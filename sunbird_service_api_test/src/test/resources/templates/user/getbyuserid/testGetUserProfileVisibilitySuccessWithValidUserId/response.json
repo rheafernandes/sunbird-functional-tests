@@ -86,7 +86,7 @@
 			"firstName": "Amit",
 			"lastLoginTime": null,
 			"createdDate": "@ignore@",
-			"createdBy": null,
+			"createdBy": "@ignore@",
 			"phone": null,
 			"dob": null,
 			"grade": [],

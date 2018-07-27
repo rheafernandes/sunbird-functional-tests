@@ -15,7 +15,7 @@ public class ReadUserRoleTest extends BaseCitrusTestRunner {
   public static final String TEST_READ_USER_ROLE_SUCCESS_WITH_ACCESS_TOKEN =
       "testReadUserRoleSuccessWithAccessToken";
 
-  public static final String TEMPLATE_DIR = "templates/user/read/role";
+  public static final String TEMPLATE_DIR = "templates/user/role/read";
 
   private String getReadUserRoleUrl() {
     return getLmsApiUriPath("/api/user/v1/role/read", "/v1/role/read");
@@ -43,6 +43,7 @@ public class ReadUserRoleTest extends BaseCitrusTestRunner {
   @CitrusTest
   public void testReadUserRoleFailure(
       String testName, boolean isAuthRequired, HttpStatus httpStatusCode) {
+    getTestCase().setName(testName);
     getAuthToken(this, isAuthRequired);
     performGetTest(
         this,
@@ -59,6 +60,7 @@ public class ReadUserRoleTest extends BaseCitrusTestRunner {
   @CitrusTest
   public void testReadUserRoleSuccess(
       String testName, boolean isAuthRequired, HttpStatus httpStatusCode) {
+    getTestCase().setName(testName);
     getAuthToken(this, isAuthRequired);
     performGetTest(
         this,

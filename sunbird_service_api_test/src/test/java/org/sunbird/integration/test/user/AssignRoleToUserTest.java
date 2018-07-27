@@ -11,8 +11,7 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 public class AssignRoleToUserTest extends BaseCitrusTestRunner {
-  private static final String TEST_ASSIGN_ROLE_USER_FAILURE_WITHOUT_ACCESS_TOKEN =
-      "testAssignRoleUserFailureWithoutAccessToken";
+
   private static final String TEST_ASSIGN_ROLE_USER_FAILURE_WITH_INVALID_USER_ID =
       "testAssignRoleUserFailureWithInvalidUserId";
   private static final String TEST_ASSIGN_ROLE_USER_FAILURE_WITH_INVALID_ORG_ID =
@@ -27,9 +26,6 @@ public class AssignRoleToUserTest extends BaseCitrusTestRunner {
 
   public static final String TEMPLATE_DIR = "templates/user/role";
 
-  public static final String BT_CREATE_ORG_TEMPLATE_DIR = "templates/organisation/create";
-  public static final String BT_TEST_NAME_CREATE_ROOT_ORG_SUCCESS = "testCreateRootOrgSuccess";
-
   public static final String TEMPLATE_ORG_DIR = "templates/user/org";
   private static final String TEST_ASSIGN_USER_TO_ORG_SUCCESS = "testAssignUserToOrgSuccess";
 
@@ -41,9 +37,6 @@ public class AssignRoleToUserTest extends BaseCitrusTestRunner {
   public Object[][] assignRoleToUserFailureDataProvider() {
 
     return new Object[][] {
-      new Object[] {
-        TEST_ASSIGN_ROLE_USER_FAILURE_WITHOUT_ACCESS_TOKEN, false, HttpStatus.UNAUTHORIZED
-      },
       new Object[] {
         TEST_ASSIGN_ROLE_USER_FAILURE_WITH_USER_NOT_ADDED_TO_ORG, true, HttpStatus.BAD_REQUEST
       },
@@ -62,12 +55,10 @@ public class AssignRoleToUserTest extends BaseCitrusTestRunner {
   @CitrusTest
   public void testAssignRoleToUserFailure(
       String testName, boolean isAuthRequired, HttpStatus httpStatusCode) {
+    getTestCase().setName(testName);
     getAuthToken(this, isAuthRequired);
     createUser();
-
-    if (isAuthRequired) {
-      createOrg();
-    }
+    createOrg();
     performPostTest(
         this,
         TEMPLATE_DIR,
@@ -83,6 +74,7 @@ public class AssignRoleToUserTest extends BaseCitrusTestRunner {
   @Test()
   @CitrusTest
   public void testAssignRoleToUserSuccessWithUserAlreadyBelongToOrg() {
+    getTestCase().setName(TEST_ASSIGN_ROLE_USER_SUCCESS_WITH_USER_ALREADY_ADDED_TO_ORG);
     getAuthToken(this, true);
     addUserToOrg();
     performPostTest(

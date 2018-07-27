@@ -9,7 +9,7 @@ import org.sunbird.integration.test.common.BaseCitrusTestRunner;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-public class CreateUserNotesTest extends BaseCitrusTestRunner {
+public class CreateUserNoteTest extends BaseCitrusTestRunner {
   private static final String TEST_CREATE_USER_NOTE_FAILURE_WITHOUT_ACCESS_TOKEN =
       "testCreateUserNoteFailureWithoutAccessToken";
 
@@ -79,6 +79,7 @@ public class CreateUserNotesTest extends BaseCitrusTestRunner {
   @CitrusTest
   public void testCreateUserNoteFailure(
       String testName, boolean isAuthRequired, HttpStatus httpStatusCode) {
+    getTestCase().setName(testName);
     beforeTest(isAuthRequired);
     performPostTest(
         this,
@@ -97,6 +98,7 @@ public class CreateUserNotesTest extends BaseCitrusTestRunner {
   @CitrusTest
   public void testCreateUserNoteSuccess(
       String testName, boolean isAuthRequired, HttpStatus httpStatusCode) {
+    getTestCase().setName(testName);
     beforeTest(isAuthRequired);
     performPostTest(
         this,
