@@ -29,7 +29,6 @@ public class BaseCitrusTestRunner extends TestNGCitrusTestRunner {
       new HashMap<String, List<String>>();
 
   public BaseCitrusTestRunner() {
-    System.out.println("context = " + testContext);
   }
 
   public String getLmsApiUriPath(String apiGatewayUriPath, String localUriPath) {
@@ -88,6 +87,7 @@ public class BaseCitrusTestRunner extends TestNGCitrusTestRunner {
                 requestJson,
                 contentType,
                 TestActionUtil.getHeaders(isAuthRequired)));
+
     runner.http(
         builder ->
             TestActionUtil.getResponseTestAction(
@@ -151,8 +151,20 @@ public class BaseCitrusTestRunner extends TestNGCitrusTestRunner {
   }
 
   public void getAuthToken(TestNGCitrusTestRunner runner, Boolean isAuthRequired) {
+
     if (isAuthRequired) {
       runner.http(builder -> TestActionUtil.getTokenRequestTestAction(builder, KEYCLOAK_ENDPOINT));
+      runner.http(builder -> TestActionUtil.getTokenResponseTestAction(builder, KEYCLOAK_ENDPOINT));
+    }
+  }
+
+  public void getAuthToken(
+      TestNGCitrusTestRunner runner, Boolean isAuthRequired, String userName, String password) {
+    if (isAuthRequired) {
+      runner.http(
+          builder ->
+              TestActionUtil.getTokenRequestTestAction(
+                  builder, KEYCLOAK_ENDPOINT, userName, password));
       runner.http(builder -> TestActionUtil.getTokenResponseTestAction(builder, KEYCLOAK_ENDPOINT));
     }
   }
@@ -178,10 +190,14 @@ public class BaseCitrusTestRunner extends TestNGCitrusTestRunner {
                 config));
     runner.http(
         builder ->
-            TestActionUtil.getResponseTestAction(builder, LMS_ENDPOINT, testName, responseCode));
+            TestActionUtil.getResponseTestAction(builder, LMS_ENDPOINT, templateDir, testName, responseCode, responseJson));
   }
 
   public String getLmsApiUriPath(String apiGatewayUriPath, String localUriPath, String pathParam) {
+    if (!pathParam.startsWith("/")) {
+      pathParam = "/" + pathParam;
+    }
+
     return config.getLmsUrl().contains("localhost")
         ? localUriPath + pathParam
         : apiGatewayUriPath + pathParam;

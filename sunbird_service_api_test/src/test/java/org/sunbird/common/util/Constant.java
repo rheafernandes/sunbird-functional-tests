@@ -48,4 +48,7 @@ public class Constant {
   public static final String DISTRICT_ID = "districtId";
   public static final String BULK_UPLOAD_PROCESS_ID = "bulkUploadProcessId";
   public static final String CONTENT_STORE_ENDPOINT = "csTestClient";
+  public static final String EXTRACT_VAR_ISSUER_ID = "issuerId";
+  public static final String EXTRACT_VAR_BADGE_ID = "badgeId";
+  public static final String EXTRACT_VAR_ASSERTION_ID = "assertionId";
 }
