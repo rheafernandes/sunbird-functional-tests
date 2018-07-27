@@ -28,8 +28,8 @@ public class UnblockUserTest extends BaseCitrusTestRunner {
   public static final String TEMPLATE_DIR_BLOCK = "templates/user/block";
   public static final String TEST_BLOCK_USER_SUCCESS_WITH_VALID_USERID =
       "testBlockUserSuccessWithValidUserId";
-  private static final String GET_USER_BY_ID_SERVER_URI = "/api/user/v1/read/";
-  private static final String GET_USER_BY_ID_LOCAL_URI = "/v1/user/read/";
+  private static final String GET_USER_BY_ID_SERVER_URI = "/api/user/v1/read";
+  private static final String GET_USER_BY_ID_LOCAL_URI = "/v1/user/read";
 
   private String getUnblockUserUrl() {
     return getLmsApiUriPath("/api/user/v1/unblock", "/v1/user/unblock");
@@ -115,6 +115,7 @@ public class UnblockUserTest extends BaseCitrusTestRunner {
   @CitrusTest
   public void testGetUnblockUserByUserIdSuccess() {
     getTestCase().setName(TEST_UNBLOCK_USER_GET_SUCCESS_WITH_VALID_USERID);
+    variable("userId", testContext.getVariable("userId"));
     performGetTest(
         this,
         TEMPLATE_DIR,

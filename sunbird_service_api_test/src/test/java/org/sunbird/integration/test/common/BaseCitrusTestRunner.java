@@ -28,8 +28,7 @@ public class BaseCitrusTestRunner extends TestNGCitrusTestRunner {
   public static Map<String, List<String>> toDeleteEsRecordsMap =
       new HashMap<String, List<String>>();
 
-  public BaseCitrusTestRunner() {
-  }
+  public BaseCitrusTestRunner() {}
 
   public String getLmsApiUriPath(String apiGatewayUriPath, String localUriPath) {
     return config.getLmsUrl().contains("localhost") ? localUriPath : apiGatewayUriPath;
@@ -190,7 +189,8 @@ public class BaseCitrusTestRunner extends TestNGCitrusTestRunner {
                 config));
     runner.http(
         builder ->
-            TestActionUtil.getResponseTestAction(builder, LMS_ENDPOINT, templateDir, testName, responseCode, responseJson));
+            TestActionUtil.getResponseTestAction(
+                builder, LMS_ENDPOINT, templateDir, testName, responseCode, responseJson));
   }
 
   public void performGetTest(
@@ -198,7 +198,8 @@ public class BaseCitrusTestRunner extends TestNGCitrusTestRunner {
       String testName,
       String requestUrl,
       Boolean isAuthRequired,
-      HttpStatus responseCode) {
+      HttpStatus responseCode,
+      String responseJson) {
     runner.http(
         builder ->
             TestActionUtil.performGetTest(

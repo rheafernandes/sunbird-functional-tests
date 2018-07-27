@@ -9,7 +9,7 @@ import org.sunbird.integration.test.common.BaseCitrusTestRunner;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-public class CreateUserNotesTest extends BaseCitrusTestRunner {
+public class CreateUserNoteTest extends BaseCitrusTestRunner {
   private static final String TEST_CREATE_USER_NOTE_FAILURE_WITHOUT_ACCESS_TOKEN =
       "testCreateUserNoteFailureWithoutAccessToken";
 

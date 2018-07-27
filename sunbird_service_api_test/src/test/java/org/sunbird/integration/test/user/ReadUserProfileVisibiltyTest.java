@@ -9,8 +9,8 @@ import org.testng.annotations.Test;
 
 public class ReadUserProfileVisibiltyTest extends BaseCitrusTestRunner {
   public static final String TEMPLATE_DIR = "templates/user/getbyuserid";
-  private static final String GET_USER_BY_ID_SERVER_URI = "/api/user/v1/read/";
-  private static final String GET_USER_BY_ID_LOCAL_URI = "/v1/user/read/";
+  private static final String GET_USER_BY_ID_SERVER_URI = "/api/user/v1/read";
+  private static final String GET_USER_BY_ID_LOCAL_URI = "/v1/user/read";
   public static final String TEMPLATE_DIR_PROFILE_VISIBILITY =
       "templates/user/profilevisibility/update";
   public static final String TEST_BA_USER_PROFILE_VISIBILITY_SUCCESS_WITH_VALID_USERID =
