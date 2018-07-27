@@ -31,7 +31,7 @@ public class EndpointConfig {
   public HttpClient csTestClient() {
     return CitrusEndpoints.http()
         .client()
-        .requestUrl(System.getenv("content_store_api_key"))
+        .requestUrl(System.getenv("content_store_api_base_url"))
         .build();
   }
 
