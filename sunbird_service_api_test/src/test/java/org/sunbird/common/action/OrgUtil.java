@@ -1,7 +1,6 @@
 package org.sunbird.common.action;
 
 import com.consol.citrus.context.TestContext;
-
 import java.time.Instant;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.http.HttpStatus;
@@ -14,7 +13,8 @@ public class OrgUtil {
   private static String rootOrgId = null;
 
   private static final String rootOrgChannel = "FT_Org_Channel_" + Instant.now().getEpochSecond();
-  private static final String rootOrgExternalId = "FT_Org_External_" + Instant.now().getEpochSecond();
+  private static final String rootOrgExternalId =
+      "FT_Org_External_" + Instant.now().getEpochSecond();
 
   public static String getRootOrgChannel() {
     return rootOrgChannel;
@@ -88,5 +88,6 @@ public class OrgUtil {
     } else {
       testContext.setVariable("organisationId", rootOrgId);
     }
+    runner.variable("organisationId", rootOrgId);
   }
 }
