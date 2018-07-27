@@ -15,6 +15,9 @@ public class CreateBadgeClassTest extends BaseCitrusTestRunner {
 
   private static final String TEST_NAME_CREATE_BADGE_CLASS_SUCCESS_WITH_TYPE_USER =
       "testCreateBadgeClassSuccessWithTypeUser";
+  private static final String
+      TEST_NAME_CREATE_BADGE_CLASS_SUCCESS_WITH_TYPE_USER_AND_MULTIPLE_ROLES =
+          "testCreateBadgeClassSuccessWithTypeUserAndMultipleRoles";
 
   private static final String TEST_NAME_CREATE_BADGE_CLASS_FAILURE_WITHOUT_ISSUER_ID =
       "testCreateBadgeClassFailureWithoutIssuerId";
@@ -35,6 +38,8 @@ public class CreateBadgeClassTest extends BaseCitrusTestRunner {
 
   private static final String TEST_NAME_CREATE_BADGE_CLASS_FAILURE_WITH_INVALID_ROOT_ORG_ID =
       "testCreateBadgeClassFailureWithInvalidRootOrgId";
+  private static final String TEST_NAME_CREATE_BADGE_CLASS_FAILURE_WITH_INVALID_ROLES =
+      "testCreateBadgeClassFailureWithInvalidRoles";
 
   private static final String TEMPLATE_DIR = "templates/badge/class/create";
 
@@ -44,21 +49,25 @@ public class CreateBadgeClassTest extends BaseCitrusTestRunner {
 
   @DataProvider(name = "createBadgeClassDataProviderSuccess")
   public Object[][] createBadgeClassDataProviderSuccess() {
-    return new Object[][] {new Object[] {TEST_NAME_CREATE_BADGE_CLASS_SUCCESS_WITH_TYPE_USER}};
+    return new Object[][] {
+      new Object[] {TEST_NAME_CREATE_BADGE_CLASS_SUCCESS_WITH_TYPE_USER},
+      new Object[] {TEST_NAME_CREATE_BADGE_CLASS_SUCCESS_WITH_TYPE_USER_AND_MULTIPLE_ROLES}
+    };
   }
 
   @DataProvider(name = "createBadgeClassDataProviderFailure")
   public Object[][] createBadgeClassDataProviderFailure() {
     return new Object[][] {
-      new Object[] {TEST_NAME_CREATE_BADGE_CLASS_FAILURE_WITHOUT_ISSUER_ID},
-      new Object[] {TEST_NAME_CREATE_BADGE_CLASS_FAILURE_WITHOUT_NAME},
-      new Object[] {TEST_NAME_CREATE_BADGE_CLASS_FAILURE_WITHOUT_CRITERIA},
-      new Object[] {TEST_NAME_CREATE_BADGE_CLASS_FAILURE_WITHOUT_DESCRIPTION},
-      new Object[] {TEST_NAME_CREATE_BADGE_CLASS_FAILURE_WITHOUT_ROOT_ORG_ID},
-      new Object[] {TEST_NAME_CREATE_BADGE_CLASS_FAILURE_WITHOUT_ROLES},
-      new Object[] {TEST_NAME_CREATE_BADGE_CLASS_FAILURE_WITHOUT_TYPE},
-      new Object[] {TEST_NAME_CREATE_BADGE_CLASS_FAILURE_WITHOUT_SUBTYPE},
-      new Object[] {TEST_NAME_CREATE_BADGE_CLASS_FAILURE_WITH_INVALID_ROOT_ORG_ID}
+      new Object[] {TEST_NAME_CREATE_BADGE_CLASS_FAILURE_WITHOUT_ISSUER_ID, false},
+      new Object[] {TEST_NAME_CREATE_BADGE_CLASS_FAILURE_WITHOUT_NAME, false},
+      new Object[] {TEST_NAME_CREATE_BADGE_CLASS_FAILURE_WITHOUT_CRITERIA, false},
+      new Object[] {TEST_NAME_CREATE_BADGE_CLASS_FAILURE_WITHOUT_DESCRIPTION, false},
+      new Object[] {TEST_NAME_CREATE_BADGE_CLASS_FAILURE_WITHOUT_ROOT_ORG_ID, false},
+      new Object[] {TEST_NAME_CREATE_BADGE_CLASS_FAILURE_WITHOUT_ROLES, false},
+      new Object[] {TEST_NAME_CREATE_BADGE_CLASS_FAILURE_WITHOUT_TYPE, false},
+      new Object[] {TEST_NAME_CREATE_BADGE_CLASS_FAILURE_WITHOUT_SUBTYPE, false},
+      new Object[] {TEST_NAME_CREATE_BADGE_CLASS_FAILURE_WITH_INVALID_ROOT_ORG_ID, false},
+      new Object[] {TEST_NAME_CREATE_BADGE_CLASS_FAILURE_WITH_INVALID_ROLES, true}
     };
   }
 
@@ -66,7 +75,7 @@ public class CreateBadgeClassTest extends BaseCitrusTestRunner {
   @CitrusParameters({"testName"})
   @CitrusTest
   public void testCreateBadgeClassSuccess(String testName) {
-    beforeTest();
+    beforeTest(true, true);
     performMultipartTest(
         this,
         TEMPLATE_DIR,
@@ -81,9 +90,10 @@ public class CreateBadgeClassTest extends BaseCitrusTestRunner {
   }
 
   @Test(dataProvider = "createBadgeClassDataProviderFailure")
-  @CitrusParameters({"testName"})
+  @CitrusParameters({"testName", "canCreateOrg"})
   @CitrusTest
-  public void testCreateBadgeClassFailure(String testName) {
+  public void testCreateBadgeClassFailure(String testName, Boolean canCreateOrg) {
+    beforeTest(canCreateOrg, false);
     performMultipartTest(
         this,
         TEMPLATE_DIR,
@@ -96,7 +106,7 @@ public class CreateBadgeClassTest extends BaseCitrusTestRunner {
         RESPONSE_JSON);
   }
 
-  private void beforeTest() {
+  private void beforeTest(Boolean canCreateOrg, Boolean canCreateIssuer) {
     getAuthToken(this, true);
     variable("rootOrgChannel", OrgUtil.getRootOrgChannel());
     OrgUtil.getRootOrgId(this, testContext);
