@@ -1,7 +1,8 @@
 pipeline {
     environment {
         sunbird_api_key = "${sunbird_api_keys}"
-	content_store_api_key = "${ekstep_api_keys}"
+        content_store_api_base_url = "https://dev.ekstep.in/api"
+        content_store_api_key = "${ekstep_api_keys}"
         sunbird_cassandra_host = "10.10.4.4"
         sunbird_cassandra_port = "9042"
         sunbird_cassandra_username = "cassandra"
@@ -14,9 +15,9 @@ pipeline {
         sunbird_es_port = "9300"
         sunbird_es_index = "searchindex"
         sunbird_test_base_url = "https://dev.open-sunbird.org"
-		sunbird_sso_url="https://dev.open-sunbird.org/auth"
-		sunbird_username="ft_org_admin@org.com"
-		sunbird_default_channel="ft_test"
+        sunbird_sso_url="https://dev.open-sunbird.org/auth"
+        sunbird_username="ft_org_admin@org.com"
+        sunbird_default_channel="ft_test"
     }
 
     agent { label "build-slave" }
