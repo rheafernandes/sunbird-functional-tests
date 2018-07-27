@@ -29,7 +29,6 @@ public class BaseCitrusTestRunner extends TestNGCitrusTestRunner {
       new HashMap<String, List<String>>();
 
   public BaseCitrusTestRunner() {
-    System.out.println("context = " + testContext);
   }
 
   public String getLmsApiUriPath(String apiGatewayUriPath, String localUriPath) {
@@ -191,7 +190,7 @@ public class BaseCitrusTestRunner extends TestNGCitrusTestRunner {
                 config));
     runner.http(
         builder ->
-            TestActionUtil.getResponseTestAction(builder, LMS_ENDPOINT, testName, responseCode));
+            TestActionUtil.getResponseTestAction(builder, LMS_ENDPOINT, templateDir, testName, responseCode, responseJson));
   }
 
   public void performGetTest(
@@ -215,6 +214,9 @@ public class BaseCitrusTestRunner extends TestNGCitrusTestRunner {
   }
 
   public String getLmsApiUriPath(String apiGatewayUriPath, String localUriPath, String pathParam) {
+    if (!pathParam.startsWith("/")) {
+      pathParam = "/" + pathParam;
+    }
 
     return config.getLmsUrl().contains("localhost")
         ? localUriPath + pathParam

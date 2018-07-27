@@ -6,13 +6,14 @@ import org.sunbird.common.util.Constant;
 import org.sunbird.integration.test.common.BaseCitrusTestRunner;
 import org.sunbird.integration.test.user.EndpointConfig.TestGlobalProperty;
 
-public class IssuerUtil {
+public class BadgeClassUtil {
 
-  public static String getCreateIssuerUrl(BaseCitrusTestRunner runner) {
-    return runner.getLmsApiUriPath("/api/badging/v1/issuer/create", "/v1/issuer/create");
+  public static String getBadgeClassIssuerUrl(BaseCitrusTestRunner runner) {
+    return runner.getLmsApiUriPath(
+        "/api/badging/v1/issuer/badge/create", "/v1/issuer/badge/create");
   }
 
-  public static void createIssuer(
+  public static void createBadgeClass(
       BaseCitrusTestRunner runner,
       TestContext testContext,
       TestGlobalProperty config,
@@ -27,7 +28,7 @@ public class IssuerUtil {
                 Constant.LMS_ENDPOINT,
                 templateDir,
                 testName,
-                getCreateIssuerUrl(runner),
+                getBadgeClassIssuerUrl(runner),
                 Constant.REQUEST_FORM_DATA,
                 null,
                 runner.getClass().getClassLoader(),
@@ -39,7 +40,7 @@ public class IssuerUtil {
                 builder,
                 Constant.LMS_ENDPOINT,
                 responseCode,
-                "$.result.issuerId",
-                Constant.EXTRACT_VAR_ISSUER_ID));
+                "$.result.badgeId",
+                Constant.EXTRACT_VAR_BADGE_ID));
   }
 }
