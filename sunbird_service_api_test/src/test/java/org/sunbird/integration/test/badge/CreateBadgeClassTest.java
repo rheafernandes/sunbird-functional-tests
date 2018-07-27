@@ -107,16 +107,20 @@ public class CreateBadgeClassTest extends BaseCitrusTestRunner {
   }
 
   private void beforeTest(Boolean canCreateOrg, Boolean canCreateIssuer) {
-    getAuthToken(this, true);
-    variable("rootOrgChannel", OrgUtil.getRootOrgChannel());
-    OrgUtil.getRootOrgId(this, testContext);
-    IssuerUtil.createIssuer(
-        this,
-        testContext,
-        config,
-        BT_CREATE_ISSUER_TEMPLATE_DIR,
-        BT_TEST_NAME_CREATE_ISSUER_SUCCESS,
-        HttpStatus.OK);
+    if (canCreateOrg) {
+      getAuthToken(this, true);
+      variable("rootOrgChannel", OrgUtil.getRootOrgChannel());
+      OrgUtil.getRootOrgId(this, testContext);
+    }
+    if (canCreateIssuer) {
+      IssuerUtil.createIssuer(
+              this,
+              testContext,
+              config,
+              BT_CREATE_ISSUER_TEMPLATE_DIR,
+              BT_TEST_NAME_CREATE_ISSUER_SUCCESS,
+              HttpStatus.OK);
+    }
   }
 
   private void afterTest() {}
