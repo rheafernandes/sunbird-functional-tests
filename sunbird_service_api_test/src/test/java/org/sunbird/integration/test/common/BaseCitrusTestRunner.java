@@ -165,22 +165,18 @@ public class BaseCitrusTestRunner extends TestNGCitrusTestRunner {
       boolean isUserAuthRequired) {
 
     if (isUserAuthRequired) {
-      runner.http(
-          builder ->
-              TestActionUtil.getTokenRequestTestAction(
-                  builder,
-                  KEYCLOAK_ENDPOINT,
-                  config.getKeycloakAdminUser(),
-                  config.getKeycloakAdminPass()));
-      runner.http(builder -> TestActionUtil.getTokenResponseTestAction(builder, KEYCLOAK_ENDPOINT));
+      getUserAuthToken(runner, config.getKeycloakAdminUser(), config.getKeycloakAdminPass());
       updateUserRequiredLoginActionTest(runner, userId);
-
-      runner.http(
-          builder ->
-              TestActionUtil.getTokenRequestTestAction(
-                  builder, KEYCLOAK_ENDPOINT, userName, password));
-      runner.http(builder -> TestActionUtil.getTokenResponseTestAction(builder, KEYCLOAK_ENDPOINT));
+      getUserAuthToken(runner, userName, password);
     }
+  }
+
+  private void getUserAuthToken(TestNGCitrusTestRunner runner, String userName, String password) {
+    runner.http(
+        builder ->
+            TestActionUtil.getTokenRequestTestAction(
+                builder, KEYCLOAK_ENDPOINT, userName, password));
+    runner.http(builder -> TestActionUtil.getTokenResponseTestAction(builder, KEYCLOAK_ENDPOINT));
   }
 
   private void updateUserRequiredLoginActionTest(TestNGCitrusTestRunner runner, String userId) {
