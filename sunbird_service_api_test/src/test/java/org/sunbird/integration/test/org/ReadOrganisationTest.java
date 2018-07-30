@@ -59,7 +59,7 @@ public class ReadOrganisationTest extends BaseCitrusTestRunner {
   @CitrusParameters({"testName", "httpStatusCode"})
   @CitrusTest
   public void testReadOrganisationFailure(String testName, HttpStatus httpStatusCode) {
-
+    getTestCase().setName(testName);
     performPostTest(
         this,
         TEMPLATE_DIR,
@@ -86,6 +86,7 @@ public class ReadOrganisationTest extends BaseCitrusTestRunner {
   @CitrusTest
   public void testReadOrganisationSuccess(String testName, HttpStatus httpStatusCode) {
     variable("rootOrgExternalId", externalId);
+    getTestCase().setName(testName);
     beforeTest();
     performPostTest(
         this,

@@ -32,6 +32,7 @@ public class SearchOrganisationTest extends BaseCitrusTestRunner {
   @CitrusParameters({"testName", "httpStatusCode"})
   @CitrusTest
   public void testSearchOrganisationFailure(String testName, HttpStatus httpStatusCode) {
+    getTestCase().setName(testName);
     performPostTest(
         this,
         TEMPLATE_DIR,

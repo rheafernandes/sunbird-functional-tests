@@ -49,7 +49,7 @@ public class ReadPageSettingsTest extends BaseCitrusTestRunner {
   public void testReadPageSettingsFailure(
       String testName, boolean isAuthRequired, HttpStatus httpStatusCode) {
     getAuthToken(this, isAuthRequired);
-
+    getTestCase().setName(testName);
     String url = getReadPageUrl("/invalid");
 
     performGetTest(
@@ -73,6 +73,7 @@ public class ReadPageSettingsTest extends BaseCitrusTestRunner {
       String testName, boolean isAuthRequired, HttpStatus httpStatusCode, boolean canCreatePage) {
 
     getAuthToken(this, isAuthRequired);
+    getTestCase().setName(testName);
     beforeTestPageSettings(canCreatePage);
     String url = getReadPageUrl("/" + PAGE_NAME);
 

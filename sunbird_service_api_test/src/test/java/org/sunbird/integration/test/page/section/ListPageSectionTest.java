@@ -12,8 +12,7 @@ public class ListPageSectionTest extends BaseCitrusTestRunner {
   public static final String TEST_NAME_LIST_PAGE_SECTION_FAILURE_WITHOUT_ACCESS_TOKEN =
       "testListPageSectionFailureWithoutAccessToken";
 
-  public static final String TEST_NAME_LIST_PAGE_SECTION_SUCCESS =
-      "testListPageSectionSuccess";
+  public static final String TEST_NAME_LIST_PAGE_SECTION_SUCCESS = "testListPageSectionSuccess";
 
   public static final String TEMPLATE_DIR = "templates/page/read";
 
@@ -26,10 +25,10 @@ public class ListPageSectionTest extends BaseCitrusTestRunner {
 
     return new Object[][] {
       new Object[] {
-    		  TEST_NAME_LIST_PAGE_SECTION_FAILURE_WITHOUT_ACCESS_TOKEN, false, HttpStatus.UNAUTHORIZED
+        TEST_NAME_LIST_PAGE_SECTION_FAILURE_WITHOUT_ACCESS_TOKEN, false, HttpStatus.UNAUTHORIZED
       },
       new Object[] {
-    		  TEST_NAME_LIST_PAGE_SECTION_SUCCESS, true, HttpStatus.OK,
+        TEST_NAME_LIST_PAGE_SECTION_SUCCESS, true, HttpStatus.OK,
       },
     };
   }
@@ -40,7 +39,7 @@ public class ListPageSectionTest extends BaseCitrusTestRunner {
   public void testListPageSectionFailure(
       String testName, boolean isAuthRequired, HttpStatus httpStatusCode) {
     getAuthToken(this, isAuthRequired);
-
+    getTestCase().setName(testName);
     performGetTest(
         this,
         TEMPLATE_DIR,

@@ -49,6 +49,7 @@ public class ReadUserSkillTest extends BaseCitrusTestRunner {
       String testName, boolean isAuthRequired, HttpStatus httpStatusCode) {
 
     getAuthToken(this, isAuthRequired);
+    getTestCase().setName(testName);
     performPostTest(
         this,
         TEMPLATE_DIR,

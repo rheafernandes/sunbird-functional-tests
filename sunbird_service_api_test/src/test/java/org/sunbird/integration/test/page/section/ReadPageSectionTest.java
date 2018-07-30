@@ -43,7 +43,7 @@ public class ReadPageSectionTest extends BaseCitrusTestRunner {
   public void testReadPageSectionFailure(
       String testName, boolean isAuthRequired, HttpStatus httpStatusCode, String pathParam) {
     getAuthToken(this, isAuthRequired);
-
+    getTestCase().setName(testName);
     performGetTest(
         this,
         TEMPLATE_DIR,
