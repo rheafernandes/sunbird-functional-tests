@@ -8,6 +8,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.sunbird.common.action.TestActionUtil;
+import org.sunbird.common.util.Constant;
 import org.sunbird.integration.test.user.EndpointConfig.TestGlobalProperty;
 
 public class BaseCitrusTestRunner extends TestNGCitrusTestRunner {
@@ -185,9 +186,12 @@ public class BaseCitrusTestRunner extends TestNGCitrusTestRunner {
   private void updateUserRequiredLoginActionTest(TestNGCitrusTestRunner runner, String userId) {
     String url = "/admin/realms/" + System.getenv("sunbird_sso_realm") + "/users/" + userId;
     String payLoad = "{\"requiredActions\":[]}";
+    HashMap<String, Object> headers = new HashMap<>();
+    headers.put(Constant.AUTHORIZATION, Constant.BEARER + "${accessToken}");
     runner.http(
         builder ->
-            TestActionUtil.getPutRequestTestAction(builder, KEYCLOAK_ENDPOINT, url, payLoad));
+            TestActionUtil.getPutRequestTestAction(
+                builder, KEYCLOAK_ENDPOINT, url, headers, payLoad));
   }
 
   public void performGetTest(

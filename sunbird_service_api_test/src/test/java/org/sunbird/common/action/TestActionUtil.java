@@ -53,9 +53,13 @@ public class TestActionUtil {
   }
 
   public static TestAction getPutRequestTestAction(
-      HttpActionBuilder builder, String endPoint, String url, String payLoad) {
+      HttpActionBuilder builder,
+      String endPoint,
+      String url,
+      Map<String, Object> headers,
+      String payLoad) {
     HttpClientRequestActionBuilder requestActionBuilder = builder.client(endPoint).send().put(url);
-    requestActionBuilder.header(Constant.AUTHORIZATION, Constant.BEARER + "${accessToken}");
+    addHeaders(requestActionBuilder, headers);
     requestActionBuilder.contentType(Constant.CONTENT_TYPE_APPLICATION_JSON);
     requestActionBuilder.payload(payLoad);
     return requestActionBuilder;
