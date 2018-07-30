@@ -162,15 +162,16 @@ public class BaseCitrusTestRunner extends TestNGCitrusTestRunner {
       String userName,
       String password,
       String userId,
-      boolean isUpdateUserRequired) {
-    if (isUpdateUserRequired) {
+      boolean isUserAuthRequired) {
+    if (isUserAuthRequired) {
       updateUserRequiredLoginActionTest(runner, userId);
+
+      runner.http(
+          builder ->
+              TestActionUtil.getTokenRequestTestAction(
+                  builder, KEYCLOAK_ENDPOINT, userName, password));
+      runner.http(builder -> TestActionUtil.getTokenResponseTestAction(builder, KEYCLOAK_ENDPOINT));
     }
-    runner.http(
-        builder ->
-            TestActionUtil.getTokenRequestTestAction(
-                builder, KEYCLOAK_ENDPOINT, userName, password));
-    runner.http(builder -> TestActionUtil.getTokenResponseTestAction(builder, KEYCLOAK_ENDPOINT));
   }
 
   private void updateUserRequiredLoginActionTest(TestNGCitrusTestRunner runner, String userId) {
