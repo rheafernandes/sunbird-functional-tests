@@ -23,7 +23,7 @@ public class UpdateUserNoteTest extends BaseCitrusTestRunner {
       "testCreateUserNoteSuccessWithCourseIdAndContentId";
 
   private String getUpdateNoteUrl(String pathParam) {
-    return getLmsApiUriPath("/api/note/v1/update", "/v1/note/update", pathParam);
+    return getLmsApiUriPath("/api/notes/v1/update", "/v1/note/update", pathParam);
   }
 
   @DataProvider(name = "updateUserNoteFailureDataProvider")
