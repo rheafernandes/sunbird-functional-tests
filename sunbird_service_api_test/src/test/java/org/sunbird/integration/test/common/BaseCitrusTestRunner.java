@@ -8,13 +8,13 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.sunbird.common.action.TestActionUtil;
+import org.sunbird.common.util.Constant;
 import org.sunbird.integration.test.user.EndpointConfig.TestGlobalProperty;
 
 public class BaseCitrusTestRunner extends TestNGCitrusTestRunner {
 
   @Autowired protected TestGlobalProperty config;
   @Autowired protected TestContext testContext;
-
   public static final String REQUEST_FORM_DATA = "request.params";
   public static final String REQUEST_JSON = "request.json";
   public static final String RESPONSE_JSON = "response.json";
@@ -163,25 +163,31 @@ public class BaseCitrusTestRunner extends TestNGCitrusTestRunner {
       String password,
       String userId,
       boolean isUserAuthRequired) {
-    getAuthToken(runner, true);
 
     if (isUserAuthRequired) {
+      getUserAuthToken(runner, config.getKeycloakAdminUser(), config.getKeycloakAdminPass());
       updateUserRequiredLoginActionTest(runner, userId);
-
-      runner.http(
-          builder ->
-              TestActionUtil.getTokenRequestTestAction(
-                  builder, KEYCLOAK_ENDPOINT, userName, password));
-      runner.http(builder -> TestActionUtil.getTokenResponseTestAction(builder, KEYCLOAK_ENDPOINT));
+      getUserAuthToken(runner, userName, password);
     }
+  }
+
+  private void getUserAuthToken(TestNGCitrusTestRunner runner, String userName, String password) {
+    runner.http(
+        builder ->
+            TestActionUtil.getTokenRequestTestAction(
+                builder, KEYCLOAK_ENDPOINT, userName, password));
+    runner.http(builder -> TestActionUtil.getTokenResponseTestAction(builder, KEYCLOAK_ENDPOINT));
   }
 
   private void updateUserRequiredLoginActionTest(TestNGCitrusTestRunner runner, String userId) {
     String url = "/admin/realms/" + System.getenv("sunbird_sso_realm") + "/users/" + userId;
     String payLoad = "{\"requiredActions\":[]}";
+    HashMap<String, Object> headers = new HashMap<>();
+    headers.put(Constant.AUTHORIZATION, Constant.BEARER + "${accessToken}");
     runner.http(
         builder ->
-            TestActionUtil.getPutRequestTestAction(builder, KEYCLOAK_ENDPOINT, url, payLoad));
+            TestActionUtil.getPutRequestTestAction(
+                builder, KEYCLOAK_ENDPOINT, url, headers, payLoad));
   }
 
   public void performGetTest(
