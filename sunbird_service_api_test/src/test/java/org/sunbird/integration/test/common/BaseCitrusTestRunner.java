@@ -168,6 +168,15 @@ public class BaseCitrusTestRunner extends TestNGCitrusTestRunner {
     }
   }
 
+  public void updateUserRequiredLoginActionTest(
+      TestNGCitrusTestRunner runner, Boolean isAuthRequired, String userId) {
+    if (isAuthRequired) {
+      runner.http(
+          builder ->
+              TestActionUtil.updateUserRequiredLoginActionTest(builder, KEYCLOAK_ENDPOINT, userId));
+    }
+  }
+
   public void performGetTest(
       TestNGCitrusTestRunner runner,
       String templateDir,

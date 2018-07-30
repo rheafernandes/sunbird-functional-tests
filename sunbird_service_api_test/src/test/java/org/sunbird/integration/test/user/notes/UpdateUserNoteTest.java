@@ -100,6 +100,8 @@ public class UpdateUserNoteTest extends BaseCitrusTestRunner {
   void beforeTest(boolean isAuthRequired) {
     UserUtil.getUserId(this, testContext);
     String channelName = System.getenv("sunbird_default_channel");
+    getAuthToken(this, isAuthRequired);
+    updateUserRequiredLoginActionTest(this, isAuthRequired, testContext.getVariable("userId"));
     getAuthToken(
         this, isAuthRequired, testContext.getVariable("userName") + "@" + channelName, "password");
     variable("userId", testContext.getVariable("userId"));
