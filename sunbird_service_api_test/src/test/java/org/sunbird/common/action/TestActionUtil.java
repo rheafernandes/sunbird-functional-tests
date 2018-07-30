@@ -52,16 +52,12 @@ public class TestActionUtil {
                 + "&grant_type=password");
   }
 
-  public static TestAction updateUserRequiredLoginActionTest(
-      HttpActionBuilder builder, String endPoint, String userId) {
-    HttpClientRequestActionBuilder requestActionBuilder =
-        builder
-            .client(endPoint)
-            .send()
-            .put("/admin/realms/" + System.getenv("sunbird_sso_realm") + "/users/" + userId);
+  public static TestAction getPostRequestTestAction(
+      HttpActionBuilder builder, String endPoint, String url, String payLoad) {
+    HttpClientRequestActionBuilder requestActionBuilder = builder.client(endPoint).send().put(url);
     addHeaders(requestActionBuilder, TestActionUtil.getHeaders(true));
     requestActionBuilder.contentType(Constant.CONTENT_TYPE_APPLICATION_JSON);
-    requestActionBuilder.payload("{\"requiredActions\":[]}");
+    requestActionBuilder.payload(payLoad);
     return requestActionBuilder;
   }
 

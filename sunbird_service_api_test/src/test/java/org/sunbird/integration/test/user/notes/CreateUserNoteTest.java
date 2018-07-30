@@ -118,8 +118,11 @@ public class CreateUserNoteTest extends BaseCitrusTestRunner {
     testContext.setVariable("password", "password");
     variable("userId", testContext.getVariable("userId"));
     getAuthToken(this, true);
-    updateUserRequiredLoginActionTest(this, true, testContext.getVariable("userId"));
     getAuthToken(
-        this, isAuthRequired, testContext.getVariable("userName") + "@" + channelName, "password");
+        this,
+        testContext.getVariable("userName") + "@" + channelName,
+        "password",
+        testContext.getVariable("userId"),
+        true);
   }
 }
