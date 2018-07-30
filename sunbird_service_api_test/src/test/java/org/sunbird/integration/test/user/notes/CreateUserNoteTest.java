@@ -40,7 +40,7 @@ public class CreateUserNoteTest extends BaseCitrusTestRunner {
 
   private String getCreateNoteUrl() {
 
-    return getLmsApiUriPath("/api/note/v1/create", "/v1/note/create");
+    return getLmsApiUriPath("/api/notes/v1/create", "/v1/note/create");
   }
 
   @DataProvider(name = "createUserNoteFailureDataProvider")

@@ -23,7 +23,7 @@ public class ReadUserNoteTest extends BaseCitrusTestRunner {
       "testCreateUserNoteSuccessWithCourseIdAndContentId";
 
   private String getReadNoteUrl(String pathParam) {
-    return getLmsApiUriPath("/api/note/v1/read", "/v1/note/read", pathParam);
+    return getLmsApiUriPath("/api/notes/v1/read", "/v1/note/read", pathParam);
   }
 
   @DataProvider(name = "readUserNoteFailureDataProvider")
