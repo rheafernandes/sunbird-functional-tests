@@ -14,7 +14,7 @@ public class BaseCitrusTestRunner extends TestNGCitrusTestRunner {
 
   @Autowired protected TestGlobalProperty config;
   @Autowired protected TestContext testContext;
-
+  @Autowired private TestGlobalProperty initGlobalValues;
   public static final String REQUEST_FORM_DATA = "request.params";
   public static final String REQUEST_JSON = "request.json";
   public static final String RESPONSE_JSON = "response.json";
@@ -163,9 +163,16 @@ public class BaseCitrusTestRunner extends TestNGCitrusTestRunner {
       String password,
       String userId,
       boolean isUserAuthRequired) {
-    getAuthToken(runner, true);
 
     if (isUserAuthRequired) {
+      runner.http(
+          builder ->
+              TestActionUtil.getTokenRequestTestAction(
+                  builder,
+                  KEYCLOAK_ENDPOINT,
+                  initGlobalValues.getKeycloakAdminUser(),
+                  initGlobalValues.getKeycloakAdminPass()));
+      runner.http(builder -> TestActionUtil.getTokenResponseTestAction(builder, KEYCLOAK_ENDPOINT));
       updateUserRequiredLoginActionTest(runner, userId);
 
       runner.http(
