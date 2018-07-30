@@ -163,6 +163,8 @@ public class BaseCitrusTestRunner extends TestNGCitrusTestRunner {
       String password,
       String userId,
       boolean isUserAuthRequired) {
+    getAuthToken(runner, true);
+
     if (isUserAuthRequired) {
       updateUserRequiredLoginActionTest(runner, userId);
 
@@ -179,7 +181,7 @@ public class BaseCitrusTestRunner extends TestNGCitrusTestRunner {
     String payLoad = "{\"requiredActions\":[]}";
     runner.http(
         builder ->
-            TestActionUtil.getPostRequestTestAction(builder, KEYCLOAK_ENDPOINT, url, payLoad));
+            TestActionUtil.getPutRequestTestAction(builder, KEYCLOAK_ENDPOINT, url, payLoad));
   }
 
   public void performGetTest(

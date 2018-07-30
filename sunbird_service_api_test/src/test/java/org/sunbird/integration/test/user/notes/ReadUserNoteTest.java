@@ -88,7 +88,6 @@ public class ReadUserNoteTest extends BaseCitrusTestRunner {
   void beforeTest(boolean isAuthRequired) {
     UserUtil.getUserId(this, testContext);
     String channelName = System.getenv("sunbird_default_channel");
-    getAuthToken(this, isAuthRequired);
     getAuthToken(
         this,
         testContext.getVariable("userName") + "@" + channelName,
