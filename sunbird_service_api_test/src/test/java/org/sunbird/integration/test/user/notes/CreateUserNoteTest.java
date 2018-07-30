@@ -116,8 +116,13 @@ public class CreateUserNoteTest extends BaseCitrusTestRunner {
     UserUtil.getUserId(this, testContext);
     String channelName = System.getenv("sunbird_default_channel");
     testContext.setVariable("password", "password");
-    getAuthToken(
-        this, isAuthRequired, testContext.getVariable("userName") + "@" + channelName, "password");
     variable("userId", testContext.getVariable("userId"));
+    getAuthToken(this, true);
+    getAuthToken(
+        this,
+        testContext.getVariable("userName") + "@" + channelName,
+        "password",
+        testContext.getVariable("userId"),
+        true);
   }
 }

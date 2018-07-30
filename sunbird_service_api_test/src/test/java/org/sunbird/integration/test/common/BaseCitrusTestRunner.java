@@ -158,14 +158,28 @@ public class BaseCitrusTestRunner extends TestNGCitrusTestRunner {
   }
 
   public void getAuthToken(
-      TestNGCitrusTestRunner runner, Boolean isAuthRequired, String userName, String password) {
-    if (isAuthRequired) {
+      TestNGCitrusTestRunner runner,
+      String userName,
+      String password,
+      String userId,
+      boolean isUserAuthRequired) {
+    if (isUserAuthRequired) {
+      updateUserRequiredLoginActionTest(runner, userId);
+
       runner.http(
           builder ->
               TestActionUtil.getTokenRequestTestAction(
                   builder, KEYCLOAK_ENDPOINT, userName, password));
       runner.http(builder -> TestActionUtil.getTokenResponseTestAction(builder, KEYCLOAK_ENDPOINT));
     }
+  }
+
+  private void updateUserRequiredLoginActionTest(TestNGCitrusTestRunner runner, String userId) {
+    String url = "/admin/realms/" + System.getenv("sunbird_sso_realm") + "/users/" + userId;
+    String payLoad = "{\"requiredActions\":[]}";
+    runner.http(
+        builder ->
+            TestActionUtil.getPostRequestTestAction(builder, KEYCLOAK_ENDPOINT, url, payLoad));
   }
 
   public void performGetTest(
