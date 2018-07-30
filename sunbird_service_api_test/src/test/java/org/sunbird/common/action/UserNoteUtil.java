@@ -9,7 +9,7 @@ import org.sunbird.integration.test.common.BaseCitrusTestRunner;
 public class UserNoteUtil {
   private static String getCreateNoteUrl(BaseCitrusTestRunner runner) {
 
-    return runner.getLmsApiUriPath("/api/note/v1/create", "/v1/note/create");
+    return runner.getLmsApiUriPath("/api/notes/v1/create", "/v1/note/create");
   }
 
   public static void createUserNote(
