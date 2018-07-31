@@ -31,9 +31,12 @@ public class ReadPageSectionTest extends BaseCitrusTestRunner {
         HttpStatus.UNAUTHORIZED,
         "/invalid"
       },
-      new Object[] {
+      /*
+      * JIRA - SB-5675. Once fixed enable this line
+      *
+      * new Object[] {
         TEST_NAME_READ_PAGE_SECTIONS_FAILURE_WITH_INVALID_ID, true, HttpStatus.NOT_FOUND, "/invalid"
-      },
+      },*/
     };
   }
 
