@@ -25,18 +25,24 @@ public class DeleteDistrictLocationTest extends BaseCitrusTestRunner {
       "testDeleteDistrictLocationFailureWithoutValidId";
   boolean isTestPerformed = false;
 
-  @DataProvider(name = "deleteLocationDataProvider")
-  public Object[][] deleteLocationDataProvider() {
+  @DataProvider(name = "deleteLocationSuccessDataProvider")
+  public Object[][] deleteLocationSuccessDataProvider() {
     return new Object[][] {
       new Object[] {TEST_DELETE_LOCATION_SUCCESS, true, HttpStatus.OK},
+    };
+  }
+
+  @DataProvider(name = "deleteLocationFailureDataProvider")
+  public Object[][] deleteLocationFailureDataProvider() {
+    return new Object[][] {
       new Object[] {TEST_DELETE_LOCATION_FAILURE_WITHOUT_VALID_ID, true, HttpStatus.BAD_REQUEST}
     };
   }
 
-  @Test(dataProvider = "deleteLocationDataProvider")
+  @Test(dataProvider = "deleteLocationSuccessDataProvider")
   @CitrusParameters({"testName", "isAuthRequired", "httpStatusCode"})
   @CitrusTest
-  public void testDeleteLocation(
+  public void testDeleteLocationSuccess(
       String testName, boolean isAuthRequired, HttpStatus httpStatusCode) {
     getAuthToken(this, isAuthRequired);
     createDistrictLocation();
@@ -50,10 +56,26 @@ public class DeleteDistrictLocationTest extends BaseCitrusTestRunner {
         isAuthRequired,
         httpStatusCode,
         RESPONSE_JSON);
-    if (!isTestPerformed) {
-      this.sleep(Constant.ES_SYNC_WAIT_TIME);
-      isTestPerformed = true;
-    }
+  }
+
+  @Test(dataProvider = "deleteLocationFailureDataProvider")
+  @CitrusParameters({"testName", "isAuthRequired", "httpStatusCode"})
+  @CitrusTest
+  public void testDeleteLocationFailure(
+      String testName, boolean isAuthRequired, HttpStatus httpStatusCode) {
+    getAuthToken(this, isAuthRequired);
+    createDistrictLocation();
+    performDeleteTest(
+        this,
+        TEMPLATE_PATH,
+        testName,
+        getDeleteLocationUrl((String) testContext.getVariables().get(Constant.DISTRICT_ID))
+            + "#InvalidId",
+        null,
+        MediaType.APPLICATION_JSON,
+        isAuthRequired,
+        httpStatusCode,
+        RESPONSE_JSON);
   }
 
   public void createDistrictLocation() {
