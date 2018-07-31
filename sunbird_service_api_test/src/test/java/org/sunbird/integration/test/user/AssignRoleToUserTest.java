@@ -30,7 +30,7 @@ public class AssignRoleToUserTest extends BaseCitrusTestRunner {
   private static final String TEST_ASSIGN_USER_TO_ORG_SUCCESS = "testAssignUserToOrgSuccess";
 
   private String getAssignRoleToUserUrl() {
-    return getLmsApiUriPath("/org/v1/role/assign", "/v1/user/assign/role");
+    return getLmsApiUriPath("/api/user/v1/role/assign", "/v1/user/assign/role");
   }
 
   @DataProvider(name = "assignRoleToUserFailureDataProvider")
