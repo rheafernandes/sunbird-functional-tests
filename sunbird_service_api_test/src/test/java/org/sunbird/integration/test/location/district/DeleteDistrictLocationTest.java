@@ -16,7 +16,7 @@ public class DeleteDistrictLocationTest extends BaseCitrusTestRunner {
 
   private static final String CREATE_LOCATION_SERVER_URI = "/api/data/v1/location/create";
   private static final String CREATE_LOCATION_LOCAL_URI = "/v1/location/create";
-  private static final String DELETE_LOCATION_SERVER_URI = "/api/data/v1/location/delete";
+  private static final String DELETE_LOCATION_SERVER_URI = "/api/org/v1/location/delete";
   private static final String DELETE_LOCATION_LOCAL_URI = "/v1/location/delete";
 
   private static final String TEMPLATE_PATH = "templates/location/district/delete";
