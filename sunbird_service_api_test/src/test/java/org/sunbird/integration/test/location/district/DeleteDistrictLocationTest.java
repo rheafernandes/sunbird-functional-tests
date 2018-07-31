@@ -23,6 +23,7 @@ public class DeleteDistrictLocationTest extends BaseCitrusTestRunner {
   private static final String TEST_DELETE_LOCATION_SUCCESS = "testDeleteDistrictLocationSuccess";
   private static final String TEST_DELETE_LOCATION_FAILURE_WITHOUT_VALID_ID =
       "testDeleteDistrictLocationFailureWithoutValidId";
+  boolean isTestPerformed = false;
 
   @DataProvider(name = "deleteLocationDataProvider")
   public Object[][] deleteLocationDataProvider() {
@@ -49,6 +50,10 @@ public class DeleteDistrictLocationTest extends BaseCitrusTestRunner {
         isAuthRequired,
         httpStatusCode,
         RESPONSE_JSON);
+    if (!isTestPerformed) {
+      this.sleep(Constant.ES_SYNC_WAIT_TIME);
+      isTestPerformed = true;
+    }
   }
 
   public void createDistrictLocation() {
