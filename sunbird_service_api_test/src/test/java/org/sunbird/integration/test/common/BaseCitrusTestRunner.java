@@ -8,13 +8,13 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.sunbird.common.action.TestActionUtil;
+import org.sunbird.common.util.Constant;
 import org.sunbird.integration.test.user.EndpointConfig.TestGlobalProperty;
 
 public class BaseCitrusTestRunner extends TestNGCitrusTestRunner {
 
   @Autowired protected TestGlobalProperty config;
   @Autowired protected TestContext testContext;
-
   public static final String REQUEST_FORM_DATA = "request.params";
   public static final String REQUEST_JSON = "request.json";
   public static final String RESPONSE_JSON = "response.json";
@@ -28,9 +28,7 @@ public class BaseCitrusTestRunner extends TestNGCitrusTestRunner {
   public static Map<String, List<String>> toDeleteEsRecordsMap =
       new HashMap<String, List<String>>();
 
-  public BaseCitrusTestRunner() {
-    System.out.println("context = " + testContext);
-  }
+  public BaseCitrusTestRunner() {}
 
   public String getLmsApiUriPath(String apiGatewayUriPath, String localUriPath) {
     return config.getLmsUrl().contains("localhost") ? localUriPath : apiGatewayUriPath;
@@ -160,14 +158,36 @@ public class BaseCitrusTestRunner extends TestNGCitrusTestRunner {
   }
 
   public void getAuthToken(
-      TestNGCitrusTestRunner runner, Boolean isAuthRequired, String userName, String password) {
-    if (isAuthRequired) {
-      runner.http(
-          builder ->
-              TestActionUtil.getTokenRequestTestAction(
-                  builder, KEYCLOAK_ENDPOINT, userName, password));
-      runner.http(builder -> TestActionUtil.getTokenResponseTestAction(builder, KEYCLOAK_ENDPOINT));
+      TestNGCitrusTestRunner runner,
+      String userName,
+      String password,
+      String userId,
+      boolean isUserAuthRequired) {
+
+    if (isUserAuthRequired) {
+      getUserAuthToken(runner, config.getKeycloakAdminUser(), config.getKeycloakAdminPass());
+      updateUserRequiredLoginActionTest(runner, userId);
+      getUserAuthToken(runner, userName, password);
     }
+  }
+
+  private void getUserAuthToken(TestNGCitrusTestRunner runner, String userName, String password) {
+    runner.http(
+        builder ->
+            TestActionUtil.getTokenRequestTestAction(
+                builder, KEYCLOAK_ENDPOINT, userName, password));
+    runner.http(builder -> TestActionUtil.getTokenResponseTestAction(builder, KEYCLOAK_ENDPOINT));
+  }
+
+  private void updateUserRequiredLoginActionTest(TestNGCitrusTestRunner runner, String userId) {
+    String url = "/admin/realms/" + System.getenv("sunbird_sso_realm") + "/users/" + userId;
+    String payLoad = "{\"requiredActions\":[]}";
+    HashMap<String, Object> headers = new HashMap<>();
+    headers.put(Constant.AUTHORIZATION, Constant.BEARER + "${accessToken}");
+    runner.http(
+        builder ->
+            TestActionUtil.getPutRequestTestAction(
+                builder, KEYCLOAK_ENDPOINT, url, headers, payLoad));
   }
 
   public void performGetTest(
@@ -191,10 +211,35 @@ public class BaseCitrusTestRunner extends TestNGCitrusTestRunner {
                 config));
     runner.http(
         builder ->
+            TestActionUtil.getResponseTestAction(
+                builder, LMS_ENDPOINT, templateDir, testName, responseCode, responseJson));
+  }
+
+  public void performGetTest(
+      TestNGCitrusTestRunner runner,
+      String testName,
+      String requestUrl,
+      Boolean isAuthRequired,
+      HttpStatus responseCode,
+      String responseJson) {
+    runner.http(
+        builder ->
+            TestActionUtil.performGetTest(
+                builder,
+                LMS_ENDPOINT,
+                testName,
+                requestUrl,
+                TestActionUtil.getHeaders(isAuthRequired),
+                config));
+    runner.http(
+        builder ->
             TestActionUtil.getResponseTestAction(builder, LMS_ENDPOINT, testName, responseCode));
   }
 
   public String getLmsApiUriPath(String apiGatewayUriPath, String localUriPath, String pathParam) {
+    if (!pathParam.startsWith("/")) {
+      pathParam = "/" + pathParam;
+    }
 
     String s = pathParam.substring(0, 1);
 

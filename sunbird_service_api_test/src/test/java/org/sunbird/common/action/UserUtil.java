@@ -73,6 +73,7 @@ public class UserUtil {
       String userName = Constant.USER_NAME_PREFIX + UUID.randomUUID().toString();
       testContext.setVariable("userName", userName);
       runner.variable("username", userName);
+      runner.variable("channel", System.getenv("sunbird_default_channel"));
       UserUtil.createUser(
           runner, testContext, TEMPLATE_DIR_USER_CREATE, TEMPLATE_DIR_USER_CREATE_TEST_CASE);
     }

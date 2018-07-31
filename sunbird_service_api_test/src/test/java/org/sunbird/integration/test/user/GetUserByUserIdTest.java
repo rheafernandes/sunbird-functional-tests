@@ -11,8 +11,8 @@ import org.testng.annotations.Test;
 
 public class GetUserByUserIdTest extends BaseCitrusTestRunner {
   public static final String TEMPLATE_DIR = "templates/user/getbyuserid";
-  private static final String GET_USER_BY_ID_SERVER_URI = "/api/user/v1/read/";
-  private static final String GET_USER_BY_ID_LOCAL_URI = "/v1/user/read/";
+  private static final String GET_USER_BY_ID_SERVER_URI = "/api/user/v1/read";
+  private static final String GET_USER_BY_ID_LOCAL_URI = "/v1/user/read";
   public static final String TEMPLATE_DIR_BLOCK = "templates/user/block";
   public static final String TEST_BA_BLOCK_USER_SUCCESS_WITH_VALID_USERID =
       "testBlockUserSuccessWithValidUserId";
@@ -41,6 +41,7 @@ public class GetUserByUserIdTest extends BaseCitrusTestRunner {
   @CitrusTest
   public void testGetUserByUserIdFailure(
       String testName, boolean isAuthRequired, String pathParam, HttpStatus httpStatusCode) {
+    getTestCase().setName("testName");
     performGetTest(
         this,
         TEMPLATE_DIR,
@@ -55,6 +56,8 @@ public class GetUserByUserIdTest extends BaseCitrusTestRunner {
   @CitrusTest
   public void testGetUserByUserIdSuccess() {
     beforeTest();
+    getAuthToken(this, true);
+    getTestCase().setName("testGetUserByUserIdSuccess");
     performGetTest(
         this,
         TEMPLATE_DIR,
@@ -69,9 +72,10 @@ public class GetUserByUserIdTest extends BaseCitrusTestRunner {
     afterTest();
   }
 
-  @Test()
+  @Test(dependsOnMethods = {"testGetUserByUserIdSuccess"})
   @CitrusTest
   public void testGetBlockUserByUserIdFailure() {
+    getTestCase().setName("testGetUserByUserIdFailureWithBlockedUser");
     getAuthToken(this, true);
     beforeTest();
     blockUser();

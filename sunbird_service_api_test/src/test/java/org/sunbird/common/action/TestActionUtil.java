@@ -52,6 +52,19 @@ public class TestActionUtil {
                 + "&grant_type=password");
   }
 
+  public static TestAction getPutRequestTestAction(
+      HttpActionBuilder builder,
+      String endPoint,
+      String url,
+      Map<String, Object> headers,
+      String payLoad) {
+    HttpClientRequestActionBuilder requestActionBuilder = builder.client(endPoint).send().put(url);
+    addHeaders(requestActionBuilder, headers);
+    requestActionBuilder.contentType(Constant.CONTENT_TYPE_APPLICATION_JSON);
+    requestActionBuilder.payload(payLoad);
+    return requestActionBuilder;
+  }
+
   public static TestAction getTokenResponseTestAction(
       HttpActionBuilder builder, String endpointName) {
     return builder

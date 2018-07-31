@@ -12,8 +12,8 @@ import org.testng.annotations.Test;
 public class BulkUploadStatusTest extends BaseCitrusTestRunner {
 
   private static final String TEMPLATE_DIR = "templates/bulkupload/status";
-  private static final String BULK_UPLOAD_STATUS_SERVER_URI = "/api/data/v1/upload/status/";
-  private static final String BULK_UPLOAD_STATUS_LOCAL_URI = "/v1/upload/status/";
+  private static final String BULK_UPLOAD_STATUS_SERVER_URI = "/api/data/v1/upload/status";
+  private static final String BULK_UPLOAD_STATUS_LOCAL_URI = "/v1/upload/status";
   private static final String TEST_BULK_UPLOAD_STATUS_SUCCESS_WITH_VALID_PROCESS_ID =
       "testBulkUploadStatusSuccessWithValidProcessId";
   private static final String TEST_BULK_UPLOAD_STATUS_FAILURE_WITH_INVALID_PROCESS_ID =

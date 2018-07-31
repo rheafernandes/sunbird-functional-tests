@@ -9,7 +9,7 @@ import org.sunbird.integration.test.common.BaseCitrusTestRunner;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-public class CreateUserNotesTest extends BaseCitrusTestRunner {
+public class CreateUserNoteTest extends BaseCitrusTestRunner {
   private static final String TEST_CREATE_USER_NOTE_FAILURE_WITHOUT_ACCESS_TOKEN =
       "testCreateUserNoteFailureWithoutAccessToken";
 
@@ -40,7 +40,7 @@ public class CreateUserNotesTest extends BaseCitrusTestRunner {
 
   private String getCreateNoteUrl() {
 
-    return getLmsApiUriPath("/api/note/v1/create", "/v1/note/create");
+    return getLmsApiUriPath("/api/notes/v1/create", "/v1/note/create");
   }
 
   @DataProvider(name = "createUserNoteFailureDataProvider")
@@ -79,6 +79,7 @@ public class CreateUserNotesTest extends BaseCitrusTestRunner {
   @CitrusTest
   public void testCreateUserNoteFailure(
       String testName, boolean isAuthRequired, HttpStatus httpStatusCode) {
+    getTestCase().setName(testName);
     beforeTest(isAuthRequired);
     performPostTest(
         this,
@@ -97,6 +98,7 @@ public class CreateUserNotesTest extends BaseCitrusTestRunner {
   @CitrusTest
   public void testCreateUserNoteSuccess(
       String testName, boolean isAuthRequired, HttpStatus httpStatusCode) {
+    getTestCase().setName(testName);
     beforeTest(isAuthRequired);
     performPostTest(
         this,
@@ -114,8 +116,12 @@ public class CreateUserNotesTest extends BaseCitrusTestRunner {
     UserUtil.getUserId(this, testContext);
     String channelName = System.getenv("sunbird_default_channel");
     testContext.setVariable("password", "password");
-    getAuthToken(
-        this, isAuthRequired, testContext.getVariable("userName") + "@" + channelName, "password");
     variable("userId", testContext.getVariable("userId"));
+    getAuthToken(
+        this,
+        testContext.getVariable("userName") + "@" + channelName,
+        "password",
+        testContext.getVariable("userId"),
+        true);
   }
 }
