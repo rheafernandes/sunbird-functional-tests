@@ -31,8 +31,9 @@ public class GetUserByUserIdTest extends BaseCitrusTestRunner {
         true,
         "4b981b53-f9eb-44fe",
         HttpStatus.BAD_REQUEST
-      },
-      new Object[] {"testGetUserByUserIdFailureWithEmptyUserId", true, "", HttpStatus.NOT_FOUND}
+      }
+      //      new Object[] {"testGetUserByUserIdFailureWithEmptyUserId", true, "",
+      // HttpStatus.NOT_FOUND}
     };
   }
 
