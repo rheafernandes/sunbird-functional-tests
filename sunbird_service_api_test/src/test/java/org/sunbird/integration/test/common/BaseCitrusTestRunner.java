@@ -241,18 +241,8 @@ public class BaseCitrusTestRunner extends TestNGCitrusTestRunner {
       pathParam = "/" + pathParam;
     }
 
-    String s = pathParam.substring(0, 1);
-
-    if (s.equalsIgnoreCase("/")) {
-
-      return config.getLmsUrl().contains("localhost")
-          ? localUriPath + pathParam
-          : apiGatewayUriPath + pathParam;
-    } else {
-
-      return config.getLmsUrl().contains("localhost")
-          ? localUriPath + "/" + pathParam
-          : apiGatewayUriPath + "/" + pathParam;
-    }
+    return config.getLmsUrl().contains("localhost")
+        ? localUriPath + pathParam
+        : apiGatewayUriPath + pathParam;
   }
 }
