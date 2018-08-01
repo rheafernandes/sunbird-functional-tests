@@ -148,6 +148,7 @@ public class UserTest extends BaseCitrusTest {
     } else {
       HttpClientReceiveActionBuilder response = http().client(restTestClient).receive();
       handleUserCreationResponse(response);
+      this.sleep(Constant.ES_SYNC_WAIT_TIME);
     }
   }
 
