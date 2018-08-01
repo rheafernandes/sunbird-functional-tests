@@ -51,7 +51,10 @@ public class UpdatePageTest extends BaseCitrusTestRunner {
   @CitrusTest
   public void testUpdatePageFailure(
       String testName, boolean isAuthRequired, HttpStatus httpStatusCode) {
+    getTestCase().setName(testName);
+
     getAuthToken(this, isAuthRequired);
+
     performPatchTest(
         this,
         TEMPLATE_DIR,
@@ -79,7 +82,7 @@ public class UpdatePageTest extends BaseCitrusTestRunner {
   @CitrusTest
   public void testUpdatePageSuccess(
       String testName, boolean isAuthRequired, HttpStatus httpStatusCode, boolean canCreatePage) {
-
+    getTestCase().setName(testName);
     getAuthToken(this, isAuthRequired);
 
     beforeTestUpdatePage(canCreatePage);

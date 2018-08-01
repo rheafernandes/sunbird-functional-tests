@@ -78,6 +78,8 @@ public class CreateOrganisationTest extends BaseCitrusTestRunner {
   public void testCreateOrganisationFailure(
       String testName, boolean isAuthRequired, HttpStatus httpStatusCode) {
     getAuthToken(this, isAuthRequired);
+
+    getTestCase().setName(testName);
     performPostTest(
         this,
         TEMPLATE_DIR,
@@ -111,6 +113,8 @@ public class CreateOrganisationTest extends BaseCitrusTestRunner {
   public void testCreateOrganisationSuccess(
       String testName, boolean isAuthRequired, HttpStatus httpStatusCode) {
     getAuthToken(this, isAuthRequired);
+
+    getTestCase().setName(testName);
     variable("rootOrgChannel", OrgUtil.getRootOrgChannel());
     performPostTest(
         this,

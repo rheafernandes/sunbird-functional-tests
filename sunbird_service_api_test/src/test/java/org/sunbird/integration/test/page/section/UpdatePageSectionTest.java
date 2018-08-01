@@ -36,6 +36,7 @@ public class UpdatePageSectionTest extends BaseCitrusTestRunner {
   public void testUpdatePageSectionFailure(
       String testName, boolean isAuthRequired, HttpStatus httpStatusCode) {
     getAuthToken(this, isAuthRequired);
+    getTestCase().setName(testName);
     performPatchTest(
         this,
         TEMPLATE_DIR,

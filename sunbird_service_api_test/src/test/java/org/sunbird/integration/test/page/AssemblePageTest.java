@@ -50,7 +50,7 @@ public class AssemblePageTest extends BaseCitrusTestRunner {
   @CitrusTest
   public void testAssemblePageFailure(
       String testName, HttpStatus httpStatusCode, boolean canCreatePage) {
-
+    getTestCase().setName(testName);
     beforeTestAssemblePage(canCreatePage);
     performPostTest(
         this,

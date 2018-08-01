@@ -63,7 +63,7 @@ public class CreatePageTest extends BaseCitrusTestRunner {
       String testName, boolean isAuthRequired, HttpStatus httpStatusCode, boolean canCreatePage) {
     getAuthToken(this, isAuthRequired);
     beforeTestCreatePage(testName, false, canCreatePage);
-
+    getTestCase().setName(testName);
     performPostTest(
         this,
         TEMPLATE_DIR,
@@ -94,7 +94,7 @@ public class CreatePageTest extends BaseCitrusTestRunner {
       String testName, boolean isAuthRequired, HttpStatus httpStatusCode, boolean canCreateOrg) {
 
     getAuthToken(this, true);
-
+    getTestCase().setName(testName);
     beforeTestCreatePage(testName, canCreateOrg, false);
 
     performPostTest(

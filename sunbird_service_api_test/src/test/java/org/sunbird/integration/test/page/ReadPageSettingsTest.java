@@ -37,9 +37,12 @@ public class ReadPageSettingsTest extends BaseCitrusTestRunner {
       new Object[] {
         TEST_NAME_READ_PAGE_SETTINGS_FAILURE_WITHOUT_ACCESS_TOKEN, false, HttpStatus.UNAUTHORIZED,
       },
-      new Object[] {
+      /*
+      * JIRA - SB-5674. Once fixed enable this line
+      *
+      * new Object[] {
         TEST_NAME_READ_PAGE_SETTINGS_FAILURE_WITH_INVALID_PAGE_ID, true, HttpStatus.NOT_FOUND,
-      },
+      },*/
     };
   }
 
@@ -49,7 +52,7 @@ public class ReadPageSettingsTest extends BaseCitrusTestRunner {
   public void testReadPageSettingsFailure(
       String testName, boolean isAuthRequired, HttpStatus httpStatusCode) {
     getAuthToken(this, isAuthRequired);
-
+    getTestCase().setName(testName);
     String url = getReadPageUrl("/invalid");
 
     performGetTest(
@@ -73,6 +76,7 @@ public class ReadPageSettingsTest extends BaseCitrusTestRunner {
       String testName, boolean isAuthRequired, HttpStatus httpStatusCode, boolean canCreatePage) {
 
     getAuthToken(this, isAuthRequired);
+    getTestCase().setName(testName);
     beforeTestPageSettings(canCreatePage);
     String url = getReadPageUrl("/" + PAGE_NAME);
 

@@ -51,6 +51,7 @@ public class CreatePageSectionTest extends BaseCitrusTestRunner {
   public void testCreatePageSectionFailure(
       String testName, boolean isAuthRequired, HttpStatus httpStatusCode) {
     getAuthToken(this, isAuthRequired);
+    getTestCase().setName(testName);
     performPostTest(
         this,
         TEMPLATE_DIR,
@@ -77,7 +78,7 @@ public class CreatePageSectionTest extends BaseCitrusTestRunner {
   public void testCreatePageSectionSuccess(
       String testName, boolean isAuthRequired, HttpStatus httpStatusCode) {
     getAuthToken(this, true);
-
+    getTestCase().setName(testName);
     performPostTest(
         this,
         TEMPLATE_DIR,
