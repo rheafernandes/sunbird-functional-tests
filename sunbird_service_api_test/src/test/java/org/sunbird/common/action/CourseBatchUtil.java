@@ -20,7 +20,7 @@ public class CourseBatchUtil {
   public static String getOpenCourseBatchId(BaseCitrusTestRunner runner, TestContext testContext) {
     if (StringUtils.isBlank(openCourseBatchId)) {
       openCourseBatchId =
-          getCourseBaychId(
+          getCourseBatchId(
               runner,
               testContext,
               CreateCourseBatchTest.TEST_NAME_CREATE_COURSE_BATCH_SUCCESS_OPEN);
@@ -33,7 +33,7 @@ public class CourseBatchUtil {
     if (StringUtils.isBlank(inviteOnlyCourseBatchId)) {
 
       inviteOnlyCourseBatchId =
-          getCourseBaychId(
+          getCourseBatchId(
               runner,
               testContext,
               CreateCourseBatchTest.TEST_NAME_CREATE_COURSE_BATCH_SUCCESS_INVITE_ONLY);
@@ -41,7 +41,7 @@ public class CourseBatchUtil {
     return inviteOnlyCourseBatchId;
   }
 
-  private static String getCourseBaychId(
+  private static String getCourseBatchId(
       BaseCitrusTestRunner runner, TestContext testContext, String testName) {
     runner.http(
         builder ->
