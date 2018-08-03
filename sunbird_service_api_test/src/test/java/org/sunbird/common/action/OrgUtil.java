@@ -76,7 +76,7 @@ public class OrgUtil {
                 TestActionUtil.getHeaders(true)));
   }
 
-  public static void getRootOrgId(BaseCitrusTestRunner runner, TestContext testContext) {
+  public static String getRootOrgId(BaseCitrusTestRunner runner, TestContext testContext) {
     if (StringUtils.isBlank(rootOrgId)) {
       createOrg(
           runner,
@@ -85,9 +85,10 @@ public class OrgUtil {
           "testCreateRootOrgSuccess",
           HttpStatus.OK);
       rootOrgId = testContext.getVariable("organisationId");
+     
     } else {
       testContext.setVariable("organisationId", rootOrgId);
     }
-    runner.variable("organisationId", rootOrgId);
+    return runner.variable("organisationId", rootOrgId);
   }
 }
