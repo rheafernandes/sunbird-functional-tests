@@ -16,10 +16,7 @@ public class UpdateUserNoteTest extends BaseCitrusTestRunner {
   private static final String TEST_UPDATE_USER_NOTE_FAILURE_WITH_INVALID_USERID =
       "testUpdateUserNoteFailureWithInvalidUserId";
   private static final String TEST_UPDATE_USER_NOTE_SUCCESS = "testUpdateUserNoteSuccess";
-  public static final String BT_CREATE_NOTE_TEMPLATE_DIR = "templates/user/note/create";
   public static final String TEMPLATE_DIR = "templates/user/note/update";
-  private static final String TEST_CREATE_USER_NOTE_SUCCESS_WITH_BOTH_COURSEID_AND_CONTENTID =
-      "testCreateUserNoteSuccessWithCourseIdAndContentId";
 
   private String getUpdateNoteUrl(String pathParam) {
     return getLmsApiUriPath("/api/notes/v1/update", "/v1/note/update", pathParam);
