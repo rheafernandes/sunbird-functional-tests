@@ -5,7 +5,6 @@ import com.consol.citrus.testng.CitrusParameters;
 import javax.ws.rs.core.MediaType;
 import org.springframework.http.HttpStatus;
 import org.sunbird.common.action.UserNoteUtil;
-import org.sunbird.common.action.UserUtil;
 import org.sunbird.integration.test.common.BaseCitrusTestRunner;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -98,19 +97,6 @@ public class UpdateUserNoteTest extends BaseCitrusTestRunner {
   }
 
   void beforeTest(boolean isAuthRequired) {
-    UserUtil.getUserId(this, testContext);
-    String channelName = System.getenv("sunbird_default_channel");
-    getAuthToken(
-        this,
-        testContext.getVariable("userName") + "@" + channelName,
-        "password",
-        testContext.getVariable("userId"),
-        true);
-    variable("userId", testContext.getVariable("userId"));
-    UserNoteUtil.createUserNote(
-        this,
-        testContext,
-        BT_CREATE_NOTE_TEMPLATE_DIR,
-        TEST_CREATE_USER_NOTE_SUCCESS_WITH_BOTH_COURSEID_AND_CONTENTID);
+    UserNoteUtil.createNote(this, testContext);
   }
 }
