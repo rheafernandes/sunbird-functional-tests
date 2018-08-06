@@ -9,14 +9,14 @@ import org.sunbird.integration.test.common.BaseCitrusTestRunner;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-public class SendEmailNotificationTest extends BaseCitrusTestRunner {
+public class EmailNotificationTest extends BaseCitrusTestRunner {
 
-  public static final String TEST_NAME_SEND_EMAIL_NOTIFICATION_FAILURE_WITHOUT_SUBJECT =
-      "testSendEmailNotificationFailureWithoutSubject";
-  public static final String TEST_NAME_SEND_EMAIL_NOTIFICATION_FAILURE_WITHOUT_BODY =
-	      "testSendEmailNotificationFailureWithoutBody";
-  public static final String TEST_NAME_SEND_EMAIL_NOTIFICATION_FAILURE_WITHOUT_RECIPIENT =
-	      "testSendEmailNotificationFailureWithoutRecipient";
+  public static final String TEST_NAME_EMAIL_NOTIFICATION_FAILURE_WITHOUT_SUBJECT =
+      "testEmailNotificationFailureWithoutSubject";
+  public static final String TEST_NAME_EMAIL_NOTIFICATION_FAILURE_WITHOUT_BODY =
+	      "testEmailNotificationFailureWithoutBody";
+  public static final String TEST_NAME_EMAIL_NOTIFICATION_FAILURE_WITHOUT_RECIPIENT =
+	      "testEmailNotificationFailureWithoutRecipient";
   
   
 
@@ -26,20 +26,20 @@ public class SendEmailNotificationTest extends BaseCitrusTestRunner {
     return getLmsApiUriPath("/api/course/v1/notification/email", "/v1/notification/email");
   }
 
-  @DataProvider(name = "sendMailFailureDataProvider")
-  public Object[][] sendMailFailureDataProvider() {
+  @DataProvider(name = "emailNotificationFailureDataProvider")
+  public Object[][] emailNotificationFailureDataProvider() {
 
     return new Object[][] {
-      new Object[] {TEST_NAME_SEND_EMAIL_NOTIFICATION_FAILURE_WITHOUT_SUBJECT,HttpStatus.BAD_REQUEST}, 
-      new Object[] {TEST_NAME_SEND_EMAIL_NOTIFICATION_FAILURE_WITHOUT_BODY, HttpStatus.BAD_REQUEST}, 
-      new Object[] {TEST_NAME_SEND_EMAIL_NOTIFICATION_FAILURE_WITHOUT_RECIPIENT, HttpStatus.BAD_REQUEST}, 
+      new Object[] {TEST_NAME_EMAIL_NOTIFICATION_FAILURE_WITHOUT_SUBJECT,HttpStatus.BAD_REQUEST}, 
+      new Object[] {TEST_NAME_EMAIL_NOTIFICATION_FAILURE_WITHOUT_BODY, HttpStatus.BAD_REQUEST}, 
+      new Object[] {TEST_NAME_EMAIL_NOTIFICATION_FAILURE_WITHOUT_RECIPIENT, HttpStatus.BAD_REQUEST}, 
     };
   }
 
-  @Test(dataProvider = "sendMailFailureDataProvider")
+  @Test(dataProvider = "emailNotificationFailureDataProvider")
   @CitrusParameters({"testName", "httpStatusCode"})
   @CitrusTest
-  public void testSendMailFailure(
+  public void testEmailNotificationFailure(
       String testName, HttpStatus httpStatusCode) {
    
 	  getTestCase().setName(testName);
