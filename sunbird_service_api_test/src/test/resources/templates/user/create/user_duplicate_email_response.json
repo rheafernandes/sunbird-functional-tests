@@ -6,8 +6,8 @@
 {
 "resmsgid":null,
 "msgid":"@ignore@",
-"err":"USERNAME_EMAIL_IN_USE",
-"status":"USERNAME_EMAIL_IN_USE",
+"err":"EMAIL_IN_USE",
+"status":"EMAIL_IN_USE",
 "errmsg":"@ignore@"
 }
 ,"responseCode":"CLIENT_ERROR",
