@@ -2,6 +2,8 @@ package org.sunbird.integration.test.course.batch;
 
 import com.consol.citrus.annotations.CitrusTest;
 import com.consol.citrus.testng.CitrusParameters;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.UUID;
 import javax.ws.rs.core.MediaType;
 import org.springframework.http.HttpStatus;
@@ -14,25 +16,26 @@ import org.testng.annotations.Test;
 public class AddUserToCourseBatch extends BaseCitrusTestRunner {
 
   public static final String TEST_NAME_ADD_USER_TO_BATCH_FAILURE_WITH_INVALID_BATCHID =
-      "testAddUserToBatchFailureWithInvalidBatchId";
+      "testAddUserToCourseBatchFailureWithInvalidBatchId";
   public static final String TEST_NAME_ADD_USER_TO_BATCH_FAILURE_WITHOUT_AUTH_TOKEN =
-      "testAddUserToBatchFailureWithoutAuthtoken";
+      "testAddUserToCourseBatchFailureWithoutAuthtoken";
   public static final String TEST_NAME_ADD_USER_TO_BATCH_FAILURE_WITHOUT_USER_IDS =
-      "testAddUserToBatchFailureWithoutUserIds";
+      "testAddUserToCourseBatchFailureWithoutUserIds";
   public static final String TEST_NAME_ADD_USER_TO_BATCH_FAILURE_FOR_OPEN_BATCH =
-      "testAddUserToBatchFailureForOpenBatch";
+      "testAddUserToCourseBatchFailureForOpenBatch";
   public static final String TEST_NAME_ADD_USER_TO_BATCH_FAILURE_FOR_Invitee_Only_WITHOUT_ORG_ID =
-      "testAddUserToBatchFailureForInviteeOnlyBatchWithoutOrg";
+      "testAddUserToCourseBatchFailureForInviteeOnlyBatchWithoutOrg";
 
   public static final String TEMPLATE_DIR = "templates/course/batch/addUser";
   private static String courseBatchId = UUID.randomUUID().toString();
+  private static final String TODAY_DATE = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
 
   private String getAddUserToBatchUrl() {
     return getLmsApiUriPath("/api/course/v1/batch/user/add", "/v1/course/batch/users/add/");
   }
 
-  @DataProvider(name = "addUserToBatchDataFailureProvider")
-  public Object[][] addUserToBatchDataFailureProvider() {
+  @DataProvider(name = "addUserToCourseBatchDataFailureProvider")
+  public Object[][] addUserToCourseBatchDataFailureProvider() {
     return new Object[][] {
       new Object[] {
         TEST_NAME_ADD_USER_TO_BATCH_FAILURE_WITHOUT_AUTH_TOKEN,
@@ -68,24 +71,24 @@ public class AddUserToCourseBatch extends BaseCitrusTestRunner {
     };
   }
 
-  @Test(dataProvider = "addUserToBatchDataFailureProvider")
+  @Test(dataProvider = "addUserToCourseBatchDataFailureProvider")
   @CitrusParameters({
     "testName",
     "isAuthRequired",
-    "courseBatchCreate",
+    "canCreateCourseBatch",
     "isOpenBatch",
     "httpStatusCode"
   })
   @CitrusTest
-  public void testAddUserToBatchFailure(
+  public void testAddUserToCourseBatchFailure(
       String testName,
       boolean isAuthRequired,
-      boolean courseBatchCreate,
+      boolean canCreateCourseBatch,
       boolean isOpenBatch,
       HttpStatus httpStatusCode) {
     getTestCase().setName(testName);
     getAuthToken(this, isAuthRequired);
-    before(courseBatchCreate, isOpenBatch);
+    beforeTest(canCreateCourseBatch, isOpenBatch);
     performPostTest(
         this,
         TEMPLATE_DIR,
@@ -98,11 +101,11 @@ public class AddUserToCourseBatch extends BaseCitrusTestRunner {
         RESPONSE_JSON);
   }
 
-  private void before(boolean courseBatchCreate, boolean isOpenBatch) {
-    if (courseBatchCreate) {
+  private void beforeTest(boolean canCreateCourseBatch, boolean isOpenBatch) {
+    if (canCreateCourseBatch) {
       variable("courseUnitId", ContentStoreUtil.getCourseUnitId());
       variable("resourceId", ContentStoreUtil.getResourceId());
-      variable("startDate", CreateCourseBatchTest.TODAY_DATE);
+      variable("startDate", TODAY_DATE);
       String courseId = ContentStoreUtil.getCourseId(this, testContext);
       variable("courseId", courseId);
       if (isOpenBatch) {

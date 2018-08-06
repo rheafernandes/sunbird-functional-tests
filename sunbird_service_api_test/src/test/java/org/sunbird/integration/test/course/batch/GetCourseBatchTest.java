@@ -13,13 +13,13 @@ import org.testng.annotations.Test;
 public class GetCourseBatchTest extends BaseCitrusTestRunner {
 
   public static final String TEST_NAME_GET_COURSE_BATCH_SUCCESS_WITH_OPEN_VALID_ID =
-      "testGetCouseBatchSuccessWithOpenValidId";
+      "testGetCourseBatchSuccessWithOpenBatchWithValidId";
   public static final String TEST_NAME_GET_COURSE_BATCH_SUCCESS_WITH_INVITEE_ONLY_VALID_ID =
-      "testGetCouseBatchSuccessWithInviteeOnlyValidId";
+      "testGetCourseBatchSuccessWithInviteeOnlyBatchWithValidId";
   public static final String TEST_NAME_GET_COURSE_BATCH_FAILURE_WITH_INVALID_ID =
-      "testGetCouseBatchFailureWithInValidId";
+      "testGetCourseBatchFailureWithInvalidId";
   public static final String TEST_NAME_GET_COURSE_BATCH_FAILURE_WITHOUT_AUTH_TOKEN =
-      "testGetCouseBatchFailureWithoutAuthToken";
+      "testGetCourseBatchFailureWithoutAuthToken";
   private static String courseBatchId = null;
   public static final String TEMPLATE_DIR = "templates/course/batch/read";
 
@@ -66,7 +66,7 @@ public class GetCourseBatchTest extends BaseCitrusTestRunner {
   @CitrusTest
   public void testReadCourseBatchSuccess(String testName, boolean isOpen) {
     getAuthToken(this, true);
-    before(isOpen);
+    beforeTest(isOpen);
     performGetTest(
         this,
         TEMPLATE_DIR,
@@ -77,7 +77,7 @@ public class GetCourseBatchTest extends BaseCitrusTestRunner {
         RESPONSE_JSON);
   }
 
-  private void before(boolean isOpen) {
+  private void beforeTest(boolean isOpen) {
     variable("courseUnitId", ContentStoreUtil.getCourseUnitId());
     variable("resourceId", ContentStoreUtil.getResourceId());
     variable("startDate", CreateCourseBatchTest.TODAY_DATE);

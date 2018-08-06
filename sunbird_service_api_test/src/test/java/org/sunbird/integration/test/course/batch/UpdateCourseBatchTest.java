@@ -39,7 +39,7 @@ public class UpdateCourseBatchTest extends BaseCitrusTestRunner {
   @Test(dataProvider = "updateCourseBatchDataFailureProvider")
   @CitrusParameters({"testName", "isAuthRequired", "httpStatusCode"})
   @CitrusTest
-  public void updateCourseBatchFailure(
+  public void testUpdateCourseBatchFailure(
       String testName, boolean isAuthRequired, HttpStatus httpStatusCode) {
     getTestCase().setName(testName);
     getAuthToken(this, isAuthRequired);
