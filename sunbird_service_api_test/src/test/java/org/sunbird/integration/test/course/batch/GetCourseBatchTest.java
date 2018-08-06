@@ -23,8 +23,8 @@ public class GetCourseBatchTest extends BaseCitrusTestRunner {
   private static String courseBatchId = null;
   public static final String TEMPLATE_DIR = "templates/course/batch/read";
 
-  private String getGetCourseBatchUrl() {
-    return getLmsApiUriPath("/api/course/v1/batch/read/", "/v1/course/batch/read/");
+  private String getGetCourseBatchUrl(String courseBatchId) {
+    return getLmsApiUriPath("/api/course/v1/batch/read", "/v1/course/batch/read", courseBatchId);
   }
 
   @DataProvider(name = "readCourseBatchDataFailureProvider")
@@ -47,7 +47,7 @@ public class GetCourseBatchTest extends BaseCitrusTestRunner {
         this,
         TEMPLATE_DIR,
         testName,
-        getGetCourseBatchUrl() + UUID.randomUUID().toString(),
+        getGetCourseBatchUrl(UUID.randomUUID().toString()),
         isAuthRequired,
         httpStatusCode,
         RESPONSE_JSON);
@@ -71,7 +71,7 @@ public class GetCourseBatchTest extends BaseCitrusTestRunner {
         this,
         TEMPLATE_DIR,
         testName,
-        getGetCourseBatchUrl() + courseBatchId,
+        getGetCourseBatchUrl(courseBatchId),
         true,
         HttpStatus.OK,
         RESPONSE_JSON);
