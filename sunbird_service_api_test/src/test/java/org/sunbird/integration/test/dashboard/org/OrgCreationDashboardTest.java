@@ -17,12 +17,12 @@ public class OrgCreationDashboardTest extends BaseCitrusTestRunner {
 			"testOrgCreationDashboardFailureWithInvalidOrgId";
 	public static final String TEST_NAME_ORG_CREATION_DASHBOARD_FAILURE_WITH_INVALID_TIME_PERIOD =
 			"testOrgCreationDashboardFailureWithInvalidTimePeriod";
-	
+
 	public static final String TEST_NAME_ORG_CREATION_DASHBOARD_SUCCESS_WITH_VALID_ORG_ID =
 			"testOrgCreationDashboardSuccessWithValidOrgId";
-	
-	public static String ROOT_ORG_ID = "1";
 
+	public static String INVALID_ROOT_ORG_ID = "invaldRootOrg1";
+	public static String ROOT_ORG_ID = null;
 
 	public static final String TEMPLATE_DIR = "templates/dashboard/org/creation";
 
@@ -36,85 +36,81 @@ public class OrgCreationDashboardTest extends BaseCitrusTestRunner {
 
 		return new Object[][] {
 			new Object[] {
-					TEST_NAME_ORG_CREATION_DASHBOARD_FAILURE_WITHOUT_ACCESS_TOKEN, false, HttpStatus.UNAUTHORIZED,false
+					TEST_NAME_ORG_CREATION_DASHBOARD_FAILURE_WITHOUT_ACCESS_TOKEN, false, HttpStatus.UNAUTHORIZED,false,""
 			},
 			new Object[] {
-					TEST_NAME_ORG_CREATION_DASHBOARD_FAILURE_WITH_INVALID_ORG_ID, true, HttpStatus.BAD_REQUEST,false
+					TEST_NAME_ORG_CREATION_DASHBOARD_FAILURE_WITH_INVALID_ORG_ID, true, HttpStatus.BAD_REQUEST,false,"?period=1d"
 			},
 			new Object[] {
-					TEST_NAME_ORG_CREATION_DASHBOARD_FAILURE_WITH_INVALID_TIME_PERIOD, true, HttpStatus.BAD_REQUEST,true
+					TEST_NAME_ORG_CREATION_DASHBOARD_FAILURE_WITH_INVALID_TIME_PERIOD, true, HttpStatus.BAD_REQUEST,true,"?period=1"
 			}
 
 		};
 	}
 
 	@Test(dataProvider = "orgCreationFailureDataProvider")
-	@CitrusParameters({"testName", "isAuthRequired", "httpStatusCode","canCreateOrg"})
+	@CitrusParameters({"testName", "isAuthRequired", "httpStatusCode","canCreateOrg", "pathParam"})
 	@CitrusTest
 	public void testOrgCreationFailure(
-			String testName, boolean isAuthRequired, HttpStatus httpStatusCode,boolean canCreateOrg) {
+			String testName, boolean isAuthRequired, HttpStatus httpStatusCode,boolean canCreateOrg, String pathParam) {
 		getAuthToken(this, isAuthRequired);
 		getTestCase().setName(testName);
-		
+
 		variable("rootOrgChannel", OrgUtil.getRootOrgChannel());
 		variable("rootOrgExternalId", OrgUtil.getRootOrgExternalId());
-		beforeTest(canCreateOrg);
 		
 		String url = null;
-		
+
 		if(canCreateOrg) {
-			if(testName.equalsIgnoreCase(TEST_NAME_ORG_CREATION_DASHBOARD_FAILURE_WITH_INVALID_TIME_PERIOD)) {
-				url = getOrgCreationUrl(ROOT_ORG_ID+"?period=1");
-			}
-			
+			beforeTest(canCreateOrg);
+			url = getOrgCreationUrl(ROOT_ORG_ID + pathParam);
 		}else {
-			url = getOrgCreationUrl(ROOT_ORG_ID);
+			url = getOrgCreationUrl(INVALID_ROOT_ORG_ID);
 		}
-		
+
 		performGetTest(
 				this, TEMPLATE_DIR, testName, url, isAuthRequired, httpStatusCode, RESPONSE_JSON);
 	}
-	
+
 	@DataProvider(name = "orgCreationSuccessDataProvider")
 	public Object[][] orgCreationSuccessDataProvider() {
 
 		return new Object[][] {			
 			new Object[] {
-					TEST_NAME_ORG_CREATION_DASHBOARD_SUCCESS_WITH_VALID_ORG_ID, true, HttpStatus.OK,true
+					TEST_NAME_ORG_CREATION_DASHBOARD_SUCCESS_WITH_VALID_ORG_ID, true, HttpStatus.OK,true,"?period=7d"
 			},
 
 		};
 	}
 
 	@Test(dataProvider = "orgCreationSuccessDataProvider")
-	@CitrusParameters({"testName", "isAuthRequired", "httpStatusCode","canCreateOrg"})
+	@CitrusParameters({"testName", "isAuthRequired", "httpStatusCode","canCreateOrg","pathParam"})
 	@CitrusTest
 	public void testOrgCreationSuccess(
-			String testName, boolean isAuthRequired, HttpStatus httpStatusCode,boolean canCreateOrg) {
+			String testName, boolean isAuthRequired, HttpStatus httpStatusCode,boolean canCreateOrg, String pathParam) {
 		getAuthToken(this, isAuthRequired);
 		getTestCase().setName(testName);
-		
+
 		variable("rootOrgChannel", OrgUtil.getRootOrgChannel());
 		variable("rootOrgExternalId", OrgUtil.getRootOrgExternalId());
 		beforeTest(canCreateOrg);
-		
+
 		String url = null;
-		
-		if(canCreateOrg) {
-			if(testName.equalsIgnoreCase(TEST_NAME_ORG_CREATION_DASHBOARD_SUCCESS_WITH_VALID_ORG_ID)){
-				url = getOrgCreationUrl(ROOT_ORG_ID+"?period=7d");
-			}
-			
-		}else {
-			url = getOrgCreationUrl(ROOT_ORG_ID);
-		}
+
+		if(canCreateOrg)
+			url = getOrgCreationUrl(ROOT_ORG_ID + pathParam);
 		
 		performGetTest(
 				this, TEMPLATE_DIR, testName, url, isAuthRequired, httpStatusCode, RESPONSE_JSON);
 	}
 	private void beforeTest(boolean canCreateOrg) {
-		if(canCreateOrg)
-			ROOT_ORG_ID = OrgUtil.getRootOrgId(this, testContext);
+		if(canCreateOrg) {
+			if(ROOT_ORG_ID == null) {
+				ROOT_ORG_ID = OrgUtil.getRootOrgId(this, testContext);
+			}else {				
+				testContext.setVariable("organisationId", ROOT_ORG_ID);
+			}
+		}
 	}
 
 }

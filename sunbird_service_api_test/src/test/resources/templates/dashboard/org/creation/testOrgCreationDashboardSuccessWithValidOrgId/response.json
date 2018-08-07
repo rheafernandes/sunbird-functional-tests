@@ -14,7 +14,7 @@
         "period": "7d",
         "org": {
             "orgName": "@ignore@",
-            "orgId": "${organisationId}"
+            "orgId": "@ignore@"
         },
         "snapshot": {
             "org.creation.content.count": {
