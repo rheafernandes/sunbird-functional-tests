@@ -15,6 +15,7 @@ public class ContentStoreUtil {
   private static final String CONTENT_STORE_CREATE_URL = "/content/v3/create";
   private static final String CONTENT_STORE_UPDATE_HIERARCHY_URL = "/content/v3/hierarchy/update";
   private static final String CONTENT_STORE_CONTENT_PUBLISH_URL = "/content/v3/publish/";
+  private static final String CONTENT_STORE_RETIRE_CONTENT_URL = "/content/v3/retire/";
   private static String courseId = null;
   private static final String courseUnitId = "SB_FT_COURSEUNIT_" + UUID.randomUUID().toString();
   private static final String resourceId = "do_1125535199417548801180";
@@ -34,18 +35,29 @@ public class ContentStoreUtil {
 
   private static Map<String, Object> getHeaders() {
     Map<String, Object> headers = TestActionUtil.getHeaders(false);
-    headers.put(Constant.AUTHORIZATION, Constant.BEARER + "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiI2NWU2MTUxNzdkODY0MGJkYWNmMWE4MWEwM2Y5MmNjYSJ9.yST4a-kA0K-r-86m0gx45IMTTZP0ujQnjFDEjv2wU0A");
+    headers.put(Constant.AUTHORIZATION, Constant.BEARER + System.getenv("content_store_api_key"));
     return headers;
   }
 
   private static void createLiveCourse(BaseCitrusTestRunner runner, TestContext testContext) {
     createCourse(runner, testContext);
 
-    updateCourseHierarchy(runner, testContext);
+    if (StringUtils.isNotBlank(courseId)) {
+      updateCourseHierarchy(runner, testContext);
 
-    publishCourse(runner, testContext);
+      publishCourse(runner, testContext);
 
-    runner.sleep(Constant.ES_SYNC_WAIT_TIME);
+      runner.sleep(Constant.ES_SYNC_WAIT_TIME);
+
+      // retire course post all test/ during jvm shutdown
+      Runtime.getRuntime()
+          .addShutdownHook(
+              new Thread() {
+                public void run() {
+                  retireCourse(runner, testContext);
+                }
+              });
+    }
   }
 
   private static void createCourse(BaseCitrusTestRunner runner, TestContext testContext) {
@@ -111,6 +123,27 @@ public class ContentStoreUtil {
                 builder,
                 Constant.CONTENT_STORE_ENDPOINT,
                 "testPublishCourseSuccess",
+                HttpStatus.OK));
+  }
+
+  private static void retireCourse(BaseCitrusTestRunner runner, TestContext testContext) {
+    runner.http(
+        builder ->
+            TestActionUtil.getDeleteRequestTestAction(
+                builder,
+                Constant.CONTENT_STORE_ENDPOINT,
+                TEMPLATE_DIR,
+                "testRetireCourseSuccess",
+                CONTENT_STORE_RETIRE_CONTENT_URL + courseId,
+                Constant.REQUEST_JSON,
+                MediaType.APPLICATION_JSON.toString(),
+                getHeaders()));
+    runner.http(
+        builder ->
+            TestActionUtil.getResponseTestAction(
+                builder,
+                Constant.CONTENT_STORE_ENDPOINT,
+                "testRetireCourseSuccess",
                 HttpStatus.OK));
   }
 }
