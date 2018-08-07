@@ -12,10 +12,10 @@ import org.testng.annotations.Test;
 
 public class GetCourseBatchTest extends BaseCitrusTestRunner {
 
-  public static final String TEST_NAME_GET_COURSE_BATCH_SUCCESS_WITH_OPEN_VALID_ID =
-      "testGetCourseBatchSuccessWithOpenBatchWithValidId";
-  public static final String TEST_NAME_GET_COURSE_BATCH_SUCCESS_WITH_INVITEE_ONLY_VALID_ID =
-      "testGetCourseBatchSuccessWithInviteeOnlyBatchWithValidId";
+  public static final String TEST_NAME_GET_COURSE_BATCH_SUCCESS_OPEN_BATCH_WITH_VALID_ID =
+      "testGetCourseBatchSuccessOpenBatchWithValidId";
+  public static final String TEST_NAME_GET_COURSE_BATCH_SUCCESS_INVITE_ONLY_BATCH_WITH_VALID_ID =
+      "testGetCourseBatchSuccessInviteOnlyBatchWithValidId";
   public static final String TEST_NAME_GET_COURSE_BATCH_FAILURE_WITH_INVALID_ID =
       "testGetCourseBatchFailureWithInvalidId";
   public static final String TEST_NAME_GET_COURSE_BATCH_FAILURE_WITHOUT_AUTH_TOKEN =
@@ -56,8 +56,8 @@ public class GetCourseBatchTest extends BaseCitrusTestRunner {
   @DataProvider(name = "readCourseBatchSuccessDataProvider")
   public Object[][] readCourseBatchSuccessDataProvider() {
     return new Object[][] {
-      new Object[] {TEST_NAME_GET_COURSE_BATCH_SUCCESS_WITH_OPEN_VALID_ID, true},
-      new Object[] {TEST_NAME_GET_COURSE_BATCH_SUCCESS_WITH_INVITEE_ONLY_VALID_ID, false}
+      new Object[] {TEST_NAME_GET_COURSE_BATCH_SUCCESS_OPEN_BATCH_WITH_VALID_ID, true},
+      new Object[] {TEST_NAME_GET_COURSE_BATCH_SUCCESS_INVITE_ONLY_BATCH_WITH_VALID_ID, false}
     };
   }
 

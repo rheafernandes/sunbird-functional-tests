@@ -18,13 +18,13 @@ public class AddUserToCourseBatch extends BaseCitrusTestRunner {
   public static final String TEST_NAME_ADD_USER_TO_BATCH_FAILURE_WITH_INVALID_BATCHID =
       "testAddUserToCourseBatchFailureWithInvalidBatchId";
   public static final String TEST_NAME_ADD_USER_TO_BATCH_FAILURE_WITHOUT_AUTH_TOKEN =
-      "testAddUserToCourseBatchFailureWithoutAuthtoken";
+      "testAddUserToCourseBatchFailureWithoutAuthToken";
   public static final String TEST_NAME_ADD_USER_TO_BATCH_FAILURE_WITHOUT_USER_IDS =
       "testAddUserToCourseBatchFailureWithoutUserIds";
-  public static final String TEST_NAME_ADD_USER_TO_BATCH_FAILURE_FOR_OPEN_BATCH =
-      "testAddUserToCourseBatchFailureForOpenBatch";
-  public static final String TEST_NAME_ADD_USER_TO_BATCH_FAILURE_FOR_Invitee_Only_WITHOUT_ORG_ID =
-      "testAddUserToCourseBatchFailureForInviteeOnlyBatchWithoutOrg";
+  public static final String TEST_NAME_ADD_USER_TO_BATCH_FAILURE_OPEN_BATCH =
+      "testAddUserToCourseBatchFailureOpenBatch";
+  public static final String TEST_NAME_ADD_USER_TO_BATCH_FAILURE_INVITE_ONLY_WITHOUT_ORG_ID =
+      "testAddUserToCourseBatchFailureForInviteBatchWithoutOrgId";
 
   public static final String TEMPLATE_DIR = "templates/course/batch/addUser";
   private static String courseBatchId = UUID.randomUUID().toString();
@@ -59,10 +59,10 @@ public class AddUserToCourseBatch extends BaseCitrusTestRunner {
         HttpStatus.BAD_REQUEST
       },
       new Object[] {
-        TEST_NAME_ADD_USER_TO_BATCH_FAILURE_FOR_OPEN_BATCH, true, true, true, HttpStatus.BAD_REQUEST
+              TEST_NAME_ADD_USER_TO_BATCH_FAILURE_OPEN_BATCH, true, true, true, HttpStatus.BAD_REQUEST
       },
       new Object[] {
-        TEST_NAME_ADD_USER_TO_BATCH_FAILURE_FOR_Invitee_Only_WITHOUT_ORG_ID,
+              TEST_NAME_ADD_USER_TO_BATCH_FAILURE_INVITE_ONLY_WITHOUT_ORG_ID,
         true,
         true,
         false,

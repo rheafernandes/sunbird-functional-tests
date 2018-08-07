@@ -34,7 +34,7 @@ public class ContentStoreUtil {
 
   private static Map<String, Object> getHeaders() {
     Map<String, Object> headers = TestActionUtil.getHeaders(false);
-    headers.put(Constant.AUTHORIZATION, Constant.BEARER + System.getenv("content_store_api_key"));
+    headers.put(Constant.AUTHORIZATION, Constant.BEARER + "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiI2NWU2MTUxNzdkODY0MGJkYWNmMWE4MWEwM2Y5MmNjYSJ9.yST4a-kA0K-r-86m0gx45IMTTZP0ujQnjFDEjv2wU0A");
     return headers;
   }
 
