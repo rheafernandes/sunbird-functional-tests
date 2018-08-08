@@ -12,10 +12,10 @@ public class CourseBatchUtil {
 
   private static String openCourseBatchId = "";
   private static String inviteOnlyCourseBatchId = "";
-  public static final String TEST_NAME_CREATE_COURSE_BATCH_SUCCESS_OPEN =
-      "testCreateCourseBatchSuccessOpen";
-  public static final String TEST_NAME_CREATE_COURSE_BATCH_SUCCESS_INVITE_ONLY =
-      "testCreateCourseBatchSuccessInviteOnly";
+  public static final String TEST_NAME_CREATE_COURSE_BATCH_SUCCESS_OPEN_BATCH =
+      "testCreateCourseBatchSuccessOpenBatch";
+  public static final String TEST_NAME_CREATE_COURSE_BATCH_SUCCESS_INVITE_ONLY_BATCH =
+      "testCreateCourseBatchSuccessInviteOnlyBatch";
 
   private static String getCreateCourseBatchUrl(BaseCitrusTestRunner runner) {
     return runner.getLmsApiUriPath("/api/course/v1/batch/create", "/v1/course/batch/create");
@@ -24,7 +24,7 @@ public class CourseBatchUtil {
   public static String getOpenCourseBatchId(BaseCitrusTestRunner runner, TestContext testContext) {
     if (StringUtils.isBlank(openCourseBatchId)) {
       openCourseBatchId =
-          getCourseBatchId(runner, testContext, TEST_NAME_CREATE_COURSE_BATCH_SUCCESS_OPEN);
+          getCourseBatchId(runner, testContext, TEST_NAME_CREATE_COURSE_BATCH_SUCCESS_OPEN_BATCH);
     }
     return openCourseBatchId;
   }
@@ -34,7 +34,8 @@ public class CourseBatchUtil {
     if (StringUtils.isBlank(inviteOnlyCourseBatchId)) {
 
       inviteOnlyCourseBatchId =
-          getCourseBatchId(runner, testContext, TEST_NAME_CREATE_COURSE_BATCH_SUCCESS_INVITE_ONLY);
+          getCourseBatchId(
+              runner, testContext, TEST_NAME_CREATE_COURSE_BATCH_SUCCESS_INVITE_ONLY_BATCH);
     }
     return inviteOnlyCourseBatchId;
   }

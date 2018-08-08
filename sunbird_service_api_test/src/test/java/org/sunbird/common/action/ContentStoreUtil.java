@@ -49,7 +49,7 @@ public class ContentStoreUtil {
 
       runner.sleep(Constant.ES_SYNC_WAIT_TIME);
 
-      // retire course post all test(before jvm shutdown)
+      // retire course post all test (before jvm shutdown)
       Runtime.getRuntime()
           .addShutdownHook(
               new Thread() {

@@ -23,8 +23,8 @@ public class AddUserToCourseBatch extends BaseCitrusTestRunner {
       "testAddUserToCourseBatchFailureWithoutUserIds";
   public static final String TEST_NAME_ADD_USER_TO_BATCH_FAILURE_OPEN_BATCH =
       "testAddUserToCourseBatchFailureOpenBatch";
-  public static final String TEST_NAME_ADD_USER_TO_BATCH_FAILURE_INVITE_ONLY_WITHOUT_ORG_ID =
-      "testAddUserToCourseBatchFailureForInviteBatchWithoutOrgId";
+  public static final String TEST_NAME_ADD_USER_TO_BATCH_FAILURE_INVITE_ONLY_BATCH_WITHOUT_ORG_ID =
+      "testAddUserToCourseBatchFailureInviteOnlyBatchWithoutOrgId";
 
   public static final String TEMPLATE_DIR = "templates/course/batch/addUser";
   private static String courseBatchId = UUID.randomUUID().toString();
@@ -59,10 +59,10 @@ public class AddUserToCourseBatch extends BaseCitrusTestRunner {
         HttpStatus.BAD_REQUEST
       },
       new Object[] {
-              TEST_NAME_ADD_USER_TO_BATCH_FAILURE_OPEN_BATCH, true, true, true, HttpStatus.BAD_REQUEST
+        TEST_NAME_ADD_USER_TO_BATCH_FAILURE_OPEN_BATCH, true, true, true, HttpStatus.BAD_REQUEST
       },
       new Object[] {
-              TEST_NAME_ADD_USER_TO_BATCH_FAILURE_INVITE_ONLY_WITHOUT_ORG_ID,
+        TEST_NAME_ADD_USER_TO_BATCH_FAILURE_INVITE_ONLY_BATCH_WITHOUT_ORG_ID,
         true,
         true,
         false,
