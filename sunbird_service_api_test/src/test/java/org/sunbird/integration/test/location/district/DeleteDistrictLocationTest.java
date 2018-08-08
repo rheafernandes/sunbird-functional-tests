@@ -39,7 +39,7 @@ public class DeleteDistrictLocationTest extends BaseCitrusTestRunner {
     };
   }
 
-  @Test(dataProvider = "deleteLocationSuccessDataProvider")
+  @Test(dataProvider = "deleteLocationSuccessDataProvider", enabled = false)
   @CitrusParameters({"testName", "isAuthRequired", "httpStatusCode"})
   @CitrusTest
   public void testDeleteLocationSuccess(
@@ -58,7 +58,7 @@ public class DeleteDistrictLocationTest extends BaseCitrusTestRunner {
         RESPONSE_JSON);
   }
 
-  @Test(dataProvider = "deleteLocationFailureDataProvider")
+  @Test(dataProvider = "deleteLocationFailureDataProvider", enabled = false)
   @CitrusParameters({"testName", "isAuthRequired", "httpStatusCode"})
   @CitrusTest
   public void testDeleteLocationFailure(
