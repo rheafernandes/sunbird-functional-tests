@@ -1,7 +1,0 @@
-{
-    "request": {
-        "rootOrgId": "${organisationId}",
-        "data": [
-        ]
-    }
-}

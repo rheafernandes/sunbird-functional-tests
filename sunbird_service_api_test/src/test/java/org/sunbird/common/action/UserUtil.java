@@ -93,4 +93,14 @@ public class UserUtil {
                 MediaType.APPLICATION_JSON.toString(),
                 TestActionUtil.getHeaders(true)));
   }
+
+  public static void getUserNameWithChannel(BaseCitrusTestRunner runner, TestContext testContext) {
+    String channelName = System.getenv("sunbird_default_channel");
+    runner.getAuthToken(
+        runner,
+        testContext.getVariable("userName") + "@" + channelName,
+        Constant.PASSWORD,
+        testContext.getVariable("userId"),
+        true);
+  }
 }

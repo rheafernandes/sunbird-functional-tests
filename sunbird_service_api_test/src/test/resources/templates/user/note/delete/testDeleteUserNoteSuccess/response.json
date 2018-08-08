@@ -1,5 +1,5 @@
 {
-    "id": "api.notification.location.create",
+    "id": "api.note.delete",
     "ver": "v1",
     "ts": "@ignore@",
     "params": {
@@ -10,7 +10,5 @@
         "errmsg": null
     },
     "responseCode": "OK",
-    "result": {
-        "response": []
-    }
+    "result": {}
 }

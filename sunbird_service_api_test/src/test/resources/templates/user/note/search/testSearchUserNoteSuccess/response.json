@@ -1,5 +1,5 @@
 {
-    "id": "api.notification.location.update",
+    "id": "api.note.search",
     "ver": "v1",
     "ts": "@ignore@",
     "params": {
@@ -11,6 +11,9 @@
     },
     "responseCode": "OK",
     "result": {
-        "response": "SUCCESS"
+        "response": {
+            "count": "@ignore@",
+            "note": "@ignore@"
+        }
     }
 }

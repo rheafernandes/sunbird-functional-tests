@@ -5,7 +5,6 @@ import com.consol.citrus.testng.CitrusParameters;
 import javax.ws.rs.core.MediaType;
 import org.springframework.http.HttpStatus;
 import org.sunbird.common.action.UserNoteUtil;
-import org.sunbird.common.action.UserUtil;
 import org.sunbird.integration.test.common.BaseCitrusTestRunner;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -44,7 +43,7 @@ public class UpdateUserNoteTest extends BaseCitrusTestRunner {
   public void testUpdateUserNoteFailure(
       String testName, boolean isAuthRequired, HttpStatus httpStatusCode) {
     getTestCase().setName(testName);
-    beforeTest(isAuthRequired);
+    beforeTest();
     getAuthToken(this, isAuthRequired);
     performPatchTest(
         this,
@@ -64,7 +63,7 @@ public class UpdateUserNoteTest extends BaseCitrusTestRunner {
   public void testUpdateUserNoteSuccess(
       String testName, boolean isAuthRequired, HttpStatus httpStatusCode) {
     getTestCase().setName(testName);
-    beforeTest(isAuthRequired);
+    beforeTest();
     performPatchTest(
         this,
         TEMPLATE_DIR,
@@ -81,7 +80,7 @@ public class UpdateUserNoteTest extends BaseCitrusTestRunner {
   @CitrusTest
   public void testUpdateUserNoteFailureWithInvalidNoteId() {
     getTestCase().setName(TEST_UPDATE_USER_NOTE_FAILURE_WITH_INVALID_NOTEID);
-    beforeTest(true);
+    beforeTest();
     performPatchTest(
         this,
         TEMPLATE_DIR,
@@ -94,20 +93,7 @@ public class UpdateUserNoteTest extends BaseCitrusTestRunner {
         RESPONSE_JSON);
   }
 
-  void beforeTest(boolean isAuthRequired) {
-    UserUtil.getUserId(this, testContext);
-    String channelName = System.getenv("sunbird_default_channel");
-    getAuthToken(
-        this,
-        testContext.getVariable("userName") + "@" + channelName,
-        "password",
-        testContext.getVariable("userId"),
-        true);
-    variable("userId", testContext.getVariable("userId"));
-    UserNoteUtil.createUserNote(
-        this,
-        testContext,
-        BT_CREATE_NOTE_TEMPLATE_DIR,
-        TEST_CREATE_USER_NOTE_SUCCESS_WITH_BOTH_COURSEID_AND_CONTENTID);
+  void beforeTest() {
+    UserNoteUtil.createNote(this, testContext);
   }
 }
