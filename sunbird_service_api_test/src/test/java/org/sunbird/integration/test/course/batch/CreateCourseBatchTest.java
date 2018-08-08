@@ -48,7 +48,7 @@ public class CreateCourseBatchTest extends BaseCitrusTestRunner {
       "testCreateCourseBatchSuccessOpen";
 
   public static final String TEMPLATE_DIR = "templates/course/batch/create";
-  private static final String TODAY_DATE = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+  public static final String TODAY_DATE = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
 
   private String getCreateCourseBatchUrl() {
     return getLmsApiUriPath("/api/course/v1/batch/create", "/v1/course/batch/create");
