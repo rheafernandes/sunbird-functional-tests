@@ -1,5 +1,5 @@
 {
-    "id": "api.bulk.user.upload",
+    "id": "api.org.create",
     "ver": "v1",
     "ts": "@ignore@",
     "params": {
@@ -11,7 +11,7 @@
     },
     "responseCode": "OK",
     "result": {
-        "processId": "@ignore@",
+        "organisationId": "@ignore@",
         "response": "SUCCESS"
     }
 }

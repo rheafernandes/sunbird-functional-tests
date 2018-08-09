@@ -13,7 +13,7 @@ public class UserBulkUploadTest extends BaseCitrusTestRunner {
 
 	public static final String TEST_NAME_USER_BULK_UPLOAD_FAILURE_WITHOUT_ACCESS_TOKEN =
 			"testUserBulkUploadFailureWithoutAccessToken";
-	public static final String TEST_NAME_USER_BULK_UPLOAD_FAILURE_WITHOUT_ORG =
+	public static final String TEST_NAME_USER_BULK_UPLOAD_FAILURE_WITHOUT_ORG_DETAIL =
 			"testUserBulkUploadFailureWithoutOrgDetails";
 	public static final String TEST_NAME_USER_BULK_UPLOAD_FAILURE_WITH_INVALID_ORG_ID =
 			"testUserBulkUploadFailureWithInvalidOrgId";
@@ -25,9 +25,14 @@ public class UserBulkUploadTest extends BaseCitrusTestRunner {
 			"testUserBulkUploadFailureWithoutColumnHeaderInCsvFile";
 	public static final String TEST_NAME_USER_BULK_UPLOAD_FAILURE_WITH_INVALID_COLUMN =
 			"testUserBulkUploadFailureWithInvalidColumn";
-	
-	
+
+	public static final String TEST_NAME_USER_BULK_UPLOAD_SUCCESS_WITH_ORG_ID =
+			"testUserBulkUploadSuccessWithOrgId";
+	public static final String TEST_NAME_USER_BULK_UPLOAD_SUCCESS_WITH_PROVIDER_AND_EXTERNAL_ID =
+			"testUserBulkUploadSuccessWithProviderAndExternalId";
+
 	private static String ROOT_ORG_ID = null;
+	private static String SUB_ORG_ID = null;
 	public static final String TEMPLATE_DIR = "templates/bulkupload/user";
 	public static final String BT_ORG_CREATE_TEMPLATE_DIR = "templates/org/create";
 
@@ -39,27 +44,24 @@ public class UserBulkUploadTest extends BaseCitrusTestRunner {
 	public Object[][] userBulkUploadFailureDataProvider() {
 
 		return new Object[][] {
-			new Object[] {TEST_NAME_USER_BULK_UPLOAD_FAILURE_WITHOUT_ACCESS_TOKEN, HttpStatus.UNAUTHORIZED, false, false},
-			new Object[] {TEST_NAME_USER_BULK_UPLOAD_FAILURE_WITHOUT_ORG, HttpStatus.BAD_REQUEST, true, false},
-			new Object[] {TEST_NAME_USER_BULK_UPLOAD_FAILURE_WITH_INVALID_ORG_ID, HttpStatus.BAD_REQUEST, true, false},
-			new Object[] {TEST_NAME_USER_BULK_UPLOAD_FAILURE_WITHOUT_CSV_FILE, HttpStatus.BAD_REQUEST, true, false},
-			new Object[] {TEST_NAME_USER_BULK_UPLOAD_FAILURE_WITH_EMPTY_CSV_FILE, HttpStatus.BAD_REQUEST, true,true},
-			new Object[] {TEST_NAME_USER_BULK_UPLOAD_FAILURE_WITHOUT_COLUMN_HEADER_IN_CSV_FILE, HttpStatus.BAD_REQUEST, true,true},
-			new Object[] {TEST_NAME_USER_BULK_UPLOAD_FAILURE_WITH_INVALID_COLUMN, HttpStatus.BAD_REQUEST, true,true},
-			
-
-
+			new Object[] {TEST_NAME_USER_BULK_UPLOAD_FAILURE_WITHOUT_ACCESS_TOKEN, HttpStatus.UNAUTHORIZED, false, false,false},
+			new Object[] {TEST_NAME_USER_BULK_UPLOAD_FAILURE_WITHOUT_ORG_DETAIL, HttpStatus.BAD_REQUEST, true, false,false},
+			new Object[] {TEST_NAME_USER_BULK_UPLOAD_FAILURE_WITH_INVALID_ORG_ID, HttpStatus.BAD_REQUEST, true, false,false},
+			new Object[] {TEST_NAME_USER_BULK_UPLOAD_FAILURE_WITHOUT_CSV_FILE, HttpStatus.BAD_REQUEST, true, false,false},
+			new Object[] {TEST_NAME_USER_BULK_UPLOAD_FAILURE_WITH_EMPTY_CSV_FILE, HttpStatus.BAD_REQUEST, true,true,false},
+			new Object[] {TEST_NAME_USER_BULK_UPLOAD_FAILURE_WITHOUT_COLUMN_HEADER_IN_CSV_FILE, HttpStatus.BAD_REQUEST, true,true,false},
+			new Object[] {TEST_NAME_USER_BULK_UPLOAD_FAILURE_WITH_INVALID_COLUMN, HttpStatus.BAD_REQUEST, true,true,false},
 		};
 	}
 
 	@Test(dataProvider = "userBulkUploadFailureDataProvider")
-	@CitrusParameters({"testName", "httpStatusCode", "isAuthRequired", "canCreateOrg"})
+	@CitrusParameters({"testName", "httpStatusCode", "isAuthRequired", "canCreateOrg","canCreateSubOrg"})
 	@CitrusTest
 	public void testUserBulkUploadFailure(
-			String testName, HttpStatus httpStatusCode, boolean isAuthRequired,boolean canCreateOrg) {
+			String testName, HttpStatus httpStatusCode, boolean isAuthRequired,boolean canCreateOrg, boolean canCreateSubOrg) {
 		getTestCase().setName(testName);
 		getAuthToken(this, true);
-		beforeTest(canCreateOrg);
+		beforeTest(canCreateOrg,canCreateSubOrg);
 		performMultipartTest(
 				this,
 				TEMPLATE_DIR,
@@ -71,12 +73,56 @@ public class UserBulkUploadTest extends BaseCitrusTestRunner {
 				httpStatusCode,
 				RESPONSE_JSON);
 	}
-	private void beforeTest(boolean canCreateOrg) {
-		if(ROOT_ORG_ID == null) {
-			variable("rootOrgChannel", OrgUtil.getRootOrgChannel());
-			ROOT_ORG_ID = OrgUtil.getRootOrgId(this, testContext);
-		}else {				
-			testContext.setVariable("organisationId", ROOT_ORG_ID);
+
+	@DataProvider(name = "userBulkUploadSuccessDataProvider")
+	public Object[][] userBulkUploadSuccessDataProvider() {
+
+		return new Object[][] {
+
+			new Object[] {TEST_NAME_USER_BULK_UPLOAD_SUCCESS_WITH_ORG_ID, HttpStatus.OK, true,true,false},
+			new Object[] {TEST_NAME_USER_BULK_UPLOAD_SUCCESS_WITH_PROVIDER_AND_EXTERNAL_ID, HttpStatus.OK, true,true,true},
+
+		};
+	}
+
+	@Test(dataProvider = "userBulkUploadSuccessDataProvider")
+	@CitrusParameters({"testName", "httpStatusCode", "isAuthRequired", "canCreateOrg", "canCreateSubOrg"})
+	@CitrusTest
+	public void testUserBulkUploadSuccess(
+			String testName, HttpStatus httpStatusCode, boolean isAuthRequired,boolean canCreateOrg, boolean canCreateSubOrg) {
+		getTestCase().setName(testName);
+		getAuthToken(this, true);
+		beforeTest(canCreateOrg,canCreateSubOrg);
+		performMultipartTest(
+				this,
+				TEMPLATE_DIR,
+				testName,
+				getUserBulkUploadUrl(),
+				REQUEST_FORM_DATA,
+				null,
+				isAuthRequired,
+				httpStatusCode,
+				RESPONSE_JSON);
+	}
+
+
+	private void beforeTest(boolean canCreateOrg, boolean canCreateSubOrg) {
+		if(canCreateOrg) {
+			if(ROOT_ORG_ID == null) {
+				variable("rootOrgChannel", OrgUtil.getRootOrgChannel());
+				ROOT_ORG_ID = OrgUtil.getRootOrgId(this, testContext);
+			}else {				
+				testContext.setVariable("organisationId", ROOT_ORG_ID);
+			}
+		}
+		if(canCreateSubOrg) {
+			if(SUB_ORG_ID == null) {			
+				variable("externalId", OrgUtil.getRootOrgChannel());
+				variable("provider", OrgUtil.getRootOrgChannel());
+				SUB_ORG_ID = OrgUtil.createSubOrgId(this, testContext);
+			}else {
+				testContext.setVariable("organisationId", ROOT_ORG_ID);
+			}
 		}
 	}
 }
