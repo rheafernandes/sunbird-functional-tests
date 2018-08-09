@@ -1,89 +1,82 @@
 package org.sunbird.integration.test.bulkupload.user;
 
-import com.consol.citrus.annotations.CitrusTest;
-import com.consol.citrus.http.client.HttpClient;
-import com.consol.citrus.testng.CitrusParameters;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.HttpStatus;
-import org.sunbird.common.util.HttpUtil;
-import org.sunbird.integration.test.common.BaseCitrusTest;
-import org.sunbird.integration.test.user.EndpointConfig.TestGlobalProperty;
+import org.sunbird.common.action.OrgUtil;
+import org.sunbird.integration.test.common.BaseCitrusTestRunner;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-public class UserBulkUploadTest extends BaseCitrusTest{
+import com.consol.citrus.annotations.CitrusTest;
+import com.consol.citrus.testng.CitrusParameters;
 
-  private static final String  TEMPLATE_DIR = "templates/bulkupload/user";
-  private static final String USER_BULK_UPLOAD_SERVER_URI="/api/user/v1/upload";
-  private static final String USER_BULK_UPLOAD_LOCAL_URI ="/v1/user/upload";
+public class UserBulkUploadTest extends BaseCitrusTestRunner {
+
+	public static final String TEST_NAME_USER_BULK_UPLOAD_FAILURE_WITHOUT_ACCESS_TOKEN =
+			"testUserBulkUploadFailureWithoutAccessToken";
+	public static final String TEST_NAME_USER_BULK_UPLOAD_FAILURE_WITHOUT_ORG =
+			"testUserBulkUploadFailureWithoutOrgDetails";
+	public static final String TEST_NAME_USER_BULK_UPLOAD_FAILURE_WITH_INVALID_ORG_ID =
+			"testUserBulkUploadFailureWithInvalidOrgId";
+	public static final String TEST_NAME_USER_BULK_UPLOAD_FAILURE_WITHOUT_CSV_FILE =
+			"testUserBulkUploadFailureWithoutCsvFile";
+	public static final String TEST_NAME_USER_BULK_UPLOAD_FAILURE_WITH_EMPTY_CSV_FILE =
+			"testUserBulkUploadFailureWithEmptyCsvFile";
+	public static final String TEST_NAME_USER_BULK_UPLOAD_FAILURE_WITHOUT_COLUMN_HEADER_IN_CSV_FILE =
+			"testUserBulkUploadFailureWithoutColumnHeaderInCsvFile";
+	public static final String TEST_NAME_USER_BULK_UPLOAD_FAILURE_WITH_INVALID_COLUMN =
+			"testUserBulkUploadFailureWithInvalidColumn";
+	
+	
+	private static String ROOT_ORG_ID = null;
+	public static final String TEMPLATE_DIR = "templates/bulkupload/user";
+	public static final String BT_ORG_CREATE_TEMPLATE_DIR = "templates/org/create";
+
+	private String getUserBulkUploadUrl() {
+		return getLmsApiUriPath("/api/user/v1/upload", "/v1/bulk/user/upload");
+	}
+
+	@DataProvider(name = "userBulkUploadFailureDataProvider")
+	public Object[][] userBulkUploadFailureDataProvider() {
+
+		return new Object[][] {
+			new Object[] {TEST_NAME_USER_BULK_UPLOAD_FAILURE_WITHOUT_ACCESS_TOKEN, HttpStatus.UNAUTHORIZED, false, false},
+			new Object[] {TEST_NAME_USER_BULK_UPLOAD_FAILURE_WITHOUT_ORG, HttpStatus.BAD_REQUEST, true, false},
+			new Object[] {TEST_NAME_USER_BULK_UPLOAD_FAILURE_WITH_INVALID_ORG_ID, HttpStatus.BAD_REQUEST, true, false},
+			new Object[] {TEST_NAME_USER_BULK_UPLOAD_FAILURE_WITHOUT_CSV_FILE, HttpStatus.BAD_REQUEST, true, false},
+			new Object[] {TEST_NAME_USER_BULK_UPLOAD_FAILURE_WITH_EMPTY_CSV_FILE, HttpStatus.BAD_REQUEST, true,true},
+			new Object[] {TEST_NAME_USER_BULK_UPLOAD_FAILURE_WITHOUT_COLUMN_HEADER_IN_CSV_FILE, HttpStatus.BAD_REQUEST, true,true},
+			new Object[] {TEST_NAME_USER_BULK_UPLOAD_FAILURE_WITH_INVALID_COLUMN, HttpStatus.BAD_REQUEST, true,true},
+			
 
 
-  @DataProvider(name = "userBulkUploadSuccessDataProvider")
-  public Object[][] userBulkUploadSuccessDataProvider() {
-    return new Object[][] {
-        new Object[]{
-            "testUserBulkUploadSuccess"
-        }
-    };
-  }
+		};
+	}
 
-  @DataProvider(name = "userBulkUploadFailureDataProvider")
-  public Object[][] userBulkUploadFailureDataProvider() {
-    return new Object[][] {
-        new Object[]{
-            "testUserBulkUploadFailureWithInvalidColumn",
-            HttpStatus.BAD_REQUEST
-        },
-        new Object[]{
-            "testUserBulkUploadFailureWithEmptyCsvFile",
-            HttpStatus.BAD_REQUEST
-        },
-        new Object[]{
-            "testUserBulkUploadFailureWithoutCsvFile",
-            HttpStatus.BAD_REQUEST
-        },
-        new Object[]{
-            "testUserBulkUploadFailureWithoutOrgDetails",
-            HttpStatus.BAD_REQUEST
-        }
-    };
-  }
-
-  @Test(
-      dataProvider = "userBulkUploadSuccessDataProvider"
-  )
-  @CitrusParameters({"testName"})
-  @CitrusTest
-  public void testUserBulkUploadSuccess(String testName) {
-    performMultipartTest(
-        testName,
-        TEMPLATE_DIR,
-        getUserBulkUploadUrl(),
-        REQUEST_FORM_DATA,
-        HttpStatus.OK,
-        RESPONSE_JSON, true);
-
-  }
-
-  @Test(
-      dataProvider = "userBulkUploadFailureDataProvider"
-  )
-  @CitrusParameters({"testName" , "status"})
-  @CitrusTest
-  public void testUserBulkUploadFailure(String testName, HttpStatus status) {
-    performMultipartTest(
-        testName,
-        TEMPLATE_DIR,
-        getUserBulkUploadUrl(),
-        REQUEST_FORM_DATA,
-        status,
-        RESPONSE_JSON, true);
-  }
-
-  private String getUserBulkUploadUrl() {
-    return getLmsApiUriPath(USER_BULK_UPLOAD_SERVER_URI, USER_BULK_UPLOAD_LOCAL_URI);
-  }
-
+	@Test(dataProvider = "userBulkUploadFailureDataProvider")
+	@CitrusParameters({"testName", "httpStatusCode", "isAuthRequired", "canCreateOrg"})
+	@CitrusTest
+	public void testUserBulkUploadFailure(
+			String testName, HttpStatus httpStatusCode, boolean isAuthRequired,boolean canCreateOrg) {
+		getTestCase().setName(testName);
+		getAuthToken(this, true);
+		beforeTest(canCreateOrg);
+		performMultipartTest(
+				this,
+				TEMPLATE_DIR,
+				testName,
+				getUserBulkUploadUrl(),
+				REQUEST_FORM_DATA,
+				null,
+				isAuthRequired,
+				httpStatusCode,
+				RESPONSE_JSON);
+	}
+	private void beforeTest(boolean canCreateOrg) {
+		if(ROOT_ORG_ID == null) {
+			variable("rootOrgChannel", OrgUtil.getRootOrgChannel());
+			ROOT_ORG_ID = OrgUtil.getRootOrgId(this, testContext);
+		}else {				
+			testContext.setVariable("organisationId", ROOT_ORG_ID);
+		}
+	}
 }

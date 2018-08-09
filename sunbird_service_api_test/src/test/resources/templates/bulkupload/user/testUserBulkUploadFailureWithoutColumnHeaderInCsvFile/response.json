@@ -5,9 +5,9 @@
     "params": {
         "resmsgid": null,
         "msgid": "@ignore@",
-        "err": "MANDATORY_PARAMETER_MISSING",
-        "status": "MANDATORY_PARAMETER_MISSING",
-        "errmsg": "Mandatory parameter file is missing."
+        "err": "INVALID_COLUMNS",
+        "status": "INVALID_COLUMNS",
+        "errmsg": "@ignore@"
     },
     "responseCode": "CLIENT_ERROR",
     "result": {}
