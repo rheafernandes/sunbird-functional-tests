@@ -1,5 +1,5 @@
 {
-    "id": "api.bulk.user.upload",
+    "id": "api.user.upload",
     "ver": "v1",
     "ts": "@ignore@",
     "params": {

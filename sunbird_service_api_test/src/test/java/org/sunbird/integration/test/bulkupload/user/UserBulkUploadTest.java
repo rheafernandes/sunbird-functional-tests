@@ -37,7 +37,7 @@ public class UserBulkUploadTest extends BaseCitrusTestRunner {
 	public static final String BT_ORG_CREATE_TEMPLATE_DIR = "templates/org/create";
 
 	private String getUserBulkUploadUrl() {
-		return getLmsApiUriPath("/api/user/v1/upload", "/v1/bulk/user/upload");
+		return getLmsApiUriPath("/api/user/v1/upload", "/v1/user/upload");
 	}
 
 	@DataProvider(name = "userBulkUploadFailureDataProvider")
