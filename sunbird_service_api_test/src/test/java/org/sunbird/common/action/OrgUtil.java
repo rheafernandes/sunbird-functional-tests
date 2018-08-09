@@ -82,6 +82,7 @@ public class OrgUtil {
 						TestActionUtil.getHeaders(true)));
 	}
 
+
 	public static String getRootOrgId(BaseCitrusTestRunner runner, TestContext testContext) {
 
 		if (StringUtils.isBlank(rootOrgId)) {
@@ -109,4 +110,5 @@ public class OrgUtil {
 
 		return rootOrgId;
 	}
+
 }

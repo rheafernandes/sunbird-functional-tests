@@ -116,12 +116,17 @@ public class UserBulkUploadTest extends BaseCitrusTestRunner {
 			}
 		}
 		if(canCreateSubOrg) {
-			if(SUB_ORG_ID == null) {			
-				variable("externalId", OrgUtil.getRootOrgChannel());
-				variable("provider", OrgUtil.getRootOrgChannel());
+			if(SUB_ORG_ID == null) {	
+				String externalId = OrgUtil.getRootOrgChannel();
+				String provider = OrgUtil.getRootOrgChannel();
+				variable("externalId", externalId);
+				variable("provider", provider);
+				
 				SUB_ORG_ID = OrgUtil.createSubOrgId(this, testContext);
-			}else {
+				
 				testContext.setVariable("organisationId", ROOT_ORG_ID);
+				testContext.setVariable("externalId", externalId);
+				testContext.setVariable("provider", provider);
 			}
 		}
 	}
