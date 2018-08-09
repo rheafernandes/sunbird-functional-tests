@@ -16,26 +16,33 @@ public class DeleteDistrictLocationTest extends BaseCitrusTestRunner {
 
   private static final String CREATE_LOCATION_SERVER_URI = "/api/data/v1/location/create";
   private static final String CREATE_LOCATION_LOCAL_URI = "/v1/location/create";
-  private static final String DELETE_LOCATION_SERVER_URI = "/api/data/v1/location/delete";
+  private static final String DELETE_LOCATION_SERVER_URI = "/api/org/v1/location/delete";
   private static final String DELETE_LOCATION_LOCAL_URI = "/v1/location/delete";
 
   private static final String TEMPLATE_PATH = "templates/location/district/delete";
   private static final String TEST_DELETE_LOCATION_SUCCESS = "testDeleteDistrictLocationSuccess";
   private static final String TEST_DELETE_LOCATION_FAILURE_WITHOUT_VALID_ID =
       "testDeleteDistrictLocationFailureWithoutValidId";
+  boolean isTestPerformed = false;
 
-  @DataProvider(name = "deleteLocationDataProvider")
-  public Object[][] deleteLocationDataProvider() {
+  @DataProvider(name = "deleteLocationSuccessDataProvider")
+  public Object[][] deleteLocationSuccessDataProvider() {
     return new Object[][] {
       new Object[] {TEST_DELETE_LOCATION_SUCCESS, true, HttpStatus.OK},
+    };
+  }
+
+  @DataProvider(name = "deleteLocationFailureDataProvider")
+  public Object[][] deleteLocationFailureDataProvider() {
+    return new Object[][] {
       new Object[] {TEST_DELETE_LOCATION_FAILURE_WITHOUT_VALID_ID, true, HttpStatus.BAD_REQUEST}
     };
   }
 
-  @Test(dataProvider = "deleteLocationDataProvider")
+  @Test(dataProvider = "deleteLocationSuccessDataProvider", enabled = false)
   @CitrusParameters({"testName", "isAuthRequired", "httpStatusCode"})
   @CitrusTest
-  public void testDeleteLocation(
+  public void testDeleteLocationSuccess(
       String testName, boolean isAuthRequired, HttpStatus httpStatusCode) {
     getAuthToken(this, isAuthRequired);
     createDistrictLocation();
@@ -44,6 +51,26 @@ public class DeleteDistrictLocationTest extends BaseCitrusTestRunner {
         TEMPLATE_PATH,
         testName,
         getDeleteLocationUrl((String) testContext.getVariables().get(Constant.DISTRICT_ID)),
+        null,
+        MediaType.APPLICATION_JSON,
+        isAuthRequired,
+        httpStatusCode,
+        RESPONSE_JSON);
+  }
+
+  @Test(dataProvider = "deleteLocationFailureDataProvider", enabled = false)
+  @CitrusParameters({"testName", "isAuthRequired", "httpStatusCode"})
+  @CitrusTest
+  public void testDeleteLocationFailure(
+      String testName, boolean isAuthRequired, HttpStatus httpStatusCode) {
+    getAuthToken(this, isAuthRequired);
+    createDistrictLocation();
+    performDeleteTest(
+        this,
+        TEMPLATE_PATH,
+        testName,
+        getDeleteLocationUrl((String) testContext.getVariables().get(Constant.DISTRICT_ID))
+            + "#InvalidId",
         null,
         MediaType.APPLICATION_JSON,
         isAuthRequired,
