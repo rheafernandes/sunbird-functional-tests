@@ -1,5 +1,5 @@
 {
-    "id": "api.note.read",
+    "id": "api.note.search",
     "ver": "v1",
     "ts": "@ignore@",
     "params": {
