@@ -24,6 +24,8 @@ public class UserBulkUploadTest extends BaseCitrusTestRunner {
       "testUserBulkUploadFailureWithoutColumnHeaderInCsvFile";
   public static final String TEST_NAME_USER_BULK_UPLOAD_FAILURE_WITH_INVALID_COLUMN =
       "testUserBulkUploadFailureWithInvalidColumn";
+  public static final String TEST_NAME_USER_BULK_UPLOAD_FAILURE_WITH_EXCEEDING_FILE_SIZE =
+      "testUserBulkUploadFailureWithExceedingFileSize";
 
   public static final String TEST_NAME_USER_BULK_UPLOAD_SUCCESS_WITH_ORG_ID =
       "testUserBulkUploadSuccessWithOrgId";
@@ -86,6 +88,13 @@ public class UserBulkUploadTest extends BaseCitrusTestRunner {
       },
       new Object[] {
         TEST_NAME_USER_BULK_UPLOAD_FAILURE_WITH_INVALID_COLUMN,
+        HttpStatus.BAD_REQUEST,
+        true,
+        true,
+        false
+      },
+      new Object[] {
+        TEST_NAME_USER_BULK_UPLOAD_FAILURE_WITH_EXCEEDING_FILE_SIZE,
         HttpStatus.BAD_REQUEST,
         true,
         true,
