@@ -10,11 +10,12 @@ import org.springframework.http.HttpStatus;
 import org.sunbird.common.annotation.CleanUp;
 import org.sunbird.common.util.HttpUtil;
 import org.sunbird.integration.test.common.BaseCitrusTest;
+import org.sunbird.integration.test.common.BaseCitrusTestRunner;
 import org.sunbird.integration.test.user.EndpointConfig.TestGlobalProperty;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-public class LocationBulkUploadTest extends BaseCitrusTest {
+public class LocationBulkUploadTest extends BaseCitrusTestRunner {
 
   private static final String  TEMPLATE_DIR = "templates/bulkupload/location";
   private static final String LOCATION_BULK_UPLOAD_SERVER_URI="/api/data/v1/bulk/location/upload";
@@ -46,12 +47,15 @@ public class LocationBulkUploadTest extends BaseCitrusTest {
   @CitrusTest
   public void testLocationBulkUploadStateTypeSuccess(String testName){
     performMultipartTest(
+        this,
+    	TEMPLATE_DIR,
         testName,
-        TEMPLATE_DIR,
         getLocationBulkUploadUrl(),
         REQUEST_FORM_DATA,
+        null,
+        true,
         HttpStatus.OK,
-        RESPONSE_JSON, true);
+        RESPONSE_JSON);
   }
 
   @Test(
@@ -61,12 +65,15 @@ public class LocationBulkUploadTest extends BaseCitrusTest {
   @CitrusTest
   public void testLocationBulkUploadStateTypeFailure(String testName, HttpStatus status){
     performMultipartTest(
-        testName,
-        TEMPLATE_DIR,
-        getLocationBulkUploadUrl(),
-        REQUEST_FORM_DATA,
-        status,
-        RESPONSE_JSON, true);
+    		this,
+        	TEMPLATE_DIR,
+            testName,
+            getLocationBulkUploadUrl(),
+            REQUEST_FORM_DATA,
+            null,
+            true,
+            HttpStatus.OK,
+            RESPONSE_JSON);
   }
 
   private String getLocationBulkUploadUrl() {

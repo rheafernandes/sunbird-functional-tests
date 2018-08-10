@@ -4,10 +4,11 @@ import com.consol.citrus.annotations.CitrusTest;
 import com.consol.citrus.testng.CitrusParameters;
 import org.springframework.http.HttpStatus;
 import org.sunbird.integration.test.common.BaseCitrusTest;
+import org.sunbird.integration.test.common.BaseCitrusTestRunner;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-public class BatchEnrolmentBulkUploadTest extends BaseCitrusTest {
+public class BatchEnrolmentBulkUploadTest extends BaseCitrusTestRunner {
 
   private static final String TEMPLATE_DIR = "templates/bulkupload/batchenrolment";
   private static final String BATCH_ENROLMENT_SERVER_URI = "/api/course/v1/batch/bulk/enrollment";
@@ -36,13 +37,16 @@ public class BatchEnrolmentBulkUploadTest extends BaseCitrusTest {
   @CitrusTest
   public void testBatchEnrolmentBulkUploadSuccess(String testName, HttpStatus status) {
     performMultipartTest(
-        testName,
-        TEMPLATE_DIR,
-        getBatchBulkEnrolmentUrl(),
-        REQUEST_FORM_DATA,
-        status,
-        RESPONSE_JSON,
-        true);
+    		this,
+    		TEMPLATE_DIR,
+    	    testName,
+    	    getBatchBulkEnrolmentUrl(),
+    	    REQUEST_FORM_DATA,
+    	    null,
+    	    true,
+    	    HttpStatus.OK,
+    	    RESPONSE_JSON);
+    
   }
 
   @Test(dataProvider = "createBatchEnrolmentBulkUploadFailureDataProvider")
@@ -50,13 +54,15 @@ public class BatchEnrolmentBulkUploadTest extends BaseCitrusTest {
   @CitrusTest
   public void testBatchEnrolmentBulkUploadFailure(String testName, HttpStatus status) {
     performMultipartTest(
-        testName,
-        TEMPLATE_DIR,
-        getBatchBulkEnrolmentUrl(),
-        REQUEST_FORM_DATA,
-        status,
-        RESPONSE_JSON,
-        true);
+    		this,
+    		TEMPLATE_DIR,
+    	    testName,
+    	    getBatchBulkEnrolmentUrl(),
+    	    REQUEST_FORM_DATA,
+    	    null,
+    	    true,
+    	    HttpStatus.OK,
+    	    RESPONSE_JSON);
   }
 
   private String getBatchBulkEnrolmentUrl() {

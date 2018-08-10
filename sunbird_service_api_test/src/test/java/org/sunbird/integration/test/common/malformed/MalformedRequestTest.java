@@ -5,6 +5,7 @@ import com.consol.citrus.testng.CitrusParameters;
 import org.springframework.http.HttpStatus;
 import org.sunbird.common.util.Constant;
 import org.sunbird.integration.test.common.BaseCitrusTest;
+import org.sunbird.integration.test.common.BaseCitrusTestRunner;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
@@ -14,7 +15,7 @@ import org.testng.annotations.Test;
  *
  * @author Karthik
  */
-public class MalformedRequestTest extends BaseCitrusTest {
+public class MalformedRequestTest extends BaseCitrusTestRunner {
 
   private static final String CREATE_ORG_SERVER_URI = "/api/org/v1/create";
   private static final String CREATE_ORG_LOCAL_URI = "/v1/org/create";
@@ -94,13 +95,15 @@ public class MalformedRequestTest extends BaseCitrusTest {
   public void testRequestWithoutContentType(
       String apiGatewayUriPath, String localUriPath, String testName, String contentType) {
     performPostTest(
-        testName,
+    	this,
         TEMPLATE_DIR,
+        testName,
         getLmsApiUriPath(apiGatewayUriPath, localUriPath),
         REQUEST_JSON,
-        HttpStatus.BAD_REQUEST,
-        RESPONSE_JSON,
+        contentType,
         true,
-        contentType);
+        HttpStatus.BAD_REQUEST,
+        RESPONSE_JSON
+        );
   }
 }

@@ -12,6 +12,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+
+import javax.swing.text.AbstractDocument.Content;
 import javax.ws.rs.core.MediaType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
@@ -20,6 +22,7 @@ import org.sunbird.common.models.response.Response;
 import org.sunbird.common.models.response.ResponseCode;
 import org.sunbird.common.util.Constant;
 import org.sunbird.integration.test.common.BaseCitrusTest;
+import org.sunbird.integration.test.common.BaseCitrusTestRunner;
 import org.sunbird.integration.test.user.EndpointConfig.TestGlobalProperty;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
@@ -162,14 +165,14 @@ public class UserTest extends BaseCitrusTest {
   @CitrusTest
   public void testCreateUserFailure(String testName) {
     performPostTest(
-        testName,
-        TEMPLATE_DIR,
-        getCreateUserUrl(),
-        REQUEST_JSON,
-        HttpStatus.BAD_REQUEST,
-        RESPONSE_JSON,
-        false,
-        MediaType.APPLICATION_JSON);
+    		testName,
+            TEMPLATE_DIR,
+            getCreateUserUrl(),
+            REQUEST_JSON,
+            HttpStatus.BAD_REQUEST,
+            RESPONSE_JSON,
+            false,
+    MediaType.APPLICATION_JSON);
   }
 
   /**
@@ -339,14 +342,15 @@ public class UserTest extends BaseCitrusTest {
     variable("loginIdval", USER_NAME + "@" + initGlobalValues.getSunbirdDefaultChannel());
     variable("channel", initGlobalValues.getSunbirdDefaultChannel());
     performPostTest(
-        "testGetUserByLoginIdSuccess",
-        GetUserByLoginIdTest.TEMPLATE_DIR,
-        getUserByIdUrl(),
-        REQUEST_JSON,
-        HttpStatus.OK,
-        RESPONSE_JSON,
-        false,
-        MediaType.APPLICATION_JSON);
+    		"testGetUserByLoginIdSuccess",
+            GetUserByLoginIdTest.TEMPLATE_DIR,
+            getUserByIdUrl(),
+            REQUEST_JSON,
+            HttpStatus.OK,
+            RESPONSE_JSON,
+            false,
+            MediaType.APPLICATION_JSON);
+    
   }
 
   /**
