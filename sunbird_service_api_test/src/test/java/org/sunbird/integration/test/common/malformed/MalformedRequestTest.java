@@ -4,7 +4,6 @@ import com.consol.citrus.annotations.CitrusTest;
 import com.consol.citrus.testng.CitrusParameters;
 import org.springframework.http.HttpStatus;
 import org.sunbird.common.util.Constant;
-import org.sunbird.integration.test.common.BaseCitrusTest;
 import org.sunbird.integration.test.common.BaseCitrusTestRunner;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -32,60 +31,57 @@ public class MalformedRequestTest extends BaseCitrusTestRunner {
   @DataProvider(name = "createRequestDataProvider")
   public Object[][] createRequestDataProvider() {
     return new Object[][] {
-        new Object[] {
-            CREATE_USER_SERVER_URI,
-            CREATE_USER_LOCAL_URI,
-            "userCreateFailureWithoutContentType",
-            null
-        },
-        new Object[] {
-            CREATE_PAGE_SERVER_URI, CREATE_PAGE_LOCAL_URI, "pageCreateFailureWithoutContentType", null
-        },
-        new Object[] {
-            CREATE_USER_NOTES_SERVER_URI,
-            CREATE_USER_NOTES_LOCAL_URI,
-            "notesCreateFailureWithoutContentType",
-            null
-        },
-        new Object[] {
-            CREATE_ORG_SERVER_URI, CREATE_ORG_LOCAL_URI, "orgCreateFailureWithoutContentType", null
-        },
-        new Object[] {
-            CREATE_COURSE_BATCH_SERVER_URI,
-            CREATE_COURSE_BATCH_LOCAL_URI,
-            "batchCreateFailureWithoutContentType",
-            null
-        },
-        new Object[] {
-            CREATE_USER_SERVER_URI,
-            CREATE_USER_LOCAL_URI,
-            "userCreateFailureWithInvalidContentType",
-            Constant.CONTENT_TYPE_APPLICATION_JSON_LD
-        },
-        new Object[] {
-            CREATE_PAGE_SERVER_URI,
-            CREATE_PAGE_LOCAL_URI,
-            "pageCreateFailureWithInvalidContentType",
-            Constant.CONTENT_TYPE_APPLICATION_JSON_LD
-        },
-        new Object[] {
-            CREATE_USER_NOTES_SERVER_URI,
-            CREATE_USER_NOTES_LOCAL_URI,
-            "notesCreateFailureWithInvalidContentType",
-            Constant.CONTENT_TYPE_APPLICATION_JSON_LD
-        },
-        new Object[] {
-            CREATE_ORG_SERVER_URI,
-            CREATE_ORG_LOCAL_URI,
-            "orgCreateFailureWithInvalidContentType",
-            Constant.CONTENT_TYPE_APPLICATION_JSON_LD
-        },
-        new Object[] {
-            CREATE_COURSE_BATCH_SERVER_URI,
-            CREATE_COURSE_BATCH_LOCAL_URI,
-            "batchCreateFailureWithInvalidContentType",
-            Constant.CONTENT_TYPE_APPLICATION_JSON_LD
-        }
+      new Object[] {
+        CREATE_USER_SERVER_URI, CREATE_USER_LOCAL_URI, "userCreateFailureWithoutContentType", null
+      },
+      new Object[] {
+        CREATE_PAGE_SERVER_URI, CREATE_PAGE_LOCAL_URI, "pageCreateFailureWithoutContentType", null
+      },
+      new Object[] {
+        CREATE_USER_NOTES_SERVER_URI,
+        CREATE_USER_NOTES_LOCAL_URI,
+        "notesCreateFailureWithoutContentType",
+        null
+      },
+      new Object[] {
+        CREATE_ORG_SERVER_URI, CREATE_ORG_LOCAL_URI, "orgCreateFailureWithoutContentType", null
+      },
+      new Object[] {
+        CREATE_COURSE_BATCH_SERVER_URI,
+        CREATE_COURSE_BATCH_LOCAL_URI,
+        "batchCreateFailureWithoutContentType",
+        null
+      },
+      new Object[] {
+        CREATE_USER_SERVER_URI,
+        CREATE_USER_LOCAL_URI,
+        "userCreateFailureWithInvalidContentType",
+        Constant.CONTENT_TYPE_APPLICATION_JSON_LD
+      },
+      new Object[] {
+        CREATE_PAGE_SERVER_URI,
+        CREATE_PAGE_LOCAL_URI,
+        "pageCreateFailureWithInvalidContentType",
+        Constant.CONTENT_TYPE_APPLICATION_JSON_LD
+      },
+      new Object[] {
+        CREATE_USER_NOTES_SERVER_URI,
+        CREATE_USER_NOTES_LOCAL_URI,
+        "notesCreateFailureWithInvalidContentType",
+        Constant.CONTENT_TYPE_APPLICATION_JSON_LD
+      },
+      new Object[] {
+        CREATE_ORG_SERVER_URI,
+        CREATE_ORG_LOCAL_URI,
+        "orgCreateFailureWithInvalidContentType",
+        Constant.CONTENT_TYPE_APPLICATION_JSON_LD
+      },
+      new Object[] {
+        CREATE_COURSE_BATCH_SERVER_URI,
+        CREATE_COURSE_BATCH_LOCAL_URI,
+        "batchCreateFailureWithInvalidContentType",
+        Constant.CONTENT_TYPE_APPLICATION_JSON_LD
+      }
     };
   }
 
@@ -95,7 +91,7 @@ public class MalformedRequestTest extends BaseCitrusTestRunner {
   public void testRequestWithoutContentType(
       String apiGatewayUriPath, String localUriPath, String testName, String contentType) {
     performPostTest(
-    	this,
+        this,
         TEMPLATE_DIR,
         testName,
         getLmsApiUriPath(apiGatewayUriPath, localUriPath),
@@ -103,7 +99,6 @@ public class MalformedRequestTest extends BaseCitrusTestRunner {
         contentType,
         true,
         HttpStatus.BAD_REQUEST,
-        RESPONSE_JSON
-        );
+        RESPONSE_JSON);
   }
 }

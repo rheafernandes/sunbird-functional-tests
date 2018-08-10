@@ -5,7 +5,6 @@ import com.consol.citrus.http.client.HttpClient;
 import com.consol.citrus.testng.CitrusParameters;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.sunbird.integration.test.common.BaseCitrusTest;
 import org.sunbird.integration.test.common.BaseCitrusTestRunner;
 import org.sunbird.integration.test.user.EndpointConfig.TestGlobalProperty;
 import org.testng.annotations.DataProvider;
@@ -79,7 +78,7 @@ public class CreateIssuerTest extends BaseCitrusTestRunner {
       String requestFormData, String responseJson, String testName) {
     System.out.println("initGlobalValues = " + initGlobalValues);
     performMultipartTest(
-    	this,
+        this,
         TEMPLATE_DIR,
         testName,
         getCreateIssuerUrl(),
@@ -88,7 +87,6 @@ public class CreateIssuerTest extends BaseCitrusTestRunner {
         false,
         HttpStatus.OK,
         responseJson);
-    
   }
 
   @Test(dataProvider = "createIssuerDataProviderFailure")
@@ -98,14 +96,14 @@ public class CreateIssuerTest extends BaseCitrusTestRunner {
       String requestFormData, String responseJson, String testName) {
     System.out.println("initGlobalValues = " + initGlobalValues);
     performMultipartTest(
-    		this,
-    	    TEMPLATE_DIR,
-    	    testName,
-    	    getCreateIssuerUrl(),
-    	    requestFormData,
-    	    null,
-    	    false,
-    	    HttpStatus.BAD_REQUEST,
-    	    responseJson);
+        this,
+        TEMPLATE_DIR,
+        testName,
+        getCreateIssuerUrl(),
+        requestFormData,
+        null,
+        false,
+        HttpStatus.BAD_REQUEST,
+        responseJson);
   }
 }

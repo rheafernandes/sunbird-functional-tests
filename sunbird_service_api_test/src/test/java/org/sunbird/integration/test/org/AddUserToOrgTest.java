@@ -4,7 +4,6 @@ import com.consol.citrus.annotations.CitrusTest;
 import com.consol.citrus.testng.CitrusParameters;
 import javax.ws.rs.core.MediaType;
 import org.springframework.http.HttpStatus;
-import org.sunbird.integration.test.common.BaseCitrusTest;
 import org.sunbird.integration.test.common.BaseCitrusTestRunner;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -41,7 +40,7 @@ public class AddUserToOrgTest extends BaseCitrusTestRunner {
   public void testAddUserToOrgFailure(String testName) {
 
     performPostTest(
-    	this,
+        this,
         TEMPLATE_DIR,
         testName,
         getAddUserToOrgUrl(),
