@@ -23,7 +23,6 @@ public class OrganisationBulkUploadTest extends BaseCitrusTestRunner {
       "testOrgBulkUploadFailureWithExceedingFileSize";
 
   public static final String TEST_NAME_ORG_BULK_UPLOAD_SUCCESS = "testOrgBulkUploadSuccess";
-
   public static final String TEMPLATE_DIR = "templates/bulkupload/organisation";
 
   private String getUserBulkUploadUrl() {
