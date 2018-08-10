@@ -11,6 +11,7 @@ import org.sunbird.integration.test.common.BaseCitrusTestRunner;
 public class OrgUtil {
 
   private static String rootOrgId = null;
+  private static String subOrgId = null;
 
   private static final String rootOrgChannel = "FT_Org_Channel_" + Instant.now().getEpochSecond();
   private static final String rootOrgExternalId =
@@ -95,6 +96,7 @@ public class OrgUtil {
     } else {
       testContext.setVariable("organisationId", rootOrgId);
     }
+    runner.variable("organisationId", rootOrgId);
     return rootOrgId;
   }
 
@@ -106,7 +108,7 @@ public class OrgUtil {
         "templates/organisation/create",
         "testCreateSubOrgSuccess",
         HttpStatus.OK);
-
-    return rootOrgId;
+    subOrgId = testContext.getVariable("organisationId");
+    return subOrgId;
   }
 }
