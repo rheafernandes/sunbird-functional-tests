@@ -5,7 +5,7 @@ import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.*;
-
+import org.openqa.selenium.chrome.ChromeOptions;
 
 public abstract class BaseTest implements IAutoConst {
 
@@ -19,8 +19,11 @@ public abstract class BaseTest implements IAutoConst {
 	@BeforeMethod
 	public void openApplication() throws IOException, InterruptedException 
 	{
+		ChromeOptions ChromeOptions = new ChromeOptions();
+		ChromeOptions.addArguments("--headless", "window-size=1024,768", "--no-sandbox");
+		driver = new ChromeDriver(ChromeOptions);
 
-		driver = new ChromeDriver(); 
+		//driver = new ChromeDriver(); 
 		driver.manage().window().maximize();
 		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 		//driver.manage().timeouts().pageLoadTimeout(20, TimeUnit.SECONDS);
