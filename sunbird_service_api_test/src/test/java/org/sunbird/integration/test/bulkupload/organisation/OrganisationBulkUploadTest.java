@@ -25,7 +25,7 @@ public class OrganisationBulkUploadTest extends BaseCitrusTestRunner {
   public static final String TEST_NAME_ORG_BULK_UPLOAD_SUCCESS = "testOrgBulkUploadSuccess";
   public static final String TEMPLATE_DIR = "templates/bulkupload/organisation";
 
-  private String getUserBulkUploadUrl() {
+  private String getOrgBulkUploadUrl() {
     return getLmsApiUriPath("/api/org/v1/upload", "/v1/org/upload");
   }
 
@@ -68,7 +68,7 @@ public class OrganisationBulkUploadTest extends BaseCitrusTestRunner {
         this,
         TEMPLATE_DIR,
         testName,
-        getUserBulkUploadUrl(),
+        getOrgBulkUploadUrl(),
         REQUEST_FORM_DATA,
         null,
         isAuthRequired,
@@ -96,7 +96,7 @@ public class OrganisationBulkUploadTest extends BaseCitrusTestRunner {
         this,
         TEMPLATE_DIR,
         testName,
-        getUserBulkUploadUrl(),
+        getOrgBulkUploadUrl(),
         REQUEST_FORM_DATA,
         null,
         isAuthRequired,

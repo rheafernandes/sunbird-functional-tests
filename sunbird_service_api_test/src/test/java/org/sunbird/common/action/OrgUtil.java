@@ -44,6 +44,7 @@ public class OrgUtil {
       TestContext testContext,
       String templateDir,
       String testName,
+      String extractVariableName,
       HttpStatus responseCode) {
     runner.http(
         builder ->
@@ -64,7 +65,7 @@ public class OrgUtil {
                 Constant.LMS_ENDPOINT,
                 responseCode,
                 "$.result.organisationId",
-                "organisationId"));
+                extractVariableName));
     runner.sleep(Constant.ES_SYNC_WAIT_TIME);
   }
 
@@ -91,12 +92,13 @@ public class OrgUtil {
           testContext,
           "templates/organisation/create",
           "testCreateRootOrgSuccess",
+          Constant.EXTRACT_VAR_ROOT_ORG_ID,
           HttpStatus.OK);
-      rootOrgId = testContext.getVariable("organisationId");
+      rootOrgId = testContext.getVariable(Constant.EXTRACT_VAR_ROOT_ORG_ID);
     } else {
-      testContext.setVariable("organisationId", rootOrgId);
+      testContext.setVariable(Constant.EXTRACT_VAR_ROOT_ORG_ID, rootOrgId);
     }
-    runner.variable("organisationId", rootOrgId);
+    runner.variable(Constant.EXTRACT_VAR_ROOT_ORG_ID, rootOrgId);
     return rootOrgId;
   }
 
@@ -107,8 +109,9 @@ public class OrgUtil {
         testContext,
         "templates/organisation/create",
         "testCreateSubOrgSuccess",
+        Constant.EXTRACT_VAR_SUB_ORG_ID,
         HttpStatus.OK);
-    subOrgId = testContext.getVariable("organisationId");
+    subOrgId = testContext.getVariable(Constant.EXTRACT_VAR_SUB_ORG_ID);
     return subOrgId;
   }
 }
