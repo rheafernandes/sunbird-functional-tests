@@ -3,97 +3,68 @@ package org.sunbird.integration.test.bulkupload.location;
 import com.consol.citrus.annotations.CitrusTest;
 import com.consol.citrus.testng.CitrusParameters;
 import org.springframework.http.HttpStatus;
+import org.sunbird.common.annotation.CleanUp;
 import org.sunbird.integration.test.common.BaseCitrusTestRunner;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 public class LocationBulkUploadTest extends BaseCitrusTestRunner {
 
-  public static final String TEST_NAME_LOCATION_BULK_UPLOAD_FAILURE_WITHOUT_TYPE =
-      "testLocationBulkUploadFailureWithoutType";
-  public static final String TEST_NAME_LOCATION_BULK_UPLOAD_FAILURE_WITHOUT_CSV_FILE =
-      "testLocationBulkUploadFailureWithoutCsvFile";
-  public static final String TEST_NAME_LOCATION_BULK_UPLOAD_FAILURE_WITHOUT_CODE_COLUMN =
-      "testLocationBulkUploadFailureWithoutCodeColumn";
+  private static final String TEMPLATE_DIR = "templates/bulkupload/location";
+  private static final String LOCATION_BULK_UPLOAD_SERVER_URI = "/api/data/v1/bulk/location/upload";
+  private static final String LOCATION_BULK_UPLOAD_LOCAL_URI = "/v1/bulk/location/upload";
 
-  public static final String TEST_NAME_LOCATION_BULK_UPLOAD_SUCCESS_WITH_STATE_TYPE =
-      "testLocationBulkUploadSuccessWithStateType";
+  @DataProvider(name = "stateBulkUploadSuccessDataProvider")
+  public Object[][] stateBulkUploadSuccessDataProvider() {
+    return new Object[][] {new Object[] {"testLocationBulkUploadOfStateTypeSuccess"}};
+  }
 
-  /*
-   * Need to work on this - JIRA Request - SB-6272
-   *
-   */
-  public static final String TEST_NAME_LOCATION_BULK_UPLOAD_FAILURE_WITH_EMPTY_CSV_FILE =
-      "testLocationBulkUploadFailureWithEmptyCsvFile";
-  public static final String
-      TEST_NAME_LOCATION_BULK_UPLOAD_FAILURE_WITHOUT_COLUMN_HEADER_IN_CSV_FILE =
-          "testLocationBulkUploadFailureWithoutColumnHeaderInCsvFile";
-  public static final String TEST_NAME_LOCATION_BULK_UPLOAD_FAILURE_WITH_INVALID_COLUMN =
-      "testLocationBulkUploadFailureWithInvalidColumn";
-  public static final String TEST_NAME_LOCATION_BULK_UPLOAD_FAILURE_WITH_INVALID_TYPE =
-      "testLocationBulkUploadFailureWithInvalidType";
-  public static final String TEST_NAME_LOCATION_BULK_UPLOAD_FAILURE_WITH_EXCEEDING_FILE_SIZE =
-      "testLocationBulkUploadFailureWithExceedingFileSize";
+  @DataProvider(name = "stateBulkUploadFailureDataProvider")
+  public Object[][] stateBulkUploadFailureDataProvider() {
+    return new Object[][] {
+      new Object[] {
+        "testLocationBulkUploadOfStateTypeFailureWithMissingMandatoryColumn", HttpStatus.BAD_REQUEST
+      }
+    };
+  }
 
-  public static final String TEMPLATE_DIR = "templates/bulkupload/location";
+  @Test(dataProvider = "stateBulkUploadSuccessDataProvider")
+  @CitrusParameters({"testName"})
+  @CitrusTest
+  public void testLocationBulkUploadStateTypeSuccess(String testName) {
+    performMultipartTest(
+        this,
+        TEMPLATE_DIR,
+        testName,
+        getLocationBulkUploadUrl(),
+        REQUEST_FORM_DATA,
+        null,
+        true,
+        HttpStatus.OK,
+        RESPONSE_JSON);
+  }
+
+  @Test(dataProvider = "stateBulkUploadFailureDataProvider")
+  @CitrusParameters({"testName", "status"})
+  @CitrusTest
+  public void testLocationBulkUploadStateTypeFailure(String testName, HttpStatus status) {
+    performMultipartTest(
+        this,
+        TEMPLATE_DIR,
+        testName,
+        getLocationBulkUploadUrl(),
+        REQUEST_FORM_DATA,
+        null,
+        true,
+        HttpStatus.OK,
+        RESPONSE_JSON);
+  }
 
   private String getLocationBulkUploadUrl() {
-    return getLmsApiUriPath("/api/data/v1/bulk/location/upload", "/v1/bulk/location/upload");
+    return getLmsApiUriPath(LOCATION_BULK_UPLOAD_SERVER_URI, LOCATION_BULK_UPLOAD_LOCAL_URI);
   }
 
-  @DataProvider(name = "locationBulkUploadFailureDataProvider")
-  public Object[][] locationBulkUploadFailureDataProvider() {
-
-    return new Object[][] {
-      new Object[] {TEST_NAME_LOCATION_BULK_UPLOAD_FAILURE_WITHOUT_TYPE, HttpStatus.BAD_REQUEST},
-      new Object[] {
-        TEST_NAME_LOCATION_BULK_UPLOAD_FAILURE_WITHOUT_CSV_FILE, HttpStatus.BAD_REQUEST
-      },
-      new Object[] {
-        TEST_NAME_LOCATION_BULK_UPLOAD_FAILURE_WITHOUT_CODE_COLUMN, HttpStatus.BAD_REQUEST
-      },
-    };
-  }
-
-  @Test(dataProvider = "locationBulkUploadFailureDataProvider")
-  @CitrusParameters({"testName", "httpStatusCode"})
-  @CitrusTest
-  public void testLocationBulkUploadFailure(String testName, HttpStatus httpStatusCode) {
-    getTestCase().setName(testName);
-    performMultipartTest(
-        this,
-        TEMPLATE_DIR,
-        testName,
-        getLocationBulkUploadUrl(),
-        REQUEST_FORM_DATA,
-        null,
-        false,
-        httpStatusCode,
-        RESPONSE_JSON);
-  }
-
-  @DataProvider(name = "locationBulkUploadSuccessDataProvider")
-  public Object[][] locationBulkUploadSuccessDataProvider() {
-
-    return new Object[][] {
-      new Object[] {TEST_NAME_LOCATION_BULK_UPLOAD_SUCCESS_WITH_STATE_TYPE, HttpStatus.OK},
-    };
-  }
-
-  @Test(dataProvider = "locationBulkUploadSuccessDataProvider")
-  @CitrusParameters({"testName", "httpStatusCode"})
-  @CitrusTest
-  public void testLocationBulkUploadSuccess(String testName, HttpStatus httpStatusCode) {
-    getTestCase().setName(testName);
-    performMultipartTest(
-        this,
-        TEMPLATE_DIR,
-        testName,
-        getLocationBulkUploadUrl(),
-        REQUEST_FORM_DATA,
-        null,
-        false,
-        httpStatusCode,
-        RESPONSE_JSON);
-  }
+  @CleanUp
+  /** Method to perform the cleanup after test suite completion. */
+  public static void cleanUp() {}
 }
