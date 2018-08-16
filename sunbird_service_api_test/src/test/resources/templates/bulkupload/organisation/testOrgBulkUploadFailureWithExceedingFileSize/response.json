@@ -1,13 +1,13 @@
 {
-    "id": "api.user.upload",
+    "id": "api.org.upload",
     "ver": "v1",
     "ts": "@ignore@",
     "params": {
         "resmsgid": null,
         "msgid": "@ignore@",
-        "err": "INVALID_CSV_FILE",
-        "status": "INVALID_CSV_FILE",
-        "errmsg": "Please provide valid csv file."
+        "err": "DATA_SIZE_EXCEEDED",
+        "status": "DATA_SIZE_EXCEEDED",
+        "errmsg": "Maximum upload data size should be 199"
     },
     "responseCode": "CLIENT_ERROR",
     "result": {}

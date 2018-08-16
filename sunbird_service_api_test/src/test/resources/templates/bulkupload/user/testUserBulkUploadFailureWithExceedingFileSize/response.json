@@ -5,9 +5,9 @@
     "params": {
         "resmsgid": null,
         "msgid": "@ignore@",
-        "err": "MANDATORY_PARAMETER_MISSING",
-        "status": "MANDATORY_PARAMETER_MISSING",
-        "errmsg": "Mandatory parameter file is missing."
+        "err": "DATA_SIZE_EXCEEDED",
+        "status": "DATA_SIZE_EXCEEDED",
+        "errmsg": "Maximum upload data size should be 1,000"
     },
     "responseCode": "CLIENT_ERROR",
     "result": {}
