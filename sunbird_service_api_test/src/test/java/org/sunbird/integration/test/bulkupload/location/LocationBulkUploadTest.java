@@ -32,6 +32,7 @@ public class LocationBulkUploadTest extends BaseCitrusTestRunner {
   @CitrusParameters({"testName"})
   @CitrusTest
   public void testLocationBulkUploadStateTypeSuccess(String testName) {
+    getAuthToken(this, true);
     performMultipartTest(
         this,
         TEMPLATE_DIR,
@@ -48,6 +49,7 @@ public class LocationBulkUploadTest extends BaseCitrusTestRunner {
   @CitrusParameters({"testName", "status"})
   @CitrusTest
   public void testLocationBulkUploadStateTypeFailure(String testName, HttpStatus status) {
+    getAuthToken(this, true);
     performMultipartTest(
         this,
         TEMPLATE_DIR,

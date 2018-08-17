@@ -16,7 +16,9 @@
         "failureResult":"@ignore@",
         "processId": "@ignore@",
         "successResult": "@ignore@",
-        "objectType": "@ignore@"
+        "objectType": "@ignore@",
+        "message": "@ignore@",
+        "status": "@ignore@"
       }
     ]
   }

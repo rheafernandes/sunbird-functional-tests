@@ -90,6 +90,7 @@ public class MalformedRequestTest extends BaseCitrusTestRunner {
   @CitrusTest
   public void testRequestWithoutContentType(
       String apiGatewayUriPath, String localUriPath, String testName, String contentType) {
+    getAuthToken(this, true);
     performPostTest(
         this,
         TEMPLATE_DIR,

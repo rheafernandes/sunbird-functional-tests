@@ -1,0 +1,21 @@
+{
+    "id": "@ignore@",
+    "ver": "v1",
+    "ts": "@ignore@",
+    "params": {
+        "resmsgid": null,
+        "msgid": "@ignore@",
+        "err": null,
+        "status": "success",
+        "errmsg": null
+    },
+    "responseCode": "OK",
+    "result": {
+        "page": {
+            "name": "@ignore@",
+            "portalSections": "@ignore@",
+            "id": "@ignore@",
+            "appSections": "@ignore@"
+        }
+    }
+}

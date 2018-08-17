@@ -33,6 +33,7 @@ public class BatchEnrolmentBulkUploadTest extends BaseCitrusTestRunner {
   @CitrusParameters({"testName", "status"})
   @CitrusTest
   public void testBatchEnrolmentBulkUploadSuccess(String testName, HttpStatus status) {
+    getAuthToken(this, true);
     performMultipartTest(
         this,
         TEMPLATE_DIR,
@@ -49,6 +50,7 @@ public class BatchEnrolmentBulkUploadTest extends BaseCitrusTestRunner {
   @CitrusParameters({"testName", "status"})
   @CitrusTest
   public void testBatchEnrolmentBulkUploadFailure(String testName, HttpStatus status) {
+    getAuthToken(this, true);
     performMultipartTest(
         this,
         TEMPLATE_DIR,
