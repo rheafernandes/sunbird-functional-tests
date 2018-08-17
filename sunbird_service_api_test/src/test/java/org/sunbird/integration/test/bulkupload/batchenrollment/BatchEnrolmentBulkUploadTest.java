@@ -59,7 +59,7 @@ public class BatchEnrolmentBulkUploadTest extends BaseCitrusTestRunner {
         REQUEST_FORM_DATA,
         null,
         true,
-        HttpStatus.OK,
+        status,
         RESPONSE_JSON);
   }
 
