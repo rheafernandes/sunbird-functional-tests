@@ -4,7 +4,7 @@
     "ts": "@ignore@",
     "params": {
         "resmsgid": null,
-        "msgid": null,
+        "msgid": "@ignore@",
         "err": null,
         "status": "success",
         "errmsg": null
