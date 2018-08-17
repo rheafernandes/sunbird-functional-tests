@@ -11,11 +11,6 @@
     },
     "responseCode": "OK",
     "result": {
-        "page": {
-            "name": "@ignore@",
-            "portalSections": "@ignore@",
-            "id": "@ignore@",
-            "appSections": "@ignore@"
-        }
+        "response": "@ignore@"
     }
 }

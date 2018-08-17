@@ -38,7 +38,7 @@ public class AddUserToOrgTest extends BaseCitrusTestRunner {
   @CitrusParameters({"testName"})
   @CitrusTest
   public void testAddUserToOrgFailure(String testName) {
-
+    getAuthToken(this, true);
     performPostTest(
         this,
         TEMPLATE_DIR,
