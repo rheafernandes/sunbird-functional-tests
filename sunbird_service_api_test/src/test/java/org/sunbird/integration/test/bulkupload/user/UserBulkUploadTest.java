@@ -166,7 +166,7 @@ public class UserBulkUploadTest extends BaseCitrusTestRunner {
       boolean canCreateOrg,
       boolean canCreateSubOrg) {
     getTestCase().setName(testName);
-    getAuthToken(this, true);
+    getAuthToken(this, isAuthRequired);
     beforeTest(canCreateOrg, canCreateSubOrg);
     performMultipartTest(
         this,
