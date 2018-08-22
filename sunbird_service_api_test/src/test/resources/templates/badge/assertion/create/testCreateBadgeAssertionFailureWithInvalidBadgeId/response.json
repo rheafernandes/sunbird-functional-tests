@@ -7,7 +7,7 @@
     "msgid": "@ignore@",
     "err": "RECIPIENT_TYPE_REQUIRED",
     "status": "RECIPIENT_TYPE_REQUIRED",
-    "errmsg": "Please provide recipient type for badge assertion."
+    "errmsg": "Please provide valid badge id for badge assertion."
   },
   "responseCode": "CLIENT_ERROR",
   "result": {}

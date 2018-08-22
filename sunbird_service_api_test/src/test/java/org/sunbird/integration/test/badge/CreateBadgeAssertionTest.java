@@ -75,15 +75,15 @@ public class CreateBadgeAssertionTest extends BaseCitrusTestRunner {
   @DataProvider(name = "createBadgeAssertionDataProviderFailure")
   public Object[][] createBadgeAssertionDataProviderFailure() {
     return new Object[][] {
-      new Object[] {TEST_NAME_CREATE_BADGE_ASSERTION_FAILURE_WITHOUT_ISSUER_ID, false},
-      new Object[] {TEST_NAME_CREATE_BADGE_ASSERTION_FAILURE_WITHOUT_BADGE_ID, false},
-      new Object[] {TEST_NAME_CREATE_BADGE_ASSERTION_FAILURE_WITHOUT_RECIPIENT_ID, false},
-      new Object[] {TEST_NAME_CREATE_BADGE_ASSERTION_FAILURE_WITHOUT_RECIPIENT_TYPE, false},
-      new Object[] {TEST_NAME_CREATE_BADGE_ASSERTION_FAILURE_WITH_INVALID_RECIPIENT_TYPE, false},
-      new Object[] {TEST_NAME_CREATE_BADGE_ASSERTION_FAILURE_WITH_INVALID_ISSUER_ID, false},
-      new Object[] {TEST_NAME_CREATE_BADGE_ASSERTION_FAILURE_WITH_INVALID_BADGE_ID, false},
-      new Object[] {TEST_NAME_CREATE_BADGE_ASSERTION_FAILURE_WITH_INVALID_USER_ID, false},
-      new Object[] {TEST_NAME_CREATE_BADGE_ASSERTION_FAILURE_WITH_INVALID_CONTENT_ID, false}
+      new Object[] {TEST_NAME_CREATE_BADGE_ASSERTION_FAILURE_WITHOUT_ISSUER_ID },
+      new Object[] {TEST_NAME_CREATE_BADGE_ASSERTION_FAILURE_WITHOUT_BADGE_ID },
+      new Object[] {TEST_NAME_CREATE_BADGE_ASSERTION_FAILURE_WITHOUT_RECIPIENT_ID },
+      new Object[] {TEST_NAME_CREATE_BADGE_ASSERTION_FAILURE_WITHOUT_RECIPIENT_TYPE },
+      new Object[] {TEST_NAME_CREATE_BADGE_ASSERTION_FAILURE_WITH_INVALID_RECIPIENT_TYPE },
+      new Object[] {TEST_NAME_CREATE_BADGE_ASSERTION_FAILURE_WITH_INVALID_ISSUER_ID },
+      new Object[] {TEST_NAME_CREATE_BADGE_ASSERTION_FAILURE_WITH_INVALID_BADGE_ID },
+      new Object[] {TEST_NAME_CREATE_BADGE_ASSERTION_FAILURE_WITH_INVALID_USER_ID },
+      new Object[] {TEST_NAME_CREATE_BADGE_ASSERTION_FAILURE_WITH_INVALID_CONTENT_ID }
     };
   }
 
@@ -92,6 +92,17 @@ public class CreateBadgeAssertionTest extends BaseCitrusTestRunner {
   @CitrusTest
   public void testCreateBadgeAssertionSuccess(String testName) {
     beforeTest(true, true, true);
+    performPostTest(
+    	this, 
+    	TEMPLATE_DIR,
+    	testName, 
+    	getCreateBadgeAssertionUrl(), 
+    	REQUEST_FORM_DATA, 
+    	"application/json", 
+    	true, 
+    	HttpStatus.OK,
+        RESPONSE_JSON);
+  /*
     performMultipartTest(
         this,
         TEMPLATE_DIR,
@@ -101,7 +112,7 @@ public class CreateBadgeAssertionTest extends BaseCitrusTestRunner {
         null,
         false,
         HttpStatus.OK,
-        RESPONSE_JSON);
+        RESPONSE_JSON); */
   }
 
   @Test(dataProvider = "createBadgeAssertionDataProviderFailure")
@@ -109,15 +120,15 @@ public class CreateBadgeAssertionTest extends BaseCitrusTestRunner {
   @CitrusTest
   public void testCreateBadgeAssertionFailure(String testName, Boolean canCreateOrg) {
     beforeTest(false, false, false);
-    performMultipartTest(
-        this,
-        TEMPLATE_DIR,
-        testName,
-        getCreateBadgeAssertionUrl(),
-        REQUEST_FORM_DATA,
-        null,
-        false,
-        HttpStatus.BAD_REQUEST,
+    performPostTest(
+        this, 
+       	TEMPLATE_DIR,
+       	testName, 
+       	getCreateBadgeAssertionUrl(), 
+       	REQUEST_FORM_DATA, 
+       	"application/json", 
+       	true, 
+       	HttpStatus.OK,
         RESPONSE_JSON);
   }
 
