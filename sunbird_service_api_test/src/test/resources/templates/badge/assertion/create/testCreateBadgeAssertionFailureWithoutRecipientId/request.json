@@ -1,10 +1,7 @@
- {
-    "request": {
-    
-     "recipientType":"user",
-     "issuerId":"issuerslug-14",
-     "badgeId":"badgeslug-10"
-     
-   }
-  } 
-  
+{
+  "request": {
+    "recipientType": "user",
+    "issuerId": "someIssuerId",
+    "badgeId": "someBadgeId"
+  }
+}

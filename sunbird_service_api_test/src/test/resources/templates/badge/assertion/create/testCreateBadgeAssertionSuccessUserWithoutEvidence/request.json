@@ -1,10 +1,8 @@
-  {
+{
   "request": {
-     
-     "recipientId":"4cbe7031-bc77-4e38-b742-47972463ffca",
-     "recipientType":"User",
-     "issuerId":"issuerslug-14",
-     "badgeId":"badgeslug-10"
-   }
-  } 
-  
+    "recipientId": "${userId}",
+    "recipientType": "user",
+    "issuerId": "${issuerId}",
+    "badgeId": "${badgeId}"
+  }
+}

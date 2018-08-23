@@ -1,11 +1,8 @@
- {
-    "request": {
-    
-     "recipientId":"4cbe7031-bc77-4e38-b742-47972463ffca",
-     "recipientType":"org",
-     "issuerId":"issuerslug-14",
-     "badgeId":"badgeslug-10"
-     
-   }
-  } 
-  
+{
+  "request": {
+    "recipientId": "someRecipientId",
+    "recipientType": "invalid",
+    "issuerId": "someIssuerId",
+    "badgeId": "someBadgeId"
+  }
+}

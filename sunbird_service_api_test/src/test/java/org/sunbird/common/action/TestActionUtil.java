@@ -87,6 +87,7 @@ public class TestActionUtil {
 
     String requestFilePath =
         MessageFormat.format("{0}/{1}/{2}", testTemplateDir, testName, requestFile);
+    System.out.println("requestFilePath = " + requestFilePath);
     HttpClientRequestActionBuilder requestActionBuilder =
         builder.client(endpointName).send().post(url).messageType(MessageType.JSON);
     if (StringUtils.isNotBlank(contentType)) {
@@ -161,6 +162,7 @@ public class TestActionUtil {
     String formDataFileFolderPath = MessageFormat.format("{0}/{1}", testTemplateDir, testName);
     String formDataFile =
         MessageFormat.format("{0}/{1}/{2}", testTemplateDir, testName, requestFile);
+    System.out.println("formDataFile = " + formDataFile);
 
     MultiValueMap<String, Object> formData = new LinkedMultiValueMap<>();
 

@@ -1,10 +1,7 @@
- {
-    "request": {
-    
-     "recipientId":"4cbe7031-bc77-4e38-b742-47972463ffca",
-     "issuerId":"issuerslug-14",
-     "badgeId":"badgeslug-10"
-     
-   }
-  } 
-  
+{
+  "request": {
+    "recipientId": "someRecipientId",
+    "issuerId": "someIssuerId",
+    "badgeId": "someBadgeId"
+  }
+}
