@@ -1,0 +1,9 @@
+{
+  "request": {
+    "recipientId": "${userId}",
+    "recipientType": "user",
+    "issuerId": "${issuerId}",
+    "badgeId": "${badgeId}",
+    "evidence": "some evidence"
+  }
+}

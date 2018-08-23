@@ -10,6 +10,8 @@ import org.sunbird.integration.test.common.BaseCitrusTestRunner;
 
 public class UserUtil {
 
+  private static String userId = null;
+
   public static String getCreateUserUrl(BaseCitrusTestRunner runner) {
     return runner.getLmsApiUriPath("/api/user/v1/create", "/v1/user/create");
   }
@@ -69,14 +71,18 @@ public class UserUtil {
   }
 
   public static void getUserId(BaseCitrusTestRunner runner, TestContext testContext) {
-    if (StringUtils.isBlank((String) testContext.getVariables().get("userId"))) {
+    if (StringUtils.isBlank(userId)) {
       String userName = Constant.USER_NAME_PREFIX + UUID.randomUUID().toString();
       testContext.setVariable("userName", userName);
       runner.variable("username", userName);
       runner.variable("channel", System.getenv("sunbird_default_channel"));
       UserUtil.createUser(
           runner, testContext, TEMPLATE_DIR_USER_CREATE, TEMPLATE_DIR_USER_CREATE_TEST_CASE);
+      userId = testContext.getVariable("userId");
+    } else {
+      testContext.setVariable("userId", userId);
     }
+    runner.variable("userId", userId);
   }
 
   public static void setProfileVisibilityPrivate(

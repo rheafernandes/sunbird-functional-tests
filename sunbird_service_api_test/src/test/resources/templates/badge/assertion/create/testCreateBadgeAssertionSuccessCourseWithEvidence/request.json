@@ -1,0 +1,12 @@
+ {
+    "request": {
+    
+     "recipientId":"4cbe7031-bc77-4e38-b742-47972463ffca",
+     "recipientType":"user",
+     "issuerId":"issuerslug-14",
+     "badgeId":"badgeslug-10",
+     "evidence":"http://10.0.1.179:8000/public/assertions/729fcad2-cce6-4dec-bc45-b103bd4880c8"
+     
+   }
+  } 
+  
