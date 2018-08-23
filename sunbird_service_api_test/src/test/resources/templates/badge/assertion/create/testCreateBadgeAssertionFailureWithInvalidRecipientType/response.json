@@ -1,14 +1,14 @@
 {
-  "id": "api.badge.assertion.create",
-  "ver": "v1",
-  "ts": "@ignore@",
-  "params": {
-    "resmsgid": null,
-    "msgid": "@ignore@",
-    "err": "RECIPIENT_TYPE_REQUIRED",
-    "status": "RECIPIENT_TYPE_REQUIRED",
-    "errmsg": "Please provide recipient type for badge assertion."
-  },
-  "responseCode": "CLIENT_ERROR",
-  "result": {}
+    "id": "api.issuer.badge.assertion.create",
+    "ver": "v1",
+    "ts": "@ignore@",
+    "params": {
+        "resmsgid": null,
+        "msgid": "@ignore@",
+        "err": "INVALID_RECIPIENT_TYPE",
+        "status": "INVALID_RECIPIENT_TYPE",
+        "errmsg": "Please provide a valid recipient type."
+    },
+    "responseCode": "CLIENT_ERROR",
+    "result": {}
 }

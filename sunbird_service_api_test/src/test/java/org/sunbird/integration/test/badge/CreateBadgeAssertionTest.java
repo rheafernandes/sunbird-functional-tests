@@ -2,6 +2,9 @@ package org.sunbird.integration.test.badge;
 
 import com.consol.citrus.annotations.CitrusTest;
 import com.consol.citrus.testng.CitrusParameters;
+
+import javax.ws.rs.core.MediaType;
+
 import org.springframework.http.HttpStatus;
 import org.sunbird.common.action.BadgeClassUtil;
 import org.sunbird.common.action.IssuerUtil;
@@ -22,36 +25,36 @@ public class CreateBadgeAssertionTest extends BaseCitrusTestRunner {
   private static final String BT_CREATE_USER_TEMPLATE_DIR = "templates/User/create";
 
   private static final String TEST_NAME_CREATE_BADGE_ASSERTION_SUCCESS_USER_WITHOUT_EVIDENCE =
-      "testCreateBadgeAssertionClassSuccessUserWithoutEvidence";
+      "testCreateBadgeAssertionSuccessUserWithoutEvidence";
   private static final String TEST_NAME_CREATE_BADGE_ASSERTION_SUCCESS_USER_WITH_EVIDENCE =
-      "testCreateBadgeAssertionClassSuccessUserWithEvidence";
+      "testCreateBadgeAssertionSuccessUserWithEvidence";
   private static final String TEST_NAME_CREATE_BADGE_ASSERTION_SUCCESS_TEXTBOOK_WITHOUT_EVIDENCE =
-      "testCreateBadgeAssertionClassSuccessTextbookWithoutEvidence";
+      "testCreateBadgeAssertionSuccessTextbookWithoutEvidence";
   private static final String TEST_NAME_CREATE_BADGE_ASSERTION_SUCCESS_TEXTBOOK_WITH_EVIDENCE =
-      "testCreateBadgeAssertionClassSuccessTextbookWithEvidence";
+      "testCreateBadgeAssertionSuccessTextbookWithEvidence";
   private static final String TEST_NAME_CREATE_BADGE_ASSERTION_SUCCESS_COURSE_WITHOUT_EVIDENCE =
-      "testCreateBadgeAssertionClassSuccessCourseWithoutEvidence";
+      "testCreateBadgeAssertionSuccessCourseWithoutEvidence";
   private static final String TEST_NAME_CREATE_BADGE_ASSERTION_SUCCESS_COUURSE_WITH_EVIDENCE =
-      "testCreateBadgeAssertionClassSuccessCourseWithEvidence";
+      "testCreateBadgeAssertionSuccessCourseWithEvidence";
 
   private static final String TEST_NAME_CREATE_BADGE_ASSERTION_FAILURE_WITHOUT_ISSUER_ID =
-      "testCreateBadgeAssertionClassFailureWithoutIssuerId";
+      "testCreateBadgeAssertionFailureWithoutIssuerId";
   private static final String TEST_NAME_CREATE_BADGE_ASSERTION_FAILURE_WITHOUT_BADGE_ID =
-      "testCreateBadgeAssertionClassFailureWithoutBadgeId";
+      "testCreateBadgeAssertionFailureWithoutBadgeId";
   private static final String TEST_NAME_CREATE_BADGE_ASSERTION_FAILURE_WITHOUT_RECIPIENT_ID =
-      "testCreateBadgeAssertionClassFailureWithoutRecipientId";
+      "testCreateBadgeAssertionFailureWithoutRecipientId";
   private static final String TEST_NAME_CREATE_BADGE_ASSERTION_FAILURE_WITHOUT_RECIPIENT_TYPE =
-      "testCreateBadgeAssertionClassFailureWithoutRecipientType";
+      "testCreateBadgeAssertionFailureWithoutRecipientType";
   private static final String TEST_NAME_CREATE_BADGE_ASSERTION_FAILURE_WITH_INVALID_RECIPIENT_TYPE =
-      "testCreateBadgeAssertionClassFailureWithInvalidRecipientType";
+      "testCreateBadgeAssertionFailureWithInvalidRecipientType";
   private static final String TEST_NAME_CREATE_BADGE_ASSERTION_FAILURE_WITH_INVALID_ISSUER_ID =
-      "testCreateBadgeAssertionClassFailureWithInvalidIssuerId";
+      "testCreateBadgeAssertionFailureWithInvalidIssuerId";
   private static final String TEST_NAME_CREATE_BADGE_ASSERTION_FAILURE_WITH_INVALID_BADGE_ID =
-      "testCreateBadgeAssertionClassFailureWithInvalidBadgeId";
+      "testCreateBadgeAssertionFailureWithInvalidBadgeId";
   private static final String TEST_NAME_CREATE_BADGE_ASSERTION_FAILURE_WITH_INVALID_USER_ID =
-      "testCreateBadgeAssertionClassFailureWithInvalidUserId";
+      "testCreateBadgeAssertionFailureWithInvalidUserId";
   private static final String TEST_NAME_CREATE_BADGE_ASSERTION_FAILURE_WITH_INVALID_CONTENT_ID =
-      "testCreateBadgeAssertionClassFailureWithInvalidContentId";
+      "testCreateBadgeAssertionFailureWithInvalidContentId";
 
   private static final String TEMPLATE_DIR = "templates/badge/assertion/create";
 
@@ -91,44 +94,34 @@ public class CreateBadgeAssertionTest extends BaseCitrusTestRunner {
   @CitrusParameters({"testName"})
   @CitrusTest
   public void testCreateBadgeAssertionSuccess(String testName) {
-    beforeTest(true, true, true);
+    //beforeTest(true, true, true);
+	getAuthToken(this, true);
     performPostTest(
     	this, 
     	TEMPLATE_DIR,
     	testName, 
     	getCreateBadgeAssertionUrl(), 
-    	REQUEST_FORM_DATA, 
-    	"application/json", 
-    	true, 
+    	REQUEST_JSON, 
+    	MediaType.APPLICATION_JSON, 
+    	false, 
     	HttpStatus.OK,
         RESPONSE_JSON);
-  /*
-    performMultipartTest(
-        this,
-        TEMPLATE_DIR,
-        testName,
-        getCreateBadgeAssertionUrl(),
-        REQUEST_FORM_DATA,
-        null,
-        false,
-        HttpStatus.OK,
-        RESPONSE_JSON); */
   }
 
   @Test(dataProvider = "createBadgeAssertionDataProviderFailure")
   @CitrusParameters({"testName"})
   @CitrusTest
-  public void testCreateBadgeAssertionFailure(String testName, Boolean canCreateOrg) {
+  public void testCreateBadgeAssertionFailure(String testName) {
     beforeTest(false, false, false);
     performPostTest(
         this, 
        	TEMPLATE_DIR,
        	testName, 
        	getCreateBadgeAssertionUrl(), 
-       	REQUEST_FORM_DATA, 
-       	"application/json", 
-       	true, 
-       	HttpStatus.OK,
+       	REQUEST_JSON, 
+       	MediaType.APPLICATION_JSON, 
+       	false, 
+       	HttpStatus.BAD_REQUEST,
         RESPONSE_JSON);
   }
 
@@ -145,7 +138,10 @@ public class CreateBadgeAssertionTest extends BaseCitrusTestRunner {
     }
     if (canCreateUser) {
       UserUtil.createUser(
-          this, testContext, BT_TEST_NAME_CREATE_USER_SUCCESS, BT_CREATE_USER_TEMPLATE_DIR);
+          this,
+          testContext,
+          BT_TEST_NAME_CREATE_USER_SUCCESS,
+          BT_CREATE_USER_TEMPLATE_DIR);
     }
     if (canCreateBadge) {
       BadgeClassUtil.createBadgeClass(

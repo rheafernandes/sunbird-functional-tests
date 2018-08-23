@@ -1,36 +1,37 @@
 {
-  "id": "api.issuer.badge.assertion.create",
-  "ver": "v1",
-  "ts": "@ignore@",
-  "params": {
-    "resmsgid": null,
-    "msgid": "@ignore@",
-    "err": null,
-    "status": "success",
-    "errmsg": null
-  },
-  "responseCode": "OK",
-  "result": {
-    "assertionDate": "@ignore@",
-    "assertionImageUrl": "@ignore@",
-    "assertionIdUrl": "@ignore@",
-    "revoked": true,
-    "issuerId": "${issuerId}",
-    "assertionId": "string",
-    "recipient": {
-      "type": "string",
-      "salt": "string",
-      "hashed": true,
-      "identity": "string"
+    "id": "api.issuer.badge.assertion.create",
+    "ver": "v1",
+    "ts": "@ignore@",
+    "params": {
+        "resmsgid": null,
+        "msgid": "@ignore@",
+        "err": null,
+        "status": "success",
+        "errmsg": null
     },
-    "verify": {
-      "url": "string",
-      "type": "string"
-    },
-    "revocationReason": "@ignore@",
-    "recipientEmail": "@ignore@",
-    "createdDate": "@ignore@",
-    "issuerIdUrl": "@ignore@",
-    "badgeIdUrl": "@ignore@"
-  }
+    "responseCode": "OK",
+    "result": {
+        "assertionDate": "@ignore@",
+        "assertionImageUrl": "@ignore@",
+        "badgeId": "@ignore@",
+        "assertionIdUrl": "@ignore@",
+        "revoked": false,
+        "issuerId": "@ignore@",
+        "createdDate": "@ignore@",
+        "assertionId": "@ignore@",
+        "issuerIdUrl": "@ignore@",
+        "recipient": {
+            "salt": "@ignore@",
+            "type": "@ignore@",
+            "hashed": true,
+            "identity": "@ignore@"
+        },
+        "verify": {
+            "url": "@ignore@",
+            "type": "@ignore@"
+        },
+        "revocationReason": null,
+        "recipientEmail": "@ignore@",
+        "badgeIdUrl": "@ignore@"
+    }
 }
