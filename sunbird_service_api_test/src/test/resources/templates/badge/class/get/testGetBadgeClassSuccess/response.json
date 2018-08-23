@@ -14,16 +14,16 @@
     "image": "@ignore@",
     "badgeId": "${badgeId}",
     "criteria": "@ignore@",
-    "roles": ["TEACHER_BADGE_ISSUER"],
-    "description": "FT badge description",
+    "roles": "@ignore@",
+    "description": "@ignore@",
     "type": "user",
     "rootOrgId": "${organisationId}",
     "issuerId": "${issuerId}",
     "createdDate": "@ignore@",
     "recipientCount": 0,
-    "subtype": "award",
+    "subtype": "@ignore@",
     "issuerIdUrl": "@ignore@",
-    "name": "FT_badge_class",
+    "name": "@ignore@",
     "badgeIdUrl": "@ignore@"
   }
 }
