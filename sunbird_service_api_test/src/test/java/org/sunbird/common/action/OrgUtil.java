@@ -6,7 +6,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.sunbird.common.util.Constant;
-import org.sunbird.integration.test.badge.CreateBadgeAssertionTest;
 import org.sunbird.integration.test.common.BaseCitrusTestRunner;
 
 public class OrgUtil {
@@ -41,8 +40,9 @@ public class OrgUtil {
   }
 
   public static String getSearchOrgUrl(BaseCitrusTestRunner runner) {
-	    return runner.getLmsApiUriPath("/api/org/v1/search", "/v1/org/search");
-	  }
+    return runner.getLmsApiUriPath("/api/org/v1/search", "/v1/org/search");
+  }
+
   public static void createOrg(
       BaseCitrusTestRunner runner,
       TestContext testContext,
@@ -87,36 +87,35 @@ public class OrgUtil {
                 MediaType.APPLICATION_JSON.toString(),
                 TestActionUtil.getHeaders(true)));
   }
-  
-  public static void SearchOrg(
-	      BaseCitrusTestRunner runner,
-	      TestContext testContext,
-	      String templateDir,
-	      String testName,
-	      String extractVariableName,
-	      HttpStatus responseCode) {
-	    runner.http(
-	        builder ->
-	            TestActionUtil.getPostRequestTestAction(
-	                builder,
-	                Constant.LMS_ENDPOINT,
-	                templateDir,
-	                testName,
-	                getSearchOrgUrl(runner),
-	                Constant.REQUEST_JSON,
-	                MediaType.APPLICATION_JSON.toString(),
-	                TestActionUtil.getHeaders(true)));
-	    runner.http(
-	        builder ->
-	            TestActionUtil.getExtractFromResponseTestAction(
-	                testContext,
-	                builder,
-	                Constant.LMS_ENDPOINT,
-	                responseCode,
-	                "$.result.response.content[*].rootOrgId",
-	                extractVariableName));
-	    runner.sleep(Constant.ES_SYNC_WAIT_TIME);
-	  }
+
+  public static void searchOrg(
+      BaseCitrusTestRunner runner,
+      TestContext testContext,
+      String templateDir,
+      String testName,
+      String extractVariableName,
+      HttpStatus responseCode) {
+    runner.http(
+        builder ->
+            TestActionUtil.getPostRequestTestAction(
+                builder,
+                Constant.LMS_ENDPOINT,
+                templateDir,
+                testName,
+                getSearchOrgUrl(runner),
+                Constant.REQUEST_JSON,
+                MediaType.APPLICATION_JSON.toString(),
+                TestActionUtil.getHeaders(true)));
+    runner.http(
+        builder ->
+            TestActionUtil.getExtractFromResponseTestAction(
+                testContext,
+                builder,
+                Constant.LMS_ENDPOINT,
+                responseCode,
+                "$.result.response.content[*].rootOrgId",
+                extractVariableName));
+  }
 
   public static String getRootOrgId(BaseCitrusTestRunner runner, TestContext testContext) {
 
@@ -149,17 +148,19 @@ public class OrgUtil {
     return subOrgId;
   }
 
-  public static String getSearchOrgId(BaseCitrusTestRunner runner, TestContext testContext,String channel) {
-	
-	  SearchOrg(
-		  runner, 
-		  testContext, 
-		  "templates/organisation/search",
-		  "testSearchOrgSuccessWithFilterByChannel", 
-		  Constant.EXTRACT_VAR_ROOT_ORG_ID, 
-		  HttpStatus.OK);
-	rootOrgId = testContext.getVariable(Constant.EXTRACT_VAR_ROOT_ORG_ID);
-	return rootOrgId;
-}
+  public static String getSearchOrgId(
+      BaseCitrusTestRunner runner, TestContext testContext, String channel) {
 
+    runner.variable("channel", System.getenv("sunbird_default_channel"));
+    String searchedOrgId = null;
+    searchOrg(
+        runner,
+        testContext,
+        "templates/organisation/search",
+        "testSearchOrgSuccessWithFilterByChannel",
+        Constant.EXTRACT_VAR_SEARCH_ROOT_ORG_ID,
+        HttpStatus.OK);
+    searchedOrgId = testContext.getVariable(Constant.EXTRACT_VAR_SEARCH_ROOT_ORG_ID);
+    return searchedOrgId;
+  }
 }
