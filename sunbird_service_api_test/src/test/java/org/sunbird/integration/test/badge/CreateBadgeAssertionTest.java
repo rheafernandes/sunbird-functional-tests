@@ -2,9 +2,6 @@ package org.sunbird.integration.test.badge;
 
 import com.consol.citrus.annotations.CitrusTest;
 import com.consol.citrus.testng.CitrusParameters;
-
-import java.util.UUID;
-
 import javax.ws.rs.core.MediaType;
 import org.springframework.http.HttpStatus;
 import org.sunbird.common.action.BadgeClassUtil;
@@ -19,7 +16,7 @@ public class CreateBadgeAssertionTest extends BaseCitrusTestRunner {
 
   private static final String BT_TEST_NAME_CREATE_ISSUER_SUCCESS = "testCreateIssuerSuccess";
   private static final String BT_CREATE_ISSUER_TEMPLATE_DIR = "templates/badge/issuer/create";
-  
+
   private static final String BT_TEST_NAME_CREATE_BADGE_CLASS_SUCCESS =
       "testCreateBadgeClassSuccessWithTypeUser";
   private static final String BT_CREATE_BADGE_CLASS_TEMPLATE_DIR = "templates/badge/class/create";
@@ -189,39 +186,36 @@ public class CreateBadgeAssertionTest extends BaseCitrusTestRunner {
         RESPONSE_JSON);
   }
 
-  private void beforeTest(String testName, Boolean canCreateUser, Boolean canCreateIssuer, Boolean canCreateBadge) {
-    
-	getTestCase().setName(testName);
-	if (canCreateUser) {
-	      getAuthToken(this, true);
-	      UserUtil.getUserId(this, testContext);
-	    }
-	
-	if (canCreateIssuer) {
-	      IssuerUtil.createIssuer(
-	          this,
-	          testContext,
-	          config,
-	          BT_CREATE_ISSUER_TEMPLATE_DIR,
-	          BT_TEST_NAME_CREATE_ISSUER_SUCCESS,
-	          HttpStatus.OK);
-	    }
-	
+  private void beforeTest(
+      String testName, Boolean canCreateUser, Boolean canCreateIssuer, Boolean canCreateBadge) {
+
+    getTestCase().setName(testName);
+    if (canCreateUser) {
+      getAuthToken(this, true);
+      UserUtil.getUserId(this, testContext);
+    }
+
+    if (canCreateIssuer) {
+      IssuerUtil.createIssuer(
+          this,
+          testContext,
+          config,
+          BT_CREATE_ISSUER_TEMPLATE_DIR,
+          BT_TEST_NAME_CREATE_ISSUER_SUCCESS,
+          HttpStatus.OK);
+    }
+
     if (canCreateBadge) {
-        // String orgId = OrgUtil.getSearchedOrgId(this, testContext,
-        // System.getenv("sunbird_default_channel"));
-        // variable("organisationId", orgId);
-    	variable("channel",System.getenv("sunbird_default_channel"));
-        String orgId =  OrgUtil.getSearchOrgId(this, testContext, System.getenv("sunbird_default_channel"));
-        variable("organisationId", orgId);
-        BadgeClassUtil.createBadgeClass(
-            this,
-            testContext,
-            config,
-            BT_CREATE_BADGE_CLASS_TEMPLATE_DIR,
-            BT_TEST_NAME_CREATE_BADGE_CLASS_SUCCESS,
-            HttpStatus.OK);
-      }
-    
+      String orgId =
+          OrgUtil.getSearchOrgId(this, testContext, System.getenv("sunbird_default_channel"));
+      variable("organisationId", orgId);
+      BadgeClassUtil.createBadgeClass(
+          this,
+          testContext,
+          config,
+          BT_CREATE_BADGE_CLASS_TEMPLATE_DIR,
+          BT_TEST_NAME_CREATE_BADGE_CLASS_SUCCESS,
+          HttpStatus.OK);
+    }
   }
 }
