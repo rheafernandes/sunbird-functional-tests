@@ -39,6 +39,10 @@ public class OrgUtil {
     return runner.getLmsApiUriPath("/api/org/v1/member/add", "/v1/org/member/add");
   }
 
+  public static String getSearchOrgUrl(BaseCitrusTestRunner runner) {
+    return runner.getLmsApiUriPath("/api/org/v1/search", "/v1/org/search");
+  }
+
   public static void createOrg(
       BaseCitrusTestRunner runner,
       TestContext testContext,
@@ -84,6 +88,35 @@ public class OrgUtil {
                 TestActionUtil.getHeaders(true)));
   }
 
+  public static void searchOrg(
+      BaseCitrusTestRunner runner,
+      TestContext testContext,
+      String templateDir,
+      String testName,
+      String extractVariableName,
+      HttpStatus responseCode) {
+    runner.http(
+        builder ->
+            TestActionUtil.getPostRequestTestAction(
+                builder,
+                Constant.LMS_ENDPOINT,
+                templateDir,
+                testName,
+                getSearchOrgUrl(runner),
+                Constant.REQUEST_JSON,
+                MediaType.APPLICATION_JSON.toString(),
+                TestActionUtil.getHeaders(true)));
+    runner.http(
+        builder ->
+            TestActionUtil.getExtractFromResponseTestAction(
+                testContext,
+                builder,
+                Constant.LMS_ENDPOINT,
+                responseCode,
+                "$.result.response.content[*].rootOrgId",
+                extractVariableName));
+  }
+
   public static String getRootOrgId(BaseCitrusTestRunner runner, TestContext testContext) {
 
     if (StringUtils.isBlank(rootOrgId)) {
@@ -113,5 +146,21 @@ public class OrgUtil {
         HttpStatus.OK);
     subOrgId = testContext.getVariable(Constant.EXTRACT_VAR_SUB_ORG_ID);
     return subOrgId;
+  }
+
+  public static String getSearchOrgId(
+      BaseCitrusTestRunner runner, TestContext testContext, String channel) {
+
+    runner.variable("channel", System.getenv("sunbird_default_channel"));
+    String searchedOrgId = null;
+    searchOrg(
+        runner,
+        testContext,
+        "templates/organisation/search",
+        "testSearchOrgSuccessWithFilterByChannel",
+        Constant.EXTRACT_VAR_SEARCH_ROOT_ORG_ID,
+        HttpStatus.OK);
+    searchedOrgId = testContext.getVariable(Constant.EXTRACT_VAR_SEARCH_ROOT_ORG_ID);
+    return searchedOrgId;
   }
 }

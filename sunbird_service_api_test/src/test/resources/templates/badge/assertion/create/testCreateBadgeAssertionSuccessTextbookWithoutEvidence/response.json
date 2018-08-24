@@ -14,18 +14,19 @@
     "assertionDate": "@ignore@",
     "assertionImageUrl": "@ignore@",
     "assertionIdUrl": "@ignore@",
-    "revoked": true,
+    "revoked": false,
     "issuerId": "${issuerId}",
-    "assertionId": "string",
+    "badgeId": "${badgeId}",
+    "assertionId": "@ignore@",
     "recipient": {
-      "type": "string",
-      "salt": "string",
+      "type": "@ignore@",
+      "salt": "@ignore@",
       "hashed": true,
-      "identity": "string"
+      "identity": "@ignore@"
     },
     "verify": {
-      "url": "string",
-      "type": "string"
+      "url": "@ignore@",
+      "type": "@ignore@"
     },
     "revocationReason": "@ignore@",
     "recipientEmail": "@ignore@",
