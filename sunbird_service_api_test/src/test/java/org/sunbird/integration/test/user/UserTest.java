@@ -19,6 +19,7 @@ import org.springframework.http.HttpStatus;
 import org.sunbird.common.models.response.Response;
 import org.sunbird.common.models.response.ResponseCode;
 import org.sunbird.common.util.Constant;
+import org.sunbird.integration.test.common.BaseCitrusTest;
 import org.sunbird.integration.test.user.EndpointConfig.TestGlobalProperty;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
