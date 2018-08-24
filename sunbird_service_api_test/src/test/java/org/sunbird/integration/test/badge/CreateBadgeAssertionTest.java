@@ -213,7 +213,6 @@ public class CreateBadgeAssertionTest extends BaseCitrusTestRunner {
         // variable("organisationId", orgId);
     	variable("channel",System.getenv("sunbird_default_channel"));
         String orgId =  OrgUtil.getSearchOrgId(this, testContext, System.getenv("sunbird_default_channel"));
-        System.out.println("Hello"+ orgId);
         variable("organisationId", orgId);
         BadgeClassUtil.createBadgeClass(
             this,
