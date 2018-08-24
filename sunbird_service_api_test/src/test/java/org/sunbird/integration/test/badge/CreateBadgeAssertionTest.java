@@ -192,10 +192,11 @@ public class CreateBadgeAssertionTest extends BaseCitrusTestRunner {
   private void beforeTest(String testName, Boolean canCreateUser, Boolean canCreateIssuer, Boolean canCreateBadge) {
     
 	getTestCase().setName(testName);
-	getAuthToken(this, true);
-	String channel = System.getenv("sunbird_default_channel")+ UUID.randomUUID().toString();
-	variable("rootOrgChannel",channel);
-	variable("channel",channel);
+	if (canCreateUser) {
+	      getAuthToken(this, true);
+	      UserUtil.getUserId(this, testContext);
+	    }
+	
 	if (canCreateIssuer) {
 	      IssuerUtil.createIssuer(
 	          this,
@@ -205,11 +206,14 @@ public class CreateBadgeAssertionTest extends BaseCitrusTestRunner {
 	          BT_TEST_NAME_CREATE_ISSUER_SUCCESS,
 	          HttpStatus.OK);
 	    }
+	
     if (canCreateBadge) {
         // String orgId = OrgUtil.getSearchedOrgId(this, testContext,
         // System.getenv("sunbird_default_channel"));
         // variable("organisationId", orgId);
-        String orgId =  OrgUtil.getRootOrgId(this, testContext);
+    	variable("channel",System.getenv("sunbird_default_channel"));
+        String orgId =  OrgUtil.getSearchOrgId(this, testContext, System.getenv("sunbird_default_channel"));
+        System.out.println("Hello"+ orgId);
         variable("organisationId", orgId);
         BadgeClassUtil.createBadgeClass(
             this,
@@ -219,12 +223,6 @@ public class CreateBadgeAssertionTest extends BaseCitrusTestRunner {
             BT_TEST_NAME_CREATE_BADGE_CLASS_SUCCESS,
             HttpStatus.OK);
       }
-    if (canCreateUser) {
-      String testCase = "Success";
-      /*if(testName=="testCreateBadgeAssertionFailureWithInvalidIssuerId")
-    	  UserUtil.getUserId(this, testContext);
-      else*/
-        UserUtil.getUserId(this, testContext,testCase);
-    }
+    
   }
 }
