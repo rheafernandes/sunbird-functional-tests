@@ -7,7 +7,7 @@
     "msgid": "@ignore@",
     "err": "RESOURCE_NOT_FOUND",
     "status": "RESOURCE_NOT_FOUND",
-    "errmsg": "Content not found."
+    "errmsg": "Requested resource not found"
   },
   "responseCode": "RESOURCE_NOT_FOUND",
   "result": {}

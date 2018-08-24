@@ -85,6 +85,20 @@ public class UserUtil {
     runner.variable("userId", userId);
   }
 
+  public static void getUserId(BaseCitrusTestRunner runner, TestContext testContext,String testCase) {
+	    if (StringUtils.isBlank(userId)) {
+	      String userName = Constant.USER_NAME_PREFIX + UUID.randomUUID().toString();
+	      testContext.setVariable("userName", userName);
+	      runner.variable("username", userName);
+	      //runner.variable("channel", System.getenv("sunbird_default_channel"));
+	      UserUtil.createUser(
+	          runner, testContext, TEMPLATE_DIR_USER_CREATE, TEMPLATE_DIR_USER_CREATE_TEST_CASE);
+	      userId = testContext.getVariable("userId");
+	    } else {
+	      testContext.setVariable("userId", userId);
+	    }
+	    runner.variable("userId", userId);
+	  }
   public static void setProfileVisibilityPrivate(
       BaseCitrusTestRunner runner, String templateDir, String testName) {
     runner.http(

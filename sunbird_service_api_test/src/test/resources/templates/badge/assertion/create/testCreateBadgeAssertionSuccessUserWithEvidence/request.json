@@ -4,6 +4,6 @@
     "recipientType": "user",
     "issuerId": "${issuerId}",
     "badgeId": "${badgeId}",
-    "evidence": "some evidence"
+    "evidence": "citrus:concat('https://',citrus:randomString(5, MIXED, true),'.com')"
   }
 }
