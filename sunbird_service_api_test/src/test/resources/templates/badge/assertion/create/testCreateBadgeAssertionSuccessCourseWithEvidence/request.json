@@ -1,12 +1,9 @@
- {
-    "request": {
-    
-     "recipientId":"${userId}",
-     "recipientType":"user",
-     "issuerId":"${issuerId}",
-     "badgeId":"${badgeId}",
-     "evidence":"http://10.0.1.179:8000/public/assertions/729fcad2-cce6-4dec-bc45-b103bd4880c8"
-     
-   }
-  } 
-  
+{
+  "request": {
+    "recipientId": "${courseId}",
+    "recipientType": "content",
+    "issuerId": "${issuerId}",
+    "badgeId": "${badgeId}",
+    "evidence": "http://evidence.com"
+  }
+}

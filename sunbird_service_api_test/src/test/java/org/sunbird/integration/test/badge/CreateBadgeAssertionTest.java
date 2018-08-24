@@ -4,10 +4,7 @@ import com.consol.citrus.annotations.CitrusTest;
 import com.consol.citrus.testng.CitrusParameters;
 import javax.ws.rs.core.MediaType;
 import org.springframework.http.HttpStatus;
-import org.sunbird.common.action.BadgeClassUtil;
-import org.sunbird.common.action.IssuerUtil;
-import org.sunbird.common.action.OrgUtil;
-import org.sunbird.common.action.UserUtil;
+import org.sunbird.common.action.*;
 import org.sunbird.integration.test.common.BaseCitrusTestRunner;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -63,12 +60,12 @@ public class CreateBadgeAssertionTest extends BaseCitrusTestRunner {
   @DataProvider(name = "createBadgeAssertionDataProviderSuccess")
   public Object[][] createBadgeAssertionDataProviderSuccess() {
     return new Object[][] {
-      new Object[] {TEST_NAME_CREATE_BADGE_ASSERTION_SUCCESS_USER_WITHOUT_EVIDENCE},
-      new Object[] {TEST_NAME_CREATE_BADGE_ASSERTION_SUCCESS_USER_WITH_EVIDENCE},
-      new Object[] {TEST_NAME_CREATE_BADGE_ASSERTION_SUCCESS_TEXTBOOK_WITHOUT_EVIDENCE},
-      new Object[] {TEST_NAME_CREATE_BADGE_ASSERTION_SUCCESS_TEXTBOOK_WITH_EVIDENCE},
-      new Object[] {TEST_NAME_CREATE_BADGE_ASSERTION_SUCCESS_COURSE_WITHOUT_EVIDENCE},
-      new Object[] {TEST_NAME_CREATE_BADGE_ASSERTION_SUCCESS_COUURSE_WITH_EVIDENCE}
+      new Object[] {TEST_NAME_CREATE_BADGE_ASSERTION_SUCCESS_USER_WITHOUT_EVIDENCE, true, false},
+      new Object[] {TEST_NAME_CREATE_BADGE_ASSERTION_SUCCESS_USER_WITH_EVIDENCE, true, false},
+      new Object[] {TEST_NAME_CREATE_BADGE_ASSERTION_SUCCESS_TEXTBOOK_WITHOUT_EVIDENCE, false, true},
+      new Object[] {TEST_NAME_CREATE_BADGE_ASSERTION_SUCCESS_TEXTBOOK_WITH_EVIDENCE, false, true},
+      new Object[] {TEST_NAME_CREATE_BADGE_ASSERTION_SUCCESS_COURSE_WITHOUT_EVIDENCE, false, true},
+      new Object[] {TEST_NAME_CREATE_BADGE_ASSERTION_SUCCESS_COUURSE_WITH_EVIDENCE, false, true}
     };
   }
 
@@ -142,10 +139,10 @@ public class CreateBadgeAssertionTest extends BaseCitrusTestRunner {
   }
 
   @Test(dataProvider = "createBadgeAssertionDataProviderSuccess")
-  @CitrusParameters({"testName"})
+  @CitrusParameters({"testName", "canCreateUser", "canCreateCourse"})
   @CitrusTest
-  public void testCreateBadgeAssertionSuccess(String testName) {
-    beforeTest(testName, true, true, true);
+  public void testCreateBadgeAssertionSuccess(String testName, Boolean canCreateUser, Boolean canCreateCourse) {
+    beforeTest(testName, canCreateUser, canCreateCourse,true, true);
     performPostTest(
         this,
         TEMPLATE_DIR,
@@ -173,7 +170,7 @@ public class CreateBadgeAssertionTest extends BaseCitrusTestRunner {
       boolean canCreateUser,
       boolean canCreateIssuer,
       boolean canCreateBadgeClass) {
-    beforeTest(testName, canCreateUser, canCreateIssuer, canCreateBadgeClass);
+    beforeTest(testName, canCreateUser, false, canCreateIssuer, canCreateBadgeClass);
     performPostTest(
         this,
         TEMPLATE_DIR,
@@ -187,12 +184,20 @@ public class CreateBadgeAssertionTest extends BaseCitrusTestRunner {
   }
 
   private void beforeTest(
-      String testName, Boolean canCreateUser, Boolean canCreateIssuer, Boolean canCreateBadge) {
+      String testName, Boolean canCreateUser, Boolean canCreateCourse, Boolean canCreateIssuer, Boolean canCreateBadge) {
 
     getTestCase().setName(testName);
     if (canCreateUser) {
       getAuthToken(this, true);
       UserUtil.getUserId(this, testContext);
+    }
+
+    if (canCreateCourse) {
+      getAuthToken(this, true);
+      variable("courseUnitId", ContentStoreUtil.getCourseUnitId());
+      variable("resourceId", ContentStoreUtil.getResourceId());
+      String courseId = ContentStoreUtil.getCourseId(this, testContext);
+      variable("courseId", courseId);
     }
 
     if (canCreateIssuer) {
