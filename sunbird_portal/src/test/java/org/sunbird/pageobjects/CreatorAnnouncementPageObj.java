@@ -26,7 +26,6 @@ import org.sunbird.page.PublicUserPage;
 import org.sunbird.page.SignUp;
 import org.sunbird.startup.BaseTest;
 import org.sunbird.testdata.TestDataForSunbird;
-import org.sunbird.testscripts.TestRun;
 import org.testng.Assert;
 
 import com.relevantcodes.extentreports.LogStatus;
@@ -78,7 +77,7 @@ public class CreatorAnnouncementPageObj extends BaseTest{
 			objListOFTestDataForSunbird = ReadTestDataFromExcel.getTestDataForSunbird("testdatasheetcourse");
 			GenericFunctions.waitWebDriver(1500);
 			createAnnouncementPage.create_Announcement.click();
-			GenericFunctions.waitWebDriver(1000);
+			GenericFunctions.waitWebDriver(2000);
 			createAnnouncementPage.enterTitle.click();
 			String announcementNumber = GenericFunctions.testDataIncrementer("./TestData/announcementNumbers.txt").toString();
 			announcementName = objListOFTestDataForSunbird.get(7).getCourseName();
@@ -141,7 +140,7 @@ public class CreatorAnnouncementPageObj extends BaseTest{
 			objListOFTestDataForSunbird = ReadTestDataFromExcel.getTestDataForSunbird("testdatasheetcourse");
 			GenericFunctions.waitWebDriver(1500);
 			createAnnouncementPage.create_Announcement.click();
-			GenericFunctions.waitWebDriver(1000);
+			GenericFunctions.waitWebDriver(2000);
 			createAnnouncementPage.enterTitle.click();
 			String announcementNumber = GenericFunctions.testDataIncrementer("./TestData/announcementNumbers.txt").toString();
 			announcementName = objListOFTestDataForSunbird.get(7).getCourseName();
@@ -171,7 +170,7 @@ public class CreatorAnnouncementPageObj extends BaseTest{
 			robot.keyPress(KeyEvent.VK_ENTER);
 			robot.keyRelease(KeyEvent.VK_ENTER);
 			GenericFunctions.waitWebDriver(2000);
-			String path = System.getProperty("user.dir")+"\\UploadingDocuments\\Upload Document Contents\\"+IMAGE;
+			String path = System.getProperty("user.dir")+"/UploadingDocuments/Upload Document Contents/"+IMAGE;
 			GenericFunctions.uploadFile(path);
 			GenericFunctions.waitWebDriver(5000);
 			//GenericFunctions.waitWebDriver(2000);

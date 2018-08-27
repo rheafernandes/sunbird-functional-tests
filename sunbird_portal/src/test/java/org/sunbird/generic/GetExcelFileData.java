@@ -94,7 +94,7 @@ public class GetExcelFileData extends TestConfigurations {
 		System.out.println("callingscript = " + callingTestScript);
 		
 		if (callingTestScript.toLowerCase().startsWith("testdatasheet") == true) 
-			testDataPath = "/home/qualitrix/Downloads/sunbird-automation-master/TestData/TestDataSheet.xls";/*testExcelDataPath*/
+			testDataPath = "./TestData/TestDataSheet.xls";/*testExcelDataPath*/
 		else{
 			System.out.println("Test Data Path: "+testDataPath+"Not Found");
 			}

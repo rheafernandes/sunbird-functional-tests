@@ -45,7 +45,7 @@ public class CreatorUserPageObj extends BaseTest{
 
 		try
 		{
-			ExtentTestManager.getTest().log(LogStatus.INFO, "User is navigating to the Workspace to create "+createVariable);
+//			ExtentTestManager.getTest().log(LogStatus.INFO, "User is navigating to the Workspace to create "+createVariable);
 			//GenericFunctions.waitTillTheElementInVisible(createUserPage.headerProfile);
 			//createUserPage.dropDown.click();
 			GenericFunctions.waitForElementToAppear(publicUserPage.headerProfile);
@@ -155,7 +155,7 @@ public class CreatorUserPageObj extends BaseTest{
 			GenericFunctions.waitWebDriver(1500);
 			createUserPage.chooseFileButton.click();
 			GenericFunctions.waitWebDriver(1500);
-			String path = System.getProperty("user.dir")+"\\UploadingDocuments\\Upload Document Contents\\"+SEARCH_COURSE_IMAGE;
+			String path = System.getProperty("user.dir")+"/UploadingDocuments/Upload Document Contents/"+SEARCH_COURSE_IMAGE;
 			System.out.println("Uploaded image : "+path);
 			//log.info("Uploaded file name: "+path);
 			GenericFunctions.waitWebDriver(3000);
@@ -225,7 +225,7 @@ public class CreatorUserPageObj extends BaseTest{
 			GenericFunctions.waitWebDriver(1500);
 			createUserPage.chooseFileButton.click();
 			GenericFunctions.waitWebDriver(1500);
-			String path = System.getProperty("user.dir")+"\\UploadingDocuments\\Upload Document Contents\\"+BOOK_IMAGE;
+			String path = System.getProperty("user.dir")+"/UploadingDocuments/Upload Document Contents/"+BOOK_IMAGE;
 			System.out.println("Uploaded image : "+path);
 			//log.info("Uploaded file name: "+path);
 			GenericFunctions.waitWebDriver(3000);
@@ -637,7 +637,7 @@ public class CreatorUserPageObj extends BaseTest{
 			GenericFunctions.waitWebDriver(1500);
 			createUserPage.chooseFileButton.click();
 			GenericFunctions.waitWebDriver(1500);
-			String path = System.getProperty("user.dir")+"\\UploadingDocuments\\Upload Document Contents\\"+LESSON_PLAN_IMAGE;
+			String path = System.getProperty("user.dir")+"/UploadingDocuments/Upload Document Contents/"+LESSON_PLAN_IMAGE;
 			System.out.println("Uploaded image : "+path);
 			//log.info("Uploaded file name: "+path);
 			GenericFunctions.waitWebDriver(3000);
@@ -854,7 +854,7 @@ public class CreatorUserPageObj extends BaseTest{
 			WebElement browse=createUserPage.browseButton;
 			if(uploadType.equalsIgnoreCase("mp4"))
 			{
-				String path = System.getProperty("user.dir")+"\\UploadingDocuments\\Uploading videos\\"+UPLOAD_MP4;
+				String path = System.getProperty("user.dir")+"/UploadingDocuments/Uploading videos/"+UPLOAD_MP4;
 				//System.getProperty("user.dir")+
 				System.out.println(path);
 				GenericFunctions.waitWebDriver(3000);
@@ -866,7 +866,7 @@ public class CreatorUserPageObj extends BaseTest{
 			}
 			else if(uploadType.equalsIgnoreCase("webm"))
 			{
-				String path = System.getProperty("user.dir")+"\\UploadingDocuments\\Uploading videos\\"+UPLOAD_WEBM;
+				String path = System.getProperty("user.dir")+"/UploadingDocuments/Uploading videos/"+UPLOAD_WEBM;
 				//System.getProperty("user.dir")+
 				System.out.println(path);
 				GenericFunctions.waitWebDriver(3000);
@@ -885,7 +885,7 @@ public class CreatorUserPageObj extends BaseTest{
 			}
 			else if(uploadType.equalsIgnoreCase("epub"))
 			{
-				String path = System.getProperty("user.dir")+"\\UploadingDocuments\\Upload Document Contents\\"+UPLOAD_EPUB;
+				String path = System.getProperty("user.dir")+"/UploadingDocuments/Upload Document Contents/"+UPLOAD_EPUB;
 				//System.getProperty("user.dir")+
 				System.out.println(path);
 				GenericFunctions.waitWebDriver(3000);
@@ -897,7 +897,7 @@ public class CreatorUserPageObj extends BaseTest{
 
 			else if(uploadType.equalsIgnoreCase("h5p"))
 			{
-				String path = System.getProperty("user.dir")+"\\UploadingDocuments\\Upload Document Contents\\"+UPLOAD_H5P;
+				String path = System.getProperty("user.dir")+"/UploadingDocuments/Upload Document Contents/"+UPLOAD_H5P;
 				//System.getProperty("user.dir")+
 				System.out.println(path);
 				GenericFunctions.waitWebDriver(3000);
@@ -908,7 +908,7 @@ public class CreatorUserPageObj extends BaseTest{
 			}
 			else if(uploadType.equalsIgnoreCase("html"))
 			{
-				String path = System.getProperty("user.dir")+"\\UploadingDocuments\\Upload Document Contents\\"+UPLOAD_HTML;
+				String path = System.getProperty("user.dir")+"/UploadingDocuments/Upload Document Contents/"+UPLOAD_HTML;
 				//System.getProperty("user.dir")+
 				System.out.println(path);
 				GenericFunctions.waitWebDriver(3000);

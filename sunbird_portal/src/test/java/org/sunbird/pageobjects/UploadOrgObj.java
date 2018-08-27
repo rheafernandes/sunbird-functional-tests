@@ -131,7 +131,7 @@ public class UploadOrgObj extends BaseTest
 
 	public void uploadRootAndSubOrgUserWithOrgId(String uploadDocument) throws Exception
 	{
-		//ExtentTestManager.getTest().log(LogStatus.INFO, "User Defined Message : User is trying to users for upload Organizations or Sub-Organizations with Ord ID based on the given input");
+		ExtentTestManager.getTest().log(LogStatus.INFO, "User Defined Message : User is trying to users for upload Organizations or Sub-Organizations with Ord ID based on the given input");
 		try
 		{
 			Robot robot =new Robot();
@@ -175,6 +175,7 @@ public class UploadOrgObj extends BaseTest
 			{
 				//ExtentTestManager.getTest().log(LogStatus.INFO, "User is Uploading users for Root Organization");
 				path = System.getProperty("user.dir")+"/UploadingDocuments/"+UPLOAD_USERS_ROOT_ORG;
+				System.out.println("Document uploaded from path: "+path);
 			}
 			else if(uploadDocument.equalsIgnoreCase(UPLOAD_USERS_SUB_ORG))
 			{

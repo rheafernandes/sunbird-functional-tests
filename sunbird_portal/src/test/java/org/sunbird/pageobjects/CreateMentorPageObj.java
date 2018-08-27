@@ -49,7 +49,7 @@ public class CreateMentorPageObj extends BaseTest{
 			ExtentTestManager.getTest().log(LogStatus.INFO, "To verify navigate to My Activity in drop down menu");
 			GenericFunctions.waitWebDriver(1500);
 			createUserPage.dropDown.click();
-			GenericFunctions.waitWebDriver(1000);
+			GenericFunctions.waitWebDriver(2000);
 			createAnnouncementPage.myActivityInDropdown.click();	
 			GenericFunctions.waitWebDriver(1500);
 			createMentorPage.SearchCourseDropdown.click();
@@ -76,7 +76,7 @@ public class CreateMentorPageObj extends BaseTest{
 			ExtentTestManager.getTest().log(LogStatus.INFO, "To verify navigate to Course section and search course");
 			GenericFunctions.waitWebDriver(1500);
 			createUserPage.headerCourse.click();
-			GenericFunctions.waitWebDriver(1000);
+			GenericFunctions.waitWebDriver(2000);
 			createMentorPage.filterSearch.sendKeys(courseName);//objListOFTestDataForSunbird.get(0).getCourseName()+GenericFunctions.readFromNotepad("./TestData/batchNumbers.txt").toUpperCase());
 			createUserPage.searchIcon.click();
 			GenericFunctions.waitWebDriver(2000);
@@ -99,7 +99,7 @@ public class CreateMentorPageObj extends BaseTest{
 			ExtentTestManager.getTest().log(LogStatus.INFO, "To verify navigate to Course section, search course and create open batch");
 			GenericFunctions.waitWebDriver(1500);
 			createUserPage.headerCourse.click();
-			GenericFunctions.waitWebDriver(1000);
+			GenericFunctions.waitWebDriver(2000);
 			createMentorPage.filterSearch.sendKeys(courseName);//objListOFTestDataForSunbird.get(0).getCourseName()+GenericFunctions.readFromNotepad("./TestData/openBatchData.txt").toUpperCase());
 			createUserPage.searchIcon.click();
 			GenericFunctions.waitWebDriver(2000);
@@ -125,7 +125,7 @@ public class CreateMentorPageObj extends BaseTest{
 			ExtentTestManager.getTest().log(LogStatus.INFO, "To verify navigate to Course section, search course and create open batch");
 			GenericFunctions.waitWebDriver(1500);
 			createUserPage.headerCourse.click();
-			GenericFunctions.waitWebDriver(1000);
+			GenericFunctions.waitWebDriver(2000);
 			createMentorPage.filterSearch.sendKeys(objListOFTestDataForSunbird.get(0).getCourseName());
 			createUserPage.searchIcon.click();
 			GenericFunctions.waitWebDriver(2000);
@@ -149,7 +149,7 @@ public class CreateMentorPageObj extends BaseTest{
 			ExtentTestManager.getTest().log(LogStatus.INFO, "To verify navigate to Course section, search course and update the course");
 			GenericFunctions.waitWebDriver(1500);
 			createUserPage.headerCourse.click();
-			GenericFunctions.waitWebDriver(1000);
+			GenericFunctions.waitWebDriver(2000);
 			createMentorPage.filterSearch.sendKeys(objListOFTestDataForSunbird.get(0).getCourseName());//+GenericFunctions.readFromNotepad("./TestData/batchNumbers.txt").toUpperCase());
 			createUserPage.searchIcon.click();
 			GenericFunctions.waitWebDriver(2000);
@@ -288,7 +288,7 @@ public class CreateMentorPageObj extends BaseTest{
 			else
 			{
 				createMentorPage.enrollForOpenBatch.click();
-				GenericFunctions.waitWebDriver(1000);
+				GenericFunctions.waitWebDriver(1500);
 				createMentorPage.enrollForCourse.click();
 			}
 		}
@@ -354,7 +354,7 @@ public class CreateMentorPageObj extends BaseTest{
 			ExtentTestManager.getTest().log(LogStatus.INFO, "User is trying to create invite only batch for a course");
 			GenericFunctions.waitWebDriver(1500);
 			createUserPage.headerCourse.click();
-			GenericFunctions.waitWebDriver(1000);
+			GenericFunctions.waitWebDriver(2000);
 			createMentorPage.filterSearch.sendKeys(objListOFTestDataForSunbird.get(0).getCourseName());//+GenericFunctions.readFromNotepad("./TestData/batchNumbers.txt").toUpperCase());
 			createUserPage.searchIcon.click();
 			GenericFunctions.waitWebDriver(2000);
@@ -441,7 +441,7 @@ public class CreateMentorPageObj extends BaseTest{
 			createMentorPage.addIcon.click();
 			GenericFunctions.waitWebDriver(1000);
 			GenericFunctions.switchToFrame(driver, createMentorPage.batchForm);
-			GenericFunctions.waitWebDriver(1000);
+			GenericFunctions.waitWebDriver(2000);
 			createMentorPage.nameOfBatch.sendKeys(objListOFTestDataForSunbird.get(0).getCourseName()+ GenericFunctions.testDataIncrementer("./TestData/dikshadata.txt"));
 			createMentorPage.aboutBatch.sendKeys(objListOFTestDataForSunbird.get(0).getCourseName());
 			createMentorPage.openBatch.click();
@@ -485,7 +485,7 @@ public class CreateMentorPageObj extends BaseTest{
 			ExtentTestManager.getTest().log(LogStatus.INFO, "User is trying to create invite only batch for Sub Organization");
 			GenericFunctions.waitWebDriver(1500);
 			createUserPage.headerCourse.click();
-			GenericFunctions.waitWebDriver(1000);
+			GenericFunctions.waitWebDriver(2000);
 			createMentorPage.filterSearch.sendKeys(objListOFTestDataForSunbird.get(0).getCourseName());//+GenericFunctions.readFromNotepad("./TestData/batchNumbers.txt").toUpperCase());
 			createUserPage.searchIcon.click();
 			GenericFunctions.waitWebDriver(2000);

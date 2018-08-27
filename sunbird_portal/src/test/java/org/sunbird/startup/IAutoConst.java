@@ -23,9 +23,9 @@ public interface IAutoConst {
 
 	//Driver values
 	String CHROME_KEY="webdriver.chrome.driver";
-	String CHROME_VAL="Drivers/chromedriver";
+	String CHROME_VAL="./Drivers/chromedriver";
 	String GECKO_KEY="webdriver.gecko.driver";
-	String GECKO_VAL="./Drivers/geckodriver.exe";
+	String GECKO_VAL="./Drivers/geckodriver";
 	String APP_URL="https://staging.open-sunbird.org";
 	String AUTO_APP_URL="http://qatestautomation.centralus.cloudapp.azure.com";
 
