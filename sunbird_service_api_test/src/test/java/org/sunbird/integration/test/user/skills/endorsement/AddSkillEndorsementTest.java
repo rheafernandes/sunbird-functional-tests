@@ -10,7 +10,7 @@ import org.sunbird.integration.test.common.BaseCitrusTestRunner;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-public class AddSkillEndorsement extends BaseCitrusTestRunner {
+public class AddSkillEndorsementTest extends BaseCitrusTestRunner {
   private static final String ADD_USER_SKILL_ENDORSEMENT_FAILURE_WITH_INVALID_USER_ID =
       "testAddUserSkillEndorsementFailureWithInvalidUserId";
   private static final String ADD_USER_SKILL_ENDORSEMENT_FAILURE_WITHOUT_SKILLS_NAME =

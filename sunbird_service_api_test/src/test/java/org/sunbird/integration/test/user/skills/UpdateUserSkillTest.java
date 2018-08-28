@@ -10,7 +10,7 @@ import org.sunbird.integration.test.common.BaseCitrusTestRunner;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-public class UpateAndDeleteUserSkill extends BaseCitrusTestRunner {
+public class UpdateUserSkillTest extends BaseCitrusTestRunner {
 
   private static final String UPDATE_USER_SKILL_FAILURE_WITHOUT_ACCESS_TOKEN =
       "testUpdateUserSkillFailureWithoutAccessToken";
@@ -18,9 +18,9 @@ public class UpateAndDeleteUserSkill extends BaseCitrusTestRunner {
       "testUpdateUserSkillFailureWithInvalidUserId";
   private static final String UPDATE_USER_SKILL_FAILURE_WITHOUT_SKILLS_LIST =
       "testUpdateUserSkillFailureWithoutSkillsList";
-  private static final String ADD_USER_SKILL_SUCCESS = "testAddUserSkillSuccess";
   private static final String UPDATE_USER_SKILL_SUCCESS = "testUpdateUserSkillSuccess";
-  private static final String DELETE_USER_ALL_SKILLS_SUCCESS = "testDeleteUserSkillSuccess";
+  private static final String UPDATE_USER_SKILL_SUCCESS_WITH_EMPTY_SKILLS_LIST =
+      "testUpdateUserSkillSuccessWithEmptySkillsList";
   private static final String TEMPLATE_DIR = "templates/user/skill/update";
 
   private String getUpdateUserSkillUrl() {
@@ -60,9 +60,8 @@ public class UpateAndDeleteUserSkill extends BaseCitrusTestRunner {
   public Object[][] updateUserSkillSuccessDataProvider() {
 
     return new Object[][] {
-      new Object[] {ADD_USER_SKILL_SUCCESS, true, HttpStatus.OK},
       new Object[] {UPDATE_USER_SKILL_SUCCESS, true, HttpStatus.OK},
-      new Object[] {DELETE_USER_ALL_SKILLS_SUCCESS, true, HttpStatus.OK},
+      new Object[] {UPDATE_USER_SKILL_SUCCESS_WITH_EMPTY_SKILLS_LIST, true, HttpStatus.OK},
     };
   }
 
