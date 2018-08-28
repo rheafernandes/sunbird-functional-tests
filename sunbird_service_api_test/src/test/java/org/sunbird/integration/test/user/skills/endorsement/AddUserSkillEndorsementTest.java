@@ -10,15 +10,15 @@ import org.sunbird.integration.test.common.BaseCitrusTestRunner;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-public class AddSkillEndorsementTest extends BaseCitrusTestRunner {
+public class AddUserSkillEndorsementTest extends BaseCitrusTestRunner {
   private static final String ADD_USER_SKILL_ENDORSEMENT_FAILURE_WITH_INVALID_USER_ID =
       "testAddUserSkillEndorsementFailureWithInvalidUserId";
   private static final String ADD_USER_SKILL_ENDORSEMENT_FAILURE_WITHOUT_SKILLS_NAME =
       "testAddUserSkillEndorsementFailureWithoutSkillName";
   private static final String ADD_USER_SKILL_ENDORSEMENT_FAILURE_WITHOUT_ENDORSED_USER_ID =
       "testAddUserSkillEndorsementFailureWithoutEndorsedUserId";
-  private static final String ADD_USER_SKILL_ENDORSEMENT_FAILURE_FOR_SELF =
-      "testAddUserSkillEndorsementFailureToEndorseSelf";
+  private static final String ADD_USER_SKILL_ENDORSEMENT_FAILURE_SELF_ENDORSEMENT =
+      "testAddUserSkillEndorsementFailureSelfEndorsement";
   private static final String ADD_USER_SKILL_ENDORSEMENT_SUCCESS =
       "testAddUserSkillEndorsementSuccess";
   private static final String TEMPLATE_DIR = "templates/user/skill/endorsement/add";
@@ -40,7 +40,9 @@ public class AddSkillEndorsementTest extends BaseCitrusTestRunner {
       new Object[] {
         ADD_USER_SKILL_ENDORSEMENT_FAILURE_WITHOUT_ENDORSED_USER_ID, true, HttpStatus.BAD_REQUEST
       },
-      new Object[] {ADD_USER_SKILL_ENDORSEMENT_FAILURE_FOR_SELF, true, HttpStatus.BAD_REQUEST},
+      new Object[] {
+        ADD_USER_SKILL_ENDORSEMENT_FAILURE_SELF_ENDORSEMENT, true, HttpStatus.BAD_REQUEST
+      },
     };
   }
 
