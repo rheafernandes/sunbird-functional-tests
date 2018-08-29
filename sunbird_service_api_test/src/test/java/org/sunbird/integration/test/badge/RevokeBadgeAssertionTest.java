@@ -61,8 +61,20 @@ public class RevokeBadgeAssertionTest extends BaseCitrusTestRunner {
   @DataProvider(name = "revokeBadgeAssertionDataProviderSuccess")
   public Object[][] revokeBadgeAssertionDataProviderSuccess() {
     return new Object[][] {
-      new Object[] {TEST_NAME_REVOKE_BADGE_ASSERTION_SUCCESS_USER_BADGE_TYPE, true, false},
-      new Object[] {TEST_NAME_REVOKE_BADGE_ASSERTION_SUCCESS_CONTENT_BADGE_TYPE, false, true}
+      new Object[] {
+        TEST_NAME_REVOKE_BADGE_ASSERTION_SUCCESS_USER_BADGE_TYPE,
+        true,
+        false,
+        BT_TEST_NAME_CREATE_USER_BADGE_ASSERTION_SUCCESS,
+        BT_CREATE_USER_BADGE_ASSERTION_TEMPLATE_DIR
+      },
+      new Object[] {
+        TEST_NAME_REVOKE_BADGE_ASSERTION_SUCCESS_CONTENT_BADGE_TYPE,
+        false,
+        true,
+        BT_TEST_NAME_CREATE_COURSE_BADGE_ASSERTION_SUCCESS,
+        BT_CREATE_COURSE_BADGE_ASSERTION_TEMPLATE_DIR
+      }
     };
   }
 
@@ -99,11 +111,15 @@ public class RevokeBadgeAssertionTest extends BaseCitrusTestRunner {
   }
 
   @Test(dataProvider = "revokeBadgeAssertionDataProviderSuccess")
-  @CitrusParameters({"testName", "canCreateUser", "canCreateContent"})
+  @CitrusParameters({"testName", "canCreateUser", "canCreateContent", "testCase", "templateDir"})
   @CitrusTest
   public void testRevokeBadgeAssertionSuccess(
-      String testName, Boolean canCreateUser, Boolean canCreateContent) {
-    beforeTest(testName, canCreateUser, canCreateContent, true, true, true);
+      String testName,
+      Boolean canCreateUser,
+      Boolean canCreateContent,
+      String testCase,
+      String templateDir) {
+    beforeTest(testName, canCreateUser, canCreateContent, true, true, true, testCase, templateDir);
     performDeleteTest(
         this,
         TEMPLATE_DIR,
@@ -122,7 +138,7 @@ public class RevokeBadgeAssertionTest extends BaseCitrusTestRunner {
   @CitrusTest
   public void testRevokeBadgeAssertionFailure(
       String testName, Boolean canCreateUser, HttpStatus httpStatus) {
-    beforeTest(testName, canCreateUser, false, false, false, false);
+    beforeTest(testName, canCreateUser, false, false, false, false, null, null);
     performDeleteTest(
         this,
         TEMPLATE_DIR,
@@ -141,7 +157,9 @@ public class RevokeBadgeAssertionTest extends BaseCitrusTestRunner {
       Boolean canCreateCourse,
       Boolean canCreateIssuer,
       Boolean canCreateBadge,
-      Boolean canCreateBadgeAssertion) {
+      Boolean canCreateBadgeAssertion,
+      String testCase,
+      String templateDir) {
 
     getTestCase().setName(testName);
 
@@ -180,25 +198,8 @@ public class RevokeBadgeAssertionTest extends BaseCitrusTestRunner {
     }
 
     if (canCreateBadgeAssertion) {
-      String BADGE_ASSERTION_TEMPLATE_DIR = null;
-      String BADGE_ASSERTION_TEST_CASE = null;
-
-      if (canCreateUser) {
-        BADGE_ASSERTION_TEMPLATE_DIR = BT_CREATE_USER_BADGE_ASSERTION_TEMPLATE_DIR;
-        BADGE_ASSERTION_TEST_CASE = BT_TEST_NAME_CREATE_USER_BADGE_ASSERTION_SUCCESS;
-      }
-
-      if (canCreateCourse) {
-        BADGE_ASSERTION_TEMPLATE_DIR = BT_CREATE_COURSE_BADGE_ASSERTION_TEMPLATE_DIR;
-        BADGE_ASSERTION_TEST_CASE = BT_TEST_NAME_CREATE_COURSE_BADGE_ASSERTION_SUCCESS;
-      }
       BadgeAssertionUtil.createBadgeAssertion(
-          this,
-          testContext,
-          config,
-          BADGE_ASSERTION_TEMPLATE_DIR,
-          BADGE_ASSERTION_TEST_CASE,
-          HttpStatus.OK);
+          this, testContext, config, templateDir, testCase, HttpStatus.OK);
     }
   }
 

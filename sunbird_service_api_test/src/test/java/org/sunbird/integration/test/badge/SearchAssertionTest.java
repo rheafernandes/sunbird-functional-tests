@@ -55,10 +55,18 @@ public class SearchAssertionTest extends BaseCitrusTestRunner {
   public Object[][] searchAssertionSuccessDataProvider() {
     return new Object[][] {
       new Object[] {
-        TEST_NAME_SEARCH_ASSERTION_SUCCESS_WITH_FILTER_BY_ASSERTION_USER_BADGE_TYPE, true, false
+        TEST_NAME_SEARCH_ASSERTION_SUCCESS_WITH_FILTER_BY_ASSERTION_USER_BADGE_TYPE,
+        true,
+        false,
+        BT_TEST_NAME_CREATE_USER_BADGE_ASSERTION_SUCCESS,
+        BT_CREATE_USER_BADGE_ASSERTION_TEMPLATE_DIR
       },
       new Object[] {
-        TEST_NAME_SEARCH_ASSERTION_SUCCESS_WITH_FILTER_BY_ASSERTION_CONTENT_BADGE_TYPE, false, true
+        TEST_NAME_SEARCH_ASSERTION_SUCCESS_WITH_FILTER_BY_ASSERTION_CONTENT_BADGE_TYPE,
+        false,
+        true,
+        BT_TEST_NAME_CREATE_COURSE_BADGE_ASSERTION_SUCCESS,
+        BT_CREATE_COURSE_BADGE_ASSERTION_TEMPLATE_DIR
       },
     };
   }
@@ -89,11 +97,15 @@ public class SearchAssertionTest extends BaseCitrusTestRunner {
   }
 
   @Test(dataProvider = "searchAssertionSuccessDataProvider")
-  @CitrusParameters({"testName", "canCreateUser", "canCreateCourse"})
+  @CitrusParameters({"testName", "canCreateUser", "canCreateCourse", "testCase", "templateDir"})
   @CitrusTest
   public void testSearchAssertionSuccess(
-      String testName, Boolean canCreateUser, Boolean canCreateCourse) {
-    beforeTest(testName, canCreateUser, canCreateCourse);
+      String testName,
+      Boolean canCreateUser,
+      Boolean canCreateCourse,
+      String testCase,
+      String templateDir) {
+    beforeTest(testName, canCreateUser, canCreateCourse, testCase, templateDir);
     performPostTest(
         this,
         TEMPLATE_DIR,
@@ -106,7 +118,12 @@ public class SearchAssertionTest extends BaseCitrusTestRunner {
         RESPONSE_JSON);
   }
 
-  private void beforeTest(String testName, Boolean canCreateUser, Boolean canCreateCourse) {
+  private void beforeTest(
+      String testName,
+      Boolean canCreateUser,
+      Boolean canCreateCourse,
+      String testCase,
+      String templateDir) {
 
     getTestCase().setName(testName);
     getAuthToken(this, true);
@@ -140,26 +157,8 @@ public class SearchAssertionTest extends BaseCitrusTestRunner {
         BT_CREATE_BADGE_CLASS_TEMPLATE_DIR,
         BT_TEST_NAME_CREATE_BADGE_CLASS_SUCCESS,
         HttpStatus.OK);
-    // variable("badgeId", testContext.getVariable(Constant.EXTRACT_VAR_BADGE_ID));
 
-    String BADGE_ASSERTION_TEMPLATE_DIR = null;
-    String BADGE_ASSERTION_TEST_CASE = null;
-
-    if (canCreateUser) {
-      BADGE_ASSERTION_TEMPLATE_DIR = BT_CREATE_USER_BADGE_ASSERTION_TEMPLATE_DIR;
-      BADGE_ASSERTION_TEST_CASE = BT_TEST_NAME_CREATE_USER_BADGE_ASSERTION_SUCCESS;
-    }
-
-    if (canCreateCourse) {
-      BADGE_ASSERTION_TEMPLATE_DIR = BT_CREATE_COURSE_BADGE_ASSERTION_TEMPLATE_DIR;
-      BADGE_ASSERTION_TEST_CASE = BT_TEST_NAME_CREATE_COURSE_BADGE_ASSERTION_SUCCESS;
-    }
     BadgeAssertionUtil.createBadgeAssertion(
-        this,
-        testContext,
-        config,
-        BADGE_ASSERTION_TEMPLATE_DIR,
-        BADGE_ASSERTION_TEST_CASE,
-        HttpStatus.OK);
+        this, testContext, config, templateDir, testCase, HttpStatus.OK);
   }
 }
