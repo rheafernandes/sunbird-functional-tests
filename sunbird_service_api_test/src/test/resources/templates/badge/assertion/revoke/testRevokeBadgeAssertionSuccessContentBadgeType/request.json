@@ -1,0 +1,8 @@
+{
+  "request": {
+    "assertionId": "c243a5d3-16df-4656-83d7-bc42aa58e3fa",
+    "recipientId": "0efc262f-4f8f-4034-bcad-427f369af578",
+    "recipientType": "content",
+    "revocationReason": "some reason"
+  }
+}

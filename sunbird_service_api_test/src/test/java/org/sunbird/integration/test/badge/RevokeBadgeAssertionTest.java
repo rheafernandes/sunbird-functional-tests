@@ -14,7 +14,7 @@ import org.sunbird.integration.test.common.BaseCitrusTestRunner;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-public class SearchAssertionTest extends BaseCitrusTestRunner {
+public class RevokeBadgeAssertionTest extends BaseCitrusTestRunner {
 
   private static final String BT_TEST_NAME_CREATE_ISSUER_SUCCESS = "testCreateIssuerSuccess";
   private static final String BT_CREATE_ISSUER_TEMPLATE_DIR = "templates/badge/issuer/create";
@@ -28,66 +28,98 @@ public class SearchAssertionTest extends BaseCitrusTestRunner {
   private static final String BT_CREATE_BADGE_ASSERTION_TEMPLATE_DIR =
       "templates/badge/assertion/create";
 
-  public static final String TEST_NAME_SEARCH_ASSERTION_FAILURE_WITHOUT_FILTER =
-      "testSearchAssertionFailureWithoutFilter";
+  private static final String TEST_NAME_REVOKE_BADGE_ASSERTION_FAILURE_WITH_INVALID_ASSERTION_ID =
+      "testRevokeBadgeAssertionFailureWithInvalidAssertionId";
+  private static final String TEST_NAME_REVOKE_BADGE_ASSERTION_FAILURE_WITH_INVALID_RECIPIENT_ID =
+      "testRevokeBadgeAssertionFailureWithInvalidRecipientId";
+  private static final String TEST_NAME_REVOKE_BADGE_ASSERTION_FAILURE_WITHOUT_ASSERTION_ID =
+      "testRevokeBadgeAssertionFailureWithoutAssertionId";
+  private static final String TEST_NAME_REVOKE_BADGE_ASSERTION_FAILURE_WITHOUT_RECIPIENT_ID =
+      "testRevokeBadgeAssertionFailureWithoutRecipientId";
+  private static final String TEST_NAME_REVOKE_BADGE_ASSERTION_FAILURE_WITHOUT_RECIPIENT_TYPE =
+      "testRevokeBadgeAssertionFailureWithoutRecipientType";
 
-  public static final String TEST_NAME_SEARCH_ASSERTION_SUCCESS_WITH_FILTER_BY_ASSERTION_ID =
-      "testSearchAssertionSuccessWithFilterByAssertionId";
+  private static final String TEST_NAME_REVOKE_BADGE_ASSERTION_SUCCESS_USER_BADGE_TYPE =
+      "testRevokeBadgeAssertionSuccessUserBadgeType";
+  private static final String TEST_NAME_REVOKE_BADGE_ASSERTION_SUCCESS_CONTENT_BADGE_TYPE =
+      "testRevokeBadgeAssertionSuccessContentBadgeType";
 
-  public static final String TEMPLATE_DIR = "templates/badge/assertion/search";
+  private static final String TEMPLATE_DIR = "templates/badge/assertion/revoke";
 
-  private String getSearchIssuerUrl() {
-
+  private String getRevokeBadgeAssertionUrl() {
     return getLmsApiUriPath(
-        "/api/badging/v1/issuer/badge/assertion/search", "/v1/issuer/badge/assertion/search");
+        "/api/badging/v1/issuer/badge/assertion/delete", "/v1/issuer/badge/assertion/delete");
   }
 
-  @DataProvider(name = "searchAssertionSuccessDataProvider")
-  public Object[][] searchAssertionSuccessDataProvider() {
+  @DataProvider(name = "revokeBadgeAssertionDataProviderSuccess")
+  public Object[][] revokeBadgeAssertionDataProviderSuccess() {
     return new Object[][] {
-      new Object[] {TEST_NAME_SEARCH_ASSERTION_SUCCESS_WITH_FILTER_BY_ASSERTION_ID}
+      new Object[] {TEST_NAME_REVOKE_BADGE_ASSERTION_SUCCESS_USER_BADGE_TYPE, true, false},
+      new Object[] {TEST_NAME_REVOKE_BADGE_ASSERTION_SUCCESS_CONTENT_BADGE_TYPE, false, true}
     };
   }
 
-  @DataProvider(name = "searchAssertionFailureDataProvider")
-  public Object[][] searchAssertionFailureDataProvider() {
-
+  @DataProvider(name = "revokeBadgeAssertionDataProviderFailure")
+  public Object[][] revokeBadgeAssertionDataProviderFailure() {
     return new Object[][] {
-      new Object[] {TEST_NAME_SEARCH_ASSERTION_FAILURE_WITHOUT_FILTER, HttpStatus.BAD_REQUEST},
-    };
-  }
-
-  @Test(dataProvider = "searchAssertionFailureDataProvider")
-  @CitrusParameters({"testName", "httpStatusCode"})
-  @CitrusTest
-  public void testSearchAssertionFailure(String testName, HttpStatus httpStatusCode) {
-
-    performPostTest(
-        this,
-        TEMPLATE_DIR,
-        testName,
-        getSearchIssuerUrl(),
-        REQUEST_JSON,
-        MediaType.APPLICATION_JSON,
+      new Object[] {
+        TEST_NAME_REVOKE_BADGE_ASSERTION_FAILURE_WITH_INVALID_ASSERTION_ID,
+        true,
+        HttpStatus.NOT_FOUND
+      },
+      new Object[] {
+        TEST_NAME_REVOKE_BADGE_ASSERTION_FAILURE_WITH_INVALID_RECIPIENT_ID,
         false,
-        httpStatusCode,
-        RESPONSE_JSON);
+        HttpStatus.NOT_FOUND
+      },
+      new Object[] {
+        TEST_NAME_REVOKE_BADGE_ASSERTION_FAILURE_WITHOUT_ASSERTION_ID, false, HttpStatus.BAD_REQUEST
+      },
+      new Object[] {
+        TEST_NAME_REVOKE_BADGE_ASSERTION_FAILURE_WITHOUT_RECIPIENT_ID, false, HttpStatus.BAD_REQUEST
+      },
+      new Object[] {
+        TEST_NAME_REVOKE_BADGE_ASSERTION_FAILURE_WITHOUT_RECIPIENT_TYPE,
+        false,
+        HttpStatus.BAD_REQUEST
+      }
+    };
   }
 
-  @Test(dataProvider = "searchAssertionSuccessDataProvider")
-  @CitrusParameters({"testName"})
+  @Test(dataProvider = "revokeBadgeAssertionDataProviderSuccess")
+  @CitrusParameters({"testName", "canCreateUser", "canCreateContent"})
   @CitrusTest
-  public void testSearchAssertionFailure(String testName) {
-    beforeTest(testName, true, false, true, true, true);
-    performPostTest(
+  public void testRevokeBadgeAssertionSuccess(
+      String testName, Boolean canCreateUser, Boolean canCreateContent) {
+    beforeTest(testName, canCreateUser, canCreateContent, true, true, true);
+    performDeleteTest(
         this,
         TEMPLATE_DIR,
         testName,
-        getSearchIssuerUrl(),
+        getRevokeBadgeAssertionUrl(),
         REQUEST_JSON,
         MediaType.APPLICATION_JSON,
         false,
         HttpStatus.OK,
+        RESPONSE_JSON);
+    afterTest();
+  }
+
+  @Test(dataProvider = "revokeBadgeAssertionDataProviderFailure")
+  @CitrusParameters({"testName", "canCreateOrg", "httpStatus"})
+  @CitrusTest
+  public void testRevokeBadgeAssertionFailure(
+      String testName, Boolean canCreateUser, HttpStatus httpStatus) {
+    beforeTest(testName, canCreateUser, false, false, false, false);
+    performDeleteTest(
+        this,
+        TEMPLATE_DIR,
+        testName,
+        getRevokeBadgeAssertionUrl(),
+        REQUEST_JSON,
+        MediaType.APPLICATION_JSON,
+        false,
+        httpStatus,
         RESPONSE_JSON);
   }
 
@@ -148,4 +180,6 @@ public class SearchAssertionTest extends BaseCitrusTestRunner {
       variable("assertionId", testContext.getVariable(Constant.EXTRACT_VAR_ASSERTION_ID));
     }
   }
+
+  private void afterTest() {}
 }

@@ -2,19 +2,18 @@ package org.sunbird.integration.test.badge;
 
 import com.consol.citrus.annotations.CitrusTest;
 import com.consol.citrus.testng.CitrusParameters;
-import javax.ws.rs.core.MediaType;
 import org.springframework.http.HttpStatus;
 import org.sunbird.common.action.BadgeClassUtil;
-import org.sunbird.common.action.ContentStoreUtil;
 import org.sunbird.common.action.IssuerUtil;
 import org.sunbird.common.action.OrgUtil;
+import org.sunbird.common.action.TestActionUtil;
 import org.sunbird.common.action.UserUtil;
 import org.sunbird.common.util.Constant;
 import org.sunbird.integration.test.common.BaseCitrusTestRunner;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-public class SearchAssertionTest extends BaseCitrusTestRunner {
+public class GetBadgeAssertionTest extends BaseCitrusTestRunner {
 
   private static final String BT_TEST_NAME_CREATE_ISSUER_SUCCESS = "testCreateIssuerSuccess";
   private static final String BT_CREATE_ISSUER_TEMPLATE_DIR = "templates/badge/issuer/create";
@@ -28,73 +27,65 @@ public class SearchAssertionTest extends BaseCitrusTestRunner {
   private static final String BT_CREATE_BADGE_ASSERTION_TEMPLATE_DIR =
       "templates/badge/assertion/create";
 
-  public static final String TEST_NAME_SEARCH_ASSERTION_FAILURE_WITHOUT_FILTER =
-      "testSearchAssertionFailureWithoutFilter";
+  private static final String TEST_NAME_GET_BADGE_ASSERTION_FAILURE_WITH_INVALID_ASSERTION_ID =
+      "testGetBadgeAssertionFailureWithInvalidAssertionId";
 
-  public static final String TEST_NAME_SEARCH_ASSERTION_SUCCESS_WITH_FILTER_BY_ASSERTION_ID =
-      "testSearchAssertionSuccessWithFilterByAssertionId";
+  private static final String TEST_NAME_GET_BADGE_ASSERTION_SUCCESS_USER_BADGE_TYPE =
+      "testGetBadgeAssertionSuccesUserBadgeType";
 
-  public static final String TEMPLATE_DIR = "templates/badge/assertion/search";
+  private static final String TEMPLATE_DIR = "templates/badge/assertion/get";
 
-  private String getSearchIssuerUrl() {
-
+  private String getReadBadgeAssertionUrl(String pathParam) {
     return getLmsApiUriPath(
-        "/api/badging/v1/issuer/badge/assertion/search", "/v1/issuer/badge/assertion/search");
+        "/api/badging/v1/issuer/badge/assertion/read",
+        "/v1/issuer/badge/assertion/read",
+        pathParam);
   }
 
-  @DataProvider(name = "searchAssertionSuccessDataProvider")
-  public Object[][] searchAssertionSuccessDataProvider() {
+  @DataProvider(name = "getBadgeAssertionDataProviderSuccess")
+  public Object[][] getBadgeAssertionDataProviderSuccess() {
+    return new Object[][] {new Object[] {TEST_NAME_GET_BADGE_ASSERTION_SUCCESS_USER_BADGE_TYPE}};
+  }
+
+  @DataProvider(name = "getBadgeAssertionDataProviderFailure")
+  public Object[][] getBadgeAssertionDataProviderFailure() {
     return new Object[][] {
-      new Object[] {TEST_NAME_SEARCH_ASSERTION_SUCCESS_WITH_FILTER_BY_ASSERTION_ID}
+      new Object[] {TEST_NAME_GET_BADGE_ASSERTION_FAILURE_WITH_INVALID_ASSERTION_ID, "invalid-id"}
     };
   }
 
-  @DataProvider(name = "searchAssertionFailureDataProvider")
-  public Object[][] searchAssertionFailureDataProvider() {
-
-    return new Object[][] {
-      new Object[] {TEST_NAME_SEARCH_ASSERTION_FAILURE_WITHOUT_FILTER, HttpStatus.BAD_REQUEST},
-    };
-  }
-
-  @Test(dataProvider = "searchAssertionFailureDataProvider")
-  @CitrusParameters({"testName", "httpStatusCode"})
+  @Test(dataProvider = "getBadgeAssertionDataProviderSuccess")
+  @CitrusParameters({"testName"})
   @CitrusTest
-  public void testSearchAssertionFailure(String testName, HttpStatus httpStatusCode) {
-
-    performPostTest(
+  public void testGetBadgeAssertionSuccess(String testName) {
+    beforeTest(testName, true, true, true, true);
+    performGetTest(
         this,
         TEMPLATE_DIR,
         testName,
-        getSearchIssuerUrl(),
-        REQUEST_JSON,
-        MediaType.APPLICATION_JSON,
+        getReadBadgeAssertionUrl(TestActionUtil.getVariable(testContext, "assertionId")),
         false,
-        httpStatusCode,
+        HttpStatus.OK,
         RESPONSE_JSON);
   }
 
-  @Test(dataProvider = "searchAssertionSuccessDataProvider")
-  @CitrusParameters({"testName"})
+  @Test(dataProvider = "getBadgeAssertionDataProviderFailure")
+  @CitrusParameters({"testName", "pathParam"})
   @CitrusTest
-  public void testSearchAssertionFailure(String testName) {
-    beforeTest(testName, true, false, true, true, true);
-    performPostTest(
+  public void testGetBadgeAssertionFailure(String testName, String pathParam) {
+    performGetTest(
         this,
         TEMPLATE_DIR,
         testName,
-        getSearchIssuerUrl(),
-        REQUEST_JSON,
-        MediaType.APPLICATION_JSON,
+        getReadBadgeAssertionUrl(pathParam),
         false,
-        HttpStatus.OK,
+        HttpStatus.NOT_FOUND,
         RESPONSE_JSON);
   }
 
   private void beforeTest(
       String testName,
       Boolean canCreateUser,
-      Boolean canCreateCourse,
       Boolean canCreateIssuer,
       Boolean canCreateBadge,
       Boolean canCreateBadgeAssertion) {
@@ -103,14 +94,6 @@ public class SearchAssertionTest extends BaseCitrusTestRunner {
     if (canCreateUser) {
       getAuthToken(this, true);
       UserUtil.getUserId(this, testContext);
-    }
-
-    if (canCreateCourse) {
-      getAuthToken(this, true);
-      variable("courseUnitId", ContentStoreUtil.getCourseUnitId());
-      variable("resourceId", ContentStoreUtil.getResourceId());
-      String courseId = ContentStoreUtil.getCourseId(this, testContext);
-      variable("courseId", courseId);
     }
 
     if (canCreateIssuer) {
