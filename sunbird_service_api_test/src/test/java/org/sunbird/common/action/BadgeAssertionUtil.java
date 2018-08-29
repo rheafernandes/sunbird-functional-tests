@@ -2,18 +2,19 @@ package org.sunbird.common.action;
 
 import com.consol.citrus.context.TestContext;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.sunbird.common.util.Constant;
 import org.sunbird.integration.test.common.BaseCitrusTestRunner;
 import org.sunbird.integration.test.user.EndpointConfig.TestGlobalProperty;
 
-public class BadgeClassUtil {
+public class BadgeAssertionUtil {
 
-  public static String getBadgeClassIssuerUrl(BaseCitrusTestRunner runner) {
+  public static String getCreateBadgeAssertionUrl(BaseCitrusTestRunner runner) {
     return runner.getLmsApiUriPath(
-        "/api/badging/v1/issuer/badge/create", "/v1/issuer/badge/create");
+        "/api/badging/v1/issuer/badge/assertion/create", "/v1/issuer/badge/assertion/create");
   }
 
-  public static void createBadgeClass(
+  public static void createBadgeAssertion(
       BaseCitrusTestRunner runner,
       TestContext testContext,
       TestGlobalProperty config,
@@ -22,17 +23,15 @@ public class BadgeClassUtil {
       HttpStatus responseCode) {
     runner.http(
         builder ->
-            TestActionUtil.getMultipartRequestTestAction(
-                testContext,
+            TestActionUtil.getPostRequestTestAction(
                 builder,
                 Constant.LMS_ENDPOINT,
                 templateDir,
                 testName,
-                getBadgeClassIssuerUrl(runner),
-                Constant.REQUEST_FORM_DATA,
-                null,
-                runner.getClass().getClassLoader(),
-                config));
+                getCreateBadgeAssertionUrl(runner),
+                Constant.REQUEST_JSON,
+                MediaType.APPLICATION_JSON.toString(),
+                TestActionUtil.getHeaders(true)));
     runner.http(
         builder ->
             TestActionUtil.getExtractFromResponseTestAction(
@@ -40,8 +39,8 @@ public class BadgeClassUtil {
                 builder,
                 Constant.LMS_ENDPOINT,
                 responseCode,
-                "$.result.badgeId",
-                Constant.EXTRACT_VAR_BADGE_ID));
-    runner.variable("badgeId", testContext.getVariable(Constant.EXTRACT_VAR_BADGE_ID));
+                "$.result.assertionId",
+                Constant.EXTRACT_VAR_ASSERTION_ID));
+    runner.variable("assertionId", testContext.getVariable(Constant.EXTRACT_VAR_ASSERTION_ID));
   }
 }
