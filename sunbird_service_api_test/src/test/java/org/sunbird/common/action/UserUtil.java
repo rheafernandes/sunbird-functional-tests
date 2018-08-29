@@ -81,6 +81,8 @@ public class UserUtil {
       BaseCitrusTestRunner runner, TestContext testContext, String variable) {
     if (StringUtils.isBlank((String) testContext.getVariables().get(variable))) {
       getUser(runner, testContext, variable);
+    } else {
+      runner.variable(variable, (String) testContext.getVariables().get(variable));
     }
   }
 
