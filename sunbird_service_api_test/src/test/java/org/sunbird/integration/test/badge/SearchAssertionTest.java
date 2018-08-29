@@ -4,12 +4,12 @@ import com.consol.citrus.annotations.CitrusTest;
 import com.consol.citrus.testng.CitrusParameters;
 import javax.ws.rs.core.MediaType;
 import org.springframework.http.HttpStatus;
+import org.sunbird.common.action.BadgeAssertionUtil;
 import org.sunbird.common.action.BadgeClassUtil;
 import org.sunbird.common.action.ContentStoreUtil;
 import org.sunbird.common.action.IssuerUtil;
 import org.sunbird.common.action.OrgUtil;
 import org.sunbird.common.action.UserUtil;
-import org.sunbird.common.util.Constant;
 import org.sunbird.integration.test.common.BaseCitrusTestRunner;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -23,16 +23,25 @@ public class SearchAssertionTest extends BaseCitrusTestRunner {
       "testCreateBadgeClassSuccessWithTypeUser";
   private static final String BT_CREATE_BADGE_CLASS_TEMPLATE_DIR = "templates/badge/class/create";
 
-  private static final String BT_TEST_NAME_CREATE_BADGE_ASSERTION_SUCCESS =
+  private static final String BT_TEST_NAME_CREATE_USER_BADGE_ASSERTION_SUCCESS =
       "testCreateBadgeAssertionSuccessUserWithoutEvidence";
-  private static final String BT_CREATE_BADGE_ASSERTION_TEMPLATE_DIR =
+  private static final String BT_CREATE_USER_BADGE_ASSERTION_TEMPLATE_DIR =
+      "templates/badge/assertion/create";
+
+  private static final String BT_TEST_NAME_CREATE_COURSE_BADGE_ASSERTION_SUCCESS =
+      "testCreateBadgeAssertionSuccessCourseWithoutEvidence";
+  private static final String BT_CREATE_COURSE_BADGE_ASSERTION_TEMPLATE_DIR =
       "templates/badge/assertion/create";
 
   public static final String TEST_NAME_SEARCH_ASSERTION_FAILURE_WITHOUT_FILTER =
       "testSearchAssertionFailureWithoutFilter";
 
-  public static final String TEST_NAME_SEARCH_ASSERTION_SUCCESS_WITH_FILTER_BY_ASSERTION_ID =
-      "testSearchAssertionSuccessWithFilterByAssertionId";
+  public static final String
+      TEST_NAME_SEARCH_ASSERTION_SUCCESS_WITH_FILTER_BY_ASSERTION_USER_BADGE_TYPE =
+          "testSearchAssertionSuccessWithFilterByAssertionUserBadgeType";
+  public static final String
+      TEST_NAME_SEARCH_ASSERTION_SUCCESS_WITH_FILTER_BY_ASSERTION_CONTENT_BADGE_TYPE =
+          "testSearchAssertionSuccessWithFilterByAssertionContentBadgeType";
 
   public static final String TEMPLATE_DIR = "templates/badge/assertion/search";
 
@@ -45,7 +54,12 @@ public class SearchAssertionTest extends BaseCitrusTestRunner {
   @DataProvider(name = "searchAssertionSuccessDataProvider")
   public Object[][] searchAssertionSuccessDataProvider() {
     return new Object[][] {
-      new Object[] {TEST_NAME_SEARCH_ASSERTION_SUCCESS_WITH_FILTER_BY_ASSERTION_ID}
+      new Object[] {
+        TEST_NAME_SEARCH_ASSERTION_SUCCESS_WITH_FILTER_BY_ASSERTION_USER_BADGE_TYPE, true, false
+      },
+      new Object[] {
+        TEST_NAME_SEARCH_ASSERTION_SUCCESS_WITH_FILTER_BY_ASSERTION_CONTENT_BADGE_TYPE, false, true
+      },
     };
   }
 
@@ -75,10 +89,11 @@ public class SearchAssertionTest extends BaseCitrusTestRunner {
   }
 
   @Test(dataProvider = "searchAssertionSuccessDataProvider")
-  @CitrusParameters({"testName"})
+  @CitrusParameters({"testName", "canCreateUser", "canCreateCourse"})
   @CitrusTest
-  public void testSearchAssertionFailure(String testName) {
-    beforeTest(testName, true, false, true, true, true);
+  public void testSearchAssertionSuccess(
+      String testName, Boolean canCreateUser, Boolean canCreateCourse) {
+    beforeTest(testName, canCreateUser, canCreateCourse);
     performPostTest(
         this,
         TEMPLATE_DIR,
@@ -91,61 +106,60 @@ public class SearchAssertionTest extends BaseCitrusTestRunner {
         RESPONSE_JSON);
   }
 
-  private void beforeTest(
-      String testName,
-      Boolean canCreateUser,
-      Boolean canCreateCourse,
-      Boolean canCreateIssuer,
-      Boolean canCreateBadge,
-      Boolean canCreateBadgeAssertion) {
+  private void beforeTest(String testName, Boolean canCreateUser, Boolean canCreateCourse) {
 
     getTestCase().setName(testName);
+    getAuthToken(this, true);
+
     if (canCreateUser) {
-      getAuthToken(this, true);
       UserUtil.getUserId(this, testContext);
     }
 
     if (canCreateCourse) {
-      getAuthToken(this, true);
       variable("courseUnitId", ContentStoreUtil.getCourseUnitId());
       variable("resourceId", ContentStoreUtil.getResourceId());
       String courseId = ContentStoreUtil.getCourseId(this, testContext);
       variable("courseId", courseId);
     }
 
-    if (canCreateIssuer) {
-      IssuerUtil.createIssuer(
-          this,
-          testContext,
-          config,
-          BT_CREATE_ISSUER_TEMPLATE_DIR,
-          BT_TEST_NAME_CREATE_ISSUER_SUCCESS,
-          HttpStatus.OK);
+    IssuerUtil.createIssuer(
+        this,
+        testContext,
+        config,
+        BT_CREATE_ISSUER_TEMPLATE_DIR,
+        BT_TEST_NAME_CREATE_ISSUER_SUCCESS,
+        HttpStatus.OK);
+
+    String orgId =
+        OrgUtil.getSearchOrgId(this, testContext, System.getenv("sunbird_default_channel"));
+    variable("organisationId", orgId);
+    BadgeClassUtil.createBadgeClass(
+        this,
+        testContext,
+        config,
+        BT_CREATE_BADGE_CLASS_TEMPLATE_DIR,
+        BT_TEST_NAME_CREATE_BADGE_CLASS_SUCCESS,
+        HttpStatus.OK);
+    // variable("badgeId", testContext.getVariable(Constant.EXTRACT_VAR_BADGE_ID));
+
+    String BADGE_ASSERTION_TEMPLATE_DIR = null;
+    String BADGE_ASSERTION_TEST_CASE = null;
+
+    if (canCreateUser) {
+      BADGE_ASSERTION_TEMPLATE_DIR = BT_CREATE_USER_BADGE_ASSERTION_TEMPLATE_DIR;
+      BADGE_ASSERTION_TEST_CASE = BT_TEST_NAME_CREATE_USER_BADGE_ASSERTION_SUCCESS;
     }
 
-    if (canCreateBadge) {
-      String orgId =
-          OrgUtil.getSearchOrgId(this, testContext, System.getenv("sunbird_default_channel"));
-      variable("organisationId", orgId);
-      BadgeClassUtil.createBadgeClass(
-          this,
-          testContext,
-          config,
-          BT_CREATE_BADGE_CLASS_TEMPLATE_DIR,
-          BT_TEST_NAME_CREATE_BADGE_CLASS_SUCCESS,
-          HttpStatus.OK);
-      variable("badgeId", testContext.getVariable(Constant.EXTRACT_VAR_BADGE_ID));
+    if (canCreateCourse) {
+      BADGE_ASSERTION_TEMPLATE_DIR = BT_CREATE_COURSE_BADGE_ASSERTION_TEMPLATE_DIR;
+      BADGE_ASSERTION_TEST_CASE = BT_TEST_NAME_CREATE_COURSE_BADGE_ASSERTION_SUCCESS;
     }
-
-    if (canCreateBadgeAssertion) {
-      BadgeClassUtil.createBadgeAssertion(
-          this,
-          testContext,
-          config,
-          BT_CREATE_BADGE_ASSERTION_TEMPLATE_DIR,
-          BT_TEST_NAME_CREATE_BADGE_ASSERTION_SUCCESS,
-          HttpStatus.OK);
-      variable("assertionId", testContext.getVariable(Constant.EXTRACT_VAR_ASSERTION_ID));
-    }
+    BadgeAssertionUtil.createBadgeAssertion(
+        this,
+        testContext,
+        config,
+        BADGE_ASSERTION_TEMPLATE_DIR,
+        BADGE_ASSERTION_TEST_CASE,
+        HttpStatus.OK);
   }
 }

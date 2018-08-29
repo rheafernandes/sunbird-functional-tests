@@ -3,12 +3,12 @@ package org.sunbird.integration.test.badge;
 import com.consol.citrus.annotations.CitrusTest;
 import com.consol.citrus.testng.CitrusParameters;
 import org.springframework.http.HttpStatus;
+import org.sunbird.common.action.BadgeAssertionUtil;
 import org.sunbird.common.action.BadgeClassUtil;
 import org.sunbird.common.action.IssuerUtil;
 import org.sunbird.common.action.OrgUtil;
 import org.sunbird.common.action.TestActionUtil;
 import org.sunbird.common.action.UserUtil;
-import org.sunbird.common.util.Constant;
 import org.sunbird.integration.test.common.BaseCitrusTestRunner;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -58,7 +58,7 @@ public class GetBadgeAssertionTest extends BaseCitrusTestRunner {
   @CitrusParameters({"testName"})
   @CitrusTest
   public void testGetBadgeAssertionSuccess(String testName) {
-    beforeTest(testName, true, true, true, true);
+    beforeTest(testName);
     performGetTest(
         this,
         TEMPLATE_DIR,
@@ -83,52 +83,38 @@ public class GetBadgeAssertionTest extends BaseCitrusTestRunner {
         RESPONSE_JSON);
   }
 
-  private void beforeTest(
-      String testName,
-      Boolean canCreateUser,
-      Boolean canCreateIssuer,
-      Boolean canCreateBadge,
-      Boolean canCreateBadgeAssertion) {
+  private void beforeTest(String testName) {
 
     getTestCase().setName(testName);
-    if (canCreateUser) {
-      getAuthToken(this, true);
-      UserUtil.getUserId(this, testContext);
-    }
 
-    if (canCreateIssuer) {
-      IssuerUtil.createIssuer(
-          this,
-          testContext,
-          config,
-          BT_CREATE_ISSUER_TEMPLATE_DIR,
-          BT_TEST_NAME_CREATE_ISSUER_SUCCESS,
-          HttpStatus.OK);
-    }
+    getAuthToken(this, true);
+    UserUtil.getUserId(this, testContext);
 
-    if (canCreateBadge) {
-      String orgId =
-          OrgUtil.getSearchOrgId(this, testContext, System.getenv("sunbird_default_channel"));
-      variable("organisationId", orgId);
-      BadgeClassUtil.createBadgeClass(
-          this,
-          testContext,
-          config,
-          BT_CREATE_BADGE_CLASS_TEMPLATE_DIR,
-          BT_TEST_NAME_CREATE_BADGE_CLASS_SUCCESS,
-          HttpStatus.OK);
-      variable("badgeId", testContext.getVariable(Constant.EXTRACT_VAR_BADGE_ID));
-    }
+    IssuerUtil.createIssuer(
+        this,
+        testContext,
+        config,
+        BT_CREATE_ISSUER_TEMPLATE_DIR,
+        BT_TEST_NAME_CREATE_ISSUER_SUCCESS,
+        HttpStatus.OK);
 
-    if (canCreateBadgeAssertion) {
-      BadgeClassUtil.createBadgeAssertion(
-          this,
-          testContext,
-          config,
-          BT_CREATE_BADGE_ASSERTION_TEMPLATE_DIR,
-          BT_TEST_NAME_CREATE_BADGE_ASSERTION_SUCCESS,
-          HttpStatus.OK);
-      variable("assertionId", testContext.getVariable(Constant.EXTRACT_VAR_ASSERTION_ID));
-    }
+    String orgId =
+        OrgUtil.getSearchOrgId(this, testContext, System.getenv("sunbird_default_channel"));
+    variable("organisationId", orgId);
+    BadgeClassUtil.createBadgeClass(
+        this,
+        testContext,
+        config,
+        BT_CREATE_BADGE_CLASS_TEMPLATE_DIR,
+        BT_TEST_NAME_CREATE_BADGE_CLASS_SUCCESS,
+        HttpStatus.OK);
+
+    BadgeAssertionUtil.createBadgeAssertion(
+        this,
+        testContext,
+        config,
+        BT_CREATE_BADGE_ASSERTION_TEMPLATE_DIR,
+        BT_TEST_NAME_CREATE_BADGE_ASSERTION_SUCCESS,
+        HttpStatus.OK);
   }
 }

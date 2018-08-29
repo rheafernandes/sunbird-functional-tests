@@ -4,12 +4,12 @@ import com.consol.citrus.annotations.CitrusTest;
 import com.consol.citrus.testng.CitrusParameters;
 import javax.ws.rs.core.MediaType;
 import org.springframework.http.HttpStatus;
+import org.sunbird.common.action.BadgeAssertionUtil;
 import org.sunbird.common.action.BadgeClassUtil;
 import org.sunbird.common.action.ContentStoreUtil;
 import org.sunbird.common.action.IssuerUtil;
 import org.sunbird.common.action.OrgUtil;
 import org.sunbird.common.action.UserUtil;
-import org.sunbird.common.util.Constant;
 import org.sunbird.integration.test.common.BaseCitrusTestRunner;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -23,15 +23,22 @@ public class RevokeBadgeAssertionTest extends BaseCitrusTestRunner {
       "testCreateBadgeClassSuccessWithTypeUser";
   private static final String BT_CREATE_BADGE_CLASS_TEMPLATE_DIR = "templates/badge/class/create";
 
-  private static final String BT_TEST_NAME_CREATE_BADGE_ASSERTION_SUCCESS =
+  private static final String BT_TEST_NAME_CREATE_USER_BADGE_ASSERTION_SUCCESS =
       "testCreateBadgeAssertionSuccessUserWithoutEvidence";
-  private static final String BT_CREATE_BADGE_ASSERTION_TEMPLATE_DIR =
+  private static final String BT_CREATE_USER_BADGE_ASSERTION_TEMPLATE_DIR =
+      "templates/badge/assertion/create";
+
+  private static final String BT_TEST_NAME_CREATE_COURSE_BADGE_ASSERTION_SUCCESS =
+      "testCreateBadgeAssertionSuccessCourseWithoutEvidence";
+  private static final String BT_CREATE_COURSE_BADGE_ASSERTION_TEMPLATE_DIR =
       "templates/badge/assertion/create";
 
   private static final String TEST_NAME_REVOKE_BADGE_ASSERTION_FAILURE_WITH_INVALID_ASSERTION_ID =
       "testRevokeBadgeAssertionFailureWithInvalidAssertionId";
   private static final String TEST_NAME_REVOKE_BADGE_ASSERTION_FAILURE_WITH_INVALID_RECIPIENT_ID =
       "testRevokeBadgeAssertionFailureWithInvalidRecipientId";
+  private static final String TEST_NAME_REVOKE_BADGE_ASSERTION_FAILURE_WITH_INVALID_RECIPIENT_TYPE =
+      "testRevokeBadgeAssertionFailureWithInvalidRecipientType";
   private static final String TEST_NAME_REVOKE_BADGE_ASSERTION_FAILURE_WITHOUT_ASSERTION_ID =
       "testRevokeBadgeAssertionFailureWithoutAssertionId";
   private static final String TEST_NAME_REVOKE_BADGE_ASSERTION_FAILURE_WITHOUT_RECIPIENT_ID =
@@ -73,6 +80,11 @@ public class RevokeBadgeAssertionTest extends BaseCitrusTestRunner {
         HttpStatus.NOT_FOUND
       },
       new Object[] {
+        TEST_NAME_REVOKE_BADGE_ASSERTION_FAILURE_WITH_INVALID_RECIPIENT_TYPE,
+        false,
+        HttpStatus.BAD_REQUEST
+      },
+      new Object[] {
         TEST_NAME_REVOKE_BADGE_ASSERTION_FAILURE_WITHOUT_ASSERTION_ID, false, HttpStatus.BAD_REQUEST
       },
       new Object[] {
@@ -82,7 +94,7 @@ public class RevokeBadgeAssertionTest extends BaseCitrusTestRunner {
         TEST_NAME_REVOKE_BADGE_ASSERTION_FAILURE_WITHOUT_RECIPIENT_TYPE,
         false,
         HttpStatus.BAD_REQUEST
-      }
+      },
     };
   }
 
@@ -132,13 +144,12 @@ public class RevokeBadgeAssertionTest extends BaseCitrusTestRunner {
       Boolean canCreateBadgeAssertion) {
 
     getTestCase().setName(testName);
-    if (canCreateUser) {
-      getAuthToken(this, true);
-      UserUtil.getUserId(this, testContext);
-    }
+
+    if (canCreateUser || canCreateCourse) getAuthToken(this, true);
+
+    if (canCreateUser) UserUtil.getUserId(this, testContext);
 
     if (canCreateCourse) {
-      getAuthToken(this, true);
       variable("courseUnitId", ContentStoreUtil.getCourseUnitId());
       variable("resourceId", ContentStoreUtil.getResourceId());
       String courseId = ContentStoreUtil.getCourseId(this, testContext);
@@ -166,18 +177,28 @@ public class RevokeBadgeAssertionTest extends BaseCitrusTestRunner {
           BT_CREATE_BADGE_CLASS_TEMPLATE_DIR,
           BT_TEST_NAME_CREATE_BADGE_CLASS_SUCCESS,
           HttpStatus.OK);
-      variable("badgeId", testContext.getVariable(Constant.EXTRACT_VAR_BADGE_ID));
     }
 
     if (canCreateBadgeAssertion) {
-      BadgeClassUtil.createBadgeAssertion(
+      String BADGE_ASSERTION_TEMPLATE_DIR = null;
+      String BADGE_ASSERTION_TEST_CASE = null;
+
+      if (canCreateUser) {
+        BADGE_ASSERTION_TEMPLATE_DIR = BT_CREATE_USER_BADGE_ASSERTION_TEMPLATE_DIR;
+        BADGE_ASSERTION_TEST_CASE = BT_TEST_NAME_CREATE_USER_BADGE_ASSERTION_SUCCESS;
+      }
+
+      if (canCreateCourse) {
+        BADGE_ASSERTION_TEMPLATE_DIR = BT_CREATE_COURSE_BADGE_ASSERTION_TEMPLATE_DIR;
+        BADGE_ASSERTION_TEST_CASE = BT_TEST_NAME_CREATE_COURSE_BADGE_ASSERTION_SUCCESS;
+      }
+      BadgeAssertionUtil.createBadgeAssertion(
           this,
           testContext,
           config,
-          BT_CREATE_BADGE_ASSERTION_TEMPLATE_DIR,
-          BT_TEST_NAME_CREATE_BADGE_ASSERTION_SUCCESS,
+          BADGE_ASSERTION_TEMPLATE_DIR,
+          BADGE_ASSERTION_TEST_CASE,
           HttpStatus.OK);
-      variable("assertionId", testContext.getVariable(Constant.EXTRACT_VAR_ASSERTION_ID));
     }
   }
 

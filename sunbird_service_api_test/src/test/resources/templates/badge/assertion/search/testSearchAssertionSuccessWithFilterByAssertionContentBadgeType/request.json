@@ -2,7 +2,7 @@
 {
     "request": {
         "filters": {
-            "assertions": ["${assertionId}","asd"]
+            "assertions": ["${assertionId}"]
         }
     }
 }
