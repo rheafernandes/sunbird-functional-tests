@@ -10,6 +10,8 @@ import org.sunbird.integration.test.common.BaseCitrusTestRunner;
 
 public class UserUtil {
 
+  private static String userId = null;
+
   public static String getCreateUserUrl(BaseCitrusTestRunner runner) {
     return runner.getLmsApiUriPath("/api/user/v1/create", "/v1/user/create");
   }
@@ -82,6 +84,7 @@ public class UserUtil {
     if (StringUtils.isBlank((String) testContext.getVariables().get(variable))) {
       getUser(runner, testContext, variable);
     }
+    runner.variable("userId", userId);
   }
 
   public static void getUser(
