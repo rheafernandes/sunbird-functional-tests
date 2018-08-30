@@ -4,8 +4,8 @@
     "name": [
       "Someone"
     ],
-    "subject": "Some random Subject",
-    "body": "Some Body",
+    "subject": "Some subject",
+    "body": "Some message body",
     "orgImgUrl": "https://dev.open-sunbird.org/assets/images/sunbird_logo.png",
     "actionName": "Review courses",
     "actionUrl": "http://dev.open-sunbird.org",
