@@ -1,0 +1,26 @@
+{
+  "params": {},
+  "request": {
+    "name": [
+      "Sudhir",
+      "abhishek"
+    ],
+    "subject": "CONTENT FLAG NOTIFICATION",
+    "body": "Your content is flagged by MR.John",
+    "orgImgUrl": "https://dev.open-sunbird.org/assets/images/sunbird_logo.png",
+    "actionName": "Review courses",
+    "actionUrl": "http://dev.open-sunbird.org",
+    "orgName": "NTP",
+    "emailTemplateType": "some_email_template",
+    "fromEmail": "manzarul.haque@tarento.com",
+    "recipientEmails": [
+      "sudhirgiri2911@gmail.com"
+    ],
+    "recipientSearchQuery": {
+      "filters": {
+        "rootOrgId": "0125790906668318728",
+        "organisations.roles" :["CONTENT_REVIEWER"]
+      }
+    }
+  }
+}

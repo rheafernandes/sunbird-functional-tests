@@ -5,9 +5,9 @@
     "params": {
         "resmsgid": null,
         "msgid": "@ignore@",
-        "err": "RECIPIENT_ADDRESS_ERROR",
-        "status": "RECIPIENT_ADDRESS_ERROR",
-        "errmsg": "Please send recipientEmails or recipientUserIds."
+        "err": "EMAIL_SUBJECT_ERROR",
+        "status": "EMAIL_SUBJECT_ERROR",
+        "errmsg": "Email Subject is mandatory."
     },
     "responseCode": "CLIENT_ERROR",
     "result": {}

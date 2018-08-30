@@ -14,8 +14,27 @@ public class EmailNotificationTest extends BaseCitrusTestRunner {
       "testEmailNotificationFailureWithoutSubject";
   public static final String TEST_NAME_EMAIL_NOTIFICATION_FAILURE_WITHOUT_BODY =
       "testEmailNotificationFailureWithoutBody";
-  public static final String TEST_NAME_EMAIL_NOTIFICATION_FAILURE_WITHOUT_RECIPIENT =
-      "testEmailNotificationFailureWithoutRecipient";
+  public static final String TEST_NAME_EMAIL_NOTIFICATION_FAILURE_WITHOUT_RECIPIENT_EMAILS =
+      "testEmailNotificationFailureWithoutRecipientEmails";
+  public static final String TEST_NAME_EMAIL_NOTIFICATION_FAILURE_WITH_INCORRECT_EMAIL_TEMPLATE =
+      "testEmailNotificationFailureWithIncorrectEmailTemplate";
+  public static final String
+      TEST_NAME_EMAIL_NOTIFICATION_FAILURE_WITH_EMPTY_RECIPIENT_SEARCH_QUERY =
+          "testEmailNotificationFailureWithEmptyRecipientSearchQuery";
+  public static final String
+      TEST_NAME_EMAIL_NOTIFICATION_FAILURE_WITH_RECIPIENTS_EXCEEDS_THRESHOLD =
+          "testEmailNotificationFailureWithRecipientsExceedsThreshold";
+  public static final String TEST_NAME_EMAIL_NOTIFICATION_FAILURE_WITHOUT_RECIPIENT_DETAILS =
+      "testEmailNotificationFailureWithoutRecipientDetails";
+
+  public static final String TEST_NAME_EMAIL_NOTIFICATION_SUCCESS_WITH_VALID_EMAIL_TEMPLATE =
+      "testEmailNotificationSuccessWithValidEmailTemplate";
+  public static final String TEST_NAME_EMAIL_NOTIFICATION_SUCCESS_WITHOUT_EMAIL_TEMPLATE =
+      "testEmailNotificationSuccessWithoutEmailTemplate";
+  public static final String TEST_NAME_EMAIL_NOTIFICATION_SUCCESS_WITHOUT_NAME =
+      "testEmailNotificationSuccessWithoutName";
+  public static final String TEST_NAME_EMAIL_NOTIFICATION_SUCCESS_WITH_MULTIPLE_RECIPIENT_EMAILS =
+      "testEmailNotificationSuccessWithMultipleRecipientEmails";
 
   public static final String TEMPLATE_DIR = "templates/user/notification/email";
 
@@ -27,18 +46,33 @@ public class EmailNotificationTest extends BaseCitrusTestRunner {
   public Object[][] emailNotificationFailureDataProvider() {
 
     return new Object[][] {
-      new Object[] {TEST_NAME_EMAIL_NOTIFICATION_FAILURE_WITHOUT_SUBJECT, HttpStatus.BAD_REQUEST},
-      new Object[] {TEST_NAME_EMAIL_NOTIFICATION_FAILURE_WITHOUT_BODY, HttpStatus.BAD_REQUEST},
-      new Object[] {TEST_NAME_EMAIL_NOTIFICATION_FAILURE_WITHOUT_RECIPIENT, HttpStatus.BAD_REQUEST},
+      new Object[] {TEST_NAME_EMAIL_NOTIFICATION_FAILURE_WITHOUT_SUBJECT},
+      new Object[] {TEST_NAME_EMAIL_NOTIFICATION_FAILURE_WITHOUT_BODY},
+      new Object[] {TEST_NAME_EMAIL_NOTIFICATION_FAILURE_WITHOUT_RECIPIENT_EMAILS},
+      new Object[] {TEST_NAME_EMAIL_NOTIFICATION_FAILURE_WITH_INCORRECT_EMAIL_TEMPLATE},
+      new Object[] {TEST_NAME_EMAIL_NOTIFICATION_FAILURE_WITH_EMPTY_RECIPIENT_SEARCH_QUERY},
+      new Object[] {TEST_NAME_EMAIL_NOTIFICATION_FAILURE_WITH_RECIPIENTS_EXCEEDS_THRESHOLD},
+      new Object[] {TEST_NAME_EMAIL_NOTIFICATION_FAILURE_WITHOUT_RECIPIENT_DETAILS}
+    };
+  }
+
+  @DataProvider(name = "emailNotificationSuccessDataProvider")
+  public Object[][] emailNotificationSuccessDataProvider() {
+
+    return new Object[][] {
+      new Object[] {TEST_NAME_EMAIL_NOTIFICATION_SUCCESS_WITH_VALID_EMAIL_TEMPLATE},
+      new Object[] {TEST_NAME_EMAIL_NOTIFICATION_SUCCESS_WITHOUT_EMAIL_TEMPLATE},
+      new Object[] {TEST_NAME_EMAIL_NOTIFICATION_SUCCESS_WITHOUT_NAME},
+      new Object[] {TEST_NAME_EMAIL_NOTIFICATION_SUCCESS_WITH_MULTIPLE_RECIPIENT_EMAILS}
     };
   }
 
   @Test(dataProvider = "emailNotificationFailureDataProvider")
-  @CitrusParameters({"testName", "httpStatusCode"})
+  @CitrusParameters({"testName"})
   @CitrusTest
-  public void testEmailNotificationFailure(String testName, HttpStatus httpStatusCode) {
+  public void testEmailNotificationFailure(String testName) {
+    beforeTest(testName);
 
-    getTestCase().setName(testName);
     performPostTest(
         this,
         TEMPLATE_DIR,
@@ -47,7 +81,29 @@ public class EmailNotificationTest extends BaseCitrusTestRunner {
         REQUEST_JSON,
         MediaType.APPLICATION_JSON,
         false,
-        httpStatusCode,
+        HttpStatus.BAD_REQUEST,
         RESPONSE_JSON);
+  }
+
+  @Test(dataProvider = "emailNotificationSuccessDataProvider")
+  @CitrusParameters({"testName"})
+  @CitrusTest
+  public void testEmailNotificationSuccess(String testName) {
+    beforeTest(testName);
+    performPostTest(
+        this,
+        TEMPLATE_DIR,
+        testName,
+        getSendEmailUrl(),
+        REQUEST_JSON,
+        MediaType.APPLICATION_JSON,
+        false,
+        HttpStatus.OK,
+        RESPONSE_JSON);
+  }
+
+  public void beforeTest(String testName) {
+    getTestCase().setName(testName);
+    getAuthToken(this, true);
   }
 }
