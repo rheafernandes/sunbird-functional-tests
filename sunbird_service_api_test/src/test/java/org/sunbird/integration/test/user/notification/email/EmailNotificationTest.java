@@ -14,27 +14,34 @@ public class EmailNotificationTest extends BaseCitrusTestRunner {
       "testEmailNotificationFailureWithoutSubject";
   public static final String TEST_NAME_EMAIL_NOTIFICATION_FAILURE_WITHOUT_BODY =
       "testEmailNotificationFailureWithoutBody";
-  public static final String TEST_NAME_EMAIL_NOTIFICATION_FAILURE_WITHOUT_RECIPIENT_EMAILS =
-      "testEmailNotificationFailureWithoutRecipientEmails";
-  public static final String TEST_NAME_EMAIL_NOTIFICATION_FAILURE_WITH_INCORRECT_EMAIL_TEMPLATE =
-      "testEmailNotificationFailureWithIncorrectEmailTemplate";
+  public static final String TEST_NAME_EMAIL_NOTIFICATION_FAILURE_WITHOUT_RECIPIENTS =
+      "testEmailNotificationFailureWithoutRecipients";
+  public static final String TEST_NAME_EMAIL_NOTIFICATION_FAILURE_WITH_INVALID_EMAIL_TEMPLATE_TYPE =
+      "testEmailNotificationFailureWithInvalidEmailTemplateType";
   public static final String
       TEST_NAME_EMAIL_NOTIFICATION_FAILURE_WITH_EMPTY_RECIPIENT_SEARCH_QUERY =
           "testEmailNotificationFailureWithEmptyRecipientSearchQuery";
-  public static final String
-      TEST_NAME_EMAIL_NOTIFICATION_FAILURE_WITH_RECIPIENTS_EXCEEDS_THRESHOLD =
-          "testEmailNotificationFailureWithRecipientsExceedsThreshold";
-  public static final String TEST_NAME_EMAIL_NOTIFICATION_FAILURE_WITHOUT_RECIPIENT_DETAILS =
-      "testEmailNotificationFailureWithoutRecipientDetails";
+  public static final String TEST_NAME_EMAIL_NOTIFICATION_FAILURE_WITH_ZERO_SEARCHED_RECIPIENTS =
+      "testEmailNotificationFailureWithZeroSearchedRecipients";
 
-  public static final String TEST_NAME_EMAIL_NOTIFICATION_SUCCESS_WITH_VALID_EMAIL_TEMPLATE =
-      "testEmailNotificationSuccessWithValidEmailTemplate";
-  public static final String TEST_NAME_EMAIL_NOTIFICATION_SUCCESS_WITHOUT_EMAIL_TEMPLATE =
-      "testEmailNotificationSuccessWithoutEmailTemplate";
+  public static final String TEST_NAME_EMAIL_NOTIFICATION_SUCCESS_WITH_VALID_EMAIL_TEMPLATE_TYPE =
+      "testEmailNotificationSuccessWithValidEmailTemplateType";
+  public static final String TEST_NAME_EMAIL_NOTIFICATION_SUCCESS_WITHOUT_EMAIL_TEMPLATE_TYPE =
+      "testEmailNotificationSuccessWithoutEmailTemplateType";
   public static final String TEST_NAME_EMAIL_NOTIFICATION_SUCCESS_WITHOUT_NAME =
       "testEmailNotificationSuccessWithoutName";
   public static final String TEST_NAME_EMAIL_NOTIFICATION_SUCCESS_WITH_MULTIPLE_RECIPIENT_EMAILS =
       "testEmailNotificationSuccessWithMultipleRecipientEmails";
+  public static final String TEST_NAME_EMAIL_NOTIFICATION_SUCCESS_WITH_ACTION_NAME_AND_ACTION_URL =
+      "testEmailNotificationSuccessWithActionNameAndActionUrl";
+  public static final String TEST_NAME_EMAIL_NOTIFICATION_SUCCESS_WITHOUT_ACTION_NAME =
+      "testEmailNotificationSuccessWithoutActionName";
+  public static final String TEST_NAME_EMAIL_NOTIFICATION_SUCCESS_WITHOUT_ACTION_URL =
+      "testEmailNotificationSuccessWithoutActionUrl";
+  public static final String TEST_NAME_EMAIL_NOTIFICATION_SUCCESS_WITH_ORG_IMAGE_URL =
+      "testEmailNotificationSuccessWithOrgImageUrl";
+  public static final String TEST_NAME_EMAIL_NOTIFICATION_SUCCESS_WITHOUT_ORG_IMAGE_URL =
+      "testEmailNotificationSuccessWithoutOrgImageUrl";
 
   public static final String TEMPLATE_DIR = "templates/user/notification/email";
 
@@ -48,11 +55,10 @@ public class EmailNotificationTest extends BaseCitrusTestRunner {
     return new Object[][] {
       new Object[] {TEST_NAME_EMAIL_NOTIFICATION_FAILURE_WITHOUT_SUBJECT},
       new Object[] {TEST_NAME_EMAIL_NOTIFICATION_FAILURE_WITHOUT_BODY},
-      new Object[] {TEST_NAME_EMAIL_NOTIFICATION_FAILURE_WITHOUT_RECIPIENT_EMAILS},
-      new Object[] {TEST_NAME_EMAIL_NOTIFICATION_FAILURE_WITH_INCORRECT_EMAIL_TEMPLATE},
+      new Object[] {TEST_NAME_EMAIL_NOTIFICATION_FAILURE_WITHOUT_RECIPIENTS},
+      new Object[] {TEST_NAME_EMAIL_NOTIFICATION_FAILURE_WITH_INVALID_EMAIL_TEMPLATE_TYPE},
       new Object[] {TEST_NAME_EMAIL_NOTIFICATION_FAILURE_WITH_EMPTY_RECIPIENT_SEARCH_QUERY},
-      new Object[] {TEST_NAME_EMAIL_NOTIFICATION_FAILURE_WITH_RECIPIENTS_EXCEEDS_THRESHOLD},
-      new Object[] {TEST_NAME_EMAIL_NOTIFICATION_FAILURE_WITHOUT_RECIPIENT_DETAILS}
+      new Object[] {TEST_NAME_EMAIL_NOTIFICATION_FAILURE_WITH_ZERO_SEARCHED_RECIPIENTS}
     };
   }
 
@@ -60,10 +66,15 @@ public class EmailNotificationTest extends BaseCitrusTestRunner {
   public Object[][] emailNotificationSuccessDataProvider() {
 
     return new Object[][] {
-      new Object[] {TEST_NAME_EMAIL_NOTIFICATION_SUCCESS_WITH_VALID_EMAIL_TEMPLATE},
-      new Object[] {TEST_NAME_EMAIL_NOTIFICATION_SUCCESS_WITHOUT_EMAIL_TEMPLATE},
+      new Object[] {TEST_NAME_EMAIL_NOTIFICATION_SUCCESS_WITH_VALID_EMAIL_TEMPLATE_TYPE},
+      new Object[] {TEST_NAME_EMAIL_NOTIFICATION_SUCCESS_WITHOUT_EMAIL_TEMPLATE_TYPE},
       new Object[] {TEST_NAME_EMAIL_NOTIFICATION_SUCCESS_WITHOUT_NAME},
-      new Object[] {TEST_NAME_EMAIL_NOTIFICATION_SUCCESS_WITH_MULTIPLE_RECIPIENT_EMAILS}
+      new Object[] {TEST_NAME_EMAIL_NOTIFICATION_SUCCESS_WITH_MULTIPLE_RECIPIENT_EMAILS},
+      new Object[] {TEST_NAME_EMAIL_NOTIFICATION_SUCCESS_WITH_ACTION_NAME_AND_ACTION_URL},
+      new Object[] {TEST_NAME_EMAIL_NOTIFICATION_SUCCESS_WITHOUT_ACTION_NAME},
+      new Object[] {TEST_NAME_EMAIL_NOTIFICATION_SUCCESS_WITHOUT_ACTION_URL},
+      new Object[] {TEST_NAME_EMAIL_NOTIFICATION_SUCCESS_WITH_ORG_IMAGE_URL},
+      new Object[] {TEST_NAME_EMAIL_NOTIFICATION_SUCCESS_WITHOUT_ORG_IMAGE_URL}
     };
   }
 

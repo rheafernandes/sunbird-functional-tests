@@ -2,16 +2,15 @@
   "params": {},
   "request": {
     "name": [
-      "Sudhir",
-      "abhishek"
+      "Someone"
     ],
-    "subject": "CONTENT FLAG NOTIFICATION",
-    "body": "Your content is flagged by MR.John",
+    "subject": "Some random Subject",
+    "body": "Some Body",
     "orgImgUrl": "https://dev.open-sunbird.org/assets/images/sunbird_logo.png",
     "actionName": "Review courses",
     "actionUrl": "http://dev.open-sunbird.org",
     "orgName": "NTP",
-    "emailTemplateType": "acceptFlag",
+    "emailTemplateType": "welcome",
     "fromEmail": "manzarul.haque@tarento.com",
     "recipientEmails": [
       "sudhirgiri2911@gmail.com"

@@ -2,21 +2,20 @@
   "params": {},
   "request": {
     "name": [
-      "Sudhir",
-      "abhishek"
-    ],
-    "subject": "CONTENT FLAG NOTIFICATION",
-    "body": "Your content is flagged by MR.John",
+      "Someone"
+     ],
+    "subject": "This is Subject of this email",
+    "body": "This is body of this email",
     "orgImgUrl": "https://dev.open-sunbird.org/assets/images/sunbird_logo.png",
     "actionName": "Review courses",
     "actionUrl": "http://dev.open-sunbird.org",
     "orgName": "NTP",
-    "emailTemplateType": "acceptFlag",
+    "emailTemplateType": "some_email_templates",
     "fromEmail": "manzarul.haque@tarento.com",
     "recipientEmails": [],
     "recipientSearchQuery": {
       "filters": {
-        "rootOrgId": "ORG-001"
+        "rootOrgId": "some_org"
       }
     }
   }

@@ -4,7 +4,6 @@
     "subject": "This is the subject of this email",
     "body": "This is the body of this email",
     "orgImgUrl": "https://something.com/anyhting.png",
-    "actionName": "Review courses",
     "actionUrl": "http://dev.open-sunbird.org",
     "orgName": "NTP",
     "emailTemplateType": "welcome",

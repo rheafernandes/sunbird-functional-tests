@@ -1,20 +1,20 @@
 {
   "params": {},
   "request": {
-    "subject": "This is the subject of this email",
-    "body": "This is the body of this email",
-    "orgImgUrl": "https://something.com/anyhting.png",
+    "name": "Someone",
+    "subject": "This is Subject of this email",
+    "body": "This is body of this email",
+    "orgImgUrl": "https://www.somehting.com/anything.png",
     "actionName": "Review courses",
     "actionUrl": "http://dev.open-sunbird.org",
     "orgName": "NTP",
-    "emailTemplateType": "welcome",
     "fromEmail": "manzarul.haque@tarento.com",
     "recipientEmails": [
       "sudhirgiri2911@gmail.com"
     ],
     "recipientSearchQuery": {
       "filters": {
-        "rootOrgId": "some_orgId"
+        "rootOrgId": "ORG-001"
       }
     }
   }

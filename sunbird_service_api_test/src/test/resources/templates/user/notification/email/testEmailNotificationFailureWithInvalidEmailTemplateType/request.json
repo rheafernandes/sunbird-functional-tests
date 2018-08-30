@@ -2,11 +2,10 @@
   "params": {},
   "request": {
     "name": [
-      "Sudhir",
-      "abhishek"
+      "SomeOne"
     ],
-    "subject": "CONTENT FLAG NOTIFICATION",
-    "body": "Your content is flagged by MR.John",
+    "subject": "Test Subject",
+    "body": "Test Body",
     "orgImgUrl": "https://dev.open-sunbird.org/assets/images/sunbird_logo.png",
     "actionName": "Review courses",
     "actionUrl": "http://dev.open-sunbird.org",
@@ -18,7 +17,7 @@
     ],
     "recipientSearchQuery": {
       "filters": {
-        "rootOrgId": "0125790906668318728",
+        "rootOrgId": "random_orgId",
         "organisations.roles" :["CONTENT_REVIEWER"]
       }
     }
