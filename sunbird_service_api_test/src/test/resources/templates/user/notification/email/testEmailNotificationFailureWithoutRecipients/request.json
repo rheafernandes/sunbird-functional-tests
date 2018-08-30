@@ -1,13 +1,13 @@
 {
   "params": {},
   "request": {
-    "subject": "Some Subject ",
-    "body": "This is body of this email",
+    "subject": "Some subject ",
+    "body": "Some message body",
     "orgImgUrl": "https://anything.com/something.png",
     "actionName": "Review courses",
     "actionUrl": "http://dev.open-sunbird.org",
     "orgName": "NTP",
-    "emailTemplateType": "some_templates",
+    "emailTemplateType": "someEmailTemplateType",
     "fromEmail": "manzarul.haque@tarento.com"
   }
 }
