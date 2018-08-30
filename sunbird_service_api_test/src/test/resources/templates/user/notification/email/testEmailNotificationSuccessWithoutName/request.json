@@ -1,8 +1,8 @@
 {
   "params": {},
   "request": {
-    "subject": "This is the subject of this email",
-    "body": "This is the body of this email",
+    "subject": "Some subject",
+    "body": "Some message body",
     "orgImgUrl": "https://something.com/anyhting.png",
     "actionName": "Review courses",
     "actionUrl": "http://dev.open-sunbird.org",
@@ -14,7 +14,7 @@
     ],
     "recipientSearchQuery": {
       "filters": {
-        "rootOrgId": "some_orgId"
+        "rootOrgId": "someRootOrgId"
       }
     }
   }
