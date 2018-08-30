@@ -2,22 +2,22 @@
   "params": {},
   "request": {
     "name": [
-      "SomeOne"
+      "Someone"
     ],
-    "subject": "Test Subject",
-    "body": "Test Body",
+    "subject": "Some suubject",
+    "body": "Some message body",
     "orgImgUrl": "https://dev.open-sunbird.org/assets/images/sunbird_logo.png",
     "actionName": "Review courses",
     "actionUrl": "http://dev.open-sunbird.org",
     "orgName": "NTP",
-    "emailTemplateType": "some_email_template",
+    "emailTemplateType": "invalidEmailTemplateType",
     "fromEmail": "manzarul.haque@tarento.com",
     "recipientEmails": [
       "sudhirgiri2911@gmail.com"
     ],
     "recipientSearchQuery": {
       "filters": {
-        "rootOrgId": "random_orgId",
+        "rootOrgId": "someRootOrgId",
         "organisations.roles" :["CONTENT_REVIEWER"]
       }
     }
