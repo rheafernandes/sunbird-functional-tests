@@ -1,8 +1,8 @@
 {
   "params": {},
   "request": {
-    "subject": "CONTENT FLAG NOTIFICATION",
-    "body": "Your content is flagged by MR.John",
+    "subject": "Some subject",
+    "body": "Some message body",
     "orgImgUrl": "https://something.com/anything.png",
     "actionName": "Review courses",
     "actionUrl": "http://dev.open-sunbird.org",
@@ -15,7 +15,7 @@
     ],
     "recipientSearchQuery": {
       "filters": {
-        "rootOrgId": "some_orgId"
+        "rootOrgId": "someRootOrgId"
       }
     }
   }
