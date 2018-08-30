@@ -1,7 +1,7 @@
 {
   "params": {},
   "request": {
-    "subject": "Some subject ",
+    "subject": "Some subject",
     "body": "Some message body",
     "orgImgUrl": "https://anything.com/something.png",
     "actionName": "Review courses",
