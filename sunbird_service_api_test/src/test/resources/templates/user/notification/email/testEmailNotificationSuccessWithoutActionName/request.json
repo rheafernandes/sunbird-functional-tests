@@ -1,8 +1,8 @@
 {
   "params": {},
   "request": {
-    "subject": "This is the subject of this email",
-    "body": "This is the body of this email",
+    "subject": "Some subject",
+    "body": "Some message body",
     "orgImgUrl": "https://something.com/anyhting.png",
     "actionUrl": "http://dev.open-sunbird.org",
     "orgName": "NTP",
@@ -13,7 +13,7 @@
     ],
     "recipientSearchQuery": {
       "filters": {
-        "rootOrgId": "some_orgId"
+        "rootOrgId": "someRootOrgId"
       }
     }
   }
