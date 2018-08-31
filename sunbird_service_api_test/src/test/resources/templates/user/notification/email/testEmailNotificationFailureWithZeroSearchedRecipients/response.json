@@ -5,9 +5,9 @@
   "params": {
     "resmsgid": null,
     "msgid": "@ignore@",
-    "err": "EMAIL_BODY_ERROR",
-    "status": "EMAIL_BODY_ERROR",
-    "errmsg": "Email Body is mandatory."
+    "err": "NO_EMAIL_RECIPIENTS",
+    "status": "NO_EMAIL_RECIPIENTS",
+    "errmsg": "Email notification is not sent as the number of recipients is zero."
   },
   "responseCode": "CLIENT_ERROR",
   "result": {}

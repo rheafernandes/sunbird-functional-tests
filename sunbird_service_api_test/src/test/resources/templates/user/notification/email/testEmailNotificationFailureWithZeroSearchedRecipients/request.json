@@ -1,23 +1,20 @@
 {
   "params": {},
   "request": {
-    "name": "Someone",
+    "name": [
+      "Someone"
+     ],
     "subject": "some subject",
+    "body": "some body",
     "orgImgUrl": "some org image url",
     "actionName": "some action name",
     "actionUrl": "some action url",
     "orgName": "some org name",
-    "emailTemplateType": "someEmailTemplateType",
-    "fromEmail": "someEmailId@something.com",
-    "recipientEmails": [
-      "${emailId1}"
-    ],
+    "emailTemplateType": "someEmailTemplates",
+    "recipientEmails": [],
     "recipientSearchQuery": {
       "filters": {
-        "rootOrgId": "someRootOrgId",
-        "organisations.roles": [
-          "someRoles"
-        ]
+        "rootOrgId": "some_org"
       }
     }
   }

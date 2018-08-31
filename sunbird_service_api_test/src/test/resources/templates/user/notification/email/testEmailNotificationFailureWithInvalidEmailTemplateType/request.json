@@ -1,13 +1,16 @@
 {
   "params": {},
   "request": {
-    "name": "Someone",
+    "name": [
+      "Someone"
+    ],
+    "subject": "some subject",
     "body": "some body",
     "orgImgUrl": "some org image url",
     "actionName": "some action",
-    "actionUrl": "some action url",
+    "actionUrl": "http://dev.open-sunbird.org",
     "orgName": "some org name",
-    "emailTemplateType": "someEmailTemplateType",
+    "emailTemplateType": "some_email_template",
     "fromEmail": "someEmailId@something.com",
     "recipientEmails": [
       "${emailId1}"
@@ -15,9 +18,7 @@
     "recipientSearchQuery": {
       "filters": {
         "rootOrgId": "someRootOrgId",
-        "organisations.roles": [
-          "some_roles"
-        ]
+        "organisations.roles" :["someRoles"]
       }
     }
   }

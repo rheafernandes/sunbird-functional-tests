@@ -18,6 +18,8 @@ pipeline {
         sunbird_sso_url="https://dev.open-sunbird.org/auth"
         sunbird_username="ft_org_admin@org.com"
         sunbird_default_channel="ft_test"
+        sunbird_test_email_address_1 = "${sunbird_test_email_address_1}"
+        sunbird_test_email_address_2 = "${sunbird_test_email_address_2}"
     }
 
     agent { label "build-slave" }
