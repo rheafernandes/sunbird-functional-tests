@@ -2,23 +2,23 @@
   "params": {},
   "request": {
     "name": [
-      "SomeOne"
+      "Someone"
     ],
     "subject": "some subject",
     "body": "some body",
     "orgImgUrl": "some org image url",
     "actionName": "some action",
     "actionUrl": "http://dev.open-sunbird.org",
-    "orgName": "NTP",
+    "orgName": "some org name",
     "emailTemplateType": "some_email_template",
-    "fromEmail": "some_email_id@something.com",
+    "fromEmail": "someEmailId@something.com",
     "recipientEmails": [
-      "${emailId_1}"
+      "${emailId1}"
     ],
     "recipientSearchQuery": {
       "filters": {
-        "rootOrgId": "random_orgId",
-        "organisations.roles" :["some_roles"]
+        "rootOrgId": "someRootOrgId",
+        "organisations.roles" :["someRoles"]
       }
     }
   }

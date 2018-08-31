@@ -10,8 +10,7 @@
     "actionName": "some action name",
     "actionUrl": "some action url",
     "orgName": "some org name",
-    "emailTemplateType": "some_email_templates",
-    "fromEmail": "some_email_id@something.com",
+    "emailTemplateType": "someEmailTemplates",
     "recipientEmails": [],
     "recipientSearchQuery": {
       "filters": {

@@ -1,7 +1,7 @@
 {
   "params": {},
   "request": {
-    "subject": "dome subject",
+    "subject": "some subject",
     "body": "some body",
     "orgImgUrl": "some image url",
     "actionName": "some action",
@@ -10,12 +10,12 @@
     "emailTemplateType": "welcome",
     "fromEmail": "some_email_id@something.com",
     "recipientEmails": [
-      "${emailId_1}",
-      "${emailId_2}"
+      "${emailId1}",
+      "${emailId2}"
     ],
     "recipientSearchQuery": {
       "filters": {
-        "rootOrgId": "some_orgId"
+        "rootOrgId": "someRootOrgId"
       }
     }
   }

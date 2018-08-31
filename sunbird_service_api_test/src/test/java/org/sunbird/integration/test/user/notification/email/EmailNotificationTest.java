@@ -115,7 +115,7 @@ public class EmailNotificationTest extends BaseCitrusTestRunner {
   public void beforeTest(String testName) {
     getTestCase().setName(testName);
     getAuthToken(this, true);
-    variable("emailId_1", System.getenv("sunbird_test_email_address_1"));
-    variable("emailId_2", System.getenv("sunbird_test_email_address_2"));
+    variable("emailId1", System.getenv("sunbird_test_email_address_1"));
+    variable("emailId2", System.getenv("sunbird_test_email_address_2"));
   }
 }

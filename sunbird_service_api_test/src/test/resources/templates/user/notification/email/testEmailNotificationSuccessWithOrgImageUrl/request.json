@@ -10,7 +10,7 @@
     "emailTemplateType": "welcome",
     "fromEmail": "some_email_id@something.com",
     "recipientEmails": [
-      "${emailId_1}"
+      "${emailId1}"
     ],
     "recipientSearchQuery": {
       "filters": {

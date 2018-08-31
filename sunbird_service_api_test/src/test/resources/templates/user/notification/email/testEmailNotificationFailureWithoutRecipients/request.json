@@ -6,8 +6,7 @@
     "orgImgUrl": "some org Img url",
     "actionName": "some action",
     "actionUrl": "some action url",
-    "orgName": "NTP",
-    "emailTemplateType": "some_templates",
-    "fromEmail": "some_email_id@something.com"
-  }
+    "orgName": "someOrgName",
+    "emailTemplateType": "someEmailTemplateType"
+}
 }

@@ -8,13 +8,13 @@
     "actionName": "some action name",
     "actionUrl": "some action url",
     "orgName": "some org name",
-    "fromEmail": "some_email_id@something.com",
+    "fromEmail": "someEmailId@something.com",
     "recipientEmails": [
-      "${emailId_1}"
+      "${emailId1}"
     ],
     "recipientSearchQuery": {
       "filters": {
-        "rootOrgId": "ORG-001"
+        "rootOrgId": "someRootOrgId"
       }
     }
   }

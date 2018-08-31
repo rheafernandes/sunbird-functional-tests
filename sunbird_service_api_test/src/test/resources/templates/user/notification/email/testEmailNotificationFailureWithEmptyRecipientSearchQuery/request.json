@@ -4,16 +4,16 @@
     "name": [
       "Someone"
     ],
-    "subject": "some Subject",
-    "body": "some Body",
-    "orgImgUrl": "some org image url",
-    "actionName": "some action",
-    "actionUrl": "some action url",
-    "orgName": "NTP",
+    "subject": "Some subject",
+    "body": "Some message body",
+    "orgImgUrl": "https://dev.open-sunbird.org/assets/images/sunbird_logo.png",
+    "actionName": "Review courses",
+    "actionUrl": "http://dev.open-sunbird.org",
+    "orgName": "Some org name",
     "emailTemplateType": "welcome",
     "fromEmail": "some_email_id@something.com",
     "recipientEmails": [
-      "${emailId_1}"
+      "${emailId1}"
     ],
     "recipientSearchQuery": {
       "filters": {}

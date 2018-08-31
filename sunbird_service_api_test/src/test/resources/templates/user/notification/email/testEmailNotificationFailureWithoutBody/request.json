@@ -7,16 +7,16 @@
     "actionName": "some action name",
     "actionUrl": "some action url",
     "orgName": "some org name",
-    "emailTemplateType": "some_template",
-    "fromEmail": "some_email_id@something.com",
+    "emailTemplateType": "someEmailTemplateType",
+    "fromEmail": "someEmailId@something.com",
     "recipientEmails": [
-      "${emailId_1}"
+      "${emailId1}"
     ],
     "recipientSearchQuery": {
       "filters": {
-        "rootOrgId": "some_orgId",
+        "rootOrgId": "someRootOrgId",
         "organisations.roles": [
-          "some_roles"
+          "someRoles"
         ]
       }
     }

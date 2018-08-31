@@ -2,18 +2,18 @@
   "params": {},
   "request": {
     "subject": "some subject",
-    "body": "some bosy",
+    "body": "some body",
     "orgImgUrl": "some org image url",
     "actionUrl": "some action url",
     "orgName": "some org name",
     "emailTemplateType": "welcome",
-    "fromEmail": "some_email_id@something.com",
+    "fromEmail": "someEmailId@something.com",
     "recipientEmails": [
-      "${emailId_1}"
+      "${emailId1}"
     ],
     "recipientSearchQuery": {
       "filters": {
-        "rootOrgId": "some_orgId"
+        "rootOrgId": "someRootOrgId"
       }
     }
   }
