@@ -4,14 +4,14 @@
     "name": [
       "Someone"
      ],
-    "subject": "This is Subject of this email",
-    "body": "This is body of this email",
-    "orgImgUrl": "https://dev.open-sunbird.org/assets/images/sunbird_logo.png",
-    "actionName": "Review courses",
-    "actionUrl": "http://dev.open-sunbird.org",
-    "orgName": "NTP",
+    "subject": "some subject",
+    "body": "some body",
+    "orgImgUrl": "some org image url",
+    "actionName": "some action name",
+    "actionUrl": "some action url",
+    "orgName": "some org name",
     "emailTemplateType": "some_email_templates",
-    "fromEmail": "manzarul.haque@tarento.com",
+    "fromEmail": "some_email_id@something.com",
     "recipientEmails": [],
     "recipientSearchQuery": {
       "filters": {

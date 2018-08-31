@@ -1,17 +1,17 @@
 {
   "params": {},
   "request": {
-    "subject": "CONTENT FLAG NOTIFICATION",
-    "body": "Your content is flagged by MR.John",
-    "orgImgUrl": "https://something.com/anything.png",
-    "actionName": "Review courses",
-    "actionUrl": "http://dev.open-sunbird.org",
-    "orgName": "NTP",
+    "subject": "dome subject",
+    "body": "some body",
+    "orgImgUrl": "some image url",
+    "actionName": "some action",
+    "actionUrl": "some url",
+    "orgName": "some organisation name",
     "emailTemplateType": "welcome",
-    "fromEmail": "manzarul.haque@tarento.com",
+    "fromEmail": "some_email_id@something.com",
     "recipientEmails": [
-      "sudhirgiri2911@gmail.com",
-      "sudhirk@beyondsquare.com"
+      "${emailId_1}",
+      "${emailId_2}"
     ],
     "recipientSearchQuery": {
       "filters": {

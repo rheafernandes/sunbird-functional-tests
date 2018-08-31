@@ -2,15 +2,15 @@
   "params": {},
   "request": {
     "name": "Someone",
-    "subject": "This is Subject of this email",
-    "body": "This is body of this email",
-    "orgImgUrl": "https://www.somehting.com/anything.png",
-    "actionName": "Review courses",
-    "actionUrl": "http://dev.open-sunbird.org",
-    "orgName": "NTP",
-    "fromEmail": "manzarul.haque@tarento.com",
+    "subject": "some subject",
+    "body": "some body",
+    "orgImgUrl": "some org image url",
+    "actionName": "some action name",
+    "actionUrl": "some action url",
+    "orgName": "some org name",
+    "fromEmail": "some_email_id@something.com",
     "recipientEmails": [
-      "sudhirgiri2911@gmail.com"
+      "${emailId_1}"
     ],
     "recipientSearchQuery": {
       "filters": {

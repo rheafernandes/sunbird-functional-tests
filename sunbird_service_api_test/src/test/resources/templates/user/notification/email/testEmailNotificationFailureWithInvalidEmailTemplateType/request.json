@@ -4,21 +4,21 @@
     "name": [
       "SomeOne"
     ],
-    "subject": "Test Subject",
-    "body": "Test Body",
-    "orgImgUrl": "https://dev.open-sunbird.org/assets/images/sunbird_logo.png",
-    "actionName": "Review courses",
+    "subject": "some subject",
+    "body": "some body",
+    "orgImgUrl": "some org image url",
+    "actionName": "some action",
     "actionUrl": "http://dev.open-sunbird.org",
     "orgName": "NTP",
     "emailTemplateType": "some_email_template",
-    "fromEmail": "manzarul.haque@tarento.com",
+    "fromEmail": "some_email_id@something.com",
     "recipientEmails": [
-      "sudhirgiri2911@gmail.com"
+      "${emailId_1}"
     ],
     "recipientSearchQuery": {
       "filters": {
         "rootOrgId": "random_orgId",
-        "organisations.roles" :["CONTENT_REVIEWER"]
+        "organisations.roles" :["some_roles"]
       }
     }
   }

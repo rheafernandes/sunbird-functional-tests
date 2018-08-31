@@ -83,7 +83,6 @@ public class EmailNotificationTest extends BaseCitrusTestRunner {
   @CitrusTest
   public void testEmailNotificationFailure(String testName) {
     beforeTest(testName);
-
     performPostTest(
         this,
         TEMPLATE_DIR,
@@ -116,5 +115,7 @@ public class EmailNotificationTest extends BaseCitrusTestRunner {
   public void beforeTest(String testName) {
     getTestCase().setName(testName);
     getAuthToken(this, true);
+    variable("emailId_1", System.getenv("sunbird_test_email_address_1"));
+    variable("emailId_2", System.getenv("sunbird_test_email_address_2"));
   }
 }

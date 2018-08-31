@@ -2,21 +2,21 @@
   "params": {},
   "request": {
     "name": "Someone",
-    "body": "This is body of this email",
-    "orgImgUrl": "https://anything.com/something.png",
-    "actionName": "Review courses",
-    "actionUrl": "http://dev.open-sunbird.org",
-    "orgName": "NTP",
+    "body": "some body",
+    "orgImgUrl": "some org image url",
+    "actionName": "some action",
+    "actionUrl": "some action url",
+    "orgName": "some org name",
     "emailTemplateType": "some_template",
-    "fromEmail": "manzarul.haque@tarento.com",
+    "fromEmail": "some_email_id@something.com",
     "recipientEmails": [
-      "sudhirgiri2911@gmail.com"
+      "${emailId_1}"
     ],
     "recipientSearchQuery": {
       "filters": {
         "rootOrgId": "some_orgId",
         "organisations.roles": [
-          "CONTENT_REVIEWER"
+          "some_roles"
         ]
       }
     }

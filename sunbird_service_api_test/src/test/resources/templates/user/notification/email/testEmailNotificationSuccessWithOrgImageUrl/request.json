@@ -1,16 +1,16 @@
 {
   "params": {},
   "request": {
-    "subject": "This is the subject of this email",
-    "body": "This is the body of this email",
+    "subject": "some subject",
+    "body": "some body",
     "orgImgUrl": "https://something.com/anyhting.png",
-    "actionName": "Review courses",
+    "actionName": "some action",
     "actionUrl": "http://dev.open-sunbird.org",
-    "orgName": "NTP",
+    "orgName": "some org name",
     "emailTemplateType": "welcome",
-    "fromEmail": "manzarul.haque@tarento.com",
+    "fromEmail": "some_email_id@something.com",
     "recipientEmails": [
-      "sudhirgiri2911@gmail.com"
+      "${emailId_1}"
     ],
     "recipientSearchQuery": {
       "filters": {
