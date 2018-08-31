@@ -31,7 +31,7 @@
         },
         "${resourceId}": {
           "name": "citrus:concat('Test_Story_name_', citrus:randomNumber(10))",
-          "contentType": "Story",
+          "contentType": "Resource",
           "children": [],
           "root": false
         }
