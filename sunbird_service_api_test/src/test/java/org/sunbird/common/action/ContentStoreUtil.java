@@ -82,6 +82,7 @@ public class ContentStoreUtil {
                 "$.result.node_id",
                 "courseId"));
     courseId = testContext.getVariable("courseId");
+    runner.sleep(Constant.ES_SYNC_WAIT_TIME);
   }
 
   private static void updateCourseHierarchy(BaseCitrusTestRunner runner, TestContext testContext) {
