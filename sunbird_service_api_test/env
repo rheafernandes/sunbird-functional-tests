@@ -20,4 +20,8 @@
 | sunbird_user_password      | Password corresponding to user set in 'sunbird_username' environment variable.
 | content_store_api_base_url | Base URL for content store API
 | content_store_api_key      | Authentication key for content store API
+| sunbird_test_email_address_1     | Email address 1 for email notification test e.g. 'sunbirdtest101@gmail.com'  
+| sunbird_test_email_address_2     | Email address 2 for email notification test e.g. 'sunbirdtest102@gmail.com'
+
+
 
