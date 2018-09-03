@@ -22,7 +22,7 @@ public class UserUtil {
     return runner.getLmsApiUriPath("/api/user/v1/block", "/v1/user/block");
   }
 
-  private static String getUnBlockUserUrl(BaseCitrusTestRunner runner) {
+  private static String getUnblockUserUrl(BaseCitrusTestRunner runner) {
 
     return runner.getLmsApiUriPath("/api/user/v1/unblock", "/v1/user/unblock");
   }
@@ -78,7 +78,7 @@ public class UserUtil {
     runner.sleep(Constant.ES_SYNC_WAIT_TIME);
   }
 
-  public static void unBlockUser(BaseCitrusTestRunner runner, String templateDir, String testName) {
+  public static void unblockUser(BaseCitrusTestRunner runner, String templateDir, String testName) {
     runner.http(
         builder ->
             TestActionUtil.getPostRequestTestAction(
@@ -86,7 +86,7 @@ public class UserUtil {
                 Constant.LMS_ENDPOINT,
                 templateDir,
                 testName,
-                getUnBlockUserUrl(runner),
+                getUnblockUserUrl(runner),
                 Constant.REQUEST_JSON,
                 MediaType.APPLICATION_JSON.toString(),
                 TestActionUtil.getHeaders(true)));

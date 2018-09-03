@@ -78,9 +78,7 @@ public class UnblockUserTest extends BaseCitrusTestRunner {
   public void testUnblockUserSuccess(
       String testName, boolean isAuthRequired, HttpStatus httpStatusCode) {
     getTestCase().setName(testName);
-    getAuthToken(this, isAuthRequired);
-    beforeTest();
-    variable("userId", testContext.getVariable("userId"));
+    beforeTest(false);
     performPostTest(
         this,
         TEMPLATE_DIR,
@@ -93,12 +91,11 @@ public class UnblockUserTest extends BaseCitrusTestRunner {
         RESPONSE_JSON);
   }
 
-  @Test(dependsOnMethods = {"testUnblockUserSuccess"})
+  @Test()
   @CitrusTest
   public void testUnblockUnblockUserByUserIdFailure() {
     getTestCase().setName(TEST_UNBLOCK_UNBLOCKED_USER_FAILURE_WITH_VALID_USERID);
-    getAuthToken(this, true);
-    variable("userId", testContext.getVariable("userId"));
+    beforeTest(true);
     performPostTest(
         this,
         TEMPLATE_DIR,
@@ -115,10 +112,8 @@ public class UnblockUserTest extends BaseCitrusTestRunner {
   @CitrusTest
   public void testGetUnblockUserByUserIdSuccess() {
     getTestCase().setName(TEST_UNBLOCK_USER_GET_SUCCESS_WITH_VALID_USERID);
-    getAuthToken(this, true);
-    beforeTest();
-    variable("userId", testContext.getVariable("userId"));
-    unBlockUser();
+
+    beforeTest(true);
     performGetTest(
         this,
         TEMPLATE_DIR,
@@ -132,13 +127,12 @@ public class UnblockUserTest extends BaseCitrusTestRunner {
         RESPONSE_JSON);
   }
 
-  private void beforeTest() {
+  private void beforeTest(boolean isUnblock) {
+    getAuthToken(this, true);
     UserUtil.getUserId(this, testContext);
     variable("userId", testContext.getVariable("userId"));
     UserUtil.blockUser(this, TEMPLATE_DIR_BLOCK, TEST_BLOCK_USER_SUCCESS_WITH_VALID_USERID);
-  }
-
-  private void unBlockUser() {
-    UserUtil.unBlockUser(this, TEMPLATE_DIR, TEST_UNBLOCK_USER_SUCCESS_WITH_VALID_USERID);
+    if (isUnblock)
+      UserUtil.unblockUser(this, TEMPLATE_DIR, TEST_UNBLOCK_USER_SUCCESS_WITH_VALID_USERID);
   }
 }
