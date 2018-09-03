@@ -2,6 +2,7 @@ package org.sunbird.common.action;
 
 import com.consol.citrus.context.TestContext;
 import org.springframework.http.MediaType;
+import org.springframework.util.StringUtils;
 import org.sunbird.common.util.Constant;
 import org.sunbird.integration.test.common.BaseCitrusTestRunner;
 
@@ -32,12 +33,14 @@ public class UserSkillUtil {
   }
 
   public static void createSkill(BaseCitrusTestRunner runner, TestContext testContext) {
-    UserUtil.getUserId(runner, testContext, "endorsedUserId");
-    runner.variable("endorsedUserId", testContext.getVariable("endorsedUserId"));
-    runner.variable("userId", testContext.getVariable("endorsedUserId"));
-    String userName = UserUtil.getUserNameWithChannel(runner, testContext);
-    runner.getAuthToken(
-        runner, userName, Constant.PASSWORD, testContext.getVariable("endorsedUserId"), true);
-    createUserSkill(runner, testContext, UPDATE_SKILL_TEMPLATE_DIR, UPDATE_USER_SKILL_SUCCESS);
+    if (StringUtils.isEmpty(testContext.getVariables().get("endorsedUserId"))) {
+      UserUtil.getUserId(runner, testContext, "endorsedUserId");
+      runner.variable("endorsedUserId", testContext.getVariable("endorsedUserId"));
+      runner.variable("userId", testContext.getVariable("endorsedUserId"));
+      String userName = UserUtil.getUserNameWithChannel(runner, testContext);
+      runner.getAuthToken(
+          runner, userName, Constant.PASSWORD, testContext.getVariable("endorsedUserId"), true);
+      createUserSkill(runner, testContext, UPDATE_SKILL_TEMPLATE_DIR, UPDATE_USER_SKILL_SUCCESS);
+    }
   }
 }
