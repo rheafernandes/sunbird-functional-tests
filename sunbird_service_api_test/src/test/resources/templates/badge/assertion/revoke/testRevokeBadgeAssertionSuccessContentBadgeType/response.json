@@ -1,5 +1,5 @@
 {
-    "id": "api.issuer.badge.assertion.create",
+    "id": "api.issuer.badge.assertion.delete",
     "ver": "v1",
     "ts": "@ignore@",
     "params": {
@@ -11,27 +11,6 @@
     },
     "responseCode": "OK",
     "result": {
-        "assertionDate": "@ignore@",
-        "assertionImageUrl": "@ignore@",
-        "badgeId": "@ignore@",
-        "assertionIdUrl": "@ignore@",
-        "revoked": false,
-        "issuerId": "@ignore@",
-        "createdDate": "@ignore@",
-        "assertionId": "@ignore@",
-        "issuerIdUrl": "@ignore@",
-        "recipient": {
-            "salt": "@ignore@",
-            "type": "@ignore@",
-            "hashed": true,
-            "identity": "@ignore@"
-        },
-        "verify": {
-            "url": "@ignore@",
-            "type": "@ignore@"
-        },
-        "revocationReason": null,
-        "recipientEmail": "@ignore@",
-        "badgeIdUrl": "@ignore@"
+        "status": "SUCCESS"
     }
 }
