@@ -111,11 +111,14 @@ public class UnblockUserTest extends BaseCitrusTestRunner {
         RESPONSE_JSON);
   }
 
-  @Test(dependsOnMethods = {"testUnblockUserSuccess"})
+  @Test()
   @CitrusTest
   public void testGetUnblockUserByUserIdSuccess() {
     getTestCase().setName(TEST_UNBLOCK_USER_GET_SUCCESS_WITH_VALID_USERID);
+    getAuthToken(this, true);
+    beforeTest();
     variable("userId", testContext.getVariable("userId"));
+    unBlockUser();
     performGetTest(
         this,
         TEMPLATE_DIR,
@@ -133,5 +136,9 @@ public class UnblockUserTest extends BaseCitrusTestRunner {
     UserUtil.getUserId(this, testContext);
     variable("userId", testContext.getVariable("userId"));
     UserUtil.blockUser(this, TEMPLATE_DIR_BLOCK, TEST_BLOCK_USER_SUCCESS_WITH_VALID_USERID);
+  }
+
+  private void unBlockUser() {
+    UserUtil.unBlockUser(this, TEMPLATE_DIR, TEST_UNBLOCK_USER_SUCCESS_WITH_VALID_USERID);
   }
 }

@@ -6,6 +6,7 @@ import javax.ws.rs.core.MediaType;
 import org.springframework.http.HttpStatus;
 import org.sunbird.common.action.UserSkillUtil;
 import org.sunbird.common.action.UserUtil;
+import org.sunbird.common.util.Constant;
 import org.sunbird.integration.test.common.BaseCitrusTestRunner;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -95,5 +96,11 @@ public class AddUserSkillEndorsementTest extends BaseCitrusTestRunner {
     UserUtil.getUserId(this, testContext);
     variable("endorsedUserId", testContext.getVariable("endorsedUserId"));
     variable("userId", testContext.getVariable("userId"));
+    getAuthToken(
+        this,
+        UserUtil.getUserNameWithChannel(this, testContext),
+        Constant.PASSWORD,
+        testContext.getVariable("userId"),
+        true);
   }
 }
