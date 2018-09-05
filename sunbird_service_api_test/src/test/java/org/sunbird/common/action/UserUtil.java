@@ -22,13 +22,23 @@ public class UserUtil {
     return runner.getLmsApiUriPath("/api/user/v1/block", "/v1/user/block");
   }
 
+  private static String getUnblockUserUrl(BaseCitrusTestRunner runner) {
+
+    return runner.getLmsApiUriPath("/api/user/v1/unblock", "/v1/user/unblock");
+  }
+
   private static String getUserProfileVisibilityUrl(BaseCitrusTestRunner runner) {
     return runner.getLmsApiUriPath(
         "/api/user/v1/profile/visibility", "/v1/user/profile/visibility");
   }
 
   public static void createUser(
-      BaseCitrusTestRunner runner, TestContext testContext, String templateDir, String testName) {
+      BaseCitrusTestRunner runner,
+      TestContext testContext,
+      String templateDir,
+      String testName,
+      String variable) {
+
     runner.http(
         builder ->
             TestActionUtil.getPostRequestTestAction(
@@ -49,7 +59,7 @@ public class UserUtil {
                 Constant.LMS_ENDPOINT,
                 HttpStatus.OK,
                 "$.result.userId",
-                "userId"));
+                variable));
     runner.sleep(Constant.ES_SYNC_WAIT_TIME);
   }
 
@@ -68,15 +78,46 @@ public class UserUtil {
     runner.sleep(Constant.ES_SYNC_WAIT_TIME);
   }
 
+  public static void unblockUser(BaseCitrusTestRunner runner, String templateDir, String testName) {
+    runner.http(
+        builder ->
+            TestActionUtil.getPostRequestTestAction(
+                builder,
+                Constant.LMS_ENDPOINT,
+                templateDir,
+                testName,
+                getUnblockUserUrl(runner),
+                Constant.REQUEST_JSON,
+                MediaType.APPLICATION_JSON.toString(),
+                TestActionUtil.getHeaders(true)));
+    runner.sleep(Constant.ES_SYNC_WAIT_TIME);
+  }
+
   public static void getUserId(BaseCitrusTestRunner runner, TestContext testContext) {
-    if (StringUtils.isBlank((String) testContext.getVariables().get("userId"))) {
-      String userName = Constant.USER_NAME_PREFIX + UUID.randomUUID().toString();
-      testContext.setVariable("userName", userName);
-      runner.variable("username", userName);
-      runner.variable("channel", System.getenv("sunbird_default_channel"));
-      UserUtil.createUser(
-          runner, testContext, TEMPLATE_DIR_USER_CREATE, TEMPLATE_DIR_USER_CREATE_TEST_CASE);
+    getUserId(runner, testContext, Constant.USER_ID);
+  }
+
+  public static void getUserId(
+      BaseCitrusTestRunner runner, TestContext testContext, String variable) {
+    if (StringUtils.isBlank((String) testContext.getVariables().get(variable))) {
+      getUser(runner, testContext, variable);
+    } else {
+      runner.variable(variable, (String) testContext.getVariables().get(variable));
     }
+  }
+
+  public static void getUser(
+      BaseCitrusTestRunner runner, TestContext testContext, String extractVariableName) {
+    String userName = Constant.USER_NAME_PREFIX + UUID.randomUUID().toString();
+    testContext.setVariable("userName", userName);
+    runner.variable("username", userName);
+    runner.variable("channel", System.getenv("sunbird_default_channel"));
+    UserUtil.createUser(
+        runner,
+        testContext,
+        TEMPLATE_DIR_USER_CREATE,
+        TEMPLATE_DIR_USER_CREATE_TEST_CASE,
+        extractVariableName);
   }
 
   public static void setProfileVisibilityPrivate(
