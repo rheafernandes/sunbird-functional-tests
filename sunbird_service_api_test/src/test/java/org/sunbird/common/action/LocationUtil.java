@@ -61,7 +61,6 @@ public class LocationUtil {
         requestJson,
         true,
         Constant.LOCATION_TYPE_STATE);
-    runner.sleep(Constant.ES_SYNC_WAIT_TIME);
   }
 
   public static void createDistrict(
@@ -86,7 +85,6 @@ public class LocationUtil {
         requestJson,
         true,
         Constant.LOCATION_TYPE_DISTRICT);
-    runner.sleep(Constant.ES_SYNC_WAIT_TIME);
   }
 
   public static void createBlock(
