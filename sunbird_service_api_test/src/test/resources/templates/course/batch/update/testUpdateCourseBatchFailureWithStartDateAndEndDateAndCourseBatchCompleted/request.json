@@ -1,0 +1,8 @@
+{
+  "request": {
+    "id": "${id}",
+    "name":"testCourseBatch",
+    "startDate":"${startDate}",
+    "endDate":"${endDate}"
+  }
+}
