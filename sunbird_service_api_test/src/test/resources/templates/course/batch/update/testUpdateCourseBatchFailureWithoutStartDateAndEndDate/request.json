@@ -1,6 +1,6 @@
 {
   "request": {
-    "id": "${id}",
+    "id": "${batchId}",
     "name":"testCourseBatch"
   }
 }
