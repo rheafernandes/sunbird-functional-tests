@@ -27,7 +27,7 @@
 			"skills": [],
 			"badgeAssertions": [],
 			"isDeleted": false,
-			"organisations": [],
+			"organisations": "@ignore@",
 			"countryCode": null,
 			"id": "@ignore@",
 			"tempPassword": null,
