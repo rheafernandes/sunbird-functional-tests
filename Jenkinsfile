@@ -1,7 +1,7 @@
 pipeline {
     environment {
         sunbird_api_key = "${sunbird_api_keys}"
-        content_store_api_base_url = "https://dev.ekstep.in/api"
+        content_store_api_base_url = "http://10.6.0.4:8080/learning-service"
         content_store_api_key = "${ekstep_api_keys}"
         sunbird_cassandra_host = "10.10.4.4"
         sunbird_cassandra_port = "9042"
@@ -18,6 +18,9 @@ pipeline {
         sunbird_sso_url="https://dev.open-sunbird.org/auth"
         sunbird_username="ft_org_admin@org.com"
         sunbird_default_channel="ft_test"
+        sunbird_test_email_address_1 = "sunbirdtest101@gmail.com"
+        sunbird_test_email_address_2 = "sunbirdtest102@gmail.com"
+        sunbird_content_id = "do_112501345261985792135"
     }
 
     agent { label "build-slave" }

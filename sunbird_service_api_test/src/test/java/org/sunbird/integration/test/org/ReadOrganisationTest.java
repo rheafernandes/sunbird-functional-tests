@@ -2,11 +2,11 @@ package org.sunbird.integration.test.org;
 
 import com.consol.citrus.annotations.CitrusTest;
 import com.consol.citrus.testng.CitrusParameters;
-import java.util.Random;
 import javax.ws.rs.core.MediaType;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.http.HttpStatus;
 import org.sunbird.common.action.OrgUtil;
+import org.sunbird.common.util.Constant;
 import org.sunbird.integration.test.common.BaseCitrusTestRunner;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -30,7 +30,7 @@ public class ReadOrganisationTest extends BaseCitrusTestRunner {
 
   public static final String TEMPLATE_DIR = "templates/organisation/read";
   private static String orgId = null;
-  private static final String externalId = "FT_Org_External_" + (new Random()).nextInt(100);
+  private static final String externalId = "FT_Org_External_" + (System.currentTimeMillis());
 
   private String getSearchOrgUrl() {
 
@@ -108,6 +108,7 @@ public class ReadOrganisationTest extends BaseCitrusTestRunner {
           testContext,
           "templates/organisation/create",
           "testCreateRootOrgSuccessWithProviderAndExternalId",
+          Constant.EXTRACT_VAR_ROOT_ORG_ID,
           HttpStatus.OK);
       orgId = testContext.getVariable("organisationId");
     } else {

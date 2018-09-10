@@ -42,5 +42,6 @@ public class BadgeClassUtil {
                 responseCode,
                 "$.result.badgeId",
                 Constant.EXTRACT_VAR_BADGE_ID));
+    runner.variable("badgeId", testContext.getVariable(Constant.EXTRACT_VAR_BADGE_ID));
   }
 }
