@@ -18,7 +18,7 @@ public class ContentStoreUtil {
   private static final String CONTENT_STORE_RETIRE_CONTENT_URL = "/content/v3/retire/";
   private static String courseId = null;
   private static final String courseUnitId = "SB_FT_COURSEUNIT_" + UUID.randomUUID().toString();
-  private static final String resourceId = "do_1125535199417548801180";
+  private static final String resourceId = System.getenv("sunbird_content_id");
 
   public static String getResourceId() {
     return resourceId;
@@ -50,13 +50,13 @@ public class ContentStoreUtil {
       runner.sleep(Constant.ES_SYNC_WAIT_TIME);
 
       // retire course post all test (before jvm shutdown)
-      /*Runtime.getRuntime()
+      Runtime.getRuntime()
           .addShutdownHook(
               new Thread() {
                 public void run() {
                   retireCourse(runner, testContext);
                 }
-              });*/
+              });
     }
   }
 
