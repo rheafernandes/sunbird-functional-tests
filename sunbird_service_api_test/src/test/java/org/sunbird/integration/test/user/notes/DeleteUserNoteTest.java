@@ -2,6 +2,7 @@ package org.sunbird.integration.test.user.notes;
 
 import com.consol.citrus.annotations.CitrusTest;
 import com.consol.citrus.testng.CitrusParameters;
+import javax.ws.rs.core.MediaType;
 import org.springframework.http.HttpStatus;
 import org.sunbird.common.action.UserNoteUtil;
 import org.sunbird.integration.test.common.BaseCitrusTestRunner;
@@ -47,7 +48,7 @@ public class DeleteUserNoteTest extends BaseCitrusTestRunner {
         testName,
         getDeleteNoteUrl(testContext.getVariable("noteId")),
         null,
-        null,
+        MediaType.APPLICATION_JSON,
         false,
         HttpStatus.UNAUTHORIZED,
         RESPONSE_JSON);
@@ -66,7 +67,7 @@ public class DeleteUserNoteTest extends BaseCitrusTestRunner {
         testName,
         getDeleteNoteUrl(testContext.getVariable("noteId")),
         null,
-        null,
+        MediaType.APPLICATION_JSON,
         true,
         HttpStatus.OK,
         RESPONSE_JSON);
@@ -83,7 +84,7 @@ public class DeleteUserNoteTest extends BaseCitrusTestRunner {
         TEST_DELETE_USER_NOTE_FAILURE_WITH_INVALID_NOTEID,
         getDeleteNoteUrl("InvalidNoteId"),
         null,
-        null,
+        MediaType.APPLICATION_JSON,
         true,
         HttpStatus.UNAUTHORIZED,
         RESPONSE_JSON);

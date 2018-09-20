@@ -26,7 +26,7 @@ public class ReadUserNoteTest extends BaseCitrusTestRunner {
   public Object[][] readUserNoteFailureDataProvider() {
 
     return new Object[][] {
-      new Object[] {TEST_READ_USER_NOTE_FAILURE_WITH_INVALID_USERID, true, HttpStatus.UNAUTHORIZED}
+      new Object[] {TEST_READ_USER_NOTE_FAILURE_WITH_INVALID_USERID, true, HttpStatus.BAD_REQUEST}
     };
   }
 
@@ -77,7 +77,7 @@ public class ReadUserNoteTest extends BaseCitrusTestRunner {
         TEST_READ_USER_NOTE_FAILURE_WITH_INVALID_NOTEID,
         getReadNoteUrl("InvalidNoteId"),
         true,
-        HttpStatus.UNAUTHORIZED,
+        HttpStatus.BAD_REQUEST,
         RESPONSE_JSON);
   }
 
