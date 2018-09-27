@@ -4,7 +4,8 @@ import com.consol.citrus.annotations.CitrusTest;
 import com.consol.citrus.testng.CitrusParameters;
 import javax.ws.rs.core.MediaType;
 import org.springframework.http.HttpStatus;
-import org.sunbird.common.action.UserNoteUtil;
+import org.sunbird.common.action.UserUtil;
+import org.sunbird.common.util.Constant;
 import org.sunbird.integration.test.common.BaseCitrusTestRunner;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -51,7 +52,7 @@ public class CreateUserNoteTest extends BaseCitrusTestRunner {
         TEST_CREATE_USER_NOTE_FAILURE_WITHOUT_ACCESS_TOKEN, false, HttpStatus.UNAUTHORIZED
       },
       new Object[] {
-        TEST_CREATE_USER_NOTE_FAILURE_WITH_INVALID_USERID, true, HttpStatus.UNAUTHORIZED
+        TEST_CREATE_USER_NOTE_FAILURE_WITH_INVALID_USERID, true, HttpStatus.BAD_REQUEST
       },
       new Object[] {
         TEST_CREATE_USER_NOTE_FAILURE_WITHOUT_CONTENTID_OR_COURSEID, true, HttpStatus.BAD_REQUEST
@@ -113,6 +114,9 @@ public class CreateUserNoteTest extends BaseCitrusTestRunner {
   }
 
   void beforeTest() {
-    UserNoteUtil.createNote(this, testContext);
+    UserUtil.getUserId(this, testContext);
+    variable("userId", testContext.getVariable("userId"));
+    String userName = UserUtil.getUserNameWithChannel(this, testContext);
+    getAuthToken(this, userName, Constant.PASSWORD, testContext.getVariable("userId"), true);
   }
 }
