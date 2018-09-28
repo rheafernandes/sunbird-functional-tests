@@ -50,7 +50,7 @@ public class DeleteUserNoteTest extends BaseCitrusTestRunner {
         null,
         MediaType.APPLICATION_JSON,
         false,
-        HttpStatus.UNAUTHORIZED,
+        HttpStatus.FORBIDDEN,
         RESPONSE_JSON);
   }
 

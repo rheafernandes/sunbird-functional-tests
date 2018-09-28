@@ -27,7 +27,7 @@ public class UpdateUserNoteTest extends BaseCitrusTestRunner {
 
     return new Object[][] {
       new Object[] {
-        TEST_UPDATE_USER_NOTE_FAILURE_WITH_INVALID_USERID, true, HttpStatus.UNAUTHORIZED
+        TEST_UPDATE_USER_NOTE_FAILURE_WITH_INVALID_USERID, true, HttpStatus.FORBIDDEN
       }
     };
   }

@@ -142,7 +142,7 @@ public class UserUtil {
   }
 
   public static void createUserAndGetToken(BaseCitrusTestRunner runner, TestContext testContext) {
-    UserUtil.getUserId(runner, testContext);
+    getUserId(runner, testContext);
     runner.variable("userId", testContext.getVariable("userId"));
     String userName = UserUtil.getUserNameWithChannel(runner, testContext);
     runner.getAuthToken(
