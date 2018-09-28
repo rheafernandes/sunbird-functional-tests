@@ -9,6 +9,6 @@
         "status": "INVALID_PARAMETER_VALUE",
         "errmsg": "@ignore@"
     },
-    "responseCode": "CLIENT_ERROR",
+    "responseCode": "RESOURCE_NOT_FOUND",
     "result": {}
 }

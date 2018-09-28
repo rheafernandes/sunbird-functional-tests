@@ -5,10 +5,10 @@
     "params": {
         "resmsgid": null,
         "msgid": "@ignore@",
-        "err": "UNAUTHORIZED_USER",
-        "status": "UNAUTHORIZED_USER",
-        "errmsg": "You are not authorized."
+        "err": "INVALID_PARAMETER_VALUE",
+        "status": "INVALID_PARAMETER_VALUE",
+        "errmsg": "Invalid value invalid for parameter userId. Please provide a valid value."
     },
-    "responseCode": "UNAUTHORIZED",
+    "responseCode": "CLIENT_ERROR",
     "result": {}
 }
