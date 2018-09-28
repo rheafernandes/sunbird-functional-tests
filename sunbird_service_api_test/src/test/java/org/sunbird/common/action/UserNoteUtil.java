@@ -43,19 +43,11 @@ public class UserNoteUtil {
   }
 
   public static void createNote(BaseCitrusTestRunner runner, TestContext testContext) {
-    beforeTest(runner, testContext);
+    UserUtil.createUserAndGetToken(runner, testContext);
     UserNoteUtil.createUserNote(
         runner,
         testContext,
         BT_CREATE_NOTE_TEMPLATE_DIR,
         TEST_CREATE_USER_NOTE_SUCCESS_WITH_COURSEID_AND_CONTENTID);
-  }
-
-  public static void beforeTest(BaseCitrusTestRunner runner, TestContext testContext) {
-    UserUtil.getUserId(runner, testContext);
-    runner.variable("userId", testContext.getVariable("userId"));
-    String userName = UserUtil.getUserNameWithChannel(runner, testContext);
-    runner.getAuthToken(
-        runner, userName, Constant.PASSWORD, testContext.getVariable("userId"), true);
   }
 }
