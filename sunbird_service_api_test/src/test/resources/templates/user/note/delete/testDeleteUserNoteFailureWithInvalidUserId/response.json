@@ -5,10 +5,10 @@
     "params": {
         "resmsgid": null,
         "msgid": "@ignore@",
-        "err": "UNAUTHORIZED_USER",
-        "status": "SERVER_ERROR",
-        "errmsg": "You are not authorized."
+        "err": "FORBIDDEN_USER",
+        "status": "FORBIDDEN_USER",
+        "errmsg": "You are forbidden from accessing specified resource."
     },
-    "responseCode": "CLIENT_ERROR",
+    "responseCode": "FORBIDDEN_USER",
     "result": {}
 }

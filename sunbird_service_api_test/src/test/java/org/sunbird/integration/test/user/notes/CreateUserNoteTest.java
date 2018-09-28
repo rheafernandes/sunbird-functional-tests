@@ -4,8 +4,7 @@ import com.consol.citrus.annotations.CitrusTest;
 import com.consol.citrus.testng.CitrusParameters;
 import javax.ws.rs.core.MediaType;
 import org.springframework.http.HttpStatus;
-import org.sunbird.common.action.UserUtil;
-import org.sunbird.common.util.Constant;
+import org.sunbird.common.action.UserNoteUtil;
 import org.sunbird.integration.test.common.BaseCitrusTestRunner;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -114,9 +113,6 @@ public class CreateUserNoteTest extends BaseCitrusTestRunner {
   }
 
   void beforeTest() {
-    UserUtil.getUserId(this, testContext);
-    variable("userId", testContext.getVariable("userId"));
-    String userName = UserUtil.getUserNameWithChannel(this, testContext);
-    getAuthToken(this, userName, Constant.PASSWORD, testContext.getVariable("userId"), true);
+    UserNoteUtil.beforeTest(this, testContext);
   }
 }
