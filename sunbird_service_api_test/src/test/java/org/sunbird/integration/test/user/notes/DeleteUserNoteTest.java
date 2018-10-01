@@ -32,7 +32,9 @@ public class DeleteUserNoteTest extends BaseCitrusTestRunner {
 
   @DataProvider(name = "deleteUserNoteSuccessDataProvider")
   public Object[][] deleteUserNoteSuccessDataProvider() {
-    return new Object[][] {new Object[] {TEST_DELETE_USER_NOTE_SUCCESS, true, HttpStatus.OK}};
+    return new Object[][] {
+      new Object[] {TEST_DELETE_USER_NOTE_SUCCESS, true, HttpStatus.UNAUTHORIZED}
+    };
   }
 
   @Test(dataProvider = "deleteUserNoteFailureDataProvider")

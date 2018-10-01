@@ -5,10 +5,10 @@
     "params": {
         "resmsgid": null,
         "msgid": "@ignore@",
-        "err": null,
-        "status": "success",
-        "errmsg": null
+        "err": UNAUTHORIZED_USER,
+        "status": "UNAUTHORIZED_USER",
+        "errmsg": "You are not authorized."
     },
-    "responseCode": "OK",
+    "responseCode": "UNAUTHORIZED",
     "result": {}
 }

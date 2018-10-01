@@ -46,9 +46,7 @@ public class UpdateUserProfileVisibilityTest extends BaseCitrusTestRunner {
         HttpStatus.UNAUTHORIZED
       },
       new Object[] {
-        TEST_UPDATE_USER_PROFILE_VISIBILITY_FAILURE_WITH_INVALID_USERID,
-        true,
-        HttpStatus.BAD_REQUEST
+        TEST_UPDATE_USER_PROFILE_VISIBILITY_FAILURE_WITH_INVALID_USERID, true, HttpStatus.NOT_FOUND
       },
       new Object[] {
         TEST_UPDATE_USER_PROFILE_VISIBILITY_FAILURE_WITH_INVALID_COLUMN,
