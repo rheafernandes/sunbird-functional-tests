@@ -21,16 +21,17 @@ public class GetUserByUserIdTest extends BaseCitrusTestRunner {
   public Object[][] getUserByUserIdFailure() {
     return new Object[][] {
       new Object[] {
-        "testGetUserByUserIdFailureWithoutAuthToken", false, "invalidUserId", HttpStatus.NOT_FOUND
+        "testGetUserByUserIdFailureWithoutAuthToken",
+        false,
+        "invalidUserId",
+        HttpStatus.UNAUTHORIZED
       },
       new Object[] {
         "testGetUserByUserIdFailureWithInvalidUserId",
         true,
         "4b981b53-f9eb-44fe",
-        HttpStatus.BAD_REQUEST
+        HttpStatus.NOT_FOUND
       }
-      //      new Object[] {"testGetUserByUserIdFailureWithEmptyUserId", true, "",
-      // HttpStatus.NOT_FOUND}
     };
   }
 
