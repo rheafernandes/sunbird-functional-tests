@@ -42,6 +42,7 @@ public class DeleteUserNoteTest extends BaseCitrusTestRunner {
   @CitrusTest
   public void testDeleteUserNoteFailure(
       String testName, boolean isAuthRequired, HttpStatus httpStatusCode) {
+    getTestCase().setName(testName);
     beforeTest();
     getAuthToken(this, isAuthRequired);
     performDeleteTest(
