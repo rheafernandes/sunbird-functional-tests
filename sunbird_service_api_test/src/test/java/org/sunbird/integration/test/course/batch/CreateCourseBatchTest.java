@@ -119,7 +119,9 @@ public class CreateCourseBatchTest extends BaseCitrusTestRunner {
   @DataProvider(name = "createCourseBatchSuccessDataProvider")
   public Object[][] createCourseBatchSuccessDataProvider() {
     return new Object[][] {
-      new Object[] {TEST_NAME_CREATE_COURSE_BATCH_SUCCESS_INVITE_ONLY_BATCH, false, false, HttpStatus.OK},
+      new Object[] {
+        TEST_NAME_CREATE_COURSE_BATCH_SUCCESS_INVITE_ONLY_BATCH, false, false, HttpStatus.OK
+      },
       new Object[] {TEST_NAME_CREATE_COURSE_BATCH_SUCCESS_OPEN_BATCH, false, false, HttpStatus.OK},
       new Object[] {
         TEST_NAME_CREATE_COURSE_BATCH_SUCCESS_INVITE_ONLY_WITH_CREATED_FOR,
@@ -171,8 +173,7 @@ public class CreateCourseBatchTest extends BaseCitrusTestRunner {
       OrgUtil.getRootOrgId(this, testContext);
     }
     if (isUsrIdRequired) {
-      UserUtil.getUserId(this, testContext);
-      variable("userId", testContext.getVariable("userId"));
+      UserUtil.createUserAndGetToken(this, testContext);
     }
   }
 }
