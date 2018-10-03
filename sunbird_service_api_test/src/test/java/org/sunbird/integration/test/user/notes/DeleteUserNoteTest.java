@@ -26,7 +26,7 @@ public class DeleteUserNoteTest extends BaseCitrusTestRunner {
   public Object[][] deleteUserNoteFailureDataProvider() {
 
     return new Object[][] {
-      new Object[] {TEST_DELETE_USER_NOTE_FAILURE_WITH_INVALID_USERID, true, HttpStatus.OK}
+      new Object[] {TEST_DELETE_USER_NOTE_FAILURE_WITH_INVALID_USERID, true, HttpStatus.FORBIDDEN}
     };
   }
 
@@ -52,7 +52,7 @@ public class DeleteUserNoteTest extends BaseCitrusTestRunner {
         null,
         MediaType.APPLICATION_JSON,
         false,
-        HttpStatus.FORBIDDEN,
+        httpStatusCode,
         RESPONSE_JSON);
   }
 

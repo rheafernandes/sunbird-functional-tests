@@ -30,7 +30,7 @@ public class GetUserByLoginIdTest extends BaseCitrusTestRunner {
   }
 
   @Test(dataProvider = "getUserByLoginIdFailure")
-  @CitrusParameters({"testName"})
+  @CitrusParameters({"testName", "httpStatusCode"})
   @CitrusTest
   public void testGetUserByLoginIdFailure(String testName, HttpStatus status) {
     performPostTest(

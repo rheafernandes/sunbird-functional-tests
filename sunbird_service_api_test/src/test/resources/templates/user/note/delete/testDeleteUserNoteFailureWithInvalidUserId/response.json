@@ -1,14 +1,14 @@
 {
     "id": "api.note.delete",
     "ver": "v1",
-    "ts": "@ignore@",
+    "ts": "@ignore",
     "params": {
         "resmsgid": null,
-        "msgid": "@ignore@",
-        "err": "UNAUTHORIZED_USER",
-        "status": "UNAUTHORIZED_USER",
-        "errmsg": "You are not authorized."
+        "msgid": "@ignore",
+        "err": "FORBIDDEN",
+        "status": "FORBIDDEN",
+        "errmsg": "You are forbidden from accessing specified resource."
     },
-    "responseCode": "UNAUTHORIZED",
+    "responseCode": "FORBIDDEN",
     "result": {}
 }
