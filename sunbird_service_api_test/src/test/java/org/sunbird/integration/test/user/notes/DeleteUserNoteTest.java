@@ -52,7 +52,7 @@ public class DeleteUserNoteTest extends BaseCitrusTestRunner {
         getDeleteNoteUrl(testContext.getVariable("noteId")),
         null,
         MediaType.APPLICATION_JSON,
-        false,
+        true,
         httpStatusCode,
         RESPONSE_JSON);
   }
