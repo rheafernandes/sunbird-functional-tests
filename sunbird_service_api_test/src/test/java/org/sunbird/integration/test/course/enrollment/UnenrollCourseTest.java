@@ -1,4 +1,4 @@
-package org.sunbird.integration.test.course.batch;
+package org.sunbird.integration.test.course.enrollment;
 
 import com.consol.citrus.annotations.CitrusTest;
 import com.consol.citrus.testng.CitrusParameters;
@@ -15,7 +15,7 @@ import org.sunbird.integration.test.common.BaseCitrusTestRunner;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-public class CourseEnrollmentTest extends BaseCitrusTestRunner {
+public class UnenrollCourseTest extends BaseCitrusTestRunner {
 
   public static final String TEST_NAME_UNENROLL_COURSE_FAILURE_WITHOUT_COURSE_ID =
       "testUnenrollCourseFailureWithoutCourseId";
