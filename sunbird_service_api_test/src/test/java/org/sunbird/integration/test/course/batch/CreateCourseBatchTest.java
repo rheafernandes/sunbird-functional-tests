@@ -232,7 +232,7 @@ public class CreateCourseBatchTest extends BaseCitrusTestRunner {
       // courseUnitId/resourceId is needed to be updated in context for creating course
       variable("courseUnitId", ContentStoreUtil.getCourseUnitId());
       variable("resourceId", ContentStoreUtil.getResourceId());
-      String courseId = "do_21259396651757568013469";
+      String courseId = ContentStoreUtil.getCourseId(this, testContext);
       variable("courseId", courseId);
     }
     if (isOrgIdRequired) {
