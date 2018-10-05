@@ -44,17 +44,17 @@ public class UpdateCourseBatchTest extends BaseCitrusTestRunner {
   public Object[][] updateCourseBatchDataFailureProvider() {
     return new Object[][] {
       new Object[] {
-        TEST_NAME_UPDATE_COURSE_BATCH_FAILURE_WITHOUT_AUTH_TOKEN, false, HttpStatus.UNAUTHORIZED
+        TEST_NAME_UPDATE_COURSE_BATCH_FAILURE_WITHOUT_AUTH_TOKEN, false, false, HttpStatus.UNAUTHORIZED
       },
       new Object[] {
-        TEST_NAME_UPDATE_COURSE_BATCH_FAILURE_WITH_INVALID_BATCHID, true, HttpStatus.BAD_REQUEST
+        TEST_NAME_UPDATE_COURSE_BATCH_FAILURE_WITH_INVALID_BATCHID, true,false, HttpStatus.BAD_REQUEST
       },
       new Object[] {
-        TEST_NAME_UPDATE_COURSE_BATCH_FAILURE_WITH_INVALID_MENTOR, true, HttpStatus.BAD_REQUEST
+        TEST_NAME_UPDATE_COURSE_BATCH_FAILURE_WITH_INVALID_MENTOR, true,true, HttpStatus.BAD_REQUEST
       },
       new Object[] {
         TEST_NAME_UPDATE_COURSE_BATCH_FAILURE_WITH_INVALID_PARTICIPANTS,
-        true,
+        true,true,
         HttpStatus.BAD_REQUEST
       },
     };
@@ -71,12 +71,16 @@ public class UpdateCourseBatchTest extends BaseCitrusTestRunner {
   }
 
   @Test(dataProvider = "updateCourseBatchDataFailureProvider")
-  @CitrusParameters({"testName", "isAuthRequired", "httpStatusCode"})
+  @CitrusParameters({"testName", "isAuthRequired", "isCreateCourseRequired", "httpStatusCode"})
   @CitrusTest
   public void testUpdateCourseBatchFailure(
-      String testName, boolean isAuthRequired, HttpStatus httpStatusCode) {
+      String testName, boolean isAuthRequired, boolean isCreateCourseRequired, HttpStatus httpStatusCode) {
     getTestCase().setName(testName);
-    beforeTest();
+    if(isCreateCourseRequired) {
+      beforeTest();
+    }else{
+      getAuthToken(this,true);
+    }
     variable("startDate", TODAY_DATE);
     performPatchTest(
         this,
@@ -115,11 +119,11 @@ public class UpdateCourseBatchTest extends BaseCitrusTestRunner {
     variable("courseUnitId", ContentStoreUtil.getCourseUnitId());
     variable("resourceId", ContentStoreUtil.getResourceId());
     variable("startDate", TODAY_DATE);
-    String courseId = ContentStoreUtil.getCourseId(this, testContext);
+//    String courseId = ContentStoreUtil.getCourseId(this, testContext);
+    String courseId = "do_21259396651757568013469";
     variable("courseId", courseId);
     variable("rootOrgChannel", OrgUtil.getRootOrgChannel());
     OrgUtil.getRootOrgId(this, testContext);
-    CourseBatchUtil.getInviteOnlyCourseBatchId(this, testContext);
-    variable("batchId", testContext.getVariable("batchId"));
+    variable("batchId", CourseBatchUtil.getInviteOnlyCourseBatchId(this, testContext));
   }
 }
