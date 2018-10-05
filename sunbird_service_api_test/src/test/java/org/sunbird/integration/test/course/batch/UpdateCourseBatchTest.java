@@ -116,7 +116,6 @@ public class UpdateCourseBatchTest extends BaseCitrusTestRunner {
     variable("resourceId", ContentStoreUtil.getResourceId());
     variable("startDate", TODAY_DATE);
     String courseId = ContentStoreUtil.getCourseId(this, testContext);
-    ;
     variable("courseId", courseId);
     variable("rootOrgChannel", OrgUtil.getRootOrgChannel());
     OrgUtil.getRootOrgId(this, testContext);
