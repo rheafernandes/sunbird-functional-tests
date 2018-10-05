@@ -37,6 +37,8 @@ public class CreateCourseBatchTest extends BaseCitrusTestRunner {
       "testCreateCourseBatchFailureInviteOnlyWithInvalidCreatedFor";
   public static final String TEST_NAME_CREATE_COURSE_BATCH_FAILURE_WITH_INVALID_MENTOR =
       "testCreateCourseBatchFailureInviteOnlyWithInvalidMentor";
+  public static final String TEST_NAME_CREATE_COURSE_BATCH_FAILURE_WITH_INVALID_PARTICIPANT =
+      "testCreateCourseBatchFailureInviteOnlyWithInvalidParticipant";
 
   public static final String TEST_NAME_CREATE_COURSE_BATCH_SUCCESS_INVITE_ONLY_BATCH =
       "testCreateCourseBatchSuccessInviteOnlyBatch";
@@ -44,6 +46,8 @@ public class CreateCourseBatchTest extends BaseCitrusTestRunner {
       "testCreateCourseBatchSuccessInviteOnlyWithCreatedFor";
   public static final String TEST_NAME_CREATE_COURSE_BATCH_SUCCESS_INVITE_ONLY_WITH_MENTORS =
       "testCreateCourseBatchSuccessInviteOnlyWithMentors";
+  public static final String TEST_NAME_CREATE_COURSE_BATCH_SUCCESS_INVITE_ONLY_WITH_PARTICICPANTS =
+      "testCreateCourseBatchSuccessInviteOnlyWithParticipants";
   public static final String TEST_NAME_CREATE_COURSE_BATCH_SUCCESS_OPEN_BATCH =
       "testCreateCourseBatchSuccessOpenBatch";
 
@@ -59,51 +63,108 @@ public class CreateCourseBatchTest extends BaseCitrusTestRunner {
 
     return new Object[][] {
       new Object[] {
-        TEST_NAME_CREATE_COURSE_BATCH_FAILURE_WITHOUT_NAME, false, HttpStatus.BAD_REQUEST
+        TEST_NAME_CREATE_COURSE_BATCH_FAILURE_WITHOUT_NAME,
+        false,
+        false,
+        false,
+        HttpStatus.BAD_REQUEST
       },
       new Object[] {
-        TEST_NAME_CREATE_COURSE_BATCH_FAILURE_WITHOUT_COURSE_ID, false, HttpStatus.BAD_REQUEST
+        TEST_NAME_CREATE_COURSE_BATCH_FAILURE_WITHOUT_COURSE_ID,
+        false,
+        false,
+        false,
+        HttpStatus.BAD_REQUEST
       },
       new Object[] {
-        TEST_NAME_CREATE_COURSE_BATCH_FAILURE_WITHOUT_ENROLLMENTTYPE, false, HttpStatus.BAD_REQUEST
+        TEST_NAME_CREATE_COURSE_BATCH_FAILURE_WITHOUT_ENROLLMENTTYPE,
+        false,
+        false,
+        false,
+        HttpStatus.BAD_REQUEST
       },
       new Object[] {
         TEST_NAME_CREATE_COURSE_BATCH_FAILURE_WITH_INVALID_ENROLLMENTTYPE,
         false,
-        HttpStatus.BAD_REQUEST
-      },
-      new Object[] {
-        TEST_NAME_CREATE_COURSE_BATCH_FAILURE_WITHOUT_START_DATE, false, HttpStatus.BAD_REQUEST
-      },
-      new Object[] {
-        TEST_NAME_CREATE_COURSE_BATCH_FAILURE_WITH_PAST_START_DATE, false, HttpStatus.BAD_REQUEST
-      },
-      new Object[] {
-        TEST_NAME_CREATE_COURSE_BATCH_FAILURE_WITH_INVALID_COURSE_ID, false, HttpStatus.BAD_REQUEST
-      },
-      new Object[] {
-        TEST_NAME_CREATE_COURSE_BATCH_FAILURE_WITH_PAST_END_DATE, false, HttpStatus.BAD_REQUEST
-      },
-      new Object[] {
-        TEST_NAME_CREATE_COURSE_BATCH_FAILURE_WITH_END_DATE_BEFORE_START_DATE,
+        false,
         false,
         HttpStatus.BAD_REQUEST
       },
       new Object[] {
-        TEST_NAME_CREATE_COURSE_BATCH_FAILURE_WITH_INVALID_CREATED_FOR, true, HttpStatus.BAD_REQUEST
+        TEST_NAME_CREATE_COURSE_BATCH_FAILURE_WITHOUT_START_DATE,
+        false,
+        false,
+        false,
+        HttpStatus.BAD_REQUEST
       },
       new Object[] {
-        TEST_NAME_CREATE_COURSE_BATCH_FAILURE_WITH_INVALID_MENTOR, true, HttpStatus.BAD_REQUEST
+        TEST_NAME_CREATE_COURSE_BATCH_FAILURE_WITH_PAST_START_DATE,
+        false,
+        false,
+        false,
+        HttpStatus.BAD_REQUEST
+      },
+      new Object[] {
+        TEST_NAME_CREATE_COURSE_BATCH_FAILURE_WITH_INVALID_COURSE_ID,
+        false,
+        false,
+        false,
+        HttpStatus.BAD_REQUEST
+      },
+      new Object[] {
+        TEST_NAME_CREATE_COURSE_BATCH_FAILURE_WITH_PAST_END_DATE,
+        false,
+        false,
+        false,
+        HttpStatus.BAD_REQUEST
+      },
+      new Object[] {
+        TEST_NAME_CREATE_COURSE_BATCH_FAILURE_WITH_END_DATE_BEFORE_START_DATE,
+        false,
+        false,
+        false,
+        HttpStatus.BAD_REQUEST
+      },
+      new Object[] {
+        TEST_NAME_CREATE_COURSE_BATCH_FAILURE_WITH_INVALID_CREATED_FOR,
+        true,
+        false,
+        false,
+        HttpStatus.BAD_REQUEST
+      },
+      new Object[] {
+        TEST_NAME_CREATE_COURSE_BATCH_FAILURE_WITH_INVALID_MENTOR,
+        true,
+        false,
+        true,
+        HttpStatus.BAD_REQUEST
+      },
+      new Object[] {
+        TEST_NAME_CREATE_COURSE_BATCH_FAILURE_WITH_INVALID_PARTICIPANT,
+        true,
+        true,
+        true,
+        HttpStatus.NOT_FOUND
       }
     };
   }
 
   @Test(dataProvider = "createCourseBatchFailureDataProvider")
-  @CitrusParameters({"testName", "isCourseIdRequired", "httpStatusCode"})
+  @CitrusParameters({
+    "testName",
+    "isCourseIdRequired",
+    "isOrganisationRequired",
+    "isUserIdRequired",
+    "httpStatusCode"
+  })
   @CitrusTest
   public void testCreateCourseBatchFailure(
-      String testName, boolean isCourseIdRequired, HttpStatus httpStatusCode) {
-    beforeTest(isCourseIdRequired, false, false);
+      String testName,
+      boolean isCourseIdRequired,
+      boolean isOrganisationRequired,
+      boolean isUserIdRequired,
+      HttpStatus httpStatusCode) {
+    beforeTest(isCourseIdRequired, isOrganisationRequired, isUserIdRequired);
     performPostTest(
         this,
         TEMPLATE_DIR,
@@ -131,6 +192,12 @@ public class CreateCourseBatchTest extends BaseCitrusTestRunner {
       },
       new Object[] {
         TEST_NAME_CREATE_COURSE_BATCH_SUCCESS_INVITE_ONLY_WITH_MENTORS, false, true, HttpStatus.OK
+      },
+      new Object[] {
+        TEST_NAME_CREATE_COURSE_BATCH_SUCCESS_INVITE_ONLY_WITH_PARTICICPANTS,
+        true,
+        true,
+        HttpStatus.OK
       }
     };
   }
@@ -165,7 +232,7 @@ public class CreateCourseBatchTest extends BaseCitrusTestRunner {
       // courseUnitId/resourceId is needed to be updated in context for creating course
       variable("courseUnitId", ContentStoreUtil.getCourseUnitId());
       variable("resourceId", ContentStoreUtil.getResourceId());
-      String courseId = ContentStoreUtil.getCourseId(this, testContext);
+      String courseId = "do_21259396651757568013469";
       variable("courseId", courseId);
     }
     if (isOrgIdRequired) {
