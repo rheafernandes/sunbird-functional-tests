@@ -1,0 +1,14 @@
+{
+    "id": "api.course.enrol",
+    "ver": "v1",
+    "ts": "@ignore@",
+    "params": {
+        "resmsgid": "@ignore@",
+        "msgid": "@ignore@",
+        "err": "@ignore@",
+        "status": "SERVER_ERROR",
+        "errmsg": "@ignore@"
+    },
+    "responseCode": "UNAUTHORIZED",
+    "result": {}
+}
