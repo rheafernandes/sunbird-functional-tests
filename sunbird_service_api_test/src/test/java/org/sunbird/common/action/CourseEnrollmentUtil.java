@@ -14,11 +14,11 @@ public class CourseEnrollmentUtil {
   public static final String TEST_NAME_UNENROLL_COURSE_SUCCESS = "testUnenrollCourseSuccess";
 
   private static String getUnenrollCourseUrl(BaseCitrusTestRunner runner) {
-    return runner.getLmsApiUriPath("/api/course/v1/unenroll", "/v1/course/unenroll");
+    return runner.getLmsApiUriPath("/api/course/v1/unenrol", "/v1/course/unenroll");
   }
 
   private static String getEnrollCourseUrl(BaseCitrusTestRunner runner) {
-    return runner.getLmsApiUriPath("/api/course/v1/enroll", "/v1/course/enrol");
+    return runner.getLmsApiUriPath("/api/course/v1/enrol", "/v1/course/enroll");
   }
 
   public static void enrollCourse(
