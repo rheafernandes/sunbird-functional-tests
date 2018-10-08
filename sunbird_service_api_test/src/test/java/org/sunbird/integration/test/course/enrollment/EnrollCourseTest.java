@@ -43,7 +43,7 @@ public class EnrollCourseTest extends BaseCitrusTestRunner {
   private static final String TODAY_DATE = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
 
   private String getEnrollCourseBatchUrl() {
-    return getLmsApiUriPath("/api/course/v1/enrol", "/v1/course/enrol");
+    return getLmsApiUriPath("/api/course/v1/enrol", "/v1/course/enroll");
   }
 
   @DataProvider(name = "enrollCourseDataProviderFailure")

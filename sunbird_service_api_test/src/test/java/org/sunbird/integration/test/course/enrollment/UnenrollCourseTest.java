@@ -43,7 +43,7 @@ public class UnenrollCourseTest extends BaseCitrusTestRunner {
   private static final String TODAY_DATE = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
 
   private String getUnenrollCourseBatchUrl() {
-    return getLmsApiUriPath("/api/course/v1/enroll", "/v1/course/unenroll");
+    return getLmsApiUriPath("/api/course/v1/unenrol", "/v1/course/unenroll");
   }
 
   @DataProvider(name = "unenrollCourseDataProviderFailure")
