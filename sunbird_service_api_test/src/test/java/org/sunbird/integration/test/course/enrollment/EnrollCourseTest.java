@@ -32,10 +32,10 @@ public class EnrollCourseTest extends BaseCitrusTestRunner {
       "testEnrollCourseFailureForInvalidUserId";
   public static final String TEST_NAME_ENROLL_COURSE_FAILURE_INVALID_BATCH_ID =
       "testEnrollCourseFailureForInvalidBatchId";
-  public static final String TEST_NAME_ENROLL_COURSE_FAILURE_WITH_USER_ALREADY_ENROLLED =
-      "testEnrollCourseFailureWithUserAlreadyEnrolled";
-  public static final String TEST_NAME_ENROLL_COURSE_SUCCESS_FOR_USER_UNENROLLED =
-      "testEnrollCourseSuccessForUserUnenrolled";
+  public static final String TEST_NAME_ENROLL_COURSE_FAILURE_FOR_ENROLLED_USER =
+      "testEnrollCourseFailureForEnrolledUser";
+  public static final String TEST_NAME_ENROLL_COURSE_SUCCESS_FOR_UNENROLLED_USER =
+      "testEnrollCourseSuccessForUnenrolledUser";
   public static final String TEST_NAME_ENROLL_COURSE_SUCCESS = "testEnrollCourseSuccess";
 
   public static final String TEMPLATE_DIR = "templates/course/batch/enroll";
@@ -46,8 +46,8 @@ public class EnrollCourseTest extends BaseCitrusTestRunner {
     return getLmsApiUriPath("/api/course/v1/enrol", "/v1/course/enrol");
   }
 
-  @DataProvider(name = "courseUnenrollmentDataProviderFailure")
-  public Object[][] courseUnenrollmentDataProviderFailure() {
+  @DataProvider(name = "enrollCourseDataProviderFailure")
+  public Object[][] enrollCourseDataProviderFailure() {
     return new Object[][] {
       new Object[] {
         TEST_NAME_ENROLL_COURSE_FAILURE_WITHOUT_COURSE_ID,
@@ -106,7 +106,7 @@ public class EnrollCourseTest extends BaseCitrusTestRunner {
         HttpStatus.BAD_REQUEST
       },
       new Object[] {
-        TEST_NAME_ENROLL_COURSE_FAILURE_WITH_USER_ALREADY_ENROLLED,
+        TEST_NAME_ENROLL_COURSE_FAILURE_FOR_ENROLLED_USER,
         true,
         true,
         true,
@@ -116,7 +116,7 @@ public class EnrollCourseTest extends BaseCitrusTestRunner {
     };
   }
 
-  @Test(dataProvider = "courseUnenrollmentDataProviderFailure")
+  @Test(dataProvider = "enrollCourseDataProviderFailure")
   @CitrusParameters({
     "testName",
     "canCreateUser",
@@ -126,7 +126,7 @@ public class EnrollCourseTest extends BaseCitrusTestRunner {
     "httpStatusCode"
   })
   @CitrusTest
-  public void testUnenrollCourseFailure(
+  public void testEnrollCourseFailure(
       String testName,
       boolean canCreateUser,
       boolean canCreateCourseBatch,
@@ -146,18 +146,18 @@ public class EnrollCourseTest extends BaseCitrusTestRunner {
         RESPONSE_JSON);
   }
 
-  @DataProvider(name = "courseUnenrollmentDataProviderSuccess")
-  public Object[][] courseUnenrollmentDataProviderSuccess() {
+  @DataProvider(name = "enrollCourseDataProviderSuccess")
+  public Object[][] enrollCourseDataProviderSuccess() {
     return new Object[][] {
       new Object[] {TEST_NAME_ENROLL_COURSE_SUCCESS, false, false},
-      new Object[] {TEST_NAME_ENROLL_COURSE_SUCCESS_FOR_USER_UNENROLLED, true, true},
+      new Object[] {TEST_NAME_ENROLL_COURSE_SUCCESS_FOR_UNENROLLED_USER, true, true},
     };
   }
 
-  @Test(dataProvider = "courseUnenrollmentDataProviderSuccess")
+  @Test(dataProvider = "enrollCourseDataProviderSuccess")
   @CitrusParameters({"testName", "canEnroll", "canUnenroll"})
   @CitrusTest
-  public void testUnenrollCourseSuccess(String testName, boolean canEnroll, boolean canUnenroll) {
+  public void testEnrollCourseSuccess(String testName, boolean canEnroll, boolean canUnenroll) {
     getTestCase().setName(testName);
     getAuthToken(this, true);
     beforeTest(testName, true, true, true, canEnroll, canUnenroll);
