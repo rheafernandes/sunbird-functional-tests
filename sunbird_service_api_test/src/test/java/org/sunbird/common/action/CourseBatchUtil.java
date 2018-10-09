@@ -11,7 +11,6 @@ import org.sunbird.integration.test.course.batch.CreateCourseBatchTest;
 public class CourseBatchUtil {
 
   private static String openCourseBatchId = "";
-  private static String inviteOnlyCourseBatchId = "";
   public static final String TEST_NAME_CREATE_COURSE_BATCH_SUCCESS_OPEN_BATCH =
       "testCreateCourseBatchSuccessOpenBatch";
   public static final String TEST_NAME_CREATE_COURSE_BATCH_SUCCESS_INVITE_ONLY_BATCH =
@@ -31,13 +30,12 @@ public class CourseBatchUtil {
 
   public static String getInviteOnlyCourseBatchId(
       BaseCitrusTestRunner runner, TestContext testContext) {
-    if (StringUtils.isBlank(inviteOnlyCourseBatchId)) {
-
-      inviteOnlyCourseBatchId =
-          getCourseBatchId(
-              runner, testContext, TEST_NAME_CREATE_COURSE_BATCH_SUCCESS_INVITE_ONLY_BATCH);
+    if (StringUtils.isBlank(
+        (String) testContext.getVariables().get(Constant.EXTRACT_VAR_BATCH_ID))) {
+      getCourseBatchId(
+          runner, testContext, TEST_NAME_CREATE_COURSE_BATCH_SUCCESS_INVITE_ONLY_BATCH);
     }
-    return inviteOnlyCourseBatchId;
+    return testContext.getVariable(Constant.EXTRACT_VAR_BATCH_ID);
   }
 
   private static String getCourseBatchId(
