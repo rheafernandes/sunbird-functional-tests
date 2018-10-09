@@ -19,9 +19,9 @@ public class CreateGeolocationTest extends BaseCitrusTestRunner {
       "testCreateGeolocationFailureWithInvalidRootOrgId";
 
   private static final String TEST_NAME_CREATE_GEOLOCATION_SUCCESS_WITH_ROOT_ORG_ID =
-      "testGeolocationSuccessWithRootOrgId";
+      "testCreateGeolocationSuccessWithRootOrgId";
   private static final String TEST_NAME_CREATE_GEOLOCATION_SUCCESS_WITH_SUB_ORG_ID =
-      "testGeolocationSuccessWithSubOrgId";
+      "testCreateGeolocationSuccessWithSubOrgId";
 
   private static final String TEMPLATE_DIR = "templates/geolocation/create";
 
