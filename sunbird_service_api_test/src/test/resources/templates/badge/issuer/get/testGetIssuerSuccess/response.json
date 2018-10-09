@@ -16,7 +16,7 @@
     "createdDate": "@ignore@",
     "issuerUrl": "http://www.example.com",
     "issuerIdUrl": "@ignore@",
-    "name": "swarn",
+    "name": "FT_issuer",
     "description": "something",
     "email": "someuser@someorg.com"
   }
