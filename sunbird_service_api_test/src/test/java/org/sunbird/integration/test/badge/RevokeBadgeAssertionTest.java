@@ -10,6 +10,7 @@ import org.sunbird.common.action.ContentStoreUtil;
 import org.sunbird.common.action.IssuerUtil;
 import org.sunbird.common.action.OrgUtil;
 import org.sunbird.common.action.UserUtil;
+import org.sunbird.common.util.Constant;
 import org.sunbird.integration.test.common.BaseCitrusTestRunner;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -130,7 +131,7 @@ public class RevokeBadgeAssertionTest extends BaseCitrusTestRunner {
         false,
         HttpStatus.OK,
         RESPONSE_JSON);
-    afterTest();
+    afterTest(true);
   }
 
   @Test(dataProvider = "revokeBadgeAssertionDataProviderFailure")
@@ -203,5 +204,12 @@ public class RevokeBadgeAssertionTest extends BaseCitrusTestRunner {
     }
   }
 
-  private void afterTest() {}
+  private void afterTest(boolean isIssuerCreated) {
+    if (isIssuerCreated)
+      IssuerUtil.deleteIssuer(
+          this,
+          testContext,
+          config,
+          (String) testContext.getVariables().get(Constant.EXTRACT_VAR_ISSUER_ID));
+  }
 }

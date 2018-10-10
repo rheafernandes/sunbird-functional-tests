@@ -5,6 +5,7 @@ import com.consol.citrus.testng.CitrusParameters;
 import javax.ws.rs.core.MediaType;
 import org.springframework.http.HttpStatus;
 import org.sunbird.common.action.*;
+import org.sunbird.common.util.Constant;
 import org.sunbird.integration.test.common.BaseCitrusTestRunner;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -62,7 +63,9 @@ public class CreateBadgeAssertionTest extends BaseCitrusTestRunner {
     return new Object[][] {
       new Object[] {TEST_NAME_CREATE_BADGE_ASSERTION_SUCCESS_USER_WITHOUT_EVIDENCE, true, false},
       new Object[] {TEST_NAME_CREATE_BADGE_ASSERTION_SUCCESS_USER_WITH_EVIDENCE, true, false},
-      new Object[] {TEST_NAME_CREATE_BADGE_ASSERTION_SUCCESS_TEXTBOOK_WITHOUT_EVIDENCE, false, true},
+      new Object[] {
+        TEST_NAME_CREATE_BADGE_ASSERTION_SUCCESS_TEXTBOOK_WITHOUT_EVIDENCE, false, true
+      },
       new Object[] {TEST_NAME_CREATE_BADGE_ASSERTION_SUCCESS_TEXTBOOK_WITH_EVIDENCE, false, true},
       new Object[] {TEST_NAME_CREATE_BADGE_ASSERTION_SUCCESS_COURSE_WITHOUT_EVIDENCE, false, true},
       new Object[] {TEST_NAME_CREATE_BADGE_ASSERTION_SUCCESS_COUURSE_WITH_EVIDENCE, false, true}
@@ -141,8 +144,9 @@ public class CreateBadgeAssertionTest extends BaseCitrusTestRunner {
   @Test(dataProvider = "createBadgeAssertionDataProviderSuccess")
   @CitrusParameters({"testName", "canCreateUser", "canCreateCourse"})
   @CitrusTest
-  public void testCreateBadgeAssertionSuccess(String testName, Boolean canCreateUser, Boolean canCreateCourse) {
-    beforeTest(testName, canCreateUser, canCreateCourse,true, true);
+  public void testCreateBadgeAssertionSuccess(
+      String testName, Boolean canCreateUser, Boolean canCreateCourse) {
+    beforeTest(testName, canCreateUser, canCreateCourse, true, true);
     performPostTest(
         this,
         TEMPLATE_DIR,
@@ -181,10 +185,15 @@ public class CreateBadgeAssertionTest extends BaseCitrusTestRunner {
         false,
         httpStatus,
         RESPONSE_JSON);
+    afterTest(canCreateIssuer);
   }
 
   private void beforeTest(
-      String testName, Boolean canCreateUser, Boolean canCreateCourse, Boolean canCreateIssuer, Boolean canCreateBadge) {
+      String testName,
+      Boolean canCreateUser,
+      Boolean canCreateCourse,
+      Boolean canCreateIssuer,
+      Boolean canCreateBadge) {
 
     getTestCase().setName(testName);
     if (canCreateUser) {
@@ -221,6 +230,16 @@ public class CreateBadgeAssertionTest extends BaseCitrusTestRunner {
           BT_CREATE_BADGE_CLASS_TEMPLATE_DIR,
           BT_TEST_NAME_CREATE_BADGE_CLASS_SUCCESS,
           HttpStatus.OK);
+    }
+  }
+
+  private void afterTest(boolean isIssuerCreated) {
+    if (isIssuerCreated) {
+      IssuerUtil.deleteIssuer(
+          this,
+          testContext,
+          config,
+          (String) testContext.getVariables().get(Constant.EXTRACT_VAR_ISSUER_ID));
     }
   }
 }

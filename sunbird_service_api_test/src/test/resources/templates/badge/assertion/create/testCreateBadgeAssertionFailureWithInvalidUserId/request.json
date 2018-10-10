@@ -1,10 +1,10 @@
  {
     "request": {
     
-     "recipientId":"4cbe7031-bc77-4e38-b742-4797246llll",
+     "recipientId":"invalidUserId",
      "recipientType":"user",
-     "issuerId":"issuerslug-14",
-     "badgeId":"badgeslug-10"
+     "issuerId":"someIssuerId",
+     "badgeId":"someBadgeId"
      
    }
   } 
