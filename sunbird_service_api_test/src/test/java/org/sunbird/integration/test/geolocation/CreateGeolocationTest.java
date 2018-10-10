@@ -26,8 +26,7 @@ public class CreateGeolocationTest extends BaseCitrusTestRunner {
   private static final String TEMPLATE_DIR = "templates/geolocation/create";
 
   private String getCreateGeolocationUrl() {
-    return getLmsApiUriPath(
-        "/api/badging/v1/issuer/badge/assertion/create", "/v1/notification/location/create");
+    return getLmsApiUriPath("/api/org/v1/location/create", "/v1/notification/location/create");
   }
 
   @DataProvider(name = "createGeolocationDataProviderFailure")
