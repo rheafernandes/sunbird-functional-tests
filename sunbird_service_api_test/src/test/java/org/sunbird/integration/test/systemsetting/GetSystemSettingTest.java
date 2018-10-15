@@ -12,7 +12,7 @@ import org.testng.annotations.Test;
 public class GetSystemSettingTest extends BaseCitrusTestRunner {
 
   public static final String TEST_NAME_GET_SYSTEM_SETTING_FAILURE_WITHOUT_TOKEN =
-      "testGetSystemSettingFailureWithoutToken";
+      "testGetSystemSettingFailureWithoutAuthToken";
   public static final String TEST_NAME_GET_SYSTEM_SETTING_FAILURE_WITH_INVALID_FIELD =
       "testGetSystemSettingFailureWithInvalidField";
   public static final String TEST_NAME_GET_SYSTEM_SETTING_SUCCESS = "testGetSystemSettingSuccess";
