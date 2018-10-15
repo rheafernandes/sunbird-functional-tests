@@ -8,7 +8,6 @@ import org.sunbird.integration.test.common.BaseCitrusTestRunner;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-/** Created by rajatgupta on 09/10/18. */
 public class GetAllSystemSettings extends BaseCitrusTestRunner {
 
   public static final String TEST_NAME_GET_ALL_SYSTEM_SETTINGS_FAILURE_WITHOUT_TOKEN =
