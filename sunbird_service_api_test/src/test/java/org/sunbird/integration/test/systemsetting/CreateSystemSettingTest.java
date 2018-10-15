@@ -30,7 +30,7 @@ public class CreateSystemSettingTest extends BaseCitrusTestRunner {
     return getLmsApiUriPath("/api/data/v1/system/setting/set", "/v1/system/setting/set");
   }
 
-  @DataProvider(name = "getAllSystemSettingsDataProvider")
+  @DataProvider(name = "createSystemSettingDataProvider")
   public Object[][] createSystemSettingDataProvider() {
 
     return new Object[][] {
