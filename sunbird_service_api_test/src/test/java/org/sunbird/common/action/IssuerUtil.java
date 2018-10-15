@@ -12,6 +12,10 @@ public class IssuerUtil {
     return runner.getLmsApiUriPath("/api/badging/v1/issuer/create", "/v1/issuer/create");
   }
 
+  public static String getDeleteIssuerUrl(BaseCitrusTestRunner runner, String pathParam) {
+    return runner.getLmsApiUriPath("/api/badging/v1/issuer/delete", "/v1/issuer/delete", pathParam);
+  }
+
   public static void createIssuer(
       BaseCitrusTestRunner runner,
       TestContext testContext,
@@ -41,5 +45,23 @@ public class IssuerUtil {
                 responseCode,
                 "$.result.issuerId",
                 Constant.EXTRACT_VAR_ISSUER_ID));
+  }
+
+  public static void deleteIssuer(
+      BaseCitrusTestRunner runner,
+      TestContext testContext,
+      TestGlobalProperty config,
+      String issuerId) {
+    runner.http(
+        builder ->
+            TestActionUtil.getDeleteRequestTestAction(
+                builder,
+                Constant.LMS_ENDPOINT,
+                null,
+                null,
+                getDeleteIssuerUrl(runner, issuerId),
+                null,
+                null,
+                null));
   }
 }
