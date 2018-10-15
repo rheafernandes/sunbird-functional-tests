@@ -7,7 +7,6 @@ import org.springframework.util.StringUtils;
 import org.sunbird.common.util.Constant;
 import org.sunbird.integration.test.common.BaseCitrusTestRunner;
 
-/** Created by rajatgupta on 09/10/18. */
 public class SystemSettingUtil {
   public static String ID = "uniqueId";
   public static String FIELD = "uniqueField";
