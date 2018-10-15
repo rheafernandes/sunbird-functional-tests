@@ -1,7 +1,6 @@
 package org.sunbird.integration.test.badge;
 
 import com.consol.citrus.annotations.CitrusTest;
-import com.consol.citrus.http.client.HttpClient;
 import com.consol.citrus.testng.CitrusParameters;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -29,15 +28,9 @@ public class CreateIssuerTest extends BaseCitrusTestRunner {
       "testCreateIssuerFailureWithInvalidEmail";
 
   public static final String TEMPLATE_DIR = "templates/badge/issuer/create";
-
-  public static final String RESPONSE_JSON = "response.json";
-
-  @Autowired private HttpClient restTestClient;
-
   @Autowired private TestGlobalProperty initGlobalValues;
 
   private String getCreateIssuerUrl() {
-    System.out.println("initGlobalValues = " + initGlobalValues);
     return initGlobalValues.getLmsUrl().contains("localhost")
         ? "/v1/issuer/create"
         : "/api/badging/v1/issuer/create";
@@ -46,64 +39,53 @@ public class CreateIssuerTest extends BaseCitrusTestRunner {
   @DataProvider(name = "createIssuerDataProviderSuccess")
   public Object[][] createIssuerDataProviderSuccess() {
     return new Object[][] {
-      new Object[] {REQUEST_FORM_DATA, RESPONSE_JSON, TEST_NAME_CREATE_ISSUER_SUCCESS},
-      new Object[] {REQUEST_FORM_DATA, RESPONSE_JSON, TEST_NAME_CREATE_ISSUER_SUCCESS_WITH_IMAGE}
+      new Object[] {TEST_NAME_CREATE_ISSUER_SUCCESS},
+      new Object[] {TEST_NAME_CREATE_ISSUER_SUCCESS_WITH_IMAGE}
     };
   }
 
   @DataProvider(name = "createIssuerDataProviderFailure")
   public Object[][] createIssuerDataProviderFailure() {
     return new Object[][] {
-      new Object[] {REQUEST_FORM_DATA, RESPONSE_JSON, TEST_NAME_CREATE_ISSUER_FAILURE_WITHOUT_NAME},
-      new Object[] {
-        REQUEST_FORM_DATA, RESPONSE_JSON, TEST_NAME_CREATE_ISSUER_FAILURE_WITHOUT_DESCRIPTION
-      },
-      new Object[] {REQUEST_FORM_DATA, RESPONSE_JSON, TEST_NAME_CREATE_ISSUER_FAILURE_WITHOUT_URL},
-      new Object[] {
-        REQUEST_FORM_DATA, RESPONSE_JSON, TEST_NAME_CREATE_ISSUER_FAILURE_WITH_INVALID_URL
-      },
-      new Object[] {
-        REQUEST_FORM_DATA, RESPONSE_JSON, TEST_NAME_CREATE_ISSUER_FAILURE_WITHOUT_EMAIL
-      },
-      new Object[] {
-        REQUEST_FORM_DATA, RESPONSE_JSON, TEST_NAME_CREATE_ISSUER_FAILURE_WITH_INVALID_EMAIL
-      }
+      new Object[] {TEST_NAME_CREATE_ISSUER_FAILURE_WITHOUT_NAME},
+      new Object[] {TEST_NAME_CREATE_ISSUER_FAILURE_WITHOUT_DESCRIPTION},
+      new Object[] {TEST_NAME_CREATE_ISSUER_FAILURE_WITHOUT_URL},
+      new Object[] {TEST_NAME_CREATE_ISSUER_FAILURE_WITH_INVALID_URL},
+      new Object[] {TEST_NAME_CREATE_ISSUER_FAILURE_WITHOUT_EMAIL},
+      new Object[] {TEST_NAME_CREATE_ISSUER_FAILURE_WITH_INVALID_EMAIL}
     };
   }
 
   @Test(dataProvider = "createIssuerDataProviderSuccess")
-  @CitrusParameters({"requestFormData", "responseJson", "testName"})
+  @CitrusParameters({"testName"})
   @CitrusTest
-  public void testCreateIssuerSuccess(
-      String requestFormData, String responseJson, String testName) {
+  public void testCreateIssuerSuccess(String testName) {
     System.out.println("initGlobalValues = " + initGlobalValues);
     performMultipartTest(
         this,
         TEMPLATE_DIR,
         testName,
         getCreateIssuerUrl(),
-        requestFormData,
+        REQUEST_FORM_DATA,
         null,
         false,
         HttpStatus.OK,
-        responseJson);
+        RESPONSE_JSON);
   }
 
   @Test(dataProvider = "createIssuerDataProviderFailure")
-  @CitrusParameters({"requestFormData", "responseJson", "testName"})
+  @CitrusParameters({"testName"})
   @CitrusTest
-  public void testCreateIssuerFailure(
-      String requestFormData, String responseJson, String testName) {
-    System.out.println("initGlobalValues = " + initGlobalValues);
+  public void testCreateIssuerFailure(String testName) {
     performMultipartTest(
         this,
         TEMPLATE_DIR,
         testName,
         getCreateIssuerUrl(),
-        requestFormData,
+        REQUEST_FORM_DATA,
         null,
         false,
         HttpStatus.BAD_REQUEST,
-        responseJson);
+        RESPONSE_JSON);
   }
 }

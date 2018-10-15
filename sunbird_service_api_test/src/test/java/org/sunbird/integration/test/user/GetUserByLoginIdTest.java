@@ -23,16 +23,16 @@ public class GetUserByLoginIdTest extends BaseCitrusTestRunner {
   @DataProvider(name = "getUserByLoginIdFailure")
   public Object[][] getUserByLoginIdFailure() {
     return new Object[][] {
-      new Object[] {"testGetUserByLoginIdFailureWithInvalidLoginId"},
-      new Object[] {"testGetUserByLoginIdFailureWithEmptyLoginId"},
-      new Object[] {"testGetUserByLoginIdFailureWithoutLoginId"}
+      new Object[] {"testGetUserByLoginIdFailureWithInvalidLoginId", HttpStatus.NOT_FOUND},
+      new Object[] {"testGetUserByLoginIdFailureWithEmptyLoginId", HttpStatus.BAD_REQUEST},
+      new Object[] {"testGetUserByLoginIdFailureWithoutLoginId", HttpStatus.BAD_REQUEST}
     };
   }
 
   @Test(dataProvider = "getUserByLoginIdFailure")
-  @CitrusParameters({"testName"})
+  @CitrusParameters({"testName", "httpStatusCode"})
   @CitrusTest
-  public void testGetUserByLoginIdFailure(String testName) {
+  public void testGetUserByLoginIdFailure(String testName, HttpStatus httpStatusCode) {
     performPostTest(
         this,
         TEMPLATE_DIR,
@@ -41,7 +41,7 @@ public class GetUserByLoginIdTest extends BaseCitrusTestRunner {
         REQUEST_JSON,
         MediaType.APPLICATION_JSON,
         false,
-        HttpStatus.BAD_REQUEST,
+        httpStatusCode,
         RESPONSE_JSON);
   }
 
@@ -60,7 +60,7 @@ public class GetUserByLoginIdTest extends BaseCitrusTestRunner {
         REQUEST_JSON,
         MediaType.APPLICATION_JSON,
         true,
-        HttpStatus.BAD_REQUEST,
+        HttpStatus.NOT_FOUND,
         RESPONSE_JSON);
   }
 

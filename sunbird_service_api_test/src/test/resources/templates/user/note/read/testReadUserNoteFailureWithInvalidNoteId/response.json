@@ -5,10 +5,10 @@
     "params": {
         "resmsgid": null,
         "msgid": "@ignore@",
-        "err": "UNAUTHORIZED_USER",
-        "status": "SERVER_ERROR",
-        "errmsg": "You are not authorized."
+        "err": "INVALID_PARAMETER_VALUE",
+        "status": "INVALID_PARAMETER_VALUE",
+        "errmsg": "@ignore@"
     },
-    "responseCode": "CLIENT_ERROR",
+    "responseCode": "RESOURCE_NOT_FOUND",
     "result": {}
 }

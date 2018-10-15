@@ -5,6 +5,7 @@ import com.consol.citrus.testng.CitrusParameters;
 import org.springframework.http.HttpStatus;
 import org.sunbird.common.action.IssuerUtil;
 import org.sunbird.common.action.OrgUtil;
+import org.sunbird.common.util.Constant;
 import org.sunbird.integration.test.common.BaseCitrusTestRunner;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -86,7 +87,7 @@ public class CreateBadgeClassTest extends BaseCitrusTestRunner {
         false,
         HttpStatus.OK,
         RESPONSE_JSON);
-    afterTest();
+    afterTest(true);
   }
 
   @Test(dataProvider = "createBadgeClassDataProviderFailure")
@@ -114,14 +115,21 @@ public class CreateBadgeClassTest extends BaseCitrusTestRunner {
     }
     if (canCreateIssuer) {
       IssuerUtil.createIssuer(
-              this,
-              testContext,
-              config,
-              BT_CREATE_ISSUER_TEMPLATE_DIR,
-              BT_TEST_NAME_CREATE_ISSUER_SUCCESS,
-              HttpStatus.OK);
+          this,
+          testContext,
+          config,
+          BT_CREATE_ISSUER_TEMPLATE_DIR,
+          BT_TEST_NAME_CREATE_ISSUER_SUCCESS,
+          HttpStatus.OK);
     }
   }
 
-  private void afterTest() {}
+  private void afterTest(boolean isIssuerCreated) {
+    if (isIssuerCreated)
+      IssuerUtil.deleteIssuer(
+          this,
+          testContext,
+          config,
+          (String) testContext.getVariables().get(Constant.EXTRACT_VAR_ISSUER_ID));
+  }
 }

@@ -5,9 +5,9 @@
     "params": {
         "resmsgid": null,
         "msgid": "@ignore@",
-        "err": "NOTE_REQUIRED",
-        "status": "NOTE_REQUIRED",
-        "errmsg": "No data to store for notes"
+        "err": "MANDATORY_PARAMETER_MISSING",
+        "status": "MANDATORY_PARAMETER_MISSING",
+        "errmsg": "Mandatory parameter note is missing."
     },
     "responseCode": "CLIENT_ERROR",
     "result": {}

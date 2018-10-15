@@ -140,4 +140,12 @@ public class UserUtil {
     String channelName = System.getenv("sunbird_default_channel");
     return testContext.getVariable("userName") + "@" + channelName;
   }
+
+  public static void createUserAndGetToken(BaseCitrusTestRunner runner, TestContext testContext) {
+    getUserId(runner, testContext);
+    runner.variable("userId", testContext.getVariable("userId"));
+    String userName = UserUtil.getUserNameWithChannel(runner, testContext);
+    runner.getAuthToken(
+        runner, userName, Constant.PASSWORD, testContext.getVariable("userId"), true);
+  }
 }

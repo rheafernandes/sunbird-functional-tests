@@ -41,7 +41,7 @@
             "homeUrl": null,
             "orgTypeId": null,
             "isDefault": null,
-            "contactDetail": [],
+            "contactDetail": "@ignore@",
             "createdDate": "@ignore@",
             "createdBy": "@ignore@",
             "parentOrgId": null,

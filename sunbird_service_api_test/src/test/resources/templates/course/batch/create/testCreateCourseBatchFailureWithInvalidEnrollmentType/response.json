@@ -5,9 +5,9 @@
     "params": {
         "resmsgid": null,
         "msgid": "@ignore@",
-        "err": "ENROLMENT_TYPE_VALUE_ERROR",
-        "status": "ENROLMENT_TYPE_VALUE_ERROR",
-        "errmsg": "EnrolmentType value must be either open or invite-only."
+        "err": "INVALID_PARAMETER_VALUE",
+        "status": "INVALID_PARAMETER_VALUE",
+        "errmsg": "Invalid value invalid for parameter enrollmentType. Please provide a valid value."
     },
     "responseCode": "CLIENT_ERROR",
     "result": {}

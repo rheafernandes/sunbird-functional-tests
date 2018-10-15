@@ -2,6 +2,7 @@ package org.sunbird.integration.test.user.notes;
 
 import com.consol.citrus.annotations.CitrusTest;
 import com.consol.citrus.testng.CitrusParameters;
+import javax.ws.rs.core.MediaType;
 import org.springframework.http.HttpStatus;
 import org.sunbird.common.action.UserNoteUtil;
 import org.sunbird.integration.test.common.BaseCitrusTestRunner;
@@ -25,13 +26,15 @@ public class DeleteUserNoteTest extends BaseCitrusTestRunner {
   public Object[][] deleteUserNoteFailureDataProvider() {
 
     return new Object[][] {
-      new Object[] {TEST_DELETE_USER_NOTE_FAILURE_WITH_INVALID_USERID, true, HttpStatus.OK}
+      new Object[] {TEST_DELETE_USER_NOTE_FAILURE_WITH_INVALID_USERID, true, HttpStatus.FORBIDDEN}
     };
   }
 
   @DataProvider(name = "deleteUserNoteSuccessDataProvider")
   public Object[][] deleteUserNoteSuccessDataProvider() {
-    return new Object[][] {new Object[] {TEST_DELETE_USER_NOTE_SUCCESS, true, HttpStatus.OK}};
+    return new Object[][] {
+      new Object[] {TEST_DELETE_USER_NOTE_SUCCESS, true, HttpStatus.UNAUTHORIZED}
+    };
   }
 
   @Test(dataProvider = "deleteUserNoteFailureDataProvider")
@@ -39,6 +42,7 @@ public class DeleteUserNoteTest extends BaseCitrusTestRunner {
   @CitrusTest
   public void testDeleteUserNoteFailure(
       String testName, boolean isAuthRequired, HttpStatus httpStatusCode) {
+    getTestCase().setName(testName);
     beforeTest();
     getAuthToken(this, isAuthRequired);
     performDeleteTest(
@@ -47,9 +51,9 @@ public class DeleteUserNoteTest extends BaseCitrusTestRunner {
         testName,
         getDeleteNoteUrl(testContext.getVariable("noteId")),
         null,
-        null,
-        false,
-        HttpStatus.UNAUTHORIZED,
+        MediaType.APPLICATION_JSON,
+        true,
+        httpStatusCode,
         RESPONSE_JSON);
   }
 
@@ -66,7 +70,7 @@ public class DeleteUserNoteTest extends BaseCitrusTestRunner {
         testName,
         getDeleteNoteUrl(testContext.getVariable("noteId")),
         null,
-        null,
+        MediaType.APPLICATION_JSON,
         true,
         HttpStatus.OK,
         RESPONSE_JSON);
@@ -83,7 +87,7 @@ public class DeleteUserNoteTest extends BaseCitrusTestRunner {
         TEST_DELETE_USER_NOTE_FAILURE_WITH_INVALID_NOTEID,
         getDeleteNoteUrl("InvalidNoteId"),
         null,
-        null,
+        MediaType.APPLICATION_JSON,
         true,
         HttpStatus.UNAUTHORIZED,
         RESPONSE_JSON);

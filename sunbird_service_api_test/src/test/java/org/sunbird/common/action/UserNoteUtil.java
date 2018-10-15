@@ -43,11 +43,7 @@ public class UserNoteUtil {
   }
 
   public static void createNote(BaseCitrusTestRunner runner, TestContext testContext) {
-    UserUtil.getUserId(runner, testContext);
-    runner.variable("userId", testContext.getVariable("userId"));
-    String userName = UserUtil.getUserNameWithChannel(runner, testContext);
-    runner.getAuthToken(
-        runner, userName, Constant.PASSWORD, testContext.getVariable("userId"), true);
+    UserUtil.createUserAndGetToken(runner, testContext);
     UserNoteUtil.createUserNote(
         runner,
         testContext,
