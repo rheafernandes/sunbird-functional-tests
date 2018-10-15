@@ -13,7 +13,7 @@ public class SystemSettingUtil {
   public static final String TEMPLATE_DIR = "templates/systemsetting/create";
 
   private static String getCreateSystemSettingUrl(BaseCitrusTestRunner runner) {
-    return runner.getLmsApiUriPath("/api/data/v1/system/settings/set", "/v1/system/setting/set");
+    return runner.getLmsApiUriPath("/api/data/v1/system/setting/set", "/v1/system/setting/set");
   }
 
   public static void createSystemSetting(
@@ -50,7 +50,7 @@ public class SystemSettingUtil {
   public static String getSystemSetting(BaseCitrusTestRunner runner, TestContext testContext) {
     runner.variable("id", ID);
     runner.variable("field", FIELD);
-    if (StringUtils.isEmpty((String) testContext.getVariables().get("systemSetting"))) {
+    if (StringUtils.isEmpty(testContext.getVariables().get("systemSetting"))) {
       createSystemSetting(
           runner, testContext, TEMPLATE_DIR, "testCreateSystemSettingSuccess", "systemSetting");
     }

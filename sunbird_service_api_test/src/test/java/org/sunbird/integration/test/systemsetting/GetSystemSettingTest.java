@@ -47,6 +47,7 @@ public class GetSystemSettingTest extends BaseCitrusTestRunner {
   @CitrusTest
   public void testGetSystemSetting(
       String testName, String field, boolean isAuthRequired, HttpStatus httpStatusCode) {
+    getTestCase().setName(testName);
     beforeTest();
     performGetTest(
         this,
