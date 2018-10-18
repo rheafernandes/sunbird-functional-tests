@@ -80,7 +80,7 @@ public class DeleteUserNoteTest extends BaseCitrusTestRunner {
   @CitrusTest
   public void testDeleteUserNoteFailureWithInvalidNoteId() {
     getTestCase().setName(TEST_DELETE_USER_NOTE_FAILURE_WITH_INVALID_NOTEID);
-    beforeTest();
+    //beforeTest();
     performDeleteTest(
         this,
         TEMPLATE_DIR,

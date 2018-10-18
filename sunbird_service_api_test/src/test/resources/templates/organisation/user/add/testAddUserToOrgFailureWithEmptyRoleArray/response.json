@@ -5,9 +5,9 @@
     "params": {
         "resmsgid": null,
         "msgid": "@ignore@",
-        "err": "ROLE_MISSING",
-        "status": "ROLE_MISSING",
-        "errmsg": "Role of the user is required"
+        "err": "INVALID_USER_DATA",
+        "status": "INVALID_USER_DATA",
+        "errmsg": "Given User Data doesn't exist in our records. Please provide a valid one"
     },
     "responseCode": "CLIENT_ERROR",
     "result": {}
