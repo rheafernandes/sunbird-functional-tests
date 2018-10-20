@@ -5,9 +5,9 @@
     "params": {
         "resmsgid": null,
         "msgid": "@ignore@",
-        "err": "ROLE_MISSING",
-        "status": "ROLE_MISSING",
-        "errmsg": "Role of the user is required"
+        "err": "DATA_TYPE_ERROR",
+        "status": "DATA_TYPE_ERROR",
+        "errmsg": "roles data type should be of List."
     },
     "responseCode": "CLIENT_ERROR",
     "result": {}
