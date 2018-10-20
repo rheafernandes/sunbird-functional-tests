@@ -16,7 +16,7 @@ public class ContentStoreUtil {
   private static final String CONTENT_STORE_UPDATE_HIERARCHY_URL = "/content/v3/hierarchy/update";
   private static final String CONTENT_STORE_CONTENT_PUBLISH_URL = "/content/v3/publish/";
   private static final String CONTENT_STORE_RETIRE_CONTENT_URL = "/content/v3/retire/";
-  private static String courseId = "do_1125132196653301761317";
+  private static String courseId = "";
   private static final String courseUnitId = "SB_FT_COURSEUNIT_" + UUID.randomUUID().toString();
   private static final String resourceId = System.getenv("sunbird_content_id");
 
@@ -50,13 +50,13 @@ public class ContentStoreUtil {
       runner.sleep(Constant.ES_SYNC_WAIT_TIME);
 
       // retire course post all test (before jvm shutdown)
-      /*  Runtime.getRuntime()
-      .addShutdownHook(
-          new Thread() {
-            public void run() {
-              retireCourse(runner, testContext);
-            }
-          });*/
+      Runtime.getRuntime()
+          .addShutdownHook(
+              new Thread() {
+                public void run() {
+                  retireCourse(runner, testContext);
+                }
+              });
     }
   }
 
