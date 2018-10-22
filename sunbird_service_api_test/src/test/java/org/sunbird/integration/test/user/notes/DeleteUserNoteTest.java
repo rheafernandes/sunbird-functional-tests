@@ -81,6 +81,7 @@ public class DeleteUserNoteTest extends BaseCitrusTestRunner {
   public void testDeleteUserNoteFailureWithInvalidNoteId() {
     getTestCase().setName(TEST_DELETE_USER_NOTE_FAILURE_WITH_INVALID_NOTEID);
     //beforeTest();
+    getAuthToken(this, true);
     performDeleteTest(
         this,
         TEMPLATE_DIR,

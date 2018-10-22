@@ -1,3 +1,5 @@
 {
-
+  "request": {
+    "loginId": "${userId}"
+  }
 }
