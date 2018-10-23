@@ -1,5 +1,5 @@
 {
   "request": {
-    "loginId": "${userId}"
+    "userId": "${userId}"
   }
 }
