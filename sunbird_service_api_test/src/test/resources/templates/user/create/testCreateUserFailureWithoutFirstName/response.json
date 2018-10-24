@@ -5,9 +5,9 @@
 	"params": {
 		"resmsgid": null,
 		"msgid": "@ignore@",
-		"err": "FIRST_NAME_REQUIRED_ERROR",
-		"status": "FIRST_NAME_REQUIRED_ERROR",
-		"errmsg": "First name is mandatory."
+		"err": "MANDATORY_PARAMETER_MISSING",
+		"status": "MANDATORY_PARAMETER_MISSING",
+		"errmsg": "Mandatory parameter firstName is missing."
 	},
 	"responseCode": "CLIENT_ERROR",
 	"result": {

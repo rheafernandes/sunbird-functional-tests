@@ -5,9 +5,9 @@
     "params": {
         "resmsgid": null,
         "msgid": "@ignore@",
-        "err": "USER_NOT_FOUND",
-        "status": "USER_NOT_FOUND",
-        "errmsg": "user not found."
+        "err": "INVALID_PARAMETER_VALUE",
+        "status": "INVALID_PARAMETER_VALUE",
+        "errmsg": "@ignore@"
     },
     "responseCode": "RESOURCE_NOT_FOUND",
     "result": {}
