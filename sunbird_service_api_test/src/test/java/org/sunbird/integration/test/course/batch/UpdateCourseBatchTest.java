@@ -17,30 +17,30 @@ import org.testng.annotations.Test;
 
 public class UpdateCourseBatchTest extends BaseCitrusTestRunner {
 
-  private static final String TEST_NAME_UPDATE_COURSE_BATCH_FAILURE_WITHOUT_AUTH_TOKEN =
+  private static final String TEST_UPDATE_COURSE_BATCH_FAILURE_WITHOUT_AUTH_TOKEN =
       "testUpdateCourseBatchFailureWithoutAuthToken";
-  private static final String TEST_NAME_UPDATE_COURSE_BATCH_FAILURE_WITH_INVALID_BATCHID =
+  private static final String TEST_UPDATE_COURSE_BATCH_FAILURE_WITH_INVALID_BATCHID =
       "testUpdateCourseBatchFailureWithInvalidId";
   private static final String
-      TEST_NAME_UPDATE_COURSE_BATCH_FAILURE_INVITE_ONLY_BATCH_WITH_INVALID_MENTOR =
+      TEST_UPDATE_COURSE_BATCH_FAILURE_INVITE_ONLY_BATCH_WITH_INVALID_MENTOR =
           "testUpdateCourseBatchFailureInviteOnlyBatchWithInvalidMentor";
-  private static final String TEST_NAME_UPDATE_COURSE_BATCH_FAILURE_OPEN_BATCH_WITH_INVALID_MENTOR =
+  private static final String TEST_UPDATE_COURSE_BATCH_FAILURE_OPEN_BATCH_WITH_INVALID_MENTOR =
       "testUpdateCourseBatchFailureOpenBatchWithInvalidMentor";
-  private static final String TEST_NAME_UPDATE_COURSE_BATCH_FAILURE_WITH_INVALID_PARTICIPANTS =
+  private static final String TEST_UPDATE_COURSE_BATCH_FAILURE_WITH_INVALID_PARTICIPANTS =
       "testUpdateCourseBatchFailureWithInvalidParticipants";
   private static final String
-      TEST_NAME_UPDATE_COURSE_BATCH_FAILURE_INVITE_ONLY_BATCH_WITH_INVALID_CREATED_FOR =
+      TEST_UPDATE_COURSE_BATCH_FAILURE_INVITE_ONLY_BATCH_WITH_INVALID_CREATED_FOR =
           "testUpdateCourseBatchFailureInviteOnlyBatchWithInvalidCreatedFor";
 
   private static final String
-      TEST_NAME_UPDATE_COURSE_BATCH_SUCCESS_INVITE_ONLY_BATCH_WITH_VALID_MENTORS =
+      TEST_UPDATE_COURSE_BATCH_SUCCESS_INVITE_ONLY_BATCH_WITH_VALID_MENTORS =
           "testUpdateCourseBatchSuccessInviteOnlyWithValidMentors";
-  private static final String TEST_NAME_UPDATE_COURSE_BATCH_SUCCESS_OPEN_BATCH_WITH_VALID_MENTORS =
+  private static final String TEST_UPDATE_COURSE_BATCH_SUCCESS_OPEN_BATCH_WITH_VALID_MENTORS =
       "testUpdateCourseBatchSuccessOpenBatchWithValidMentors";
   private static final String
-      TEST_NAME_UPDATE_COURSE_BATCH_SUCCESS_INVITE_ONLY_BATCH_WITH_VALID_CREATED_FOR =
+      TEST_UPDATE_COURSE_BATCH_SUCCESS_INVITE_ONLY_BATCH_WITH_VALID_CREATED_FOR =
           "testUpdateCourseBatchSuccessInviteOnlyWithValidCreatedFor";
-  private static final String TEST_NAME_UPDATE_COURSE_BATCH_SUCCESS_WITH_VALID_PARTICIPANTS =
+  private static final String TEST_UPDATE_COURSE_BATCH_SUCCESS_WITH_VALID_PARTICIPANTS =
       "testUpdateCourseBatchSuccessWithValidParticipants";
 
   private static String courseBatchId = "FT_Course_Batch_Id" + Instant.now().getEpochSecond();
@@ -55,42 +55,42 @@ public class UpdateCourseBatchTest extends BaseCitrusTestRunner {
   public Object[][] updateCourseBatchDataFailureProvider() {
     return new Object[][] {
       new Object[] {
-        TEST_NAME_UPDATE_COURSE_BATCH_FAILURE_WITHOUT_AUTH_TOKEN,
+        TEST_UPDATE_COURSE_BATCH_FAILURE_WITHOUT_AUTH_TOKEN,
         false,
         false,
         false,
         HttpStatus.UNAUTHORIZED
       },
       new Object[] {
-        TEST_NAME_UPDATE_COURSE_BATCH_FAILURE_WITH_INVALID_BATCHID,
+        TEST_UPDATE_COURSE_BATCH_FAILURE_WITH_INVALID_BATCHID,
         true,
         false,
         false,
         HttpStatus.BAD_REQUEST
       },
       new Object[] {
-        TEST_NAME_UPDATE_COURSE_BATCH_FAILURE_INVITE_ONLY_BATCH_WITH_INVALID_MENTOR,
+        TEST_UPDATE_COURSE_BATCH_FAILURE_INVITE_ONLY_BATCH_WITH_INVALID_MENTOR,
         true,
         true,
         false,
         HttpStatus.BAD_REQUEST
       },
       new Object[] {
-        TEST_NAME_UPDATE_COURSE_BATCH_FAILURE_INVITE_ONLY_BATCH_WITH_INVALID_CREATED_FOR,
+        TEST_UPDATE_COURSE_BATCH_FAILURE_INVITE_ONLY_BATCH_WITH_INVALID_CREATED_FOR,
         true,
         true,
         false,
         HttpStatus.BAD_REQUEST
       },
       new Object[] {
-        TEST_NAME_UPDATE_COURSE_BATCH_FAILURE_OPEN_BATCH_WITH_INVALID_MENTOR,
+        TEST_UPDATE_COURSE_BATCH_FAILURE_OPEN_BATCH_WITH_INVALID_MENTOR,
         true,
         true,
         true,
         HttpStatus.BAD_REQUEST
       },
       new Object[] {
-        TEST_NAME_UPDATE_COURSE_BATCH_FAILURE_WITH_INVALID_PARTICIPANTS,
+        TEST_UPDATE_COURSE_BATCH_FAILURE_WITH_INVALID_PARTICIPANTS,
         true,
         true,
         false,
@@ -103,22 +103,19 @@ public class UpdateCourseBatchTest extends BaseCitrusTestRunner {
   public Object[][] updateCourseBatchDataSuccessProvider() {
     return new Object[][] {
       new Object[] {
-        TEST_NAME_UPDATE_COURSE_BATCH_SUCCESS_OPEN_BATCH_WITH_VALID_MENTORS,
-        true,
-        true,
-        HttpStatus.OK
+        TEST_UPDATE_COURSE_BATCH_SUCCESS_OPEN_BATCH_WITH_VALID_MENTORS, true, true, HttpStatus.OK
       },
       new Object[] {
-        TEST_NAME_UPDATE_COURSE_BATCH_SUCCESS_INVITE_ONLY_BATCH_WITH_VALID_MENTORS,
+        TEST_UPDATE_COURSE_BATCH_SUCCESS_INVITE_ONLY_BATCH_WITH_VALID_MENTORS,
         true,
         false,
         HttpStatus.OK
       },
       new Object[] {
-        TEST_NAME_UPDATE_COURSE_BATCH_SUCCESS_WITH_VALID_PARTICIPANTS, true, false, HttpStatus.OK
+        TEST_UPDATE_COURSE_BATCH_SUCCESS_WITH_VALID_PARTICIPANTS, true, false, HttpStatus.OK
       },
       new Object[] {
-        TEST_NAME_UPDATE_COURSE_BATCH_SUCCESS_INVITE_ONLY_BATCH_WITH_VALID_CREATED_FOR,
+        TEST_UPDATE_COURSE_BATCH_SUCCESS_INVITE_ONLY_BATCH_WITH_VALID_CREATED_FOR,
         true,
         false,
         HttpStatus.OK

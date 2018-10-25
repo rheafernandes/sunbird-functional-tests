@@ -10,8 +10,8 @@ import org.sunbird.integration.test.course.batch.CreateCourseBatchTest;
 
 public class CourseBatchUtil {
 
-  private static String openCourseBatchId = "";
-  private static String inviteOnlyCourseBatchId = "";
+  private static String openCourseBatchId;
+  private static String inviteOnlyCourseBatchId;
   public static final String TEST_NAME_CREATE_COURSE_BATCH_SUCCESS_OPEN_BATCH =
       "testCreateCourseBatchSuccessOpenBatch";
   public static final String TEST_NAME_CREATE_COURSE_BATCH_SUCCESS_INVITE_ONLY_BATCH =

@@ -15,44 +15,44 @@ import org.testng.annotations.Test;
 
 public class CreateCourseBatchTest extends BaseCitrusTestRunner {
 
-  public static final String TEST_NAME_CREATE_COURSE_BATCH_FAILURE_WITHOUT_NAME =
+  public static final String TEST_CREATE_COURSE_BATCH_FAILURE_WITHOUT_NAME =
       "testCreateCourseBatchFailureWithoutName";
-  public static final String TEST_NAME_CREATE_COURSE_BATCH_FAILURE_WITHOUT_COURSE_ID =
+  public static final String TEST_CREATE_COURSE_BATCH_FAILURE_WITHOUT_COURSE_ID =
       "testCreateCourseBatchFailureWithoutCourseId";
-  public static final String TEST_NAME_CREATE_COURSE_BATCH_FAILURE_WITHOUT_ENROLLMENTTYPE =
+  public static final String TEST_CREATE_COURSE_BATCH_FAILURE_WITHOUT_ENROLLMENTTYPE =
       "testCreateCourseBatchFailureWithoutEnrollmentType";
-  public static final String TEST_NAME_CREATE_COURSE_BATCH_FAILURE_WITH_INVALID_ENROLLMENTTYPE =
+  public static final String TEST_CREATE_COURSE_BATCH_FAILURE_WITH_INVALID_ENROLLMENTTYPE =
       "testCreateCourseBatchFailureWithInvalidEnrollmentType";
-  public static final String TEST_NAME_CREATE_COURSE_BATCH_FAILURE_WITHOUT_START_DATE =
+  public static final String TEST_CREATE_COURSE_BATCH_FAILURE_WITHOUT_START_DATE =
       "testCreateCourseBatchFailureWithoutStartDate";
-  public static final String TEST_NAME_CREATE_COURSE_BATCH_FAILURE_WITH_PAST_START_DATE =
+  public static final String TEST_CREATE_COURSE_BATCH_FAILURE_WITH_PAST_START_DATE =
       "testCreateCourseBatchFailurePastStartDate";
-  public static final String TEST_NAME_CREATE_COURSE_BATCH_FAILURE_WITH_INVALID_COURSE_ID =
+  public static final String TEST_CREATE_COURSE_BATCH_FAILURE_WITH_INVALID_COURSE_ID =
       "testCreateCourseBatchFailureInvalidCourseId";
-  public static final String TEST_NAME_CREATE_COURSE_BATCH_FAILURE_WITH_PAST_END_DATE =
+  public static final String TEST_CREATE_COURSE_BATCH_FAILURE_WITH_PAST_END_DATE =
       "testCreateCourseBatchFailurePastEndDate";
-  public static final String TEST_NAME_CREATE_COURSE_BATCH_FAILURE_WITH_END_DATE_BEFORE_START_DATE =
+  public static final String TEST_CREATE_COURSE_BATCH_FAILURE_WITH_END_DATE_BEFORE_START_DATE =
       "testCreateCourseBatchFailureEndDateBeforeStartDate";
-  public static final String TEST_NAME_CREATE_COURSE_BATCH_FAILURE_WITH_INVALID_CREATED_FOR =
+  public static final String TEST_CREATE_COURSE_BATCH_FAILURE_WITH_INVALID_CREATED_FOR =
       "testCreateCourseBatchFailureInviteOnlyWithInvalidCreatedFor";
-  public static final String TEST_NAME_CREATE_COURSE_BATCH_FAILURE_INVITE_ONLY_WITH_INVALID_MENTOR =
+  public static final String TEST_CREATE_COURSE_BATCH_FAILURE_INVITE_ONLY_WITH_INVALID_MENTOR =
       "testCreateCourseBatchFailureInviteOnlyWithInvalidMentor";
-  public static final String TEST_NAME_CREATE_COURSE_BATCH_FAILURE_OPEN_BATCH_WITH_INVALID_MENTOR =
+  public static final String TEST_CREATE_COURSE_BATCH_FAILURE_OPEN_BATCH_WITH_INVALID_MENTOR =
       "testCreateCourseBatchFailureOpenBatchWithInvalidMentor";
-  public static final String TEST_NAME_CREATE_COURSE_BATCH_FAILURE_WITH_INVALID_PARTICIPANT =
+  public static final String TEST_CREATE_COURSE_BATCH_FAILURE_WITH_INVALID_PARTICIPANT =
       "testCreateCourseBatchFailureInviteOnlyWithInvalidParticipant";
 
-  public static final String TEST_NAME_CREATE_COURSE_BATCH_SUCCESS_INVITE_ONLY_BATCH =
+  public static final String TEST_CREATE_COURSE_BATCH_SUCCESS_INVITE_ONLY_BATCH =
       "testCreateCourseBatchSuccessInviteOnlyBatch";
-  public static final String TEST_NAME_CREATE_COURSE_BATCH_SUCCESS_INVITE_ONLY_WITH_CREATED_FOR =
+  public static final String TEST_CREATE_COURSE_BATCH_SUCCESS_INVITE_ONLY_WITH_CREATED_FOR =
       "testCreateCourseBatchSuccessInviteOnlyWithCreatedFor";
-  public static final String TEST_NAME_CREATE_COURSE_BATCH_SUCCESS_INVITE_ONLY_WITH_MENTORS =
+  public static final String TEST_CREATE_COURSE_BATCH_SUCCESS_INVITE_ONLY_WITH_MENTORS =
       "testCreateCourseBatchSuccessInviteOnlyWithMentors";
-  public static final String TEST_NAME_CREATE_COURSE_BATCH_SUCCESS_INVITE_ONLY_WITH_PARTICICPANTS =
+  public static final String TEST_CREATE_COURSE_BATCH_SUCCESS_INVITE_ONLY_WITH_PARTICICPANTS =
       "testCreateCourseBatchSuccessInviteOnlyWithParticipants";
-  public static final String TEST_NAME_CREATE_COURSE_BATCH_SUCCESS_OPEN_BATCH =
+  public static final String TEST_CREATE_COURSE_BATCH_SUCCESS_OPEN_BATCH =
       "testCreateCourseBatchSuccessOpenBatch";
-  public static final String TEST_NAME_CREATE_COURSE_BATCH_SUCCESS_OPEN_BATCH_WITH_MENTORS =
+  public static final String TEST_CREATE_COURSE_BATCH_SUCCESS_OPEN_BATCH_WITH_MENTORS =
       "testCreateCourseBatchSuccessOpenBatchWithMentors";
 
   public static final String TEMPLATE_DIR = "templates/course/batch/create";
@@ -67,91 +67,87 @@ public class CreateCourseBatchTest extends BaseCitrusTestRunner {
 
     return new Object[][] {
       new Object[] {
-        TEST_NAME_CREATE_COURSE_BATCH_FAILURE_WITHOUT_NAME,
+        TEST_CREATE_COURSE_BATCH_FAILURE_WITHOUT_NAME, false, false, false, HttpStatus.BAD_REQUEST
+      },
+      new Object[] {
+        TEST_CREATE_COURSE_BATCH_FAILURE_WITHOUT_COURSE_ID,
         false,
         false,
         false,
         HttpStatus.BAD_REQUEST
       },
       new Object[] {
-        TEST_NAME_CREATE_COURSE_BATCH_FAILURE_WITHOUT_COURSE_ID,
+        TEST_CREATE_COURSE_BATCH_FAILURE_WITHOUT_ENROLLMENTTYPE,
         false,
         false,
         false,
         HttpStatus.BAD_REQUEST
       },
       new Object[] {
-        TEST_NAME_CREATE_COURSE_BATCH_FAILURE_WITHOUT_ENROLLMENTTYPE,
+        TEST_CREATE_COURSE_BATCH_FAILURE_WITH_INVALID_ENROLLMENTTYPE,
         false,
         false,
         false,
         HttpStatus.BAD_REQUEST
       },
       new Object[] {
-        TEST_NAME_CREATE_COURSE_BATCH_FAILURE_WITH_INVALID_ENROLLMENTTYPE,
+        TEST_CREATE_COURSE_BATCH_FAILURE_WITHOUT_START_DATE,
         false,
         false,
         false,
         HttpStatus.BAD_REQUEST
       },
       new Object[] {
-        TEST_NAME_CREATE_COURSE_BATCH_FAILURE_WITHOUT_START_DATE,
+        TEST_CREATE_COURSE_BATCH_FAILURE_WITH_PAST_START_DATE,
         false,
         false,
         false,
         HttpStatus.BAD_REQUEST
       },
       new Object[] {
-        TEST_NAME_CREATE_COURSE_BATCH_FAILURE_WITH_PAST_START_DATE,
+        TEST_CREATE_COURSE_BATCH_FAILURE_WITH_INVALID_COURSE_ID,
         false,
         false,
         false,
         HttpStatus.BAD_REQUEST
       },
       new Object[] {
-        TEST_NAME_CREATE_COURSE_BATCH_FAILURE_WITH_INVALID_COURSE_ID,
+        TEST_CREATE_COURSE_BATCH_FAILURE_WITH_PAST_END_DATE,
         false,
         false,
         false,
         HttpStatus.BAD_REQUEST
       },
       new Object[] {
-        TEST_NAME_CREATE_COURSE_BATCH_FAILURE_WITH_PAST_END_DATE,
+        TEST_CREATE_COURSE_BATCH_FAILURE_WITH_END_DATE_BEFORE_START_DATE,
         false,
         false,
         false,
         HttpStatus.BAD_REQUEST
       },
       new Object[] {
-        TEST_NAME_CREATE_COURSE_BATCH_FAILURE_WITH_END_DATE_BEFORE_START_DATE,
-        false,
-        false,
-        false,
-        HttpStatus.BAD_REQUEST
-      },
-      new Object[] {
-        TEST_NAME_CREATE_COURSE_BATCH_FAILURE_WITH_INVALID_CREATED_FOR,
+        TEST_CREATE_COURSE_BATCH_FAILURE_WITH_INVALID_CREATED_FOR,
         true,
         false,
         false,
         HttpStatus.BAD_REQUEST
       },
       new Object[] {
-        TEST_NAME_CREATE_COURSE_BATCH_FAILURE_INVITE_ONLY_WITH_INVALID_MENTOR,
+        TEST_CREATE_COURSE_BATCH_FAILURE_INVITE_ONLY_WITH_INVALID_MENTOR,
         true,
         false,
         true,
         HttpStatus.BAD_REQUEST
       },
       new Object[] {
-        TEST_NAME_CREATE_COURSE_BATCH_FAILURE_OPEN_BATCH_WITH_INVALID_MENTOR,
+        TEST_CREATE_COURSE_BATCH_FAILURE_OPEN_BATCH_WITH_INVALID_MENTOR,
         true,
         false,
         true,
         HttpStatus.BAD_REQUEST
       },
       new Object[] {
-        TEST_NAME_CREATE_COURSE_BATCH_FAILURE_WITH_INVALID_PARTICIPANT,
+        TEST_CREATE_COURSE_BATCH_FAILURE_WITH_INVALID_PARTICIPANT,
         true,
         true,
         true,
@@ -192,26 +188,20 @@ public class CreateCourseBatchTest extends BaseCitrusTestRunner {
   public Object[][] createCourseBatchSuccessDataProvider() {
     return new Object[][] {
       new Object[] {
-        TEST_NAME_CREATE_COURSE_BATCH_SUCCESS_INVITE_ONLY_BATCH, false, false, HttpStatus.OK
+        TEST_CREATE_COURSE_BATCH_SUCCESS_INVITE_ONLY_BATCH, false, false, HttpStatus.OK
       },
-      new Object[] {TEST_NAME_CREATE_COURSE_BATCH_SUCCESS_OPEN_BATCH, false, false, HttpStatus.OK},
+      new Object[] {TEST_CREATE_COURSE_BATCH_SUCCESS_OPEN_BATCH, false, false, HttpStatus.OK},
       new Object[] {
-        TEST_NAME_CREATE_COURSE_BATCH_SUCCESS_INVITE_ONLY_WITH_CREATED_FOR,
-        true,
-        false,
-        HttpStatus.OK
+        TEST_CREATE_COURSE_BATCH_SUCCESS_INVITE_ONLY_WITH_CREATED_FOR, true, false, HttpStatus.OK
       },
       new Object[] {
-        TEST_NAME_CREATE_COURSE_BATCH_SUCCESS_INVITE_ONLY_WITH_MENTORS, false, true, HttpStatus.OK
+        TEST_CREATE_COURSE_BATCH_SUCCESS_INVITE_ONLY_WITH_MENTORS, false, true, HttpStatus.OK
       },
       new Object[] {
-        TEST_NAME_CREATE_COURSE_BATCH_SUCCESS_OPEN_BATCH_WITH_MENTORS, false, true, HttpStatus.OK
+        TEST_CREATE_COURSE_BATCH_SUCCESS_OPEN_BATCH_WITH_MENTORS, false, true, HttpStatus.OK
       },
       new Object[] {
-        TEST_NAME_CREATE_COURSE_BATCH_SUCCESS_INVITE_ONLY_WITH_PARTICICPANTS,
-        true,
-        true,
-        HttpStatus.OK
+        TEST_CREATE_COURSE_BATCH_SUCCESS_INVITE_ONLY_WITH_PARTICICPANTS, true, true, HttpStatus.OK
       }
     };
   }
