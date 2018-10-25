@@ -35,8 +35,10 @@ public class CreateCourseBatchTest extends BaseCitrusTestRunner {
       "testCreateCourseBatchFailureEndDateBeforeStartDate";
   public static final String TEST_NAME_CREATE_COURSE_BATCH_FAILURE_WITH_INVALID_CREATED_FOR =
       "testCreateCourseBatchFailureInviteOnlyWithInvalidCreatedFor";
-  public static final String TEST_NAME_CREATE_COURSE_BATCH_FAILURE_WITH_INVALID_MENTOR =
+  public static final String TEST_NAME_CREATE_COURSE_BATCH_FAILURE_INVITE_ONLY_WITH_INVALID_MENTOR =
       "testCreateCourseBatchFailureInviteOnlyWithInvalidMentor";
+  public static final String TEST_NAME_CREATE_COURSE_BATCH_FAILURE_OPEN_BATCH_WITH_INVALID_MENTOR =
+      "testCreateCourseBatchFailureOpenBatchWithInvalidMentor";
   public static final String TEST_NAME_CREATE_COURSE_BATCH_FAILURE_WITH_INVALID_PARTICIPANT =
       "testCreateCourseBatchFailureInviteOnlyWithInvalidParticipant";
 
@@ -50,6 +52,8 @@ public class CreateCourseBatchTest extends BaseCitrusTestRunner {
       "testCreateCourseBatchSuccessInviteOnlyWithParticipants";
   public static final String TEST_NAME_CREATE_COURSE_BATCH_SUCCESS_OPEN_BATCH =
       "testCreateCourseBatchSuccessOpenBatch";
+  public static final String TEST_NAME_CREATE_COURSE_BATCH_SUCCESS_OPEN_BATCH_WITH_MENTORS =
+      "testCreateCourseBatchSuccessOpenBatchWithMentors";
 
   public static final String TEMPLATE_DIR = "templates/course/batch/create";
   public static final String TODAY_DATE = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
@@ -133,7 +137,14 @@ public class CreateCourseBatchTest extends BaseCitrusTestRunner {
         HttpStatus.BAD_REQUEST
       },
       new Object[] {
-        TEST_NAME_CREATE_COURSE_BATCH_FAILURE_WITH_INVALID_MENTOR,
+        TEST_NAME_CREATE_COURSE_BATCH_FAILURE_INVITE_ONLY_WITH_INVALID_MENTOR,
+        true,
+        false,
+        true,
+        HttpStatus.BAD_REQUEST
+      },
+      new Object[] {
+        TEST_NAME_CREATE_COURSE_BATCH_FAILURE_OPEN_BATCH_WITH_INVALID_MENTOR,
         true,
         false,
         true,
@@ -192,6 +203,9 @@ public class CreateCourseBatchTest extends BaseCitrusTestRunner {
       },
       new Object[] {
         TEST_NAME_CREATE_COURSE_BATCH_SUCCESS_INVITE_ONLY_WITH_MENTORS, false, true, HttpStatus.OK
+      },
+      new Object[] {
+        TEST_NAME_CREATE_COURSE_BATCH_SUCCESS_OPEN_BATCH_WITH_MENTORS, false, true, HttpStatus.OK
       },
       new Object[] {
         TEST_NAME_CREATE_COURSE_BATCH_SUCCESS_INVITE_ONLY_WITH_PARTICICPANTS,
