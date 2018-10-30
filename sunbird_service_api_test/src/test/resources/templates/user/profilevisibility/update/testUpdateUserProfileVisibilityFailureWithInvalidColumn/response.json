@@ -5,8 +5,8 @@
     "params": {
         "resmsgid": null,
         "msgid": "@ignore@",
-        "err": "INVALID_PARAMETER_VALUE",
-        "status": "INVALID_PARAMETER_VALUE",
+        "err": "INVALID_COLUMN_NAME",
+        "status": "INVALID_COLUMN_NAME",
         "errmsg": "@ignore@"
     },
     "responseCode": "CLIENT_ERROR",
