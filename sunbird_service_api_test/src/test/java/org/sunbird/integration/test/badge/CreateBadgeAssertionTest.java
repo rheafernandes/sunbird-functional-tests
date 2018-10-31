@@ -185,7 +185,7 @@ public class CreateBadgeAssertionTest extends BaseCitrusTestRunner {
         false,
         httpStatus,
         RESPONSE_JSON);
-    afterTest(canCreateIssuer);
+    afterTest(canCreateBadgeClass, canCreateIssuer);
   }
 
   private void beforeTest(
@@ -233,7 +233,14 @@ public class CreateBadgeAssertionTest extends BaseCitrusTestRunner {
     }
   }
 
-  private void afterTest(boolean isIssuerCreated) {
+  private void afterTest(boolean isBadgeClassCreated, boolean isIssuerCreated) {
+    if (isBadgeClassCreated) {
+      BadgeClassUtil.deleteBadgeClass(
+          this,
+          testContext,
+          config,
+          (String) testContext.getVariables().get(Constant.EXTRACT_VAR_BADGE_ID));
+    }
     if (isIssuerCreated) {
       IssuerUtil.deleteIssuer(
           this,

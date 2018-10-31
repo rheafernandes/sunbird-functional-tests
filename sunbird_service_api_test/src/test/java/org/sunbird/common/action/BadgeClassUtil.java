@@ -13,6 +13,11 @@ public class BadgeClassUtil {
         "/api/badging/v1/issuer/badge/create", "/v1/issuer/badge/create");
   }
 
+  public static String deleteBadgeClassUrl(BaseCitrusTestRunner runner, String pathParam) {
+    return runner.getLmsApiUriPath(
+        "/api/badging/v1/issuer/badge/delete", "/v1/issuer/badge/delete", pathParam);
+  }
+
   public static void createBadgeClass(
       BaseCitrusTestRunner runner,
       TestContext testContext,
@@ -43,5 +48,23 @@ public class BadgeClassUtil {
                 "$.result.badgeId",
                 Constant.EXTRACT_VAR_BADGE_ID));
     runner.variable("badgeId", testContext.getVariable(Constant.EXTRACT_VAR_BADGE_ID));
+  }
+
+  public static void deleteBadgeClass(
+      BaseCitrusTestRunner runner,
+      TestContext testContext,
+      TestGlobalProperty config,
+      String badgeId) {
+    runner.http(
+        builder ->
+            TestActionUtil.getDeleteRequestTestAction(
+                builder,
+                Constant.LMS_ENDPOINT,
+                null,
+                null,
+                deleteBadgeClassUrl(runner, badgeId),
+                null,
+                null,
+                null));
   }
 }

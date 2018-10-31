@@ -63,7 +63,7 @@ public class GetBadgeClassTest extends BaseCitrusTestRunner {
         false,
         HttpStatus.OK,
         RESPONSE_JSON);
-    afterTest(true);
+    afterTest(true, true);
   }
 
   @Test(dataProvider = "getBadgeClassDataProviderFailure")
@@ -100,7 +100,15 @@ public class GetBadgeClassTest extends BaseCitrusTestRunner {
         HttpStatus.OK);
   }
 
-  private void afterTest(boolean isIssuerCreated) {
+  private void afterTest(boolean isBadgeClassCreated, boolean isIssuerCreated) {
+
+    if (isBadgeClassCreated) {
+      BadgeClassUtil.deleteBadgeClass(
+          this,
+          testContext,
+          config,
+          (String) testContext.getVariables().get(Constant.EXTRACT_VAR_BADGE_ID));
+    }
     if (isIssuerCreated) {
       IssuerUtil.deleteIssuer(
           this,
