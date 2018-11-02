@@ -6,6 +6,7 @@ import javax.ws.rs.core.MediaType;
 import org.springframework.http.HttpStatus;
 import org.sunbird.common.action.OrgUtil;
 import org.sunbird.common.action.UserUtil;
+import org.sunbird.common.util.Constant;
 import org.sunbird.integration.test.common.BaseCitrusTestRunner;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -106,5 +107,6 @@ public class AssignRoleToUserTest extends BaseCitrusTestRunner {
     variable("userId", testContext.getVariable("userId"));
     variable("organisationId", testContext.getVariable("organisationId"));
     OrgUtil.addUserToOrg(this, TEMPLATE_ORG_DIR, TEST_ASSIGN_USER_TO_ORG_SUCCESS);
+    this.sleep(Constant.ES_SYNC_WAIT_TIME);
   }
 }
