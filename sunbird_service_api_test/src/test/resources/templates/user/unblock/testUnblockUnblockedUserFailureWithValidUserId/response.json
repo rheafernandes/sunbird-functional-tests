@@ -7,7 +7,7 @@
         "msgid": "@ignore@",
         "err": "USER_ALREADY_ACTIVE",
         "status": "USER_ALREADY_ACTIVE",
-        "errmsg": "User is already active"
+        "errmsg": "User is already active."
     },
     "responseCode": "CLIENT_ERROR",
     "result": {}

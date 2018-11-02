@@ -44,9 +44,7 @@ public class AssignRoleToUserTest extends BaseCitrusTestRunner {
       new Object[] {
         TEST_ASSIGN_ROLE_USER_FAILURE_WITH_INVALID_USER_ID, true, HttpStatus.BAD_REQUEST
       },
-      new Object[] {
-        TEST_ASSIGN_ROLE_USER_FAILURE_WITH_INVALID_ORG_ID, true, HttpStatus.BAD_REQUEST
-      },
+      new Object[] {TEST_ASSIGN_ROLE_USER_FAILURE_WITH_INVALID_ORG_ID, true, HttpStatus.NOT_FOUND},
     };
   }
 

@@ -86,6 +86,7 @@ public class OrgUtil {
                 Constant.REQUEST_JSON,
                 MediaType.APPLICATION_JSON.toString(),
                 TestActionUtil.getHeaders(true)));
+    runner.sleep(Constant.ES_SYNC_WAIT_TIME);
   }
 
   public static void searchOrg(
