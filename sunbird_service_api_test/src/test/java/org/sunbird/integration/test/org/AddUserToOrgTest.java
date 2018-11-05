@@ -52,22 +52,31 @@ public class AddUserToOrgTest extends BaseCitrusTestRunner {
         RESPONSE_JSON);
   }
 
-  @Test()
+  @DataProvider(name = "addUserToOrgSuccessDataProvider")
+  public Object[][] addUserToOrgSuccessDataProvider() {
+
+    return new Object[][] {
+      new Object[] {TEST_ADD_USER_TO_ORG_SUCCESS_WITH_EMPTY_ROLE_ARRAY, HttpStatus.OK}
+    };
+  }
+
+  @Test(dataProvider = "addUserToOrgSuccessDataProvider")
+  @CitrusParameters({"testName", "httpStatusCode"})
   @CitrusTest
-  public void testAddUserToOrgSuccessWithEmptyRoleArray() {
-    getTestCase().setName(TEST_ADD_USER_TO_ORG_SUCCESS_WITH_EMPTY_ROLE_ARRAY);
+  public void testAddUserToOrgSuccessWithEmptyRoleArray(
+      String testName, HttpStatus httpStatusCode) {
     getAuthToken(this, true);
     createUser();
     createOrg();
     performPostTest(
         this,
         TEMPLATE_DIR,
-        TEST_ADD_USER_TO_ORG_SUCCESS_WITH_EMPTY_ROLE_ARRAY,
+        testName,
         getAddUserToOrgUrl(),
         REQUEST_JSON,
         MediaType.APPLICATION_JSON,
         true,
-        HttpStatus.OK,
+        httpStatusCode,
         RESPONSE_JSON);
   }
 
