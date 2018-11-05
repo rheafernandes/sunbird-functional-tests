@@ -47,7 +47,9 @@ public class UpdateUserProfileVisibilityTest extends BaseCitrusTestRunner {
         HttpStatus.UNAUTHORIZED
       },
       new Object[] {
-        TEST_UPDATE_USER_PROFILE_VISIBILITY_FAILURE_WITH_INVALID_USERID, true, HttpStatus.NOT_FOUND
+        TEST_UPDATE_USER_PROFILE_VISIBILITY_FAILURE_WITH_INVALID_USERID,
+        true,
+        HttpStatus.BAD_REQUEST
       },
       new Object[] {
         TEST_UPDATE_USER_PROFILE_VISIBILITY_FAILURE_WITH_INVALID_COLUMN,
@@ -116,10 +118,13 @@ public class UpdateUserProfileVisibilityTest extends BaseCitrusTestRunner {
   }
 
   private void beforeTest(boolean isAuthRequired) {
-	UserUtil.getUserId(this, testContext);
-	variable("userId", TestActionUtil.getVariable(testContext, "userId"));  
-	getAuthToken(this, UserUtil.getUserNameWithChannel(this, testContext),
-	        Constant.PASSWORD,
-	        testContext.getVariable("userId"), isAuthRequired);  
+    UserUtil.getUserId(this, testContext);
+    variable("userId", TestActionUtil.getVariable(testContext, "userId"));
+    getAuthToken(
+        this,
+        UserUtil.getUserNameWithChannel(this, testContext),
+        Constant.PASSWORD,
+        testContext.getVariable("userId"),
+        isAuthRequired);
   }
 }
