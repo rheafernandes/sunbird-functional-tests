@@ -28,7 +28,6 @@ public class AddUserToOrgTest extends BaseCitrusTestRunner {
 
   @DataProvider(name = "addUserToOrgFailureDataProvider")
   public Object[][] addUserToOrgFailureDataProvider() {
-
     return new Object[][] {
       new Object[] {TEST_NAME_ADD_USER_TO_ORG_FAILURE_WITH_INVALID_USER_ID},
       new Object[] {TEST_NAME_ADD_USER_TO_ORG_FAILURE_WITH_INVALID_ORG_ID},
@@ -54,7 +53,6 @@ public class AddUserToOrgTest extends BaseCitrusTestRunner {
 
   @DataProvider(name = "addUserToOrgSuccessDataProvider")
   public Object[][] addUserToOrgSuccessDataProvider() {
-
     return new Object[][] {
       new Object[] {TEST_ADD_USER_TO_ORG_SUCCESS_WITH_EMPTY_ROLE_ARRAY, HttpStatus.OK}
     };
@@ -63,11 +61,8 @@ public class AddUserToOrgTest extends BaseCitrusTestRunner {
   @Test(dataProvider = "addUserToOrgSuccessDataProvider")
   @CitrusParameters({"testName", "httpStatusCode"})
   @CitrusTest
-  public void testAddUserToOrgSuccessWithEmptyRoleArray(
-      String testName, HttpStatus httpStatusCode) {
-    getAuthToken(this, true);
-    createUser();
-    createOrg();
+  public void testAddUserToOrgSuccess(String testName, HttpStatus httpStatusCode) {
+    beforeTest();
     performPostTest(
         this,
         TEMPLATE_DIR,
@@ -80,6 +75,12 @@ public class AddUserToOrgTest extends BaseCitrusTestRunner {
         RESPONSE_JSON);
   }
 
+  private void beforeTest() {
+    getAuthToken(this, true);
+    createUser();
+    createOrg();
+  }
+
   private void createUser() {
     UserUtil.getUserId(this, testContext);
     variable("userId", testContext.getVariable("userId"));
@@ -90,4 +91,5 @@ public class AddUserToOrgTest extends BaseCitrusTestRunner {
     OrgUtil.getRootOrgId(this, testContext);
     variable("organisationId", testContext.getVariable("organisationId"));
   }
+
 }
