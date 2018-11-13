@@ -12,7 +12,7 @@
     "responseCode": "OK",
     "result": {
         "response": "SUCCESS",
-        "accessToken": null,
-        "userId": "@ignore@"
+        "userId": "@ignore@",
+        "errors": "@ignore@"
     }
 }
