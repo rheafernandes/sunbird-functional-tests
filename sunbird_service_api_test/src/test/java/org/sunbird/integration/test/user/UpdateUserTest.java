@@ -23,28 +23,28 @@ public class UpdateUserTest extends BaseCitrusTestRunner {
       "testUpdateUserFrameworkFailureWithEmptyBoard";
   public static final String TEST_UPDATE_USER_FRAMEWORK_FAILURE_WITHOUT_BOARD =
       "testUpdateUserFrameworkFailureWithoutBoard";
-  public static final String TEST_UPDATE_USER_FRAMEWORK_FAILURE_WITH_BOARD_AS_NON_LIST =
-      "testUpdateUserFrameworkFailureWithBoardAsNonList";
+  public static final String TEST_UPDATE_USER_FRAMEWORK_FAILURE_WITH_INVALID_BOARD_DATA_TYPE =
+      "testUpdateUserFrameworkFailureWithInvalidBoardDataType";
   public static final String TEST_UPDATE_USER_FRAMEWORK_FAILURE_WITH_INVALID_MEDIUM =
       "testUpdateUserFrameworkFailureWithInvalidMedium";
   public static final String TEST_UPDATE_USER_FRAMEWORK_FAILURE_WITH_EMPTY_MEDIUM =
       "testUpdateUserFrameworkFailureWithEmptyMedium";
   public static final String TEST_UPDATE_USER_FRAMEWORK_FAILURE_WITHOUT_MEDIUM =
       "testUpdateUserFrameworkFailureWithoutMedium";
-  public static final String TEST_UPDATE_USER_FRAMEWORK_FAILURE_WITH_MEDIUM_AS_NON_LIST =
-      "testUpdateUserFrameworkFailureWithMediumAsNonList";
+  public static final String TEST_UPDATE_USER_FRAMEWORK_FAILURE_WITH_INVALID_MEDIUM_DATA_TYPE =
+      "testUpdateUserFrameworkFailureWithInvalidMediumDataType";
   public static final String TEST_UPDATE_USER_FRAMEWORK_FAILURE_WITH_INVALID_GRADE_LEVEL =
       "testUpdateUserFrameworkFailureWithInvalidGradeLevel";
   public static final String TEST_UPDATE_USER_FRAMEWORK_FAILURE_WITH_EMPTY_GRADE_LEVEL =
       "testUpdateUserFrameworkFailureWithEmptyGradeLevel";
   public static final String TEST_UPDATE_USER_FRAMEWORK_FAILURE_WITHOUT_GRADE_LEVEL =
       "testUpdateUserFrameworkFailureWithoutGradeLevel";
-  public static final String TEST_UPDATE_USER_FRAMEWORK_FAILURE_WITH_GRADE_LEVEL_AS_NON_LIST =
-      "testUpdateUserFrameworkFailureWithGradeLevelAsNonList";
+  public static final String TEST_UPDATE_USER_FRAMEWORK_FAILURE_WITH_INVALID_GRADE_LEVEL_DATA_TYPE =
+      "testUpdateUserFrameworkFailureWithInvalidGradeLevelDataType";
   public static final String TEST_UPDATE_USER_FRAMEWORK_FAILURE_WITH_INVALID_SUBJECT =
       "testUpdateUserFrameworkFailureWithInvalidSubject";
-  public static final String TEST_UPDATE_USER_FRAMEWORK_FAILURE_WITH_SUBJECT_AS_NON_LIST =
-      "testUpdateUserFrameworkFailureWithSubjectAsNonList";
+  public static final String TEST_UPDATE_USER_FRAMEWORK_FAILURE_WITH_INVALID_SUBJECT_DATA_TYPE =
+      "testUpdateUserFrameworkFailureWithInvalidSubjectDataType";
   public static final String TEST_UPDATE_USER_FRAMEWORK_FAILURE_WITH_UNSUPPORTED_FIELD =
       "testUpdateUserFrameworkFailureWithUnsupportedField";
 
@@ -73,13 +73,13 @@ public class UpdateUserTest extends BaseCitrusTestRunner {
       new Object[] {TEST_UPDATE_USER_FRAMEWORK_FAILURE_WITH_EMPTY_BOARD, HttpStatus.BAD_REQUEST},
       new Object[] {TEST_UPDATE_USER_FRAMEWORK_FAILURE_WITHOUT_BOARD, HttpStatus.BAD_REQUEST},
       new Object[] {
-        TEST_UPDATE_USER_FRAMEWORK_FAILURE_WITH_BOARD_AS_NON_LIST, HttpStatus.BAD_REQUEST
+        TEST_UPDATE_USER_FRAMEWORK_FAILURE_WITH_INVALID_BOARD_DATA_TYPE, HttpStatus.BAD_REQUEST
       },
       new Object[] {TEST_UPDATE_USER_FRAMEWORK_FAILURE_WITH_INVALID_MEDIUM, HttpStatus.BAD_REQUEST},
       new Object[] {TEST_UPDATE_USER_FRAMEWORK_FAILURE_WITH_EMPTY_MEDIUM, HttpStatus.BAD_REQUEST},
       new Object[] {TEST_UPDATE_USER_FRAMEWORK_FAILURE_WITHOUT_MEDIUM, HttpStatus.BAD_REQUEST},
       new Object[] {
-        TEST_UPDATE_USER_FRAMEWORK_FAILURE_WITH_MEDIUM_AS_NON_LIST, HttpStatus.BAD_REQUEST
+        TEST_UPDATE_USER_FRAMEWORK_FAILURE_WITH_INVALID_MEDIUM_DATA_TYPE, HttpStatus.BAD_REQUEST
       },
       new Object[] {
         TEST_UPDATE_USER_FRAMEWORK_FAILURE_WITH_INVALID_GRADE_LEVEL, HttpStatus.BAD_REQUEST
@@ -89,13 +89,14 @@ public class UpdateUserTest extends BaseCitrusTestRunner {
       },
       new Object[] {TEST_UPDATE_USER_FRAMEWORK_FAILURE_WITHOUT_GRADE_LEVEL, HttpStatus.BAD_REQUEST},
       new Object[] {
-        TEST_UPDATE_USER_FRAMEWORK_FAILURE_WITH_GRADE_LEVEL_AS_NON_LIST, HttpStatus.BAD_REQUEST
+        TEST_UPDATE_USER_FRAMEWORK_FAILURE_WITH_INVALID_GRADE_LEVEL_DATA_TYPE,
+        HttpStatus.BAD_REQUEST
       },
       new Object[] {
         TEST_UPDATE_USER_FRAMEWORK_FAILURE_WITH_INVALID_SUBJECT, HttpStatus.BAD_REQUEST
       },
       new Object[] {
-        TEST_UPDATE_USER_FRAMEWORK_FAILURE_WITH_SUBJECT_AS_NON_LIST, HttpStatus.BAD_REQUEST
+        TEST_UPDATE_USER_FRAMEWORK_FAILURE_WITH_INVALID_SUBJECT_DATA_TYPE, HttpStatus.BAD_REQUEST
       },
       new Object[] {
         TEST_UPDATE_USER_FRAMEWORK_FAILURE_WITH_UNSUPPORTED_FIELD, HttpStatus.BAD_REQUEST
