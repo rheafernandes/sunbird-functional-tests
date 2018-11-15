@@ -1,2 +1,2 @@
-orgId,orgName,isRootOrg,channel,externalId,provider,description,homeUrl,orgCode,orgType,preferredLanguage,contactDetail
-,rewrwer2,true,sdfsdfsdfsfdfsdfsf2,sdf2,fsdfsf2,fsdfsfd,https://staging.open-sunbird.org/,,,,
+organisationId,orgName,externalId,description,locationCode,status
+,rewrwer2,,sdf2,,

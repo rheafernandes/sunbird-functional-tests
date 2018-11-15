@@ -19,7 +19,7 @@ public class GetSystemSettingTest extends BaseCitrusTestRunner {
   public static final String TEMPLATE_DIR = "templates/systemsetting/get";
 
   private String getGetSystemSettingUrl(String field) {
-    return getLmsApiUriPath("/api/data/v1/system/setting/read", "/v1/system/setting/get", field);
+    return getLmsApiUriPath("/api/data/v1/system/settings/read", "/v1/system/settings/get", field);
   }
 
   @DataProvider(name = "getSystemSettingDataProvider")

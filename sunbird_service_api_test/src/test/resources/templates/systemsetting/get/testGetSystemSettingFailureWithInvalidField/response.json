@@ -1,5 +1,5 @@
 {
-    "id": "api.system.setting.get.invalid",
+    "id": "api.system.settings.get.invalid",
     "ver": "v1",
     "ts": "@ignore@",
     "params": {

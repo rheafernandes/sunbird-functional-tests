@@ -1,5 +1,5 @@
 {
-    "id": "api.system.setting.set",
+    "id": "api.system.settings.set",
     "ver": "v1",
     "ts": "@ignore@",
     "params": {
