@@ -25,9 +25,7 @@ public class ReadOrganisationTest extends BaseCitrusTestRunner {
       "testReadOrgFailureWithInvalidProviderAndExternalId";
   public static final String TEST_NAME_READ_ORG_SUCCESS_WITH_VALID_ORG_ID =
       "testReadOrgSuccessWithValidOrgId";
-  public static final String TEST_NAME_READ_ORG_SUCCESS_WITH_VALID_PROVIDER_AND_EXTERNAL_ID =
-      "testReadOrgSuccessWithValidProviderAndExternalId";
-
+  
   public static final String TEMPLATE_DIR = "templates/organisation/read";
   private static String orgId = null;
   private static final String externalId = "FT_Org_External_" + (System.currentTimeMillis());
@@ -77,7 +75,6 @@ public class ReadOrganisationTest extends BaseCitrusTestRunner {
 
     return new Object[][] {
       new Object[] {TEST_NAME_READ_ORG_SUCCESS_WITH_VALID_ORG_ID, HttpStatus.OK},
-      new Object[] {TEST_NAME_READ_ORG_SUCCESS_WITH_VALID_PROVIDER_AND_EXTERNAL_ID, HttpStatus.OK}
     };
   }
 

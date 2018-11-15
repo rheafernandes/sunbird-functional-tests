@@ -28,13 +28,19 @@ pipeline {
     stages {
         stage("build") {
             steps {
+                script{
+                try{
                 sh '''
                 cd sunbird_service_api_test
                 ls
-                mvn clean verify
+                mvn -X clean verify
                 '''
             }
+        finally{
+			archiveArtifacts 'sunbird_service_api_test/target/target/citrus-reports/citrus-test-results.html'
+		}
         }
-    }
 }
-
+}
+}
+}

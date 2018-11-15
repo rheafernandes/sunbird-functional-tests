@@ -1,6 +1,0 @@
-{
-  "request": {
-    "externalId": "${rootOrgExternalId}",
-    "provider": "FT_provider"
-  }
-}
