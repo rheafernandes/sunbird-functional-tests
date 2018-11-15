@@ -13,7 +13,7 @@ public class SystemSettingUtil {
   public static final String TEMPLATE_DIR = "templates/systemsetting/create";
 
   private static String getCreateSystemSettingUrl(BaseCitrusTestRunner runner) {
-    return runner.getLmsApiUriPath("/api/data/v1/system/setting/set", "/v1/system/setting/set");
+    return runner.getLmsApiUriPath("/api/data/v1/system/settings/set", "/v1/system/settings/set");
   }
 
   public static void createSystemSetting(

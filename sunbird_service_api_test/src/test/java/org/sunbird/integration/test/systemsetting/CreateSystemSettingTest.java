@@ -27,7 +27,7 @@ public class CreateSystemSettingTest extends BaseCitrusTestRunner {
   public static final String TEMPLATE_DIR = "templates/systemsetting/create";
 
   private String getCreateSystemSettingUrl() {
-    return getLmsApiUriPath("/api/data/v1/system/setting/set", "/v1/system/setting/set");
+    return getLmsApiUriPath("/api/data/v1/system/settings/set", "/v1/system/settings/set");
   }
 
   @DataProvider(name = "createSystemSettingDataProvider")

@@ -1,5 +1,5 @@
 {
-    "id": "api.system.setting.get.uniqueField",
+    "id": "api.system.settings.get.uniqueField",
     "ver": "v1",
     "ts": "@ignore@",
     "params": {
