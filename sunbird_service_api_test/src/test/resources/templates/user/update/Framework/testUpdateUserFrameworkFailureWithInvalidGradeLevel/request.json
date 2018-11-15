@@ -1,0 +1,11 @@
+{
+"request":{
+"userId":"${userId}",
+"framework" : {
+	"gradeLevel"  : ["anyGradeLevel"],
+	"medium"  : ["${medium}"],
+	"board"  : ["${board}"],
+	"subject" : []
+	}
+  }	
+}
