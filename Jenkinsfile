@@ -21,6 +21,10 @@ pipeline {
         sunbird_test_email_address_1 = "sunbirdtest101@gmail.com"
         sunbird_test_email_address_2 = "sunbirdtest102@gmail.com"
         sunbird_content_id = "do_112501345261985792135"
+        sunbird_user_framework_board="CBSE"
+        sunbird_user_framework_grade_level="KG"
+        sunbird_user_framework_medium="English"
+ 		sunbird_user_framework_subject="English"
     }
 
     agent { label "build-slave" }

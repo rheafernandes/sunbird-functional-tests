@@ -3,8 +3,8 @@
 "userId":"${userId}",
 "framework" : {
 	"medium"  : ["anyMedium"],
-	"board"  : ["anyBoard"],
-	"gradeLevel"  : {},
+	"board"  : ["${board}"],
+	"gradeLevel"  : ["${gradeLevel}"],
 	"subject" : []
 	}
   }	

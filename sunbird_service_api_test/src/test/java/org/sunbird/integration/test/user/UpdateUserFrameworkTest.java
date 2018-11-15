@@ -9,7 +9,7 @@ import org.sunbird.integration.test.common.BaseCitrusTestRunner;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-public class UpdateUserTest extends BaseCitrusTestRunner {
+public class UpdateUserFrameworkTest extends BaseCitrusTestRunner {
 
   public static final String TEST_UPDATE_USER_FRAMEWORK_FAILURE_WITH_INVALID_USER_ID =
       "testUpdateUserFrameworkFailureWithInvalidUserId";
@@ -54,14 +54,14 @@ public class UpdateUserTest extends BaseCitrusTestRunner {
       "testUpdateUserFrameworkSuccessWithEmptySubject";
   public static final String TEST_UPDATE_USER_FRAMEWORK_SUCCESS = "testUpdateUserFrameworkSuccess";
 
-  public static final String TEMPLATE_DIR = "templates/user/update";
+  public static final String TEMPLATE_DIR = "templates/user/update/framework";
 
   private String getUpdaterUserUrl() {
     return getLmsApiUriPath("/api/user/v1/update", "/v1/user/update");
   }
 
-  @DataProvider(name = "updateUserFailureDataProvider")
-  public Object[][] updateUserFailureDataProvider() {
+  @DataProvider(name = "updateUserFrameworkFailureDataProvider")
+  public Object[][] updateUserFrameworkFailureDataProvider() {
 
     return new Object[][] {
       new Object[] {
@@ -104,8 +104,8 @@ public class UpdateUserTest extends BaseCitrusTestRunner {
     };
   }
 
-  @DataProvider(name = "updateUserSuccessDataProvider")
-  public Object[][] updateUserSuccessDataProvider() {
+  @DataProvider(name = "updateUserFrameworkSuccessDataProvider")
+  public Object[][] updateUserFrameworkSuccessDataProvider() {
 
     return new Object[][] {
       new Object[] {TEST_UPDATE_USER_FRAMEWORK_SUCCESS_WITHOUT_SUBJECT},
@@ -114,10 +114,10 @@ public class UpdateUserTest extends BaseCitrusTestRunner {
     };
   }
 
-  @Test(dataProvider = "updateUserFailureDataProvider")
+  @Test(dataProvider = "updateUserFrameworkFailureDataProvider")
   @CitrusParameters({"testName", "httpStatusCode"})
   @CitrusTest
-  public void testUserUpdateFailure(String testName, HttpStatus httpStatus) {
+  public void testUpdateUserFrameworkFailure(String testName, HttpStatus httpStatus) {
     getTestCase().setName(testName);
     beforeTest();
     performPatchTest(
@@ -132,10 +132,10 @@ public class UpdateUserTest extends BaseCitrusTestRunner {
         RESPONSE_JSON);
   }
 
-  @Test(dataProvider = "updateUserSuccessDataProvider")
+  @Test(dataProvider = "updateUserFrameworkSuccessDataProvider")
   @CitrusParameters({"testName"})
   @CitrusTest
-  public void testUpdateUserSuccess(String testName) {
+  public void testUpdateUserFrameworkSuccess(String testName) {
     getTestCase().setName(testName);
     beforeTest();
     performPatchTest(
@@ -153,5 +153,9 @@ public class UpdateUserTest extends BaseCitrusTestRunner {
   private void beforeTest() {
     UserUtil.createUserAndGetToken(this, testContext);
     variable("userId", testContext.getVariable("userId"));
+    variable("board", System.getenv("sunbird_user_framework_board"));
+    variable("gradeLevel", System.getenv("sunbird_user_framework_grade_level"));
+    variable("medium", System.getenv("sunbird_user_framework_medium"));
+    variable("subject", System.getenv("sunbird_user_framework_subject"));
   }
 }
