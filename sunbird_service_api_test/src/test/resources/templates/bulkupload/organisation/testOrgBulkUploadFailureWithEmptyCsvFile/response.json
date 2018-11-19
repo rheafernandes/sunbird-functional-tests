@@ -5,9 +5,9 @@
   "params": {
     "resmsgid": null,
     "msgid": "@ignore@",
-    "err": "DATA_SIZE_EXCEEDED",
-    "status": "DATA_SIZE_EXCEEDED",
-    "errmsg": "@ignore@"
+    "err": "EMPTY_CSV_FILE",
+    "status": "EMPTY_CSV_FILE",
+    "errmsg": "CSV file is Empty."
   },
   "responseCode": "CLIENT_ERROR",
   "result": {}

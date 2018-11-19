@@ -5,9 +5,9 @@
     "params": {
         "resmsgid": null,
         "msgid": "@ignore@",
-        "err": "DATA_SIZE_EXCEEDED",
-        "status": "DATA_SIZE_EXCEEDED",
-        "errmsg": "Maximum upload data size should be 199"
+        "err": "MAX_ALLOWED_SIZE_LIMIT_EXCEED",
+        "status": "MAX_ALLOWED_SIZE_LIMIT_EXCEED",
+        "errmsg": "Max allowed size is 10MB"
     },
     "responseCode": "CLIENT_ERROR",
     "result": {}
