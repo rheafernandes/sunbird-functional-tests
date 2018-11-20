@@ -16,14 +16,11 @@ public class CreateOrganisationTest extends BaseCitrusTestRunner {
   private static final String externalID = "FT_Org_External_" + Instant.now().getEpochSecond();
   public static final String TEST_NAME_CREATE_SUB_ORG_FAILURE_WITHOUT_NAME =
       "testCreateSubOrgFailureWithoutName";
-  public static final String TEST_NAME_CREATE_SUB_ORG_FAILURE_WITH_PROVIDER_WITHOUT_EXTERNAL_ID =
-      "testCreateSubOrgFailureWithProviderWithoutExternalId";
+
   public static final String TEST_NAME_CREATE_SUB_ORG_FAILURE_WITH_INVALID_LOCATION_CODE =
       "testCreateSubOrgFailureWithInvalidLocationCode";
   public static final String TEST_NAME_CREATE_SUB_ORG_FAILURE_WITH_INVALID_CHANNEL =
       "testCreateSubOrgFailureWithInvalidChannel";
-  public static final String TEST_NAME_CREATE_SUB_ORG_FAILURE_WITH_EXTERNAL_ID_WITHOUT_PROVIDER =
-      "testCreateSubOrgFailureWithExternalIdWithoutProvider";
   public static final String TEST_NAME_CREATE_SUB_ORG_FAILURE_WITHOUT_ACCESS_TOKEN =
       "testCreateSubOrgFailureWithoutAccessToken";
   public static final String TEST_NAME_CREATE_SUB_ORG_SUCCESS_WITH_ORG_NAME =
@@ -58,20 +55,10 @@ public class CreateOrganisationTest extends BaseCitrusTestRunner {
     return new Object[][] {
       new Object[] {TEST_NAME_CREATE_SUB_ORG_FAILURE_WITHOUT_NAME, true, HttpStatus.BAD_REQUEST},
       new Object[] {
-        TEST_NAME_CREATE_SUB_ORG_FAILURE_WITH_PROVIDER_WITHOUT_EXTERNAL_ID,
-        true,
-        HttpStatus.BAD_REQUEST
-      },
-      new Object[] {
         TEST_NAME_CREATE_SUB_ORG_FAILURE_WITH_INVALID_LOCATION_CODE, true, HttpStatus.BAD_REQUEST
       },
       new Object[] {
         TEST_NAME_CREATE_SUB_ORG_FAILURE_WITH_INVALID_CHANNEL, true, HttpStatus.BAD_REQUEST
-      },
-      new Object[] {
-        TEST_NAME_CREATE_SUB_ORG_FAILURE_WITH_EXTERNAL_ID_WITHOUT_PROVIDER,
-        true,
-        HttpStatus.BAD_REQUEST
       },
       new Object[] {
         TEST_NAME_CREATE_ORG_FAILURE_WITH_DUPLICATE_EXTERNALID, true, HttpStatus.BAD_REQUEST
@@ -90,7 +77,7 @@ public class CreateOrganisationTest extends BaseCitrusTestRunner {
   public void testCreateOrganisationFailure(
       String testName, boolean isAuthRequired, HttpStatus httpStatusCode) {
     getAuthToken(this, isAuthRequired);
-    variable("externalId",externalID.toLowerCase());
+    variable("externalId", externalID.toLowerCase());
     getTestCase().setName(testName);
     performPostTest(
         this,
@@ -170,7 +157,7 @@ public class CreateOrganisationTest extends BaseCitrusTestRunner {
     getAuthToken(this, isAuthRequired);
 
     variable("rootOrgChannel", OrgUtil.getRootOrgChannel());
-    variable("rootOrgExternalId", OrgUtil.getRootOrgExternalId());
+    variable("rootOrgExternalId", OrgUtil.getRootOrgExternalId().toLowerCase());
     beforeTest();
 
     performPostTest(
