@@ -1,2 +1,2 @@
-firstName,roles,externalId,externalIdProvider,USER_TYPE
-Amit789655,"ORG_MEMBER",id111,provider111,"TEACHER"
+firstName,roles,orgExternalId,USER_TYPE
+Amit789655,"ORG_MEMBER",id111,"TEACHER"
