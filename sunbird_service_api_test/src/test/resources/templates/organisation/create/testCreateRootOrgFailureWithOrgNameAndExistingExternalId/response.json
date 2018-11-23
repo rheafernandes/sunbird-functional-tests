@@ -5,9 +5,9 @@
     "params": {
         "resmsgid": null,
         "msgid": "@ignore@",
-        "err": "SRC_EXTERNAL_ID_ALREADY_EXIST",
-        "status": "SRC_EXTERNAL_ID_ALREADY_EXIST",
-        "errmsg": "PROVIDER WITH EXTERNAL ID ALREADY EXIST ."
+        "err": "ERROR_DUPLICATE_ENTRY",
+        "status": "ERROR_DUPLICATE_ENTRY",
+        "errmsg": "Value ${rootOrgExternalId} for externalId is already in use."
     },
     "responseCode": "CLIENT_ERROR",
     "result": {}
