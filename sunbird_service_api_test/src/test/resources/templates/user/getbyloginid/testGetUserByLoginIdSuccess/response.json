@@ -54,7 +54,10 @@
 			"grade": [],
 			"currentLoginTime": null,
 			"location": null,
-			"status": 1
+			"status": 1,
+			"locationIds": "@ignore@",
+			"userType": "@ignore@",
+			"framework": "@ignore@"
 		}
 	}
 }

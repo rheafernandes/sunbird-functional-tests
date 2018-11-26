@@ -7,7 +7,7 @@
         "msgid": "@ignore@",
         "err": "MAX_ALLOWED_SIZE_LIMIT_EXCEED",
         "status": "MAX_ALLOWED_SIZE_LIMIT_EXCEED",
-        "errmsg": "Max allowed size is 10MB"
+        "errmsg": "@ignore@"
     },
     "responseCode": "CLIENT_ERROR",
     "result": {}

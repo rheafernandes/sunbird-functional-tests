@@ -48,7 +48,8 @@
             "parentOrgId": null,
             "hashTagId": "@ignore@",
             "noOfMembers": null,
-            "status": 1
+            "status": 1,
+            "email": null
         }
     }
 }
