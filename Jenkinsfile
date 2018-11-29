@@ -2,7 +2,7 @@ pipeline {
     environment {
         sunbird_api_key = "${sunbird_api_keys}"
         content_store_api_base_url = "https://dev.open-sunbird.org/api"
-        content_store_api_key = ${sunbird_api_key}
+        content_store_api_key = ${sunbird_api_keys}
         sunbird_cassandra_host = "10.10.4.4"
         sunbird_cassandra_port = "9042"
         sunbird_cassandra_username = "cassandra"
