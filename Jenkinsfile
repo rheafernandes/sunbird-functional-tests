@@ -2,7 +2,7 @@ pipeline {
     environment {
         sunbird_api_key = "${sunbird_api_keys}"
         content_store_api_base_url = "https://dev.open-sunbird.org/api"
-        content_store_api_key = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJkMTc1MDIwNDdlODc0ODZjOTM0ZDQ1ODdlYTQ4MmM3MyJ9.7LWocwCn5rrCScFQYOne8_Op2EOo-xTCK5JCFarHKSs"
+        content_store_api_key = ${sunbird_api_key}
         sunbird_cassandra_host = "10.10.4.4"
         sunbird_cassandra_port = "9042"
         sunbird_cassandra_username = "cassandra"
@@ -29,7 +29,6 @@ pipeline {
         sunbird_user_framework_subject = "English"
         content_reviewer_user="ft_reviewer2@org.com"
 		content_reviewer_password=“password”
-        
     }
 
     agent { label "build-slave" }
