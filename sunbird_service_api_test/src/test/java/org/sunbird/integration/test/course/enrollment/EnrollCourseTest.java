@@ -182,10 +182,7 @@ public class EnrollCourseTest extends BaseCitrusTestRunner {
       boolean canUnenroll) {
     getTestCase().setName(testName);
     getAuthToken(this, true);
-    if (canCreateUser) {
-      testContext.setVariable(Constant.USER_ID, "");
-      UserUtil.createUserAndGetToken(this, testContext);
-    }
+   
     if (canCreateCourseBatch) {
       variable("courseUnitId", ContentStoreUtil.getCourseUnitId());
       variable("resourceId", ContentStoreUtil.getResourceId());
@@ -199,6 +196,10 @@ public class EnrollCourseTest extends BaseCitrusTestRunner {
       }
       variable("batchId", courseBatchId);
     }
+    if (canCreateUser) {
+        testContext.setVariable(Constant.USER_ID, "");
+        UserUtil.createUserAndGetToken(this, testContext);
+      }
     if (canEnroll) {
       CourseEnrollmentUtil.enrollCourse(this, testContext, config);
     }
