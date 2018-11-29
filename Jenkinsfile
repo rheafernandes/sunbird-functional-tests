@@ -28,7 +28,7 @@ pipeline {
         sunbird_user_framework_medium = "English"
         sunbird_user_framework_subject = "English"
         content_reviewer_user="ft_reviewer2@org.com"
-		content_reviewer_password=“password”
+        content_reviewer_password=“password”
     }
 
     agent { label "build-slave" }
