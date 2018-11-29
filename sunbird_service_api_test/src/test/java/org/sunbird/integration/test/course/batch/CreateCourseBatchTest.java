@@ -231,6 +231,10 @@ public class CreateCourseBatchTest extends BaseCitrusTestRunner {
   public void beforeTest(
       boolean isCourseIdRequired, boolean isOrgIdRequired, boolean isUsrIdRequired) {
     getAuthToken(this, true);
+    if (isOrgIdRequired) {
+      variable("rootOrgChannel", OrgUtil.getRootOrgChannel());
+      OrgUtil.getRootOrgId(this, testContext);
+    }
     variable("startDate", TODAY_DATE);
     if (isCourseIdRequired) {
       // courseUnitId/resourceId is needed to be updated in context for creating course
@@ -239,10 +243,7 @@ public class CreateCourseBatchTest extends BaseCitrusTestRunner {
       String courseId = ContentStoreUtil.getCourseId(this, testContext);
       variable("courseId", courseId);
     }
-    if (isOrgIdRequired) {
-      variable("rootOrgChannel", OrgUtil.getRootOrgChannel());
-      OrgUtil.getRootOrgId(this, testContext);
-    }
+
     if (isUsrIdRequired) {
       UserUtil.createUserAndGetToken(this, testContext);
     }
