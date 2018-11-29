@@ -49,10 +49,10 @@ public class OrganisationBulkUploadTest extends BaseCitrusTestRunner {
       },
       new Object[] {
         TEST_NAME_ORG_BULK_UPLOAD_FAILURE_WITH_INVALID_COLUMN, HttpStatus.BAD_REQUEST, true
-      },
-      new Object[] {
-        TEST_NAME_ORG_BULK_UPLOAD_FAILURE_WITH_EXCEEDING_FILE_SIZE, HttpStatus.BAD_REQUEST, true
-      },
+      }
+//      ,new Object[] {
+//        TEST_NAME_ORG_BULK_UPLOAD_FAILURE_WITH_EXCEEDING_FILE_SIZE, HttpStatus.BAD_REQUEST, true
+//      },
     };
   }
 

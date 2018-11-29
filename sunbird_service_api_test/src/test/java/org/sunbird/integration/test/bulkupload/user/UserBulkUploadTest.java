@@ -84,14 +84,14 @@ public class UserBulkUploadTest extends BaseCitrusTestRunner {
         true,
         true,
         false
-      },
-      new Object[] {
-        TEST_NAME_USER_BULK_UPLOAD_FAILURE_WITH_EXCEEDING_FILE_SIZE,
-        HttpStatus.BAD_REQUEST,
-        true,
-        true,
-        false
-      },
+      }
+//      ,new Object[] {
+//        TEST_NAME_USER_BULK_UPLOAD_FAILURE_WITH_EXCEEDING_FILE_SIZE,
+//        HttpStatus.BAD_REQUEST,
+//        true,
+//        true,
+//        false
+//      },
     };
   }
 
