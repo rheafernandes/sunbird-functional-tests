@@ -178,15 +178,18 @@ public class UpdateCourseBatchTest extends BaseCitrusTestRunner {
   }
 
   private void beforeTest(boolean isOpenBatch) {
-    UserUtil.createUserAndGetToken(this, testContext);
+    getAuthToken(this, true);
+
+    variable("rootOrgChannel", OrgUtil.getRootOrgChannel());
+    OrgUtil.getRootOrgId(this, testContext);
     variable("courseUnitId", ContentStoreUtil.getCourseUnitId());
     variable("resourceId", ContentStoreUtil.getResourceId());
     variable("startDate", TODAY_DATE);
     String courseId = ContentStoreUtil.getCourseId(this, testContext);
     variable("courseId", courseId);
-    variable("rootOrgChannel", OrgUtil.getRootOrgChannel());
-    OrgUtil.getRootOrgId(this, testContext);
+
     variable("batchId", "");
+    UserUtil.createUserAndGetToken(this, testContext);
     if (isOpenBatch) {
       courseBatchId = CourseBatchUtil.getOpenCourseBatchId(this, testContext);
     } else {
