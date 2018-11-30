@@ -18,6 +18,7 @@ import org.testng.annotations.Test;
 
 public class EnrollCourseTest extends BaseCitrusTestRunner {
 
+  private CourseBatchUtil courseBatchUtil = new CourseBatchUtil();
   public static final String TEST_NAME_ENROLL_COURSE_FAILURE_WITHOUT_COURSE_ID =
       "testEnrollCourseFailureWithoutCourseId";
   public static final String TEST_NAME_ENROLL_COURSE_FAILURE_WITHOUT_BATCH_ID =
@@ -182,7 +183,7 @@ public class EnrollCourseTest extends BaseCitrusTestRunner {
       boolean canUnenroll) {
     getTestCase().setName(testName);
     getAuthToken(this, true);
-   
+
     if (canCreateCourseBatch) {
       variable("courseUnitId", ContentStoreUtil.getCourseUnitId());
       variable("resourceId", ContentStoreUtil.getResourceId());
@@ -190,16 +191,16 @@ public class EnrollCourseTest extends BaseCitrusTestRunner {
       String courseId = ContentStoreUtil.getCourseId(this, testContext);
       variable("courseId", courseId);
       if (isOpenBatch) {
-        courseBatchId = CourseBatchUtil.getOpenCourseBatchId(this, testContext);
+        courseBatchId = courseBatchUtil.getOpenCourseBatchId(this, testContext);
       } else {
-        courseBatchId = CourseBatchUtil.getInviteOnlyCourseBatchId(this, testContext);
+        courseBatchId = courseBatchUtil.getInviteOnlyCourseBatchId(this, testContext);
       }
       variable("batchId", courseBatchId);
     }
     if (canCreateUser) {
-        testContext.setVariable(Constant.USER_ID, "");
-        UserUtil.createUserAndGetToken(this, testContext);
-      }
+      testContext.setVariable(Constant.USER_ID, "");
+      UserUtil.createUserAndGetToken(this, testContext);
+    }
     if (canEnroll) {
       CourseEnrollmentUtil.enrollCourse(this, testContext, config);
     }

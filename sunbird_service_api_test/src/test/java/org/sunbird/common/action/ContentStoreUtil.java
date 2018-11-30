@@ -129,12 +129,11 @@ public class ContentStoreUtil {
                 MediaType.APPLICATION_JSON.toString(),
                 getHeaders()));
     runner.http(
-        builder ->
-            TestActionUtil.getResponseTestAction(
-                builder,
-                Constant.CONTENT_STORE_ENDPOINT,
-                "testPublishCourseSuccess",
-                HttpStatus.OK));
+        builder -> {
+          TestActionUtil.getResponseTestAction(
+              builder, Constant.CONTENT_STORE_ENDPOINT, "testPublishCourseSuccess", HttpStatus.OK);
+          runner.getAuthToken(runner, true);
+        });
   }
 
   private static void retireCourse(BaseCitrusTestRunner runner, TestContext testContext) {

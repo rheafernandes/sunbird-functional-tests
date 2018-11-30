@@ -16,7 +16,7 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 public class UpdateCourseBatchTest extends BaseCitrusTestRunner {
-
+  private CourseBatchUtil courseBatchUtil = new CourseBatchUtil();
   private static final String TEST_UPDATE_COURSE_BATCH_FAILURE_WITHOUT_AUTH_TOKEN =
       "testUpdateCourseBatchFailureWithoutAuthToken";
   private static final String TEST_UPDATE_COURSE_BATCH_FAILURE_WITH_INVALID_BATCHID =
@@ -191,9 +191,9 @@ public class UpdateCourseBatchTest extends BaseCitrusTestRunner {
     variable("batchId", "");
     UserUtil.createUserAndGetToken(this, testContext);
     if (isOpenBatch) {
-      courseBatchId = CourseBatchUtil.getOpenCourseBatchId(this, testContext);
+      courseBatchId = courseBatchUtil.getOpenCourseBatchId(this, testContext);
     } else {
-      courseBatchId = CourseBatchUtil.getInviteOnlyCourseBatchId(this, testContext);
+      courseBatchId = courseBatchUtil.getInviteOnlyCourseBatchId(this, testContext);
     }
     variable("batchId", courseBatchId);
   }

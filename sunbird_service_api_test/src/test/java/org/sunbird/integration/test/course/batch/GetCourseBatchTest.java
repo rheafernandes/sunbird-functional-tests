@@ -12,6 +12,7 @@ import org.testng.annotations.Test;
 
 public class GetCourseBatchTest extends BaseCitrusTestRunner {
 
+  private CourseBatchUtil courseBatchUtil = new CourseBatchUtil();
   public static final String TEST_NAME_GET_COURSE_BATCH_SUCCESS_OPEN_BATCH_WITH_VALID_ID =
       "testGetCourseBatchSuccessOpenBatchWithValidId";
   public static final String TEST_NAME_GET_COURSE_BATCH_SUCCESS_INVITE_ONLY_BATCH_WITH_VALID_ID =
@@ -84,9 +85,9 @@ public class GetCourseBatchTest extends BaseCitrusTestRunner {
     String courseId = ContentStoreUtil.getCourseId(this, testContext);
     variable("courseId", courseId);
     if (isOpen) {
-      courseBatchId = CourseBatchUtil.getOpenCourseBatchId(this, testContext);
+      courseBatchId = courseBatchUtil.getOpenCourseBatchId(this, testContext);
     } else {
-      courseBatchId = CourseBatchUtil.getInviteOnlyCourseBatchId(this, testContext);
+      courseBatchId = courseBatchUtil.getInviteOnlyCourseBatchId(this, testContext);
     }
   }
 }
