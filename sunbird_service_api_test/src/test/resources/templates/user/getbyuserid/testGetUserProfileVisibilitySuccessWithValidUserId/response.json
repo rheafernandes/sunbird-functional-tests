@@ -28,7 +28,7 @@
 			"updatedDate": null,
 			"skills": [],
 			"badgeAssertions": [],
-			"isDeleted": null,
+			"isDeleted": false,
 			"organisations": "@ignore@",
 			"countryCode": null,
 			"id": "@ignore@",
