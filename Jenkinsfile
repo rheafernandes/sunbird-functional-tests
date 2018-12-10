@@ -1,7 +1,7 @@
 pipeline {
     environment {
         sunbird_api_key = "${sunbird_api_keys}"
-        content_store_api_base_url = "https://dev.open-sunbird.org/api"
+        content_store_api_base_url = "https://dev.sunbirded.org/api"
         content_store_api_key="${sunbird_api_keys}"
         sunbird_cassandra_host = "10.10.4.4"
         sunbird_cassandra_port = "9042"
@@ -14,8 +14,8 @@ pipeline {
         sunbird_es_host = "10.10.3.7"
         sunbird_es_port = "9300"
         sunbird_es_index = "searchindex"
-        sunbird_test_base_url = "https://dev.open-sunbird.org"
-        sunbird_sso_url="https://dev.open-sunbird.org/auth"
+        sunbird_test_base_url = "https://dev.sunbirded.org"
+        sunbird_sso_url="https://dev.sunbirded.org/auth"
         sunbird_username="ft_org_admin@org.com"
         sunbird_password="password"
         sunbird_default_channel="ft_channel_01"
