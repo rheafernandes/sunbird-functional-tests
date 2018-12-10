@@ -92,13 +92,13 @@ public class OrgConsumptionDashboardTest extends BaseCitrusTestRunner {
   public Object[][] orgConsumptionDashboardSuccessDataProvider() {
 
     return new Object[][] {
-      new Object[] {
-        TEST_NAME_ORG_CONSUMPTION_DASHBOARD_SUCCESS_WITH_VALID_ORG_ID,
-        true,
-        HttpStatus.OK,
-        true,
-        "?period=7d"
-      },
+//      new Object[] {
+//        TEST_NAME_ORG_CONSUMPTION_DASHBOARD_SUCCESS_WITH_VALID_ORG_ID,
+//        true,
+//        HttpStatus.OK,
+//        true,
+//        "?period=7d"
+//      },
     };
   }
 

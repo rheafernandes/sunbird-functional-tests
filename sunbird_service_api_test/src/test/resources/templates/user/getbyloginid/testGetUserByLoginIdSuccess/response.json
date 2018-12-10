@@ -44,7 +44,7 @@
 			"registryId": "@ignore@",
 			"avatar": null,
 			"rootOrgId": "@ignore@",
-			"emailVerified": false,
+			"emailVerified": "@ignore@",
 			"firstName": "@ignore@",
 			"lastLoginTime": null,
 			"createdDate": "@ignore@",
