@@ -6,7 +6,6 @@ import org.springframework.http.HttpStatus;
 import org.sunbird.common.action.TOCUtil;
 import org.sunbird.integration.test.common.BaseCitrusTestRunner;
 import org.testng.annotations.DataProvider;
-import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
 /**
@@ -30,7 +29,7 @@ public class TextbookTocTest extends BaseCitrusTestRunner {
     private static final String TEST_TOC_UPLOAD_WITH_VALID_FILE_AND_INVALID_DATA = "testTocUploadFailureWithValidFileAndInvalidData";
 
     private static final String TEST_TOC_UPLOAD_BLANK_CSV_FILE = "testTocUploadFailureBlankCsvFile";
-    private static final String TEST_TOC_UPLOAD_BLANK_CSV_FILE_HEADERS_ONLY = "testTocUploadFailureBlankCsvFileheadersOnly";
+    private static final String TEST_TOC_UPLOAD_BLANK_CSV_FILE_HEADERS_ONLY = "testTocUploadFailureBlankCsvFileHeadersOnly";
     private static final String TEST_TOC_UPLOAD_CSV_ROWS_EXCEED = "testTocUploadFailureCsvRowsExceed";
     private static final String TEST_TOC_UPLOAD_CSV_DUPLICATE_ROWS = "testTocUploadFailureCsvDuplicateRows";
     private static final String TEST_TOC_UPLOAD_CSV_INVALID_TEXTBOOK_NAME = "testTocUploadFailureCsvInValidTextbookName";
@@ -109,12 +108,11 @@ public class TextbookTocTest extends BaseCitrusTestRunner {
                         TEST_TOC_UPLOAD_WITH_VALID_FILE_AND_INVALID_TEXTBOOK_CONTENT_TYPE, HttpStatus.BAD_REQUEST, true, "Resource"
                 },
                 new Object[]{
-                        TEST_TOC_UPLOAD_WITH_VALID_FILE_AND_INVALID_TEXTBOOK_CHILDREN_EXISTS, HttpStatus.BAD_REQUEST, true, "Resource"
+                        TEST_TOC_UPLOAD_WITH_VALID_FILE_AND_INVALID_TEXTBOOK_CHILDREN_EXISTS, HttpStatus.BAD_REQUEST, true, "TextBookWithChildren"
                 },
-                //TODO: Fix Children Exist Test Scenario
-                /*new Object[]{
-                        TEST_TOC_UPLOAD_WITH_VALID_FILE_AND_INVALID_TEXTBOOK_CHILDREN_EXISTS, HttpStatus.BAD_REQUEST, true, "TextBook"
-                },*/
+                new Object[]{
+                        TEST_TOC_UPLOAD_WITH_VALID_FILE_AND_INVALID_DATA, HttpStatus.BAD_REQUEST, true, "TextBook"
+                },
                 new Object[]{
                         TEST_TOC_UPLOAD_BLANK_CSV_FILE, HttpStatus.BAD_REQUEST, true, "Identifier"
                 },
@@ -174,6 +172,8 @@ public class TextbookTocTest extends BaseCitrusTestRunner {
             contentId = TOCUtil.createTextbook(this, testContext);
         else if ("Resource".equalsIgnoreCase(contentType))
             contentId = TOCUtil.createResourceContent(this, testContext);
+        else if("TextBookWithChildren".equalsIgnoreCase(contentType))
+            contentId=TOCUtil.createTextbookWithChildren(this, testContext);
         return contentId;
     }
 

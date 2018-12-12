@@ -5,9 +5,9 @@
     "params": {
         "resmsgid": null,
         "msgid": "@ignore@",
-        "err": "ERROR_PROCESSING_FILE",
-        "status": "ERROR_PROCESSING_FILE",
-        "errmsg": "Something Went Wrong While Reading File. Please Check The File."
+        "err": "BLANK_CSV_DATA",
+        "status": "BLANK_CSV_DATA",
+        "errmsg": "Did not find any TOC data. Please check and upload again."
     },
     "responseCode": "CLIENT_ERROR",
     "result": {}

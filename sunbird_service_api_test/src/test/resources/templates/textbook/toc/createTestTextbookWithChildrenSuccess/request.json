@@ -1,0 +1,28 @@
+{
+  "request": {
+    "data": {
+      "nodesModified": {
+        "${textbookUnitId}": {
+          "isNew": true,
+          "root": false,
+          "metadata": {
+            "mimeType": "application/vnd.ekstep.content-collection",
+            "contentType": "TextBookUnit",
+            "code": "${textbookUnitId}",
+            "name": "citrus:concat('Test_CourseUnit_name_', citrus:randomNumber(10))",
+            "description": "citrus:concat('Test_CourseUnit_desc_', citrus:randomNumber(10))"
+          }
+        }
+      },
+      "hierarchy": {
+        "${textbookId}": {
+          "contentType": "TextBook",
+          "children": [
+            "${textbookUnitId}"
+          ],
+          "root": true
+        }
+      }
+    }
+  }
+}

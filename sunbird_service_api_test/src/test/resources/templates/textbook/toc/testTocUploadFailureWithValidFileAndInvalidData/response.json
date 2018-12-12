@@ -5,9 +5,9 @@
     "params": {
         "resmsgid": null,
         "msgid": "@ignore@",
-        "err": "ERROR_PROCESSING_FILE",
-        "status": "ERROR_PROCESSING_FILE",
-        "errmsg": "Something Went Wrong While Reading File. Please Check The File."
+        "err": "CLIENT_ERROR",
+        "status": "CLIENT_ERROR",
+        "errmsg": "@ignore@"
     },
     "responseCode": "CLIENT_ERROR",
     "result": {}
