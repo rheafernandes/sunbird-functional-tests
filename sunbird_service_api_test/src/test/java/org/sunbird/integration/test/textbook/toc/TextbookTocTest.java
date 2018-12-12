@@ -21,12 +21,15 @@ public class TextbookTocTest extends BaseCitrusTestRunner {
 
     private static final String TEST_TOC_UPLOAD_WITH_VALID_FILE_AND_TEXTBOOK = "testTocUploadSuccessWithValidFileAndTextbook";
     private static final String TEST_TOC_UPLOAD_WITH_VALID_FILE_URL_AND_TEXTBOOK = "testTocUploadSuccessWithValidFileUrlAndTextbook";
+
     private static final String TEST_TOC_UPDATE_WITH_VALID_FILE_AND_TEXTBOOK = "testTocUpdateSuccessWithValidFileAndTextbook";
+    private static final String TEST_TOC_UPDATE_WITH_VALID_FILE_URL_AND_TEXTBOOK = "testTocUploadSuccessWithValidFileUrlAndTextbook";
 
     private static final String TEST_TOC_UPLOAD_WITH_VALID_FILE_AND_INVALID_TEXTBOOK_ID = "testTocUploadFailureWithValidFileAndInvalidTextbookId";
     private static final String TEST_TOC_UPLOAD_WITH_VALID_FILE_AND_INVALID_TEXTBOOK_MIME_TYPE = "testTocUploadFailureWithValidFileAndInvalidTextbookMimeType";
     private static final String TEST_TOC_UPLOAD_WITH_VALID_FILE_AND_INVALID_TEXTBOOK_CONTENT_TYPE = "testTocUploadFailureWithValidFileAndInvalidTextbookContentType";
     private static final String TEST_TOC_UPLOAD_WITH_VALID_FILE_AND_INVALID_TEXTBOOK_CHILDREN_EXISTS = "testTocUploadFailureWithValidFileAndInvalidTextbookChildrenExists";
+    private static final String TEST_TOC_UPLOAD_WITH_VALID_FILE_AND_INVALID_DATA = "testTocUploadFailureWithValidFileAndInvalidData";
 
     private static final String TEST_TOC_UPLOAD_BLANK_CSV_FILE = "testTocUploadFailureBlankCsvFile";
     private static final String TEST_TOC_UPLOAD_BLANK_CSV_FILE_HEADERS_ONLY = "testTocUploadFailureBlankCsvFileheadersOnly";
@@ -90,6 +93,9 @@ public class TextbookTocTest extends BaseCitrusTestRunner {
         return new Object[][]{
                 new Object[]{
                         TEST_TOC_UPLOAD_WITH_VALID_FILE_AND_TEXTBOOK, HttpStatus.OK, true, "TextBook"
+                },
+                new Object[]{
+                        TEST_TOC_UPLOAD_WITH_VALID_FILE_URL_AND_TEXTBOOK, HttpStatus.OK, true, "TextBook"
                 }
         };
     }

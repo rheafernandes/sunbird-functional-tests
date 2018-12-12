@@ -53,7 +53,7 @@ public class TOCUtil {
                                 builder,
                                 Constant.CONTENT_STORE_ENDPOINT,
                                 HttpStatus.OK,
-                                "$.result.node_id",
+                                "$.result.content_id",
                                 "contentId"));
         contentId = testContext.getVariable("contentId");
         runner.sleep(Constant.ES_SYNC_WAIT_TIME);
