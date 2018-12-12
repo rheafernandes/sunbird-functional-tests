@@ -9,7 +9,7 @@
 			"language": [
 				"English"
 			],
-			"contentType": "Course",
+			"contentType": "TextBook",
 			"code": "citrus:concat('SB_FT_COURSE_', citrus:currentDate('yyyyMMddhhmmss'))",
 			"tags": [
 				"QA_Content"
