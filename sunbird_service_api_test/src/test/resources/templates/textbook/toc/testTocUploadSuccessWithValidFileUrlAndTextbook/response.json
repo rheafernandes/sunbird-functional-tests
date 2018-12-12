@@ -11,6 +11,8 @@
     },
     "responseCode": "OK",
     "result": {
-        "contentId":"@ignore@"
+        "contentId":"@ignore@",
+        "identifiers":"@ignore@",
+        "versionKey":"@ignore@"
     }
 }
