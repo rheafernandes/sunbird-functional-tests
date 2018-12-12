@@ -1,0 +1,16 @@
+{
+    "id": "api.textbook.toc.upload",
+    "ver": "v1",
+    "ts": "@ignore@",
+    "params": {
+        "resmsgid": null,
+        "msgid": "@ignore@",
+        "err": "BLANK_CSV_DATA",
+        "status": "BLANK_CSV_DATA",
+        "errmsg": "Did not find any TOC data. Please check and upload again."
+    },
+    "responseCode": "OK",
+    "result": {
+        "contentId":"CLIENT_ERROR"
+    }
+}
