@@ -66,7 +66,6 @@ public class TextbookTocTest extends BaseCitrusTestRunner {
                 RESPONSE_JSON);
     }
 
-    @Ignore
     @Test(dataProvider = "tocUploadFailureDataProvider")
     @CitrusParameters({"testName", "httpStatusCode", "isAuthRequired", "contentType"})
     @CitrusTest
