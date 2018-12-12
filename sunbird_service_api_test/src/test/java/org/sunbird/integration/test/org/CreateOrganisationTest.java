@@ -2,6 +2,9 @@ package org.sunbird.integration.test.org;
 
 import com.consol.citrus.annotations.CitrusTest;
 import com.consol.citrus.testng.CitrusParameters;
+
+import java.time.Instant;
+
 import javax.ws.rs.core.MediaType;
 import org.springframework.http.HttpStatus;
 import org.sunbird.common.action.OrgUtil;
@@ -10,17 +13,14 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 public class CreateOrganisationTest extends BaseCitrusTestRunner {
-
+  private static final String externalID = "FT_Org_External_" + Instant.now().getEpochSecond();
   public static final String TEST_NAME_CREATE_SUB_ORG_FAILURE_WITHOUT_NAME =
       "testCreateSubOrgFailureWithoutName";
-  public static final String TEST_NAME_CREATE_SUB_ORG_FAILURE_WITH_PROVIDER_WITHOUT_EXTERNAL_ID =
-      "testCreateSubOrgFailureWithProviderWithoutExternalId";
+
   public static final String TEST_NAME_CREATE_SUB_ORG_FAILURE_WITH_INVALID_LOCATION_CODE =
       "testCreateSubOrgFailureWithInvalidLocationCode";
   public static final String TEST_NAME_CREATE_SUB_ORG_FAILURE_WITH_INVALID_CHANNEL =
       "testCreateSubOrgFailureWithInvalidChannel";
-  public static final String TEST_NAME_CREATE_SUB_ORG_FAILURE_WITH_EXTERNAL_ID_WITHOUT_PROVIDER =
-      "testCreateSubOrgFailureWithExternalIdWithoutProvider";
   public static final String TEST_NAME_CREATE_SUB_ORG_FAILURE_WITHOUT_ACCESS_TOKEN =
       "testCreateSubOrgFailureWithoutAccessToken";
   public static final String TEST_NAME_CREATE_SUB_ORG_SUCCESS_WITH_ORG_NAME =
@@ -33,6 +33,10 @@ public class CreateOrganisationTest extends BaseCitrusTestRunner {
       "testCreateRootOrgSuccessWithOrgNameAndNewChannel";
   private static final Object TEST_NAME_CREATE_ROOT_ORG_SUCCESS_WITH_PROVIDER_AND_EXTERNALID =
       "testCreateRootOrgSuccessWithProviderAndExternalId";
+
+  private static final Object TEST_NAME_CREATE_ORG_FAILURE_WITH_DUPLICATE_EXTERNALID =
+      "testCreateOrgFailureWithDuplicateExternalId";
+
   public static final String TEST_NAME_CREATE_ROOT_ORG_FAILURE_WITH_ORG_NAME_AND_EXISTING_CHANNEL =
       "testCreateRootOrgFailureWithOrgNameAndExistingChannel";
   private static final Object
@@ -51,20 +55,13 @@ public class CreateOrganisationTest extends BaseCitrusTestRunner {
     return new Object[][] {
       new Object[] {TEST_NAME_CREATE_SUB_ORG_FAILURE_WITHOUT_NAME, true, HttpStatus.BAD_REQUEST},
       new Object[] {
-        TEST_NAME_CREATE_SUB_ORG_FAILURE_WITH_PROVIDER_WITHOUT_EXTERNAL_ID,
-        true,
-        HttpStatus.BAD_REQUEST
-      },
-      new Object[] {
         TEST_NAME_CREATE_SUB_ORG_FAILURE_WITH_INVALID_LOCATION_CODE, true, HttpStatus.BAD_REQUEST
       },
       new Object[] {
         TEST_NAME_CREATE_SUB_ORG_FAILURE_WITH_INVALID_CHANNEL, true, HttpStatus.BAD_REQUEST
       },
       new Object[] {
-        TEST_NAME_CREATE_SUB_ORG_FAILURE_WITH_EXTERNAL_ID_WITHOUT_PROVIDER,
-        true,
-        HttpStatus.BAD_REQUEST
+        TEST_NAME_CREATE_ORG_FAILURE_WITH_DUPLICATE_EXTERNALID, true, HttpStatus.BAD_REQUEST
       },
       new Object[] {
         TEST_NAME_CREATE_SUB_ORG_FAILURE_WITHOUT_ACCESS_TOKEN, false, HttpStatus.UNAUTHORIZED
@@ -72,13 +69,15 @@ public class CreateOrganisationTest extends BaseCitrusTestRunner {
     };
   }
 
-  @Test(dataProvider = "createSubOrgFailureDataProvider")
+  @Test(
+      dataProvider = "createSubOrgFailureDataProvider",
+      dependsOnMethods = {"createOrgWithExternalId"})
   @CitrusParameters({"testName", "isAuthRequired", "httpStatusCode"})
   @CitrusTest
   public void testCreateOrganisationFailure(
       String testName, boolean isAuthRequired, HttpStatus httpStatusCode) {
     getAuthToken(this, isAuthRequired);
-
+    variable("externalId", externalID.toLowerCase());
     getTestCase().setName(testName);
     performPostTest(
         this,
@@ -105,9 +104,8 @@ public class CreateOrganisationTest extends BaseCitrusTestRunner {
   }
 
   @Test(
-    dataProvider = "createSubOrgSuccessDataProvider",
-    dependsOnMethods = {"testCreateRootOrganisation"}
-  )
+      dataProvider = "createSubOrgSuccessDataProvider",
+      dependsOnMethods = {"testCreateRootOrganisation"})
   @CitrusParameters({"testName", "isAuthRequired", "httpStatusCode"})
   @CitrusTest
   public void testCreateOrganisationSuccess(
@@ -159,7 +157,7 @@ public class CreateOrganisationTest extends BaseCitrusTestRunner {
     getAuthToken(this, isAuthRequired);
 
     variable("rootOrgChannel", OrgUtil.getRootOrgChannel());
-    variable("rootOrgExternalId", OrgUtil.getRootOrgExternalId());
+    variable("rootOrgExternalId", OrgUtil.getRootOrgExternalId().toLowerCase());
     beforeTest();
 
     performPostTest(
@@ -172,6 +170,15 @@ public class CreateOrganisationTest extends BaseCitrusTestRunner {
         isAuthRequired,
         httpStatusCode,
         RESPONSE_JSON);
+  }
+
+  @Test
+  @CitrusTest
+  public void createOrgWithExternalId() {
+    getAuthToken(this, true);
+    variable("externalId", externalID);
+    variable("provider", OrgUtil.getRootOrgChannel());
+    OrgUtil.createSubOrgId(this, testContext);
   }
 
   private void beforeTest() {

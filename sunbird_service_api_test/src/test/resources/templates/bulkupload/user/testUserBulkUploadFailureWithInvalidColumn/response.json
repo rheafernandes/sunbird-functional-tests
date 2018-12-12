@@ -7,7 +7,7 @@
         "msgid": "@ignore@",
         "err": "INVALID_COLUMNS",
         "status": "INVALID_COLUMNS",
-        "errmsg": "Invalid column: firstNameInvalidField. Valid columns are: firstName, lastName, phone, countryCode, email, userName, phoneVerified, emailVerified, roles, position, grade, location, dob, gender, language, profileSummary, subject, webPages, externalIdProvider, externalId, externalIdType, externalIds."
+        "errmsg": "@startsWith('Invalid column: firstnameinvalidfield')@"
     },
     "responseCode": "CLIENT_ERROR",
     "result": {}

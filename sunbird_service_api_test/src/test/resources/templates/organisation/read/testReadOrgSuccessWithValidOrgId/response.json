@@ -32,6 +32,7 @@
             "thumbnail": null,
             "orgName": "@ignore@",
             "updatedBy": null,
+            "address":"@ignore@",
             "locationIds": [],
             "externalId": "@ignore@",
             "isRootOrg": true,
@@ -47,7 +48,8 @@
             "parentOrgId": null,
             "hashTagId": "@ignore@",
             "noOfMembers": null,
-            "status": 1
+            "status": 1,
+            "email": null
         }
     }
 }

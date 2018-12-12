@@ -37,7 +37,7 @@ public class OrganisationBulkUploadTest extends BaseCitrusTestRunner {
         TEST_NAME_ORG_BULK_UPLOAD_FAILURE_WITHOUT_ACCESS_TOKEN, HttpStatus.UNAUTHORIZED, false
       },
       new Object[] {
-        TEST_NAME_ORG_BULK_UPLOAD_FAILURE_WITHOUT_CSV_FILE, HttpStatus.INTERNAL_SERVER_ERROR, true
+        TEST_NAME_ORG_BULK_UPLOAD_FAILURE_WITHOUT_CSV_FILE, HttpStatus.BAD_REQUEST, true
       },
       new Object[] {
         TEST_NAME_ORG_BULK_UPLOAD_FAILURE_WITH_EMPTY_CSV_FILE, HttpStatus.BAD_REQUEST, true
@@ -49,10 +49,10 @@ public class OrganisationBulkUploadTest extends BaseCitrusTestRunner {
       },
       new Object[] {
         TEST_NAME_ORG_BULK_UPLOAD_FAILURE_WITH_INVALID_COLUMN, HttpStatus.BAD_REQUEST, true
-      },
-      new Object[] {
-        TEST_NAME_ORG_BULK_UPLOAD_FAILURE_WITH_EXCEEDING_FILE_SIZE, HttpStatus.BAD_REQUEST, true
-      },
+      }
+//      ,new Object[] {
+//        TEST_NAME_ORG_BULK_UPLOAD_FAILURE_WITH_EXCEEDING_FILE_SIZE, HttpStatus.BAD_REQUEST, true
+//      },
     };
   }
 

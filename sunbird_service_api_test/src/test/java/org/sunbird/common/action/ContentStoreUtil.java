@@ -12,13 +12,16 @@ import org.sunbird.integration.test.common.BaseCitrusTestRunner;
 public class ContentStoreUtil {
 
   public static final String TEMPLATE_DIR = "templates/course/create";
-  private static final String CONTENT_STORE_CREATE_URL = "/content/v3/create";
-  private static final String CONTENT_STORE_UPDATE_HIERARCHY_URL = "/content/v3/hierarchy/update";
-  private static final String CONTENT_STORE_CONTENT_PUBLISH_URL = "/content/v3/publish/";
-  private static final String CONTENT_STORE_RETIRE_CONTENT_URL = "/content/v3/retire/";
-  private static String courseId = null;
+  private static final String CONTENT_STORE_CREATE_URL = "/content/v1/create";
+  private static final String CONTENT_STORE_UPDATE_HIERARCHY_URL = "/course/v1/hierarchy/update";
+  private static final String CONTENT_STORE_CONTENT_PUBLISH_URL = "/content/v1/publish/";
+  private static final String CONTENT_STORE_RETIRE_CONTENT_URL = "/content/v1/retire/";
+  private static String courseId = "";
   private static final String courseUnitId = "SB_FT_COURSEUNIT_" + UUID.randomUUID().toString();
   private static final String resourceId = System.getenv("sunbird_content_id");
+  private static final String CONTENT_REVIEWER_USER = System.getenv("content_reviewer_user");
+  private static final String CONTENT_REVIEWER_PASSWORD =
+      System.getenv("content_reviewer_password");
 
   public static String getResourceId() {
     return resourceId;
@@ -34,7 +37,7 @@ public class ContentStoreUtil {
   }
 
   private static Map<String, Object> getHeaders() {
-    Map<String, Object> headers = TestActionUtil.getHeaders(false);
+    Map<String, Object> headers = TestActionUtil.getHeaders(true);
     headers.put(Constant.AUTHORIZATION, Constant.BEARER + System.getenv("content_store_api_key"));
     return headers;
   }
@@ -79,7 +82,7 @@ public class ContentStoreUtil {
                 builder,
                 Constant.CONTENT_STORE_ENDPOINT,
                 HttpStatus.OK,
-                "$.result.node_id",
+                "$.result.content_id",
                 "courseId"));
     courseId = testContext.getVariable("courseId");
     runner.sleep(Constant.ES_SYNC_WAIT_TIME);
@@ -107,6 +110,13 @@ public class ContentStoreUtil {
   }
 
   private static void publishCourse(BaseCitrusTestRunner runner, TestContext testContext) {
+    UserUtil.getUserId(runner, testContext, "userId");
+    runner.getAuthToken(
+        runner,
+        CONTENT_REVIEWER_USER,
+        CONTENT_REVIEWER_PASSWORD,
+        testContext.getVariable("userId"),
+        true);
     runner.http(
         builder ->
             TestActionUtil.getPostRequestTestAction(
@@ -119,12 +129,11 @@ public class ContentStoreUtil {
                 MediaType.APPLICATION_JSON.toString(),
                 getHeaders()));
     runner.http(
-        builder ->
-            TestActionUtil.getResponseTestAction(
-                builder,
-                Constant.CONTENT_STORE_ENDPOINT,
-                "testPublishCourseSuccess",
-                HttpStatus.OK));
+        builder -> {
+          TestActionUtil.getResponseTestAction(
+              builder, Constant.CONTENT_STORE_ENDPOINT, "testPublishCourseSuccess", HttpStatus.OK);
+          runner.getAuthToken(runner, true);
+        });
   }
 
   private static void retireCourse(BaseCitrusTestRunner runner, TestContext testContext) {

@@ -12,10 +12,9 @@ public class UserBulkUploadTest extends BaseCitrusTestRunner {
 
   public static final String TEST_NAME_USER_BULK_UPLOAD_FAILURE_WITHOUT_ACCESS_TOKEN =
       "testUserBulkUploadFailureWithoutAccessToken";
-  public static final String TEST_NAME_USER_BULK_UPLOAD_FAILURE_WITHOUT_ORG_DETAIL =
-      "testUserBulkUploadFailureWithoutOrgDetails";
-  public static final String TEST_NAME_USER_BULK_UPLOAD_FAILURE_WITH_INVALID_ORG_ID =
-      "testUserBulkUploadFailureWithInvalidOrgId";
+  public static final String TEST_NAME_USER_BULK_UPLOAD_FAILURE_WITHOUT_USER_TYPE =
+      "testUserBulkUploadFailureWithoutUserType";
+  
   public static final String TEST_NAME_USER_BULK_UPLOAD_FAILURE_WITHOUT_CSV_FILE =
       "testUserBulkUploadFailureWithoutCsvFile";
   public static final String TEST_NAME_USER_BULK_UPLOAD_FAILURE_WITH_EMPTY_CSV_FILE =
@@ -52,14 +51,7 @@ public class UserBulkUploadTest extends BaseCitrusTestRunner {
         false
       },
       new Object[] {
-        TEST_NAME_USER_BULK_UPLOAD_FAILURE_WITHOUT_ORG_DETAIL,
-        HttpStatus.BAD_REQUEST,
-        true,
-        false,
-        false
-      },
-      new Object[] {
-        TEST_NAME_USER_BULK_UPLOAD_FAILURE_WITH_INVALID_ORG_ID,
+        TEST_NAME_USER_BULK_UPLOAD_FAILURE_WITHOUT_USER_TYPE,
         HttpStatus.BAD_REQUEST,
         true,
         false,
@@ -92,14 +84,14 @@ public class UserBulkUploadTest extends BaseCitrusTestRunner {
         true,
         true,
         false
-      },
-      new Object[] {
-        TEST_NAME_USER_BULK_UPLOAD_FAILURE_WITH_EXCEEDING_FILE_SIZE,
-        HttpStatus.BAD_REQUEST,
-        true,
-        true,
-        false
-      },
+      }
+//      ,new Object[] {
+//        TEST_NAME_USER_BULK_UPLOAD_FAILURE_WITH_EXCEEDING_FILE_SIZE,
+//        HttpStatus.BAD_REQUEST,
+//        true,
+//        true,
+//        false
+//      },
     };
   }
 

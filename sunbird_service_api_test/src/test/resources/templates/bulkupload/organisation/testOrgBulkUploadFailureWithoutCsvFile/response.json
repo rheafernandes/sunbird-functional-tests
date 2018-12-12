@@ -5,10 +5,10 @@
   "params": {
     "resmsgid": null,
     "msgid": "@ignore@",
-    "err": "INTERNAL_ERROR",
-    "status": "INTERNAL_ERROR",
-    "errmsg": "@ignore@"
+    "err": "MISSING_FILE_ATTACHMENT",
+    "status": "MISSING_FILE_ATTACHMENT",
+    "errmsg": "Missing file attachment."
   },
-  "responseCode": "SERVER_ERROR",
+  "responseCode": "CLIENT_ERROR",
   "result": {}
 }

@@ -4,6 +4,7 @@ import com.consol.citrus.annotations.CitrusTest;
 import org.springframework.http.HttpStatus;
 import org.sunbird.common.action.TestActionUtil;
 import org.sunbird.common.action.UserUtil;
+import org.sunbird.common.util.Constant;
 import org.sunbird.integration.test.common.BaseCitrusTestRunner;
 import org.testng.annotations.Test;
 
@@ -43,8 +44,13 @@ public class ReadUserProfileVisibiltyTest extends BaseCitrusTestRunner {
   }
 
   private void beforeTest() {
-    getAuthToken(this, true);
     UserUtil.getUserId(this, testContext);
     variable("userId", testContext.getVariable("userId"));
+    getAuthToken(
+        this,
+        UserUtil.getUserNameWithChannel(this, testContext),
+        Constant.PASSWORD,
+        testContext.getVariable("userId"),
+        true);
   }
 }

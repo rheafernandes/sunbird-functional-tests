@@ -31,7 +31,7 @@
 			"countryCode": null,
 			"id": "@ignore@",
 			"tempPassword": null,
-			"email": "",
+			"email": "@ignore@",
 			"phoneverified": null,
 			"rootOrg":"@ignore@",
 			"identifier": "@ignore@",
@@ -44,7 +44,7 @@
 			"registryId": "@ignore@",
 			"avatar": null,
 			"rootOrgId": "@ignore@",
-			"emailVerified": false,
+			"emailVerified": "@ignore@",
 			"firstName": "@ignore@",
 			"lastLoginTime": null,
 			"createdDate": "@ignore@",
@@ -54,7 +54,10 @@
 			"grade": [],
 			"currentLoginTime": null,
 			"location": null,
-			"status": 1
+			"status": 1,
+			"locationIds": "@ignore@",
+			"userType": "@ignore@",
+			"framework": "@ignore@"
 		}
 	}
 }

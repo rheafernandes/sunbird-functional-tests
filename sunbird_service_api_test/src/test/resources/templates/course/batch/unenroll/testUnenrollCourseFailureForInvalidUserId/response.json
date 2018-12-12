@@ -6,7 +6,7 @@
         "resmsgid": "@ignore@",
         "msgid": "@ignore@",
         "err": "@ignore@",
-        "status": "SERVER_ERROR",
+        "status": "UNAUTHORIZED_USER",
         "errmsg": "@ignore@"
     },
     "responseCode": "UNAUTHORIZED",

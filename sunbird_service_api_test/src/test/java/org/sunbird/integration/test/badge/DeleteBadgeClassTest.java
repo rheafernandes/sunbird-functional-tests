@@ -65,7 +65,7 @@ public class DeleteBadgeClassTest extends BaseCitrusTestRunner {
         false,
         HttpStatus.OK,
         RESPONSE_JSON);
-    afterTest();
+    afterTest(true);
   }
 
   @Test(dataProvider = "deleteBadgeClassDataProviderFailure")
@@ -104,5 +104,13 @@ public class DeleteBadgeClassTest extends BaseCitrusTestRunner {
         HttpStatus.OK);
   }
 
-  private void afterTest() {}
+  private void afterTest(boolean isIssuerCreated) {
+    if (isIssuerCreated) {
+      IssuerUtil.deleteIssuer(
+          this,
+          testContext,
+          config,
+          (String) testContext.getVariables().get(Constant.EXTRACT_VAR_ISSUER_ID));
+    }
+  }
 }

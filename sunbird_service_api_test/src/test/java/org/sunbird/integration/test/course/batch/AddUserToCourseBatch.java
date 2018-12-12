@@ -15,6 +15,7 @@ import org.testng.annotations.Test;
 
 public class AddUserToCourseBatch extends BaseCitrusTestRunner {
 
+  private CourseBatchUtil courseBatchUtil = new CourseBatchUtil();
   public static final String TEST_NAME_ADD_USER_TO_BATCH_FAILURE_WITH_INVALID_BATCHID =
       "testAddUserToCourseBatchFailureWithInvalidBatchId";
   public static final String TEST_NAME_ADD_USER_TO_BATCH_FAILURE_WITHOUT_AUTH_TOKEN =
@@ -109,9 +110,9 @@ public class AddUserToCourseBatch extends BaseCitrusTestRunner {
       String courseId = ContentStoreUtil.getCourseId(this, testContext);
       variable("courseId", courseId);
       if (isOpenBatch) {
-        courseBatchId = CourseBatchUtil.getOpenCourseBatchId(this, testContext);
+        courseBatchId = courseBatchUtil.getOpenCourseBatchId(this, testContext);
       } else {
-        courseBatchId = CourseBatchUtil.getInviteOnlyCourseBatchId(this, testContext);
+        courseBatchId = courseBatchUtil.getInviteOnlyCourseBatchId(this, testContext);
       }
     }
   }
