@@ -17,8 +17,6 @@ public class TextbookTocTest extends BaseCitrusTestRunner {
 
     private static final String TEMPLATE_DIR = "templates/textbook/toc";
 
-    private static final String TEST_TOC_UPLOAD_WITHOUT_ACCESS_TOKEN = "testTocUploadFailureWithoutAccessToken";
-
     private static final String TEST_TOC_UPLOAD_WITH_VALID_FILE_AND_TEXTBOOK = "testTocUploadSuccessWithValidFileAndTextbook";
     private static final String TEST_TOC_UPLOAD_WITH_VALID_FILE_URL_AND_TEXTBOOK = "testTocUploadSuccessWithValidFileUrlAndTextbook";
 
@@ -73,7 +71,6 @@ public class TextbookTocTest extends BaseCitrusTestRunner {
             String testName, HttpStatus httpStatusCode, boolean isAuthRequired, String contentType) {
         getTestCase().setName(testName);
         getAuthToken(this, isAuthRequired);
-        String textbookId = "";
         performMultipartTest(
                 this,
                 TEMPLATE_DIR,
@@ -102,9 +99,6 @@ public class TextbookTocTest extends BaseCitrusTestRunner {
     @DataProvider(name = "tocUploadFailureDataProvider")
     public Object[][] tocUploadFailureDataProvider() {
         return new Object[][]{
-                new Object[]{
-                        TEST_TOC_UPLOAD_WITHOUT_ACCESS_TOKEN, HttpStatus.UNAUTHORIZED, true, true
-                },
                 new Object[]{
                         TEST_TOC_UPLOAD_WITH_VALID_FILE_AND_INVALID_TEXTBOOK_ID, HttpStatus.BAD_REQUEST, true, "Identifier"
                 },
