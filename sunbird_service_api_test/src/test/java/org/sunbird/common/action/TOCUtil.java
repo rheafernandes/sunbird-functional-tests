@@ -31,6 +31,7 @@ public class TOCUtil {
 
     public static String createTextbookWithChildren(BaseCitrusTestRunner runner, TestContext testContext) {
         textbookId = createContent(runner, testContext, CREATE_TEST_TEXTBOOK);
+        runner.variable("textbookId", textbookId);
         updateContentHierarchy(runner, testContext, CREATE_TEST_TEXTBOOK_WITH_CHILDREN);
         return textbookId;
     }
