@@ -29,6 +29,7 @@ public class TextbookTocTest extends BaseCitrusTestRunner {
     private static final String TEST_TOC_UPLOAD_WITH_VALID_FILE_AND_INVALID_DATA = "testTocUploadFailureWithValidFileAndInvalidData";
 
     private static final String TEST_TOC_UPLOAD_BLANK_CSV_FILE = "testTocUploadFailureBlankCsvFile";
+    private static final String TEST_TOC_UPLOAD_BLANK_CSV_FILE_NO_HEADER = "testTocUploadFailureBlankCsvFileNoHeader";
     private static final String TEST_TOC_UPLOAD_BLANK_CSV_FILE_HEADERS_ONLY = "testTocUploadFailureBlankCsvFileHeadersOnly";
     private static final String TEST_TOC_UPLOAD_CSV_ROWS_EXCEED = "testTocUploadFailureCsvRowsExceed";
     private static final String TEST_TOC_UPLOAD_CSV_DUPLICATE_ROWS = "testTocUploadFailureCsvDuplicateRows";
@@ -115,6 +116,9 @@ public class TextbookTocTest extends BaseCitrusTestRunner {
                 },
                 new Object[]{
                         TEST_TOC_UPLOAD_BLANK_CSV_FILE, HttpStatus.BAD_REQUEST, true, "Identifier"
+                },
+                new Object[]{
+                        TEST_TOC_UPLOAD_BLANK_CSV_FILE_NO_HEADER, HttpStatus.BAD_REQUEST, true, "Identifier"
                 },
                 new Object[]{
                         TEST_TOC_UPLOAD_BLANK_CSV_FILE_HEADERS_ONLY, HttpStatus.BAD_REQUEST, true, "Identifier"

@@ -2,15 +2,15 @@
   "request": {
     "data": {
       "nodesModified": {
-        "${textbookUnitId}": {
+        "2cb4d698-dc19-4f0c-9990-96f49daff753": {
           "isNew": true,
           "root": false,
           "metadata": {
             "mimeType": "application/vnd.ekstep.content-collection",
             "contentType": "TextBookUnit",
-            "code": "${textbookUnitId}",
-            "name": "citrus:concat('Test_CourseUnit_name_', citrus:randomNumber(10))",
-            "description": "citrus:concat('Test_CourseUnit_desc_', citrus:randomNumber(10))"
+            "code": "citrus:concat('unit_code_', citrus:randomNumber(10))",
+            "name": "citrus:concat('Test_TextBookUnit_name_', citrus:randomNumber(10))",
+            "description": "citrus:concat('Test_TextBookUnit_desc_', citrus:randomNumber(10))"
           }
         }
       },
@@ -18,7 +18,7 @@
         "${textbookId}": {
           "contentType": "TextBook",
           "children": [
-            "${textbookUnitId}"
+            "2cb4d698-dc19-4f0c-9990-96f49daff753"
           ],
           "root": true
         }

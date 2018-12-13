@@ -5,10 +5,10 @@
     "params": {
         "resmsgid": null,
         "msgid": "@ignore@",
-        "err": "RESOURCE_NOT_FOUND",
-        "status": "RESOURCE_NOT_FOUND",
-        "errmsg": "@ignore@"
+        "err": "ERROR_PROCESSING_REQUEST",
+        "status": "ERROR_PROCESSING_REQUEST",
+        "errmsg": "Something went wrong while Processing Request"
     },
-    "responseCode": "RESOURCE_NOT_FOUND",
+    "responseCode": "SERVER_ERROR",
     "result": {}
 }
