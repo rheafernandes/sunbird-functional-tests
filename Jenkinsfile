@@ -41,7 +41,7 @@ pipeline {
                 sh '''
                 cd sunbird_service_api_test
                 ls
-                mvn -X clean verify
+                mvn -Dtest=TextbookTocTest test
                 '''
             }
             finally {
