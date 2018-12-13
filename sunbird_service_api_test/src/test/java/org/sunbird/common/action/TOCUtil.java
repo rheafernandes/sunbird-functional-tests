@@ -22,8 +22,8 @@ public class TOCUtil {
     private static final String CREATE_TEST_TEXTBOOK_WITH_CHILDREN = "createTestTextbookWithChildrenSuccess";
     private static final String CREATE_TEST_RESOURCE_CONTENT = "createTestResourceContentSuccess";
 
-    private static String textbookId="";
-    private static String textbookUnitId= UUID.randomUUID().toString();
+    private static String textbookId = "";
+    private static String textbookUnitId = UUID.randomUUID().toString();
 
     public static String createTextbook(BaseCitrusTestRunner runner, TestContext testContext) {
         return createContent(runner, testContext, CREATE_TEST_TEXTBOOK);
@@ -93,5 +93,4 @@ public class TOCUtil {
         headers.put(Constant.AUTHORIZATION, Constant.BEARER + System.getenv("content_store_api_key"));
         return headers;
     }
-
 }

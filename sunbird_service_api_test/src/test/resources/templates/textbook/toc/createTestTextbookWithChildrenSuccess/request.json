@@ -15,7 +15,11 @@
             "contentType": "TextBookUnit",
             "code": "citrus:concat('unit_code_', citrus:randomNumber(10))",
             "name": "citrus:concat('Test_TextBookUnit_name_', citrus:randomNumber(10))",
-            "description": "citrus:concat('Test_TextBookUnit_desc_', citrus:randomNumber(10))"
+            "description": "citrus:concat('Test_TextBookUnit_desc_', citrus:randomNumber(10))",
+            "subject":"Science",
+            "medium":"Hindi",
+            "gradeLevel":["Class 1"],
+            "dialcodeRequired":"No"
           }
         }
       },

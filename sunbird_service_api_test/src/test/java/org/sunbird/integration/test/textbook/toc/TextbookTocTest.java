@@ -1,12 +1,18 @@
 package org.sunbird.integration.test.textbook.toc;
 
 import com.consol.citrus.annotations.CitrusTest;
+import com.consol.citrus.context.TestContext;
 import com.consol.citrus.testng.CitrusParameters;
 import org.springframework.http.HttpStatus;
 import org.sunbird.common.action.TOCUtil;
+import org.sunbird.common.action.TestActionUtil;
+import org.sunbird.common.util.Constant;
 import org.sunbird.integration.test.common.BaseCitrusTestRunner;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Integration Test Cases for Textbook Toc Upload, Update & Download API's
@@ -19,8 +25,7 @@ public class TextbookTocTest extends BaseCitrusTestRunner {
     private static final String TEST_TOC_UPLOAD_WITH_VALID_FILE_AND_TEXTBOOK = "testTocUploadSuccessWithValidFileAndTextbook";
     private static final String TEST_TOC_UPLOAD_WITH_VALID_FILE_URL_AND_TEXTBOOK = "testTocUploadSuccessWithValidFileUrlAndTextbook";
 
-    private static final String TEST_TOC_UPDATE_WITH_VALID_FILE_AND_TEXTBOOK = "testTocUpdateSuccessWithValidFileAndTextbook";
-    private static final String TEST_TOC_UPDATE_WITH_VALID_FILE_URL_AND_TEXTBOOK = "testTocUploadSuccessWithValidFileUrlAndTextbook";
+    private static final String TEST_TOC_UPDATE_WITH_VALID_FILE_URL_AND_TEXTBOOK = "testTocUpdateSuccessWithValidFileUrlAndTextbook";
 
     private static final String TEST_TOC_UPLOAD_WITH_VALID_FILE_AND_INVALID_TEXTBOOK_ID = "testTocUploadFailureWithValidFileAndInvalidTextbookId";
     private static final String TEST_TOC_UPLOAD_WITH_VALID_FILE_AND_INVALID_TEXTBOOK_MIME_TYPE = "testTocUploadFailureWithValidFileAndInvalidTextbookMimeType";
@@ -83,6 +88,22 @@ public class TextbookTocTest extends BaseCitrusTestRunner {
                 RESPONSE_JSON);
     }
 
+    @Test(dataProvider = "tocDownloadSuccessDataProvider")
+    @CitrusParameters({"testName", "httpStatusCode", "isAuthRequired", "contentType"})
+    @CitrusTest
+    public void testTocDownloadSuccess(String testName, HttpStatus httpStatusCode, boolean isAuthRequired, String contentType) {
+        getTestCase().setName(testName);
+        getAuthToken(this, isAuthRequired);
+        performGetTest(
+                this,
+                TEMPLATE_DIR,
+                testName,
+                getTocDownloadUrl(getContentId(contentType)),
+                isAuthRequired,
+                httpStatusCode,
+                RESPONSE_JSON);
+    }
+
     @Test(dataProvider = "tocDownloadFailureDataProvider")
     @CitrusParameters({"testName", "httpStatusCode", "isAuthRequired", "contentType"})
     @CitrusTest
@@ -99,6 +120,26 @@ public class TextbookTocTest extends BaseCitrusTestRunner {
                 RESPONSE_JSON);
     }
 
+    @Test(dataProvider = "tocUpdateSuccessDataProvider")
+    @CitrusParameters({"testName", "httpStatusCode", "isAuthRequired"})
+    @CitrusTest
+    public void testTocUpdateSuccess(
+            String testName, HttpStatus httpStatusCode, boolean isAuthRequired) {
+        getTestCase().setName(testName);
+        getAuthToken(this, isAuthRequired);
+        Map<String, String> data = getTOCUrl(this, testContext);
+        variable("tocFileUrl", data.getOrDefault("fileUrl", ""));
+        performMultipartTest(
+                this,
+                TEMPLATE_DIR,
+                testName,
+                getTocUploadUrl(data.getOrDefault("contentId", "")),
+                REQUEST_FORM_DATA,
+                null,
+                isAuthRequired,
+                httpStatusCode,
+                RESPONSE_JSON);
+    }
 
     @DataProvider(name = "tocUploadSuccessDataProvider")
     public Object[][] tocUploadSuccessDataProvider() {
@@ -160,17 +201,20 @@ public class TextbookTocTest extends BaseCitrusTestRunner {
 
     @DataProvider(name = "tocUpdateSuccessDataProvider")
     public Object[][] tocUpdateSuccessDataProvider() {
-        return null;
-    }
-
-    @DataProvider(name = "tocUpdateFailureDataProvider")
-    public Object[][] tocUpdateFailureDataProvider() {
-        return null;
+        return new Object[][]{
+                new Object[]{
+                        TEST_TOC_UPDATE_WITH_VALID_FILE_URL_AND_TEXTBOOK, HttpStatus.OK, true
+                }
+        };
     }
 
     @DataProvider(name = "tocDownloadSuccessDataProvider")
     public Object[][] tocDownloadSuccessDataProvider() {
-        return null;
+        return new Object[][]{
+                new Object[]{
+                        TEST_TOC_DOWNLOAD_VALID_TEXTBOOK_ID, HttpStatus.OK, true, "TextBookWithChildren"
+                }
+        };
     }
 
     @DataProvider(name = "tocDownloadFailureDataProvider")
@@ -205,9 +249,45 @@ public class TextbookTocTest extends BaseCitrusTestRunner {
             contentId = TOCUtil.createTextbook(this, testContext);
         else if ("Resource".equalsIgnoreCase(contentType))
             contentId = TOCUtil.createResourceContent(this, testContext);
-        else if("TextBookWithChildren".equalsIgnoreCase(contentType))
-            contentId=TOCUtil.createTextbookWithChildren(this, testContext);
+        else if ("TextBookWithChildren".equalsIgnoreCase(contentType))
+            contentId = TOCUtil.createTextbookWithChildren(this, testContext);
         return contentId;
+    }
+
+    private Map<String, String> getTOCUrl(BaseCitrusTestRunner runner, TestContext testContext) {
+        String textbookId = TOCUtil.createTextbookWithChildren(runner, testContext);
+        String tocUrl = downloadTOC(runner, testContext, textbookId);
+        Map<String, String> result = new HashMap<String, String>() {{
+            put("contentId", textbookId);
+            put("fileUrl", tocUrl);
+        }};
+        return result;
+    }
+
+    private String downloadTOC(BaseCitrusTestRunner runner, TestContext testContext, String textbookId) {
+        String tocUrl = "";
+        runner.http(
+                builder ->
+                        TestActionUtil.performGetTest(
+                                builder,
+                                LMS_ENDPOINT,
+                                TEST_TOC_DOWNLOAD_VALID_TEXTBOOK_ID,
+                                getTocDownloadUrl(textbookId),
+                                TestActionUtil.getHeaders(true),
+                                config));
+        runner.http(
+                builder ->
+                        TestActionUtil.getExtractFromResponseTestAction(
+                                testContext,
+                                builder,
+                                LMS_ENDPOINT,
+                                HttpStatus.OK,
+                                "$.result.textbook.tocUrl",
+                                "tocUrl"));
+        tocUrl = testContext.getVariable("tocUrl");
+        System.out.println("TOC URL :::::::::::::::: " + tocUrl);
+        runner.sleep(Constant.ES_SYNC_WAIT_TIME);
+        return tocUrl;
     }
 
 }
