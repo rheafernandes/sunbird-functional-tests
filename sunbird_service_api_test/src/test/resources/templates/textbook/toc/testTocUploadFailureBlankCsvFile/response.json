@@ -9,6 +9,6 @@
         "status": "ERROR_PROCESSING_FILE",
         "errmsg": "Something Went Wrong While Reading File. Please Check The File."
     },
-    "responseCode": "CLIENT_ERROR",
+    "responseCode": "SERVER_ERROR",
     "result": {}
 }
