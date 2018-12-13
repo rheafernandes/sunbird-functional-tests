@@ -87,6 +87,8 @@ public class TextbookTocTest extends BaseCitrusTestRunner {
     @CitrusParameters({"testName", "httpStatusCode", "isAuthRequired", "contentType"})
     @CitrusTest
     public void testTocDownloadFailure(String testName, HttpStatus httpStatusCode, boolean isAuthRequired, String contentType) {
+        getTestCase().setName(testName);
+        getAuthToken(this, isAuthRequired);
         performGetTest(
                 this,
                 TEMPLATE_DIR,
