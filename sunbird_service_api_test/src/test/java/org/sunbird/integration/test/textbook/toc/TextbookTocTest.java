@@ -22,31 +22,50 @@ public class TextbookTocTest extends BaseCitrusTestRunner {
 
     private static final String TEMPLATE_DIR = "templates/textbook/toc";
 
-    private static final String TEST_TOC_UPLOAD_WITH_VALID_FILE_AND_TEXTBOOK = "testTocUploadSuccessWithValidFileAndTextbook";
-    private static final String TEST_TOC_UPLOAD_WITH_VALID_FILE_URL_AND_TEXTBOOK = "testTocUploadSuccessWithValidFileUrlAndTextbook";
+    private static final String TEST_TOC_UPLOAD_WITH_VALID_FILE_AND_TEXTBOOK =
+            "testTocUploadSuccessWithValidFileAndTextbook";
+    private static final String TEST_TOC_UPLOAD_WITH_VALID_FILE_URL_AND_TEXTBOOK =
+            "testTocUploadSuccessWithValidFileUrlAndTextbook";
+    private static final String TEST_TOC_UPDATE_WITH_VALID_FILE_URL_AND_TEXTBOOK =
+            "testTocUpdateSuccessWithValidFileUrlAndTextbook";
+    private static final String TEST_TOC_UPLOAD_WITH_VALID_FILE_AND_INVALID_TEXTBOOK_ID =
+            "testTocUploadFailureWithValidFileAndInvalidTextbookId";
+    private static final String TEST_TOC_UPLOAD_WITH_VALID_FILE_AND_INVALID_TEXTBOOK_MIME_TYPE =
+            "testTocUploadFailureWithValidFileAndInvalidTextbookMimeType";
+    private static final String TEST_TOC_UPLOAD_WITH_VALID_FILE_AND_INVALID_TEXTBOOK_CONTENT_TYPE =
+            "testTocUploadFailureWithValidFileAndInvalidTextbookContentType";
+    private static final String TEST_TOC_UPLOAD_WITH_VALID_FILE_AND_INVALID_TEXTBOOK_CHILDREN_EXISTS =
+            "testTocUploadFailureWithValidFileAndInvalidTextbookChildrenExists";
+    private static final String TEST_TOC_UPLOAD_WITH_VALID_FILE_AND_INVALID_DATA =
+            "testTocUploadFailureWithValidFileAndInvalidData";
 
-    private static final String TEST_TOC_UPDATE_WITH_VALID_FILE_URL_AND_TEXTBOOK = "testTocUpdateSuccessWithValidFileUrlAndTextbook";
+    private static final String TEST_TOC_UPLOAD_BLANK_CSV_FILE =
+            "testTocUploadFailureBlankCsvFile";
+    private static final String TEST_TOC_UPLOAD_BLANK_CSV_FILE_NO_HEADER =
+            "testTocUploadFailureBlankCsvFileNoHeader";
+    private static final String TEST_TOC_UPLOAD_BLANK_CSV_FILE_HEADERS_ONLY =
+            "testTocUploadFailureBlankCsvFileHeadersOnly";
+    private static final String TEST_TOC_UPLOAD_CSV_ROWS_EXCEED =
+            "testTocUploadFailureCsvRowsExceed";
+    private static final String TEST_TOC_UPLOAD_CSV_DUPLICATE_ROWS =
+            "testTocUploadFailureCsvDuplicateRows";
+    private static final String TEST_TOC_UPLOAD_CSV_INVALID_TEXTBOOK_NAME =
+            "testTocUploadFailureCsvInValidTextbookName";
+    private static final String TEST_TOC_UPLOAD_CSV_REQUIRED_FIELD_HEADER_MISSING =
+            "testTocUploadFailureCsvRequiredFieldHeaderMissing";
+    private static final String TEST_TOC_UPLOAD_CSV_REQUIRED_FIELD_DATA_MISSING =
+            "testTocUploadFailureCsvRequiredFieldDataMissing";
 
-    private static final String TEST_TOC_UPLOAD_WITH_VALID_FILE_AND_INVALID_TEXTBOOK_ID = "testTocUploadFailureWithValidFileAndInvalidTextbookId";
-    private static final String TEST_TOC_UPLOAD_WITH_VALID_FILE_AND_INVALID_TEXTBOOK_MIME_TYPE = "testTocUploadFailureWithValidFileAndInvalidTextbookMimeType";
-    private static final String TEST_TOC_UPLOAD_WITH_VALID_FILE_AND_INVALID_TEXTBOOK_CONTENT_TYPE = "testTocUploadFailureWithValidFileAndInvalidTextbookContentType";
-    private static final String TEST_TOC_UPLOAD_WITH_VALID_FILE_AND_INVALID_TEXTBOOK_CHILDREN_EXISTS = "testTocUploadFailureWithValidFileAndInvalidTextbookChildrenExists";
-    private static final String TEST_TOC_UPLOAD_WITH_VALID_FILE_AND_INVALID_DATA = "testTocUploadFailureWithValidFileAndInvalidData";
-
-    private static final String TEST_TOC_UPLOAD_BLANK_CSV_FILE = "testTocUploadFailureBlankCsvFile";
-    private static final String TEST_TOC_UPLOAD_BLANK_CSV_FILE_NO_HEADER = "testTocUploadFailureBlankCsvFileNoHeader";
-    private static final String TEST_TOC_UPLOAD_BLANK_CSV_FILE_HEADERS_ONLY = "testTocUploadFailureBlankCsvFileHeadersOnly";
-    private static final String TEST_TOC_UPLOAD_CSV_ROWS_EXCEED = "testTocUploadFailureCsvRowsExceed";
-    private static final String TEST_TOC_UPLOAD_CSV_DUPLICATE_ROWS = "testTocUploadFailureCsvDuplicateRows";
-    private static final String TEST_TOC_UPLOAD_CSV_INVALID_TEXTBOOK_NAME = "testTocUploadFailureCsvInValidTextbookName";
-    private static final String TEST_TOC_UPLOAD_CSV_REQUIRED_FIELD_HEADER_MISSING = "testTocUploadFailureCsvRequiredFieldHeaderMissing";
-    private static final String TEST_TOC_UPLOAD_CSV_REQUIRED_FIELD_DATA_MISSING = "testTocUploadFailureCsvRequiredFieldDataMissing";
-
-    private static final String TEST_TOC_DOWNLOAD_VALID_TEXTBOOK_ID = "testTocDownloadSuccessValidTextbookId";
-    private static final String TEST_TOC_DOWNLOAD_INVALID_TEXTBOOK_ID = "testTocDownloadFailureInvalidTextbookId";
-    private static final String TEST_TOC_DOWNLOAD_INVALID_TEXTBOOK_CONTENT_TYPE = "testTocDownloadFailureInvalidTextbookContentType";
-    private static final String TEST_TOC_DOWNLOAD_INVALID_TEXTBOOK_MIME_TYPE = "testTocDownloadFailureInvalidTextbookMimeType";
-    private static final String TEST_TOC_DOWNLOAD_INVALID_TEXTBOOK_CHILDREN_NOT_EXIST = "testTocDownloadFailureInvalidTextbookChildrenNotExist";
+    private static final String TEST_TOC_DOWNLOAD_VALID_TEXTBOOK_ID =
+            "testTocDownloadSuccessValidTextbookId";
+    private static final String TEST_TOC_DOWNLOAD_INVALID_TEXTBOOK_ID =
+            "testTocDownloadFailureInvalidTextbookId";
+    private static final String TEST_TOC_DOWNLOAD_INVALID_TEXTBOOK_CONTENT_TYPE =
+            "testTocDownloadFailureInvalidTextbookContentType";
+    private static final String TEST_TOC_DOWNLOAD_INVALID_TEXTBOOK_MIME_TYPE =
+            "testTocDownloadFailureInvalidTextbookMimeType";
+    private static final String TEST_TOC_DOWNLOAD_INVALID_TEXTBOOK_CHILDREN_NOT_EXIST =
+            "testTocDownloadFailureInvalidTextbookChildrenNotExist";
 
 
     @Test(dataProvider = "tocUploadSuccessDataProvider")
@@ -128,7 +147,7 @@ public class TextbookTocTest extends BaseCitrusTestRunner {
         getTestCase().setName(testName);
         getAuthToken(this, isAuthRequired);
         Map<String, String> data = getTOCUrl(this, testContext);
-        variable("tocFileUrl", data.getOrDefault("fileUrl", ""));
+        testContext.setVariable("tocFileUrl", data.getOrDefault("fileUrl", ""));
         performMultipartTest(
                 this,
                 TEMPLATE_DIR,
@@ -285,7 +304,6 @@ public class TextbookTocTest extends BaseCitrusTestRunner {
                                 "$.result.textbook.tocUrl",
                                 "tocUrl"));
         tocUrl = testContext.getVariable("tocUrl");
-        System.out.println("TOC URL :::::::::::::::: " + tocUrl);
         runner.sleep(Constant.ES_SYNC_WAIT_TIME);
         return tocUrl;
     }
