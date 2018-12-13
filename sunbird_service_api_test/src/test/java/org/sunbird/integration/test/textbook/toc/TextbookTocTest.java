@@ -83,6 +83,20 @@ public class TextbookTocTest extends BaseCitrusTestRunner {
                 RESPONSE_JSON);
     }
 
+    @Test(dataProvider = "tocDownloadFailureDataProvider")
+    @CitrusParameters({"testName", "httpStatusCode", "isAuthRequired", "contentType"})
+    @CitrusTest
+    public void testTocDownloadFailure(String testName, HttpStatus httpStatusCode, boolean isAuthRequired, String contentType) {
+        performGetTest(
+                this,
+                TEMPLATE_DIR,
+                testName,
+                getTocDownloadUrl(getContentId(contentType)),
+                isAuthRequired,
+                httpStatusCode,
+                RESPONSE_JSON);
+    }
+
 
     @DataProvider(name = "tocUploadSuccessDataProvider")
     public Object[][] tocUploadSuccessDataProvider() {
@@ -159,7 +173,20 @@ public class TextbookTocTest extends BaseCitrusTestRunner {
 
     @DataProvider(name = "tocDownloadFailureDataProvider")
     public Object[][] tocDownloadFailureDataProvider() {
-        return null;
+        return new Object[][]{
+                new Object[]{
+                        TEST_TOC_DOWNLOAD_INVALID_TEXTBOOK_ID, HttpStatus.BAD_REQUEST, true, "Identifier"
+                },
+                new Object[]{
+                        TEST_TOC_DOWNLOAD_INVALID_TEXTBOOK_CONTENT_TYPE, HttpStatus.BAD_REQUEST, true, "Resource"
+                },
+                new Object[]{
+                        TEST_TOC_DOWNLOAD_INVALID_TEXTBOOK_MIME_TYPE, HttpStatus.BAD_REQUEST, true, "Resource"
+                },
+                new Object[]{
+                        TEST_TOC_DOWNLOAD_INVALID_TEXTBOOK_CHILDREN_NOT_EXIST, HttpStatus.BAD_REQUEST, true, "TextBook"
+                }
+        };
     }
 
     private String getTocUploadUrl(String contentId) {
