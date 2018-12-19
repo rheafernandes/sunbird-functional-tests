@@ -109,8 +109,7 @@ public class UpdateUserFrameworkTest extends BaseCitrusTestRunner {
           TEST_UPDATE_USER_FRAMEWORK_FAILURE_WITH_INVALID_FRAMEWORKID, HttpStatus.BAD_REQUEST
         },
       new Object[] {
-          TEST_UPDATE_USER_FRAMEWORK_FAILURE_WITHOUT_FRAMEWORKID, HttpStatus.BAD_REQUEST
-        },
+          TEST_UPDATE_USER_FRAMEWORK_FAILURE_WITHOUT_FRAMEWORKID, HttpStatus.BAD_REQUEST},
     };
   }
 
