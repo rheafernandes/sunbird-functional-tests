@@ -1,0 +1,14 @@
+{
+    "id": "api.user.update",
+    "ver": "v1",
+    "ts": "@ignore@",
+    "params": {
+        "resmsgid": null,
+        "msgid": "@ignore@",
+        "err": "ERROR_FRAMEWORK_ID",
+        "status": "ERROR_INVALID_FRAMEWORKID",
+        "errmsg": "No framework present with the given frameworkId."
+    },
+    "responseCode": "CLIENT_ERROR",
+    "result": {}
+}

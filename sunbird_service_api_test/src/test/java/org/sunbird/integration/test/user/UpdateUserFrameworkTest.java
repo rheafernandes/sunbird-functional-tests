@@ -46,7 +46,11 @@ public class UpdateUserFrameworkTest extends BaseCitrusTestRunner {
   public static final String TEST_UPDATE_USER_FRAMEWORK_FAILURE_WITH_INVALID_SUBJECT_DATA_TYPE =
       "testUpdateUserFrameworkFailureWithInvalidSubjectDataType";
   public static final String TEST_UPDATE_USER_FRAMEWORK_FAILURE_WITH_UNSUPPORTED_FIELD =
-      "testUpdateUserFrameworkFailureWithUnsupportedField";
+      "testUpdateUserFrameworkFailureWithUnsupportedField"; 
+  public static final String TEST_UPDATE_USER_FRAMEWORK_FAILURE_WITH_INVALID_FRAMEWORKID = 
+      "testUpdateUserFrameworkFailureWithInvalidFrameworkId";
+  public static final String TEST_UPDATE_USER_FRAMEWORK_FAILURE_WITHOUT_FRAMEWORKID = 
+      "testUpdateUserFrameworkFailureWithoutFrameworkId";
 
   public static final String TEST_UPDATE_USER_FRAMEWORK_SUCCESS_WITHOUT_SUBJECT =
       "testUpdateUserFrameworkSuccessWithoutSubject";
@@ -101,6 +105,11 @@ public class UpdateUserFrameworkTest extends BaseCitrusTestRunner {
       new Object[] {
         TEST_UPDATE_USER_FRAMEWORK_FAILURE_WITH_UNSUPPORTED_FIELD, HttpStatus.BAD_REQUEST
       },
+      new Object[] {
+          TEST_UPDATE_USER_FRAMEWORK_FAILURE_WITH_INVALID_FRAMEWORKID, HttpStatus.BAD_REQUEST
+        },
+      new Object[] {
+          TEST_UPDATE_USER_FRAMEWORK_FAILURE_WITHOUT_FRAMEWORKID, HttpStatus.BAD_REQUEST},
     };
   }
 
