@@ -2,7 +2,7 @@
 "request":{
 "userId":"${userId}",
 "framework" : {
-	"id" : "${id}",
+	"id" : "${frameworkId}",
 	"medium"  : ["anyMedium"],
 	"board"  : {},
 	"gradeLevel"  : ["anyGradeLevel"],
