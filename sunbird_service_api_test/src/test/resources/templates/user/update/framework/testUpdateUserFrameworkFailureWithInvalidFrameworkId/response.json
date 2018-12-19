@@ -7,7 +7,7 @@
         "msgid": "@ignore@",
         "err": "ERROR_FRAMEWORK_ID",
         "status": "ERROR_INVALID_FRAMEWORKID",
-        "errmsg": "@ignore@"
+        "errmsg": "No framework present with the given frameworkId."
     },
     "responseCode": "CLIENT_ERROR",
     "result": {}
