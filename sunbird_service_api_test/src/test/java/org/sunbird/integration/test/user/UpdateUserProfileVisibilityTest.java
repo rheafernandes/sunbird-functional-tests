@@ -122,7 +122,7 @@ public class UpdateUserProfileVisibilityTest extends BaseCitrusTestRunner {
     variable("userId", TestActionUtil.getVariable(testContext, "userId"));
     getAuthToken(
         this,
-        UserUtil.getUserNameWithChannel(this, testContext),
+        testContext.getVariable("userName"),
         Constant.PASSWORD,
         testContext.getVariable("userId"),
         isAuthRequired);

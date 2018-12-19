@@ -87,7 +87,7 @@ public class UpdateUserSkillTest extends BaseCitrusTestRunner {
   private void beforeTest() {
     UserUtil.getUserId(this, testContext);
     variable("userId", testContext.getVariable("userId"));
-    String userName = UserUtil.getUserNameWithChannel(this, testContext);
+    String userName = testContext.getVariable("userName");
     getAuthToken(this, userName, Constant.PASSWORD, testContext.getVariable("userId"), true);
   }
 }
