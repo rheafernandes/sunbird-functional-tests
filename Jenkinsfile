@@ -29,7 +29,7 @@ pipeline {
         sunbird_user_framework_subject = "English"
         content_reviewer_user="ft_reviewer2@org.com"
         content_reviewer_password="password"
-       	sunbird_user_framework_id="NCFCOPY"
+        sunbird_user_framework_id="NCFCOPY"
     }
 
     agent { label "build-slave" }
