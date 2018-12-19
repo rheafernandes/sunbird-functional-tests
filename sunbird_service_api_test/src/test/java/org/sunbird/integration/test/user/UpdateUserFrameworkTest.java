@@ -157,5 +157,6 @@ public class UpdateUserFrameworkTest extends BaseCitrusTestRunner {
     variable("gradeLevel", System.getenv("sunbird_user_framework_grade_level"));
     variable("medium", System.getenv("sunbird_user_framework_medium"));
     variable("subject", System.getenv("sunbird_user_framework_subject"));
+    variable("frameworkId", System.getenv("sunbird_user_framework_id"));
   }
 }
