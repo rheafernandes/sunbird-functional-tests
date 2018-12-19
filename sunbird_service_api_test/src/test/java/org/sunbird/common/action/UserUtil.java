@@ -135,16 +135,10 @@ public class UserUtil {
                 TestActionUtil.getHeaders(true)));
   }
 
-  public static String getUserNameWithChannel(
-      BaseCitrusTestRunner runner, TestContext testContext) {
-    String channelName = System.getenv("sunbird_default_channel");
-    return testContext.getVariable("userName") + "@" + channelName;
-  }
-
   public static void createUserAndGetToken(BaseCitrusTestRunner runner, TestContext testContext) {
     getUserId(runner, testContext);
     runner.variable("userId", testContext.getVariable("userId"));
-    String userName = UserUtil.getUserNameWithChannel(runner, testContext);
+    String userName = testContext.getVariable("userName");
     runner.getAuthToken(
         runner, userName, Constant.PASSWORD, testContext.getVariable("userId"), true);
   }

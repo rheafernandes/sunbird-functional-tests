@@ -98,7 +98,7 @@ public class AddUserSkillEndorsementTest extends BaseCitrusTestRunner {
     variable("userId", testContext.getVariable("userId"));
     getAuthToken(
         this,
-        UserUtil.getUserNameWithChannel(this, testContext),
+        testContext.getVariable("userName"),
         Constant.PASSWORD,
         testContext.getVariable("userId"),
         true);
