@@ -1,6 +1,7 @@
 {
 "request":{
 "framework" : {
+	"id" : "${id}",
 	"medium"  : ["anyMedium"],
 	"board"  : ["anyBoard"],
 	"gradeLevel"  : ["anyGradeLevel"],
