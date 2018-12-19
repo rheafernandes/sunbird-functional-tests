@@ -10,25 +10,26 @@ import org.testng.annotations.Test;
 
 public class OtpVerificationTest extends BaseCitrusTestRunner {
 
-  public static final String TEST_VERIFY_OTP_WITHOUT_PHONE_KEY_FAILURE =
-      "testVerifyOtpWithoutPhoneKeyFailure";
+  public static final String TEST_VERIFY_OTP_FAILURE_WITHOUT_PHONE_KEY =
+      "testVerifyOtpFailureWithoutPhoneKey";
 
-  public static final String TEST_VERIFY_OTP_WITH_INVALID_PHONE_FAILURE =
-      "testVerifyOtpWithInvalidPhoneFailure";
+  public static final String TEST_VERIFY_OTP_FAILURE_WITH_INVALID_PHONE_NUMBER =
+      "testVerifyOtpFailureWithInvalidPhonenNumber";
 
-  public static final String TEST_VERIFY_OTP_WITHOUT_EMAIL_KEY_FAILURE =
-      "testVerifyOtpWithoutEmailKeyFailure";
+  public static final String TEST_VERIFY_OTP_FAILURE_WITHOUT_EMAIL_KEY =
+      "testVerifyOtpFailureWithoutEmailKey";
 
-  public static final String TEST_VERIFY_OTP_WITH_INVALID_EMAIL_FAILURE =
-      "testVerifyOtpWithInvalidEmailFailure";
+  public static final String TEST_VERIFY_OTP_FAILURE_WITH_INVALID_EMAIL =
+      "testVerifyOtpFailureWithInvalidEmail";
 
-  public static final String TEST_VERIFY_OTP_WITHOUT_OTP_FAILURE = "testVerifyOtpWithoutOtpFailure";
+  public static final String TEST_VERIFY_OTP_FAILURE_WITHOUT_OTP = "testVerifyOtpFailureWithoutOtp";
 
-  public static final String TEST_VERIFY_OTP_WITH_INVALID_TYPE_FAILURE =
-      "testVerifyOtpWithInvalidTypeFailure";
+  public static final String TEST_VERIFY_OTP_FAILURE_WITHOUT_TYPE =
+      "testVerifyOtpFailureWithoutType";
 
-  public static final String TEST_VERIFY_OTP_WITHOUT_TYPE_FAILURE =
-      "testVerifyOtpWithoutTypeFailure";
+  public static final String TEST_VERIFY_OTP_FAILURE_WITH_INVALID_TYPE =
+      "testVerifyOtpFailureWithInvalidType";
+
   public static final String TEMPLATE_DIR = "templates/otp/verify";
 
   private String getOtpVerifyUrl() {
@@ -38,13 +39,13 @@ public class OtpVerificationTest extends BaseCitrusTestRunner {
   @DataProvider(name = "otpVerifyFailureDataProvider")
   public Object[][] otpVerifyFailureDataProvider() {
     return new Object[][] {
-      new Object[] {TEST_VERIFY_OTP_WITHOUT_PHONE_KEY_FAILURE},
-      new Object[] {TEST_VERIFY_OTP_WITH_INVALID_PHONE_FAILURE},
-      new Object[] {TEST_VERIFY_OTP_WITHOUT_EMAIL_KEY_FAILURE},
-      new Object[] {TEST_VERIFY_OTP_WITH_INVALID_EMAIL_FAILURE},
-      new Object[] {TEST_VERIFY_OTP_WITHOUT_OTP_FAILURE},
-      new Object[] {TEST_VERIFY_OTP_WITH_INVALID_TYPE_FAILURE},
-      new Object[] {TEST_VERIFY_OTP_WITHOUT_TYPE_FAILURE},
+      new Object[] {TEST_VERIFY_OTP_FAILURE_WITHOUT_PHONE_KEY},
+      new Object[] {TEST_VERIFY_OTP_FAILURE_WITH_INVALID_PHONE_NUMBER},
+      new Object[] {TEST_VERIFY_OTP_FAILURE_WITHOUT_EMAIL_KEY},
+      new Object[] {TEST_VERIFY_OTP_FAILURE_WITH_INVALID_EMAIL},
+      new Object[] {TEST_VERIFY_OTP_FAILURE_WITHOUT_OTP},
+      new Object[] {TEST_VERIFY_OTP_FAILURE_WITHOUT_TYPE},
+      new Object[] {TEST_VERIFY_OTP_FAILURE_WITH_INVALID_TYPE},
     };
   }
 
