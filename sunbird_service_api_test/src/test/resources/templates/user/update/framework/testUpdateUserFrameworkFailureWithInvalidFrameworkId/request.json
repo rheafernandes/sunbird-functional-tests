@@ -6,7 +6,7 @@
 	"medium"  : ["anyMedium"],
 	"board"  : ["anyBoard"],
 	"gradeLevel"  : ["anyGradeLevel"],
-	"subject" : [],
+	"subject" : []
 	}
   }	
 }
