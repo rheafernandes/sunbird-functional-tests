@@ -7,7 +7,7 @@
         "msgid": "@ignore@",
         "err": "BLANK_CSV_DATA",
         "status": "BLANK_CSV_DATA",
-        "errmsg": "Did not find any TOC data. Please check and upload again."
+        "errmsg": "@ignore@"
     },
     "responseCode": "CLIENT_ERROR",
     "result": {}
