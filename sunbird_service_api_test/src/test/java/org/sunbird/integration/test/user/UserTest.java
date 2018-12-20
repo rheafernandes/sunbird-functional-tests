@@ -400,6 +400,7 @@ public class UserTest extends BaseCitrusTest {
     Map<String, Object> innerMap = createUserInnerMap();
     innerMap.put(
         Constant.EMAIL, Constant.USER_NAME_PREFIX + UUID.randomUUID().toString() + "@gmail.com");
+    innerMap.put(Constant.EMAIL_VERIFIED, true);
     innerMap.put(Constant.USER_NAME, Constant.USER_NAME_PREFIX + UUID.randomUUID().toString());
     innerMap.put(Constant.CHANNEL, "functionalTest#Invalid$Channel@1235123");
     requestMap.put(Constant.REQUEST, innerMap);
@@ -448,6 +449,7 @@ public class UserTest extends BaseCitrusTest {
     String email = Constant.USER_NAME_PREFIX + EndpointConfig.val + "@gmail.com";
     innerMap.put(Constant.USER_NAME, USER_NAME);
     innerMap.put(Constant.EMAIL, email);
+    innerMap.put(Constant.EMAIL_VERIFIED, true);
     return innerMap;
   }
 
