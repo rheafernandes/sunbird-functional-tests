@@ -4,6 +4,7 @@
 		"lastName": "test",
 		"password": "password",
 		"userName": "manzarul109",
+		"emailVerified": true,
 		"email": "manzarul07+769@gmail.com"
 	}
 }

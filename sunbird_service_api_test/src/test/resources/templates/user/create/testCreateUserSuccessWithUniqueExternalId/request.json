@@ -5,6 +5,7 @@
         "lastName": "Kumar",
         "password": "password",
         "email": "citrus:randomString(10, MIXED, true)@gmail.com",
+        "emailVerified": true,
         "userName":"citrus:concat('ft_username',citrus:randomString(10, MIXED, true))",
         "externalIds": [
             {
