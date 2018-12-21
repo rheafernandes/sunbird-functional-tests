@@ -12,18 +12,20 @@ import org.testng.annotations.Test;
 /** @author Rahul Kumar */
 public class GenerateOTPTest extends BaseCitrusTestRunner {
 
-  public static final String GENERATE_OTP_FOR_INVALID_KEY_FAILURE =
-      "generateOTPForInvalidKeyFailure";
-  public static final String GENERATE_OTP_FOR_MISSING_TYPE_FAILURE =
-      "generateOTPForMissingTypeFailure";
-  public static final String GENERATE_OTP_FOR_INVALID_TYPE_FAILURE =
-      "generateOTPForInvalidTypeFailure";
-  public static final String GENERATE_OTP_FOR_INVALID_EMAIL_FAILURE =
-      "generateOTPForInvalidEmailFailure";
-  public static final String GENERATE_OTP_FOR_INVALID_PHONE_FAILURE =
-      "generateOTPForInvalidPhoneFailure";
-  public static final String GENERATE_OTP_FOR_EMAIL_SUCCESS = "generateOTPForEmailSuccess";
-  public static final String GENERATE_OTP_FOR_PHONE_SUCCESS = "generateOTPForPhoneSuccess";
+  public static final String TEST_GENERATE_OTP_FAILURE_WITH_INVALID_KEY =
+      "testGenerateOtpFailureWithInavlidKey";
+  public static final String TEST_GENERATE_OTP_FAILURE_WITHOUT_TYPE =
+      "testGenerateOtpFailureWithoutType";
+  public static final String TEST_GENERATE_OTP_FAILURE_WITH_INVALID_TYPE =
+      "testGenerateOtpFailureWithInvalidType";
+  public static final String TEST_GENERATE_OTP_FAILURE_WITH_INVALID_EMAIL =
+      "testGenerateOtpFailureWithInvalidEmail";
+  public static final String TEST_GENERATE_OTP_FAILURE_WITH_INVALID_PHONE =
+      "testGenerateOtpFailureWithInvalidPhone";
+  public static final String TEST_GENERATE_OTP_SUCCESS_WITH_EMAIL =
+      "testGenerateOtpSuccessWithEmail";
+  public static final String TEST_GENERATE_OTP_SUCCESS_WITH_PHONE =
+      "testGenerateOtpSuccessWithPhone";
 
   public static final String TEMPLATE_DIR = "templates/otp/generate";
 
@@ -34,11 +36,11 @@ public class GenerateOTPTest extends BaseCitrusTestRunner {
   @DataProvider(name = "generateOTPFailureDataProvider")
   public Object[][] generateOTPFailureDataProvider() {
     return new Object[][] {
-      new Object[] {GENERATE_OTP_FOR_INVALID_KEY_FAILURE, HttpStatus.BAD_REQUEST},
-      new Object[] {GENERATE_OTP_FOR_MISSING_TYPE_FAILURE, HttpStatus.BAD_REQUEST},
-      new Object[] {GENERATE_OTP_FOR_INVALID_TYPE_FAILURE, HttpStatus.BAD_REQUEST},
-      new Object[] {GENERATE_OTP_FOR_INVALID_EMAIL_FAILURE, HttpStatus.BAD_REQUEST},
-      new Object[] {GENERATE_OTP_FOR_INVALID_PHONE_FAILURE, HttpStatus.BAD_REQUEST}
+      new Object[] {TEST_GENERATE_OTP_FAILURE_WITH_INVALID_KEY, HttpStatus.BAD_REQUEST},
+      new Object[] {TEST_GENERATE_OTP_FAILURE_WITHOUT_TYPE, HttpStatus.BAD_REQUEST},
+      new Object[] {TEST_GENERATE_OTP_FAILURE_WITH_INVALID_TYPE, HttpStatus.BAD_REQUEST},
+      new Object[] {TEST_GENERATE_OTP_FAILURE_WITH_INVALID_EMAIL, HttpStatus.BAD_REQUEST},
+      new Object[] {TEST_GENERATE_OTP_FAILURE_WITH_INVALID_PHONE, HttpStatus.BAD_REQUEST}
     };
   }
 
@@ -62,8 +64,8 @@ public class GenerateOTPTest extends BaseCitrusTestRunner {
   @DataProvider(name = "generateOTPSuccessDataProvider")
   public Object[][] generateOTPSuccessDataProvider() {
     return new Object[][] {
-      new Object[] {GENERATE_OTP_FOR_EMAIL_SUCCESS, HttpStatus.OK},
-      new Object[] {GENERATE_OTP_FOR_PHONE_SUCCESS, HttpStatus.OK}
+      new Object[] {TEST_GENERATE_OTP_SUCCESS_WITH_EMAIL, HttpStatus.OK},
+      new Object[] {TEST_GENERATE_OTP_SUCCESS_WITH_PHONE, HttpStatus.OK}
     };
   }
 
