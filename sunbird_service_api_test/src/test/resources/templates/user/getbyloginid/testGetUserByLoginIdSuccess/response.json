@@ -32,7 +32,7 @@
 			"id": "@ignore@",
 			"tempPassword": null,
 			"email": "@ignore@",
-			"phoneverified": null,
+			"phoneverified": "@ignore@",
 			"rootOrg":"@ignore@",
 			"identifier": "@ignore@",
 			"thumbnail": null,
