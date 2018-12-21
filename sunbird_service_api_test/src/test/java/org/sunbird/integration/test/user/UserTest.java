@@ -259,8 +259,6 @@ public class UserTest extends BaseCitrusTest {
                 + initGlobalValues.getClientId()
                 + "&username="
                 + USER_NAME
-                + "@"
-                + initGlobalValues.getSunbirdDefaultChannel()
                 + "&password=password&grant_type=password");
     http()
         .client(keycloakTestClient)
@@ -336,7 +334,7 @@ public class UserTest extends BaseCitrusTest {
   @Test(dependsOnMethods = {"testCreateUser"})
   @CitrusTest
   public void testGetUserByLoginIdSuccess() {
-    variable("loginIdval", USER_NAME + "@" + initGlobalValues.getSunbirdDefaultChannel());
+    variable("loginIdval", USER_NAME);
     variable("channel", initGlobalValues.getSunbirdDefaultChannel());
     performPostTest(
         "testGetUserByLoginIdSuccess",
