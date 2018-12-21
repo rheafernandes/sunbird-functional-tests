@@ -91,8 +91,7 @@ public class CreateGeolocationTest extends BaseCitrusTestRunner {
       variable("rootOrgChannel", OrgUtil.getRootOrgChannel());
       OrgUtil.getRootOrgId(this, testContext);
     } else {
-      variable("externalId", "FT_ExternalId_" + Instant.now().getEpochSecond());
-      variable("provider", OrgUtil.getRootOrgChannel());
+      variable("channel", OrgUtil.getDefaultSunbirdRootOrg());
       OrgUtil.createSubOrgId(this, testContext);
     }
   }
