@@ -78,6 +78,7 @@ public class CreateOrganisationTest extends BaseCitrusTestRunner {
       String testName, boolean isAuthRequired, HttpStatus httpStatusCode) {
     getAuthToken(this, isAuthRequired);
     variable("externalId", externalID.toLowerCase());
+    variable("channel", OrgUtil.getDefaultSunbirdRootOrg());
     getTestCase().setName(testName);
     performPostTest(
         this,
@@ -176,8 +177,7 @@ public class CreateOrganisationTest extends BaseCitrusTestRunner {
   @CitrusTest
   public void createOrgWithExternalId() {
     getAuthToken(this, true);
-    variable("externalId", externalID);
-    variable("provider", OrgUtil.getRootOrgChannel());
+    variable("channel", OrgUtil.getDefaultSunbirdRootOrg());
     OrgUtil.createSubOrgId(this, testContext);
   }
 

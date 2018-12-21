@@ -2,9 +2,7 @@ package org.sunbird.integration.test.geolocation;
 
 import com.consol.citrus.annotations.CitrusTest;
 import com.consol.citrus.testng.CitrusParameters;
-
 import java.time.Instant;
-
 import javax.ws.rs.core.MediaType;
 import org.springframework.http.HttpStatus;
 import org.sunbird.common.action.OrgUtil;
@@ -92,7 +90,7 @@ public class CreateGeolocationTest extends BaseCitrusTestRunner {
       OrgUtil.getRootOrgId(this, testContext);
     } else {
       variable("externalId", "FT_ExternalId_" + Instant.now().getEpochSecond());
-      variable("provider", OrgUtil.getRootOrgChannel());
+      variable("channel", OrgUtil.getDefaultSunbirdRootOrg());
       OrgUtil.createSubOrgId(this, testContext);
     }
   }
