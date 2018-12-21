@@ -52,8 +52,7 @@ public class OtpVerificationTest extends BaseCitrusTestRunner {
   @Test(dataProvider = "otpVerifyFailureDataProvider")
   @CitrusParameters({"testName"})
   @CitrusTest
-  public void testAddUserToOrgFailure(String testName) {
-    getAuthToken(this, true);
+  public void testOtpVerifyFailure(String testName) {
     performPostTest(
         this,
         TEMPLATE_DIR,
@@ -61,7 +60,7 @@ public class OtpVerificationTest extends BaseCitrusTestRunner {
         getOtpVerifyUrl(),
         REQUEST_JSON,
         MediaType.APPLICATION_JSON,
-        true,
+        false,
         HttpStatus.BAD_REQUEST,
         RESPONSE_JSON);
   }
