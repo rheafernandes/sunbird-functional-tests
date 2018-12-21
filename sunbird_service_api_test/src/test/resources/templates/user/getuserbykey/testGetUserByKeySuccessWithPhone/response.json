@@ -1,0 +1,45 @@
+{
+    "id": "api.user.getByKey",
+    "ver": "v1",
+    "ts": "@ignore@",
+    "params": {
+        "resmsgid": null,
+        "msgid": "@ignore@",
+        "err": null,
+        "status": "success",
+        "errmsg": null
+    },
+    "responseCode": "OK",
+    "result": {
+        "response": {
+            "id": "@ignore@",
+            "createdBy": "@ignore@",
+            "createdDate": "@ignore@",
+            "firstName": "ABC",
+            "grade": [],
+            "language": [],
+            "lastName": "Kumar",
+            "profileVisibility": "@ignore@",
+            "roles": "@ignore@",
+            "rootOrgId": "@ignore@",
+            "status": 1,
+            "subject": [],
+            "userId": "@ignore@",
+            "userName": "@ignore@",
+            "webPages": [],
+            "channel": "@ignore@",
+            "loginId": "@ignore@",
+            "tncAcceptedOn": "@ignore@",
+            "tncAcceptedVersion": "@ignore@",
+            "rootOrg": "@ignore@",
+            "defaultProfileFieldVisibility": "@ignore@",
+            "externalIds": "@ignore@",
+            "identifier": "@ignore@",
+            "phone": null,
+            "email": "@ignore@",
+            "tncLatestVersion": "@ignore@",
+            "promptTnC": "@ignore@",
+            "tncLatestVersionUrl": "@ignore@"
+        }
+    }
+}
