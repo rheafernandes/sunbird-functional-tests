@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.sunbird.common.util.Constant;
 import org.sunbird.integration.test.common.BaseCitrusTestRunner;
+import org.sunbird.integration.test.user.EndpointConfig;
 
 import java.util.Map;
 import java.util.UUID;
@@ -21,6 +22,7 @@ public class TOCUtil {
     private static final String CREATE_TEST_TEXTBOOK = "createTestTextbookSuccess";
     private static final String CREATE_TEST_TEXTBOOK_WITH_CHILDREN = "createTestTextbookWithChildrenSuccess";
     private static final String CREATE_TEST_RESOURCE_CONTENT = "createTestResourceContentSuccess";
+    private static EndpointConfig.TestGlobalProperty config = new EndpointConfig().initGlobalValues();
 
     private static String textbookId = "";
     private static String textbookUnitId = UUID.randomUUID().toString();
@@ -90,6 +92,7 @@ public class TOCUtil {
 
     private static Map<String, Object> getHeaders() {
         Map<String, Object> headers = TestActionUtil.getHeaders(true);
+        headers.put(Constant.X_CHANNEL_ID,config.getSunbirdDefaultChannel());
         headers.put(Constant.AUTHORIZATION, Constant.BEARER + System.getenv("content_store_api_key"));
         return headers;
     }

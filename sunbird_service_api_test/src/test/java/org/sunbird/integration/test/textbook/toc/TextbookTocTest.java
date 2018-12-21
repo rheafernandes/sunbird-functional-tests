@@ -82,7 +82,7 @@ public class TextbookTocTest extends BaseCitrusTestRunner {
                 testName,
                 getTocUploadUrl(getContentId(contentType)),
                 REQUEST_FORM_DATA,
-                null,
+                getHeader(),
                 isAuthRequired,
                 httpStatusCode,
                 RESPONSE_JSON);
@@ -101,7 +101,7 @@ public class TextbookTocTest extends BaseCitrusTestRunner {
                 testName,
                 getTocUploadUrl(getContentId(contentType)),
                 REQUEST_FORM_DATA,
-                null,
+                getHeader(),
                 isAuthRequired,
                 httpStatusCode,
                 RESPONSE_JSON);
@@ -154,7 +154,7 @@ public class TextbookTocTest extends BaseCitrusTestRunner {
                 testName,
                 getTocUploadUrl(data.getOrDefault("contentId", "")),
                 REQUEST_FORM_DATA,
-                null,
+                getHeader(),
                 isAuthRequired,
                 httpStatusCode,
                 RESPONSE_JSON);
@@ -308,4 +308,9 @@ public class TextbookTocTest extends BaseCitrusTestRunner {
         return tocUrl;
     }
 
+    private Map<String, Object> getHeader() {
+        return new HashMap<String, Object>() {{
+            put(Constant.X_CHANNEL_ID, config.getSunbirdDefaultChannel());
+        }};
+    }
 }
