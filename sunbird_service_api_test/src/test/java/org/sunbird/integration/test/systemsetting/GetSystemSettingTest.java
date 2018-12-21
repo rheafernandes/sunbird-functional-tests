@@ -10,8 +10,8 @@ import org.testng.annotations.Test;
 
 public class GetSystemSettingTest extends BaseCitrusTestRunner {
 
-  public static final String TEST_NAME_GET_SYSTEM_SETTING_FAILURE_WITHOUT_TOKEN =
-      "testGetSystemSettingFailureWithoutAuthToken";
+  public static final String TEST_NAME_GET_SYSTEM_SETTING_SUCCESS_WITHOUT_TOKEN =
+      "testGetSystemSettingSuccessWithoutAuthToken";
   public static final String TEST_NAME_GET_SYSTEM_SETTING_FAILURE_WITH_INVALID_FIELD =
       "testGetSystemSettingFailureWithInvalidField";
   public static final String TEST_NAME_GET_SYSTEM_SETTING_SUCCESS = "testGetSystemSettingSuccess";
@@ -27,10 +27,10 @@ public class GetSystemSettingTest extends BaseCitrusTestRunner {
 
     return new Object[][] {
       new Object[] {
-        TEST_NAME_GET_SYSTEM_SETTING_FAILURE_WITHOUT_TOKEN,
+        TEST_NAME_GET_SYSTEM_SETTING_SUCCESS_WITHOUT_TOKEN,
         "uniqueField",
         false,
-        HttpStatus.UNAUTHORIZED
+        HttpStatus.OK
       },
       new Object[] {
         TEST_NAME_GET_SYSTEM_SETTING_FAILURE_WITH_INVALID_FIELD,
@@ -48,9 +48,7 @@ public class GetSystemSettingTest extends BaseCitrusTestRunner {
   public void testGetSystemSetting(
       String testName, String field, boolean isAuthRequired, HttpStatus httpStatusCode) {
     getTestCase().setName(testName);
-    if(isAuthRequired) {
-      beforeTest();
-    }
+    beforeTest();
     performGetTest(
         this,
         TEMPLATE_DIR,
