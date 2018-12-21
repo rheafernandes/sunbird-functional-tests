@@ -254,6 +254,7 @@ public class TestActionUtil {
     if (isAuthRequired) {
       headers.put(Constant.X_AUTHENTICATED_USER_TOKEN, "${accessToken}");
     }
+    headers.put(" X-Channel-Id", "channel");
     headers.put(Constant.AUTHORIZATION, Constant.BEARER + System.getenv("sunbird_api_key"));
     return headers;
   }
