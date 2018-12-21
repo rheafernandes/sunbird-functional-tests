@@ -1,0 +1,14 @@
+{
+    "id": "api.textbook.toc.upload",
+    "ver": "v1",
+    "ts": "@ignore@",
+    "params": {
+        "resmsgid": null,
+        "msgid": "@ignore@",
+        "err": "ERROR_PROCESSING_REQUEST",
+        "status": "ERROR_PROCESSING_REQUEST",
+        "errmsg": "Something went wrong while Processing Request"
+    },
+    "responseCode": "SERVER_ERROR",
+    "result": {}
+}

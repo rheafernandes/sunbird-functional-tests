@@ -1,0 +1,14 @@
+{
+  "id": "api.textbook.toc.download",
+  "ver": "v1",
+  "ts": "@ignore@",
+  "params": {
+    "resmsgid": null,
+    "msgid": "@ignore@",
+    "err": "TEXTBOOK_NOT_FOUND",
+    "status": "TEXTBOOK_NOT_FOUND",
+    "errmsg": "Textbook not found."
+  },
+  "responseCode": "CLIENT_ERROR",
+  "result": {}
+}
