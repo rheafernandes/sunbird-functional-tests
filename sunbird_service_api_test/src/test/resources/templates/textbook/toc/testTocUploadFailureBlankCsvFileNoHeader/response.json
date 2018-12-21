@@ -5,8 +5,8 @@
     "params": {
         "resmsgid": null,
         "msgid": "@ignore@",
-        "err": "REQUIRED_HEADER_MISSING",
-        "status": "REQUIRED_HEADER_MISSING",
+        "err": "BLANK_CSV_DATA",
+        "status": "BLANK_CSV_DATA",
         "errmsg": "@ignore@"
     },
     "responseCode": "CLIENT_ERROR",
