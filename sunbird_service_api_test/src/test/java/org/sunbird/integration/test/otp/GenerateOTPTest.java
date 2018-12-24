@@ -30,7 +30,7 @@ public class GenerateOTPTest extends BaseCitrusTestRunner {
   public static final String TEMPLATE_DIR = "templates/otp/generate";
 
   private String getOTPGenerateUrl() {
-    return getLmsApiUriPath("/api/v1/otp/generate", "v1/otp/generate");
+    return getLmsApiUriPath("/api/otp/v1/generate", "v1/otp/generate");
   }
 
   @DataProvider(name = "generateOTPFailureDataProvider")
