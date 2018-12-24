@@ -334,7 +334,7 @@ public class UserTest extends BaseCitrusTest {
   @Test(dependsOnMethods = {"testCreateUser"})
   @CitrusTest
   public void testGetUserByLoginIdSuccess() {
-    variable("loginIdval", USER_NAME);
+    variable("loginIdval", USER_NAME + "@" + initGlobalValues.getSunbirdDefaultChannel());
     variable("channel", initGlobalValues.getSunbirdDefaultChannel());
     performPostTest(
         "testGetUserByLoginIdSuccess",
@@ -370,21 +370,6 @@ public class UserTest extends BaseCitrusTest {
   private String createUserMap() {
     Map<String, Object> requestMap = new HashMap<>();
     requestMap.put(Constant.REQUEST, createUserInnerMap());
-    try {
-      return objectMapper.writeValueAsString(requestMap);
-    } catch (JsonProcessingException e) {
-      e.printStackTrace();
-    }
-    return null;
-  }
-
-  private String createUserWithDuplicateExtIdAndProvider() {
-    Map<String, Object> requestMap = new HashMap<>();
-    Map<String, Object> innerMap = createUserInnerMap();
-    innerMap.put(
-        Constant.EMAIL, Constant.USER_NAME_PREFIX + UUID.randomUUID().toString() + "@gmail.com");
-    innerMap.put(Constant.USER_NAME, Constant.USER_NAME_PREFIX + UUID.randomUUID().toString());
-    requestMap.put(Constant.REQUEST, innerMap);
     try {
       return objectMapper.writeValueAsString(requestMap);
     } catch (JsonProcessingException e) {
