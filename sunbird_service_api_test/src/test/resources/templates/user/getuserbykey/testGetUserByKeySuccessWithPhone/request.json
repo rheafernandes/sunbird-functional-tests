@@ -1,6 +1,0 @@
-{
-    "request": {
-        "key":"phone",
-        "value":"${phone}"
-    }
-}

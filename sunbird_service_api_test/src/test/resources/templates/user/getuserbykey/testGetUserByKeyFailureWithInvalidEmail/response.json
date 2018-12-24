@@ -1,5 +1,5 @@
 {
-    "id": "api.user.getByKey",
+    "id": "api.user.get.email.invalidEmail",
     "ver": "v1",
     "ts": "@ignore@",
     "params": {

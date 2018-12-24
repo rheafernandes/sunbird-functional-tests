@@ -1,6 +1,0 @@
-{
-    "request": {
-        "key":"loginId",
-        "value":"${userName}@${channel}"
-    }
-}

@@ -1,5 +1,5 @@
 {
-    "id": "api.user.getByKey",
+    "id": "api.user.get.phone.invalidPhone",
     "ver": "v1",
     "ts": "@ignore@",
     "params": {

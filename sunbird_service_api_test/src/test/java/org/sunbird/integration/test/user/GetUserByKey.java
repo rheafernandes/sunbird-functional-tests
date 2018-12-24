@@ -10,12 +10,9 @@ import org.sunbird.integration.test.common.BaseCitrusTestRunner;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-/** Created by rajatgupta on 21/12/18. */
 public class GetUserByKey extends BaseCitrusTestRunner {
-  private static final String TEST_GET_USER_BY_KEY_FAILURE_WITHOUT_KEY =
-      "testGetUserByKeyFailureWithoutKey";
-  private static final String TEST_GET_USER_BY_KEY_FAILURE_WITHOUT_VALUE =
-      "testGetUserByKeyFailureWithoutValue";
+  private static final String TEST_GET_USER_BY_KEY_FAILURE_INVALID_KEY =
+      "testGetUserByKeyFailureInvalidKey";
   private static final String TEST_GET_USER_BY_KEY_FAILURE_WITH_INVALID_EMAIL =
       "testGetUserByKeyFailureWithInvalidEmail";
   private static final String TEST_GET_USER_BY_KEY_FAILURE_WITH_INVALID_PHONE =
@@ -33,17 +30,30 @@ public class GetUserByKey extends BaseCitrusTestRunner {
   public static final String TEMPLATE_DIR = "templates/user/getuserbykey";
 
   private String getUserByKeyUrl(String idType, String id) {
-    return getLmsApiUriPath("/api/user/v1/getByKey", "/v1/user/check", idType, id);
+    return getLmsApiUriPath("/api/user/v1/get", "/v1/user/get", idType, id);
   }
 
   @DataProvider(name = "getUserByKeyFailureDataProvider")
   public Object[][] getUserByKeyFailureDataProvider() {
 
     return new Object[][] {
-      new Object[] {TEST_GET_USER_BY_KEY_FAILURE_WITHOUT_KEY, true, HttpStatus.BAD_REQUEST},
-      new Object[] {TEST_GET_USER_BY_KEY_FAILURE_WITHOUT_VALUE, true, HttpStatus.BAD_REQUEST},
-      new Object[] {TEST_GET_USER_BY_KEY_FAILURE_WITH_INVALID_EMAIL, true, HttpStatus.BAD_REQUEST},
-      new Object[] {TEST_GET_USER_BY_KEY_FAILURE_WITH_INVALID_PHONE, true, HttpStatus.BAD_REQUEST}
+      new Object[] {
+        TEST_GET_USER_BY_KEY_FAILURE_INVALID_KEY, true, HttpStatus.BAD_REQUEST, "invalid", "invalid"
+      },
+      new Object[] {
+        TEST_GET_USER_BY_KEY_FAILURE_WITH_INVALID_EMAIL,
+        true,
+        HttpStatus.BAD_REQUEST,
+        "email",
+        "invalidEmail"
+      },
+      new Object[] {
+        TEST_GET_USER_BY_KEY_FAILURE_WITH_INVALID_PHONE,
+        true,
+        HttpStatus.BAD_REQUEST,
+        "phone",
+        "invalidPhone"
+      }
     };
   }
 
@@ -51,18 +61,22 @@ public class GetUserByKey extends BaseCitrusTestRunner {
   public Object[][] getUserByKeySuccessDataProvider() {
 
     return new Object[][] {
-      new Object[] {TEST_GET_USER_BY_KEY_SUCCESS_WITHOUT_TOKEN, false, HttpStatus.OK},
-      new Object[] {TEST_GET_USER_BY_KEY_SUCCESS_WITH_PHONE, true, HttpStatus.OK},
-      new Object[] {TEST_GET_USER_BY_KEY_SUCCESS_WITH_EMAIL, true, HttpStatus.OK},
-      new Object[] {TEST_GET_USER_BY_KEY_SUCCESS_WITH_LOGIN_ID, true, HttpStatus.OK}
+      new Object[] {TEST_GET_USER_BY_KEY_SUCCESS_WITHOUT_TOKEN, false, HttpStatus.OK, "email"},
+      new Object[] {TEST_GET_USER_BY_KEY_SUCCESS_WITH_PHONE, true, HttpStatus.OK, "phone"},
+      new Object[] {TEST_GET_USER_BY_KEY_SUCCESS_WITH_EMAIL, true, HttpStatus.OK, "email"},
+      new Object[] {TEST_GET_USER_BY_KEY_SUCCESS_WITH_LOGIN_ID, true, HttpStatus.OK, "loginId"}
     };
   }
 
   @Test(dataProvider = "getUserByKeyFailureDataProvider")
-  @CitrusParameters({"testName", "isAuthRequired", "httpStatusCode"})
+  @CitrusParameters({"testName", "isAuthRequired", "httpStatusCode", "idType", "id"})
   @CitrusTest
   public void testGetUserByKeyFailure(
-      String testName, boolean isAuthRequired, HttpStatus httpStatusCode) {
+      String testName,
+      boolean isAuthRequired,
+      HttpStatus httpStatusCode,
+      String idType,
+      String id) {
     getTestCase().setName(testName);
     getAuthToken(this, isAuthRequired);
     beforeTest();
@@ -70,25 +84,26 @@ public class GetUserByKey extends BaseCitrusTestRunner {
         this,
         TEMPLATE_DIR,
         testName,
-        getUserByKeyUrl("email", "id"),
+        getUserByKeyUrl(idType, id),
         isAuthRequired,
         httpStatusCode,
         RESPONSE_JSON);
   }
 
   @Test(dataProvider = "getUserByKeySuccessDataProvider")
-  @CitrusParameters({"testName", "isAuthRequired", "httpStatusCode"})
+  @CitrusParameters({"testName", "isAuthRequired", "httpStatusCode", "idType"})
   @CitrusTest
   public void testGetUserByKeySuccess(
-      String testName, boolean isAuthRequired, HttpStatus httpStatusCode) {
+      String testName, boolean isAuthRequired, HttpStatus httpStatusCode, String idType) {
     getTestCase().setName(testName);
     getAuthToken(this, isAuthRequired);
     beforeTest();
+    String id = testContext.getVariable(idType);
     performGetTest(
         this,
         TEMPLATE_DIR,
         testName,
-        getUserByKeyUrl("email", "id"),
+        getUserByKeyUrl(idType, id),
         isAuthRequired,
         httpStatusCode,
         RESPONSE_JSON);
@@ -100,8 +115,10 @@ public class GetUserByKey extends BaseCitrusTestRunner {
     } else {
       variable("phone", testContext.getVariable("phone"));
       variable("email", testContext.getVariable("email"));
-      variable("userName", testContext.getVariable("userName"));
-      variable("channel", testContext.getVariable("channel"));
+
+      testContext.setVariable(
+          "loginId",
+          testContext.getVariable("userName") + "@" + testContext.getVariable("channel"));
     }
   }
 }
