@@ -178,6 +178,7 @@ public class CreateOrganisationTest extends BaseCitrusTestRunner {
   public void createOrgWithExternalId() {
     getAuthToken(this, true);
     variable("channel", OrgUtil.getDefaultSunbirdRootOrg());
+    variable("externalId", externalID);
     OrgUtil.createSubOrgId(this, testContext);
   }
 
