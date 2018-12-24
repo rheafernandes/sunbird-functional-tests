@@ -334,8 +334,7 @@ public class UserTest extends BaseCitrusTest {
   @Test(dependsOnMethods = {"testCreateUser"})
   @CitrusTest
   public void testGetUserByLoginIdSuccess() {
-    variable("loginIdval", USER_NAME + "@" + initGlobalValues.getSunbirdDefaultChannel());
-    variable("channel", initGlobalValues.getSunbirdDefaultChannel());
+    variable("loginIdval", USER_NAME);
     performPostTest(
         "testGetUserByLoginIdSuccess",
         GetUserByLoginIdTest.TEMPLATE_DIR,
