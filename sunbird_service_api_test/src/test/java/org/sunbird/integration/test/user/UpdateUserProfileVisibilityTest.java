@@ -73,9 +73,9 @@ public class UpdateUserProfileVisibilityTest extends BaseCitrusTestRunner {
       new Object[] {
         TEST_UPDATE_USER_PROFILE_VISIBILITY_SUCCESS_WITH_ALREADY_PUBLIC_COLUMN, true, HttpStatus.OK
       },
-      new Object[] {
+      /* new Object[] {
         TEST_UPDATE_USER_PROFILE_VISIBILITY_SUCCESS_WITH_ALREADY_PRIVATE_COLUMN, true, HttpStatus.OK
-      },
+      },*/
     };
   }
 
