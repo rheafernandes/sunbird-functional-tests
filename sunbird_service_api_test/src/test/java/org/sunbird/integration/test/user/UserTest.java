@@ -45,8 +45,6 @@ public class UserTest extends BaseCitrusTest {
   private static final String UPDATE_USER_LOCAL_URI = "/v1/user/update";
   public static final String TEMPLATE_DIR = "templates/user/create";
   private static volatile String USER_NAME = "userName";
-  private static String externalId = String.valueOf(System.currentTimeMillis());
-  private static String provider = String.valueOf(System.currentTimeMillis() + 10);
   private static TestGlobalProperty testGlobalProperty = new EndpointConfig().initGlobalValues();
 
   /**
@@ -331,7 +329,7 @@ public class UserTest extends BaseCitrusTest {
             });
   }
 
-  @Test(dependsOnMethods = {"testCreateUser"})
+  // @Test(dependsOnMethods = {"testCreateUser"})
   @CitrusTest
   public void testGetUserByLoginIdSuccess() {
     variable("loginIdval", USER_NAME + "@" + initGlobalValues.getSunbirdDefaultChannel());
@@ -495,23 +493,6 @@ public class UserTest extends BaseCitrusTest {
     innerMap.put(Constant.ID, userId);
     innerMap.put(Constant.USER_ID, userId);
     innerMap.put(Constant.CHANNEL, "channel");
-    requestMap.put(Constant.REQUEST, innerMap);
-
-    try {
-      return objectMapper.writeValueAsString(requestMap);
-    } catch (JsonProcessingException e) {
-      e.printStackTrace();
-    }
-    return null;
-  }
-
-  private String updateUserWithExtIdAndProvider() {
-    Map<String, Object> requestMap = new HashMap<>();
-    Map<String, Object> innerMap = createUserInnerMap();
-    innerMap.put(Constant.LAST_NAME, "ft_lastName_updated_without_userid");
-    innerMap.remove(Constant.USER_NAME);
-    innerMap.put(Constant.EXTERNAL_ID, externalId);
-    innerMap.put(Constant.PROVIDER, provider);
     requestMap.put(Constant.REQUEST, innerMap);
 
     try {
