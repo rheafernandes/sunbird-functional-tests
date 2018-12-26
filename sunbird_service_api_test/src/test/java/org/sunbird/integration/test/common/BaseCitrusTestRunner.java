@@ -30,10 +30,6 @@ public class BaseCitrusTestRunner extends TestNGCitrusTestRunner {
 
   public BaseCitrusTestRunner() {}
 
-  public String getLmsApiUriPath(String apiGatewayUriPath, String localUriPath) {
-    return config.getLmsUrl().contains("localhost") ? localUriPath : apiGatewayUriPath;
-  }
-
   public void performMultipartTest(
       TestNGCitrusTestRunner runner,
       String templateDir,
@@ -236,13 +232,20 @@ public class BaseCitrusTestRunner extends TestNGCitrusTestRunner {
             TestActionUtil.getResponseTestAction(builder, LMS_ENDPOINT, testName, responseCode));
   }
 
-  public String getLmsApiUriPath(String apiGatewayUriPath, String localUriPath, String pathParam) {
-    if (!pathParam.startsWith("/")) {
-      pathParam = "/" + pathParam;
+  public String getLmsApiUriPath(
+      String apiGatewayUriPath, String localUriPath, String... pathParam) {
+    String pathParams = "";
+
+    for (int i = 0; i < pathParam.length; i++) {
+      if (!pathParam[i].startsWith("/")) {
+        pathParams += "/" + pathParam[i];
+      } else {
+        pathParams += pathParam[i];
+      }
     }
 
     return config.getLmsUrl().contains("localhost")
-        ? localUriPath + pathParam
-        : apiGatewayUriPath + pathParam;
+        ? localUriPath + pathParams
+        : apiGatewayUriPath + pathParams;
   }
 }
