@@ -39,9 +39,6 @@ public class CreateOrganisationTest extends BaseCitrusTestRunner {
 
   public static final String TEST_NAME_CREATE_ROOT_ORG_FAILURE_WITH_ORG_NAME_AND_EXISTING_CHANNEL =
       "testCreateRootOrgFailureWithOrgNameAndExistingChannel";
-  private static final Object
-      TEST_NAME_CREATE_ROOT_ORG_FAILURE_WITH_ORG_NAME_AND_EXISTING_EXTERNAL_ID =
-          "testCreateRootOrgFailureWithOrgNameAndExistingExternalId";
 
   public static final String TEMPLATE_DIR = "templates/organisation/create";
 
@@ -141,11 +138,6 @@ public class CreateOrganisationTest extends BaseCitrusTestRunner {
         TEST_NAME_CREATE_ROOT_ORG_FAILURE_WITH_ORG_NAME_AND_EXISTING_CHANNEL,
         true,
         HttpStatus.BAD_REQUEST
-      },
-      new Object[] {
-        TEST_NAME_CREATE_ROOT_ORG_FAILURE_WITH_ORG_NAME_AND_EXISTING_EXTERNAL_ID,
-        true,
-        HttpStatus.BAD_REQUEST
       }
     };
   }
@@ -156,7 +148,6 @@ public class CreateOrganisationTest extends BaseCitrusTestRunner {
   public void testCreateRootOrganisation(
       String testName, boolean isAuthRequired, HttpStatus httpStatusCode) {
     getAuthToken(this, isAuthRequired);
-
     variable("rootOrgChannel", OrgUtil.getRootOrgChannel());
     variable("rootOrgExternalId", OrgUtil.getRootOrgExternalId().toLowerCase());
     beforeTest();
