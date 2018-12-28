@@ -5,10 +5,10 @@
   "params": {
     "resmsgid": null,
     "msgid": "@ignore@",
-    "err": "TEXTBOOK_NOT_FOUND",
-    "status": "TEXTBOOK_NOT_FOUND",
-    "errmsg": "Textbook not found."
+    "err": "RESOURCE_NOT_FOUND",
+    "status": "RESOURCE_NOT_FOUND",
+    "errmsg": "@ignore@"
   },
-  "responseCode": "CLIENT_ERROR",
+  "responseCode": "RESOURCE_NOT_FOUND",
   "result": {}
 }
