@@ -176,7 +176,7 @@ public class TextbookTocTest extends BaseCitrusTestRunner {
     public Object[][] tocUploadFailureDataProvider() {
         return new Object[][]{
                 new Object[]{
-                        TEST_TOC_UPLOAD_WITH_VALID_FILE_AND_INVALID_TEXTBOOK_ID, HttpStatus.INTERNAL_SERVER_ERROR, true, "Identifier"
+                        TEST_TOC_UPLOAD_WITH_VALID_FILE_AND_INVALID_TEXTBOOK_ID, HttpStatus.NOT_FOUND, true, "Identifier"
                 },
                 new Object[]{
                         TEST_TOC_UPLOAD_WITH_VALID_FILE_AND_INVALID_TEXTBOOK_MIME_TYPE, HttpStatus.BAD_REQUEST, true, "Resource"
@@ -240,7 +240,7 @@ public class TextbookTocTest extends BaseCitrusTestRunner {
     public Object[][] tocDownloadFailureDataProvider() {
         return new Object[][]{
                 new Object[]{
-                        TEST_TOC_DOWNLOAD_INVALID_TEXTBOOK_ID, HttpStatus.BAD_REQUEST, true, "Identifier"
+                        TEST_TOC_DOWNLOAD_INVALID_TEXTBOOK_ID, HttpStatus.NOT_FOUND, true, "Identifier"
                 },
                 new Object[]{
                         TEST_TOC_DOWNLOAD_INVALID_TEXTBOOK_CONTENT_TYPE, HttpStatus.BAD_REQUEST, true, "Resource"
