@@ -55,4 +55,6 @@ public class Constant {
   public static final String EXTRACT_VAR_ROOT_ORG_ID = "organisationId";
   public static final String EXTRACT_VAR_SEARCH_ROOT_ORG_ID = "organisationId";
   public static final String EXTRACT_VAR_SUB_ORG_ID = "subOrganisationId";
+  public static final String EMAIL_VERIFIED = "emailVerified";
+  public static final String X_CHANNEL_ID = "X-Channel-Id";
 }

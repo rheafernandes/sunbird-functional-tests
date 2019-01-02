@@ -132,13 +132,13 @@ public class UserBulkUploadTest extends BaseCitrusTestRunner {
       new Object[] {
         TEST_NAME_USER_BULK_UPLOAD_SUCCESS_WITH_ORG_ID, HttpStatus.OK, true, true, false
       },
-      new Object[] {
-        TEST_NAME_USER_BULK_UPLOAD_SUCCESS_WITH_PROVIDER_AND_EXTERNAL_ID,
-        HttpStatus.OK,
-        true,
-        true,
-        true
-      },
+//      new Object[] {
+//        TEST_NAME_USER_BULK_UPLOAD_SUCCESS_WITH_PROVIDER_AND_EXTERNAL_ID,
+//        HttpStatus.OK,
+//        true,
+//        true,
+//        true
+//      },
     };
   }
 

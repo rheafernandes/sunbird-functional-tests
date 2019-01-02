@@ -37,7 +37,7 @@ public class UserSkillUtil {
       UserUtil.getUserId(runner, testContext, "endorsedUserId");
       runner.variable("endorsedUserId", testContext.getVariable("endorsedUserId"));
       runner.variable("userId", testContext.getVariable("endorsedUserId"));
-      String userName = UserUtil.getUserNameWithChannel(runner, testContext);
+      String userName = testContext.getVariable("userName");
       runner.getAuthToken(
           runner, userName, Constant.PASSWORD, testContext.getVariable("endorsedUserId"), true);
       createUserSkill(runner, testContext, UPDATE_SKILL_TEMPLATE_DIR, UPDATE_USER_SKILL_SUCCESS);

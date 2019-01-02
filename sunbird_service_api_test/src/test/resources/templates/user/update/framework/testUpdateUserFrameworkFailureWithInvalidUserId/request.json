@@ -2,6 +2,7 @@
 "request":{
 "userId":"invalidUserId",
 "framework" : {
+	"id" : "${frameworkId}",
 	"medium"  : ["anyMedium"],
 	"board"  : ["anyBoard"],
 	"gradeLevel"  : ["anyGradeLevel"],

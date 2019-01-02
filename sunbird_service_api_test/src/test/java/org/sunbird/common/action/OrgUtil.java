@@ -19,6 +19,12 @@ public class OrgUtil {
   private static final String rootOrgProviderId =
       "FT_Org_Provider_" + Instant.now().getEpochSecond();
 
+  private static final String sunbirdDefaultOrg = System.getenv("sunbird_default_channel");;
+
+  public static String getDefaultSunbirdRootOrg() {
+    return sunbirdDefaultOrg;
+  }
+
   public static String getRootOrgChannel() {
     return rootOrgChannel;
   }
@@ -158,7 +164,7 @@ public class OrgUtil {
         runner,
         testContext,
         "templates/organisation/search",
-        "testSearchOrgSuccessWithFilterByChannel",
+        "testSearchRootOrgIdSuccessFilterByChannel",
         Constant.EXTRACT_VAR_SEARCH_ROOT_ORG_ID,
         HttpStatus.OK);
     searchedOrgId = testContext.getVariable(Constant.EXTRACT_VAR_SEARCH_ROOT_ORG_ID);

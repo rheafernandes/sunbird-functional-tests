@@ -1,13 +1,13 @@
 {
-    "id": "api.system.settings.get.uniqueField",
+    "id": "api.textbook.toc.upload",
     "ver": "v1",
     "ts": "@ignore@",
     "params": {
         "resmsgid": null,
         "msgid": "@ignore@",
-        "err": "UNAUTHORIZED_USER",
-        "status": "SERVER_ERROR",
-        "errmsg": "You are not authorized."
+        "err": "CSV_ROWS_EXCEEDS",
+        "status": "CSV_ROWS_EXCEEDS",
+        "errmsg": "@ignore@"
     },
     "responseCode": "CLIENT_ERROR",
     "result": {}

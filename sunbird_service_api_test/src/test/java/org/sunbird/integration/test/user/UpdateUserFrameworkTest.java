@@ -47,6 +47,10 @@ public class UpdateUserFrameworkTest extends BaseCitrusTestRunner {
       "testUpdateUserFrameworkFailureWithInvalidSubjectDataType";
   public static final String TEST_UPDATE_USER_FRAMEWORK_FAILURE_WITH_UNSUPPORTED_FIELD =
       "testUpdateUserFrameworkFailureWithUnsupportedField";
+  public static final String TEST_UPDATE_USER_FRAMEWORK_FAILURE_WITH_INVALID_FRAMEWORKID =
+      "testUpdateUserFrameworkFailureWithInvalidFrameworkId";
+  public static final String TEST_UPDATE_USER_FRAMEWORK_FAILURE_WITHOUT_FRAMEWORKID =
+      "testUpdateUserFrameworkFailureWithoutFrameworkId";
 
   public static final String TEST_UPDATE_USER_FRAMEWORK_SUCCESS_WITHOUT_SUBJECT =
       "testUpdateUserFrameworkSuccessWithoutSubject";
@@ -101,6 +105,10 @@ public class UpdateUserFrameworkTest extends BaseCitrusTestRunner {
       new Object[] {
         TEST_UPDATE_USER_FRAMEWORK_FAILURE_WITH_UNSUPPORTED_FIELD, HttpStatus.BAD_REQUEST
       },
+      new Object[] {
+        TEST_UPDATE_USER_FRAMEWORK_FAILURE_WITH_INVALID_FRAMEWORKID, HttpStatus.NOT_FOUND
+      },
+      new Object[] {TEST_UPDATE_USER_FRAMEWORK_FAILURE_WITHOUT_FRAMEWORKID, HttpStatus.BAD_REQUEST},
     };
   }
 
@@ -157,5 +165,6 @@ public class UpdateUserFrameworkTest extends BaseCitrusTestRunner {
     variable("gradeLevel", System.getenv("sunbird_user_framework_grade_level"));
     variable("medium", System.getenv("sunbird_user_framework_medium"));
     variable("subject", System.getenv("sunbird_user_framework_subject"));
+    variable("frameworkId", System.getenv("sunbird_user_framework_id"));
   }
 }
