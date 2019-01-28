@@ -11,7 +11,7 @@ public class LocationUtil {
   private static final String STATE_CODE =
       "FT_State_Code-" + String.valueOf(System.currentTimeMillis());
 
-  private static final String DISTRICT_CODE =
+  public static final String DISTRICT_CODE =
       "FT_District_Code-" + String.valueOf(System.currentTimeMillis());
 
   public static void createLocation(
