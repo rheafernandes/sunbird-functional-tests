@@ -1,15 +1,15 @@
 {
-    "id": "api.role.read",
-    "ver": "v1",
-    "ts": "@ignore@",
-    "params": {
-        "resmsgid": null,
-        "msgid": "@ignore@",
-        "err": null,
-        "status": "success",
-        "errmsg": null
-    },
-    "responseCode": "OK",
+  "id": "api.role.read",
+  "ver": "v1",
+  "ts": "@ignore@",
+  "params": {
+    "resmsgid": null,
+    "msgid": "@ignore@",
+    "err": null,
+    "status": "success",
+    "errmsg": null
+  },
+  "responseCode": "OK",
   "result": {
     "roles": [
       {
@@ -158,17 +158,6 @@
         ],
         "name": "Flag Reviewer",
         "id": "FLAG_REVIEWER"
-      },
-      {
-        "actionGroups": [
-          {
-            "name": "Report Viewer",
-            "id": "REPORT_VIEWER",
-            "actions": []
-          }
-        ],
-        "name": "Report Viewer",
-        "id": "REPORT_VIEWER"
       }
     ]
   }
