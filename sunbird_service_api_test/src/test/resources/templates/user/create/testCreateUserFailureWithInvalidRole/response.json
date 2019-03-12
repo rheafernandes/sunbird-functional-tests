@@ -7,7 +7,7 @@
 		"msgid": "@ignore@",
 		"err": "DATA_TYPE_ERROR",
 		"status": "DATA_TYPE_ERROR",
-		"errmsg": "roles data type should be of List."
+		"errmsg": "Data type of roles should be List."
 	},
 	"responseCode": "CLIENT_ERROR",
 	"result": {

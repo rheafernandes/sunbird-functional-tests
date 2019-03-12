@@ -14,6 +14,7 @@
 		"response": {
 			"lastName": "Kumar",
 			"tncLatestVersion": "@ignore@",
+			"rootOrgName": "@ignore@",
 			"roles": "@ignore@",
 			"channel": "@ignore@",
 			"updatedDate": null,
@@ -30,6 +31,7 @@
 			"profileSummary": null,
 			"locationIds": [],
 			"registryId": null,
+			"userName": "@ignore@",
 			"rootOrgId": "@ignore@",
 			"promptTnC": true,
 			"firstName": "Amit",

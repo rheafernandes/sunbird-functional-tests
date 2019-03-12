@@ -7,7 +7,7 @@
         "msgid": "@ignore@",
         "err": "DATA_TYPE_ERROR",
         "status": "DATA_TYPE_ERROR",
-        "errmsg": "mentors data type should be of Arrays."
+        "errmsg": "Data type of mentors should be Arrays."
     },
     "responseCode": "CLIENT_ERROR",
     "result": {}
