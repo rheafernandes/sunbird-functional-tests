@@ -7,7 +7,7 @@
         "msgid": "@ignore@",
         "err": "DATA_TYPE_ERROR",
         "status": "DATA_TYPE_ERROR",
-        "errmsg": "framework.board data type should be of List."
+        "errmsg": "Data type of framework.board should be List."
     },
     "responseCode": "CLIENT_ERROR",
     "result": {}

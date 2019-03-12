@@ -20,7 +20,7 @@
             "updatedDate": null,
             "addressId": null,
             "orgType": null,
-            "provider": "ft_provider",
+            "provider": "@ignore@",
             "locationId": null,
             "orgCode": null,
             "theme": null,
