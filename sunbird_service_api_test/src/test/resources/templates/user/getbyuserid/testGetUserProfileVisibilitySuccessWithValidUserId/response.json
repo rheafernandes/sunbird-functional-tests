@@ -18,6 +18,7 @@
 			"roles": "@ignore@",
 			"channel": "@ignore@",
 			"updatedDate": null,
+			"batches":"@ignore@",
 			"isDeleted": false,
 			"organisations":"@ignore@",
 			"tncLatestVersionUrl": "@ignore@",
