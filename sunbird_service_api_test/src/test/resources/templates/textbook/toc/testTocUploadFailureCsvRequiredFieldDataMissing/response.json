@@ -5,8 +5,8 @@
     "params": {
         "resmsgid": null,
         "msgid": "@ignore@",
-        "err": "REQUIRED_FIELD_MISSING",
-        "status": "REQUIRED_FIELD_MISSING",
+        "err": "INVALID_TEXTBOOK_NAME",
+        "status": "INVALID_TEXTBOOK_NAME",
         "errmsg": "@ignore@"
     },
     "responseCode": "CLIENT_ERROR",
