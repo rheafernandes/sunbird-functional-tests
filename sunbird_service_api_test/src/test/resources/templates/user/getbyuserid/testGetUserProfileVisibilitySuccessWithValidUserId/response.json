@@ -14,6 +14,7 @@
 		"response": {
 			"lastName": "Kumar",
 			"tncLatestVersion": "@ignore@",
+			"maskedPhone": null,
 			"rootOrgName": "@ignore@",
 			"roles": "@ignore@",
 			"channel": "@ignore@",
@@ -22,8 +23,10 @@
 			"isDeleted": false,
 			"organisations":"@ignore@",
 			"tncLatestVersionUrl": "@ignore@",
+			"maskedEmail": "@ignore@",
 			"id": "@ignore@",
 			"tempPassword": null,
+			"email": "@ignore@",
 			"rootOrg": "@ignore@",
 			"identifier": "@ignore@",
 			"thumbnail": null,
