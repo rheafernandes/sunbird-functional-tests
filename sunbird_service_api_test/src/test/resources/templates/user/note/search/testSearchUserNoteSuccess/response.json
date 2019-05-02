@@ -13,7 +13,8 @@
     "result": {
         "response": {
             "count": "@ignore@",
-            "note": "@ignore@"
+            "note": "@ignore@",
+            "content":"@ignore@"
         }
     }
 }
