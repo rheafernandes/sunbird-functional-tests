@@ -29,7 +29,9 @@ public class EndPointConfig {
     @Bean
     public TestGlobalProperty initGlobalValues() {
         TestGlobalProperty property = new TestGlobalProperty();
-        property.setKpApiKey(AppConfig.config.getString("kp_api_key"));
+        //TODO: Revert back to kp_api_key
+        //property.setKpApiKey(AppConfig.config.getString("kp_api_key"));
+        property.setKpApiKey(AppConfig.config.getString("kp_private_api_key"));
         property.setKpBaseUri(AppConfig.config.getString("kp_base_uri"));
         property.setContentCreatorUser(AppConfig.config.getString("kp_creator_user"));
         property.setContentCreatorUser(AppConfig.config.getString("kp_creator_password"));
