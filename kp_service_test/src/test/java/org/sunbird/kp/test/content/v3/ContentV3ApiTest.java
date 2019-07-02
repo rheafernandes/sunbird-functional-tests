@@ -12,6 +12,7 @@ import javax.ws.rs.core.MediaType;
 
 /**
  * Content V3 API Tests
+ *
  * @author Kumar Gauraw
  */
 public class ContentV3ApiTest extends BaseCitrusTestRunner {
@@ -56,20 +57,19 @@ public class ContentV3ApiTest extends BaseCitrusTestRunner {
 
 
     @Test(dataProvider = "createResourceContentWithValidRequest")
-    @CitrusParameters({"testName", "requestUrl", "httpStatusCode", "isAuthRequired"})
+    @CitrusParameters({"testName", "requestUrl", "httpStatusCode", "userType"})
     @CitrusTest
-    public void testCreateResourcePdfContentWithValidRequest(
-            String testName, String requestUrl, HttpStatus httpStatusCode, boolean isAuthRequired) {
-        getTestCase().setName(testName);
-        getAuthToken(this, isAuthRequired);
+    public void testCreateResourceContentWithValidRequest(
+            String testName, String requestUrl, HttpStatus httpStatusCode, String userType) {
         performPostTest(
                 this,
                 TEMPLATE_DIR,
                 testName,
                 requestUrl,
+                null,
                 REQUEST_JSON,
                 MediaType.APPLICATION_JSON,
-                isAuthRequired,
+                userType,
                 httpStatusCode,
                 RESPONSE_JSON
         );
@@ -80,13 +80,13 @@ public class ContentV3ApiTest extends BaseCitrusTestRunner {
     public Object[][] createResourceContentWithValidRequest() {
         return new Object[][]{
                 new Object[]{
-                        TEST_CREATE_RESOURCE_PDF_CONTENT_WITH_VALID_REQUEST, APIUrl.CREATE_CONTENT, HttpStatus.OK, false
+                        TEST_CREATE_RESOURCE_PDF_CONTENT_WITH_VALID_REQUEST, APIUrl.CREATE_CONTENT, HttpStatus.OK, "Creator"
                 },
                 new Object[]{
-                        TEST_CREATE_RESOURCE_ECML_CONTENT_WITH_VALID_REQUEST, APIUrl.CREATE_CONTENT, HttpStatus.OK, false
+                        TEST_CREATE_RESOURCE_ECML_CONTENT_WITH_VALID_REQUEST, APIUrl.CREATE_CONTENT, HttpStatus.OK, "Creator"
                 },
                 new Object[]{
-                        TEST_CREATE_RESOURCE_HTML_CONTENT_WITH_VALID_REQUEST, APIUrl.CREATE_CONTENT, HttpStatus.OK, false
+                        TEST_CREATE_RESOURCE_HTML_CONTENT_WITH_VALID_REQUEST, APIUrl.CREATE_CONTENT, HttpStatus.OK, "Creator"
                 }
         };
     }

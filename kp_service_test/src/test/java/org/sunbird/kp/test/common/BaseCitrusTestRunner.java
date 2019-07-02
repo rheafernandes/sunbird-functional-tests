@@ -6,16 +6,15 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 
+import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Base Runner Class
+ * Base Runner Class for Integration Test
+ *
  * @author Kumar Gauraw
  */
 public class BaseCitrusTestRunner extends TestNGCitrusTestRunner {
-
-    @Autowired
-    protected EndPointConfig.TestGlobalProperty config;
 
     @Autowired
     protected TestContext testContext;
@@ -24,182 +23,272 @@ public class BaseCitrusTestRunner extends TestNGCitrusTestRunner {
     public static final String REQUEST_JSON = "request.json";
     public static final String RESPONSE_JSON = "response.json";
 
-    public static final String KP_ENDPOINT = "kpRestClient";
-    public static final String KEYCLOAK_ENDPOINT = "keycloakTestClient";
+    private static final String API_KEY = AppConfig.config.getString("kp_api_key");
+    private static final Boolean IS_USER_AUTH_REQUIRED = AppConfig.config.getBoolean("user_auth_enable");
 
+    public BaseCitrusTestRunner() {
+    }
 
-
-    public BaseCitrusTestRunner() {}
-
+    /**
+     * This Method Perform Test for API with GET Method
+     * @param runner
+     * @param templateDir
+     * @param testName
+     * @param requestUrl
+     * @param headers
+     * @param userType
+     * @param responseCode
+     * @param responseJson
+     */
     public void performGetTest(
             TestNGCitrusTestRunner runner,
             String templateDir,
             String testName,
             String requestUrl,
-            Boolean isAuthRequired,
+            Map<String, Object> headers,
+            String userType,
             HttpStatus responseCode,
             String responseJson) {
         getTestCase().setName(testName);
-        getAuthToken(runner, isAuthRequired);
+        getAuthToken(runner, userType);
         runner.http(
                 builder ->
-                        TestActionUtil.performGetTest(
+                        TestActionUtil.processGetRequest(
                                 builder,
-                                KP_ENDPOINT,
+                                Constant.KP_ENDPOINT,
                                 testName,
                                 requestUrl,
-                                TestActionUtil.getHeaders(isAuthRequired),
-                                config));
+                                getHeaders(headers)
+                        ));
         runner.http(
                 builder ->
-                        TestActionUtil.getResponseTestAction(
-                                builder, KP_ENDPOINT, templateDir, testName, responseCode, responseJson));
+                        TestActionUtil.getResponse(
+                                builder, Constant.KP_ENDPOINT, templateDir, testName, responseCode, responseJson));
     }
 
+    /**
+     * This Method Perform Test for API with POST Method
+     * @param runner
+     * @param templateDir
+     * @param testName
+     * @param requestUrl
+     * @param headers
+     * @param requestJson
+     * @param contentType
+     * @param userType
+     * @param responseCode
+     * @param responseJson
+     */
     public void performPostTest(
             TestNGCitrusTestRunner runner,
             String templateDir,
             String testName,
             String requestUrl,
+            Map<String, Object> headers,
             String requestJson,
             String contentType,
-            boolean isAuthRequired,
+            String userType,
             HttpStatus responseCode,
             String responseJson) {
         getTestCase().setName(testName);
+        getAuthToken(runner, userType);
         runner.http(
                 builder ->
-                        TestActionUtil.getPostRequestTestAction(
+                        TestActionUtil.processPostRequest(
                                 builder,
-                                KP_ENDPOINT,
+                                Constant.KP_ENDPOINT,
                                 templateDir,
                                 testName,
                                 requestUrl,
                                 requestJson,
                                 contentType,
-                                TestActionUtil.getHeaders(isAuthRequired)));
+                                getHeaders(headers)
+                        ));
 
         runner.http(
                 builder ->
-                        TestActionUtil.getResponseTestAction(
-                                builder, KP_ENDPOINT, templateDir, testName, responseCode, responseJson));
+                        TestActionUtil.getResponse(
+                                builder, Constant.KP_ENDPOINT, templateDir, testName, responseCode, responseJson));
     }
 
+    /**
+     * This Method Perform Test for API with PATCH Method
+     * @param runner
+     * @param templateDir
+     * @param testName
+     * @param requestUrl
+     * @param headers
+     * @param requestJson
+     * @param contentType
+     * @param userType
+     * @param responseCode
+     * @param responseJson
+     */
     public void performPatchTest(
             TestNGCitrusTestRunner runner,
             String templateDir,
             String testName,
             String requestUrl,
+            Map<String, Object> headers,
             String requestJson,
             String contentType,
-            boolean isAuthRequired,
+            String userType,
             HttpStatus responseCode,
             String responseJson) {
         getTestCase().setName(testName);
+        getAuthToken(runner, userType);
         runner.http(
                 builder ->
-                        TestActionUtil.getPatchRequestTestAction(
+                        TestActionUtil.processPatchRequest(
                                 builder,
-                                KP_ENDPOINT,
+                                Constant.KP_ENDPOINT,
                                 templateDir,
                                 testName,
                                 requestUrl,
                                 requestJson,
                                 contentType,
-                                TestActionUtil.getHeaders(isAuthRequired)));
+                                getHeaders(headers)
+                        ));
         runner.http(
                 builder ->
-                        TestActionUtil.getResponseTestAction(
-                                builder, KP_ENDPOINT, templateDir, testName, responseCode, responseJson));
+                        TestActionUtil.getResponse(
+                                builder, Constant.KP_ENDPOINT, templateDir, testName, responseCode, responseJson));
     }
 
+    /**
+     * This Method Perform Test for API with DELETE Method
+     * @param runner
+     * @param templateDir
+     * @param testName
+     * @param requestUrl
+     * @param headers
+     * @param requestJson
+     * @param contentType
+     * @param userType
+     * @param responseCode
+     * @param responseJson
+     */
     public void performDeleteTest(
             TestNGCitrusTestRunner runner,
             String templateDir,
             String testName,
             String requestUrl,
+            Map<String, Object> headers,
             String requestJson,
             String contentType,
-            boolean isAuthRequired,
+            String userType,
             HttpStatus responseCode,
             String responseJson) {
         getTestCase().setName(testName);
+        getAuthToken(runner, userType);
         runner.http(
                 builder ->
-                        TestActionUtil.getDeleteRequestTestAction(
+                        TestActionUtil.processDeleteRequest(
                                 builder,
-                                KP_ENDPOINT,
+                                Constant.KP_ENDPOINT,
                                 templateDir,
                                 testName,
                                 requestUrl,
                                 requestJson,
                                 contentType,
-                                TestActionUtil.getHeaders(isAuthRequired)));
+                                getHeaders(headers)
+                        ));
         runner.http(
                 builder ->
-                        TestActionUtil.getResponseTestAction(
-                                builder, KP_ENDPOINT, templateDir, testName, responseCode, responseJson));
+                        TestActionUtil.getResponse(
+                                builder, Constant.KP_ENDPOINT, templateDir, testName, responseCode, responseJson));
     }
 
-
-
+    /**
+     * This Method Perform Test for API with Multipart Request
+     * @param runner
+     * @param templateDir
+     * @param testName
+     * @param requestUrl
+     * @param headers
+     * @param requestFile
+     * @param userType
+     * @param responseCode
+     * @param responseJson
+     */
     public void performMultipartTest(
             TestNGCitrusTestRunner runner,
             String templateDir,
             String testName,
             String requestUrl,
-            String requestFile,
-            Map<String, Object> requestHeaders,
-            Boolean isAuthRequired,
-            HttpStatus responseCode,
+            Map<String, Object> headers, String requestFile,
+            String userType, HttpStatus responseCode,
             String responseJson) {
         getTestCase().setName(testName);
+        getAuthToken(runner, userType);
         runner.http(
                 builder ->
-                        TestActionUtil.getMultipartRequestTestAction(
+                        TestActionUtil.processMultipartRequest(
                                 testContext,
                                 builder,
-                                KP_ENDPOINT,
+                                Constant.KP_ENDPOINT,
                                 templateDir,
                                 testName,
                                 requestUrl,
                                 requestFile,
-                                TestActionUtil.getHeaders(isAuthRequired, requestHeaders),
-                                runner.getClass().getClassLoader(),
-                                config));
+                                getHeaders(headers),
+                                runner.getClass().getClassLoader()
+                        ));
         runner.http(
                 builder ->
-                        TestActionUtil.getResponseTestAction(
-                                builder, KP_ENDPOINT, templateDir, testName, responseCode, responseJson));
+                        TestActionUtil.getResponse(
+                                builder, Constant.KP_ENDPOINT, templateDir, testName, responseCode, responseJson));
     }
 
-
-
-
-
-
-
-    public void getAuthToken(TestNGCitrusTestRunner runner, Boolean isAuthRequired) {
-
-        if (isAuthRequired) {
-            //runner.http(builder -> TestActionUtil.getTokenRequestTestAction(builder, KEYCLOAK_ENDPOINT));
-            //runner.http(builder -> TestActionUtil.getTokenResponseTestAction(builder, KEYCLOAK_ENDPOINT));
-            //TODO: Change logic to take user details in other way.
-            getUserAuthToken(runner,null,null);
+    /**
+     * This Method Set User Auth Token to Test Runner Instance
+     * @param runner
+     * @param userType
+     */
+    protected void getAuthToken(TestNGCitrusTestRunner runner, String userType) {
+        if (IS_USER_AUTH_REQUIRED) {
+            if (StringUtils.equalsIgnoreCase(userType, "Reviewer"))
+                getUserAuthToken(runner, AppConfig.config.getString("kp_reviewer_user"), AppConfig.config.getString("kp_reviewer_password"));
+            else getUserAuthToken(runner, null, null);
         }
     }
 
-
+    /**
+     *
+     * @param runner
+     * @param userName
+     * @param password
+     */
     private void getUserAuthToken(TestNGCitrusTestRunner runner, String userName, String password) {
-        if(StringUtils.isNotBlank(userName) && StringUtils.isNotBlank(password)){
+        if (StringUtils.isNotBlank(userName) && StringUtils.isNotBlank(password)) {
             runner.http(
                     builder ->
-                            TestActionUtil.getTokenRequestTestAction(
-                                    builder, KEYCLOAK_ENDPOINT, userName, password));
-            runner.http(builder -> TestActionUtil.getTokenResponseTestAction(builder, KEYCLOAK_ENDPOINT));
-        }else{
-            getUserAuthToken(runner,config.getContentCreatorUser(),config.getContentCreatorPass());
+                            TestActionUtil.getTokenRequest(
+                                    builder, Constant.KEYCLOAK_ENDPOINT, userName, password));
+            runner.http(builder -> TestActionUtil.getTokenResponse(builder, Constant.KEYCLOAK_ENDPOINT));
+        } else {
+            getUserAuthToken(runner, AppConfig.config.getString("kp_creator_user"), AppConfig.config.getString("kp_creator_password"));
         }
+    }
+
+    /**
+     * This Method provides all necessary header elements
+     * @param additionalHeaders
+     * @return
+     */
+    private Map<String, Object> getHeaders(Map<String, Object> additionalHeaders) {
+        Map<String, Object> headers = new HashMap<String, Object>();
+        if (null != additionalHeaders && !additionalHeaders.isEmpty())
+            headers.putAll(additionalHeaders);
+
+        if (!headers.containsKey(Constant.X_CHANNEL_ID))
+            headers.put(Constant.X_CHANNEL_ID, AppConfig.config.getString("kp_test_default_channel"));
+
+        headers.put(Constant.AUTHORIZATION, Constant.BEARER + API_KEY);
+
+        if (IS_USER_AUTH_REQUIRED)
+            headers.put(Constant.X_AUTHENTICATED_USER_TOKEN, "${accessToken}");
+        return headers;
     }
 
 
