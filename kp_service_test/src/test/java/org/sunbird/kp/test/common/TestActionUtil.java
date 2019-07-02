@@ -18,24 +18,25 @@ import javax.ws.rs.core.MediaType;
 import java.io.File;
 import java.io.IOException;
 import java.text.MessageFormat;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
 /**
  * Utility Class which perform rest calls
+ *
  * @author Kumar Gauraw
  */
 public class TestActionUtil {
 
-    public static TestAction getTokenRequestTestAction(
-            HttpActionBuilder builder, String endpointName) {
-        String userName = System.getenv("sunbird_username");
-        String password = System.getenv("sunbird_user_password");
-        return getTokenRequestTestAction(builder, endpointName, userName, password);
-    }
-
-    public static TestAction getTokenRequestTestAction(
+    /**
+     *
+     * @param builder
+     * @param endpointName
+     * @param userName
+     * @param password
+     * @return
+     */
+    public static TestAction getTokenRequest(
             HttpActionBuilder builder, String endpointName, String userName, String password) {
         return builder
                 .client(endpointName)
@@ -51,20 +52,13 @@ public class TestActionUtil {
                                 + "&grant_type=password");
     }
 
-    public static TestAction getPutRequestTestAction(
-            HttpActionBuilder builder,
-            String endPoint,
-            String url,
-            Map<String, Object> headers,
-            String payLoad) {
-        HttpClientRequestActionBuilder requestActionBuilder = builder.client(endPoint).send().put(url);
-        addHeaders(requestActionBuilder, headers);
-        requestActionBuilder.contentType(Constant.CONTENT_TYPE_APPLICATION_JSON);
-        requestActionBuilder.payload(payLoad);
-        return requestActionBuilder;
-    }
-
-    public static TestAction getTokenResponseTestAction(
+    /**
+     *
+     * @param builder
+     * @param endpointName
+     * @return
+     */
+    public static TestAction getTokenResponse(
             HttpActionBuilder builder, String endpointName) {
         return builder
                 .client(endpointName)
@@ -74,7 +68,46 @@ public class TestActionUtil {
                 .extractFromPayload("$.access_token", "accessToken");
     }
 
-    public static TestAction getPostRequestTestAction(
+    /**
+     *
+     * @param builder
+     * @param endpointName
+     * @param testName
+     * @param requestUrl
+     * @param headers
+     * @return
+     */
+    public static TestAction processGetRequest(
+            HttpActionBuilder builder,
+            String endpointName,
+            String testName,
+            String requestUrl,
+            Map<String, Object> headers) {
+        HttpClientRequestActionBuilder requestActionBuilder =
+                builder.client(endpointName)
+                        .send()
+                        .get(requestUrl)
+                        .messageType(MessageType.JSON);
+
+        if (null != headers)
+            requestActionBuilder = addHeaders(requestActionBuilder, headers);
+
+        return requestActionBuilder;
+    }
+
+    /**
+     *
+     * @param builder
+     * @param endpointName
+     * @param testTemplateDir
+     * @param testName
+     * @param url
+     * @param requestFile
+     * @param contentType
+     * @param headers
+     * @return
+     */
+    public static TestAction processPostRequest(
             HttpActionBuilder builder,
             String endpointName,
             String testTemplateDir,
@@ -89,16 +122,51 @@ public class TestActionUtil {
         System.out.println("requestFilePath = " + requestFilePath);
         HttpClientRequestActionBuilder requestActionBuilder =
                 builder.client(endpointName).send().post(url).messageType(MessageType.JSON);
-        if (StringUtils.isNotBlank(contentType)) {
-            requestActionBuilder.contentType(contentType);
-        }
 
-        requestActionBuilder = addHeaders(requestActionBuilder, headers);
+        if (StringUtils.isNotBlank(contentType))
+            requestActionBuilder.contentType(contentType);
+
+        if (null != headers)
+            requestActionBuilder = addHeaders(requestActionBuilder, headers);
 
         return requestActionBuilder.payload(new ClassPathResource(requestFilePath));
     }
 
-    public static TestAction getPatchRequestTestAction(
+    /**
+     *
+     * @param builder
+     * @param endPoint
+     * @param url
+     * @param headers
+     * @param payLoad
+     * @return
+     */
+    public static TestAction processPutRequest(
+            HttpActionBuilder builder,
+            String endPoint,
+            String url,
+            Map<String, Object> headers,
+            String payLoad) {
+        HttpClientRequestActionBuilder requestActionBuilder = builder.client(endPoint).send().put(url);
+        addHeaders(requestActionBuilder, headers);
+        requestActionBuilder.contentType(Constant.CONTENT_TYPE_APPLICATION_JSON);
+        requestActionBuilder.payload(payLoad);
+        return requestActionBuilder;
+    }
+
+    /**
+     *
+     * @param builder
+     * @param endpointName
+     * @param testTemplateDir
+     * @param testName
+     * @param url
+     * @param requestFile
+     * @param contentType
+     * @param headers
+     * @return
+     */
+    public static TestAction processPatchRequest(
             HttpActionBuilder builder,
             String endpointName,
             String testTemplateDir,
@@ -116,12 +184,25 @@ public class TestActionUtil {
             requestActionBuilder.contentType(contentType);
         }
 
-        requestActionBuilder = addHeaders(requestActionBuilder, headers);
+        if (null != headers)
+            requestActionBuilder = addHeaders(requestActionBuilder, headers);
 
         return requestActionBuilder.payload(new ClassPathResource(requestFilePath));
     }
 
-    public static TestAction getDeleteRequestTestAction(
+    /**
+     *
+     * @param builder
+     * @param endpointName
+     * @param testTemplateDir
+     * @param testName
+     * @param url
+     * @param requestFile
+     * @param contentType
+     * @param headers
+     * @return
+     */
+    public static TestAction processDeleteRequest(
             HttpActionBuilder builder,
             String endpointName,
             String testTemplateDir,
@@ -137,7 +218,8 @@ public class TestActionUtil {
             requestActionBuilder.contentType(contentType);
         }
 
-        requestActionBuilder = addHeaders(requestActionBuilder, headers);
+        if (null != headers)
+            requestActionBuilder = addHeaders(requestActionBuilder, headers);
 
         if (StringUtils.isNotBlank(requestFile)) {
             String requestFilePath =
@@ -147,7 +229,20 @@ public class TestActionUtil {
         return requestActionBuilder;
     }
 
-    public static TestAction getMultipartRequestTestAction(
+    /**
+     *
+     * @param context
+     * @param builder
+     * @param endpointName
+     * @param testTemplateDir
+     * @param testName
+     * @param requestUrl
+     * @param requestFile
+     * @param headers
+     * @param classLoader
+     * @return
+     */
+    public static TestAction processMultipartRequest(
             TestContext context,
             HttpActionBuilder builder,
             String endpointName,
@@ -156,8 +251,7 @@ public class TestActionUtil {
             String requestUrl,
             String requestFile,
             Map<String, Object> headers,
-            ClassLoader classLoader,
-            EndPointConfig.TestGlobalProperty config) {
+            ClassLoader classLoader) {
         String formDataFileFolderPath = MessageFormat.format("{0}/{1}", testTemplateDir, testName);
         String formDataFile =
                 MessageFormat.format("{0}/{1}/{2}", testTemplateDir, testName, requestFile);
@@ -189,16 +283,26 @@ public class TestActionUtil {
                         .client(endpointName)
                         .send()
                         .post(requestUrl)
-                        .contentType(MediaType.MULTIPART_FORM_DATA)
-                        .header(Constant.AUTHORIZATION, Constant.BEARER + config.getKpApiKey());
+                        .contentType(MediaType.MULTIPART_FORM_DATA);
 
-        if (null != headers) {
+
+        if (null != headers)
             actionBuilder = addHeaders(actionBuilder, headers);
-        }
+
         return actionBuilder.payload(formData);
     }
 
-    public static TestAction getResponseTestAction(
+    /**
+     *
+     * @param builder
+     * @param endpointName
+     * @param testTemplateDir
+     * @param testName
+     * @param responseCode
+     * @param responseFile
+     * @return
+     */
+    public static TestAction getResponse(
             HttpActionBuilder builder,
             String endpointName,
             String testTemplateDir,
@@ -206,7 +310,7 @@ public class TestActionUtil {
             HttpStatus responseCode,
             String responseFile) {
         if (StringUtils.isBlank(responseFile)) {
-            return getResponseTestAction(builder, endpointName, testName, responseCode);
+            return getResponse(builder, endpointName, testName, responseCode);
         }
 
         String responseFilePath =
@@ -221,6 +325,33 @@ public class TestActionUtil {
                 .payload(new ClassPathResource(responseFilePath));
     }
 
+    /**
+     *
+     * @param builder
+     * @param endpointName
+     * @param testName
+     * @param responseCode
+     * @return
+     */
+    public static TestAction getResponse(
+            HttpActionBuilder builder, String endpointName, String testName, HttpStatus responseCode) {
+        return builder
+                .client(endpointName)
+                .receive()
+                .response(responseCode)
+                .validator("defaultJsonMessageValidator");
+    }
+
+    /**
+     *
+     * @param testContext
+     * @param builder
+     * @param endpointName
+     * @param responseCode
+     * @param extractFieldPath
+     * @param extractVariable
+     * @return
+     */
     public static TestAction getExtractFromResponseTestAction(
             TestContext testContext,
             HttpActionBuilder builder,
@@ -248,28 +379,12 @@ public class TestActionUtil {
                         });
     }
 
-    public static Map<String, Object> getHeaders(boolean isAuthRequired) {
-        Map<String, Object> headers = new HashMap<>();
-        if (isAuthRequired) {
-            //TODO: Fix accessToken
-            headers.put(Constant.X_AUTHENTICATED_USER_TOKEN, "${accessToken}");
-        }
-        headers.put("X-Channel-Id", AppConfig.config.getString("kp_test_default_channel"));
-        //TODO: Revert back to kp_api_key after fixing application.conf
-        headers.put(Constant.AUTHORIZATION, Constant.BEARER + AppConfig.config.getString("kp_api_key"));
-        //headers.put(Constant.AUTHORIZATION, Constant.BEARER + AppConfig.config.getString("kp_private_api_key"));
-        return headers;
-    }
-
-    public static Map<String, Object> getHeaders(
-            boolean isAuthRequired, Map<String, Object> additionalHeaders) {
-        if (null == additionalHeaders) {
-            additionalHeaders = new HashMap<>();
-        }
-        additionalHeaders.putAll(getHeaders(isAuthRequired));
-        return additionalHeaders;
-    }
-
+    /**
+     *
+     * @param actionBuilder
+     * @param headers
+     * @return
+     */
     private static HttpClientRequestActionBuilder addHeaders(
             HttpClientRequestActionBuilder actionBuilder, Map<String, Object> headers) {
         if (headers != null) {
@@ -280,7 +395,13 @@ public class TestActionUtil {
         return actionBuilder;
     }
 
-    public static String getVariable(TestContext testContext, String variableName) {
+    /**
+     *
+     * @param testContext
+     * @param variableName
+     * @return
+     */
+    private static String getVariable(TestContext testContext, String variableName) {
         String value;
         try {
             value = testContext.getVariable(variableName);
@@ -290,32 +411,4 @@ public class TestActionUtil {
         return value;
     }
 
-    public static TestAction performGetTest(
-            HttpActionBuilder builder,
-            String endpointName,
-            String testName,
-            String requestUrl,
-            Map<String, Object> headers,
-            EndPointConfig.TestGlobalProperty config) {
-        HttpClientRequestActionBuilder actionBuilder =
-                builder
-                        .client(endpointName)
-                        .send()
-                        .get(requestUrl)
-                        .messageType(MessageType.JSON)
-                        .header(Constant.AUTHORIZATION, Constant.BEARER + config.getKpApiKey());
-        if (null != headers) {
-            actionBuilder = addHeaders(actionBuilder, headers);
-        }
-        return actionBuilder;
-    }
-
-    public static TestAction getResponseTestAction(
-            HttpActionBuilder builder, String endpointName, String testName, HttpStatus responseCode) {
-        return builder
-                .client(endpointName)
-                .receive()
-                .response(responseCode)
-                .validator("defaultJsonMessageValidator");
-    }
 }
