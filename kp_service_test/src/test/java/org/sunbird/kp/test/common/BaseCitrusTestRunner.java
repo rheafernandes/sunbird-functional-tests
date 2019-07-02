@@ -2,6 +2,7 @@ package org.sunbird.kp.test.common;
 
 import com.consol.citrus.context.TestContext;
 import com.consol.citrus.dsl.testng.TestNGCitrusTestRunner;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 
@@ -184,17 +185,21 @@ public class BaseCitrusTestRunner extends TestNGCitrusTestRunner {
             //runner.http(builder -> TestActionUtil.getTokenRequestTestAction(builder, KEYCLOAK_ENDPOINT));
             //runner.http(builder -> TestActionUtil.getTokenResponseTestAction(builder, KEYCLOAK_ENDPOINT));
             //TODO: Change logic to take user details in other way.
-            getUserAuthToken(runner,config.getContentCreatorUser(),config.getContentCreatorPass());
+            getUserAuthToken(runner,null,null);
         }
     }
 
 
     private void getUserAuthToken(TestNGCitrusTestRunner runner, String userName, String password) {
-        runner.http(
-                builder ->
-                        TestActionUtil.getTokenRequestTestAction(
-                                builder, KEYCLOAK_ENDPOINT, userName, password));
-        runner.http(builder -> TestActionUtil.getTokenResponseTestAction(builder, KEYCLOAK_ENDPOINT));
+        if(StringUtils.isNotBlank(userName) && StringUtils.isNotBlank(password)){
+            runner.http(
+                    builder ->
+                            TestActionUtil.getTokenRequestTestAction(
+                                    builder, KEYCLOAK_ENDPOINT, userName, password));
+            runner.http(builder -> TestActionUtil.getTokenResponseTestAction(builder, KEYCLOAK_ENDPOINT));
+        }else{
+            getUserAuthToken(runner,config.getContentCreatorUser(),config.getContentCreatorPass());
+        }
     }
 
 
