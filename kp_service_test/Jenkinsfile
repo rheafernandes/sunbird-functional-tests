@@ -27,11 +27,15 @@ node() {
         }
 
         stage('Build') {
+            withCredentials([string(credentialsId: 'kp_private_api_key', variable: 'kp_private_api_key'), string(credentialsId: 'kp_ft_access_key', variable: 'kp_ft_access_key')]) {
             sh """
+                 export kp_private_api_key=$kp_private_api_key
+                 export kp_ft_access_key=$kp_ft_access_key
                  cd kp_service_test
                  ls
                  mvn -X clean verify
               """
+            }
         }
 
 
