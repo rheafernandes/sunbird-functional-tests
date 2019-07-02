@@ -256,8 +256,8 @@ public class TestActionUtil {
         }
         headers.put("X-Channel-Id", AppConfig.config.getString("kp_test_default_channel"));
         //TODO: Revert back to kp_api_key after fixing application.conf
-        //headers.put(Constant.AUTHORIZATION, Constant.BEARER + AppConfig.config.getString("kp_api_key"));
-        headers.put(Constant.AUTHORIZATION, Constant.BEARER + AppConfig.config.getString("kp_private_api_key"));
+        headers.put(Constant.AUTHORIZATION, Constant.BEARER + AppConfig.config.getString("kp_api_key"));
+        //headers.put(Constant.AUTHORIZATION, Constant.BEARER + AppConfig.config.getString("kp_private_api_key"));
         return headers;
     }
 
