@@ -3,16 +3,19 @@ package org.sunbird.kp.test.common;
 import com.consol.citrus.TestAction;
 import com.consol.citrus.context.TestContext;
 import com.consol.citrus.dsl.builder.HttpActionBuilder;
+import com.consol.citrus.dsl.builder.HttpClientActionBuilder;
 import com.consol.citrus.dsl.builder.HttpClientRequestActionBuilder;
 import com.consol.citrus.exceptions.CitrusRuntimeException;
 import com.consol.citrus.message.MessageType;
 import com.consol.citrus.validation.json.JsonMappingValidationCallback;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.commons.collections4.MapUtils;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.HttpStatus;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
+import org.testng.Assert;
 
 import javax.ws.rs.core.MediaType;
 import java.io.File;
@@ -27,6 +30,8 @@ import java.util.Scanner;
  * @author Kumar Gauraw
  */
 public class TestActionUtil {
+
+    private static ObjectMapper objectMapper = new ObjectMapper();
 
     /**
      *
@@ -300,6 +305,7 @@ public class TestActionUtil {
      * @param testName
      * @param responseCode
      * @param responseFile
+     * @param validationParams
      * @return
      */
     public static TestAction getResponse(
@@ -308,11 +314,43 @@ public class TestActionUtil {
             String testTemplateDir,
             String testName,
             HttpStatus responseCode,
-            String responseFile) {
-        if (StringUtils.isBlank(responseFile)) {
-            return getResponse(builder, endpointName, testName, responseCode);
+            String responseFile,
+            Map<String, Object> validationParams) {
+
+        if (MapUtils.isNotEmpty(validationParams)) {
+            HttpClientActionBuilder.HttpClientReceiveActionBuilder response = builder.client(Constant.KP_ENDPOINT).receive();
+            return response
+                    .response(responseCode)
+                    .validationCallback(
+                            new JsonMappingValidationCallback<Response>(Response.class, objectMapper) {
+                                @Override
+                                public void validate(
+                                        Response response, Map<String, Object> headers, TestContext context) {
+                                    System.out.println("Going With Dynamic Validation. | API Result : "+response.getResult());
+                                    System.out.println("Validation Params : "+validationParams);
+                                    Assert.assertEquals(response.getResponseCode().code(), responseCode.value());
+                                    for(String key : validationParams.keySet()){
+                                            Assert.assertTrue(response.getResult().containsKey(key));
+                                            System.out.println("Key Matched. Key = "+key+" | Value from Response = "+response.getResult().get(key));
+
+                                            if (null != validationParams.get(key)) {
+                                                System.out.println("Checking for Exact Value Match!");
+                                                Assert.assertEquals(validationParams.get(key), response.getResult().get(key));
+                                            } else {
+                                                System.out.println("Checking for Not Null!");
+                                                Assert.assertNotNull(response.getResult().get(key));
+                                            }
+
+                                    }
+                                }
+                            });
         }
 
+        if (MapUtils.isEmpty(validationParams) && StringUtils.isBlank(responseFile)) {
+            System.out.println("Dynamic/Static Validation Skipped. Only Response Code Will be Validated.");
+            return getResponse(builder, endpointName, testName, responseCode);
+        }
+        System.out.println("Going With Static Validation Against Response File!");
         String responseFilePath =
                 MessageFormat.format("{0}/{1}/{2}", testTemplateDir, testName, responseFile);
 

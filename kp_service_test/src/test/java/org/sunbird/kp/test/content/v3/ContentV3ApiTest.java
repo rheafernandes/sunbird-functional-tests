@@ -9,6 +9,7 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import javax.ws.rs.core.MediaType;
+import java.util.Map;
 
 /**
  * Content V3 API Tests
@@ -57,10 +58,10 @@ public class ContentV3ApiTest extends BaseCitrusTestRunner {
 
 
     @Test(dataProvider = "createResourceContentWithValidRequest")
-    @CitrusParameters({"testName", "requestUrl", "httpStatusCode", "userType"})
+    @CitrusParameters({"testName", "requestUrl", "httpStatusCode", "userType","valParams"})
     @CitrusTest
     public void testCreateResourceContentWithValidRequest(
-            String testName, String requestUrl, HttpStatus httpStatusCode, String userType) {
+            String testName, String requestUrl, HttpStatus httpStatusCode, String userType, Map<String, Object> valParams) {
         performPostTest(
                 this,
                 TEMPLATE_DIR,
@@ -71,6 +72,7 @@ public class ContentV3ApiTest extends BaseCitrusTestRunner {
                 MediaType.APPLICATION_JSON,
                 userType,
                 httpStatusCode,
+                valParams,
                 RESPONSE_JSON
         );
     }
@@ -79,14 +81,20 @@ public class ContentV3ApiTest extends BaseCitrusTestRunner {
     @DataProvider(name = "createResourceContentWithValidRequest")
     public Object[][] createResourceContentWithValidRequest() {
         return new Object[][]{
+                // Sample Request for Dynamic Validation.
+                // If validationParams Map Passed, Static Validation based on Response File Will be disabled.
+                /*new Object[]{
+                        TEST_CREATE_RESOURCE_PDF_CONTENT_WITH_VALID_REQUEST, APIUrl.CREATE_CONTENT, HttpStatus.OK, "Creator",
+                        new HashMap<String, Object>(){{put("node_id",null);put("versionKey",null);put("mimeType","application/pdf");}}
+                },*/
                 new Object[]{
-                        TEST_CREATE_RESOURCE_PDF_CONTENT_WITH_VALID_REQUEST, APIUrl.CREATE_CONTENT, HttpStatus.OK, "Creator"
+                        TEST_CREATE_RESOURCE_PDF_CONTENT_WITH_VALID_REQUEST, APIUrl.CREATE_CONTENT, HttpStatus.OK, "Creator",null
                 },
                 new Object[]{
-                        TEST_CREATE_RESOURCE_ECML_CONTENT_WITH_VALID_REQUEST, APIUrl.CREATE_CONTENT, HttpStatus.OK, "Creator"
+                        TEST_CREATE_RESOURCE_ECML_CONTENT_WITH_VALID_REQUEST, APIUrl.CREATE_CONTENT, HttpStatus.OK, "Creator",null
                 },
                 new Object[]{
-                        TEST_CREATE_RESOURCE_HTML_CONTENT_WITH_VALID_REQUEST, APIUrl.CREATE_CONTENT, HttpStatus.OK, "Creator"
+                        TEST_CREATE_RESOURCE_HTML_CONTENT_WITH_VALID_REQUEST, APIUrl.CREATE_CONTENT, HttpStatus.OK, "Creator",null
                 }
         };
     }
