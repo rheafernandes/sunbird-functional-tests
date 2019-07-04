@@ -38,6 +38,7 @@ public class BaseCitrusTestRunner extends TestNGCitrusTestRunner {
      * @param headers
      * @param userType
      * @param responseCode
+     * @param validationParams
      * @param responseJson
      */
     public void performGetTest(
@@ -48,6 +49,7 @@ public class BaseCitrusTestRunner extends TestNGCitrusTestRunner {
             Map<String, Object> headers,
             String userType,
             HttpStatus responseCode,
+            Map<String, Object> validationParams,
             String responseJson) {
         getTestCase().setName(testName);
         getAuthToken(runner, userType);
@@ -63,7 +65,7 @@ public class BaseCitrusTestRunner extends TestNGCitrusTestRunner {
         runner.http(
                 builder ->
                         TestActionUtil.getResponse(
-                                builder, Constant.KP_ENDPOINT, templateDir, testName, responseCode, responseJson));
+                                builder, Constant.KP_ENDPOINT, templateDir, testName, responseCode, responseJson, validationParams));
     }
 
     /**
@@ -77,6 +79,7 @@ public class BaseCitrusTestRunner extends TestNGCitrusTestRunner {
      * @param contentType
      * @param userType
      * @param responseCode
+     * @param validationParams
      * @param responseJson
      */
     public void performPostTest(
@@ -89,6 +92,7 @@ public class BaseCitrusTestRunner extends TestNGCitrusTestRunner {
             String contentType,
             String userType,
             HttpStatus responseCode,
+            Map<String, Object> validationParams,
             String responseJson) {
         getTestCase().setName(testName);
         getAuthToken(runner, userType);
@@ -104,11 +108,12 @@ public class BaseCitrusTestRunner extends TestNGCitrusTestRunner {
                                 contentType,
                                 getHeaders(headers)
                         ));
+            runner.http(
+                    builder ->
+                            TestActionUtil.getResponse(
+                                    builder, Constant.KP_ENDPOINT, templateDir, testName, responseCode, responseJson, validationParams));
 
-        runner.http(
-                builder ->
-                        TestActionUtil.getResponse(
-                                builder, Constant.KP_ENDPOINT, templateDir, testName, responseCode, responseJson));
+
     }
 
     /**
@@ -122,6 +127,7 @@ public class BaseCitrusTestRunner extends TestNGCitrusTestRunner {
      * @param contentType
      * @param userType
      * @param responseCode
+     * @param validationParams
      * @param responseJson
      */
     public void performPatchTest(
@@ -134,6 +140,7 @@ public class BaseCitrusTestRunner extends TestNGCitrusTestRunner {
             String contentType,
             String userType,
             HttpStatus responseCode,
+            Map<String, Object> validationParams,
             String responseJson) {
         getTestCase().setName(testName);
         getAuthToken(runner, userType);
@@ -152,7 +159,7 @@ public class BaseCitrusTestRunner extends TestNGCitrusTestRunner {
         runner.http(
                 builder ->
                         TestActionUtil.getResponse(
-                                builder, Constant.KP_ENDPOINT, templateDir, testName, responseCode, responseJson));
+                                builder, Constant.KP_ENDPOINT, templateDir, testName, responseCode, responseJson, validationParams));
     }
 
     /**
@@ -166,6 +173,7 @@ public class BaseCitrusTestRunner extends TestNGCitrusTestRunner {
      * @param contentType
      * @param userType
      * @param responseCode
+     * @param validationParams
      * @param responseJson
      */
     public void performDeleteTest(
@@ -178,6 +186,7 @@ public class BaseCitrusTestRunner extends TestNGCitrusTestRunner {
             String contentType,
             String userType,
             HttpStatus responseCode,
+            Map<String, Object> validationParams,
             String responseJson) {
         getTestCase().setName(testName);
         getAuthToken(runner, userType);
@@ -196,7 +205,7 @@ public class BaseCitrusTestRunner extends TestNGCitrusTestRunner {
         runner.http(
                 builder ->
                         TestActionUtil.getResponse(
-                                builder, Constant.KP_ENDPOINT, templateDir, testName, responseCode, responseJson));
+                                builder, Constant.KP_ENDPOINT, templateDir, testName, responseCode, responseJson, validationParams));
     }
 
     /**
@@ -209,6 +218,7 @@ public class BaseCitrusTestRunner extends TestNGCitrusTestRunner {
      * @param requestFile
      * @param userType
      * @param responseCode
+     * @param validationParams
      * @param responseJson
      */
     public void performMultipartTest(
@@ -218,6 +228,7 @@ public class BaseCitrusTestRunner extends TestNGCitrusTestRunner {
             String requestUrl,
             Map<String, Object> headers, String requestFile,
             String userType, HttpStatus responseCode,
+            Map<String, Object> validationParams,
             String responseJson) {
         getTestCase().setName(testName);
         getAuthToken(runner, userType);
@@ -237,7 +248,7 @@ public class BaseCitrusTestRunner extends TestNGCitrusTestRunner {
         runner.http(
                 builder ->
                         TestActionUtil.getResponse(
-                                builder, Constant.KP_ENDPOINT, templateDir, testName, responseCode, responseJson));
+                                builder, Constant.KP_ENDPOINT, templateDir, testName, responseCode, responseJson, validationParams));
     }
 
     /**
@@ -290,6 +301,5 @@ public class BaseCitrusTestRunner extends TestNGCitrusTestRunner {
             headers.put(Constant.X_AUTHENTICATED_USER_TOKEN, "${accessToken}");
         return headers;
     }
-
 
 }
