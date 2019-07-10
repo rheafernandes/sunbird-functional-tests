@@ -62,6 +62,7 @@ public class ContentV3ApiTest extends BaseCitrusTestRunner {
     @CitrusTest
     public void testCreateResourceContentWithValidRequest(
             String testName, String requestUrl, HttpStatus httpStatusCode, String userType, Map<String, Object> valParams) {
+        getAuthToken(this, userType);
         performPostTest(
                 this,
                 TEMPLATE_DIR,
@@ -70,7 +71,6 @@ public class ContentV3ApiTest extends BaseCitrusTestRunner {
                 null,
                 REQUEST_JSON,
                 MediaType.APPLICATION_JSON,
-                userType,
                 httpStatusCode,
                 valParams,
                 RESPONSE_JSON

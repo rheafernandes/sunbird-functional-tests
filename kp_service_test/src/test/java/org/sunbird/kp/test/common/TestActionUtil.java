@@ -449,4 +449,100 @@ public class TestActionUtil {
         return value;
     }
 
+    /**
+     *
+     * @param builder
+     * @param endPointName
+     * @param url
+     * @param contentType
+     * @param payload
+     * @param headers
+     * @return
+     */
+    public static TestAction getPostRequestTestAction(
+            HttpActionBuilder builder,
+            String endPointName,
+            String url,
+            String contentType,
+            String payload,
+            Map<String, Object> headers) {
+        HttpClientRequestActionBuilder requestActionBuilder = builder.client(endPointName).send().post(url).messageType(MessageType.JSON);
+        addHeaders(requestActionBuilder, headers);
+        requestActionBuilder.contentType(contentType);
+        requestActionBuilder.payload(payload);
+        return requestActionBuilder;
+    }
+
+    /**
+     *
+     * @param builder
+     * @param endPointName
+     * @param url
+     * @param contentType
+     * @param payload
+     * @param headers
+     * @return
+     */
+    public static TestAction getPutRequestTestAction(
+            HttpActionBuilder builder,
+            String endPointName,
+            String url,
+            String contentType,
+            String payload,
+            Map<String, Object> headers) {
+        HttpClientRequestActionBuilder requestActionBuilder = builder.client(endPointName).send().put(url).messageType(MessageType.JSON);
+        addHeaders(requestActionBuilder, headers);
+        requestActionBuilder.contentType(contentType);
+        requestActionBuilder.payload(payload);
+        return requestActionBuilder;
+    }
+
+    /**
+     *
+     * @param builder
+     * @param endPointName
+     * @param url
+     * @param contentType
+     * @param payload
+     * @param headers
+     * @return
+     */
+    public static TestAction getPatchRequestTestAction(
+            HttpActionBuilder builder,
+            String endPointName,
+            String url,
+            String contentType,
+            String payload,
+            Map<String, Object> headers) {
+        HttpClientRequestActionBuilder requestActionBuilder = builder.client(endPointName).send().patch(url).messageType(MessageType.JSON);
+        addHeaders(requestActionBuilder, headers);
+        requestActionBuilder.contentType(contentType);
+        requestActionBuilder.payload(payload);
+        return requestActionBuilder;
+    }
+
+    /**
+     *
+     * @param builder
+     * @param endPointName
+     * @param url
+     * @param contentType
+     * @param payload
+     * @param headers
+     * @return
+     */
+    public static TestAction getDeleteRequestTestAction(
+            HttpActionBuilder builder,
+            String endPointName,
+            String url,
+            String contentType,
+            String payload,
+            Map<String, Object> headers) {
+        HttpClientRequestActionBuilder requestActionBuilder = builder.client(endPointName).send().delete(url).messageType(MessageType.JSON);
+        addHeaders(requestActionBuilder, headers);
+        requestActionBuilder.contentType(contentType);
+        requestActionBuilder.payload(payload);
+        return requestActionBuilder;
+    }
+
 }
