@@ -27,5 +27,8 @@ public class Constant {
     public static final String RESPONSE_JSON = "response.json";
     public static final String EQUAL_SIGN = "=";
 
+    public static final int ES_SYNC_WAIT_TIME = 5000;
+    public static final int PUBLISH_WAIT_TIME = 10000;
+
 
 }

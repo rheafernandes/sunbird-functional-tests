@@ -36,7 +36,6 @@ public class BaseCitrusTestRunner extends TestNGCitrusTestRunner {
      * @param testName
      * @param requestUrl
      * @param headers
-     * @param userType
      * @param responseCode
      * @param validationParams
      * @param responseJson
@@ -47,12 +46,10 @@ public class BaseCitrusTestRunner extends TestNGCitrusTestRunner {
             String testName,
             String requestUrl,
             Map<String, Object> headers,
-            String userType,
             HttpStatus responseCode,
             Map<String, Object> validationParams,
             String responseJson) {
         getTestCase().setName(testName);
-        getAuthToken(runner, userType);
         runner.http(
                 builder ->
                         TestActionUtil.processGetRequest(
@@ -77,7 +74,6 @@ public class BaseCitrusTestRunner extends TestNGCitrusTestRunner {
      * @param headers
      * @param requestJson
      * @param contentType
-     * @param userType
      * @param responseCode
      * @param validationParams
      * @param responseJson
@@ -90,12 +86,10 @@ public class BaseCitrusTestRunner extends TestNGCitrusTestRunner {
             Map<String, Object> headers,
             String requestJson,
             String contentType,
-            String userType,
             HttpStatus responseCode,
             Map<String, Object> validationParams,
             String responseJson) {
         getTestCase().setName(testName);
-        getAuthToken(runner, userType);
         runner.http(
                 builder ->
                         TestActionUtil.processPostRequest(
@@ -125,7 +119,6 @@ public class BaseCitrusTestRunner extends TestNGCitrusTestRunner {
      * @param headers
      * @param requestJson
      * @param contentType
-     * @param userType
      * @param responseCode
      * @param validationParams
      * @param responseJson
@@ -138,12 +131,10 @@ public class BaseCitrusTestRunner extends TestNGCitrusTestRunner {
             Map<String, Object> headers,
             String requestJson,
             String contentType,
-            String userType,
             HttpStatus responseCode,
             Map<String, Object> validationParams,
             String responseJson) {
         getTestCase().setName(testName);
-        getAuthToken(runner, userType);
         runner.http(
                 builder ->
                         TestActionUtil.processPatchRequest(
@@ -171,7 +162,6 @@ public class BaseCitrusTestRunner extends TestNGCitrusTestRunner {
      * @param headers
      * @param requestJson
      * @param contentType
-     * @param userType
      * @param responseCode
      * @param validationParams
      * @param responseJson
@@ -184,12 +174,10 @@ public class BaseCitrusTestRunner extends TestNGCitrusTestRunner {
             Map<String, Object> headers,
             String requestJson,
             String contentType,
-            String userType,
             HttpStatus responseCode,
             Map<String, Object> validationParams,
             String responseJson) {
         getTestCase().setName(testName);
-        getAuthToken(runner, userType);
         runner.http(
                 builder ->
                         TestActionUtil.processDeleteRequest(
@@ -216,7 +204,6 @@ public class BaseCitrusTestRunner extends TestNGCitrusTestRunner {
      * @param requestUrl
      * @param headers
      * @param requestFile
-     * @param userType
      * @param responseCode
      * @param validationParams
      * @param responseJson
@@ -227,11 +214,10 @@ public class BaseCitrusTestRunner extends TestNGCitrusTestRunner {
             String testName,
             String requestUrl,
             Map<String, Object> headers, String requestFile,
-            String userType, HttpStatus responseCode,
+            HttpStatus responseCode,
             Map<String, Object> validationParams,
             String responseJson) {
         getTestCase().setName(testName);
-        getAuthToken(runner, userType);
         runner.http(
                 builder ->
                         TestActionUtil.processMultipartRequest(
