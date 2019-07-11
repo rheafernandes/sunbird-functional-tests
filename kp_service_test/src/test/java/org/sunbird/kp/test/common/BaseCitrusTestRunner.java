@@ -17,7 +17,7 @@ import java.util.Map;
 public class BaseCitrusTestRunner extends TestNGCitrusTestRunner {
 
     @Autowired
-    protected TestContext testContext;
+    public TestContext testContext;
 
     public static final String REQUEST_FORM_DATA = "request.params";
     public static final String REQUEST_JSON = "request.json";

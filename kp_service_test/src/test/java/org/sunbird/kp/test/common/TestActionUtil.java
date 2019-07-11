@@ -21,8 +21,11 @@ import javax.ws.rs.core.MediaType;
 import java.io.File;
 import java.io.IOException;
 import java.text.MessageFormat;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 /**
  * Utility Class which perform rest calls
@@ -32,6 +35,7 @@ import java.util.Scanner;
 public class TestActionUtil {
 
     private static ObjectMapper objectMapper = new ObjectMapper();
+    private static List<String> objectTypes = Arrays.asList("content","framework","assessment","dialcode","definition","concept");
 
     /**
      *
@@ -318,6 +322,8 @@ public class TestActionUtil {
             Map<String, Object> validationParams) {
 
         if (MapUtils.isNotEmpty(validationParams)) {
+            String path = objectTypes.stream().filter(x->testTemplateDir.toLowerCase().contains(x)).collect(Collectors.toList()).get(0);
+            System.out.println("path : "+path);
             HttpClientActionBuilder.HttpClientReceiveActionBuilder response = builder.client(Constant.KP_ENDPOINT).receive();
             return response
                     .response(responseCode)
@@ -329,16 +335,17 @@ public class TestActionUtil {
                                     System.out.println("Going With Dynamic Validation. | API Result : "+response.getResult());
                                     System.out.println("Validation Params : "+validationParams);
                                     Assert.assertEquals(response.getResponseCode().code(), responseCode.value());
+                                    Map<String, Object> result = (Map<String, Object>) response.getResult().get(path);
                                     for(String key : validationParams.keySet()){
-                                            Assert.assertTrue(response.getResult().containsKey(key));
-                                            System.out.println("Key Matched. Key = "+key+" | Value from Response = "+response.getResult().get(key));
+                                            Assert.assertTrue(result.containsKey(key));
+                                            System.out.println("Key Matched. Key = "+key+" | Value from Response = "+result.get(key));
 
                                             if (null != validationParams.get(key)) {
                                                 System.out.println("Checking for Exact Value Match!");
-                                                Assert.assertEquals(validationParams.get(key), response.getResult().get(key));
+                                                Assert.assertEquals(validationParams.get(key), result.get(key));
                                             } else {
                                                 System.out.println("Checking for Not Null!");
-                                                Assert.assertNotNull(response.getResult().get(key));
+                                                Assert.assertNotNull(result.get(key));
                                             }
 
                                     }
@@ -409,8 +416,7 @@ public class TestActionUtil {
                         new JsonMappingValidationCallback<Map>(Map.class, mapper) {
                             @Override
                             public void validate(Map response, Map<String, Object> headers, TestContext context) {
-                                String extractValue =
-                                        (String) context.getVariables().getOrDefault(extractVariable, extractVariable);
+                                Object extractValue = context.getVariables().get(extractVariable);
                                 testContext.getVariables().put(extractVariable, extractValue);
                                 System.out.println("extractVariable = " + extractValue);
                             }
