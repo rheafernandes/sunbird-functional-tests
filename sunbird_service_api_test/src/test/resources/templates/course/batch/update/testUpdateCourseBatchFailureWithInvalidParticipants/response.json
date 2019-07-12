@@ -7,7 +7,7 @@
         "msgid": "@ignore@",
         "err": "DATA_TYPE_ERROR",
         "status": "DATA_TYPE_ERROR",
-        "errmsg": "participants data type should be of Array."
+        "errmsg": "Data type of participants should be Array."
     },
     "responseCode": "CLIENT_ERROR",
     "result": {}

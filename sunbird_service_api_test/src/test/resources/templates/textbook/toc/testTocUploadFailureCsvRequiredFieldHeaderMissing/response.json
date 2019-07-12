@@ -5,8 +5,8 @@
     "params": {
         "resmsgid": null,
         "msgid": "@ignore@",
-        "err": "REQUIRED_FIELD_MISSING",
-        "status": "REQUIRED_FIELD_MISSING",
+        "err": "MANDATORY_HEADER_MISSING",
+        "status": "MANDATORY_HEADER_MISSING",
         "errmsg": "@ignore@"
     },
     "responseCode": "CLIENT_ERROR",
