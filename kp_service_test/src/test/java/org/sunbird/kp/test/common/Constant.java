@@ -30,7 +30,7 @@ public class Constant {
     public static final String CONTENT_TYPE_RESOURCE="Resource";
     public static final String CONTENT_TYPE_PLUGIN="Plugin";
     public static final String CONTENT_TYPE_COLLECTION="Collection";
-    public static final String MEDIA_TYPE_CONTENT="Content";
+
 
     public static final int ES_SYNC_WAIT_TIME = 5000;
     public static final int PUBLISH_WAIT_TIME = 10000;
