@@ -1,0 +1,13 @@
+{
+  "request": {
+    "content": {
+      "identifier": "KP_FT_${idVal}",
+      "name": "KP Integration Test Collection Content",
+      "description": "KP Integration Test Collection Content",
+      "code": "${codeVal}",
+      "mimeType": "application/vnd.ekstep.content-collection",
+      "contentType": "${contentTypeVal}",
+      "mediaType": "content"
+    }
+  }
+}

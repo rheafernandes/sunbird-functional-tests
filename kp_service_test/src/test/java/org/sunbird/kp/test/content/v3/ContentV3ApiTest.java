@@ -49,8 +49,7 @@ public class ContentV3ApiTest extends BaseCitrusTestRunner {
     public void testReadResourceContent(
             String testName, String requestUrl, HttpStatus httpStatusCode, String userType, Map<String, Object> valParams, String mimeType) {
         getAuthToken(this, userType);
-        String contentId = (String)ContentUtil.createContent(this, null, mimeType, null).get("content_id");
-        System.out.println("contentId : "+contentId);
+        String contentId = (String)ContentUtil.createResourceContent(this, null, mimeType, null).get("content_id");
         performGetTest(
                 this,
                 TEMPLATE_DIR,

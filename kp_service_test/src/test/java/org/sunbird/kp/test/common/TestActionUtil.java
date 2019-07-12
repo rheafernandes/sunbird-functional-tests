@@ -273,6 +273,10 @@ public class TestActionUtil {
             while (scanner.hasNext()) {
                 String[] param = scanner.nextLine().split(Constant.EQUAL_SIGN);
                 if (param != null && param.length == 2) {
+                    if(StringUtils.equals("fileNameValue",param[1])){
+                        param[1] = context.getVariable("fileNameValue");
+                        System.out.println("fileNameValue : "+context.getVariable("fileNameValue"));
+                    }
                     if (param[0].equalsIgnoreCase(Constant.MULTIPART_FILE_NAME)) {
                         formData.add(
                                 Constant.MULTIPART_FILE_NAME,
