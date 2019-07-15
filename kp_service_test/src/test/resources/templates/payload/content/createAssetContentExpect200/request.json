@@ -1,0 +1,13 @@
+{
+  "request": {
+    "content": {
+      "identifier": "KP_FT_${idVal}",
+      "name": "KP Integration Test Asset",
+      "description": "KP Integration Test Asset",
+      "code": "${codeVal}",
+      "mimeType": "${mimeTypeVal}",
+      "contentType": "Asset",
+      "mediaType": "${mediaTypeVal}"
+    }
+  }
+}
