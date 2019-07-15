@@ -6,6 +6,8 @@ package org.sunbird.kp.test.content.v3;
  */
 public class ContentV3Scenario {
 
+    //Scenario's for Content Create API
+
     //Resource
     public static final String TEST_CREATE_RESOURCE_PDF_CONTENT_WITH_VALID_REQUEST =
             "testCreateResourcePdfContentWithValidRequest";
@@ -39,7 +41,7 @@ public class ContentV3Scenario {
             "testCreateAssetImagePngContentWithValidRequest";
 
 
-    // Content Read API
+    // Scenario's for Content Read API
     public static final String TEST_READ_RESOURCE_CONTENT_WITH_VALID_IDENTIFIER =
             "testReadResourceContentWithValidIdentifier";
     public static final String TEST_READ_RESOURCE_CONTENT_WITH_INVALID_IDENTIFIER =
