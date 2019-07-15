@@ -11,6 +11,7 @@ public class APIUrl {
     public static final String CREATE_CONTENT = "/content/v3/create";
     public static final String READ_CONTENT = "/content/v3/read/";
     public static final String UPLOAD_CONTENT = "/content/v3/upload/";
+    public static final String UPDATE_CONTENT = "/content/v3/update/";
     public static final String REVIEW_CONTENT = "/content/v3/review/";
     public static final String PUBLIC_PUBLISH_CONTENT = "/content/v3/publish/";
     public static final String UNLISTED_PUBLISH_CONTENT = "/content/v3/unlisted/publish/";
