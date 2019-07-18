@@ -18,7 +18,7 @@ public class BaseCitrusTestRunner extends TestNGCitrusTestRunner {
 
     @Autowired
     public TestContext testContext;
-
+    public static final String IMAGE_SUFFIX = ".img";
     public static final String REQUEST_FORM_DATA = "request.params";
     public static final String REQUEST_JSON = "request.json";
     public static final String RESPONSE_JSON = "response.json";

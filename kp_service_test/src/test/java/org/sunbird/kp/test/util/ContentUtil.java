@@ -29,21 +29,27 @@ public class ContentUtil {
     private static final String CONTENT_PAYLOAD_DIR = "templates/payload/content";
 
     //static payload
-    private static final String CREATE_RESOURCE_CONTENT_EXPECT_200 = "createResourceContentExpect200";
-    private static final String UPLOAD_RESOURCE_CONTENT_EXPECT_200 = "uploadResourceContentExpect200";
-    private static final String CREATE_ASSET_CONTENT_EXPECT_200 = "createAssetContentExpect200";
-    private static final String UPLOAD_ASSET_CONTENT_EXPECT_200 = "uploadAssetContentExpect200";
-    private static final String CREATE_COLLECTION_CONTENT_EXPECT_200 = "createCollectionContentExpect200";
+    protected static final String CREATE_RESOURCE_CONTENT_EXPECT_200 = "createResourceContentExpect200";
+    protected static final String UPLOAD_RESOURCE_CONTENT_EXPECT_200 = "uploadResourceContentExpect200";
+    protected static final String CREATE_ASSET_CONTENT_EXPECT_200 = "createAssetContentExpect200";
+    protected static final String UPLOAD_ASSET_CONTENT_EXPECT_200 = "uploadAssetContentExpect200";
+    protected static final String CREATE_COLLECTION_CONTENT_EXPECT_200 = "createCollectionContentExpect200";
+    protected static final String REVIEW_RESOURCE_CONTENT_EXPECT_200 = "reviewResourceContentExpect200";
+    protected static final String UPDATE_RESOURCE_CONTENT_EXPECT_200 = "updateResourceContentExpect200";
+    protected static final String PUBLISH_CONTENT_EXPECT_200 = "publishContentExpect200";
+
+
 
 
     public static Map<String, Object> createResourceContent(BaseCitrusTestRunner runner, String payload, String mimeType, Map<String, Object> headers) {
         String contentId = "KP_FT_12345";
         String versionKey = "12345";
+        String blankContentId = "";
         Map<String, Object> data = new HashMap<String, Object>();
 
         if (StringUtils.isNotBlank(payload)) {
             return createContent(runner, runner.testContext, payload, null, headers);
-        } else if (StringUtils.isNotBlank(mimeType)) {
+        } else if (StringUtils.isNotBlank(mimeType) && !StringUtils.equals("kp-blank",mimeType)) {
             switch (mimeType.toLowerCase()) {
                 case "application/pdf": {
                     runner.variable("idVal", String.valueOf(System.currentTimeMillis()));
@@ -82,11 +88,10 @@ public class ContentUtil {
                     runner.variable("mimeTypeVal", mimeType);
                     break;
                 }
-
             }
             return createContent(runner, runner.testContext, null, CREATE_RESOURCE_CONTENT_EXPECT_200, headers);
         }
-        data.put("content_id", contentId);
+        data.put("content_id", StringUtils.equals("kp-blank", mimeType) ? blankContentId : contentId);
         data.put("versionKey", versionKey);
         return data;
     }
@@ -99,57 +104,25 @@ public class ContentUtil {
         if (StringUtils.isNotBlank(payload)) {
             return createContent(runner, runner.testContext, payload, null, headers);
         } else if (StringUtils.isNotBlank(mimeType)) {
-            switch (mimeType.toLowerCase()) {
-                case "image/jpeg": {
-                    runner.variable("idVal", String.valueOf(System.currentTimeMillis()));
-                    runner.variable("codeVal", "kp.ft.asset.jpeg");
-                    runner.variable("mimeTypeVal", mimeType);
-                    runner.variable("mediaTypeVal", "image");
+            runner.variable("idVal", String.valueOf(System.currentTimeMillis()));
+            runner.variable("mimeTypeVal", mimeType);
+            String[] mimeTypeArray = mimeType.toLowerCase().split("/");
+            switch (mimeTypeArray[0]) {
+                case "image": {
+                    runner.variable("codeVal", "kp.ft.asset." + mimeTypeArray[1]);
+                    runner.variable("mediaTypeVal", mimeTypeArray[0]);
                     break;
                 }
-                case "image/png": {
-                    runner.variable("idVal", String.valueOf(System.currentTimeMillis()));
-                    runner.variable("codeVal", "kp.ft.asset.png");
-                    runner.variable("mimeTypeVal", mimeType);
-                    runner.variable("mediaTypeVal", "image");
+                case "video": {
+                    runner.variable("codeVal", "kp.ft.asset." + mimeTypeArray[1]);
+                    runner.variable("mediaTypeVal", mimeTypeArray[0]);
                     break;
                 }
-                case "image/jpg": {
-                    runner.variable("idVal", String.valueOf(System.currentTimeMillis()));
-                    runner.variable("codeVal", "kp.ft.asset.jpg");
-                    runner.variable("mimeTypeVal", mimeType);
-                    runner.variable("mediaTypeVal", "image");
+                case "audio": {
+                    runner.variable("codeVal", "kp.ft.asset." + mimeTypeArray[1]);
+                    runner.variable("mediaTypeVal", mimeTypeArray[0]);
                     break;
                 }
-                case "video/mp4": {
-                    runner.variable("idVal", String.valueOf(System.currentTimeMillis()));
-                    runner.variable("codeVal", "kp.ft.asset.mp4");
-                    runner.variable("mimeTypeVal", mimeType);
-                    runner.variable("mediaTypeVal", "video");
-                    break;
-                }
-                case "video/webm": {
-                    runner.variable("idVal", String.valueOf(System.currentTimeMillis()));
-                    runner.variable("codeVal", "kp.ft.asset.webm");
-                    runner.variable("mimeTypeVal", mimeType);
-                    runner.variable("mediaTypeVal", "video");
-                    break;
-                }
-                case "video/mpeg": {
-                    runner.variable("idVal", String.valueOf(System.currentTimeMillis()));
-                    runner.variable("codeVal", "kp.ft.asset.mpeg");
-                    runner.variable("mimeTypeVal", mimeType);
-                    runner.variable("mediaTypeVal", "video");
-                    break;
-                }
-                case "audio/mp3": {
-                    runner.variable("idVal", String.valueOf(System.currentTimeMillis()));
-                    runner.variable("codeVal", "kp.ft.asset.mp3");
-                    runner.variable("mimeTypeVal", mimeType);
-                    runner.variable("mediaTypeVal", "audio");
-                    break;
-                }
-
             }
             return createContent(runner, runner.testContext, null, CREATE_ASSET_CONTENT_EXPECT_200, headers);
         }
@@ -166,27 +139,24 @@ public class ContentUtil {
         if (StringUtils.isNotBlank(payload)) {
             return createContent(runner, runner.testContext, payload, null, headers);
         } else if (StringUtils.isNotBlank(collectionType)) {
+            runner.variable("idVal", String.valueOf(System.currentTimeMillis()));
             switch (collectionType.toLowerCase()) {
                 case "collection": {
-                    runner.variable("idVal", String.valueOf(System.currentTimeMillis()));
                     runner.variable("codeVal", "kp.ft.collection."+collectionType.toLowerCase());
                     runner.variable("contentTypeVal", StringUtils.capitalize(collectionType));
                     break;
                 }
                 case "textbook": {
-                    runner.variable("idVal", String.valueOf(System.currentTimeMillis()));
                     runner.variable("codeVal", "kp.ft.collection."+collectionType.toLowerCase());
                     runner.variable("contentTypeVal", StringUtils.capitalize(collectionType));
                     break;
                 }
                 case "course": {
-                    runner.variable("idVal", String.valueOf(System.currentTimeMillis()));
                     runner.variable("codeVal", "kp.ft.collection."+collectionType.toLowerCase());
                     runner.variable("contentTypeVal", StringUtils.capitalize(collectionType));
                     break;
                 }
                 case "lessonplan": {
-                    runner.variable("idVal", String.valueOf(System.currentTimeMillis()));
                     runner.variable("codeVal", "kp.ft.collection."+collectionType.toLowerCase());
                     runner.variable("contentTypeVal", StringUtils.capitalize(collectionType));
                     break;
@@ -371,8 +341,9 @@ public class ContentUtil {
         return data;
     }
 
-    public static void publishContent(BaseCitrusTestRunner runner,  TestContext testContext, String payload, String testName, String publishType, String contentId, Map<String, Object> headers) {
+    public static Map<String, Object> publishContent(BaseCitrusTestRunner runner, String payload, String publishType, String contentId, Map<String, Object> headers) {
         final String url = StringUtils.equalsIgnoreCase("unlisted",publishType.toLowerCase())?(APIUrl.UNLISTED_PUBLISH_CONTENT + contentId) : (APIUrl.PUBLIC_PUBLISH_CONTENT + contentId);
+        final TestContext testContext = runner.testContext;
         if (StringUtils.isNotBlank(payload)) {
             runner.http(
                     builder ->
@@ -383,10 +354,165 @@ public class ContentUtil {
                                     MediaType.APPLICATION_JSON.toString(),
                                     payload,
                                     getHeaders(headers)));
+        } else {
+            runner.getTestCase().setName(PUBLISH_CONTENT_EXPECT_200);
             runner.http(
-                    builder ->TestActionUtil.getResponse(
-                    builder, Constant.KP_ENDPOINT, "", "publishContent", HttpStatus.OK, "", null));
+                    builder ->
+                            TestActionUtil.processPostRequest(
+                                    builder,
+                                    Constant.KP_ENDPOINT,
+                                    CONTENT_PAYLOAD_DIR,
+                                    PUBLISH_CONTENT_EXPECT_200,
+                                    url,
+                                    Constant.REQUEST_JSON,
+                                    Constant.CONTENT_TYPE_APPLICATION_JSON,
+                                    getHeaders(headers)));
         }
+        runner.http(
+                builder ->TestActionUtil.getResponse(
+                        builder, Constant.KP_ENDPOINT, "", PUBLISH_CONTENT_EXPECT_200, HttpStatus.OK, "", null));
+        runner.http(
+                builder ->
+                        TestActionUtil.getExtractFromResponseTestAction(
+                                testContext,
+                                builder,
+                                Constant.KP_ENDPOINT,
+                                HttpStatus.OK,
+                                "$.result",
+                                "result"));
+        Map<String, Object> result = null;
+        try {
+            result = objectMapper.readValue(testContext.getVariable("result"), new TypeReference<Map<String, Object>>() {});
+        } catch (Exception e) {
+            System.out.println("Exception Occurred While parsing context variable : " + e);
+        }
+        Map<String, Object> data = new HashMap<String, Object>();
+        if (MapUtils.isNotEmpty(result))
+            data.put("content_id", result.get("node_id"));
+        runner.sleep(Constant.PUBLISH_WAIT_TIME);
+        return data;
+    }
+
+    /**
+     * This method can review content with a static payload.
+     * TODO: NEED TO ADD FOR DYNAMIC PAYLOAD
+     * @param runner
+     * @param payload
+     * @param testName
+     * @param contentId
+     * @param headers
+     * @return
+     */
+
+    public static Map<String, Object> reviewContent(BaseCitrusTestRunner runner, String payload, String testName, String contentId, Map<String, Object> headers) {
+        final TestContext testContext = runner.testContext;
+        final String url = APIUrl.REVIEW_CONTENT + contentId;
+        if (StringUtils.isNotBlank(payload)) {
+            runner.http(
+                    builder ->
+                            TestActionUtil.getPostRequestTestAction(
+                                    builder,
+                                    Constant.KP_ENDPOINT,
+                                    url,
+                                    MediaType.APPLICATION_JSON.toString(),
+                                    payload,
+                                    getHeaders(headers)));
+        } else if (StringUtils.isNotBlank(testName)) {
+            runner.getTestCase().setName(testName);
+            runner.http(
+                    builder ->
+                            TestActionUtil.processPostRequest(
+                                    builder,
+                                    Constant.KP_ENDPOINT,
+                                    CONTENT_PAYLOAD_DIR,
+                                    testName,
+                                    url,
+                                    Constant.REQUEST_JSON,
+                                    Constant.CONTENT_TYPE_APPLICATION_JSON,
+                                    getHeaders(headers)));
+        }
+
+        runner.http(
+                builder ->
+                        TestActionUtil.getExtractFromResponseTestAction(
+                                testContext,
+                                builder,
+                                Constant.KP_ENDPOINT,
+                                HttpStatus.OK,
+                                "$.result",
+                                "result"));
+        Map<String, Object> result = null;
+        try {
+            result = objectMapper.readValue(testContext.getVariable("result"), new TypeReference<Map<String, Object>>() {});
+        } catch (Exception e) {
+            System.out.println("Exception Occurred While parsing context variable : " + e);
+        }
+        Map<String, Object> data = new HashMap<String, Object>();
+        if (MapUtils.isNotEmpty(result))
+            data.put("content_id", result.get("node_id"));
+
+        return data;
+    }
+
+    /**
+     * This method can update content with static payload
+     * TODO: Need to add dynamic payload
+     * @param runner
+     * @param payload
+     * @param testName
+     * @param contentId
+     * @param headers
+     * @return
+     */
+    public static Map<String, Object> updateContent(BaseCitrusTestRunner runner, String payload, String testName, String contentId, Map<String, Object> headers) {
+        final String url = APIUrl.UPDATE_CONTENT + contentId;
+        final TestContext testContext = runner.testContext;
+        if (StringUtils.isNotBlank(payload)) {
+            runner.http(
+                    builder ->
+                            TestActionUtil.getPatchRequestTestAction(
+                                    builder,
+                                    Constant.KP_ENDPOINT,
+                                    url,
+                                    MediaType.APPLICATION_JSON.toString(),
+                                    payload,
+                                    getHeaders(headers)));
+        } else if (StringUtils.isNotBlank(testName)) {
+            runner.getTestCase().setName(testName);
+            runner.http(
+                    builder ->
+                            TestActionUtil.processPatchRequest(
+                                    builder,
+                                    Constant.KP_ENDPOINT,
+                                    CONTENT_PAYLOAD_DIR,
+                                    testName,
+                                    url,
+                                    Constant.REQUEST_JSON,
+                                    Constant.CONTENT_TYPE_APPLICATION_JSON,
+                                    getHeaders(headers)));
+        }
+
+        runner.http(
+                builder ->
+                        TestActionUtil.getExtractFromResponseTestAction(
+                                testContext,
+                                builder,
+                                Constant.KP_ENDPOINT,
+                                HttpStatus.OK,
+                                "$.result",
+                                "result"));
+        Map<String, Object> result = null;
+        try {
+            result = objectMapper.readValue(testContext.getVariable("result"), new TypeReference<Map<String, Object>>() {});
+        } catch (Exception e) {
+            System.out.println("Exception Occurred While parsing context variable : " + e);
+        }
+        Map<String, Object> data = new HashMap<String, Object>();
+        if (MapUtils.isNotEmpty(result)) {
+            data.put("content_id", result.get("node_id"));
+            data.put("versionKey", result.get("versionKey"));
+        }
+        return data;
     }
 
     /**
