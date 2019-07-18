@@ -3,6 +3,7 @@ package org.sunbird.kp.test.util;
 import com.consol.citrus.context.TestContext;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.collections4.MapUtils;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.http.HttpStatus;
@@ -13,8 +14,11 @@ import org.sunbird.kp.test.common.BaseCitrusTestRunner;
 import org.sunbird.kp.test.common.Constant;
 import org.sunbird.kp.test.common.TestActionUtil;
 
+import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.function.Supplier;
 
 /**
  * Utility Class for Content API Test
@@ -29,22 +33,72 @@ public class ContentUtil {
     private static final String CONTENT_PAYLOAD_DIR = "templates/payload/content";
 
     //static payload
-    protected static final String CREATE_RESOURCE_CONTENT_EXPECT_200 = "createResourceContentExpect200";
-    protected static final String UPLOAD_RESOURCE_CONTENT_EXPECT_200 = "uploadResourceContentExpect200";
-    protected static final String CREATE_ASSET_CONTENT_EXPECT_200 = "createAssetContentExpect200";
-    protected static final String UPLOAD_ASSET_CONTENT_EXPECT_200 = "uploadAssetContentExpect200";
-    protected static final String CREATE_COLLECTION_CONTENT_EXPECT_200 = "createCollectionContentExpect200";
-    protected static final String REVIEW_RESOURCE_CONTENT_EXPECT_200 = "reviewResourceContentExpect200";
-    protected static final String UPDATE_RESOURCE_CONTENT_EXPECT_200 = "updateResourceContentExpect200";
-    protected static final String PUBLISH_CONTENT_EXPECT_200 = "publishContentExpect200";
+    private static final String CREATE_RESOURCE_CONTENT_EXPECT_200 = "createResourceContentExpect200";
+    private static final String UPLOAD_RESOURCE_CONTENT_EXPECT_200 = "uploadResourceContentExpect200";
+    private static final String CREATE_ASSET_CONTENT_EXPECT_200 = "createAssetContentExpect200";
+    private static final String UPLOAD_ASSET_CONTENT_EXPECT_200 = "uploadAssetContentExpect200";
+    private static final String CREATE_COLLECTION_CONTENT_EXPECT_200 = "createCollectionContentExpect200";
+    private static final String REVIEW_RESOURCE_CONTENT_EXPECT_200 = "reviewResourceContentExpect200";
+    private static final String UPDATE_RESOURCE_CONTENT_EXPECT_200 = "updateResourceContentExpect200";
+    private static final String PUBLISH_CONTENT_EXPECT_200 = "publishContentExpect200";
 
+    private static final ObjectMapper mapper = new ObjectMapper();
+
+    // TODO: Add all the workflows for all test objects possible (Of Resource Type and Collection Type)
+    private static final String contentWorkFlows = "{\n" +
+            "\t\"contentInDraft\" : [],\n" +
+            "\t\"contentInDraftUpdated\" : [\"Update\"],\n" +
+            "\t\"contentInReview\" : [\"Upload\", \"Review\"],\n" +
+            "\t\"contentInLive\": [\"Upload\", \"Publish\"],\n" +
+            "\t\"contentInUnlisted\": [\"Upload\", \"Unlisted\"],\n" +
+            "\t\"contentInLiveImageDraft\" : [\"Upload\", \"Publish\", \"Update\"],\n" +
+            "\t\"contentInLiveImageReview\" : [\"Upload\", \"Publish\", \"Update\", \"Review\"]\n" +
+            "}";
+
+
+    public static Map<String, Object> prepareResourceContent(String type, BaseCitrusTestRunner runner, String payload,
+                                                             String mimeType, Map<String, Object> headers) {
+        Map contentWorkMap = null;
+        Map contentMap = ContentUtil.createResourceContent(runner, payload, mimeType, headers);
+        Map<String, Object> result = new HashMap<>();
+        String contentId = (String) contentMap.get("content_id");
+        result.put("content_id", contentId);
+        result.put("versionKey", contentMap.get("versionKey"));
+        runner.variable("versionKeyVal", contentMap.get("versionKey"));
+        try {
+            contentWorkMap = mapper.readValue(contentWorkFlows, new TypeReference<Map<String, Object>>() {
+            });
+            List contentWorkList = (List<String>) contentWorkMap.get(type);
+            Map<String, Supplier<Map<String, Object>>> actionMap = new HashMap<String, Supplier<Map<String, Object>>>() {
+                {
+                    put("Upload", () -> uploadResourceContent(runner, contentId, mimeType, headers));
+                    put("Publish", () -> publishContent(runner, payload, "listed", contentId, headers));
+                    put("Review", () -> reviewContent(runner, payload, REVIEW_RESOURCE_CONTENT_EXPECT_200, contentId, headers));
+                    put("Update", () -> updateContent(runner, payload, UPDATE_RESOURCE_CONTENT_EXPECT_200, contentId, headers));
+                    put("Unlisted", () -> publishContent(runner, payload, "unlisted", contentId, headers));
+                }
+            };
+            if (!CollectionUtils.isEmpty(contentWorkList))
+                contentWorkList.forEach(action -> {
+                    Map response = actionMap.get(action).get();
+                    if (StringUtils.isNotBlank((String) response.get("versionKey"))) {
+                        result.put("versionKey", response.get("versionKey"));
+                        runner.variable("versionKeyVal", response.get("versionKey"));
+                    }
+                    if (StringUtils.isNotBlank((String) response.get("content_url")))
+                        result.put("content_url", response.get("content_url"));
+                });
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
 
 
 
     public static Map<String, Object> createResourceContent(BaseCitrusTestRunner runner, String payload, String mimeType, Map<String, Object> headers) {
         String contentId = "KP_FT_12345";
         String versionKey = "12345";
-        String blankContentId = "";
         Map<String, Object> data = new HashMap<String, Object>();
 
         if (StringUtils.isNotBlank(payload)) {
@@ -91,7 +145,7 @@ public class ContentUtil {
             }
             return createContent(runner, runner.testContext, null, CREATE_RESOURCE_CONTENT_EXPECT_200, headers);
         }
-        data.put("content_id", StringUtils.equals("kp-blank", mimeType) ? blankContentId : contentId);
+        data.put("content_id", contentId);
         data.put("versionKey", versionKey);
         return data;
     }
