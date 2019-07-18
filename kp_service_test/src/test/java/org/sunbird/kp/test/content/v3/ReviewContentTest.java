@@ -17,7 +17,7 @@ import javax.ws.rs.core.MediaType;
 
 public class ReviewContentTest extends BaseCitrusTestRunner {
 
-    private static final String TEMPLATE_DIR = "templates/content/v3";
+    private static final String TEMPLATE_DIR = "templates/content/v3/review";
 
     @Test(dataProvider = "reviewContent")
     @CitrusParameters({"testName", "requestUrl", "httpStatusCode", "userType","valParams","mimeType", "doUpload"})
