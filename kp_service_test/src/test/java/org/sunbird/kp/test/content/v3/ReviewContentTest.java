@@ -15,11 +15,11 @@ import java.util.Map;
 import javax.ws.rs.core.MediaType;
 
 
-public class ReviewResourceContentTest extends BaseCitrusTestRunner {
+public class ReviewContentTest extends BaseCitrusTestRunner {
 
     private static final String TEMPLATE_DIR = "templates/content/v3";
 
-    @Test(dataProvider = "reviewResourceContent")
+    @Test(dataProvider = "reviewContent")
     @CitrusParameters({"testName", "requestUrl", "httpStatusCode", "userType","valParams","mimeType", "doUpload"})
     @CitrusTest
     public void testReviewContent(
@@ -41,8 +41,8 @@ public class ReviewResourceContentTest extends BaseCitrusTestRunner {
         );
     }
 
-    @DataProvider(name = "reviewResourceContent")
-    public Object[][] reviewResourceContent() {
+    @DataProvider(name = "reviewContent")
+    public Object[][] reviewContent() {
         return new Object[][]{
                 new Object[]{
                         ContentV3Scenario.TEST_REVIEW_WITH_VALID_IDENTIFIER_WITH_NOT_UPLOAD_FILE, APIUrl.REVIEW_CONTENT, HttpStatus.BAD_REQUEST, Constant.CREATOR,
