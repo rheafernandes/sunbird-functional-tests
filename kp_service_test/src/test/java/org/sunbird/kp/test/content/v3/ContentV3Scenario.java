@@ -48,4 +48,66 @@ public class ContentV3Scenario {
             "testReadResourceContentWithInvalidIdentifier";
 
 
+    /**
+     *
+     * Content Update Api- Scenarios
+     */
+    public static final String TEST_UPDATE_RESOURCE_PDF_CONTENT_WITH_VALID_REQUEST =
+            "testUpdateResourcePdfContentWithValidRequest";
+    public static final String TEST_UPDATE_RESOURCE_ECML_CONTENT_WITH_VALID_REQUEST =
+            "testUpdateResourceEcmlContentWithValidRequest";
+    public static final String TEST_UPDATE_RESOURCE_HTML_CONTENT_WITH_VALID_REQUEST =
+            "testUpdateResourceHtmlContentWithValidRequest";
+    public static final String TEST_UPDATE_RESOURCE_H5P_CONTENT_WITH_VALID_REQUEST =
+            "testUpdateResourceH5pContentWithValidRequest";
+    public static final String TEST_UPDATE_RESOURCE_YOUTUBE_CONTENT_WITH_VALID_REQUEST =
+            "testUpdateResourceYoutubeContentWithValidRequest";
+    public static final String TEST_UPDATE_CONTENT_WITH_BLANK_VERSION_KEY =
+            "testUpdateContentBlankVersionKey";
+    public static final String TEST_UPDATE_CONTENT_WITH_NOT_FOUND_REQUEST =
+            "testUpdateContentNotFoundRequest";
+    public static final String TEST_UPDATE_CONTENT_WITH_INVALID_VERSION_KEY =
+            "testUpdateContentInvalidVersionKey";
+    public static final String TEST_UPDATE_CONTENT_WITH_INVALID_METADATA =
+            "testUpdateContentInvalidMetadata";
+    //Get Content should have same framework if allow update is false
+    public static final String TEST_UPDATE_CONTENT_WITH_NEW_FRAMEWORK =
+            "testUpdateContentNewFramework";
+    //Get Content should have same Status if allow update is false
+    public static final String TEST_UPDATE_CONTENT_WITH_CHANGED_STATUS =
+            "testUpdateContentChangeStatus";
+    //Get Content should have same MimeType if allow update is false
+    public static final String TEST_UPDATE_CONTENT_WITH_NEW_MIMETYPE =
+            "testUpdateContentNewMimetype";
+    public static final String TEST_UPDATE_CONTENT_WITH_NEW_MEDIATYPE =
+            "testUpdateContentNewMediaType";
+    public static final String TEST_UPDATE_CONTENT_WITH_INVALID_CONTENT_TYPE =
+            "testUpdateContentInvalidContentType";
+    public static final String TEST_UPDATE_CONTENT_WITH_VALID_CONTENT_TYPE =
+            "testUpdateContentValidContentType";
+    public static final String TEST_UPDATE_CONTENT_IN_REVIEW_STATE =
+            "testUpdateContentInReviewState";
+    public static final String TEST_UPDATE_CONTENT_IN_LIVE =
+            "testUpdateContentInLive";
+    public static final String TEST_UPDATE_CONTENT_IN_LIVE_WITH_IMAGE =
+            "testUpdateContentInLiveWithImage";
+    public static final String TEST_UPDATE_CONTENT_STATUS_FLAGGED =
+            "testUpdateStatusReview";
+    public static final String TEST_UPDATE_CONTENT_STATUS_FLAGREVIEW =
+            "testUpdateStatusReview";
+    public static final String TEST_UPDATE_CONTENT_IN_RETIRED =
+            "testUpdateContentInRetired";
+    public static final String TEST_UPDATE_CONTENT_AFTER_DISCARD =
+            "testUpdateContentAfterDiscard";
+    public static final String TEST_UPDATE_WITH_IMAGE_ID =
+            "testUpdateWithImageId";
+    //Get Content Should expect lastSubmittedOn if allowUpdate is true
+    public static final String TEST_UPDATE_WITH_STATUS_REVIEW =
+            "testUpdateContentWithStatusReview";
+    public static final String TEST_UPDATE_WITH_SYSTEM_PROPERTY =
+            "testUpdateContentWithSystemProperty";
+    public static final String TEST_UPDATE_WITH_INVALID_FORMAT_RESERVED_DIALCODES =
+            "testUpdateWithInvalidReservedDialcodes";
+    public static final String TEST_UPDATE_WITH_STALE_DATA =
+            "testUpdateContentWithStaleData";
 }
