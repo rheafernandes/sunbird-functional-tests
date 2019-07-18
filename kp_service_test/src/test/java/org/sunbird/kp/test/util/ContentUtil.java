@@ -232,11 +232,11 @@ public class ContentUtil {
                     break;
                 }
                 case "application/vnd.ekstep.ecml-archive": {
-                    runner.testContext.setVariable("fileNameValue", "sample.pdf");
+                    runner.testContext.setVariable("fileNameValue", "sample_ecml.zip");
                     break;
                 }
                 case "application/vnd.ekstep.html-archive": {
-                    runner.testContext.setVariable("fileNameValue", "sample.pdf");
+                    runner.testContext.setVariable("fileNameValue", "sample_Html.zip");
                     break;
                 }
                 case "application/vnd.ekstep.h5p-archive": {
