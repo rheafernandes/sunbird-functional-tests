@@ -110,4 +110,34 @@ public class ContentV3Scenario {
             "testUpdateWithInvalidReservedDialcodes";
     public static final String TEST_UPDATE_WITH_STALE_DATA =
             "testUpdateContentWithStaleData";
+
+    /**
+     *  Content Discard API - Scenario
+     *
+     */
+
+    public static final String TEST_DISCARD_WITH_IMAGE_ID =
+            "testDiscardContentWithImageId";
+    public static final String TEST_DISCARD_CONTENT_STATUS_DRAFT =
+            "testDiscardStatusDraft";
+    public static final String TEST_DISCARD_COLLECTION_STATUS_DRAFT =
+            "testDiscardCollectionStatusDraft";
+    public static final String TEST_DISCARD_CONTENT_STATUS_REVIEW =
+            "testDiscardStatusReview";
+    public static final String TEST_DISCARD_CONTENT_STATUS_FLAGGED =
+            "testDiscardStatusFlagged";
+    public static final String TEST_DISCARD_CONTENT_STATUS_FLAGREVIEW =
+            "testDiscardStatusFlagReview";
+    public static final String TEST_DISCARD_CONTENT_STATUS_LIVE =
+            "testDiscardStatusLive";
+    public static final String TEST_DISCARD_CONTENT_STATUS_UNLISTED =
+            "testDiscardStatusUnlisted";
+    public static final String TEST_DISCARD_CONTENT_STATUS_LIVE_WITH_IMAGE_DRAFT =
+            "testDiscardStatusLiveWithImageDraft";
+    public static final String TEST_DISCARD_CONTENT_STATUS_LIVE_WITH_IMAGE_REVIEW =
+            "testDiscardStatusLiveWithImageReview";
+    public static final String TEST_DISCARD_CONTENT_STATUS_RETIRED =
+            "testDiscardStatusRetired";
+    public static final String TEST_DISCARD_CONTENT_AFTER_DISCARD =
+            "testDiscardAfterDiscard";
 }
