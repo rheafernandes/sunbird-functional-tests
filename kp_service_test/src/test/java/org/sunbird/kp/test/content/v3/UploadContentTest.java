@@ -22,7 +22,7 @@ public class UploadContentTest extends BaseCitrusTestRunner {
     private static final String MATCHED_EXTENSION = ".pdf";
 
 
-/*    @Test(dataProvider = "uploadResourceContentForFile")
+    @Test(dataProvider = "uploadResourceContentForFile")
     @CitrusParameters({"userType", "mimeType", "extension"})
     @CitrusTest
     public void testUploadResourceContentForFile(String userType, String mimeType, String extension) {
@@ -68,7 +68,7 @@ public class UploadContentTest extends BaseCitrusTestRunner {
                 new Object[]{Constant.CREATOR, "video/mpeg", ".mpeg"},
 
         };
-    }*/
+    }
 
    @Test(dataProvider = "uploadResourceContentForFileUrl")
     @CitrusParameters({"testName", "requestUrl", "httpStatusCode", "userType","valParams","mimeType", "extension"})
