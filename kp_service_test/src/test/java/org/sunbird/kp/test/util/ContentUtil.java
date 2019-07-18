@@ -103,7 +103,7 @@ public class ContentUtil {
 
         if (StringUtils.isNotBlank(payload)) {
             return createContent(runner, runner.testContext, payload, null, headers);
-        } else if (StringUtils.isNotBlank(mimeType) && !StringUtils.equals("kp-blank",mimeType)) {
+        } else if (StringUtils.isNotBlank(mimeType)) {
             switch (mimeType.toLowerCase()) {
                 case "application/pdf": {
                     runner.variable("idVal", String.valueOf(System.currentTimeMillis()));
