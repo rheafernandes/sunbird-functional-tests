@@ -49,15 +49,16 @@ public class ContentUtil {
     // TODO: Add all the workflows for all test objects possible (Of Resource Type and Collection Type)
     private static final String contentWorkFlows = "{\n" +
             "\t\"contentInDraft\" : [],\n" +
-            "\t\"contentInDraftUpdated\" : [\"Update\"],\n" +
+            "\t\"contentUpload\" : [\"Upload\"],\n" +
+            "\t\"contentDraftUpdated\" : [\"Update\"],\n" +
             "\t\"contentInReview\" : [\"Upload\", \"Review\"],\n" +
             "\t\"contentInLive\": [\"Upload\", \"Publish\"],\n" +
-            "\t\"contentInUnlisted\": [\"Upload\", \"Unlisted\"],\n" +
             "\t\"contentInLiveImageDraft\" : [\"Upload\", \"Publish\", \"Update\"],\n" +
-            "\t\"contentInLiveImageReview\" : [\"Upload\", \"Publish\", \"Update\", \"Review\"],\n" +
+            "\t\"contentInLiveImageRewiew\" : [\"Upload\", \"Publish\", \"Update\", \"Review\"],\n" +
+            "\t\"contentInUnlisted\" : [\"Upload\", \"Unlisted\"],\n" +
             "\t\"contentInFlagged\" : [\"Upload\", \"Publish\", \"Flag\"],\n" +
-            "\t\"contentInFlagDraft\" : [\"Upload\", \"Publish\", \"Flag\", \"AcceptFlag\"],\n" +
-            "\t\"contentInFlagReview\" : [\"Upload\", \"Publish\", \"Flag\", \"AcceptFlag\", \"Review\"],\n" +
+            "\t\"contentInFlagDraft\" :  [\"Upload\", \"Publish\", \"Flag\", \"AcceptFlag\"],\n" +
+            "\t\"contentInFlagReview\" :  [\"Upload\", \"Publish\", \"Flag\", \"AcceptFlag\", \"Review\"]\n" +
             "}";
 
 
