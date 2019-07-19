@@ -322,15 +322,13 @@ public class ContentUtil {
 
 
     public static Map<String, Object> readCollectionHierarchy(BaseCitrusTestRunner runner, String contentId) {
-        String testName = "readCollectionHierarchy";
         if (StringUtils.isNotBlank(contentId)) {
-            runner.getTestCase().setName(testName);
             runner.http(
                     builder ->
                             TestActionUtil.processGetRequest(
                                     builder,
                                     Constant.KP_ENDPOINT,
-                                    testName,
+                                    runner.getTestCase().getName(),
                                     APIUrl.READ_CONTENT_HIERARCHY + contentId,
                                     getHeaders(null)
                             ));
