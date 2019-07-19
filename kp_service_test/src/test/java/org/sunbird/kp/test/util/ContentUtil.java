@@ -54,7 +54,7 @@ public class ContentUtil {
             "\t\"contentInReview\" : [\"Upload\", \"Review\"],\n" +
             "\t\"contentInLive\": [\"Upload\", \"Publish\"],\n" +
             "\t\"contentInLiveImageDraft\" : [\"Upload\", \"Publish\", \"Update\"],\n" +
-            "\t\"contentInLiveImageRewiew\" : [\"Upload\", \"Publish\", \"Update\", \"Review\"],\n" +
+            "\t\"contentInLiveImageReview\" : [\"Upload\", \"Publish\", \"Update\", \"Review\"],\n" +
             "\t\"contentInUnlisted\" : [\"Upload\", \"Unlisted\"],\n" +
             "\t\"contentInFlagged\" : [\"Upload\", \"Publish\", \"Flag\"],\n" +
             "\t\"contentInFlagDraft\" :  [\"Upload\", \"Publish\", \"Flag\", \"AcceptFlag\"],\n" +
