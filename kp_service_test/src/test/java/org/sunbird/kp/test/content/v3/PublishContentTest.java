@@ -6,6 +6,7 @@ import org.sunbird.kp.test.util.ContentUtil;
 import org.sunbird.kp.test.util.DynamicPayload;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+
 import java.util.List;
 import java.util.Map;
 
@@ -42,13 +43,14 @@ public class PublishContentTest extends BaseCitrusTestRunner {
         ContentUtil.publishContent(this, null, "public", textbookId, null);
 
         this.getTestCase().setName("testPublishTextbookContentWithResourceHavingConceptRelation");
-        Map<String, Object> textbookMap = ContentUtil.readCollectionHierarchy(this, textbookId);
+        delay(this, 60000);
+        Map<String, Object> textbookMap = (Map<String, Object>) ContentUtil.readCollectionHierarchy(this, textbookId).get("content");
         Assert.assertNotNull(textbookMap);
-        List<Map<String, Object>>  list = (List<Map<String, Object>>)textbookMap.get("concepts");
+        List<Map<String, Object>> list = (List<Map<String, Object>>) textbookMap.get("concepts");
         Map<String, Object> concept = list.get(0);
-        Assert.assertEquals("status","Live");
+        Assert.assertEquals((String) textbookMap.get("status"), "Live");
         Assert.assertNotNull(textbookMap.get("variants"));
-        Assert.assertEquals("LO53",(String)concept.get("identifier"));
+        Assert.assertEquals("LO53", (String) concept.get("identifier"));
     }
 
 }

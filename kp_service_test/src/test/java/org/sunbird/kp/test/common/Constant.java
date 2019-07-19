@@ -33,7 +33,7 @@ public class Constant {
 
 
     public static final int ES_SYNC_WAIT_TIME = 5000;
-    public static final int PUBLISH_WAIT_TIME = 10000;
+    public static final int PUBLISH_WAIT_TIME = 20000;
 
     public static final String CREATOR = "Creator";
     public static final String REVIEWER = "Reviewer";
