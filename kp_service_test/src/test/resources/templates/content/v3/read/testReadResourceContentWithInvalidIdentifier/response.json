@@ -1,6 +1,6 @@
 {
-  "id": "api.v3.read",
-  "ver": "1.0",
+  "id": "ekstep.content.find",
+  "ver": "3.0",
   "ts": "@ignore@",
   "params": {
     "resmsgid": "@ignore@",
