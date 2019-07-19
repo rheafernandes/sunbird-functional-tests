@@ -288,4 +288,12 @@ public class BaseCitrusTestRunner extends TestNGCitrusTestRunner {
         return headers;
     }
 
+    protected void delay(TestNGCitrusTestRunner runner, long time) {
+        try {
+            runner.sleep(time);
+        } catch (Exception e) {
+            System.out.println("Exception : "+e);
+        }
+    }
+
 }
