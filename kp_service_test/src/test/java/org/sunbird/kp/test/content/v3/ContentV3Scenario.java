@@ -47,6 +47,100 @@ public class ContentV3Scenario {
     public static final String TEST_READ_RESOURCE_CONTENT_WITH_INVALID_IDENTIFIER =
             "testReadResourceContentWithInvalidIdentifier";
 
+
+    /**
+     *
+     * Content Update Api- Scenarios
+     */
+    public static final String TEST_UPDATE_RESOURCE_PDF_CONTENT_WITH_VALID_REQUEST =
+            "testUpdateResourcePdfContentWithValidRequest";
+    public static final String TEST_UPDATE_RESOURCE_ECML_CONTENT_WITH_VALID_REQUEST =
+            "testUpdateResourceEcmlContentWithValidRequest";
+    public static final String TEST_UPDATE_RESOURCE_HTML_CONTENT_WITH_VALID_REQUEST =
+            "testUpdateResourceHtmlContentWithValidRequest";
+    public static final String TEST_UPDATE_RESOURCE_H5P_CONTENT_WITH_VALID_REQUEST =
+            "testUpdateResourceH5pContentWithValidRequest";
+    public static final String TEST_UPDATE_RESOURCE_YOUTUBE_CONTENT_WITH_VALID_REQUEST =
+            "testUpdateResourceYoutubeContentWithValidRequest";
+    public static final String TEST_UPDATE_CONTENT_WITH_BLANK_VERSION_KEY =
+            "testUpdateContentBlankVersionKey";
+    public static final String TEST_UPDATE_CONTENT_WITH_NOT_FOUND_REQUEST =
+            "testUpdateContentNotFoundRequest";
+    public static final String TEST_UPDATE_CONTENT_WITH_INVALID_VERSION_KEY =
+            "testUpdateContentInvalidVersionKey";
+    public static final String TEST_UPDATE_CONTENT_WITH_INVALID_METADATA =
+            "testUpdateContentInvalidMetadata";
+    //Get Content should have same framework if allow update is false
+    public static final String TEST_UPDATE_CONTENT_WITH_NEW_FRAMEWORK =
+            "testUpdateContentNewFramework";
+    //Get Content should have same Status if allow update is false
+    public static final String TEST_UPDATE_CONTENT_WITH_CHANGED_STATUS =
+            "testUpdateContentChangeStatus";
+    //Get Content should have same MimeType if allow update is false
+    public static final String TEST_UPDATE_CONTENT_WITH_NEW_MIMETYPE =
+            "testUpdateContentNewMimetype";
+    public static final String TEST_UPDATE_CONTENT_WITH_NEW_MEDIATYPE =
+            "testUpdateContentNewMediaType";
+    public static final String TEST_UPDATE_CONTENT_WITH_INVALID_CONTENT_TYPE =
+            "testUpdateContentInvalidContentType";
+    public static final String TEST_UPDATE_CONTENT_WITH_VALID_CONTENT_TYPE =
+            "testUpdateContentValidContentType";
+    public static final String TEST_UPDATE_CONTENT_IN_REVIEW_STATE =
+            "testUpdateContentInReviewState";
+    public static final String TEST_UPDATE_CONTENT_IN_LIVE =
+            "testUpdateContentInLive";
+    public static final String TEST_UPDATE_CONTENT_IN_LIVE_WITH_IMAGE =
+            "testUpdateContentInLiveWithImage";
+    public static final String TEST_UPDATE_CONTENT_STATUS_FLAGGED =
+            "testUpdateStatusReview";
+    public static final String TEST_UPDATE_CONTENT_STATUS_FLAGREVIEW =
+            "testUpdateStatusReview";
+    public static final String TEST_UPDATE_CONTENT_IN_RETIRED =
+            "testUpdateContentInRetired";
+    public static final String TEST_UPDATE_CONTENT_AFTER_DISCARD =
+            "testUpdateContentAfterDiscard";
+    public static final String TEST_UPDATE_WITH_IMAGE_ID =
+            "testUpdateWithImageId";
+    //Get Content Should expect lastSubmittedOn if allowUpdate is true
+    public static final String TEST_UPDATE_WITH_STATUS_REVIEW =
+            "testUpdateContentWithStatusReview";
+    public static final String TEST_UPDATE_WITH_SYSTEM_PROPERTY =
+            "testUpdateContentWithSystemProperty";
+    public static final String TEST_UPDATE_WITH_INVALID_FORMAT_RESERVED_DIALCODES =
+            "testUpdateWithInvalidReservedDialcodes";
+    public static final String TEST_UPDATE_WITH_STALE_DATA =
+            "testUpdateContentWithStaleData";
+
+    /**
+     *  Content Discard API - Scenario
+     *
+     */
+
+    public static final String TEST_DISCARD_WITH_IMAGE_ID =
+            "testRetireContentWithImageId";
+    public static final String TEST_DISCARD_CONTENT_STATUS_DRAFT =
+            "testRetireStatusDraft";
+    public static final String TEST_DISCARD_COLLECTION_STATUS_DRAFT =
+            "testRetireCollectionStatusDraft";
+    public static final String TEST_DISCARD_CONTENT_STATUS_REVIEW =
+            "testRetireStatusReview";
+    public static final String TEST_DISCARD_CONTENT_STATUS_FLAGGED =
+            "testRetireStatusFlagged";
+    public static final String TEST_DISCARD_CONTENT_STATUS_FLAGREVIEW =
+            "testRetireStatusFlagReview";
+    public static final String TEST_DISCARD_CONTENT_STATUS_LIVE =
+            "testRetireStatusLive";
+    public static final String TEST_DISCARD_CONTENT_STATUS_UNLISTED =
+            "testRetireStatusUnlisted";
+    public static final String TEST_DISCARD_CONTENT_STATUS_LIVE_WITH_IMAGE_DRAFT =
+            "testReviewStatusLiveWithImageDraft";
+    public static final String TEST_DISCARD_CONTENT_STATUS_LIVE_WITH_IMAGE_REVIEW =
+            "testRetireStatusLiveWithImageReview";
+    public static final String TEST_DISCARD_CONTENT_STATUS_RETIRED =
+            "testRetireStatusRetired";
+    public static final String TEST_DISCARD_CONTENT_AFTER_DISCARD =
+            "testDiscardAfterDiscard";
+
     // Scenario's for upload Content  API
     public static final String TEST_UPLOAD_RESOURCE_PDF_WITH_FILE_URL = "testUploadResourcePdfWithFileUrl";
     public static final String TEST_UPLOAD_RESOURCE_PDF_WITH_FILE_MISMATCHED_MIME = "testUploadResourcePdfWithFileMismatchedMime";
@@ -57,6 +151,36 @@ public class ContentV3Scenario {
     public static final String TEST_REVIEW_WITH_VALID_IDENTIFIER = "testReviewWithValidIdentifier";
     public static final String TEST_REVIEW_WITH_INVALID_IDENTIFIER = "testReviewWithInvalidIdentifier";
 
+    /**
+     *
+     * Content Retire API - Scenarios
+     */
 
-
+    public static final String TEST_RETIRE_WITH_IMAGE_ID =
+            "testRetireContentWithImageId";
+    public static final String TEST_RETIRE_CONTENT_STATUS_DRAFT =
+            "testRetireStatusDraft";
+    public static final String TEST_RETIRE_COLLECTION_STATUS_DRAFT =
+            "testRetireCollectionStatusDraft";
+    public static final String TEST_RETIRE_CONTENT_STATUS_REVIEW =
+            "testRetireStatusReview";
+    public static final String TEST_RETIRE_CONTENT_STATUS_FLAGGED =
+            "testRetireStatusFlagged";
+    public static final String TEST_RETIRE_CONTENT_STATUS_FLAGDRAFT =
+            "testRetireStatusFlagDraft";
+    public static final String TEST_RETIRE_CONTENT_STATUS_FLAGREVIEW =
+            "testRetireStatusFlagReview";
+    public static final String TEST_RETIRE_CONTENT_STATUS_LIVE =
+            "testRetireStatusLive";
+    public static final String TEST_RETIRE_CONTENT_STATUS_UNLISTED =
+            "testRetireStatusUnlisted";
+    public static final String TEST_RETIRE_CONTENT_STATUS_LIVE_WITH_IMAGE_REVIEW =
+            "testRetireStatusLiveWithImageReview";
+    public static final String TEST_RETIRE_CONTENT_STATUS_LIVE_WITH_IMAGE_DRAFT =
+            "testRetireStatusLiveWithImageDraft";
+    public static final String TEST_RETIRE_CONTENT_STATUS_RETIRED =
+            "testRetireStatusRetired";
+    //For Live node which has image
+    public static final String TEST_RETIRE_CONTENT_AFTER_DISCARD =
+            "testRetireAfterDiscard";
 }
