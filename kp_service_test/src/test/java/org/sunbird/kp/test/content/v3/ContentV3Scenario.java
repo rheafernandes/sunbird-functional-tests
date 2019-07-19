@@ -117,27 +117,27 @@ public class ContentV3Scenario {
      */
 
     public static final String TEST_DISCARD_WITH_IMAGE_ID =
-            "testDiscardContentWithImageId";
+            "testRetireContentWithImageId";
     public static final String TEST_DISCARD_CONTENT_STATUS_DRAFT =
-            "testDiscardStatusDraft";
+            "testRetireStatusDraft";
     public static final String TEST_DISCARD_COLLECTION_STATUS_DRAFT =
-            "testDiscardCollectionStatusDraft";
+            "testRetireCollectionStatusDraft";
     public static final String TEST_DISCARD_CONTENT_STATUS_REVIEW =
-            "testDiscardStatusReview";
+            "testRetireStatusReview";
     public static final String TEST_DISCARD_CONTENT_STATUS_FLAGGED =
-            "testDiscardStatusFlagged";
+            "testRetireStatusFlagged";
     public static final String TEST_DISCARD_CONTENT_STATUS_FLAGREVIEW =
-            "testDiscardStatusFlagReview";
+            "testRetireStatusFlagReview";
     public static final String TEST_DISCARD_CONTENT_STATUS_LIVE =
-            "testDiscardStatusLive";
+            "testRetireStatusLive";
     public static final String TEST_DISCARD_CONTENT_STATUS_UNLISTED =
-            "testDiscardStatusUnlisted";
+            "testRetireStatusUnlisted";
     public static final String TEST_DISCARD_CONTENT_STATUS_LIVE_WITH_IMAGE_DRAFT =
-            "testDiscardStatusLiveWithImageDraft";
+            "testReviewStatusLiveWithImageDraft";
     public static final String TEST_DISCARD_CONTENT_STATUS_LIVE_WITH_IMAGE_REVIEW =
-            "testDiscardStatusLiveWithImageReview";
+            "testRetireStatusLiveWithImageReview";
     public static final String TEST_DISCARD_CONTENT_STATUS_RETIRED =
-            "testDiscardStatusRetired";
+            "testRetireStatusRetired";
     public static final String TEST_DISCARD_CONTENT_AFTER_DISCARD =
             "testDiscardAfterDiscard";
 
@@ -150,4 +150,37 @@ public class ContentV3Scenario {
     public static final String TEST_REVIEW_WITH_VALID_IDENTIFIER_WITH_NOT_UPLOAD_FILE = "testReviewWithValidIdentifieWithNonUploadFile";
     public static final String TEST_REVIEW_WITH_VALID_IDENTIFIER = "testReviewWithValidIdentifier";
     public static final String TEST_REVIEW_WITH_INVALID_IDENTIFIER = "testReviewWithInvalidIdentifier";
+
+    /**
+     *
+     * Content Retire API - Scenarios
+     */
+
+    public static final String TEST_RETIRE_WITH_IMAGE_ID =
+            "testRetireContentWithImageId";
+    public static final String TEST_RETIRE_CONTENT_STATUS_DRAFT =
+            "testRetireStatusDraft";
+    public static final String TEST_RETIRE_COLLECTION_STATUS_DRAFT =
+            "testRetireCollectionStatusDraft";
+    public static final String TEST_RETIRE_CONTENT_STATUS_REVIEW =
+            "testRetireStatusReview";
+    public static final String TEST_RETIRE_CONTENT_STATUS_FLAGGED =
+            "testRetireStatusFlagged";
+    public static final String TEST_RETIRE_CONTENT_STATUS_FLAGDRAFT =
+            "testRetireStatusFlagDraft";
+    public static final String TEST_RETIRE_CONTENT_STATUS_FLAGREVIEW =
+            "testRetireStatusFlagReview";
+    public static final String TEST_RETIRE_CONTENT_STATUS_LIVE =
+            "testRetireStatusLive";
+    public static final String TEST_RETIRE_CONTENT_STATUS_UNLISTED =
+            "testRetireStatusUnlisted";
+    public static final String TEST_RETIRE_CONTENT_STATUS_LIVE_WITH_IMAGE_REVIEW =
+            "testRetireStatusLiveWithImageReview";
+    public static final String TEST_RETIRE_CONTENT_STATUS_LIVE_WITH_IMAGE_DRAFT =
+            "testRetireStatusLiveWithImageDraft";
+    public static final String TEST_RETIRE_CONTENT_STATUS_RETIRED =
+            "testRetireStatusRetired";
+    //For Live node which has image
+    public static final String TEST_RETIRE_CONTENT_AFTER_DISCARD =
+            "testRetireAfterDiscard";
 }

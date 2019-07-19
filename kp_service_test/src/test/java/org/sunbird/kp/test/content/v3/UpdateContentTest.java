@@ -18,13 +18,13 @@ public class UpdateContentTest extends BaseCitrusTestRunner {
     private static final String TEMPLATE_DIR = "templates/content/v3/update";
 
     @Test(dataProvider = "updateResourceContent")
-    @CitrusParameters({"testName", "requestUrl", "httpStatusCode", "userType", "valParams", "mimeType", "needImage", "testObjectType"})
+    @CitrusParameters({"testName", "requestUrl", "httpStatusCode", "userType", "valParams", "mimeType", "needImage", "workflow"})
     @CitrusTest
     public void testUpdateResourceContent(
             String testName, String requestUrl, HttpStatus httpStatusCode, String userType,
-            Map<String, Object> valParams, String mimeType, Boolean needImage, String testObjectType) {
+            Map<String, Object> valParams, String mimeType, Boolean needImage, String workflow) {
         getAuthToken(this, userType);
-        Map<String, Object> map = ContentUtil.prepareResourceContent(testObjectType, this, null, mimeType, null);        String contentId = (String) map.get("content_id");
+        Map<String, Object> map = ContentUtil.prepareResourceContent(workflow, this, null, mimeType, null);        String contentId = (String) map.get("content_id");
         String versionKey = (String) map.get("versionKey");
         this.variable("versionKeyVal", versionKey);
         this.variable("contentIdVal", contentId);
