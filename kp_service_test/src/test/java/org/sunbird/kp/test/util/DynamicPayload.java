@@ -6,5 +6,20 @@ package org.sunbird.kp.test.util;
  */
 public class DynamicPayload {
 
-    //TODO: All Dynamic payload should go here.
+    public static final String CREATE_RESOURCE_CONTENT_WITH_CONCEPT = "{\n" +
+            "  \"request\": {\n" +
+            "    \"content\": {\n" +
+            "      \"identifier\": \"KP_FT_"+System.currentTimeMillis()+"\",\n" +
+            "      \"name\": \"KP Integration Test Content\",\n" +
+            "      \"code\": \"kp.ft.resource.pdf\",\n" +
+            "      \"mimeType\": \"application/pdf\",\n" +
+            "      \"contentType\": \"Resource\",\n" +
+            "      \"concepts\": [\n" +
+            "        {\n" +
+            "          \"identifier\": \"LO53\"\n" +
+            "        }\n" +
+            "      ]\n" +
+            "    }\n" +
+            "  }\n" +
+            "}";
 }

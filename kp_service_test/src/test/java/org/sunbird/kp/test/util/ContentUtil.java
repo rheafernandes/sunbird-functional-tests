@@ -22,6 +22,7 @@ import java.util.function.Supplier;
 
 /**
  * Utility Class for Content API Test
+ *
  * @author Kumar Gauraw
  */
 public class ContentUtil {
@@ -41,6 +42,7 @@ public class ContentUtil {
     private static final String REVIEW_RESOURCE_CONTENT_EXPECT_200 = "reviewResourceContentExpect200";
     private static final String UPDATE_RESOURCE_CONTENT_EXPECT_200 = "updateResourceContentExpect200";
     private static final String PUBLISH_CONTENT_EXPECT_200 = "publishContentExpect200";
+    private static final String UPDATE_HIERARCHY_EXPECT_200 = "updateHierarchyExpect200";
 
     private static final ObjectMapper mapper = new ObjectMapper();
 
@@ -52,7 +54,7 @@ public class ContentUtil {
             "\t\"contentInLive\": [\"Upload\", \"Publish\"],\n" +
             "\t\"contentInUnlisted\": [\"Upload\", \"Unlisted\"],\n" +
             "\t\"contentInLiveImageDraft\" : [\"Upload\", \"Publish\", \"Update\"],\n" +
-            "\t\"contentInLiveImageReview\" : [\"Upload\", \"Publish\", \"Update\", \"Review\"]\n" +
+            "\t\"contentInLiveImageReview\" : [\"Upload\", \"Publish\", \"Update\", \"Review\"],\n" +
             "\t\"contentInFlagged\" : [\"Upload\", \"Publish\", \"Flag\"],\n" +
             "\t\"contentInFlagDraft\" : [\"Upload\", \"Publish\", \"Flag\", \"AcceptFlag\"],\n" +
             "\t\"contentInFlagReview\" : [\"Upload\", \"Publish\", \"Flag\", \"AcceptFlag\", \"Review\"],\n" +
@@ -98,7 +100,6 @@ public class ContentUtil {
     }
 
 
-
     public static Map<String, Object> createResourceContent(BaseCitrusTestRunner runner, String payload, String mimeType, Map<String, Object> headers) {
         String contentId = "KP_FT_12345";
         String versionKey = "12345";
@@ -107,27 +108,24 @@ public class ContentUtil {
         if (StringUtils.isNotBlank(payload)) {
             return createContent(runner, runner.testContext, payload, null, headers);
         } else if (StringUtils.isNotBlank(mimeType)) {
+            runner.variable("idVal", String.valueOf(System.currentTimeMillis()));
             switch (mimeType.toLowerCase()) {
                 case "application/pdf": {
-                    runner.variable("idVal", String.valueOf(System.currentTimeMillis()));
                     runner.variable("codeVal", "kp.ft.resource.pdf");
                     runner.variable("mimeTypeVal", mimeType);
                     break;
                 }
                 case "application/vnd.ekstep.ecml-archive": {
-                    runner.variable("idVal", String.valueOf(System.currentTimeMillis()));
                     runner.variable("codeVal", "kp.ft.resource.ecml");
                     runner.variable("mimeTypeVal", mimeType);
                     break;
                 }
                 case "application/vnd.ekstep.html-archive": {
-                    runner.variable("idVal", String.valueOf(System.currentTimeMillis()));
                     runner.variable("codeVal", "kp.ft.resource.html");
                     runner.variable("mimeTypeVal", mimeType);
                     break;
                 }
                 case "application/vnd.ekstep.h5p-archive": {
-                    runner.variable("idVal", String.valueOf(System.currentTimeMillis()));
                     runner.variable("codeVal", "kp.ft.resource.h5p");
                     runner.variable("mimeTypeVal", mimeType);
                     break;
@@ -140,7 +138,6 @@ public class ContentUtil {
                     break;
                 }
                 case "video/x-youtube": {
-                    runner.variable("idVal", String.valueOf(System.currentTimeMillis()));
                     runner.variable("codeVal", "kp.ft.resource.youtube");
                     runner.variable("mimeTypeVal", mimeType);
                     break;
@@ -199,22 +196,22 @@ public class ContentUtil {
             runner.variable("idVal", String.valueOf(System.currentTimeMillis()));
             switch (collectionType.toLowerCase()) {
                 case "collection": {
-                    runner.variable("codeVal", "kp.ft.collection."+collectionType.toLowerCase());
+                    runner.variable("codeVal", "kp.ft.collection." + collectionType.toLowerCase());
                     runner.variable("contentTypeVal", StringUtils.capitalize(collectionType));
                     break;
                 }
                 case "textbook": {
-                    runner.variable("codeVal", "kp.ft.collection."+collectionType.toLowerCase());
+                    runner.variable("codeVal", "kp.ft.collection." + collectionType.toLowerCase());
                     runner.variable("contentTypeVal", StringUtils.capitalize(collectionType));
                     break;
                 }
                 case "course": {
-                    runner.variable("codeVal", "kp.ft.collection."+collectionType.toLowerCase());
+                    runner.variable("codeVal", "kp.ft.collection." + collectionType.toLowerCase());
                     runner.variable("contentTypeVal", StringUtils.capitalize(collectionType));
                     break;
                 }
                 case "lessonplan": {
-                    runner.variable("codeVal", "kp.ft.collection."+collectionType.toLowerCase());
+                    runner.variable("codeVal", "kp.ft.collection." + collectionType.toLowerCase());
                     runner.variable("contentTypeVal", StringUtils.capitalize(collectionType));
                     break;
                 }
@@ -224,6 +221,132 @@ public class ContentUtil {
         data.put("content_id", contentId);
         data.put("versionKey", versionKey);
         return data;
+    }
+
+    public static void updateContentHierarchy(BaseCitrusTestRunner runner, String contentId, String collectionType, String resourceId, String payload, Map<String, Object> headers) {
+        if (StringUtils.isNotBlank(payload)) {
+            updateContentHierarchy(runner, runner.testContext, UPDATE_HIERARCHY_EXPECT_200, contentId, payload, headers);
+        } else if (StringUtils.isNotBlank(collectionType)) {
+            runner.variable("collectionIdVal", contentId);
+            switch (collectionType.toLowerCase()) {
+                case "collection": {
+                    runner.variable("collectionTypeVal", "Collection");
+                    runner.variable("contentTypeVal", "Collection");
+                    runner.variable("resourceIdVal", resourceId);
+                    break;
+                }
+                case "textbook": {
+                    runner.variable("collectionTypeVal", "TextBook");
+                    runner.variable("contentTypeVal", "TextBookUnit");
+                    runner.variable("resourceIdVal", resourceId);
+                    break;
+                }
+                case "course": {
+                    runner.variable("collectionTypeVal", "Course");
+                    runner.variable("contentTypeVal", "CourseUnit");
+                    runner.variable("resourceIdVal", resourceId);
+                    break;
+                }
+                case "lessonplan": {
+                    runner.variable("collectionTypeVal", "LessonPlan");
+                    runner.variable("contentTypeVal", "LessonPlanUnit");
+                    runner.variable("resourceIdVal", StringUtils.capitalize(resourceId));
+                    break;
+                }
+            }
+            updateContentHierarchy(runner, runner.testContext, UPDATE_HIERARCHY_EXPECT_200, contentId, null, headers);
+        }
+    }
+
+    private static void updateContentHierarchy(BaseCitrusTestRunner runner, TestContext testContext, String testName, String contentId, String payload, Map<String, Object> headers) {
+        if (StringUtils.isNotBlank(payload)) {
+            runner.http(
+                    builder ->
+                            TestActionUtil.getPatchRequestTestAction(
+                                    builder,
+                                    Constant.KP_ENDPOINT,
+                                    APIUrl.UPDATE_CONTENT_HIERARCHY,
+                                    Constant.CONTENT_TYPE_APPLICATION_JSON,
+                                    payload,
+                                    getHeaders(headers)));
+        } else {
+            runner.http(
+                    builder ->
+                            TestActionUtil.processPatchRequest(
+                                    builder,
+                                    Constant.KP_ENDPOINT,
+                                    CONTENT_PAYLOAD_DIR,
+                                    testName,
+                                    APIUrl.UPDATE_CONTENT_HIERARCHY,
+                                    Constant.REQUEST_JSON,
+                                    Constant.CONTENT_TYPE_APPLICATION_JSON,
+                                    getHeaders(headers)));
+
+        }
+        runner.http(
+                builder ->
+                        TestActionUtil.getResponse(
+                                builder,
+                                Constant.KP_ENDPOINT,
+                                testName,
+                                HttpStatus.OK));
+    }
+
+    public static Map<String, Object> readContent(BaseCitrusTestRunner runner, String contentId) {
+        String testName = "readContentExpect200";
+        if (StringUtils.isNotBlank(contentId)) {
+            runner.getTestCase().setName(testName);
+            runner.http(
+                    builder ->
+                            TestActionUtil.processGetRequest(
+                                    builder,
+                                    Constant.KP_ENDPOINT,
+                                    testName,
+                                    APIUrl.READ_CONTENT + contentId,
+                                    getHeaders(null)
+                            ));
+            runner.http(
+                    builder ->
+                            TestActionUtil.getExtractFromResponseTestAction(
+                                    runner.testContext,
+                                    builder,
+                                    Constant.KP_ENDPOINT,
+                                    HttpStatus.OK,
+                                    "$.result",
+                                    "result"));
+            Map<String, Object> result = getResult(runner.testContext);
+            return result;
+        }
+        return null;
+    }
+
+
+    public static Map<String, Object> readCollectionHierarchy(BaseCitrusTestRunner runner, String contentId) {
+        String testName = "readCollectionHierarchy";
+        if (StringUtils.isNotBlank(contentId)) {
+            runner.getTestCase().setName(testName);
+            runner.http(
+                    builder ->
+                            TestActionUtil.processGetRequest(
+                                    builder,
+                                    Constant.KP_ENDPOINT,
+                                    testName,
+                                    APIUrl.READ_CONTENT_HIERARCHY + contentId,
+                                    getHeaders(null)
+                            ));
+            runner.http(
+                    builder ->
+                            TestActionUtil.getExtractFromResponseTestAction(
+                                    runner.testContext,
+                                    builder,
+                                    Constant.KP_ENDPOINT,
+                                    HttpStatus.OK,
+                                    "$.result",
+                                    "result"));
+            Map<String, Object> result = getResult(runner.testContext);
+            return result;
+        }
+        return null;
     }
 
     //TODO: Update File Name for All.
@@ -337,13 +460,7 @@ public class ContentUtil {
                                 HttpStatus.OK,
                                 "$.result",
                                 "result"));
-        Map<String, Object> result = null;
-        try {
-            result = objectMapper.readValue(testContext.getVariable("result"), new TypeReference<Map<String, Object>>() {
-            });
-        } catch (Exception e) {
-            System.out.println("Exception Occurred While parsing context variable : " + e);
-        }
+        Map<String, Object> result = getResult(testContext);
 
         if (MapUtils.isNotEmpty(result)) {
             data.put("content_id", (String) result.get("node_id"));
@@ -366,7 +483,7 @@ public class ContentUtil {
                                     Constant.KP_ENDPOINT,
                                     CONTENT_PAYLOAD_DIR,
                                     testName,
-                                    APIUrl.UPLOAD_CONTENT+contentId,
+                                    APIUrl.UPLOAD_CONTENT + contentId,
                                     Constant.REQUEST_FORM_DATA,
                                     getHeaders(headers),
                                     runner.getClass().getClassLoader()
@@ -382,13 +499,7 @@ public class ContentUtil {
                                 HttpStatus.OK,
                                 "$.result",
                                 "result"));
-        Map<String, Object> result = null;
-        try {
-            result = objectMapper.readValue(testContext.getVariable("result"), new TypeReference<Map<String, Object>>() {
-            });
-        } catch (Exception e) {
-            System.out.println("Exception Occurred While parsing context variable : " + e);
-        }
+        Map<String, Object> result = getResult(testContext);
 
         if (MapUtils.isNotEmpty(result)) {
             data.put("content_id", (String) result.get("node_id"));
@@ -399,7 +510,7 @@ public class ContentUtil {
     }
 
     public static Map<String, Object> publishContent(BaseCitrusTestRunner runner, String payload, String publishType, String contentId, Map<String, Object> headers) {
-        final String url = StringUtils.equalsIgnoreCase("unlisted",publishType.toLowerCase())?(APIUrl.UNLISTED_PUBLISH_CONTENT + contentId) : (APIUrl.PUBLIC_PUBLISH_CONTENT + contentId);
+        final String url = StringUtils.equalsIgnoreCase("unlisted", publishType.toLowerCase()) ? (APIUrl.UNLISTED_PUBLISH_CONTENT + contentId) : (APIUrl.PUBLIC_PUBLISH_CONTENT + contentId);
         final TestContext testContext = runner.testContext;
         if (StringUtils.isNotBlank(payload)) {
             runner.http(
@@ -425,9 +536,7 @@ public class ContentUtil {
                                     Constant.CONTENT_TYPE_APPLICATION_JSON,
                                     getHeaders(headers)));
         }
-        runner.http(
-                builder ->TestActionUtil.getResponse(
-                        builder, Constant.KP_ENDPOINT, "", PUBLISH_CONTENT_EXPECT_200, HttpStatus.OK, "", null));
+
         runner.http(
                 builder ->
                         TestActionUtil.getExtractFromResponseTestAction(
@@ -437,12 +546,7 @@ public class ContentUtil {
                                 HttpStatus.OK,
                                 "$.result",
                                 "result"));
-        Map<String, Object> result = null;
-        try {
-            result = objectMapper.readValue(testContext.getVariable("result"), new TypeReference<Map<String, Object>>() {});
-        } catch (Exception e) {
-            System.out.println("Exception Occurred While parsing context variable : " + e);
-        }
+        Map<String, Object> result = getResult(testContext);
         Map<String, Object> data = new HashMap<String, Object>();
         if (MapUtils.isNotEmpty(result))
             data.put("content_id", result.get("node_id"));
@@ -453,6 +557,7 @@ public class ContentUtil {
     /**
      * This method can review content with a static payload.
      * TODO: NEED TO ADD FOR DYNAMIC PAYLOAD
+     *
      * @param runner
      * @param payload
      * @param testName
@@ -498,12 +603,7 @@ public class ContentUtil {
                                 HttpStatus.OK,
                                 "$.result",
                                 "result"));
-        Map<String, Object> result = null;
-        try {
-            result = objectMapper.readValue(testContext.getVariable("result"), new TypeReference<Map<String, Object>>() {});
-        } catch (Exception e) {
-            System.out.println("Exception Occurred While parsing context variable : " + e);
-        }
+        Map<String, Object> result = getResult(testContext);
         Map<String, Object> data = new HashMap<String, Object>();
         if (MapUtils.isNotEmpty(result))
             data.put("content_id", result.get("node_id"));
@@ -514,6 +614,7 @@ public class ContentUtil {
     /**
      * This method can update content with static payload
      * TODO: Need to add dynamic payload
+     *
      * @param runner
      * @param payload
      * @param testName
@@ -558,12 +659,7 @@ public class ContentUtil {
                                 HttpStatus.OK,
                                 "$.result",
                                 "result"));
-        Map<String, Object> result = null;
-        try {
-            result = objectMapper.readValue(testContext.getVariable("result"), new TypeReference<Map<String, Object>>() {});
-        } catch (Exception e) {
-            System.out.println("Exception Occurred While parsing context variable : " + e);
-        }
+        Map<String, Object> result = getResult(testContext);
         Map<String, Object> data = new HashMap<String, Object>();
         if (MapUtils.isNotEmpty(result)) {
             data.put("content_id", result.get("node_id"));
@@ -574,6 +670,7 @@ public class ContentUtil {
 
     /**
      * This Method provides all necessary header elements
+     *
      * @param additionalHeaders
      * @return
      */
@@ -590,6 +687,23 @@ public class ContentUtil {
         if (IS_USER_AUTH_REQUIRED)
             headers.put(Constant.X_AUTHENTICATED_USER_TOKEN, "${accessToken}");
         return headers;
+    }
+
+    /**
+     * This Method Returns Result Map
+     *
+     * @param testContext
+     * @return
+     */
+    private static Map<String, Object> getResult(TestContext testContext) {
+        Map<String, Object> result = null;
+        try {
+            result = objectMapper.readValue(testContext.getVariable("result"), new TypeReference<Map<String, Object>>() {
+            });
+        } catch (Exception e) {
+            System.out.println("Exception Occurred While parsing context variable : " + e);
+        }
+        return result;
     }
 
 }
