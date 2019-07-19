@@ -22,4 +22,13 @@ public class DynamicPayload {
             "    }\n" +
             "  }\n" +
             "}";
+
+    public static final String SEARCH_CONTENT_WITH_IDENTIFIERS="{\n" +
+            "    \"request\": {\n" +
+            "        \"filters\": {\n" +
+            "            \"objectType\": [\"Content\"],\n" +
+            "            \"identifier\":identifiersVal\n" +
+            "        }\n" +
+            "    }\n" +
+            "}";
 }

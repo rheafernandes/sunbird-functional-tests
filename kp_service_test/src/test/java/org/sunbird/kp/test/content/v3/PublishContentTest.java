@@ -2,6 +2,7 @@ package org.sunbird.kp.test.content.v3;
 
 import com.consol.citrus.annotations.CitrusTest;
 import org.sunbird.kp.test.common.BaseCitrusTestRunner;
+import org.sunbird.kp.test.util.CompositeSearchUtil;
 import org.sunbird.kp.test.util.ContentUtil;
 import org.sunbird.kp.test.util.DynamicPayload;
 import org.testng.Assert;
@@ -20,7 +21,7 @@ public class PublishContentTest extends BaseCitrusTestRunner {
 
     @Test
     @CitrusTest
-    public void testPublishTextbookContentWithResourceHavingConceptRelation() {
+    public void testPublishTextbookContentWithResourceHavingConceptRelation() throws Exception {
         String resourceMimeType = "application/pdf";
         getAuthToken(this, null);
 
@@ -51,6 +52,12 @@ public class PublishContentTest extends BaseCitrusTestRunner {
         Assert.assertEquals((String) textbookMap.get("status"), "Live");
         Assert.assertNotNull(textbookMap.get("variants"));
         Assert.assertEquals("LO53", (String) concept.get("identifier"));
+        List<String> childNodes = (List<String>) textbookMap.get("childNodes");
+        String payload = DynamicPayload.SEARCH_CONTENT_WITH_IDENTIFIERS.replace("identifiersVal", objectMapper.writeValueAsString(childNodes));
+        Map<String, Object> searchResult = CompositeSearchUtil.searchContent(this, payload, null, null);
+        System.out.println("searchResult : " + searchResult);
+        int count = (int) searchResult.get("count");
+        Assert.assertEquals(childNodes.size(), count);
     }
 
 }
