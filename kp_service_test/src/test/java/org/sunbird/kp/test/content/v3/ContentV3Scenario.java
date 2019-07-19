@@ -47,5 +47,16 @@ public class ContentV3Scenario {
     public static final String TEST_READ_RESOURCE_CONTENT_WITH_INVALID_IDENTIFIER =
             "testReadResourceContentWithInvalidIdentifier";
 
+    // Scenario's for upload Content  API
+    public static final String TEST_UPLOAD_RESOURCE_PDF_WITH_FILE_URL = "testUploadResourcePdfWithFileUrl";
+    public static final String TEST_UPLOAD_RESOURCE_PDF_WITH_FILE_MISMATCHED_MIME = "testUploadResourcePdfWithFileMismatchedMime";
+    public static final String TEST_UPLOAD_RESOURCE_PDF_WITH_FILE_INVALID_IDENTIFIER = "testUploadResourcePdfWithFileInvalidId";
+
+    // Scenario's for review Content  API
+    public static final String TEST_REVIEW_WITH_VALID_IDENTIFIER_WITH_NOT_UPLOAD_FILE = "testReviewWithValidIdentifieWithNonUploadFile";
+    public static final String TEST_REVIEW_WITH_VALID_IDENTIFIER = "testReviewWithValidIdentifier";
+    public static final String TEST_REVIEW_WITH_INVALID_IDENTIFIER = "testReviewWithInvalidIdentifier";
+
+
 
 }
