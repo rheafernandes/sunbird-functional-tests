@@ -28,7 +28,8 @@ public class DynamicPayload {
             "        \"filters\": {\n" +
             "            \"objectType\": [\"Content\"],\n" +
             "            \"identifier\":identifiersVal\n" +
-            "        }\n" +
+            "        },\n" +
+            "        \"limit\": 0\n" +
             "    }\n" +
             "}";
 }
