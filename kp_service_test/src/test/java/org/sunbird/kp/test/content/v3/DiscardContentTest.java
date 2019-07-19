@@ -17,7 +17,7 @@ public class DiscardContentTest extends BaseCitrusTestRunner {
     private static final String TEMPLATE_DIR = "templates/content/v3/discard";
 
     @Test(dataProvider = "discardContent")
-    @CitrusParameters({"testName", "requestUrl", "httpStatusCode", "userType", "valParams", "mimeType", "needImage","workflow"})
+    @CitrusParameters({"testName", "requestUrl", "httpStatusCode", "userType", "valParams", "mimeType", "needImage", "workflow"})
     @CitrusTest
     public void testDiscardContent(
             String testName, String requestUrl, HttpStatus httpStatusCode, String userType,
@@ -47,7 +47,7 @@ public class DiscardContentTest extends BaseCitrusTestRunner {
     public void testDiscardCollection(
             String testName, String requestUrl, HttpStatus httpStatusCode, String userType, Map<String, Object> valParams, Boolean needImage, String collectionType) {
         getAuthToken(this, userType);
-        Map<String, Object> map = ContentUtil.createCollectionContent(this, null,collectionType , null);
+        Map<String, Object> map = ContentUtil.createCollectionContent(this, null, collectionType, null);
         String contentId = (String) map.get("content_id");
         String versionKey = (String) map.get("versionKey");
         this.variable("versionKeyVal", versionKey);
@@ -67,13 +67,10 @@ public class DiscardContentTest extends BaseCitrusTestRunner {
         );
     }
 
-
     @DataProvider(name = "discardContent")
     public Object[][] discardContent() {
         return new Object[][]{
-                /**
-                 * Valid request (200) For Discard Content
-                */
+                //Valid request (200) For Discard Content
                 new Object[]{
                         ContentV3Scenario.TEST_DISCARD_CONTENT_STATUS_DRAFT, APIUrl.DISCARD_CONTENT, HttpStatus.OK, Constant.CREATOR, null, "application/pdf", false, "contentInDraft"
                 },
@@ -83,12 +80,9 @@ public class DiscardContentTest extends BaseCitrusTestRunner {
                 },
                 new Object[]{
                         ContentV3Scenario.TEST_DISCARD_CONTENT_STATUS_LIVE_WITH_IMAGE_DRAFT, APIUrl.DISCARD_CONTENT, HttpStatus.OK, Constant.CREATOR, null, "application/pdf", false, "contentInLiveImageDraft"
-                },
-
-                /**
-                 *
-                 * Invalid Request Format (400) requests are here
-                */
+                }
+                /*
+                //Invalid Request Format (400) requests are here
                 new Object[]{
                         ContentV3Scenario.TEST_DISCARD_CONTENT_STATUS_LIVE_WITH_IMAGE_REVIEW, APIUrl.DISCARD_CONTENT, HttpStatus.BAD_REQUEST, Constant.CREATOR, null, "application/pdf", false, "contentInLiveImageReview"
                 },
@@ -103,18 +97,8 @@ public class DiscardContentTest extends BaseCitrusTestRunner {
                 },
                 new Object[]{
                         ContentV3Scenario.TEST_DISCARD_CONTENT_STATUS_UNLISTED, APIUrl.DISCARD_CONTENT, HttpStatus.BAD_REQUEST, Constant.CREATOR, null, "application/pdf", true, "contentInUnlisted"
-                },
+                },*/
 
-
-                /**
-                 *
-                 * Resource Not Found requests (404) are here
-                */
-
-                /**
-                 *
-                 * Resources with Server (500) errors are here
-                */
         };
     }
 
@@ -122,9 +106,8 @@ public class DiscardContentTest extends BaseCitrusTestRunner {
     public Object[][] discardCollection() {
         return new Object[][]{
                 new Object[]{
-                ContentV3Scenario.TEST_DISCARD_COLLECTION_STATUS_DRAFT, APIUrl.DISCARD_CONTENT, HttpStatus.OK, Constant.CREATOR, null, false, "Collection"
-        },
-
+                        ContentV3Scenario.TEST_DISCARD_COLLECTION_STATUS_DRAFT, APIUrl.DISCARD_CONTENT, HttpStatus.OK, Constant.CREATOR, null, false, "Collection"
+                }
         };
     }
 

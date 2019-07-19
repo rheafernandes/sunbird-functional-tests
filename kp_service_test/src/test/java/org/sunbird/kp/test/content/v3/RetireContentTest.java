@@ -14,10 +14,11 @@ import javax.ws.rs.core.MediaType;
 import java.util.Map;
 
 public class RetireContentTest extends BaseCitrusTestRunner {
+
     private static final String TEMPLATE_DIR = "templates/content/v3/retire";
 
     @Test(dataProvider = "retireContent")
-    @CitrusParameters({"testName", "requestUrl", "httpStatusCode", "userType", "valParams", "mimeType", "needImage","workflow"})
+    @CitrusParameters({"testName", "requestUrl", "httpStatusCode", "userType", "valParams", "mimeType", "needImage", "workflow"})
     @CitrusTest
     public void testRetireContent(
             String testName, String requestUrl, HttpStatus httpStatusCode, String userType,
@@ -44,10 +45,10 @@ public class RetireContentTest extends BaseCitrusTestRunner {
     @Test(dataProvider = "retireCollection")
     @CitrusParameters({"testName", "requestUrl", "httpStatusCode", "userType", "valParams", "needImage", "collectionType"})
     @CitrusTest
-    public void testRetireCollection(
+    public void testRetireCollectionContent(
             String testName, String requestUrl, HttpStatus httpStatusCode, String userType, Map<String, Object> valParams, Boolean needImage, String collectionType) {
         getAuthToken(this, userType);
-        Map<String, Object> map = ContentUtil.createCollectionContent(this, null,collectionType , null);
+        Map<String, Object> map = ContentUtil.createCollectionContent(this, null, collectionType, null);
         String contentId = (String) map.get("content_id");
         String versionKey = (String) map.get("versionKey");
         this.variable("versionKeyVal", versionKey);
@@ -71,24 +72,17 @@ public class RetireContentTest extends BaseCitrusTestRunner {
     @DataProvider(name = "retireContent")
     public Object[][] retireContent() {
         return new Object[][]{
-                /**
-                 * Valid request (200) For Retire Content
-                */
+                // Valid request (200) For Retire Content
                 new Object[]{
                         ContentV3Scenario.TEST_RETIRE_CONTENT_STATUS_DRAFT, APIUrl.RETIRE_CONTENT, HttpStatus.OK, Constant.CREATOR, null, "application/pdf", false, "contentInDraft"
                 },
-
                 new Object[]{
                         ContentV3Scenario.TEST_RETIRE_CONTENT_STATUS_DRAFT, APIUrl.RETIRE_CONTENT, HttpStatus.OK, Constant.CREATOR, null, "application/pdf", false, "contentInDraftUpdated"
-                },
+                }/*,
                 new Object[]{
                         ContentV3Scenario.TEST_RETIRE_CONTENT_STATUS_LIVE_WITH_IMAGE_DRAFT, APIUrl.RETIRE_CONTENT, HttpStatus.OK, Constant.CREATOR, null, "application/pdf", false, "contentInLiveImageDraft"
                 },
-
-                /**
-                 *
-                 * Invalid Request Format (400) requests are here
-                */
+                 //Invalid Request Format (400) requests are here
                 new Object[]{
                         ContentV3Scenario.TEST_RETIRE_CONTENT_STATUS_LIVE_WITH_IMAGE_REVIEW, APIUrl.RETIRE_CONTENT, HttpStatus.BAD_REQUEST, Constant.CREATOR, null, "application/pdf", false, "contentInLiveImageReview"
                 },
@@ -103,18 +97,8 @@ public class RetireContentTest extends BaseCitrusTestRunner {
                 },
                 new Object[]{
                         ContentV3Scenario.TEST_RETIRE_CONTENT_STATUS_UNLISTED, APIUrl.RETIRE_CONTENT, HttpStatus.BAD_REQUEST, Constant.CREATOR, null, "application/pdf", true, "contentInUnlisted"
-                },
+                }*/
 
-
-                /**
-                 *
-                 * Resource Not Found requests (404) are here
-                */
-
-                /**
-                 *
-                 * Resources with Server (500) errors are here
-                */
         };
     }
 
@@ -123,8 +107,7 @@ public class RetireContentTest extends BaseCitrusTestRunner {
         return new Object[][]{
                 new Object[]{
                         ContentV3Scenario.TEST_RETIRE_COLLECTION_STATUS_DRAFT, APIUrl.RETIRE_CONTENT, HttpStatus.OK, Constant.CREATOR, null, false, "Collection"
-                },
-
+                }
         };
     }
 

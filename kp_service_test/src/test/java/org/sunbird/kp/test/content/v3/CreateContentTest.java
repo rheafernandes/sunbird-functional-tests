@@ -13,12 +13,12 @@ import javax.ws.rs.core.MediaType;
 import java.util.Map;
 
 /**
- * Integration Test Cases for Content Read API
+ * Integration Test Cases for Content Create API
  * @author Kumar Gauraw
  */
 public class CreateContentTest extends BaseCitrusTestRunner {
 
-    private static final String TEMPLATE_DIR = "templates/content/v3";
+    private static final String TEMPLATE_DIR = "templates/content/v3/create";
 
     @Test(dataProvider = "createResourceContentWithValidRequest")
     @CitrusParameters({"testName", "requestUrl", "httpStatusCode", "userType","valParams"})
@@ -40,15 +40,30 @@ public class CreateContentTest extends BaseCitrusTestRunner {
         );
     }
 
+    @Test(dataProvider = "createAssetContentWithValidRequest")
+    @CitrusParameters({"testName", "requestUrl", "httpStatusCode", "userType","valParams"})
+    @CitrusTest
+    public void testCreateAssetContentWithValidRequest(
+            String testName, String requestUrl, HttpStatus httpStatusCode, String userType, Map<String, Object> valParams) {
+        getAuthToken(this, userType);
+        performPostTest(
+                this,
+                TEMPLATE_DIR,
+                testName,
+                requestUrl,
+                null,
+                REQUEST_JSON,
+                MediaType.APPLICATION_JSON,
+                httpStatusCode,
+                valParams,
+                RESPONSE_JSON
+        );
+    }
+
+
     @DataProvider(name = "createResourceContentWithValidRequest")
     public Object[][] createResourceContentWithValidRequest() {
         return new Object[][]{
-                // Sample Request for Dynamic Validation.
-                // If validationParams Map Passed, Static Validation based on Response File Will be disabled.
-                /*new Object[]{
-                        ContentV3Scenario.TEST_CREATE_RESOURCE_PDF_CONTENT_WITH_VALID_REQUEST, APIUrl.CREATE_CONTENT, HttpStatus.OK, "Creator",
-                        new HashMap<String, Object>(){{put("node_id",null);put("versionKey",null);put("mimeType","application/pdf");}}
-                },*/
                 new Object[]{
                         ContentV3Scenario.TEST_CREATE_RESOURCE_PDF_CONTENT_WITH_VALID_REQUEST, APIUrl.CREATE_CONTENT, HttpStatus.OK, Constant.CREATOR, null
                 },
@@ -72,7 +87,13 @@ public class CreateContentTest extends BaseCitrusTestRunner {
                 },
                 new Object[]{
                         ContentV3Scenario.TEST_CREATE_PLUGIN_CONTENT_WITH_VALID_REQUEST, APIUrl.CREATE_CONTENT, HttpStatus.OK, Constant.CREATOR, null
-                },
+                }
+        };
+    }
+
+    @DataProvider(name = "createAssetContentWithValidRequest")
+    public Object[][] createAssetContentWithValidRequest() {
+        return new Object[][]{
                 new Object[]{
                         ContentV3Scenario.TEST_CREATE_ASSET_VIDEO_MP4_CONTENT_WITH_VALID_REQUEST, APIUrl.CREATE_CONTENT, HttpStatus.OK, Constant.CREATOR, null
                 },

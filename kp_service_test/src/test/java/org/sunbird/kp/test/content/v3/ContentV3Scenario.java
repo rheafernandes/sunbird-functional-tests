@@ -2,12 +2,12 @@ package org.sunbird.kp.test.content.v3;
 
 /**
  * This Class Holds All Scenarios for Content API
+ *
  * @author Kumar Gauraw
  */
 public class ContentV3Scenario {
 
     //Scenario's for Content Create API
-
     //Resource
     public static final String TEST_CREATE_RESOURCE_PDF_CONTENT_WITH_VALID_REQUEST =
             "testCreateResourcePdfContentWithValidRequest";
@@ -23,11 +23,9 @@ public class ContentV3Scenario {
             "testCreateResourceVideoMp4ContentWithValidRequest";
     public static final String TEST_CREATE_RESOURCE_VIDEO_MPEG_CONTENT_WITH_VALID_REQUEST =
             "testCreateResourceVideoMpegContentWithValidRequest";
-
     //Plugin
     public static final String TEST_CREATE_PLUGIN_CONTENT_WITH_VALID_REQUEST =
             "testCreatePluginContentWithValidRequest";
-
     //Asset
     public static final String TEST_CREATE_ASSET_VIDEO_MP4_CONTENT_WITH_VALID_REQUEST =
             "testCreateAssetVideoMp4ContentWithValidRequest";
@@ -48,10 +46,25 @@ public class ContentV3Scenario {
             "testReadResourceContentWithInvalidIdentifier";
 
 
-    /**
-     *
-     * Content Update Api- Scenarios
-     */
+    // Scenario's for upload Content  API
+    public static final String TEST_UPLOAD_RESOURCE_PDF_WITH_FILE_URL =
+            "testUploadResourcePdfWithFileUrl";
+    public static final String TEST_UPLOAD_RESOURCE_PDF_WITH_FILE_MISMATCHED_MIME =
+            "testUploadResourcePdfWithFileMismatchedMime";
+    public static final String TEST_UPLOAD_RESOURCE_PDF_WITH_FILE_INVALID_IDENTIFIER =
+            "testUploadResourcePdfWithFileInvalidId";
+
+
+    // Scenario's for review Content  API
+    public static final String TEST_REVIEW_WITH_VALID_IDENTIFIER_WITH_NOT_UPLOAD_FILE =
+            "testReviewWithValidIdentifieWithNonUploadFile";
+    public static final String TEST_REVIEW_WITH_VALID_IDENTIFIER =
+            "testReviewWithValidIdentifier";
+    public static final String TEST_REVIEW_WITH_INVALID_IDENTIFIER =
+            "testReviewWithInvalidIdentifier";
+
+
+    // Scenario's for Content Update API
     public static final String TEST_UPDATE_RESOURCE_PDF_CONTENT_WITH_VALID_REQUEST =
             "testUpdateResourcePdfContentWithValidRequest";
     public static final String TEST_UPDATE_RESOURCE_ECML_CONTENT_WITH_VALID_REQUEST =
@@ -111,51 +124,7 @@ public class ContentV3Scenario {
     public static final String TEST_UPDATE_WITH_STALE_DATA =
             "testUpdateContentWithStaleData";
 
-    /**
-     *  Content Discard API - Scenario
-     *
-     */
-
-    public static final String TEST_DISCARD_WITH_IMAGE_ID =
-            "testRetireContentWithImageId";
-    public static final String TEST_DISCARD_CONTENT_STATUS_DRAFT =
-            "testRetireStatusDraft";
-    public static final String TEST_DISCARD_COLLECTION_STATUS_DRAFT =
-            "testRetireCollectionStatusDraft";
-    public static final String TEST_DISCARD_CONTENT_STATUS_REVIEW =
-            "testRetireStatusReview";
-    public static final String TEST_DISCARD_CONTENT_STATUS_FLAGGED =
-            "testRetireStatusFlagged";
-    public static final String TEST_DISCARD_CONTENT_STATUS_FLAGREVIEW =
-            "testRetireStatusFlagReview";
-    public static final String TEST_DISCARD_CONTENT_STATUS_LIVE =
-            "testRetireStatusLive";
-    public static final String TEST_DISCARD_CONTENT_STATUS_UNLISTED =
-            "testRetireStatusUnlisted";
-    public static final String TEST_DISCARD_CONTENT_STATUS_LIVE_WITH_IMAGE_DRAFT =
-            "testReviewStatusLiveWithImageDraft";
-    public static final String TEST_DISCARD_CONTENT_STATUS_LIVE_WITH_IMAGE_REVIEW =
-            "testRetireStatusLiveWithImageReview";
-    public static final String TEST_DISCARD_CONTENT_STATUS_RETIRED =
-            "testRetireStatusRetired";
-    public static final String TEST_DISCARD_CONTENT_AFTER_DISCARD =
-            "testDiscardAfterDiscard";
-
-    // Scenario's for upload Content  API
-    public static final String TEST_UPLOAD_RESOURCE_PDF_WITH_FILE_URL = "testUploadResourcePdfWithFileUrl";
-    public static final String TEST_UPLOAD_RESOURCE_PDF_WITH_FILE_MISMATCHED_MIME = "testUploadResourcePdfWithFileMismatchedMime";
-    public static final String TEST_UPLOAD_RESOURCE_PDF_WITH_FILE_INVALID_IDENTIFIER = "testUploadResourcePdfWithFileInvalidId";
-
-    // Scenario's for review Content  API
-    public static final String TEST_REVIEW_WITH_VALID_IDENTIFIER_WITH_NOT_UPLOAD_FILE = "testReviewWithValidIdentifieWithNonUploadFile";
-    public static final String TEST_REVIEW_WITH_VALID_IDENTIFIER = "testReviewWithValidIdentifier";
-    public static final String TEST_REVIEW_WITH_INVALID_IDENTIFIER = "testReviewWithInvalidIdentifier";
-
-    /**
-     *
-     * Content Retire API - Scenarios
-     */
-
+    //Scenario's for Content Retire API
     public static final String TEST_RETIRE_WITH_IMAGE_ID =
             "testRetireContentWithImageId";
     public static final String TEST_RETIRE_CONTENT_STATUS_DRAFT =
@@ -183,4 +152,33 @@ public class ContentV3Scenario {
     //For Live node which has image
     public static final String TEST_RETIRE_CONTENT_AFTER_DISCARD =
             "testRetireAfterDiscard";
+
+
+    // Scenario's for Content Discard API
+    public static final String TEST_DISCARD_WITH_IMAGE_ID =
+            "testDiscardContentWithImageId";
+    public static final String TEST_DISCARD_CONTENT_STATUS_DRAFT =
+            "testDiscardStatusDraft";
+    public static final String TEST_DISCARD_COLLECTION_STATUS_DRAFT =
+            "testDiscardCollectionStatusDraft";
+    public static final String TEST_DISCARD_CONTENT_STATUS_REVIEW =
+            "testDiscardStatusReview";
+    public static final String TEST_DISCARD_CONTENT_STATUS_FLAGGED =
+            "testDiscardStatusFlagged";
+    public static final String TEST_DISCARD_CONTENT_STATUS_FLAGREVIEW =
+            "testDiscardStatusFlagReview";
+    public static final String TEST_DISCARD_CONTENT_STATUS_LIVE =
+            "testDiscardStatusLive";
+    public static final String TEST_DISCARD_CONTENT_STATUS_UNLISTED =
+            "testDiscardStatusUnlisted";
+    public static final String TEST_DISCARD_CONTENT_STATUS_LIVE_WITH_IMAGE_DRAFT =
+            "testDiscardStatusLiveWithImageDraft";
+    public static final String TEST_DISCARD_CONTENT_STATUS_LIVE_WITH_IMAGE_REVIEW =
+            "testDiscardStatusLiveWithImageReview";
+    public static final String TEST_DISCARD_CONTENT_STATUS_RETIRED =
+            "testDiscardStatusRetired";
+    public static final String TEST_DISCARD_CONTENT_AFTER_DISCARD =
+            "testDiscardAfterDiscard";
+
+
 }
