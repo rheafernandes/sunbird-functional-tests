@@ -41,6 +41,7 @@ public class PublishContentTest extends BaseCitrusTestRunner {
         ContentUtil.updateContentHierarchy(this, textbookId, "textbook", collectionId, null, null);
         ContentUtil.publishContent(this, null, "public", textbookId, null);
 
+        this.getTestCase().setName("testPublishTextbookContentWithResourceHavingConceptRelation");
         Map<String, Object> textbookMap = ContentUtil.readCollectionHierarchy(this, textbookId);
         Assert.assertNotNull(textbookMap);
         List<Map<String, Object>>  list = (List<Map<String, Object>>)textbookMap.get("concepts");
