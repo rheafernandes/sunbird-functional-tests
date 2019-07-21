@@ -6,9 +6,9 @@
     "resmsgid": "@ignore@",
     "msgid": null,
     "status": "failed",
-    "err": "ERR_CONTENT_NOT_DRAFT",
+    "err": "@ignore@",
     "errmsg": "@ignore@"
   },
-  "responseCode": "CLIENT_ERROR",
+  "responseCode": "BAD_REQUEST",
   "result": "@ignore@"
 }

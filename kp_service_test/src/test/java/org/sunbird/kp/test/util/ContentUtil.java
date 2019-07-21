@@ -43,6 +43,8 @@ public class ContentUtil {
     private static final String UPDATE_RESOURCE_CONTENT_EXPECT_200 = "updateResourceContentExpect200";
     private static final String PUBLISH_CONTENT_EXPECT_200 = "publishContentExpect200";
     private static final String UPDATE_HIERARCHY_EXPECT_200 = "updateHierarchyExpect200";
+    private static final String RETIRE_RESOURCE_CONTENT_EXPECT_200 = "retireResourceContentExpect200";
+    private static final String DISCARD_RESOURCE_CONTENT_EXPECT_200 = "discardResourceContentExpect200";
 
     private static final ObjectMapper mapper = new ObjectMapper();
 
@@ -62,10 +64,10 @@ public class ContentUtil {
             "}";
 
 
-    public static Map<String, Object> prepareResourceContent(String type, BaseCitrusTestRunner runner, String payload,
+    public static Map<String, Object> prepareResourceContent(String type, BaseCitrusTestRunner runner, Map<String, Object> payload,
                                                              String mimeType, Map<String, Object> headers) {
         Map contentWorkMap = null;
-        Map contentMap = ContentUtil.createResourceContent(runner, payload, mimeType, headers);
+        Map contentMap = ContentUtil.createResourceContent(runner, null, mimeType, headers);
         Map<String, Object> result = new HashMap<>();
         String contentId = (String) contentMap.get("content_id");
         result.put("content_id", contentId);
@@ -78,13 +80,13 @@ public class ContentUtil {
             Map<String, Supplier<Map<String, Object>>> actionMap = new HashMap<String, Supplier<Map<String, Object>>>() {
                 {
                     put("Upload", () -> uploadResourceContent(runner, contentId, mimeType, headers));
-                    put("Publish", () -> publishContent(runner, payload, "listed", contentId, headers));
-                    put("Review", () -> reviewContent(runner, payload, REVIEW_RESOURCE_CONTENT_EXPECT_200, contentId, headers));
-                    put("Update", () -> updateContent(runner, payload, UPDATE_RESOURCE_CONTENT_EXPECT_200, contentId, headers));
-                    put("Unlisted", () -> publishContent(runner, payload, "unlisted", contentId, headers));
+                    put("Publish", () -> publishContent(runner, null, "listed", contentId, headers));
+                    put("Review", () -> reviewContent(runner, null, REVIEW_RESOURCE_CONTENT_EXPECT_200, contentId, headers));
+                    put("Update", () -> updateContent(runner, null, UPDATE_RESOURCE_CONTENT_EXPECT_200, contentId, headers));
+                    put("Unlisted", () -> publishContent(runner, null, "unlisted", contentId, headers));
                 }
             };
-            if (!CollectionUtils.isEmpty(contentWorkList))
+            if (!CollectionUtils.isEmpty(contentWorkList)) {
                 contentWorkList.forEach(action -> {
                     Map response = actionMap.get(action).get();
                     if (StringUtils.isNotBlank((String) response.get("versionKey"))) {
@@ -94,6 +96,7 @@ public class ContentUtil {
                     if (StringUtils.isNotBlank((String) response.get("content_url")))
                         result.put("content_url", response.get("content_url"));
                 });
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -663,6 +666,96 @@ public class ContentUtil {
         if (MapUtils.isNotEmpty(result)) {
             data.put("content_id", result.get("node_id"));
             data.put("versionKey", result.get("versionKey"));
+        }
+        return data;
+    }
+
+    public static Map<String, Object> retireContent(BaseCitrusTestRunner runner, String payload, String testName, String contentId, Map<String, Object> headers) {
+        final String url = APIUrl.RETIRE_CONTENT + contentId;
+        final TestContext testContext = runner.testContext;
+        if (StringUtils.isNotBlank(payload)) {
+            runner.http(
+                    builder ->
+                            TestActionUtil.getDeleteRequestTestAction(
+                                    builder,
+                                    Constant.KP_ENDPOINT,
+                                    url,
+                                    MediaType.APPLICATION_JSON.toString(),
+                                    payload,
+                                    getHeaders(headers)));
+        } else if (StringUtils.isNotBlank(testName)) {
+            runner.getTestCase().setName(testName);
+            runner.http(
+                    builder ->
+                            TestActionUtil.processDeleteRequest(
+                                    builder,
+                                    Constant.KP_ENDPOINT,
+                                    CONTENT_PAYLOAD_DIR,
+                                    testName,
+                                    url,
+                                    Constant.REQUEST_JSON,
+                                    Constant.CONTENT_TYPE_APPLICATION_JSON,
+                                    getHeaders(headers)));
+        }
+
+        runner.http(
+                builder ->
+                        TestActionUtil.getExtractFromResponseTestAction(
+                                testContext,
+                                builder,
+                                Constant.KP_ENDPOINT,
+                                HttpStatus.OK,
+                                "$.result",
+                                "result"));
+        Map<String, Object> result = getResult(testContext);
+        Map<String, Object> data = new HashMap<String, Object>();
+        if (MapUtils.isNotEmpty(result)) {
+            data.put("content_id", result.get("node_id"));
+        }
+        return data;
+    }
+
+    public static Map<String, Object> discardContent(BaseCitrusTestRunner runner, String payload, String testName, String contentId, Map<String, Object> headers) {
+        final String url = APIUrl.DISCARD_CONTENT + contentId;
+        final TestContext testContext = runner.testContext;
+        if (StringUtils.isNotBlank(payload)) {
+            runner.http(
+                    builder ->
+                            TestActionUtil.getDeleteRequestTestAction(
+                                    builder,
+                                    Constant.KP_ENDPOINT,
+                                    url,
+                                    MediaType.APPLICATION_JSON.toString(),
+                                    payload,
+                                    getHeaders(headers)));
+        } else if (StringUtils.isNotBlank(testName)) {
+            runner.getTestCase().setName(testName);
+            runner.http(
+                    builder ->
+                            TestActionUtil.processDeleteRequest(
+                                    builder,
+                                    Constant.KP_ENDPOINT,
+                                    CONTENT_PAYLOAD_DIR,
+                                    testName,
+                                    url,
+                                    Constant.REQUEST_JSON,
+                                    Constant.CONTENT_TYPE_APPLICATION_JSON,
+                                    getHeaders(headers)));
+        }
+
+        runner.http(
+                builder ->
+                        TestActionUtil.getExtractFromResponseTestAction(
+                                testContext,
+                                builder,
+                                Constant.KP_ENDPOINT,
+                                HttpStatus.OK,
+                                "$.result",
+                                "result"));
+        Map<String, Object> result = getResult(testContext);
+        Map<String, Object> data = new HashMap<String, Object>();
+        if (MapUtils.isNotEmpty(result)) {
+            data.put("content_id", result.get("node_id"));
         }
         return data;
     }
