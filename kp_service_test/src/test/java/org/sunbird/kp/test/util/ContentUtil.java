@@ -60,7 +60,9 @@ public class ContentUtil {
             "\t\"contentInUnlisted\" : [\"Upload\", \"Unlisted\"],\n" +
             "\t\"contentInFlagged\" : [\"Upload\", \"Publish\", \"Flag\"],\n" +
             "\t\"contentInFlagDraft\" :  [\"Upload\", \"Publish\", \"Flag\", \"AcceptFlag\"],\n" +
-            "\t\"contentInFlagReview\" :  [\"Upload\", \"Publish\", \"Flag\", \"AcceptFlag\", \"Review\"]\n" +
+            "\t\"contentInFlagReview\" :  [\"Upload\", \"Publish\", \"Flag\", \"AcceptFlag\", \"Review\"],\n" +
+            "\t\"contentRetired\" : [\"Retire\"],\n" +
+            "\t\"contentDiscard\" : [\"Discard\"]\n" +
             "}";
 
 
@@ -84,6 +86,8 @@ public class ContentUtil {
                     put("Review", () -> reviewContent(runner, null, REVIEW_RESOURCE_CONTENT_EXPECT_200, contentId, headers));
                     put("Update", () -> updateContent(runner, null, UPDATE_RESOURCE_CONTENT_EXPECT_200, contentId, headers));
                     put("Unlisted", () -> publishContent(runner, null, "unlisted", contentId, headers));
+                    put("Retire", () -> retireContent(runner, null, RETIRE_RESOURCE_CONTENT_EXPECT_200, contentId, headers));
+                    put("Discard", () -> discardContent(runner, null, DISCARD_RESOURCE_CONTENT_EXPECT_200, contentId, headers));
                 }
             };
             if (!CollectionUtils.isEmpty(contentWorkList)) {
