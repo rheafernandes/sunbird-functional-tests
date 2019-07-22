@@ -23,6 +23,7 @@ public class UploadContentTest extends BaseCitrusTestRunner {
 
     private static final String TEMPLATE_DIR = "templates/content/v3/upload";
     private static final String MATCHED_EXTENSION = ".pdf";
+    private static final String IMG_EXTENSION = ".img";
 
     @Test(dataProvider = "uploadResourceContentInLiveWithFile")
     @CitrusParameters({"userType", "mimeType", "extension"})
@@ -35,6 +36,11 @@ public class UploadContentTest extends BaseCitrusTestRunner {
         Assert.assertTrue(result.containsKey("content_url"));
         String url = (String) result.get("content_url");
         Assert.assertTrue(url.endsWith(extension));
+
+        Map<String, Object> resourceMap = (Map<String, Object>) ContentUtil.readContent(this, contentId, "edit", null).get("content");
+        String identifier = (String)resourceMap.get("identifier");
+        Assert.assertTrue(identifier.endsWith(IMG_EXTENSION));
+
     }
 
 
