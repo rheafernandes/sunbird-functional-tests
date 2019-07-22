@@ -14,7 +14,10 @@ import java.util.HashMap;
 import java.util.Map;
 import javax.ws.rs.core.MediaType;
 
-
+/**
+ * Functional test cases for Review API
+ * @author pritha
+ */
 public class ReviewContentTest extends BaseCitrusTestRunner {
 
     private static final String TEMPLATE_DIR = "templates/content/v3/review";
