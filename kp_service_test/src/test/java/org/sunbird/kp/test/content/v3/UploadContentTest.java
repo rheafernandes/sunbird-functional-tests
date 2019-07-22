@@ -108,9 +108,9 @@ public class UploadContentTest extends BaseCitrusTestRunner {
     @DataProvider(name = "uploadResourceContentWithFileMimeTypes")
     public Object[][] uploadResourceContentWithFileMimeTypes() {
         return new Object[][]{
-                //new Object[]{Constant.CREATOR, "application/pdf", ".pdf"},
+                new Object[]{Constant.CREATOR, "application/pdf", ".pdf"},
                 new Object[]{Constant.CREATOR, "application/vnd.ekstep.ecml-archive", ".zip"},
-               // new Object[]{Constant.CREATOR, "application/vnd.ekstep.html-archive", ".zip"},
+                new Object[]{Constant.CREATOR, "application/vnd.ekstep.html-archive", ".zip"},
 
         };
     }
@@ -118,12 +118,12 @@ public class UploadContentTest extends BaseCitrusTestRunner {
     @DataProvider(name = "uploadAssetContentWithFileMimeTypes")
     public Object[][] uploadAssetContentWithFileMimeTypss() {
         return new Object[][]{
-       /*         new Object[]{Constant.CREATOR, "image/png", ".png"},
+                new Object[]{Constant.CREATOR, "image/png", ".png"},
                 new Object[]{Constant.CREATOR, "image/jpg", ".jpg"},
                 new Object[]{Constant.CREATOR, "video/mp4", ".mp4"},
                 new Object[]{Constant.CREATOR, "video/webm", ".webm"},
                 new Object[]{Constant.CREATOR, "audio/mp3", ".mp3"},
-                new Object[]{Constant.CREATOR, "video/mpeg", ".mpeg"},*/
+                new Object[]{Constant.CREATOR, "video/mpeg", ".mpeg"},
 
         };
     }
@@ -131,10 +131,10 @@ public class UploadContentTest extends BaseCitrusTestRunner {
     @DataProvider(name = "uploadResourceContentWithFileUrl")
     public Object[][] uploadResourceContentWithFileUrl() {
         return new Object[][]{
-                /*new Object[]{
+                new Object[]{
                         ContentV3Scenario.TEST_UPLOAD_RESOURCE_PDF_WITH_FILE_URL, APIUrl.UPLOAD_CONTENT, HttpStatus.OK, Constant.CREATOR,
                         null, "application/pdf", ".pdf"
-                },*/
+                },
 
         };
     }
@@ -143,7 +143,7 @@ public class UploadContentTest extends BaseCitrusTestRunner {
     public Object[][] uploadResourceContentWithFile() {
         return new Object[][]{
                 //specific negetive test scenarios
-/*                new Object[]{
+                new Object[]{
                         ContentV3Scenario.TEST_UPLOAD_RESOURCE_PDF_WITH_FILE_MISMATCHED_MIME, APIUrl.UPLOAD_CONTENT, HttpStatus.BAD_REQUEST, Constant.CREATOR,
                         null, "application/pdf", ".jpg", null
                 },
@@ -181,14 +181,14 @@ public class UploadContentTest extends BaseCitrusTestRunner {
                 new Object[]{
                         ContentV3Scenario.TEST_UPLOAD_RESOURCE_ECML_WITH_TWIN_ANIMATION_AUDIO_SPRITES_IMG_SPRITES, APIUrl.UPLOAD_CONTENT, HttpStatus.OK, Constant.CREATOR,
                         null, "application/vnd.ekstep.ecml-archive", null, "tweenAndaudioSprite.zip"
-                },*/
+                },
         };
     }
 
     @DataProvider(name = "uploadResourceContentInLiveWithFile")
     public Object[][] uploadResourceContentInLiveWithFile() {
         return new Object[][]{
-                //new Object[]{Constant.CREATOR, "application/pdf", ".pdf"},
+                new Object[]{Constant.CREATOR, "application/pdf", ".pdf"},
 
         };
     }

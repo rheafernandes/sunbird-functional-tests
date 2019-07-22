@@ -71,7 +71,6 @@ public class ContentV3Scenario {
             "testUploadResourceWithEcmlInvalidJson";
     public static final String TEST_UPLOAD_RESOURCE_WITH_VALID_ECML_MISSING_ASSET =
             "testUploadResourceWithValidEcmlMissingAsset";
-    //Check for ECML containing Tween animations, audio sprites, image sprites
     public static final String TEST_UPLOAD_RESOURCE_ECML_WITH_TWIN_ANIMATION_AUDIO_SPRITES_IMG_SPRITES =
             "testUploadResourceEcmlWithTwinAnimationAudioSpritesImgSprites";
 
