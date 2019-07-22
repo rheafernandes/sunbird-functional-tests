@@ -2,6 +2,7 @@ package org.sunbird.kp.test.common;
 
 import com.consol.citrus.context.TestContext;
 import com.consol.citrus.dsl.testng.TestNGCitrusTestRunner;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -25,6 +26,8 @@ public class BaseCitrusTestRunner extends TestNGCitrusTestRunner {
 
     private static final String API_KEY = AppConfig.config.getString("kp_api_key");
     private static final Boolean IS_USER_AUTH_REQUIRED = AppConfig.config.getBoolean("user_auth_enable");
+
+    protected static ObjectMapper objectMapper = new ObjectMapper();
 
     public BaseCitrusTestRunner() {
     }
@@ -286,6 +289,14 @@ public class BaseCitrusTestRunner extends TestNGCitrusTestRunner {
         if (IS_USER_AUTH_REQUIRED)
             headers.put(Constant.X_AUTHENTICATED_USER_TOKEN, "${accessToken}");
         return headers;
+    }
+
+    protected void delay(TestNGCitrusTestRunner runner, long time) {
+        try {
+            runner.sleep(time);
+        } catch (Exception e) {
+            System.out.println("Exception : "+e);
+        }
     }
 
 }
