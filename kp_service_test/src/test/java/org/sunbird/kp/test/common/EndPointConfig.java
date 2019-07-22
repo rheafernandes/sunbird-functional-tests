@@ -25,4 +25,12 @@ public class EndPointConfig {
         return CitrusEndpoints.http().client().requestUrl(AppConfig.config.getString("env_base_path")).build();
     }
 
+    @Bean
+    public HttpClient kpSearchServiceClient() {
+        return CitrusEndpoints.http()
+                .client()
+                .requestUrl(AppConfig.config.getString("kp_search_base_uri"))
+                .build();
+    }
+
 }

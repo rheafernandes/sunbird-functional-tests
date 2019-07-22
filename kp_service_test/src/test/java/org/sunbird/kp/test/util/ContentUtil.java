@@ -43,21 +43,25 @@ public class ContentUtil {
     private static final String UPDATE_RESOURCE_CONTENT_EXPECT_200 = "updateResourceContentExpect200";
     private static final String PUBLISH_CONTENT_EXPECT_200 = "publishContentExpect200";
     private static final String UPDATE_HIERARCHY_EXPECT_200 = "updateHierarchyExpect200";
+    private static final String RETIRE_CONTENT_EXPECT_200 = "retireContentExpect200";
 
     private static final ObjectMapper mapper = new ObjectMapper();
 
     // TODO: Add all the workflows for all test objects possible (Of Resource Type and Collection Type)
     private static final String contentWorkFlows = "{\n" +
             "\t\"contentInDraft\" : [],\n" +
-            "\t\"contentInDraftUpdated\" : [\"Update\"],\n" +
+            "\t\"contentUpload\" : [\"Upload\"],\n" +
+            "\t\"contentDraftUpdated\" : [\"Update\"],\n" +
             "\t\"contentInReview\" : [\"Upload\", \"Review\"],\n" +
             "\t\"contentInLive\": [\"Upload\", \"Publish\"],\n" +
-            "\t\"contentInUnlisted\": [\"Upload\", \"Unlisted\"],\n" +
             "\t\"contentInLiveImageDraft\" : [\"Upload\", \"Publish\", \"Update\"],\n" +
             "\t\"contentInLiveImageReview\" : [\"Upload\", \"Publish\", \"Update\", \"Review\"],\n" +
+            "\t\"contentInUnlisted\" : [\"Upload\", \"Unlisted\"],\n" +
             "\t\"contentInFlagged\" : [\"Upload\", \"Publish\", \"Flag\"],\n" +
             "\t\"contentInFlagDraft\" : [\"Upload\", \"Publish\", \"Flag\", \"AcceptFlag\"],\n" +
             "\t\"contentInFlagReview\" : [\"Upload\", \"Publish\", \"Flag\", \"AcceptFlag\", \"Review\"]\n" +
+            "\t\"contentInFlagDraft\" :  [\"Upload\", \"Publish\", \"Flag\", \"AcceptFlag\"],\n" +
+            "\t\"contentInFlagReview\" :  [\"Upload\", \"Publish\", \"Flag\", \"AcceptFlag\", \"Review\"]\n" +
             "}";
 
 
@@ -292,8 +296,19 @@ public class ContentUtil {
                                 HttpStatus.OK));
     }
 
-    public static Map<String, Object> readContent(BaseCitrusTestRunner runner, String contentId) {
+    public static Map<String, Object> readContent(BaseCitrusTestRunner runner, String contentId, String mode, String fields) {
         String testName = "readContentExpect200";
+        String url = APIUrl.READ_CONTENT + contentId;
+        if (StringUtils.isNotBlank(mode)) {
+            url = url + "?mode=" + mode.trim();
+        }
+        if (StringUtils.isNotBlank(fields)) {
+            if (url.contains("mode="))
+                url = url + "&fields=" + fields.trim();
+            else url = url + "?fields=" + fields.trim();
+        }
+
+        final String reqUrl = url;
         if (StringUtils.isNotBlank(contentId)) {
             runner.getTestCase().setName(testName);
             runner.http(
@@ -302,7 +317,7 @@ public class ContentUtil {
                                     builder,
                                     Constant.KP_ENDPOINT,
                                     testName,
-                                    APIUrl.READ_CONTENT + contentId,
+                                    reqUrl,
                                     getHeaders(null)
                             ));
             runner.http(
@@ -663,6 +678,36 @@ public class ContentUtil {
             data.put("content_id", result.get("node_id"));
             data.put("versionKey", result.get("versionKey"));
         }
+        return data;
+    }
+
+    public static Map<String, Object> retireContent(BaseCitrusTestRunner runner, String contentId, Map<String, Object> headers) {
+        final String url = APIUrl.RETIRE_CONTENT + contentId;
+        runner.getTestCase().setName(RETIRE_CONTENT_EXPECT_200);
+        runner.http(
+                builder ->
+                        TestActionUtil.processDeleteRequest(
+                                builder,
+                                Constant.KP_ENDPOINT,
+                                CONTENT_PAYLOAD_DIR,
+                                RETIRE_CONTENT_EXPECT_200,
+                                url,
+                                Constant.REQUEST_JSON,
+                                Constant.CONTENT_TYPE_APPLICATION_JSON,
+                                getHeaders(headers)));
+
+        runner.variable("contentIdVal", contentId);
+        runner.http(
+                builder ->
+                        TestActionUtil.getResponse(builder,
+                                Constant.KP_ENDPOINT,
+                                CONTENT_PAYLOAD_DIR,
+                                RETIRE_CONTENT_EXPECT_200,
+                                HttpStatus.OK,
+                                Constant.RESPONSE_JSON,
+                                null));
+        Map<String, Object> data = new HashMap<String, Object>();
+        data.put("content_id", contentId);
         return data;
     }
 
