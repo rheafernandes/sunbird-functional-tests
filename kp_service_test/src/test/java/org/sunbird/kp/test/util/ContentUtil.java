@@ -57,7 +57,7 @@ public class ContentUtil {
             "\t\"contentInLiveImageReview\" : [\"Upload\", \"Publish\", \"Update\", \"Review\"],\n" +
             "\t\"contentInFlagged\" : [\"Upload\", \"Publish\", \"Flag\"],\n" +
             "\t\"contentInFlagDraft\" : [\"Upload\", \"Publish\", \"Flag\", \"AcceptFlag\"],\n" +
-            "\t\"contentInFlagReview\" : [\"Upload\", \"Publish\", \"Flag\", \"AcceptFlag\", \"Review\"],\n" +
+            "\t\"contentInFlagReview\" : [\"Upload\", \"Publish\", \"Flag\", \"AcceptFlag\", \"Review\"]\n" +
             "}";
 
 
@@ -368,7 +368,7 @@ public class ContentUtil {
                     break;
                 }
                 case "application/vnd.ekstep.plugin-archive": {
-                    runner.testContext.setVariable("fileNameValue", "sample.pdf");
+                    runner.testContext.setVariable("fileNameValue", "Custom_Plugin.zip");
                     break;
                 }
                 case "video/x-youtube": {
