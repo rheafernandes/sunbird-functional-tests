@@ -43,6 +43,10 @@ public class ContentUtil {
     private static final String UPDATE_RESOURCE_CONTENT_EXPECT_200 = "updateResourceContentExpect200";
     private static final String PUBLISH_CONTENT_EXPECT_200 = "publishContentExpect200";
     private static final String UPDATE_HIERARCHY_EXPECT_200 = "updateHierarchyExpect200";
+    private static final String DISCARD_RESOURCE_CONTENT_EXPECT_200 = "discardResourceContentExpect200";
+    private static final String FLAG_RESOURCE_CONTENT_EXPECT_200 = "flagResourceContentExpect200";
+    private static final String ACCEPT_FLAG_RESOURCE_CONTENT_EXPECT_200 = "acceptFlagResourceContentExpect200";
+    private static final String REJECT_FLAG_RESOURCE_CONTENT_EXPECT_200 = "rejectFlagResourceContentExpect200";
     private static final String RETIRE_CONTENT_EXPECT_200 = "retireContentExpect200";
 
     private static final ObjectMapper mapper = new ObjectMapper();
@@ -61,14 +65,16 @@ public class ContentUtil {
             "\t\"contentInFlagDraft\" : [\"Upload\", \"Publish\", \"Flag\", \"AcceptFlag\"],\n" +
             "\t\"contentInFlagReview\" : [\"Upload\", \"Publish\", \"Flag\", \"AcceptFlag\", \"Review\"]\n" +
             "\t\"contentInFlagDraft\" :  [\"Upload\", \"Publish\", \"Flag\", \"AcceptFlag\"],\n" +
-            "\t\"contentInFlagReview\" :  [\"Upload\", \"Publish\", \"Flag\", \"AcceptFlag\", \"Review\"]\n" +
+            "\t\"contentInFlagReview\" :  [\"Upload\", \"Publish\", \"Flag\", \"AcceptFlag\", \"Review\"],\n" +
+            "\t\"contentRetired\" : [\"Retire\"],\n" +
+            "\t\"contentDiscarded\" : [\"Discard\"]\n" +
             "}";
 
 
-    public static Map<String, Object> prepareResourceContent(String type, BaseCitrusTestRunner runner, String payload,
+    public static Map<String, Object> prepareResourceContent(String type, BaseCitrusTestRunner runner, Map<String, Object> payload,
                                                              String mimeType, Map<String, Object> headers) {
         Map contentWorkMap = null;
-        Map contentMap = ContentUtil.createResourceContent(runner, payload, mimeType, headers);
+        Map contentMap = ContentUtil.createResourceContent(runner, null, mimeType, headers);
         Map<String, Object> result = new HashMap<>();
         String contentId = (String) contentMap.get("content_id");
         result.put("content_id", contentId);
@@ -81,13 +87,19 @@ public class ContentUtil {
             Map<String, Supplier<Map<String, Object>>> actionMap = new HashMap<String, Supplier<Map<String, Object>>>() {
                 {
                     put("Upload", () -> uploadResourceContent(runner, contentId, mimeType, headers));
-                    put("Publish", () -> publishContent(runner, payload, "listed", contentId, headers));
-                    put("Review", () -> reviewContent(runner, payload, REVIEW_RESOURCE_CONTENT_EXPECT_200, contentId, headers));
-                    put("Update", () -> updateContent(runner, payload, UPDATE_RESOURCE_CONTENT_EXPECT_200, contentId, headers));
-                    put("Unlisted", () -> publishContent(runner, payload, "unlisted", contentId, headers));
+                    put("Publish", () -> publishContent(runner, null, "listed", contentId, headers));
+                    put("Review", () -> reviewContent(runner, null, REVIEW_RESOURCE_CONTENT_EXPECT_200, contentId, headers));
+                    put("Update", () -> updateContent(runner, null, UPDATE_RESOURCE_CONTENT_EXPECT_200, contentId, headers));
+                    put("Unlisted", () -> publishContent(runner, null, "unlisted", contentId, headers));
+                    put("Retire", () -> retireContent(runner, contentId, headers));
+                    put("Discard", () -> discardContent(runner, null, DISCARD_RESOURCE_CONTENT_EXPECT_200, contentId, headers));
+                    put("Flag", () -> flagContent(runner, null, FLAG_RESOURCE_CONTENT_EXPECT_200, contentId, headers));
+                    put("AcceptFlag", () -> acceptFlagContent(runner, null, ACCEPT_FLAG_RESOURCE_CONTENT_EXPECT_200, contentId, headers));
+                    put("RejectFlag", () -> rejectFlagContent(runner, null, REJECT_FLAG_RESOURCE_CONTENT_EXPECT_200, contentId, headers));
+
                 }
             };
-            if (!CollectionUtils.isEmpty(contentWorkList))
+            if (!CollectionUtils.isEmpty(contentWorkList)) {
                 contentWorkList.forEach(action -> {
                     Map response = actionMap.get(action).get();
                     if (StringUtils.isNotBlank((String) response.get("versionKey"))) {
@@ -97,6 +109,7 @@ public class ContentUtil {
                     if (StringUtils.isNotBlank((String) response.get("content_url")))
                         result.put("content_url", response.get("content_url"));
                 });
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -618,8 +631,10 @@ public class ContentUtil {
                                 "result"));
         Map<String, Object> result = getResult(testContext);
         Map<String, Object> data = new HashMap<String, Object>();
-        if (MapUtils.isNotEmpty(result))
+        if (MapUtils.isNotEmpty(result)) {
             data.put("content_id", result.get("node_id"));
+            data.put("versionKey", (String) result.get("versionKey"));
+        }
 
         return data;
     }
@@ -680,6 +695,164 @@ public class ContentUtil {
         }
         return data;
     }
+
+    public static Map<String, Object> discardContent(BaseCitrusTestRunner runner, String payload, String testName, String contentId, Map<String, Object> headers) {
+        final String url = APIUrl.DISCARD_CONTENT + contentId;
+        if (StringUtils.isNotBlank(payload)) {
+            runner.http(
+                    builder ->
+                            TestActionUtil.getDeleteRequestTestAction(
+                                    builder,
+                                    Constant.KP_ENDPOINT,
+                                    url,
+                                    MediaType.APPLICATION_JSON.toString(),
+                                    payload,
+                                    getHeaders(headers)));
+        } else if (StringUtils.isNotBlank(testName)) {
+            runner.getTestCase().setName(testName);
+            runner.http(
+                    builder ->
+                            TestActionUtil.processDeleteRequest(
+                                    builder,
+                                    Constant.KP_ENDPOINT,
+                                    CONTENT_PAYLOAD_DIR,
+                                    testName,
+                                    url,
+                                    Constant.REQUEST_JSON,
+                                    Constant.CONTENT_TYPE_APPLICATION_JSON,
+                                    getHeaders(headers)));
+        }
+
+        runner.http(
+                builder ->
+                        TestActionUtil.getResponse(
+                                builder,
+                                Constant.KP_ENDPOINT,
+                                testName,
+                                HttpStatus.OK));
+        Map<String, Object> data = new HashMap<String, Object>();
+        data.put("content_id", contentId);
+        return data;
+    }
+
+    public static Map<String, Object> flagContent(BaseCitrusTestRunner runner, String payload, String testName, String contentId, Map<String, Object> headers) {
+        final String url = APIUrl.FLAG_CONTENT + contentId;
+        if (StringUtils.isNotBlank(payload)) {
+            runner.http(
+                    builder ->
+                            TestActionUtil.getPostRequestTestAction(
+                                    builder,
+                                    Constant.KP_ENDPOINT,
+                                    url,
+                                    MediaType.APPLICATION_JSON.toString(),
+                                    payload,
+                                    getHeaders(headers)));
+        } else if (StringUtils.isNotBlank(testName)) {
+            runner.getTestCase().setName(testName);
+            runner.http(
+                    builder ->
+                            TestActionUtil.processPostRequest(
+                                    builder,
+                                    Constant.KP_ENDPOINT,
+                                    CONTENT_PAYLOAD_DIR,
+                                    testName,
+                                    url,
+                                    Constant.REQUEST_JSON,
+                                    Constant.CONTENT_TYPE_APPLICATION_JSON,
+                                    getHeaders(headers)));
+        }
+
+        runner.http(
+                builder ->
+                        TestActionUtil.getResponse(
+                                builder,
+                                Constant.KP_ENDPOINT,
+                                testName,
+                                HttpStatus.OK));
+        Map<String, Object> data = new HashMap<String, Object>();
+        data.put("content_id", contentId);
+        return data;
+    }
+
+
+    public static Map<String, Object> acceptFlagContent(BaseCitrusTestRunner runner, String payload, String testName, String contentId, Map<String, Object> headers) {
+        final String url = APIUrl.ACCEPT_FLAG_CONTENT + contentId;
+        if (StringUtils.isNotBlank(payload)) {
+            runner.http(
+                    builder ->
+                            TestActionUtil.getPostRequestTestAction(
+                                    builder,
+                                    Constant.KP_ENDPOINT,
+                                    url,
+                                    MediaType.APPLICATION_JSON.toString(),
+                                    payload,
+                                    getHeaders(headers)));
+        } else if (StringUtils.isNotBlank(testName)) {
+            runner.getTestCase().setName(testName);
+            runner.http(
+                    builder ->
+                            TestActionUtil.processPostRequest(
+                                    builder,
+                                    Constant.KP_ENDPOINT,
+                                    CONTENT_PAYLOAD_DIR,
+                                    testName,
+                                    url,
+                                    Constant.REQUEST_JSON,
+                                    Constant.CONTENT_TYPE_APPLICATION_JSON,
+                                    getHeaders(headers)));
+        }
+
+        runner.http(
+                builder ->
+                        TestActionUtil.getResponse(
+                                builder,
+                                Constant.KP_ENDPOINT,
+                                testName,
+                                HttpStatus.OK));
+        Map<String, Object> data = new HashMap<String, Object>();
+        data.put("content_id", contentId);
+        return data;
+    }
+
+    public static Map<String, Object> rejectFlagContent(BaseCitrusTestRunner runner, String payload, String testName, String contentId, Map<String, Object> headers) {
+        final String url = APIUrl.REJECT_FLAG_CONTENT + contentId;
+        if (StringUtils.isNotBlank(payload)) {
+            runner.http(
+                    builder ->
+                            TestActionUtil.getPostRequestTestAction(
+                                    builder,
+                                    Constant.KP_ENDPOINT,
+                                    url,
+                                    MediaType.APPLICATION_JSON.toString(),
+                                    payload,
+                                    getHeaders(headers)));
+        } else if (StringUtils.isNotBlank(testName)) {
+            runner.getTestCase().setName(testName);
+            runner.http(
+                    builder ->
+                            TestActionUtil.processPostRequest(
+                                    builder,
+                                    Constant.KP_ENDPOINT,
+                                    CONTENT_PAYLOAD_DIR,
+                                    testName,
+                                    url,
+                                    Constant.REQUEST_JSON,
+                                    Constant.CONTENT_TYPE_APPLICATION_JSON,
+                                    getHeaders(headers)));
+        }
+
+        runner.http(
+                builder ->
+                        TestActionUtil.getResponse(
+                                builder,
+                                Constant.KP_ENDPOINT,
+                                testName,
+                                HttpStatus.OK));
+        Map<String, Object> data = new HashMap<String, Object>();
+        data.put("content_id", contentId);
+        return data;
+    }
+
 
     public static Map<String, Object> retireContent(BaseCitrusTestRunner runner, String contentId, Map<String, Object> headers) {
         final String url = APIUrl.RETIRE_CONTENT + contentId;
@@ -750,3 +923,4 @@ public class ContentUtil {
     }
 
 }
+

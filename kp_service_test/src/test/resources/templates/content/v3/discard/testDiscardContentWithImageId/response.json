@@ -9,6 +9,6 @@
     "err": "@ignore@",
     "errmsg": "@ignore@"
   },
-  "responseCode": "BAD_REQUEST",
+  "responseCode": "CLIENT_ERROR",
   "result": "@ignore@"
 }

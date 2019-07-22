@@ -117,16 +117,16 @@ public class ContentV3Scenario {
             "testUpdateContentInvalidContentType";
     public static final String TEST_UPDATE_CONTENT_WITH_VALID_CONTENT_TYPE =
             "testUpdateContentValidContentType";
-    public static final String TEST_UPDATE_CONTENT_IN_REVIEW_STATE =
+    public static final String TEST_UPDATE_CONTENT_STATUS_REVIEW =
             "testUpdateContentInReviewState";
     public static final String TEST_UPDATE_CONTENT_IN_LIVE =
             "testUpdateContentInLive";
     public static final String TEST_UPDATE_CONTENT_IN_LIVE_WITH_IMAGE =
             "testUpdateContentInLiveWithImage";
     public static final String TEST_UPDATE_CONTENT_STATUS_FLAGGED =
-            "testUpdateStatusReview";
+            "testUpdateStatusFlagged";
     public static final String TEST_UPDATE_CONTENT_STATUS_FLAGREVIEW =
-            "testUpdateStatusReview";
+            "testUpdateStatusFlagReview";
     public static final String TEST_UPDATE_CONTENT_IN_RETIRED =
             "testUpdateContentInRetired";
     public static final String TEST_UPDATE_CONTENT_AFTER_DISCARD =
@@ -134,8 +134,7 @@ public class ContentV3Scenario {
     public static final String TEST_UPDATE_WITH_IMAGE_ID =
             "testUpdateWithImageId";
     //Get Content Should expect lastSubmittedOn if allowUpdate is true
-    public static final String TEST_UPDATE_WITH_STATUS_REVIEW =
-            "testUpdateContentWithStatusReview";
+
     public static final String TEST_UPDATE_WITH_SYSTEM_PROPERTY =
             "testUpdateContentWithSystemProperty";
     public static final String TEST_UPDATE_WITH_INVALID_FORMAT_RESERVED_DIALCODES =
@@ -198,6 +197,5 @@ public class ContentV3Scenario {
             "testDiscardStatusRetired";
     public static final String TEST_DISCARD_CONTENT_AFTER_DISCARD =
             "testDiscardAfterDiscard";
-
 
 }

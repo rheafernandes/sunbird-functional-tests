@@ -78,27 +78,37 @@ public class RetireContentTest extends BaseCitrusTestRunner {
                 },
                 new Object[]{
                         ContentV3Scenario.TEST_RETIRE_CONTENT_STATUS_DRAFT, APIUrl.RETIRE_CONTENT, HttpStatus.OK, Constant.CREATOR, null, "application/pdf", false, "contentInDraftUpdated"
-                }/*,
+                },
                 new Object[]{
                         ContentV3Scenario.TEST_RETIRE_CONTENT_STATUS_LIVE_WITH_IMAGE_DRAFT, APIUrl.RETIRE_CONTENT, HttpStatus.OK, Constant.CREATOR, null, "application/pdf", false, "contentInLiveImageDraft"
                 },
-                 //Invalid Request Format (400) requests are here
                 new Object[]{
-                        ContentV3Scenario.TEST_RETIRE_CONTENT_STATUS_LIVE_WITH_IMAGE_REVIEW, APIUrl.RETIRE_CONTENT, HttpStatus.BAD_REQUEST, Constant.CREATOR, null, "application/pdf", false, "contentInLiveImageReview"
+                        ContentV3Scenario.TEST_RETIRE_CONTENT_STATUS_LIVE_WITH_IMAGE_REVIEW, APIUrl.RETIRE_CONTENT, HttpStatus.OK, Constant.CREATOR, null, "application/pdf", false, "contentInLiveImageReview"
                 },
                 new Object[]{
-                        ContentV3Scenario.TEST_RETIRE_CONTENT_STATUS_LIVE, APIUrl.RETIRE_CONTENT, HttpStatus.BAD_REQUEST, Constant.CREATOR, null, "application/pdf", false, "contentInLive"
+                        ContentV3Scenario.TEST_RETIRE_CONTENT_STATUS_LIVE, APIUrl.RETIRE_CONTENT, HttpStatus.OK, Constant.CREATOR, null, "application/pdf", false, "contentInLive"
                 },
                 new Object[]{
-                        ContentV3Scenario.TEST_RETIRE_CONTENT_STATUS_REVIEW, APIUrl.RETIRE_CONTENT, HttpStatus.BAD_REQUEST, Constant.CREATOR, null, "application/pdf", false, "contentInReview"
+                        ContentV3Scenario.TEST_RETIRE_CONTENT_STATUS_REVIEW, APIUrl.RETIRE_CONTENT, HttpStatus.OK, Constant.CREATOR, null, "application/pdf", false, "contentInReview"
                 },
                 new Object[]{
                         ContentV3Scenario.TEST_RETIRE_WITH_IMAGE_ID, APIUrl.RETIRE_CONTENT, HttpStatus.BAD_REQUEST, Constant.CREATOR, null, "application/pdf", true, "contentInLiveImageDraft"
                 },
                 new Object[]{
-                        ContentV3Scenario.TEST_RETIRE_CONTENT_STATUS_UNLISTED, APIUrl.RETIRE_CONTENT, HttpStatus.BAD_REQUEST, Constant.CREATOR, null, "application/pdf", true, "contentInUnlisted"
-                }*/
-
+                        ContentV3Scenario.TEST_RETIRE_CONTENT_STATUS_UNLISTED, APIUrl.RETIRE_CONTENT, HttpStatus.OK, Constant.CREATOR, null, "application/pdf", false, "contentInUnlisted"
+                },
+                new Object[]{
+                        ContentV3Scenario.TEST_RETIRE_CONTENT_STATUS_FLAGDRAFT, APIUrl.RETIRE_CONTENT, HttpStatus.OK, Constant.CREATOR, null, "application/pdf", true, "contentInFlagDraft"
+                },
+                new Object[]{
+                        ContentV3Scenario.TEST_RETIRE_CONTENT_STATUS_FLAGGED, APIUrl.RETIRE_CONTENT, HttpStatus.OK, Constant.CREATOR, null, "application/pdf", true, "contentInFlagged"
+                },
+                new Object[]{
+                        ContentV3Scenario.TEST_RETIRE_CONTENT_STATUS_FLAGREVIEW, APIUrl.RETIRE_CONTENT, HttpStatus.OK, Constant.CREATOR, null, "application/pdf", true, "contentInFlagReview"
+                },
+                new Object[]{
+                        ContentV3Scenario.TEST_RETIRE_CONTENT_STATUS_RETIRED, APIUrl.RETIRE_CONTENT, HttpStatus.OK, Constant.CREATOR, null, "application/pdf", true, "contentInUnlisted"
+                }
         };
     }
 
