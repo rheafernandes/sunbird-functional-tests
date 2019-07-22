@@ -91,21 +91,24 @@ public class DiscardContentTest extends BaseCitrusTestRunner {
                 new Object[]{
                         ContentV3Scenario.TEST_DISCARD_CONTENT_STATUS_REVIEW, APIUrl.DISCARD_CONTENT, HttpStatus.BAD_REQUEST, Constant.CREATOR, null, "application/pdf", false, "contentInReview"
                 },
-//                new Object[]{
-//                        ContentV3Scenario.TEST_DISCARD_WITH_IMAGE_ID, APIUrl.DISCARD_CONTENT, "CLIENT_ERROR", Constant.CREATOR, null, "application/pdf", true, "contentInLiveImageDraft"
-//                },
+                new Object[]{
+                        ContentV3Scenario.TEST_DISCARD_WITH_IMAGE_ID, APIUrl.DISCARD_CONTENT, HttpStatus.BAD_REQUEST, Constant.CREATOR, null, "application/pdf", true, "contentInLiveImageDraft"
+                },
                 new Object[]{
                         ContentV3Scenario.TEST_DISCARD_CONTENT_STATUS_UNLISTED, APIUrl.DISCARD_CONTENT, HttpStatus.BAD_REQUEST, Constant.CREATOR, null, "application/pdf", false, "contentInUnlisted"
                 },
-//                new Object[]{
-//                        ContentV3Scenario.TEST_DISCARD_CONTENT_STATUS_FLAGGED, APIUrl.DISCARD_CONTENT, HttpStatus.BAD_REQUEST, Constant.CREATOR, null, "application/pdf", false, "contentInFlagged"
-//                },
-//                new Object[]{
-//                        ContentV3Scenario.TEST_DISCARD_CONTENT_STATUS_FLAGREVIEW, APIUrl.DISCARD_CONTENT, HttpStatus.BAD_REQUEST, Constant.CREATOR, null, "application/pdf", false, "contentInFlagReview"
-//                },
-//                new Object[]{
-//                        ContentV3Scenario.TEST_DISCARD_CONTENT_STATUS_RETIRED, APIUrl.DISCARD_CONTENT, HttpStatus.BAD_REQUEST, Constant.CREATOR, null, "application/pdf", false, "contentInFlagged"
-//                },
+                new Object[]{
+                        ContentV3Scenario.TEST_DISCARD_CONTENT_STATUS_FLAGGED, APIUrl.DISCARD_CONTENT, HttpStatus.BAD_REQUEST, Constant.CREATOR, null, "application/pdf", false, "contentInFlagged"
+                },
+                new Object[]{
+                        ContentV3Scenario.TEST_DISCARD_CONTENT_STATUS_FLAGREVIEW, APIUrl.DISCARD_CONTENT, HttpStatus.BAD_REQUEST, Constant.CREATOR, null, "application/pdf", false, "contentInFlagReview"
+                },
+                new Object[]{
+                        ContentV3Scenario.TEST_DISCARD_CONTENT_STATUS_RETIRED, APIUrl.DISCARD_CONTENT, HttpStatus.BAD_REQUEST, Constant.CREATOR, null, "application/pdf", false, "contentRetired"
+                },
+                new Object[]{
+                        ContentV3Scenario.TEST_DISCARD_CONTENT_STATUS_RETIRED, APIUrl.DISCARD_CONTENT, HttpStatus.BAD_REQUEST, Constant.CREATOR, null, "application/pdf", false, "contentRetired"
+                },
 
         };
     }

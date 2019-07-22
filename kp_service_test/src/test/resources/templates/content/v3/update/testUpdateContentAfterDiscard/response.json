@@ -1,14 +1,14 @@
 {
-  "id": "ekstep.learning.content.discard",
+  "id": "ekstep.learning.content.update",
   "ver": "3.0",
   "ts": "@ignore@",
   "params": {
     "resmsgid": "@ignore@",
     "msgid": null,
+    "err": "ERR_GRAPH_SEARCH_UNKNOWN_ERROR",
     "status": "failed",
-    "err": "@ignore@",
     "errmsg": "@ignore@"
   },
-  "responseCode": "CLIENT_ERROR",
+  "responseCode": "RESOURCE_NOT_FOUND",
   "result": "@ignore@"
 }
