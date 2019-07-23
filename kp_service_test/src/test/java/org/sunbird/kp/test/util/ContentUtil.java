@@ -699,7 +699,7 @@ public class ContentUtil {
 
     public static Map<String, Object> discardContent(BaseCitrusTestRunner runner, String contentId, Map<String, Object> headers) {
         final String url = APIUrl.DISCARD_CONTENT + contentId;
-        runner.getTestCase().setName(RETIRE_CONTENT_EXPECT_200);
+        runner.getTestCase().setName(DISCARD_RESOURCE_CONTENT_EXPECT_200);
         runner.http(
                 builder ->
                         TestActionUtil.processDeleteRequest(

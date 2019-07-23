@@ -10,5 +10,7 @@
     "errmsg": null
   },
   "responseCode": "OK",
-  "result": "@ignore@"
+  "result": {
+    "node_id" : "${contentIdVal}"
+  }
 }
