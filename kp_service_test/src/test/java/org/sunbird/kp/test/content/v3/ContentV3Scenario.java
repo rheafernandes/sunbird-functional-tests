@@ -198,4 +198,23 @@ public class ContentV3Scenario {
     public static final String TEST_DISCARD_CONTENT_AFTER_DISCARD =
             "testDiscardAfterDiscard";
 
+    //Publish Content API
+    public static final String TEST_PUBLISH_RESOURCE_PDF_CONTENT =
+            "testPublishResourcePdfContent";
+    public static final String TEST_PUBLISH_RESOURCE_ECML_CONTENT =
+            "testPublishResourceEcmlContent";
+    public static final String TEST_PUBLISH_RESOURCE_HTML_CONTENT =
+            "testPublishResourceHtmlContent";
+    public static final String TEST_PUBLISH_RESOURCE_H5P_CONTENT =
+            "testPublishResourceH5pContent";
+    public static final String TEST_PUBLISH_COLLECTION_WITH_RESOURCE_CONTENT =
+            "testPublishCollectionWithResourceContent";
+    public static final String TEST_PUBLISH_TEXTBOOK_WITH_RESOURCE_CONTENT =
+            "testPublishTextbookWithResourceContent";
+    public static final String TEST_PUBLISH_COURSE_WITH_RESOURCE_CONTENT =
+            "testPublishCourseWithResourceContent";
+    public static final String TEST_PUBLISH_LESSONPLAN_WITH_RESOURCE_CONTENT =
+            "testPublishLessonPlanWithResourceContent";
+
+
 }
