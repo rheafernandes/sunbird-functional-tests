@@ -43,11 +43,11 @@ public class ContentUtil {
     private static final String UPDATE_RESOURCE_CONTENT_EXPECT_200 = "updateResourceContentExpect200";
     private static final String PUBLISH_CONTENT_EXPECT_200 = "publishContentExpect200";
     private static final String UPDATE_HIERARCHY_EXPECT_200 = "updateHierarchyExpect200";
+    private static final String RETIRE_CONTENT_EXPECT_200 = "retireContentExpect200";
     private static final String DISCARD_RESOURCE_CONTENT_EXPECT_200 = "discardResourceContentExpect200";
     private static final String FLAG_RESOURCE_CONTENT_EXPECT_200 = "flagResourceContentExpect200";
     private static final String ACCEPT_FLAG_RESOURCE_CONTENT_EXPECT_200 = "acceptFlagResourceContentExpect200";
     private static final String REJECT_FLAG_RESOURCE_CONTENT_EXPECT_200 = "rejectFlagResourceContentExpect200";
-    private static final String RETIRE_CONTENT_EXPECT_200 = "retireContentExpect200";
 
     private static final ObjectMapper mapper = new ObjectMapper();
 
@@ -58,14 +58,12 @@ public class ContentUtil {
             "\t\"contentDraftUpdated\" : [\"Update\"],\n" +
             "\t\"contentInReview\" : [\"Upload\", \"Review\"],\n" +
             "\t\"contentInLive\": [\"Upload\", \"Publish\"],\n" +
-            "\t\"contentInLiveImageDraft\" : [\"Upload\", \"Publish\", \"Update\"],\n" +
-            "\t\"contentInLiveImageReview\" : [\"Upload\", \"Publish\", \"Update\", \"Review\"],\n" +
+            "\t\"contentInLiveImageDraft\" : [\"Upload\", \"Publish\", \"Get\", \"Update\"],\n" +
+            "\t\"contentInLiveImageReview\" : [\"Upload\", \"Publish\", \"Get\", \"Update\", \"Review\"],\n" +
             "\t\"contentInUnlisted\" : [\"Upload\", \"Unlisted\"],\n" +
-            "\t\"contentInFlagged\" : [\"Upload\", \"Publish\", \"Flag\"],\n" +
-            "\t\"contentInFlagDraft\" : [\"Upload\", \"Publish\", \"Flag\", \"AcceptFlag\"],\n" +
-            "\t\"contentInFlagReview\" : [\"Upload\", \"Publish\", \"Flag\", \"AcceptFlag\", \"Review\"]\n" +
-            "\t\"contentInFlagDraft\" :  [\"Upload\", \"Publish\", \"Flag\", \"AcceptFlag\"],\n" +
-            "\t\"contentInFlagReview\" :  [\"Upload\", \"Publish\", \"Flag\", \"AcceptFlag\", \"Review\"],\n" +
+            "\t\"contentInFlagged\" : [\"Upload\", \"Publish\", \"Get\", \"Flag\"],\n" +
+            "\t\"contentInFlagDraft\" :  [\"Upload\", \"Publish\", \"Get\", \"Flag\", \"AcceptFlag\"],\n" +
+            "\t\"contentInFlagReview\" :  [\"Upload\", \"Publish\", \"Get\", \"Flag\", \"AcceptFlag\", \"Review\"],\n" +
             "\t\"contentRetired\" : [\"Retire\"],\n" +
             "\t\"contentDiscarded\" : [\"Discard\"]\n" +
             "}";
@@ -92,16 +90,19 @@ public class ContentUtil {
                     put("Update", () -> updateContent(runner, null, UPDATE_RESOURCE_CONTENT_EXPECT_200, contentId, headers));
                     put("Unlisted", () -> publishContent(runner, null, "unlisted", contentId, headers));
                     put("Retire", () -> retireContent(runner, contentId, headers));
-                    put("Discard", () -> discardContent(runner, null, DISCARD_RESOURCE_CONTENT_EXPECT_200, contentId, headers));
+                    put("Discard", () -> discardContent(runner, contentId, headers));
                     put("Flag", () -> flagContent(runner, null, FLAG_RESOURCE_CONTENT_EXPECT_200, contentId, headers));
                     put("AcceptFlag", () -> acceptFlagContent(runner, null, ACCEPT_FLAG_RESOURCE_CONTENT_EXPECT_200, contentId, headers));
                     put("RejectFlag", () -> rejectFlagContent(runner, null, REJECT_FLAG_RESOURCE_CONTENT_EXPECT_200, contentId, headers));
-
+                    put("Get", () -> readContent(runner, contentId, null, null));
                 }
             };
             if (!CollectionUtils.isEmpty(contentWorkList)) {
                 contentWorkList.forEach(action -> {
                     Map response = actionMap.get(action).get();
+                    if(response.get("content") != null)
+                        response = (Map<String,Object>) response.get("content");
+
                     if (StringUtils.isNotBlank((String) response.get("versionKey"))) {
                         result.put("versionKey", response.get("versionKey"));
                         runner.variable("versionKeyVal", response.get("versionKey"));
@@ -696,46 +697,38 @@ public class ContentUtil {
         return data;
     }
 
-    public static Map<String, Object> discardContent(BaseCitrusTestRunner runner, String payload, String testName, String contentId, Map<String, Object> headers) {
+    public static Map<String, Object> discardContent(BaseCitrusTestRunner runner, String contentId, Map<String, Object> headers) {
         final String url = APIUrl.DISCARD_CONTENT + contentId;
-        if (StringUtils.isNotBlank(payload)) {
-            runner.http(
-                    builder ->
-                            TestActionUtil.getDeleteRequestTestAction(
-                                    builder,
-                                    Constant.KP_ENDPOINT,
-                                    url,
-                                    MediaType.APPLICATION_JSON.toString(),
-                                    payload,
-                                    getHeaders(headers)));
-        } else if (StringUtils.isNotBlank(testName)) {
-            runner.getTestCase().setName(testName);
-            runner.http(
-                    builder ->
-                            TestActionUtil.processDeleteRequest(
-                                    builder,
-                                    Constant.KP_ENDPOINT,
-                                    CONTENT_PAYLOAD_DIR,
-                                    testName,
-                                    url,
-                                    Constant.REQUEST_JSON,
-                                    Constant.CONTENT_TYPE_APPLICATION_JSON,
-                                    getHeaders(headers)));
-        }
-
+        runner.getTestCase().setName(DISCARD_RESOURCE_CONTENT_EXPECT_200);
         runner.http(
                 builder ->
-                        TestActionUtil.getResponse(
+                        TestActionUtil.processDeleteRequest(
                                 builder,
                                 Constant.KP_ENDPOINT,
-                                testName,
-                                HttpStatus.OK));
+                                CONTENT_PAYLOAD_DIR,
+                                DISCARD_RESOURCE_CONTENT_EXPECT_200,
+                                url,
+                                Constant.REQUEST_JSON,
+                                Constant.CONTENT_TYPE_APPLICATION_JSON,
+                                getHeaders(headers)));
+
+        runner.variable("contentIdVal", contentId);
+        runner.http(
+                builder ->
+                        TestActionUtil.getResponse(builder,
+                                Constant.KP_ENDPOINT,
+                                CONTENT_PAYLOAD_DIR,
+                                DISCARD_RESOURCE_CONTENT_EXPECT_200,
+                                HttpStatus.OK,
+                                Constant.RESPONSE_JSON,
+                                null));
         Map<String, Object> data = new HashMap<String, Object>();
         data.put("content_id", contentId);
         return data;
     }
 
     public static Map<String, Object> flagContent(BaseCitrusTestRunner runner, String payload, String testName, String contentId, Map<String, Object> headers) {
+        final TestContext testContext = runner.testContext;
         final String url = APIUrl.FLAG_CONTENT + contentId;
         if (StringUtils.isNotBlank(payload)) {
             runner.http(
@@ -764,13 +757,19 @@ public class ContentUtil {
 
         runner.http(
                 builder ->
-                        TestActionUtil.getResponse(
+                        TestActionUtil.getExtractFromResponseTestAction(
+                                testContext,
                                 builder,
                                 Constant.KP_ENDPOINT,
-                                testName,
-                                HttpStatus.OK));
+                                HttpStatus.OK,
+                                "$.result",
+                                "result"));
+        Map<String, Object> result = getResult(testContext);
         Map<String, Object> data = new HashMap<String, Object>();
-        data.put("content_id", contentId);
+        if (MapUtils.isNotEmpty(result)) {
+            data.put("content_id", result.get("node_id"));
+            data.put("versionKey", result.get("versionKey"));
+        }
         return data;
     }
 

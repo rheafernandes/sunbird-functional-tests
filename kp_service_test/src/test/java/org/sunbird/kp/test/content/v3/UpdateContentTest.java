@@ -87,9 +87,9 @@ public class UpdateContentTest extends BaseCitrusTestRunner {
                 new Object[]{
                         ContentV3Scenario.TEST_UPDATE_CONTENT_IN_LIVE_WITH_IMAGE, APIUrl.UPDATE_CONTENT, HttpStatus.OK, Constant.CREATOR, null, "application/pdf", false, "contentInLiveImageDraft"
                 },
-                new Object[]{
-                        ContentV3Scenario.TEST_UPDATE_CONTENT_IN_RETIRED, APIUrl.UPDATE_CONTENT, HttpStatus.OK, Constant.CREATOR, null, "application/pdf", false, "contentRetired"
-                },
+//                new Object[]{
+//                        ContentV3Scenario.TEST_UPDATE_CONTENT_IN_RETIRED, APIUrl.UPDATE_CONTENT, HttpStatus.OK, Constant.CREATOR, null, "application/pdf", false, "contentRetired"
+//                },
 
                 /**
                  *
@@ -116,12 +116,12 @@ public class UpdateContentTest extends BaseCitrusTestRunner {
                         ContentV3Scenario.TEST_UPDATE_WITH_SYSTEM_PROPERTY, APIUrl.UPDATE_CONTENT, HttpStatus.BAD_REQUEST, Constant.CREATOR, null, "application/pdf", false, "contentInDraft"
                 },
 
-//                new Object[]{
-//                        ContentV3Scenario.TEST_UPDATE_CONTENT_STATUS_FLAGGED, APIUrl.UPDATE_CONTENT, HttpStatus.BAD_REQUEST, Constant.CREATOR, null, "application/pdf", false, "contentInFlagged"
-//                },
-//                new Object[]{
-//                        ContentV3Scenario.TEST_UPDATE_CONTENT_STATUS_FLAGREVIEW, APIUrl.UPDATE_CONTENT, HttpStatus.BAD_REQUEST, Constant.CREATOR, null, "application/pdf", false, "contentInFlagReview"
-//                },
+                new Object[]{
+                        ContentV3Scenario.TEST_UPDATE_CONTENT_STATUS_FLAGGED, APIUrl.UPDATE_CONTENT, HttpStatus.OK, Constant.CREATOR, null, "application/pdf", false, "contentInFlagged"
+                },
+                new Object[]{
+                        ContentV3Scenario.TEST_UPDATE_CONTENT_STATUS_FLAGREVIEW, APIUrl.UPDATE_CONTENT, HttpStatus.OK, Constant.CREATOR, null, "application/pdf", false, "contentInFlagReview"
+                },
 
                 /**
                  *

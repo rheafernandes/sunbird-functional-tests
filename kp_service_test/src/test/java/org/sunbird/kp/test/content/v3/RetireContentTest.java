@@ -98,16 +98,16 @@ public class RetireContentTest extends BaseCitrusTestRunner {
                         ContentV3Scenario.TEST_RETIRE_CONTENT_STATUS_UNLISTED, APIUrl.RETIRE_CONTENT, HttpStatus.OK, Constant.CREATOR, null, "application/pdf", false, "contentInUnlisted"
                 },
                 new Object[]{
-                        ContentV3Scenario.TEST_RETIRE_CONTENT_STATUS_FLAGDRAFT, APIUrl.RETIRE_CONTENT, HttpStatus.OK, Constant.CREATOR, null, "application/pdf", true, "contentInFlagDraft"
+                        ContentV3Scenario.TEST_RETIRE_CONTENT_STATUS_FLAGDRAFT, APIUrl.RETIRE_CONTENT, HttpStatus.BAD_REQUEST, Constant.CREATOR, null, "application/pdf", false, "contentInFlagDraft"
                 },
                 new Object[]{
-                        ContentV3Scenario.TEST_RETIRE_CONTENT_STATUS_FLAGGED, APIUrl.RETIRE_CONTENT, HttpStatus.OK, Constant.CREATOR, null, "application/pdf", true, "contentInFlagged"
+                        ContentV3Scenario.TEST_RETIRE_CONTENT_STATUS_FLAGGED, APIUrl.RETIRE_CONTENT, HttpStatus.OK, Constant.CREATOR, null, "application/pdf", false, "contentInFlagged"
                 },
                 new Object[]{
-                        ContentV3Scenario.TEST_RETIRE_CONTENT_STATUS_FLAGREVIEW, APIUrl.RETIRE_CONTENT, HttpStatus.OK, Constant.CREATOR, null, "application/pdf", true, "contentInFlagReview"
+                        ContentV3Scenario.TEST_RETIRE_CONTENT_STATUS_FLAGREVIEW, APIUrl.RETIRE_CONTENT, HttpStatus.BAD_REQUEST, Constant.CREATOR, null, "application/pdf", false, "contentInFlagReview"
                 },
                 new Object[]{
-                        ContentV3Scenario.TEST_RETIRE_CONTENT_STATUS_RETIRED, APIUrl.RETIRE_CONTENT, HttpStatus.OK, Constant.CREATOR, null, "application/pdf", true, "contentInUnlisted"
+                        ContentV3Scenario.TEST_RETIRE_CONTENT_STATUS_RETIRED, APIUrl.RETIRE_CONTENT, HttpStatus.BAD_REQUEST, Constant.CREATOR, null, "application/pdf", true, "contentInUnlisted"
                 }
         };
     }
