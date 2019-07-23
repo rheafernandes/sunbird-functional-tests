@@ -1,10 +1,10 @@
-package org.sunbird.kp.test.content.v3;
+package org.sunbird.kp.test.content.v3.publish;
 
 import com.consol.citrus.annotations.CitrusTest;
 import org.sunbird.kp.test.common.BaseCitrusTestRunner;
 import org.sunbird.kp.test.util.CompositeSearchUtil;
 import org.sunbird.kp.test.util.ContentUtil;
-import org.sunbird.kp.test.util.DynamicPayload;
+import org.sunbird.kp.test.util.ContentPayload;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -12,10 +12,10 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Integration Test for Content Publish API
+ * Integration Test for Content Publish API With Multi Stage Scenario's
  * @author Kumar Gauraw
  */
-public class PublishContentTest extends BaseCitrusTestRunner {
+public class PublishMultiStageScenarioTest extends BaseCitrusTestRunner {
 
     private static final String TEMPLATE_DIR = "templates/content/v3/publish";
 
@@ -25,7 +25,7 @@ public class PublishContentTest extends BaseCitrusTestRunner {
         String resourceMimeType = "application/pdf";
         getAuthToken(this, null);
 
-        String resourceId = (String) ContentUtil.createResourceContent(this, DynamicPayload.CREATE_RESOURCE_CONTENT_WITH_CONCEPT, null, null).get("content_id");
+        String resourceId = (String) ContentUtil.createResourceContent(this, ContentPayload.CREATE_RESOURCE_CONTENT_WITH_CONCEPT, null, null).get("content_id");
         System.out.println("Resource Content Id:" + resourceId);
         Map<String, Object> uploadResult = ContentUtil.uploadResourceContent(this, resourceId, resourceMimeType, null);
         Assert.assertNotNull(uploadResult.get("content_url"));
@@ -53,7 +53,7 @@ public class PublishContentTest extends BaseCitrusTestRunner {
         Assert.assertNotNull(textbookMap.get("variants"));
         Assert.assertEquals("LO53", (String) concept.get("identifier"));
         List<String> childNodes = (List<String>) textbookMap.get("childNodes");
-        String payload = DynamicPayload.SEARCH_CONTENT_WITH_IDENTIFIERS.replace("identifiersVal", objectMapper.writeValueAsString(childNodes));
+        String payload = ContentPayload.SEARCH_CONTENT_WITH_IDENTIFIERS.replace("identifiersVal", objectMapper.writeValueAsString(childNodes));
         Map<String, Object> searchResult = CompositeSearchUtil.searchContent(this, payload, null, null);
         System.out.println("searchResult : " + searchResult);
         int count = (int) searchResult.get("count");

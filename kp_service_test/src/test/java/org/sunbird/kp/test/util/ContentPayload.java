@@ -1,10 +1,11 @@
 package org.sunbird.kp.test.util;
 
 /**
- * This Class Holds All Dynamic Request Payload Required for Before Test Preparation
+ * This Class Holds All Dynamic Request Payload Required For Content Api's
+ *
  * @author Kumar Gauraw
  */
-public class DynamicPayload {
+public class ContentPayload {
 
     public static final String CREATE_RESOURCE_CONTENT_WITH_CONCEPT = "{\n" +
             "  \"request\": {\n" +

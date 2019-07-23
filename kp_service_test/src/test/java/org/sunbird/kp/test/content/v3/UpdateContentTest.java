@@ -47,9 +47,7 @@ public class UpdateContentTest extends BaseCitrusTestRunner {
     @DataProvider(name = "updateResourceContent")
     public Object[][] updateResourceContent() {
         return new Object[][]{
-                /**
-                 * Valid Requests (200) are here
-                */
+                //Valid Requests (200) are here
                 new Object[]{
                         ContentV3Scenario.TEST_UPDATE_RESOURCE_PDF_CONTENT_WITH_VALID_REQUEST, APIUrl.UPDATE_CONTENT, HttpStatus.OK, Constant.CREATOR, null, "application/pdf", false, "contentInDraft"
                 },
@@ -91,10 +89,7 @@ public class UpdateContentTest extends BaseCitrusTestRunner {
 //                        ContentV3Scenario.TEST_UPDATE_CONTENT_IN_RETIRED, APIUrl.UPDATE_CONTENT, HttpStatus.OK, Constant.CREATOR, null, "application/pdf", false, "contentRetired"
 //                },
 
-                /**
-                 *
-                 * Invalid Request Format (400) requests are here
-                */
+                 //Invalid Request Format (400) requests are here
 
                 new Object[]{
                         ContentV3Scenario.TEST_UPDATE_CONTENT_WITH_BLANK_VERSION_KEY, APIUrl.UPDATE_CONTENT, HttpStatus.BAD_REQUEST, Constant.CREATOR, null, "application/pdf", false, "contentInDraft"
@@ -123,10 +118,7 @@ public class UpdateContentTest extends BaseCitrusTestRunner {
                         ContentV3Scenario.TEST_UPDATE_CONTENT_STATUS_FLAGREVIEW, APIUrl.UPDATE_CONTENT, HttpStatus.OK, Constant.CREATOR, null, "application/pdf", false, "contentInFlagReview"
                 },
 
-                /**
-                 *
-                 * Resource Not Found requests (404) are here
-                */
+                // Resource Not Found requests (404) are here
 
                 new Object[]{
                         ContentV3Scenario.TEST_UPDATE_CONTENT_WITH_NOT_FOUND_REQUEST, APIUrl.UPDATE_CONTENT, HttpStatus.NOT_FOUND, Constant.CREATOR, null, null, false, "contentInDraft"
@@ -139,11 +131,7 @@ public class UpdateContentTest extends BaseCitrusTestRunner {
                         ContentV3Scenario.TEST_UPDATE_CONTENT_AFTER_DISCARD, APIUrl.UPDATE_CONTENT, HttpStatus.NOT_FOUND, Constant.CREATOR, null, "application/pdf", false, "contentDiscarded"
                 },
 
-                /**
-                 *
-                 * Resources with Server (500) errors are here
-                */
-
+                // Resources with Server (500) errors are here
                 new Object[]{
                         ContentV3Scenario.TEST_UPDATE_WITH_INVALID_FORMAT_RESERVED_DIALCODES, APIUrl.UPDATE_CONTENT, HttpStatus.BAD_REQUEST, Constant.CREATOR, null, "application/pdf", false, "contentInDraft"
                 },
