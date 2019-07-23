@@ -33,4 +33,8 @@ public class APIUrl {
     //Search API
     public static final String COMPOSITE_SEARCH = "/v3/search";
 
+    //DIAL Api's
+    public static final String GENERATE_DIALCODE = "/dialcode/v3/generate";
+    public static final String SEARCH_DIALCODE = "/dialcode/v3/search";
+
 }

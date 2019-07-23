@@ -33,4 +33,12 @@ public class EndPointConfig {
                 .build();
     }
 
+    @Bean
+    public HttpClient kpDIALServiceClient() {
+        return CitrusEndpoints.http()
+                .client()
+                .requestUrl(AppConfig.config.getString("kp_dial_base_uri"))
+                .build();
+    }
+
 }
