@@ -30,18 +30,31 @@ public class UploadContentTest extends BaseCitrusTestRunner {
     @CitrusTest
     public void testUploadResourceContentInLiveWithFile(String userType, String mimeType, String extension) {
         getAuthToken(this, userType);
-        String contentId = (String) ContentUtil.prepareResourceContent("contentInLive", this, null, mimeType, null).get("content_id");
-        System.out.println("contentId for live content == " + contentId);
+        String contentId = (String) ContentUtil.createResourceContent(this, null, mimeType, null).get("content_id");
+        System.out.println("Resource Content Id:" + contentId);
+        ContentUtil.uploadResourceContent(this, contentId, mimeType, null);
+        ContentUtil.publishContent(this, null, "public", contentId, null);
+
+        Map<String, Object> resourceMapBeforeUpload = (Map<String, Object>) ContentUtil.readContent(this, contentId, null, null).get("content");
+        String versionKeyBeforUpload = (String) resourceMapBeforeUpload.get("versionKey");
+        String statusBeforeUpload = (String)resourceMapBeforeUpload.get("status");
+        Assert.assertTrue(statusBeforeUpload.equals("Live"));
+
         Map<String, Object> result = ContentUtil.uploadResourceContent(this, contentId, mimeType, null);
         Assert.assertTrue(result.containsKey("content_url"));
         String url = (String) result.get("content_url");
         Assert.assertTrue(url.endsWith(extension));
 
         Map<String, Object> resourceMap = (Map<String, Object>) ContentUtil.readContent(this, contentId, "edit", null).get("content");
-        String identifier = (String)resourceMap.get("identifier");
-        Assert.assertTrue(identifier.endsWith(IMG_EXTENSION));
+        System.out.println("resourceMap == "+resourceMap);
+        String status = (String)resourceMap.get("status");
+        String versionKey = (String) resourceMap.get("versionKey");
+        Assert.assertTrue(status.equals("Draft"));
+
+        Assert.assertFalse(versionKeyBeforUpload.equals(versionKey));
 
     }
+
 
 
     @Test(dataProvider = "uploadResourceContentWithFileMimeTypes")
@@ -190,6 +203,7 @@ public class UploadContentTest extends BaseCitrusTestRunner {
                 },
         };
     }
+
 
     @DataProvider(name = "uploadResourceContentInLiveWithFile")
     public Object[][] uploadResourceContentInLiveWithFile() {
