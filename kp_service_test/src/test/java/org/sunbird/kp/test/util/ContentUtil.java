@@ -44,10 +44,10 @@ public class ContentUtil {
     private static final String PUBLISH_CONTENT_EXPECT_200 = "publishContentExpect200";
     private static final String UPDATE_HIERARCHY_EXPECT_200 = "updateHierarchyExpect200";
     private static final String RETIRE_CONTENT_EXPECT_200 = "retireContentExpect200";
-    private static final String DISCARD_RESOURCE_CONTENT_EXPECT_200 = "discardResourceContentExpect200";
+    private static final String DISCARD_CONTENT_EXPECT_200 = "discardContentExpect200";
     private static final String FLAG_RESOURCE_CONTENT_EXPECT_200 = "flagResourceContentExpect200";
     private static final String ACCEPT_FLAG_RESOURCE_CONTENT_EXPECT_200 = "acceptFlagResourceContentExpect200";
-    private static final String REJECT_FLAG_RESOURCE_CONTENT_EXPECT_200 = "rejectFlagResourceContentExpect200";
+    private static final String REJECT_FLAG_CONTENT_EXPECT_200 = "rejectFlagContentExpect200";
 
     private static final ObjectMapper mapper = new ObjectMapper();
 
@@ -93,7 +93,7 @@ public class ContentUtil {
                     put("Discard", () -> discardContent(runner, contentId, headers));
                     put("Flag", () -> flagContent(runner, null, FLAG_RESOURCE_CONTENT_EXPECT_200, contentId, headers));
                     put("AcceptFlag", () -> acceptFlagContent(runner, null, ACCEPT_FLAG_RESOURCE_CONTENT_EXPECT_200, contentId, headers));
-                    put("RejectFlag", () -> rejectFlagContent(runner, null, REJECT_FLAG_RESOURCE_CONTENT_EXPECT_200, contentId, headers));
+                    put("RejectFlag", () -> rejectFlagContent(runner, null, contentId, headers));
                     put("Get", () -> readContent(runner, contentId, null, null));
                 }
             };
@@ -699,14 +699,13 @@ public class ContentUtil {
 
     public static Map<String, Object> discardContent(BaseCitrusTestRunner runner, String contentId, Map<String, Object> headers) {
         final String url = APIUrl.DISCARD_CONTENT + contentId;
-        runner.getTestCase().setName(DISCARD_RESOURCE_CONTENT_EXPECT_200);
         runner.http(
                 builder ->
                         TestActionUtil.processDeleteRequest(
                                 builder,
                                 Constant.KP_ENDPOINT,
                                 CONTENT_PAYLOAD_DIR,
-                                DISCARD_RESOURCE_CONTENT_EXPECT_200,
+                                DISCARD_CONTENT_EXPECT_200,
                                 url,
                                 Constant.REQUEST_JSON,
                                 Constant.CONTENT_TYPE_APPLICATION_JSON,
@@ -718,7 +717,7 @@ public class ContentUtil {
                         TestActionUtil.getResponse(builder,
                                 Constant.KP_ENDPOINT,
                                 CONTENT_PAYLOAD_DIR,
-                                DISCARD_RESOURCE_CONTENT_EXPECT_200,
+                                DISCARD_CONTENT_EXPECT_200,
                                 HttpStatus.OK,
                                 Constant.RESPONSE_JSON,
                                 null));
@@ -813,7 +812,7 @@ public class ContentUtil {
         return data;
     }
 
-    public static Map<String, Object> rejectFlagContent(BaseCitrusTestRunner runner, String payload, String testName, String contentId, Map<String, Object> headers) {
+    public static Map<String, Object> rejectFlagContent(BaseCitrusTestRunner runner, String payload, String contentId, Map<String, Object> headers) {
         final String url = APIUrl.REJECT_FLAG_CONTENT + contentId;
         if (StringUtils.isNotBlank(payload)) {
             runner.http(
@@ -825,15 +824,14 @@ public class ContentUtil {
                                     MediaType.APPLICATION_JSON.toString(),
                                     payload,
                                     getHeaders(headers)));
-        } else if (StringUtils.isNotBlank(testName)) {
-            runner.getTestCase().setName(testName);
+        } else {
             runner.http(
                     builder ->
                             TestActionUtil.processPostRequest(
                                     builder,
                                     Constant.KP_ENDPOINT,
                                     CONTENT_PAYLOAD_DIR,
-                                    testName,
+                                    REJECT_FLAG_CONTENT_EXPECT_200,
                                     url,
                                     Constant.REQUEST_JSON,
                                     Constant.CONTENT_TYPE_APPLICATION_JSON,
@@ -845,7 +843,7 @@ public class ContentUtil {
                         TestActionUtil.getResponse(
                                 builder,
                                 Constant.KP_ENDPOINT,
-                                testName,
+                                REJECT_FLAG_CONTENT_EXPECT_200,
                                 HttpStatus.OK));
         Map<String, Object> data = new HashMap<String, Object>();
         data.put("content_id", contentId);

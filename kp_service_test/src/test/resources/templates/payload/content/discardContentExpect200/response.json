@@ -5,10 +5,13 @@
   "params": {
     "resmsgid": "@ignore@",
     "msgid": null,
-    "status": "successful",
     "err": null,
+    "status": "successful",
     "errmsg": null
   },
   "responseCode": "OK",
-  "result": "@ignore@"
+  "result": {
+    "message": "Draft version of the content with id : ${contentIdVal} is discarded",
+    "node_id": "${contentIdVal}"
+  }
 }
