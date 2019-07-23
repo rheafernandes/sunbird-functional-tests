@@ -54,6 +54,25 @@ public class ContentV3Scenario {
     public static final String TEST_UPLOAD_RESOURCE_PDF_WITH_FILE_INVALID_IDENTIFIER =
             "testUploadResourcePdfWithFileInvalidId";
 
+    public static final String TEST_UPLOAD_RESOURCE_WITH_VALID_ECML_VALID_JSON =
+            "testUploadResourceWithValidEcmlValidJson";
+    public static final String TEST_UPLOAD_RESOURCE_WITH_VALID_ECML_CUSTOM_PLUGIN=
+            "testUploadResourceWithValidEcmlCustom_Plugin";
+
+    public static final String TEST_UPLOAD_RESOURCE_WITH_GREATER_THAN_50MB_ZIP =
+            "testUploadResourceWithGreatedThan50MbZip";
+    public static final String TEST_UPLOAD_RESOURCE_WITH_EMPTY_ZIP =
+            "testUploadResourceWithEmptyZip";
+    public static final String TEST_UPLOAD_RESOURCE_ZIP_WITHOUT_INDEX =
+            "testUploadResourceZipWithoutIndex";
+    public static final String TEST_UPLOAD_RESOURCE_ZIP_WITHOUT_ASSET =
+            "testUploadResourceZipWithoutAsset";
+    public static final String TEST_UPLOAD_RESOURCE_WITH_VALID_ECML_INVALID_JSON =
+            "testUploadResourceWithEcmlInvalidJson";
+    public static final String TEST_UPLOAD_RESOURCE_WITH_VALID_ECML_MISSING_ASSET =
+            "testUploadResourceWithValidEcmlMissingAsset";
+    public static final String TEST_UPLOAD_RESOURCE_ECML_WITH_TWIN_ANIMATION_AUDIO_SPRITES_IMG_SPRITES =
+            "testUploadResourceEcmlWithTwinAnimationAudioSpritesImgSprites";
 
     // Scenario's for review Content  API
     public static final String TEST_REVIEW_WITH_VALID_IDENTIFIER_WITH_NOT_UPLOAD_FILE =

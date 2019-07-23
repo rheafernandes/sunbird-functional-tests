@@ -43,12 +43,11 @@ public class ContentUtil {
     private static final String UPDATE_RESOURCE_CONTENT_EXPECT_200 = "updateResourceContentExpect200";
     private static final String PUBLISH_CONTENT_EXPECT_200 = "publishContentExpect200";
     private static final String UPDATE_HIERARCHY_EXPECT_200 = "updateHierarchyExpect200";
-    private static final String RETIRE_CONTENT_EXPECT_200 = "retireResourceContentExpect200";
+    private static final String RETIRE_CONTENT_EXPECT_200 = "retireContentExpect200";
     private static final String DISCARD_RESOURCE_CONTENT_EXPECT_200 = "discardResourceContentExpect200";
     private static final String FLAG_RESOURCE_CONTENT_EXPECT_200 = "flagResourceContentExpect200";
     private static final String ACCEPT_FLAG_RESOURCE_CONTENT_EXPECT_200 = "acceptFlagResourceContentExpect200";
     private static final String REJECT_FLAG_RESOURCE_CONTENT_EXPECT_200 = "rejectFlagResourceContentExpect200";
-
 
     private static final ObjectMapper mapper = new ObjectMapper();
 
@@ -95,7 +94,7 @@ public class ContentUtil {
                     put("Flag", () -> flagContent(runner, null, FLAG_RESOURCE_CONTENT_EXPECT_200, contentId, headers));
                     put("AcceptFlag", () -> acceptFlagContent(runner, null, ACCEPT_FLAG_RESOURCE_CONTENT_EXPECT_200, contentId, headers));
                     put("RejectFlag", () -> rejectFlagContent(runner, null, REJECT_FLAG_RESOURCE_CONTENT_EXPECT_200, contentId, headers));
-                    put("Get", () -> readContent(runner,  contentId));
+                    put("Get", () -> readContent(runner, contentId, null, null));
                 }
             };
             if (!CollectionUtils.isEmpty(contentWorkList)) {
@@ -311,8 +310,19 @@ public class ContentUtil {
                                 HttpStatus.OK));
     }
 
-    public static Map<String, Object> readContent(BaseCitrusTestRunner runner, String contentId) {
+    public static Map<String, Object> readContent(BaseCitrusTestRunner runner, String contentId, String mode, String fields) {
         String testName = "readContentExpect200";
+        String url = APIUrl.READ_CONTENT + contentId;
+        if (StringUtils.isNotBlank(mode)) {
+            url = url + "?mode=" + mode.trim();
+        }
+        if (StringUtils.isNotBlank(fields)) {
+            if (url.contains("mode="))
+                url = url + "&fields=" + fields.trim();
+            else url = url + "?fields=" + fields.trim();
+        }
+
+        final String reqUrl = url;
         if (StringUtils.isNotBlank(contentId)) {
             runner.getTestCase().setName(testName);
             runner.http(
@@ -321,7 +331,7 @@ public class ContentUtil {
                                     builder,
                                     Constant.KP_ENDPOINT,
                                     testName,
-                                    APIUrl.READ_CONTENT + contentId,
+                                    reqUrl,
                                     getHeaders(null)
                             ));
             runner.http(
@@ -387,7 +397,7 @@ public class ContentUtil {
                     break;
                 }
                 case "application/vnd.ekstep.plugin-archive": {
-                    runner.testContext.setVariable("fileNameValue", "sample.pdf");
+                    runner.testContext.setVariable("fileNameValue", "Custom_Plugin.zip");
                     break;
                 }
                 case "video/x-youtube": {
@@ -687,36 +697,6 @@ public class ContentUtil {
         return data;
     }
 
-    public static Map<String, Object> retireContent(BaseCitrusTestRunner runner, String contentId, Map<String, Object> headers) {
-        final String url = APIUrl.RETIRE_CONTENT + contentId;
-        runner.getTestCase().setName(RETIRE_CONTENT_EXPECT_200);
-        runner.http(
-                builder ->
-                        TestActionUtil.processDeleteRequest(
-                                builder,
-                                Constant.KP_ENDPOINT,
-                                CONTENT_PAYLOAD_DIR,
-                                RETIRE_CONTENT_EXPECT_200,
-                                url,
-                                Constant.REQUEST_JSON,
-                                Constant.CONTENT_TYPE_APPLICATION_JSON,
-                                getHeaders(headers)));
-
-        runner.variable("contentIdVal", contentId);
-        runner.http(
-                builder ->
-                        TestActionUtil.getResponse(builder,
-                                Constant.KP_ENDPOINT,
-                                CONTENT_PAYLOAD_DIR,
-                                RETIRE_CONTENT_EXPECT_200,
-                                HttpStatus.OK,
-                                Constant.RESPONSE_JSON,
-                                null));
-        Map<String, Object> data = new HashMap<String, Object>();
-        data.put("content_id", contentId);
-        return data;
-    }
-
     public static Map<String, Object> discardContent(BaseCitrusTestRunner runner, String contentId, Map<String, Object> headers) {
         final String url = APIUrl.DISCARD_CONTENT + contentId;
         runner.getTestCase().setName(RETIRE_CONTENT_EXPECT_200);
@@ -792,6 +772,8 @@ public class ContentUtil {
         }
         return data;
     }
+
+
     public static Map<String, Object> acceptFlagContent(BaseCitrusTestRunner runner, String payload, String testName, String contentId, Map<String, Object> headers) {
         final String url = APIUrl.ACCEPT_FLAG_CONTENT + contentId;
         if (StringUtils.isNotBlank(payload)) {
@@ -869,6 +851,38 @@ public class ContentUtil {
         data.put("content_id", contentId);
         return data;
     }
+
+
+    public static Map<String, Object> retireContent(BaseCitrusTestRunner runner, String contentId, Map<String, Object> headers) {
+        final String url = APIUrl.RETIRE_CONTENT + contentId;
+        runner.getTestCase().setName(RETIRE_CONTENT_EXPECT_200);
+        runner.http(
+                builder ->
+                        TestActionUtil.processDeleteRequest(
+                                builder,
+                                Constant.KP_ENDPOINT,
+                                CONTENT_PAYLOAD_DIR,
+                                RETIRE_CONTENT_EXPECT_200,
+                                url,
+                                Constant.REQUEST_JSON,
+                                Constant.CONTENT_TYPE_APPLICATION_JSON,
+                                getHeaders(headers)));
+
+        runner.variable("contentIdVal", contentId);
+        runner.http(
+                builder ->
+                        TestActionUtil.getResponse(builder,
+                                Constant.KP_ENDPOINT,
+                                CONTENT_PAYLOAD_DIR,
+                                RETIRE_CONTENT_EXPECT_200,
+                                HttpStatus.OK,
+                                Constant.RESPONSE_JSON,
+                                null));
+        Map<String, Object> data = new HashMap<String, Object>();
+        data.put("content_id", contentId);
+        return data;
+    }
+
     /**
      * This Method provides all necessary header elements
      *
@@ -908,3 +922,4 @@ public class ContentUtil {
     }
 
 }
+
