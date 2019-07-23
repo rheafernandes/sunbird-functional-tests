@@ -19,6 +19,15 @@ public class PublishMultiStageScenarioTest extends BaseCitrusTestRunner {
 
     private static final String TEMPLATE_DIR = "templates/content/v3/publish";
 
+    /*
+    * Scenario : Publish a Textbook Having Another Collection With Concept as children
+    * Expectation: Textbook Should be Published and Get Hierarchy should work for the Textbook.
+    *
+    * Step 1: Create a Live Resource Content with Concept
+    * Step 2: Create a Collection Content, add  Resource Content as children, Publish the Collection
+    * Step 3: Create a Textbook, Add Collection Content (Have Concept) as children to textbook unit and publish Textbook.
+    *
+    * */
     @Test
     @CitrusTest
     public void testPublishTextbookContentWithResourceHavingConceptRelation() throws Exception {
@@ -60,6 +69,18 @@ public class PublishMultiStageScenarioTest extends BaseCitrusTestRunner {
         Assert.assertEquals(childNodes.size(), count);
     }
 
+    /*
+     * Scenario : Publish a Textbook Having Resource Content (Which Got Updated Now and have new version)
+     * Expectation: Textbook Should be Published and Get Hierarchy should work for the Textbook. Textbook Hierarchy should
+     * have latest version of the resource.
+     *
+     * Step 1: Create a Live Resource Content.
+     * Step 2: Create a Textbook, Add Resource Content as children to textbook unit and publish Textbook.
+     * Step 3: Publish The Resource Content Again
+     * Step 4: Publish The Textbook Again.
+     * Step 5: Make Call to Get Hierarchy And Verify pkgVersion of the Resource Children.
+     *
+     * */
     @Test
     @CitrusTest
     public void testPublishTextbookWithResourceHavingNewVersion() {
