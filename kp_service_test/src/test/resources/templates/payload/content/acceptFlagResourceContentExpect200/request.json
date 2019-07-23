@@ -1,7 +1,5 @@
 {
   "request": {
-    "content": {
-
-    }
+      "versionKey": "${versionKeyVal}"
   }
 }

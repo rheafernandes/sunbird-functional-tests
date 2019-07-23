@@ -106,9 +106,6 @@ public class DiscardContentTest extends BaseCitrusTestRunner {
                 new Object[]{
                         ContentV3Scenario.TEST_DISCARD_CONTENT_STATUS_RETIRED, APIUrl.DISCARD_CONTENT, HttpStatus.BAD_REQUEST, Constant.CREATOR, null, "application/pdf", false, "contentRetired"
                 },
-                new Object[]{
-                        ContentV3Scenario.TEST_DISCARD_CONTENT_STATUS_RETIRED, APIUrl.DISCARD_CONTENT, HttpStatus.BAD_REQUEST, Constant.CREATOR, null, "application/pdf", false, "contentRetired"
-                },
 
         };
     }
