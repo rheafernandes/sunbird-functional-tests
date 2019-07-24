@@ -25,7 +25,7 @@ import java.util.function.Supplier;
  *
  * @author Kumar Gauraw
  */
-public class ContentUtil {
+public class ContentUtil implements WorkFlows {
 
     private static final String API_KEY = AppConfig.config.getString("kp_api_key");
     private static final Boolean IS_USER_AUTH_REQUIRED = AppConfig.config.getBoolean("user_auth_enable");
@@ -51,24 +51,6 @@ public class ContentUtil {
 
     private static final ObjectMapper mapper = new ObjectMapper();
 
-    // TODO: Add all the workflows for all test objects possible (Of Resource Type and Collection Type)
-    private static final String contentWorkFlows = "{\n" +
-            "\t\"contentInDraft\" : [],\n" +
-            "\t\"contentUpload\" : [\"Upload\"],\n" +
-            "\t\"contentDraftUpdated\" : [\"Update\"],\n" +
-            "\t\"contentInReview\" : [\"Upload\", \"Review\"],\n" +
-            "\t\"contentInLive\": [\"Upload\", \"Publish\"],\n" +
-            "\t\"contentInLiveImageDraft\" : [\"Upload\", \"Publish\", \"Get\", \"Update\"],\n" +
-            "\t\"contentInLiveImageReview\" : [\"Upload\", \"Publish\", \"Get\", \"Update\", \"Review\"],\n" +
-            "\t\"contentInUnlisted\" : [\"Upload\", \"Unlisted\"],\n" +
-            "\t\"contentInFlagged\" : [\"Upload\", \"Publish\", \"Get\", \"Flag\"],\n" +
-            "\t\"contentInFlagDraft\" :  [\"Upload\", \"Publish\", \"Get\", \"Flag\", \"AcceptFlag\"],\n" +
-            "\t\"contentInFlagReview\" :  [\"Upload\", \"Publish\", \"Get\", \"Flag\", \"AcceptFlag\", \"Review\"],\n" +
-            "\t\"contentRetired\" : [\"Retire\"],\n" +
-            "\t\"contentDiscarded\" : [\"Discard\"]\n" +
-            "}";
-
-
     public static Map<String, Object> prepareResourceContent(String type, BaseCitrusTestRunner runner, Map<String, Object> payload,
                                                              String mimeType, Map<String, Object> headers) {
         Map contentWorkMap = null;
@@ -82,21 +64,7 @@ public class ContentUtil {
             contentWorkMap = mapper.readValue(contentWorkFlows, new TypeReference<Map<String, Object>>() {
             });
             List contentWorkList = (List<String>) contentWorkMap.get(type);
-            Map<String, Supplier<Map<String, Object>>> actionMap = new HashMap<String, Supplier<Map<String, Object>>>() {
-                {
-                    put("Upload", () -> uploadResourceContent(runner, contentId, mimeType, headers));
-                    put("Publish", () -> publishContent(runner, null, "listed", contentId, headers));
-                    put("Review", () -> reviewContent(runner, null, REVIEW_RESOURCE_CONTENT_EXPECT_200, contentId, headers));
-                    put("Update", () -> updateContent(runner, null, UPDATE_RESOURCE_CONTENT_EXPECT_200, contentId, headers));
-                    put("Unlisted", () -> publishContent(runner, null, "unlisted", contentId, headers));
-                    put("Retire", () -> retireContent(runner, contentId, headers));
-                    put("Discard", () -> discardContent(runner, contentId, headers));
-                    put("Flag", () -> flagContent(runner, null, FLAG_RESOURCE_CONTENT_EXPECT_200, contentId, headers));
-                    put("AcceptFlag", () -> acceptFlagContent(runner, null, ACCEPT_FLAG_RESOURCE_CONTENT_EXPECT_200, contentId, headers));
-                    put("RejectFlag", () -> rejectFlagContent(runner, null, contentId, headers));
-                    put("Get", () -> readContent(runner, contentId, null, null));
-                }
-            };
+            Map<String, Supplier<Map<String, Object>>> actionMap = WorkFlows.getContentWorkflowMap(runner, contentId, mimeType, headers);
             if (!CollectionUtils.isEmpty(contentWorkList)) {
                 contentWorkList.forEach(action -> {
                     Map response = actionMap.get(action).get();
@@ -596,6 +564,7 @@ public class ContentUtil {
     public static Map<String, Object> reviewContent(BaseCitrusTestRunner runner, String payload, String testName, String contentId, Map<String, Object> headers) {
         final TestContext testContext = runner.testContext;
         final String url = APIUrl.REVIEW_CONTENT + contentId;
+        final String updatedTestName = StringUtils.isBlank(testName) ? REVIEW_RESOURCE_CONTENT_EXPECT_200 : testName;
         if (StringUtils.isNotBlank(payload)) {
             runner.http(
                     builder ->
@@ -606,15 +575,15 @@ public class ContentUtil {
                                     MediaType.APPLICATION_JSON.toString(),
                                     payload,
                                     getHeaders(headers)));
-        } else if (StringUtils.isNotBlank(testName)) {
-            runner.getTestCase().setName(testName);
+        } else if (StringUtils.isNotBlank(updatedTestName)) {
+            runner.getTestCase().setName(updatedTestName);
             runner.http(
                     builder ->
                             TestActionUtil.processPostRequest(
                                     builder,
                                     Constant.KP_ENDPOINT,
                                     CONTENT_PAYLOAD_DIR,
-                                    testName,
+                                    updatedTestName,
                                     url,
                                     Constant.REQUEST_JSON,
                                     Constant.CONTENT_TYPE_APPLICATION_JSON,
@@ -654,6 +623,7 @@ public class ContentUtil {
     public static Map<String, Object> updateContent(BaseCitrusTestRunner runner, String payload, String testName, String contentId, Map<String, Object> headers) {
         final String url = APIUrl.UPDATE_CONTENT + contentId;
         final TestContext testContext = runner.testContext;
+        final String updatedTestName = StringUtils.isBlank(testName) ? UPDATE_RESOURCE_CONTENT_EXPECT_200 : testName;
         if (StringUtils.isNotBlank(payload)) {
             runner.http(
                     builder ->
@@ -664,15 +634,15 @@ public class ContentUtil {
                                     MediaType.APPLICATION_JSON.toString(),
                                     payload,
                                     getHeaders(headers)));
-        } else if (StringUtils.isNotBlank(testName)) {
-            runner.getTestCase().setName(testName);
+        } else if (StringUtils.isNotBlank(updatedTestName)) {
+            runner.getTestCase().setName(updatedTestName);
             runner.http(
                     builder ->
                             TestActionUtil.processPatchRequest(
                                     builder,
                                     Constant.KP_ENDPOINT,
                                     CONTENT_PAYLOAD_DIR,
-                                    testName,
+                                    updatedTestName,
                                     url,
                                     Constant.REQUEST_JSON,
                                     Constant.CONTENT_TYPE_APPLICATION_JSON,
@@ -729,6 +699,7 @@ public class ContentUtil {
     public static Map<String, Object> flagContent(BaseCitrusTestRunner runner, String payload, String testName, String contentId, Map<String, Object> headers) {
         final TestContext testContext = runner.testContext;
         final String url = APIUrl.FLAG_CONTENT + contentId;
+        final String updatedTestName = StringUtils.isBlank(testName) ? FLAG_RESOURCE_CONTENT_EXPECT_200 : testName;
         if (StringUtils.isNotBlank(payload)) {
             runner.http(
                     builder ->
@@ -739,15 +710,15 @@ public class ContentUtil {
                                     MediaType.APPLICATION_JSON.toString(),
                                     payload,
                                     getHeaders(headers)));
-        } else if (StringUtils.isNotBlank(testName)) {
-            runner.getTestCase().setName(testName);
+        } else if (StringUtils.isNotBlank(updatedTestName)) {
+            runner.getTestCase().setName(updatedTestName);
             runner.http(
                     builder ->
                             TestActionUtil.processPostRequest(
                                     builder,
                                     Constant.KP_ENDPOINT,
                                     CONTENT_PAYLOAD_DIR,
-                                    testName,
+                                    updatedTestName,
                                     url,
                                     Constant.REQUEST_JSON,
                                     Constant.CONTENT_TYPE_APPLICATION_JSON,
@@ -775,6 +746,7 @@ public class ContentUtil {
 
     public static Map<String, Object> acceptFlagContent(BaseCitrusTestRunner runner, String payload, String testName, String contentId, Map<String, Object> headers) {
         final String url = APIUrl.ACCEPT_FLAG_CONTENT + contentId;
+        final String updatedTestName = StringUtils.isBlank(testName) ? ACCEPT_FLAG_RESOURCE_CONTENT_EXPECT_200 : testName;
         if (StringUtils.isNotBlank(payload)) {
             runner.http(
                     builder ->
@@ -785,15 +757,15 @@ public class ContentUtil {
                                     MediaType.APPLICATION_JSON.toString(),
                                     payload,
                                     getHeaders(headers)));
-        } else if (StringUtils.isNotBlank(testName)) {
-            runner.getTestCase().setName(testName);
+        } else if (StringUtils.isNotBlank(updatedTestName)) {
+            runner.getTestCase().setName(updatedTestName);
             runner.http(
                     builder ->
                             TestActionUtil.processPostRequest(
                                     builder,
                                     Constant.KP_ENDPOINT,
                                     CONTENT_PAYLOAD_DIR,
-                                    testName,
+                                    updatedTestName,
                                     url,
                                     Constant.REQUEST_JSON,
                                     Constant.CONTENT_TYPE_APPLICATION_JSON,
