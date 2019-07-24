@@ -25,7 +25,7 @@ import java.util.function.Supplier;
  *
  * @author Kumar Gauraw
  */
-public class ContentUtil implements WorkFlows {
+public class ContentUtil extends WorkFlows {
 
     private static final String API_KEY = AppConfig.config.getString("kp_api_key");
     private static final Boolean IS_USER_AUTH_REQUIRED = AppConfig.config.getBoolean("user_auth_enable");
@@ -51,6 +51,16 @@ public class ContentUtil implements WorkFlows {
 
     private static final ObjectMapper mapper = new ObjectMapper();
 
+    /**
+     * This method will allow you to create a test resource object in any state you want as per WorkFlows Class
+     * @see WorkFlows
+     * @param type
+     * @param runner
+     * @param payload
+     * @param mimeType
+     * @param headers
+     * @return
+     */
     public static Map<String, Object> prepareResourceContent(String type, BaseCitrusTestRunner runner, Map<String, Object> payload,
                                                              String mimeType, Map<String, Object> headers) {
         Map contentWorkMap = null;
@@ -61,7 +71,7 @@ public class ContentUtil implements WorkFlows {
         result.put("versionKey", contentMap.get("versionKey"));
         runner.variable("versionKeyVal", contentMap.get("versionKey"));
         try {
-            contentWorkMap = mapper.readValue(contentWorkFlows, new TypeReference<Map<String, Object>>() {
+            contentWorkMap = mapper.readValue(WorkFlows.contentWorkFlows, new TypeReference<Map<String, Object>>() {
             });
             List contentWorkList = (List<String>) contentWorkMap.get(type);
             Map<String, Supplier<Map<String, Object>>> actionMap = WorkFlows.getContentWorkflowMap(runner, contentId, mimeType, headers);
@@ -84,6 +94,48 @@ public class ContentUtil implements WorkFlows {
         }
         return result;
     }
+    /**
+     * This method will allow you to create a test Asset object in any state you want as per WorkFlows Class
+     * @see WorkFlows
+     * @param type
+     * @param runner
+     * @param mimeType
+     * @param headers
+     * @return
+     */
+    public static Map<String, Object> prepareAssetContent(String type, BaseCitrusTestRunner runner,
+                                                             String mimeType, Map<String, Object> headers) {
+        Map assetWorkMap = null;
+        Map contentMap = ContentUtil.createAssetContent(runner, null, mimeType, headers);
+        Map<String, Object> result = new HashMap<>();
+        String contentId = (String) contentMap.get("content_id");
+        result.put("content_id", contentId);
+        result.put("versionKey", contentMap.get("versionKey"));
+        runner.variable("versionKeyVal", contentMap.get("versionKey"));
+        try {
+            assetWorkMap = mapper.readValue(assetWorkFlows, new TypeReference<Map<String, Object>>() {});
+            List contentWorkList = (List<String>) assetWorkMap.get(type);
+            Map<String, Supplier<Map<String, Object>>> actionMap = WorkFlows.getAssetWorkFlowMap(runner, contentId, mimeType, headers);
+            if (!CollectionUtils.isEmpty(contentWorkList)) {
+                contentWorkList.forEach(action -> {
+                    Map response = actionMap.get(action).get();
+                    if(response.get("content") != null)
+                        response = (Map<String,Object>) response.get("content");
+
+                    if (StringUtils.isNotBlank((String) response.get("versionKey"))) {
+                        result.put("versionKey", response.get("versionKey"));
+                        runner.variable("versionKeyVal", response.get("versionKey"));
+                    }
+                    if (StringUtils.isNotBlank((String) response.get("content_url")))
+                        result.put("content_url", response.get("content_url"));
+                });
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
 
 
     public static Map<String, Object> createResourceContent(BaseCitrusTestRunner runner, String payload, String mimeType, Map<String, Object> headers) {

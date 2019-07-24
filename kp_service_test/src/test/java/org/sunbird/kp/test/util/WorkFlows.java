@@ -6,9 +6,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Supplier;
 
-public interface WorkFlows {
+public class WorkFlows {
     // TODO: Add all the workflows for all test objects possible (Of Resource Type and Collection Type)
-    String contentWorkFlows = "{\n" +
+    public static final String contentWorkFlows = "{\n" +
             "\t\"contentInDraft\" : [],\n" +
             "\t\"contentUpload\" : [\"Upload\"],\n" +
             "\t\"contentDraftUpdated\" : [\"Update\"],\n" +
@@ -23,8 +23,11 @@ public interface WorkFlows {
             "\t\"contentRetired\" : [\"Retire\"],\n" +
             "\t\"contentDiscarded\" : [\"Discard\"]\n" +
             "}";
-    String assetWorkFlows = "";
-    String collectionWorkFlows = "";
+    public static final String assetWorkFlows = "{\n" +
+            "\"assetDraft\":[ ],\n" +
+            "\"assetLive\":[\"Upload\"]\n" +
+            "}";
+    public static final String collectionWorkFlows = "";
 
     public static Map<String, Supplier<Map<String, Object>>> getContentWorkflowMap(BaseCitrusTestRunner runner, String contentId, String mimeType, Map<String,Object> headers) {
         return new HashMap<String, Supplier<Map<String, Object>>>() {
@@ -43,4 +46,18 @@ public interface WorkFlows {
             }
         };
     }
+    public static Map<String, Supplier<Map<String, Object>>> getAssetWorkFlowMap(BaseCitrusTestRunner runner, String contentId, String mimeType, Map<String,Object> headers) {
+        return new HashMap<String, Supplier<Map<String, Object>>>() {
+            {
+                put("Upload", () -> ContentUtil.uploadAssetContent(runner, contentId, mimeType, headers));
+                put("Retire", () -> ContentUtil.retireContent(runner, contentId, headers));
+                put("Discard", () -> ContentUtil.discardContent(runner, contentId, headers));
+                put("Flag", () -> ContentUtil.flagContent(runner, null, null, contentId, headers));
+                put("AcceptFlag", () -> ContentUtil.acceptFlagContent(runner, null, null, contentId, headers));
+                put("RejectFlag", () -> ContentUtil.rejectFlagContent(runner, null, contentId, headers));
+                put("Get", () -> ContentUtil.readContent(runner, contentId, null, null));
+            }
+        };
+    }
+
 }
