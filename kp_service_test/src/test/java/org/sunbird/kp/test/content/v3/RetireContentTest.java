@@ -107,7 +107,7 @@ public class RetireContentTest extends BaseCitrusTestRunner {
                         ContentV3Scenario.TEST_RETIRE_CONTENT_STATUS_FLAGREVIEW, APIUrl.RETIRE_CONTENT, HttpStatus.BAD_REQUEST, Constant.CREATOR, null, "application/pdf", false, "contentInFlagReview"
                 },
                 new Object[]{
-                        ContentV3Scenario.TEST_RETIRE_CONTENT_STATUS_RETIRED, APIUrl.RETIRE_CONTENT, HttpStatus.BAD_REQUEST, Constant.CREATOR, null, "application/pdf", true, "contentInUnlisted"
+                        ContentV3Scenario.TEST_RETIRE_CONTENT_STATUS_RETIRED, APIUrl.RETIRE_CONTENT, HttpStatus.BAD_REQUEST, Constant.CREATOR, null, "application/pdf", false, "contentRetired"
                 }
         };
     }
