@@ -25,7 +25,7 @@ import java.util.function.Supplier;
  *
  * @author Kumar Gauraw
  */
-public class ContentUtil extends WorkFlows {
+public class ContentUtil {
 
     private static final String API_KEY = AppConfig.config.getString("kp_api_key");
     private static final Boolean IS_USER_AUTH_REQUIRED = AppConfig.config.getBoolean("user_auth_enable");
@@ -52,8 +52,8 @@ public class ContentUtil extends WorkFlows {
     private static final ObjectMapper mapper = new ObjectMapper();
 
     /**
-     * This method will allow you to create a test resource object in any state you want as per WorkFlows Class
-     * @see WorkFlows
+     * This method will allow you to create a test resource object in any state you want as per WorkflowConstants Class
+     * @see WorkflowConstants
      * @param type
      * @param runner
      * @param payload
@@ -71,10 +71,10 @@ public class ContentUtil extends WorkFlows {
         result.put("versionKey", contentMap.get("versionKey"));
         runner.variable("versionKeyVal", contentMap.get("versionKey"));
         try {
-            contentWorkMap = mapper.readValue(WorkFlows.contentWorkFlows, new TypeReference<Map<String, Object>>() {
+            contentWorkMap = mapper.readValue(WorkflowConstants.contentWorkFlows, new TypeReference<Map<String, Object>>() {
             });
             List contentWorkList = (List<String>) contentWorkMap.get(type);
-            Map<String, Supplier<Map<String, Object>>> actionMap = WorkFlows.getContentWorkflowMap(runner, contentId, mimeType, headers);
+            Map<String, Supplier<Map<String, Object>>> actionMap = getContentWorkflowMap(runner, contentId, mimeType, headers);
             if (!CollectionUtils.isEmpty(contentWorkList)) {
                 contentWorkList.forEach(action -> {
                     Map response = actionMap.get(action).get();
@@ -95,8 +95,8 @@ public class ContentUtil extends WorkFlows {
         return result;
     }
     /**
-     * This method will allow you to create a test Asset object in any state you want as per WorkFlows Class
-     * @see WorkFlows
+     * This method will allow you to create a test Asset object in any state you want as per WorkflowConstants Class
+     * @see WorkflowConstants
      * @param type
      * @param runner
      * @param mimeType
@@ -113,9 +113,9 @@ public class ContentUtil extends WorkFlows {
         result.put("versionKey", contentMap.get("versionKey"));
         runner.variable("versionKeyVal", contentMap.get("versionKey"));
         try {
-            assetWorkMap = mapper.readValue(assetWorkFlows, new TypeReference<Map<String, Object>>() {});
+            assetWorkMap = mapper.readValue(WorkflowConstants.assetWorkFlows, new TypeReference<Map<String, Object>>() {});
             List contentWorkList = (List<String>) assetWorkMap.get(type);
-            Map<String, Supplier<Map<String, Object>>> actionMap = WorkFlows.getAssetWorkFlowMap(runner, contentId, mimeType, headers);
+            Map<String, Supplier<Map<String, Object>>> actionMap = getAssetWorkFlowMap(runner, contentId, mimeType, headers);
             if (!CollectionUtils.isEmpty(contentWorkList)) {
                 contentWorkList.forEach(action -> {
                     Map response = actionMap.get(action).get();
@@ -941,6 +941,37 @@ public class ContentUtil extends WorkFlows {
             System.out.println("Exception Occurred While parsing context variable : " + e);
         }
         return result;
+    }
+
+    public static Map<String, Supplier<Map<String, Object>>> getContentWorkflowMap(BaseCitrusTestRunner runner, String contentId, String mimeType, Map<String,Object> headers) {
+        return new HashMap<String, Supplier<Map<String, Object>>>() {
+            {
+                put("Upload", () -> ContentUtil.uploadResourceContent(runner, contentId, mimeType, headers));
+                put("Publish", () -> ContentUtil.publishContent(runner, null, "listed", contentId, headers));
+                put("Review", () -> ContentUtil.reviewContent(runner, null, null, contentId, headers));
+                put("Update", () -> ContentUtil.updateContent(runner, null, null, contentId, headers));
+                put("Unlisted", () -> ContentUtil.publishContent(runner, null, "unlisted", contentId, headers));
+                put("Retire", () -> ContentUtil.retireContent(runner, contentId, headers));
+                put("Discard", () -> ContentUtil.discardContent(runner, contentId, headers));
+                put("Flag", () -> ContentUtil.flagContent(runner, null, null, contentId, headers));
+                put("AcceptFlag", () -> ContentUtil.acceptFlagContent(runner, null, null, contentId, headers));
+                put("RejectFlag", () -> ContentUtil.rejectFlagContent(runner, null, contentId, headers));
+                put("Get", () -> ContentUtil.readContent(runner, contentId, null, null));
+            }
+        };
+    }
+    public static Map<String, Supplier<Map<String, Object>>> getAssetWorkFlowMap(BaseCitrusTestRunner runner, String contentId, String mimeType, Map<String,Object> headers) {
+        return new HashMap<String, Supplier<Map<String, Object>>>() {
+            {
+                put("Upload", () -> ContentUtil.uploadAssetContent(runner, contentId, mimeType, headers));
+                put("Retire", () -> ContentUtil.retireContent(runner, contentId, headers));
+                put("Discard", () -> ContentUtil.discardContent(runner, contentId, headers));
+                put("Flag", () -> ContentUtil.flagContent(runner, null, null, contentId, headers));
+                put("AcceptFlag", () -> ContentUtil.acceptFlagContent(runner, null, null, contentId, headers));
+                put("RejectFlag", () -> ContentUtil.rejectFlagContent(runner, null, contentId, headers));
+                put("Get", () -> ContentUtil.readContent(runner, contentId, null, null));
+            }
+        };
     }
 
 }
