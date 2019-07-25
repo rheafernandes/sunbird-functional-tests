@@ -6,6 +6,8 @@ import org.springframework.http.HttpStatus;
 import org.sunbird.kp.test.common.APIUrl;
 import org.sunbird.kp.test.common.BaseCitrusTestRunner;
 import org.sunbird.kp.test.common.Constant;
+import org.sunbird.kp.test.util.CollectionUtil;
+import org.sunbird.kp.test.util.CollectionUtilPayload;
 import org.sunbird.kp.test.util.ContentUtil;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -43,12 +45,15 @@ public class RetireContentTest extends BaseCitrusTestRunner {
     }
 
     @Test(dataProvider = "retireCollection")
-    @CitrusParameters({"testName", "requestUrl", "httpStatusCode", "userType", "valParams", "needImage", "collectionType"})
+    @CitrusParameters({"testName", "requestUrl", "httpStatusCode", "userType", "payload", "needImage", "collectionType", "workflow", "assetCount", "resourceCount"})
     @CitrusTest
     public void testRetireCollectionContent(
-            String testName, String requestUrl, HttpStatus httpStatusCode, String userType, Map<String, Object> valParams, Boolean needImage, String collectionType) {
+            String testName, String requestUrl, HttpStatus httpStatusCode, String userType, String payloadForHierarchy, Boolean needImage,
+            String collectionType, String workflow, Integer assetCount, Integer resourceCount) {
         getAuthToken(this, userType);
-        Map<String, Object> map = ContentUtil.createCollectionContent(this, null, collectionType, null);
+//        Map<String, Object> map = ContentUtil.createCollectionContent(this, null, collectionType, null);
+        Map<String, Object> map = CollectionUtil.prepareTestCollection(workflow,this, payloadForHierarchy, collectionType, assetCount, resourceCount, null);
+        System.out.println(map);
         String contentId = (String) map.get("content_id");
         String versionKey = (String) map.get("versionKey");
         this.variable("versionKeyVal", versionKey);
@@ -63,7 +68,7 @@ public class RetireContentTest extends BaseCitrusTestRunner {
                 REQUEST_JSON,
                 MediaType.APPLICATION_JSON,
                 httpStatusCode,
-                valParams,
+                null,
                 RESPONSE_JSON
         );
     }
@@ -116,9 +121,13 @@ public class RetireContentTest extends BaseCitrusTestRunner {
     public Object[][] retireCollection() {
         return new Object[][]{
                 new Object[]{
-                        ContentV3Scenario.TEST_RETIRE_COLLECTION_STATUS_DRAFT, APIUrl.RETIRE_CONTENT, HttpStatus.OK, Constant.CREATOR, null, false, "Collection"
+                        ContentV3Scenario.TEST_RETIRE_COLLECTION_STATUS_DRAFT, APIUrl.RETIRE_CONTENT, HttpStatus.OK, Constant.CREATOR, CollectionUtilPayload.UPDATE_HIERARCHY_1_UNIT_1_RESOURCE, false, "TextBook", "collectionUnitsInDraft", 0, 1
+                },
+                new Object[]{
+                        ContentV3Scenario.TEST_RETIRE_COLLECTION_STATUS_DRAFT, APIUrl.RETIRE_CONTENT, HttpStatus.OK, Constant.CREATOR, CollectionUtilPayload.UPDATE_HIERARCHY_1_UNIT_1_ASSET, false, "TextBook", "collectionUnitsInDraft", 1, 0
                 }
         };
+
     }
 
 }

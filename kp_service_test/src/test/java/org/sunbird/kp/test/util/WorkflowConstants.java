@@ -21,10 +21,13 @@ public class WorkflowConstants {
             "\"assetDraft\":[ ],\n" +
             "\"assetLive\":[\"Upload\"]\n" +
             "}";
+    // Collection With Unit's or/and Resources and/or Asset's
     public static final String collectionWorkFlows = "{\n" +
-            "\"collectionDraft\":[],\n" +
-            "\"collectionDraftUnits\":[\"Update\"],\n" +
-            "\"collectionDraftUnitsResources\":[\"CreateResources\", \"Update\"],\n" +
+            "\"collectionInDraft\":[],\n" +
+            "\"collectionUnitsInDraft\":[\"Update\"],\n" +
+            "\"collectionUnitsInLive\":[\"Update\", \"Publish\"],\n" +
+            "\"collectionRead\":[\"Update\", \"Publish\"],\n" +
+            "\"collectionUnitsResourcesInDraft\":[\"CreateResources\", \"Update\"]\n" +
             "}";
 
 }
