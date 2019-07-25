@@ -76,9 +76,10 @@ public class CollectionUtil {
                     Map response = actionMap.get(action).get();
                     if (response.get("content") != null)
                         response = (Map<String, Object>) response.get("content");
-                    if (StringUtils.isNotBlank((String) response.get("versionKey"))) {
+                    if( null != response.get("identifiers"))
+                        collectionMap.put("identifiers", response.get("identifiers"));
+                    if (StringUtils.isNotBlank((String) response.get("versionKey")))
                         runner.variable("versionKeyVal", response.get("versionKey"));
-                    }
                 });
             }
         } catch (IOException e) {
