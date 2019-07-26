@@ -1,6 +1,16 @@
 package org.sunbird.kp.test.util;
 
 public class WorkflowConstants {
+
+    public static final String CONTENT_IN_FLAG_STATE= "contentInFlagged";
+    public static final String CONTENT_IN_FLAG_DRAFT= "contentInFlagDraft";
+    public static final String CONTENT_IN_FLAG_REVIEW= "contentInFlagReview";
+    public static final String CONTENT_IN_LIVE_STATE= "contentInLive";
+    public static final String CONTENT_IN_LIVE_IMAGE_DRAFT_STATE= "contentInLiveImageDraft";
+    public static final String CONTENT_IN_REVIEW_STATE= "contentInReview";
+    public static final String CONTENT_IN_RETIRED_STATE= "contentRetired";
+
+
     // TODO: Add all the workflows for all test objects possible (Of Resource Type and Collection Type)
     public static final String contentWorkFlows = "{\n" +
             "\t\"contentInDraft\" : [],\n" +
