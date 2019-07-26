@@ -228,4 +228,13 @@ public class ContentV3Scenario {
     public static final String TEST_PUBLISHING_INVALID_RESOURCE_CONTENT =
             "testPublishingInvalidResourceContent";
 
+    public static final String TEST_ACCEPT_FLAG_VALID_ID_AND_VALID_STATUS =
+            "testAcceptFlagValidIdValidStatus";
+    public static final String TEST_ACCEPT_FLAG_VALID_ID_AND_INVALID_STATUS =
+            "testAcceptFlagValidIdInValidStatus";
+    public static final String TEST_REACCEPT_FLAG_VALID_ID_AND_VALID_STATUS =
+            "testReAcceptFlagValidIdInValidStatus";
+    public static final String TEST_ACCEPT_FLAG_INVALID_ID =
+            "testAcceptFlagInValidId";
+
 }
