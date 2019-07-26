@@ -42,25 +42,28 @@ public class CollectionUtil {
      * @param assetCount     (Number of assets that are needed to replace in the payload)
      * @param resourceCount  (Number of resources that are needed to replace in the payload
      * @param mimeType       (This field is optional and can be passed as null for random valid mimeType generation
-     * @return
+     * @return a map of all the resources/assets added, all unit identifiers and textBook identifier
      * @see ContentUtil
      */
     public static Map<String, Object> prepareTestCollection(String workFlow, BaseCitrusTestRunner runner, String payload, String collectionType,
                                                             Integer assetCount, Integer resourceCount, String mimeType) {
-
+        Map<String, Object> collectionMap = new HashMap<>();
         if (assetCount != 0) {
             List<String> assetIds = getLiveAsset(runner, assetCount, mimeType);
             for (String assetId : assetIds) {
+                collectionMap.put("asset_" + (assetIds.indexOf(assetId) + 1), assetId);
                 payload = payload.replace("asset_" + (assetIds.indexOf(assetId) + 1), assetId);
             }
         }
         if (resourceCount != 0) {
             List<String> resourceIds = getLiveResources(runner, resourceCount, mimeType);
             for (String resourceId : resourceIds) {
+                collectionMap.put("resource_" + (resourceIds.indexOf(resourceId) + 1), resourceId);
                 payload = payload.replace("resource_" + (resourceIds.indexOf(resourceId) + 1), resourceId);
             }
         }
-        Map<String, Object> collectionMap = ContentUtil.createCollectionContent(runner, null, collectionType, null);
+        collectionMap.putAll(ContentUtil.createCollectionContent(runner, null, collectionType, null));
+
         //Map also has identifiers which is a map of all id's of unit's etc TODO: Return that too
         String contentId = (String) collectionMap.get("content_id");
         runner.variable("collectionIdVal", contentId);

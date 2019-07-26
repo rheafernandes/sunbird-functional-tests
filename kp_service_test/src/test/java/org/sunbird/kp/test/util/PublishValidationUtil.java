@@ -4,6 +4,7 @@ import org.apache.commons.collections4.MapUtils;
 import org.apache.commons.lang.StringUtils;
 import org.testng.Assert;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -53,9 +54,11 @@ public class PublishValidationUtil {
 
             if (null != valParams.get(key)) {
                 System.out.println("Checking for Exact Value Match!");
-                if (StringUtils.equals("pkgVersion", key)) {
-                    Assert.assertEquals(valParams.get(key), ((Double) contentMap.get(key)).intValue());
-                } else {
+                if (valParams.get(key) instanceof Integer) {
+                    Assert.assertEquals(valParams.get(key), ((Number) contentMap.get(key)).intValue());
+                } else if(valParams.get(key) instanceof Double){
+                    Assert.assertEquals(valParams.get(key), ((Number) contentMap.get(key)).doubleValue());
+                } else if(!StringUtils.equalsIgnoreCase("@ignore@", (String) valParams.get(key))){
                     Assert.assertEquals(valParams.get(key), contentMap.get(key));
                 }
             } else {
@@ -63,6 +66,10 @@ public class PublishValidationUtil {
                 Assert.assertNotNull(contentMap.get(key));
             }
         }
+    }
+
+    public static Boolean validateHierarchyJson(File ecarFile,  Map<String, Object> valParams ) {
+        return true;
     }
 
 }
