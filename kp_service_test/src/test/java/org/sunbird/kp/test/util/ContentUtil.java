@@ -1014,6 +1014,7 @@ public class ContentUtil {
     public static Map<String, Supplier<Map<String, Object>>> getCollectionWorkFlowMap(BaseCitrusTestRunner runner, String contentId, String testName, String payload, Map<String, Object> headers) {
         return new HashMap<String, Supplier<Map<String, Object>>>() {
             {
+                put("Publish", () -> ContentUtil.publishContent(runner, null, "listed", contentId, headers));
                 put("Update", () -> ContentUtil.updateContentHierarchy(runner, testName, payload, headers));
                 put("Retire", () -> ContentUtil.retireContent(runner, contentId, headers));
                 put("Discard", () -> ContentUtil.discardContent(runner, contentId, headers));
