@@ -184,6 +184,16 @@ public class ContentUtil {
                     runner.variable("mimeTypeVal", mimeType);
                     break;
                 }
+                case "video/webm": {
+                    runner.variable("codeVal", "kp.ft.resource.webm");
+                    runner.variable("mimeTypeVal", mimeType);
+                    break;
+                }
+                case "video/mp4": {
+                    runner.variable("codeVal", "kp.ft.resource.mp4");
+                    runner.variable("mimeTypeVal", mimeType);
+                    break;
+                }
             }
             return createContent(runner, runner.testContext, null, CREATE_RESOURCE_CONTENT_EXPECT_200, headers);
         }
@@ -411,28 +421,45 @@ public class ContentUtil {
             switch (mimeType.toLowerCase()) {
                 case "application/pdf": {
                     runner.testContext.setVariable("fileNameValue", "sample.pdf");
+                    runner.testContext.setVariable("fileUrlValue", "");
                     break;
                 }
                 case "application/vnd.ekstep.ecml-archive": {
-                    runner.testContext.setVariable("fileNameValue", "sample_ecml.zip");
+                    runner.testContext.setVariable("fileNameValue", "ecml_with_json.zip");
+                    runner.testContext.setVariable("fileUrlValue", "");
                     break;
                 }
                 case "application/vnd.ekstep.html-archive": {
                     runner.testContext.setVariable("fileNameValue", "sample_Html.zip");
+                    runner.testContext.setVariable("fileUrlValue", "");
                     break;
                 }
                 case "application/vnd.ekstep.h5p-archive": {
                     runner.testContext.setVariable("fileNameValue", "sample.pdf");
+                    runner.testContext.setVariable("fileUrlValue", "");
                     break;
                 }
                 case "application/vnd.ekstep.plugin-archive": {
                     runner.testContext.setVariable("fileNameValue", "Custom_Plugin.zip");
+                    runner.testContext.setVariable("fileUrlValue", "");
                     break;
                 }
                 case "video/x-youtube": {
-                    runner.testContext.setVariable("fileNameValue", "sample.pdf");
+                    runner.testContext.setVariable("fileNameValue", "");
+                    runner.testContext.setVariable("fileUrlValue", "https://www.youtube.com/watch?v=FfgT6zx4k3Q");
                     break;
                 }
+                case "video/mp4": {
+                    runner.testContext.setVariable("fileNameValue", "sample.mp4");
+                    runner.testContext.setVariable("fileUrlValue", "");
+                    break;
+                }
+                case "video/webm": {
+                    runner.testContext.setVariable("fileNameValue", "sample.webm");
+                    runner.testContext.setVariable("fileUrlValue", "");
+                    break;
+                }
+
             }
             return uploadContent(runner, runner.testContext, UPLOAD_RESOURCE_CONTENT_EXPECT_200, contentId, headers);
         }
@@ -592,6 +619,7 @@ public class ContentUtil {
                                     Constant.CONTENT_TYPE_APPLICATION_JSON,
                                     getHeaders(headers)));
         }
+        runner.sleep(Constant.PUBLISH_WAIT_TIME);
 
         runner.http(
                 builder ->
@@ -606,7 +634,6 @@ public class ContentUtil {
         Map<String, Object> data = new HashMap<String, Object>();
         if (MapUtils.isNotEmpty(result))
             data.put("content_id", result.get("node_id"));
-        runner.sleep(Constant.PUBLISH_WAIT_TIME);
         return data;
     }
 
