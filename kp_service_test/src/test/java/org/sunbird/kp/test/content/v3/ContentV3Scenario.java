@@ -215,6 +215,17 @@ public class ContentV3Scenario {
             "testPublishCourseWithResourceContent";
     public static final String TEST_PUBLISH_LESSONPLAN_WITH_RESOURCE_CONTENT =
             "testPublishLessonPlanWithResourceContent";
-
+    public static final String TEST_REPUBLISH_RESOURCE_ECML_CONTENT =
+            "testRepublishResourceEcmlContent";
+    public static final String TEST_PUBLISH_DRAFT_VERSION_OF_PUBLISHED_RESOURCE_ECML_CONTENT =
+            "testPublishDraftVersionOfPublishedResourceEcmlContent";
+    public static final String TEST_PUBLISH_RESOURCE_ECML_CONTENT_WITH_CORRUPTED_ECML_BODY =
+            "testPublishResourceEcmlContentWithCorruptedEcmlBody";
+    public static final String TEST_PUBLISHING_EXISTING_LIVE_RESOURCE_CONTENT =
+            "testPublishingExistingLiveResourceContent";
+    public static final String TEST_PUBLISHING_DELETED_RESOURCE_CONTENT =
+            "testPublishingDeletedResourceContent";
+    public static final String TEST_PUBLISHING_INVALID_RESOURCE_CONTENT =
+            "testPublishingInvalidResourceContent";
 
 }
