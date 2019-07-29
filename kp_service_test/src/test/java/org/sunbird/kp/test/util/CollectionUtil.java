@@ -37,30 +37,34 @@ public class CollectionUtil {
      *
      * @param workFlow       (Mandatory)
      * @param runner
-     * @param payload        (Mandatory)
+     * @param payloadMap        (Mandatory -> Send new HashMap with (updateHierarchy -> Payload String))
      * @param collectionType (For valid collection type see ContentUtil)
      * @param assetCount     (Number of assets that are needed to replace in the payload)
      * @param resourceCount  (Number of resources that are needed to replace in the payload
      * @param mimeType       (This field is optional and can be passed as null for random valid mimeType generation
-     * @return
+     * @return a map of all the resources/assets added, all unit identifiers and textBook identifier
      * @see ContentUtil
      */
-    public static Map<String, Object> prepareTestCollection(String workFlow, BaseCitrusTestRunner runner, String payload, String collectionType,
+    public static Map<String, Object> prepareTestCollection(String workFlow, BaseCitrusTestRunner runner, Map<String, String> payloadMap, String collectionType,
                                                             Integer assetCount, Integer resourceCount, String mimeType) {
-
+        String updateHierarchyPayload = payloadMap.get("updateHierarchy");
+        Map<String, Object> collectionMap = new HashMap<>();
         if (assetCount != 0) {
             List<String> assetIds = getLiveAsset(runner, assetCount, mimeType);
             for (String assetId : assetIds) {
-                payload = payload.replace("asset_" + (assetIds.indexOf(assetId) + 1), assetId);
+                collectionMap.put("asset_" + (assetIds.indexOf(assetId) + 1), assetId);
+                updateHierarchyPayload = updateHierarchyPayload.replace("asset_" + (assetIds.indexOf(assetId) + 1), assetId);
             }
         }
         if (resourceCount != 0) {
-            List<String> resourceIds = getLiveResources(runner, resourceCount, mimeType);
+            List<String> resourceIds = getLiveResources(runner, resourceCount, mimeType, payloadMap.get("createResource"));
             for (String resourceId : resourceIds) {
-                payload = payload.replace("resource_" + (resourceIds.indexOf(resourceId) + 1), resourceId);
+                collectionMap.put("resource_" + (resourceIds.indexOf(resourceId) + 1), resourceId);
+                updateHierarchyPayload = updateHierarchyPayload.replace("resource_" + (resourceIds.indexOf(resourceId) + 1), resourceId);
             }
         }
-        Map<String, Object> collectionMap = ContentUtil.createCollectionContent(runner, null, collectionType, null);
+        collectionMap.putAll(ContentUtil.createCollectionContent(runner, null, collectionType, null));
+
         //Map also has identifiers which is a map of all id's of unit's etc TODO: Return that too
         String contentId = (String) collectionMap.get("content_id");
         runner.variable("collectionIdVal", contentId);
@@ -70,7 +74,7 @@ public class CollectionUtil {
             collectionWorkMap = mapper.readValue(WorkflowConstants.collectionWorkFlows, new TypeReference<Map<String, Object>>() {
             });
             List contentWorkList = (List<String>) collectionWorkMap.get(workFlow);
-            Map<String, Supplier<Map<String, Object>>> actionMap = ContentUtil.getCollectionWorkFlowMap(runner, contentId, null, payload, null);
+            Map<String, Supplier<Map<String, Object>>> actionMap = ContentUtil.getCollectionWorkFlowMap(runner, contentId, null, updateHierarchyPayload, null);
             if (!CollectionUtils.isEmpty(contentWorkList)) {
                 contentWorkList.forEach(action -> {
                     Map response = actionMap.get(action).get();
@@ -89,11 +93,19 @@ public class CollectionUtil {
         return collectionMap;
     }
 
-    public static List<String> getLiveResources(BaseCitrusTestRunner runner, Integer resourceCount, String mimeType) {
+    /**
+     *
+     * @param runner
+     * @param resourceCount
+     * @param mimeType
+     * @param createReqPayload  Payload for create resource request
+     * @return
+     */
+    public static List<String> getLiveResources(BaseCitrusTestRunner runner, Integer resourceCount, String mimeType, String createReqPayload) {
         List<String> resourceIds = new ArrayList<>();
         IntStream.rangeClosed(1, resourceCount).forEach(val -> {
             String randMimeType = StringUtils.isBlank(mimeType) ? resourceMimeTypes.get((new Random()).nextInt(resourceMimeTypes.size())) : mimeType;
-            resourceIds.add((String) ContentUtil.prepareResourceContent("contentInLive", runner, null, randMimeType, null).get("content_id"));
+            resourceIds.add((String) ContentUtil.prepareResourceContent("contentInLive", runner, createReqPayload, randMimeType, null).get("content_id"));
         });
         return resourceIds;
     }

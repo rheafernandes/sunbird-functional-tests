@@ -33,4 +33,22 @@ public class ContentPayload {
             "        \"limit\": 0\n" +
             "    }\n" +
             "}";
+    public static final String CREATE_RESOURCE_CONTENT_WITH_MULTIPLE_CONCEPTS = "{\n" +
+            "  \"request\": {\n" +
+            "    \"content\": {\n" +
+            "      \"identifier\": \"KP_FT_"+System.currentTimeMillis()+"\",\n" +
+            "      \"name\": \"KP Integration Test Content\",\n" +
+            "      \"code\": \"kp.ft.resource.pdf\",\n" +
+            "      \"mimeType\": \"application/pdf\",\n" +
+            "      \"contentType\": \"Resource\",\n" +
+            "      \"concepts\": [\n" +
+            "        {\n" +
+            "          \"identifier\": \"LO53\"\n" +
+            "          \"identifier\": \"AI31\"\n" +
+            "        }\n" +
+            "      ]\n" +
+            "    }\n" +
+            "  }\n" +
+            "}";
+
 }

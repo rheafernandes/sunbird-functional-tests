@@ -178,7 +178,7 @@ public class ContentV3Scenario {
     public static final String TEST_DISCARD_CONTENT_STATUS_DRAFT =
             "testDiscardStatusDraft";
     public static final String TEST_DISCARD_COLLECTION_STATUS_DRAFT =
-            "testDiscardCollectionStatusDraft";
+            "testPublishCollectionWithResourceContent";
     public static final String TEST_DISCARD_CONTENT_STATUS_REVIEW =
             "testDiscardStatusReview";
     public static final String TEST_DISCARD_CONTENT_STATUS_FLAGGED =
@@ -227,5 +227,48 @@ public class ContentV3Scenario {
             "testPublishingDeletedResourceContent";
     public static final String TEST_PUBLISHING_INVALID_RESOURCE_CONTENT =
             "testPublishingInvalidResourceContent";
+    public static final String TEST_PUBLISH_WITH_DIFFERENT_VERSION =
+            "testPublishWithDifferentVersionResource";
+    public static final String TEST_PUBLISH_WITH_RESOURCE_RETIRED=
+            "testPublishWithResourceRetired";
+    public static final String TEST_PUBLISH_COLLECTION_WITH_CONCEPT=
+            "testPublishWithResourceRetired";
+
+    //Accept Flag Scenarios
+    public static final String TEST_ACCEPT_FLAG_VALID_ID_AND_VALID_STATUS =
+            "testAcceptFlagValidIdValidStatus";
+    public static final String TEST_ACCEPT_FLAG_VALID_ID_AND_INVALID_STATUS =
+            "testAcceptFlagValidIdInValidStatus";
+    public static final String TEST_REACCEPT_FLAG_VALID_ID_AND_VALID_STATUS =
+            "testReAcceptFlagValidIdInValidStatus";
+    public static final String TEST_ACCEPT_FLAG_INVALID_ID =
+            "testAcceptFlagInValidId";
+
+    //Flag scenarios
+    public static final String TEST_FLAG_VALID_REQUEST_VALID_ID =
+            "testFlagValidRequestValidId";
+    public static final String TEST_FLAG_VALID_REQUEST_WITHOUT_FLAGGEDBY =
+            "testFlagValidRequestWithoutFlaggedBy";
+    public static final String TEST_FLAG_VALID_REQUEST_WITHOUT_FLAG_ARRAY =
+            "testFlagValidRequestWithoutFlagArray";
+    public static final String TEST_FLAG_VALID_REQUEST_WITHOUT_VERSIONKEY =
+            "testFlagValidRequestWithoutVersionkey";
+    public static final String TEST_FLAG_VALID_REQUEST_WITH_INVALID_VERSIONKEY =
+            "testFlagValidRequestWithInvalidVersionkey";
+    public static final String TEST_FLAG_VALID_REQUEST_WITHOUT_FLAGGEDREASON =
+            "testFlagValidRequestWithoutFlaggedReason";
+
+    public static final String TEST_FLAG_WITH_FLAGGED_STATE_WITH_VALID_REQUEST =
+            "testFlagValidRequestWithAlreadyFlagged";
+    public static final String TEST_FLAG_WITH_FLAGDRAFT_STATE_WITH_VALID_REQUEST =
+            "testFlagValidRequestWithResourceFlagDraft";
+    public static final String TEST_FLAG_WITH_FLAGREVIEW_STATE_WITH_VALID_REQUEST =
+            "testFlagValidRequestWithResourceFlagReview";
+    public static final String TEST_FLAG_WITH_PUBLISHED_CONTENT_WITH_EXISTING_IMG_WITH_VALID_REQUEST =
+            "testFlagWithPublishedContentWithExistingImage";
+    public static final String TEST_FLAG_WITH_REVIEW_STATE_WITH_VALID_REQUEST =
+            "testFlagValidRequestWithResourceInReview";
+    public static final String TEST_FLAG_WITH_RETIRE_STATE_WITH_VALID_REQUEST =
+            "testFlagValidRequestWithResourceInRetire";
 
 }
