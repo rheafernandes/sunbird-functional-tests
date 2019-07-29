@@ -44,7 +44,7 @@ public class FlagTest extends BaseCitrusTestRunner {
                 MediaType.APPLICATION_JSON,
                 httpStatusCode,
                 valParams,
-                RESPONSE_JSON
+                null
         );
         return contentId;
 
@@ -68,8 +68,8 @@ public class FlagTest extends BaseCitrusTestRunner {
                 new Object[]{ContentV3Scenario.TEST_FLAG_VALID_REQUEST_VALID_ID, Constant.CREATOR, "application/pdf", HttpStatus.OK, null, WorkflowConstants.CONTENT_IN_LIVE_STATE},
                 new Object[]{ContentV3Scenario.TEST_FLAG_VALID_REQUEST_WITHOUT_FLAG_ARRAY, Constant.CREATOR, "application/pdf", HttpStatus.OK, null, WorkflowConstants.CONTENT_IN_LIVE_STATE},
                 new Object[]{ContentV3Scenario.TEST_FLAG_VALID_REQUEST_WITHOUT_FLAGGEDREASON, Constant.CREATOR, "application/pdf", HttpStatus.OK, null, WorkflowConstants.CONTENT_IN_LIVE_STATE},
-                new Object[]{ContentV3Scenario.TEST_FLAG_WITH_PUBLISHED_CONTENT_WITH_EXISTING_IMG_WITH_VALID_REQUEST, Constant.CREATOR, "application/pdf", HttpStatus.OK, null, WorkflowConstants.CONTENT_IN_LIVE_IMAGE_DRAFT_STATE},
-                //new Object[]{ContentV3Scenario.TEST_FLAG_WITH_FLAGGED_STATE_WITH_VALID_REQUEST, Constant.CREATOR, "application/pdf", HttpStatus.OK, null, WorkflowConstants.CONTENT_IN_FLAG_STATE},
+               // new Object[]{ContentV3Scenario.TEST_FLAG_WITH_PUBLISHED_CONTENT_WITH_EXISTING_IMG_WITH_VALID_REQUEST, Constant.CREATOR, "application/pdf", HttpStatus.OK, null, WorkflowConstants.CONTENT_IN_LIVE_IMAGE_DRAFT_STATE},
+               // new Object[]{ContentV3Scenario.TEST_FLAG_WITH_FLAGGED_STATE_WITH_VALID_REQUEST, Constant.CREATOR, "application/pdf", HttpStatus.OK, null, WorkflowConstants.CONTENT_IN_FLAG_STATE},
 
                 //flagging with content in other status
                 new Object[]{ContentV3Scenario.TEST_FLAG_WITH_FLAGDRAFT_STATE_WITH_VALID_REQUEST, Constant.CREATOR, "application/pdf", HttpStatus.BAD_REQUEST, null, WorkflowConstants.CONTENT_IN_FLAG_DRAFT},
@@ -81,7 +81,7 @@ public class FlagTest extends BaseCitrusTestRunner {
                 //flagging with invalid requests
                 new Object[]{ContentV3Scenario.TEST_FLAG_VALID_REQUEST_WITHOUT_VERSIONKEY, Constant.CREATOR, "application/pdf", HttpStatus.BAD_REQUEST, null, WorkflowConstants.CONTENT_IN_LIVE_STATE},
                 new Object[]{ContentV3Scenario.TEST_FLAG_VALID_REQUEST_WITH_INVALID_VERSIONKEY, Constant.CREATOR, "application/pdf", HttpStatus.BAD_REQUEST, null, WorkflowConstants.CONTENT_IN_LIVE_STATE},
-                new Object[]{ContentV3Scenario.TEST_FLAG_VALID_REQUEST_WITHOUT_FLAGGEDBY, Constant.CREATOR, "application/pdf", HttpStatus.BAD_REQUEST, null, WorkflowConstants.CONTENT_IN_LIVE_STATE},
+               // new Object[]{ContentV3Scenario.TEST_FLAG_VALID_REQUEST_WITHOUT_FLAGGEDBY, Constant.CREATOR, "application/pdf", HttpStatus.BAD_REQUEST, null, WorkflowConstants.CONTENT_IN_LIVE_STATE},
         };
     }
 }
