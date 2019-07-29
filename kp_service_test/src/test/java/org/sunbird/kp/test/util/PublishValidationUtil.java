@@ -58,7 +58,7 @@ public class PublishValidationUtil {
                     Assert.assertEquals(valParams.get(key), ((Number) contentMap.get(key)).intValue());
                 } else if(valParams.get(key) instanceof Double){
                     Assert.assertEquals(valParams.get(key), ((Number) contentMap.get(key)).doubleValue());
-                } else if(!StringUtils.equalsIgnoreCase("@ignore@", (String) valParams.get(key))){
+                } else {
                     Assert.assertEquals(valParams.get(key), contentMap.get(key));
                 }
             } else {

@@ -178,7 +178,7 @@ public class ContentV3Scenario {
     public static final String TEST_DISCARD_CONTENT_STATUS_DRAFT =
             "testDiscardStatusDraft";
     public static final String TEST_DISCARD_COLLECTION_STATUS_DRAFT =
-            "testDiscardCollectionStatusDraft";
+            "testPublishCollectionWithResourceContent";
     public static final String TEST_DISCARD_CONTENT_STATUS_REVIEW =
             "testDiscardStatusReview";
     public static final String TEST_DISCARD_CONTENT_STATUS_FLAGGED =
@@ -227,5 +227,10 @@ public class ContentV3Scenario {
             "testPublishingDeletedResourceContent";
     public static final String TEST_PUBLISHING_INVALID_RESOURCE_CONTENT =
             "testPublishingInvalidResourceContent";
-
+    public static final String TEST_PUBLISH_WITH_DIFFERENT_VERSION =
+            "testPublishWithDifferentVersionResource";
+    public static final String TEST_PUBLISH_WITH_RESOURCE_RETIRED=
+            "testPublishWithResourceRetired";
+    public static final String TEST_PUBLISH_COLLECTION_WITH_CONCEPT=
+            "testPublishWithResourceRetired";
 }

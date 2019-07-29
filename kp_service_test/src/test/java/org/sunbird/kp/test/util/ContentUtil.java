@@ -56,16 +56,16 @@ public class ContentUtil {
      *
      * @param type
      * @param runner
-     * @param payload
+     * @param createReqPayload
      * @param mimeType
      * @param headers
      * @return
      * @see WorkflowConstants
      */
-    public static Map<String, Object> prepareResourceContent(String type, BaseCitrusTestRunner runner, Map<String, Object> payload,
+    public static Map<String, Object> prepareResourceContent(String type, BaseCitrusTestRunner runner, String createReqPayload,
                                                              String mimeType, Map<String, Object> headers) {
         Map contentWorkMap = null;
-        Map contentMap = ContentUtil.createResourceContent(runner, null, mimeType, headers);
+        Map contentMap = ContentUtil.createResourceContent(runner, createReqPayload, mimeType, headers);
         Map<String, Object> result = new HashMap<>();
         String contentId = (String) contentMap.get("content_id");
         result.put("content_id", contentId);

@@ -13,6 +13,7 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import javax.ws.rs.core.MediaType;
+import java.util.HashMap;
 import java.util.Map;
 
 public class RetireContentTest extends BaseCitrusTestRunner {
@@ -51,8 +52,7 @@ public class RetireContentTest extends BaseCitrusTestRunner {
             String testName, String requestUrl, HttpStatus httpStatusCode, String userType, String payloadForHierarchy, Boolean needImage,
             String collectionType, String workflow, Integer assetCount, Integer resourceCount) {
         getAuthToken(this, userType);
-//        Map<String, Object> map = ContentUtil.createCollectionContent(this, null, collectionType, null);
-        Map<String, Object> map = CollectionUtil.prepareTestCollection(workflow,this, payloadForHierarchy, collectionType, assetCount, resourceCount, null);
+        Map<String, Object> map = CollectionUtil.prepareTestCollection(workflow,this, new HashMap<String,String>() {{put("updateHierarchy",payloadForHierarchy);}}, collectionType, assetCount, resourceCount, null);
         System.out.println(map);
         String contentId = (String) map.get("content_id");
         String versionKey = (String) map.get("versionKey");
