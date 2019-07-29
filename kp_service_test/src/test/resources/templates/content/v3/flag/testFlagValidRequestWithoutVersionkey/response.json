@@ -1,0 +1,14 @@
+{
+    "id": "@ignore@",
+    "ver": "@ignore@",
+    "ts": "@ignore@",
+    "params": {
+        "resmsgid": "@ignore@",
+        "msgid": null,
+        "err": "BLANK_VERSION",
+        "status": "failed",
+        "errmsg": "@ignore@"
+    },
+    "responseCode": "CLIENT_ERROR",
+    "result": {}
+}
