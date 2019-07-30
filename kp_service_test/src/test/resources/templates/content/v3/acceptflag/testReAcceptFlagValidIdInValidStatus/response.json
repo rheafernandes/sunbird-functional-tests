@@ -7,7 +7,7 @@
     "msgid": "@ignore@",
     "err": "ERR_TAXONOMY_INVALID_CONTENT",
     "status": "failed",
-    "errmsg": "@ignore@"
+    "errmsg": "Invalid Flagged Content! Content Can Not Be Accepted."
   },
   "responseCode": "CLIENT_ERROR",
     "result": {}

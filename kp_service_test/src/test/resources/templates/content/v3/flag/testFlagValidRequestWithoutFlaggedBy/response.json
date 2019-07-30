@@ -10,5 +10,5 @@
         "errmsg": "Invalid data type for the property: flaggedBy"
     },
     "responseCode": "CLIENT_ERROR",
-    "result": {}
+    "result": {"node_id":"${contentIdVal}"}
 }

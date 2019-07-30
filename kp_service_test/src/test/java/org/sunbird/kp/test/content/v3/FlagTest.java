@@ -27,14 +27,17 @@ public class FlagTest extends BaseCitrusTestRunner {
 
     private static final String TEMPLATE_DIR = "templates/content/v3/flag";
 
-    private String flagContent(String testName, String mimeType, HttpStatus httpStatusCode, Map<String, Object> valParams, String workFlowStatus) {
-        Map<String, Object> resourceMap = ContentUtil.prepareResourceContent(workFlowStatus, this, null, mimeType, null);
+    private String flagContent(String testName, String mimeType, HttpStatus httpStatusCode, Map<String, Object> valParams, String workFlowStatus, boolean withValidId) {
+        String contentId = "invalidId";
+        if(withValidId) {
+            Map<String, Object> resourceMap = ContentUtil.prepareResourceContent(workFlowStatus, this, null, mimeType, null);
 
-        String contentId = (String) resourceMap.get("content_id");
-        Map<String, Object> contentMap = (Map<String, Object>) ContentUtil.readContent(this, contentId, "null", null).get("content");
+            contentId = (String) resourceMap.get("content_id");
+            Map<String, Object> contentMap = (Map<String, Object>) ContentUtil.readContent(this, contentId, "null", null).get("content");
 
-        this.variable("versionKeyVal", contentMap.get("versionKey").toString());
-        this.variable("contentIdVal", contentId);
+            this.variable("versionKeyVal", contentMap.get("versionKey").toString());
+            this.variable("contentIdVal", contentId);
+        }
         performPostTest(
                 this,
                 TEMPLATE_DIR,
@@ -54,10 +57,10 @@ public class FlagTest extends BaseCitrusTestRunner {
     @Test(dataProvider = "flagContent")
     @CitrusParameters({"testName", "userType", "mimeType", "httpStatusCode", "valParams", "workFlowStatus"})
     @CitrusTest
-    public void testFlagContent(String testName, String userType, String mimeType, HttpStatus httpStatusCode, Map<String, Object> valParams, String workFlowStatus) {
+    public void testFlagContent(String testName, String userType, String mimeType, HttpStatus httpStatusCode, Map<String, Object> valParams, String workFlowStatus, boolean withValidId) {
 
         getAuthToken(this, userType);
-        flagContent(testName, mimeType, httpStatusCode, valParams, workFlowStatus);
+        flagContent(testName, mimeType, httpStatusCode, valParams, workFlowStatus, withValidId);
 
     }
 
