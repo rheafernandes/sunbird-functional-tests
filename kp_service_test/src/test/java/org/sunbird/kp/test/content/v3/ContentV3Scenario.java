@@ -73,6 +73,10 @@ public class ContentV3Scenario {
             "testUploadResourceWithValidEcmlMissingAsset";
     public static final String TEST_UPLOAD_RESOURCE_ECML_WITH_TWIN_ANIMATION_AUDIO_SPRITES_IMG_SPRITES =
             "testUploadResourceEcmlWithTwinAnimationAudioSpritesImgSprites";
+    public static final String TEST_UPLOAD_RESOURCE_WITH_VALID_ECML_CONTAINING_JSON_ITEM =
+            "testUploadResourceEcmlWithJsonItem";
+    public static final String TEST_UPLOAD_RESOURCE_WITH_VALID_HTML_WITHOUT_HTML_INDEX =
+            "testUploadResourceWithValidHtmlWithoutIndexHtml";
 
     // Scenario's for review Content  API
     public static final String TEST_REVIEW_WITH_VALID_IDENTIFIER_WITH_NOT_UPLOAD_FILE =
