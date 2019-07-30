@@ -85,6 +85,8 @@ public class ContentV3Scenario {
             "testReviewWithValidIdentifier";
     public static final String TEST_REVIEW_WITH_INVALID_IDENTIFIER =
             "testReviewWithInvalidIdentifier";
+    public static final String TEST_REVIEW_WITH_REVIEWED_CONTENT =
+            "testReviewWithReviewedContent";
 
 
     // Scenario's for Content Update API

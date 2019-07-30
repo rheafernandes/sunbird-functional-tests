@@ -90,7 +90,7 @@ public class UploadContentTest extends BaseCitrusTestRunner {
         getAuthToken(this, userType);
         String contentId = (String) ContentUtil.createResourceContent(this, null, mimeType, null).get("content_id");
         System.out.println("created contentId = " + contentId);
-        setContext(this, contentId, mimeType, extension, null, "");
+        setContext(this, contentId, mimeType, extension, null, FILE_URL);
         performMultipartTest(
                 this,
                 TEMPLATE_DIR,

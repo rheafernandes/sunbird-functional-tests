@@ -10,7 +10,6 @@ import org.sunbird.kp.test.util.ContentUtil;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import java.util.HashMap;
 import java.util.Map;
 import javax.ws.rs.core.MediaType;
 
@@ -23,18 +22,19 @@ public class ReviewContentTest extends BaseCitrusTestRunner {
     private static final String TEMPLATE_DIR = "templates/content/v3/review";
 
     @Test(dataProvider = "reviewContent")
-    @CitrusParameters({"testName", "requestUrl", "httpStatusCode", "userType","valParams","mimeType", "doUpload"})
+    @CitrusParameters({"testName", "httpStatusCode", "userType","valParams","mimeType", "workflow", "withValidId"})
     @CitrusTest
     public void testReviewContent(
-            String testName, String requestUrl, HttpStatus httpStatusCode, String userType, Map<String, Object> valParams, String mimeType, boolean doUpload) {
+            String testName, HttpStatus httpStatusCode, String userType, Map<String, Object> valParams, String mimeType, String workflow, boolean withValidId) {
         getAuthToken(this, userType);
-        String contentId = (String) ContentUtil.createResourceContent(this, null, mimeType, null).get("content_id");
-        if(doUpload) ContentUtil.uploadResourceContent(this, contentId, mimeType, null);
+
+        String contentId = ContentUtil.prepareResourceContent(workflow, this, null, mimeType, null).get("content_id").toString();
+        String identifier = withValidId ? contentId : "invalidId";
         performPostTest(
                 this,
                 TEMPLATE_DIR,
                 testName,
-                requestUrl + contentId,
+                APIUrl.REVIEW_CONTENT + identifier,
                 null,
                 REQUEST_JSON,
                 MediaType.APPLICATION_JSON,
@@ -48,16 +48,20 @@ public class ReviewContentTest extends BaseCitrusTestRunner {
     public Object[][] reviewContent() {
         return new Object[][]{
                 new Object[]{
-                        ContentV3Scenario.TEST_REVIEW_WITH_VALID_IDENTIFIER_WITH_NOT_UPLOAD_FILE, APIUrl.REVIEW_CONTENT, HttpStatus.BAD_REQUEST, Constant.CREATOR,
-                        null, "application/pdf", false
+                        ContentV3Scenario.TEST_REVIEW_WITH_VALID_IDENTIFIER_WITH_NOT_UPLOAD_FILE, HttpStatus.BAD_REQUEST, Constant.CREATOR,
+                        null, "application/pdf", "contentInDraft", true
                 },
                 new Object[]{
-                        ContentV3Scenario.TEST_REVIEW_WITH_VALID_IDENTIFIER, APIUrl.REVIEW_CONTENT, HttpStatus.OK, Constant.REVIEWER,
-                        null, "application/pdf", true
+                        ContentV3Scenario.TEST_REVIEW_WITH_VALID_IDENTIFIER, HttpStatus.OK, Constant.REVIEWER,
+                        null, "application/pdf", "contentUpload",true
                 },
                 new Object[]{
-                        ContentV3Scenario.TEST_REVIEW_WITH_INVALID_IDENTIFIER, APIUrl.REVIEW_CONTENT, HttpStatus.BAD_REQUEST, Constant.CREATOR,
-                        null, "application/pdf", false
+                        ContentV3Scenario.TEST_REVIEW_WITH_REVIEWED_CONTENT,  HttpStatus.OK, Constant.CREATOR,
+                        null, "application/pdf", "contentInReview", true
+                },
+                new Object[]{
+                        ContentV3Scenario.TEST_REVIEW_WITH_INVALID_IDENTIFIER,  HttpStatus.BAD_REQUEST, Constant.CREATOR,
+                        null, "application/pdf", "contentInDraft", false
                 }
         };
     }
