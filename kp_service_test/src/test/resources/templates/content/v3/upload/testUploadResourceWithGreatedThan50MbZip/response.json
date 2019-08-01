@@ -5,9 +5,9 @@
   "params": {
     "resmsgid": "@ignore@",
     "msgid": null,
-    "err": "INVALID_FILE",
+    "err": "VALIDATOR_ERROR",
     "status": "failed",
-    "errmsg": "Error! Invalid File Extension.Uploaded file is not a pdf file"
+    "errmsg": "Error! Content exceeds the file size limit. | [Content Package file size is too large]"
   },
   "responseCode": "CLIENT_ERROR",
   "result": {}

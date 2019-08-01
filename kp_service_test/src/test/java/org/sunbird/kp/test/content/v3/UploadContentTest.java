@@ -100,7 +100,7 @@ public class UploadContentTest extends BaseCitrusTestRunner {
                 Constant.REQUEST_FORM_DATA,
                 httpStatusCode,
                 valParams,
-                null
+                RESPONSE_JSON
         );
     }
 
@@ -110,7 +110,10 @@ public class UploadContentTest extends BaseCitrusTestRunner {
     public void testUploadResourceContentWithFile(
             String testName, String requestUrl, HttpStatus httpStatusCode, String userType, Map<String, Object> valParams, String mimeType, String extension, String fileName) {
         getAuthToken(this, userType);
-        String contentId = (String) ContentUtil.createResourceContent(this, null, mimeType, null).get("content_id");
+        Map<String, Object> resourceMap = ContentUtil.createResourceContent(this, null, mimeType, null);
+        String contentId = (String) resourceMap.get("content_id");
+        this.variable("contentIdVal", contentId);
+
         setContext(this, contentId, mimeType, extension, fileName, "");
         performMultipartTest(
                 this,
@@ -121,7 +124,7 @@ public class UploadContentTest extends BaseCitrusTestRunner {
                 Constant.REQUEST_FORM_DATA,
                 httpStatusCode,
                 valParams,
-                null
+                RESPONSE_JSON
         );
     }
 
@@ -165,53 +168,21 @@ public class UploadContentTest extends BaseCitrusTestRunner {
     public Object[][] uploadResourceContentWithFile() {
         return new Object[][]{
                 //specific negetive test scenarios
-                new Object[]{
-                        ContentV3Scenario.TEST_UPLOAD_RESOURCE_PDF_WITH_FILE_MISMATCHED_MIME, APIUrl.UPLOAD_CONTENT, HttpStatus.BAD_REQUEST, Constant.CREATOR,
-                        null, "application/pdf", ".jpg", null
-                },
-                new Object[]{
-                        ContentV3Scenario.TEST_UPLOAD_RESOURCE_PDF_WITH_FILE_INVALID_IDENTIFIER, APIUrl.UPLOAD_CONTENT, HttpStatus.BAD_REQUEST, Constant.CREATOR,
-                        null, null, null, ".pdf"
-                },
-                new Object[]{
-                        ContentV3Scenario.TEST_UPLOAD_RESOURCE_WITH_EMPTY_ZIP, APIUrl.UPLOAD_CONTENT, HttpStatus.BAD_REQUEST, Constant.CREATOR,
-                        null, "application/vnd.ekstep.ecml-archive", null, "empty.zip"
-                },
-                new Object[]{
-                        ContentV3Scenario.TEST_UPLOAD_RESOURCE_ZIP_WITHOUT_INDEX, APIUrl.UPLOAD_CONTENT, HttpStatus.BAD_REQUEST, Constant.CREATOR,
-                        null, "application/vnd.ekstep.ecml-archive", null, "UploadWithoutIndex.zip"
-                },
-                new Object[]{
-                        ContentV3Scenario.TEST_UPLOAD_RESOURCE_ZIP_WITHOUT_ASSET, APIUrl.UPLOAD_CONTENT, HttpStatus.BAD_REQUEST, Constant.CREATOR,
-                        null, "application/vnd.ekstep.ecml-archive", null, "sample_withoutAssets.zip"
-                },
-                new Object[]{
-                        ContentV3Scenario.TEST_UPLOAD_RESOURCE_WITH_VALID_ECML_INVALID_JSON, APIUrl.UPLOAD_CONTENT, HttpStatus.BAD_REQUEST, Constant.CREATOR,
-                        null, "application/vnd.ekstep.ecml-archive", null, "ecmlCorruptedJSON.zip"
-                },
+                new Object[]{ContentV3Scenario.TEST_UPLOAD_RESOURCE_PDF_WITH_FILE_MISMATCHED_MIME, APIUrl.UPLOAD_CONTENT, HttpStatus.BAD_REQUEST, Constant.CREATOR, null, "application/pdf", ".jpg", null},
+                new Object[]{ContentV3Scenario.TEST_UPLOAD_RESOURCE_PDF_WITH_FILE_INVALID_IDENTIFIER, APIUrl.UPLOAD_CONTENT, HttpStatus.BAD_REQUEST, Constant.CREATOR, null, null, null, ".pdf"},
+                new Object[]{ContentV3Scenario.TEST_UPLOAD_RESOURCE_WITH_EMPTY_ZIP, APIUrl.UPLOAD_CONTENT, HttpStatus.BAD_REQUEST, Constant.CREATOR, null, "application/vnd.ekstep.ecml-archive", null, "empty.zip"},
+                new Object[]{ContentV3Scenario.TEST_UPLOAD_RESOURCE_ZIP_WITHOUT_INDEX, APIUrl.UPLOAD_CONTENT, HttpStatus.BAD_REQUEST, Constant.CREATOR, null, "application/vnd.ekstep.ecml-archive", null, "UploadWithoutIndex.zip"},
+                new Object[]{ContentV3Scenario.TEST_UPLOAD_RESOURCE_ZIP_WITH_MISSING_ASSET_ID, APIUrl.UPLOAD_CONTENT, HttpStatus.BAD_REQUEST, Constant.CREATOR, null, "application/vnd.ekstep.ecml-archive", null, "sample_with_missing_assetid.zip"},
+                new Object[]{ContentV3Scenario.TEST_UPLOAD_RESOURCE_WITH_VALID_ECML_INVALID_JSON, APIUrl.UPLOAD_CONTENT, HttpStatus.BAD_REQUEST, Constant.CREATOR, null, "application/vnd.ekstep.ecml-archive", null, "ecmlCorruptedJSON.zip"},
+                new Object[]{ContentV3Scenario.TEST_UPLOAD_RESOURCE_WITH_GREATER_THAN_50MB_ZIP, APIUrl.UPLOAD_CONTENT, HttpStatus.BAD_REQUEST, Constant.CREATOR, null, "application/vnd.ekstep.ecml-archive", null, "contentAbove50MB.zip"},
+                new Object[]{ContentV3Scenario.TEST_UPLOAD_RESOURCE_WITH_VALID_HTML_WITHOUT_HTML_INDEX, APIUrl.UPLOAD_CONTENT, HttpStatus.BAD_REQUEST, Constant.CREATOR, null, "application/vnd.ekstep.html-archive", null, "html_without_index.zip"},
 
-                new Object[]{
-                        ContentV3Scenario.TEST_UPLOAD_RESOURCE_WITH_GREATER_THAN_50MB_ZIP, APIUrl.UPLOAD_CONTENT, HttpStatus.BAD_REQUEST, Constant.CREATOR,
-                        null, "application/vnd.ekstep.ecml-archive", null, "contentAbove50MB.zip"
-                },
                 // specific positive test cases
-                new Object[]{
-                        ContentV3Scenario.TEST_UPLOAD_RESOURCE_WITH_VALID_ECML_VALID_JSON, APIUrl.UPLOAD_CONTENT, HttpStatus.OK, Constant.CREATOR,
-                        null, "application/vnd.ekstep.ecml-archive", null, "ecml_with_json.zip"
-                },
+                new Object[]{ContentV3Scenario.TEST_UPLOAD_RESOURCE_WITH_VALID_ECML_VALID_JSON, APIUrl.UPLOAD_CONTENT, HttpStatus.OK, Constant.CREATOR, null, "application/vnd.ekstep.ecml-archive", null, "ecml_with_json.zip"},
+                new Object[]{ContentV3Scenario.TEST_UPLOAD_RESOURCE_ECML_WITH_TWIN_ANIMATION_AUDIO_SPRITES_IMG_SPRITES, APIUrl.UPLOAD_CONTENT, HttpStatus.OK, Constant.CREATOR, null, "application/vnd.ekstep.ecml-archive", null, "tweenAndaudioSprite.zip"},
+                new Object[]{ContentV3Scenario.TEST_UPLOAD_RESOURCE_WITH_VALID_ECML_CONTAINING_JSON_ITEM, APIUrl.UPLOAD_CONTENT, HttpStatus.OK, Constant.CREATOR, null, "application/vnd.ekstep.ecml-archive", null, "Item_json.zip"},
+                new Object[]{ContentV3Scenario.TEST_UPLOAD_RESOURCE_ZIP_WITHOUT_ASSET, APIUrl.UPLOAD_CONTENT, HttpStatus.OK, Constant.CREATOR, null, "application/vnd.ekstep.ecml-archive", null, "Ecml_without_asset.zip"},
 
-                new Object[]{
-                        ContentV3Scenario.TEST_UPLOAD_RESOURCE_ECML_WITH_TWIN_ANIMATION_AUDIO_SPRITES_IMG_SPRITES, APIUrl.UPLOAD_CONTENT, HttpStatus.OK, Constant.CREATOR,
-                        null, "application/vnd.ekstep.ecml-archive", null, "tweenAndaudioSprite.zip"
-                },
-                new Object[]{
-                        ContentV3Scenario.TEST_UPLOAD_RESOURCE_WITH_VALID_ECML_CONTAINING_JSON_ITEM, APIUrl.UPLOAD_CONTENT, HttpStatus.OK, Constant.CREATOR,
-                        null, "application/vnd.ekstep.ecml-archive", null, "Item_json.zip"
-                },
-                new Object[]{
-                        ContentV3Scenario.TEST_UPLOAD_RESOURCE_WITH_VALID_HTML_WITHOUT_HTML_INDEX, APIUrl.UPLOAD_CONTENT, HttpStatus.BAD_REQUEST, Constant.CREATOR,
-                        null, "application/vnd.ekstep.html-archive", null, "html_without_index.zip"
-                },
         };
     }
 
@@ -219,7 +190,7 @@ public class UploadContentTest extends BaseCitrusTestRunner {
     @DataProvider(name = "uploadResourceContentInLiveWithFile")
     public Object[][] uploadResourceContentInLiveWithFile() {
         return new Object[][]{
-                new Object[]{Constant.CREATOR, "application/pdf", ".pdf"},
+                //new Object[]{Constant.CREATOR, "application/pdf", ".pdf"},
 
         };
     }

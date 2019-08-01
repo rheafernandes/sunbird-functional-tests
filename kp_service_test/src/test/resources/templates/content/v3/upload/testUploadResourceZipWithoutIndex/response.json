@@ -5,9 +5,9 @@
   "params": {
     "resmsgid": "@ignore@",
     "msgid": null,
-    "err": "INVALID_FILE",
+    "err": "VALIDATOR_ERROR",
     "status": "failed",
-    "errmsg": "Error! Invalid File Extension.Uploaded file is not a pdf file"
+    "errmsg": "Error! Invalid Content Package File Structure. | ['index' file and other folders (assets, data & widgets) should be at root location]"
   },
   "responseCode": "CLIENT_ERROR",
   "result": {}

@@ -5,9 +5,9 @@
   "params": {
     "resmsgid": "@ignore@",
     "msgid": null,
-    "err": "INVALID_FILE",
+    "err": "ERR_CONTENT_UPLOAD_FILE",
     "status": "failed",
-    "errmsg": "Error! Invalid File Extension.Uploaded file is not a pdf file"
+    "errmsg": "Zip file doesn't have required files."
   },
   "responseCode": "CLIENT_ERROR",
   "result": {}

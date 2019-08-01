@@ -77,6 +77,8 @@ public class ContentV3Scenario {
             "testUploadResourceEcmlWithJsonItem";
     public static final String TEST_UPLOAD_RESOURCE_WITH_VALID_HTML_WITHOUT_HTML_INDEX =
             "testUploadResourceWithValidHtmlWithoutIndexHtml";
+    public static final String TEST_UPLOAD_RESOURCE_ZIP_WITH_MISSING_ASSET_ID =
+            "testUploadResourceZipWithMissingAsserId";
 
     // Scenario's for review Content  API
     public static final String TEST_REVIEW_WITH_VALID_IDENTIFIER_WITH_NOT_UPLOAD_FILE =
@@ -253,6 +255,8 @@ public class ContentV3Scenario {
     //Flag scenarios
     public static final String TEST_FLAG_VALID_REQUEST_VALID_ID =
             "testFlagValidRequestValidId";
+    public static final String TEST_FLAG_VALID_REQUEST_INVALID_ID =
+            "testFlagValidRequestInValidId";
     public static final String TEST_FLAG_VALID_REQUEST_WITHOUT_FLAGGEDBY =
             "testFlagValidRequestWithoutFlaggedBy";
     public static final String TEST_FLAG_VALID_REQUEST_WITHOUT_FLAG_ARRAY =
