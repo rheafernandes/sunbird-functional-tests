@@ -59,7 +59,7 @@ public class PublishResourceContentTest extends BaseCitrusTestRunner {
                 new Object[]{"", "video/mp4"},
                 new Object[]{"", "video/webm"},
                 new Object[]{"", "video/x-youtube"},
-                //new Object[]{ContentV3Scenario.TEST_PUBLISH_RESOURCE_H5P_CONTENT, "application/vnd.ekstep.h5p-archive"},
+                new Object[]{ContentV3Scenario.TEST_PUBLISH_RESOURCE_H5P_CONTENT, "application/vnd.ekstep.h5p-archive"},
 
         };
     }

@@ -7,8 +7,10 @@
         "msgid": null,
         "err": "BLANK_VERSION",
         "status": "failed",
-        "errmsg": "@ignore@"
+        "errmsg": "Error! Version Key cannot be Blank. | [Node Id: ${contentIdVal}]"
     },
     "responseCode": "CLIENT_ERROR",
-    "result": {}
+    "result": {
+        "node_id": "${contentIdVal}"
+    }
 }

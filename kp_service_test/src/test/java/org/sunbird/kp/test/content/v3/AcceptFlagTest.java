@@ -67,7 +67,7 @@ public class AcceptFlagTest extends BaseCitrusTestRunner {
             }
 
             case ContentV3Scenario.TEST_REACCEPT_FLAG_VALID_ID_AND_VALID_STATUS : {
-                contentId = doFlagAccept(testName, mimeType, httpStatusCode, valParams, "contentInFlagged");
+                contentId = ContentUtil.prepareResourceContent("contentInFlag", this,null, mimeType,null).get("content_id").toString();//doFlagAccept(testName, mimeType, httpStatusCode, valParams, "contentInFlagged");
                 performPostTest(this, TEMPLATE_DIR, testName, APIUrl.ACCEPT_FLAG_CONTENT + contentId, null, REQUEST_JSON, MediaType.APPLICATION_JSON, httpStatusCode, valParams, RESPONSE_JSON);
                 break;
             }
@@ -84,11 +84,11 @@ public class AcceptFlagTest extends BaseCitrusTestRunner {
     public Object[][] acceptFlagContent() {
         return new Object[][]{
                 //accept flag with valid scenarios
-                new Object[]{ContentV3Scenario.TEST_ACCEPT_FLAG_VALID_ID_AND_VALID_STATUS, Constant.CREATOR, "application/vnd.ekstep.html-archive", HttpStatus.OK, null},
+                new Object[]{ContentV3Scenario.TEST_ACCEPT_FLAG_VALID_ID_AND_VALID_STATUS, Constant.CREATOR, "application/pdf", HttpStatus.OK, null},
                 // accept flag for invalid scenarios
-                //new Object[]{ContentV3Scenario.TEST_ACCEPT_FLAG_VALID_ID_AND_INVALID_STATUS, Constant.CREATOR, "application/pdf", HttpStatus.BAD_REQUEST, null},
-                //new Object[]{ContentV3Scenario.TEST_REACCEPT_FLAG_VALID_ID_AND_VALID_STATUS, Constant.CREATOR, "application/pdf", HttpStatus.BAD_REQUEST, null},
-                //new Object[]{ContentV3Scenario.TEST_ACCEPT_FLAG_INVALID_ID, Constant.CREATOR, "application/pdf", HttpStatus.BAD_REQUEST, null},
+                new Object[]{ContentV3Scenario.TEST_ACCEPT_FLAG_VALID_ID_AND_INVALID_STATUS, Constant.CREATOR, "application/pdf", HttpStatus.BAD_REQUEST, null},
+                new Object[]{ContentV3Scenario.TEST_REACCEPT_FLAG_VALID_ID_AND_VALID_STATUS, Constant.CREATOR, "application/pdf", HttpStatus.BAD_REQUEST, null},
+                new Object[]{ContentV3Scenario.TEST_ACCEPT_FLAG_INVALID_ID, Constant.CREATOR, "application/pdf", HttpStatus.BAD_REQUEST, null},
 
         };
     }

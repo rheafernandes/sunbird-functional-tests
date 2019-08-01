@@ -10,5 +10,7 @@
         "errmsg": "Error! Invalid Data Version Key. | [Unable to Update the Data.]"
     },
     "responseCode": "CLIENT_ERROR",
-    "result": {}
+    "result": {
+        "node_id": "${contentIdVal}"
+    }
 }

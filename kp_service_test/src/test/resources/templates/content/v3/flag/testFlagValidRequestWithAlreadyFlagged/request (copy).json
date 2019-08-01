@@ -1,8 +1,0 @@
-{
-  "request": {
-      "flagReasons":["Copyright Violation"],
-      "flaggedBy":"KP-Tester",
-      "versionKey": "${versionKeyVal}",
-      "flags": ["kp-flags", "newKp-flags"]
-  }
-}

@@ -5,7 +5,7 @@
     "params": {
         "resmsgid": "@ignore@",
         "msgid": null,
-        "err": "ERR_TAXONOMY_INVALID_CONTENT",
+        "err": "MISSING_ASSETS",
         "status": "failed",
         "errmsg": "@ignore@"
     },
