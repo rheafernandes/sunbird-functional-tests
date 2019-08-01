@@ -65,9 +65,7 @@ public class RejectFlag extends BaseCitrusTestRunner{
             Map<String, Object> resourceMap = ContentUtil.prepareResourceContent(workFlowStatus, this, null, mimeType, null);
             contentId = (String) resourceMap.get("content_id");
             Map<String, Object> contentMap = (Map<String, Object>) ContentUtil.readContent(this, contentId, "null", null).get("content");
-            versionKey = contentMap.get("versionKey").toString();
         }
-        this.variable("versionKeyVal", versionKey);
         this.variable("contentIdVal", contentId);
         performPostTest(
                 this,
