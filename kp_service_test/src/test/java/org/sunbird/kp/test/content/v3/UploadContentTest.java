@@ -27,10 +27,11 @@ public class UploadContentTest extends BaseCitrusTestRunner {
     private static final String FILE_URL = "https://ekstep-public-dev.s3-ap-south-1.amazonaws.com/content/do_112513878123618304117/artifact/test_1527573671403.pdf";
 
     @Test(dataProvider = "uploadResourceContentInLiveWithFile")
-    @CitrusParameters({"userType", "mimeType", "extension"})
+    @CitrusParameters({"testName", "userType", "mimeType", "extension"})
     @CitrusTest
-    public void testUploadResourceContentInLiveWithFile(String userType, String mimeType, String extension) {
+    public void testUploadResourceContentInLiveWithFile(String testName, String userType, String mimeType, String extension) {
         getAuthToken(this, userType);
+        this.getTestCase().setName(testName);
         String contentId = (String) ContentUtil.createResourceContent(this, null, mimeType, null).get("content_id");
         System.out.println("Resource Content Id:" + contentId);
         ContentUtil.uploadResourceContent(this, contentId, mimeType, null);
@@ -59,10 +60,11 @@ public class UploadContentTest extends BaseCitrusTestRunner {
 
 
     @Test(dataProvider = "uploadResourceContentWithFileMimeTypes")
-    @CitrusParameters({"userType", "mimeType", "extension"})
+    @CitrusParameters({"testName", "userType", "mimeType", "extension"})
     @CitrusTest
-    public void testUploadResourceContentWithFileMimeTypes(String userType, String mimeType, String extension) {
+    public void testUploadResourceContentWithFileMimeTypes(String testName, String userType, String mimeType, String extension) {
         getAuthToken(this, userType);
+        this.getTestCase().setName(testName);
         String contentId = (String) ContentUtil.createResourceContent(this, null, mimeType, null).get("content_id");
         Map<String, Object> result = ContentUtil.uploadResourceContent(this, contentId, mimeType, null);
         Assert.assertTrue(result.containsKey("content_url"));
@@ -71,10 +73,11 @@ public class UploadContentTest extends BaseCitrusTestRunner {
     }
 
     @Test(dataProvider = "uploadAssetContentWithFileMimeTypes")
-    @CitrusParameters({"userType", "mimeType", "extension"})
+    @CitrusParameters({"testName", "userType", "mimeType", "extension"})
     @CitrusTest
-    public void testUploadAssetContentWithFileMimeTypes(String userType, String mimeType, String extension) {
+    public void testUploadAssetContentWithFileMimeTypes(String testName, String userType, String mimeType, String extension) {
         getAuthToken(this, userType);
+        this.getTestCase().setName(testName);
         String contentId = (String) ContentUtil.createAssetContent(this, null, mimeType, null).get("content_id");
         Map<String, Object> result = ContentUtil.uploadAssetContent(this, contentId, mimeType, null);
         Assert.assertTrue(result.containsKey("content_url"));
@@ -131,11 +134,11 @@ public class UploadContentTest extends BaseCitrusTestRunner {
     @DataProvider(name = "uploadResourceContentWithFileMimeTypes")
     public Object[][] uploadResourceContentWithFileMimeTypes() {
         return new Object[][]{
-                new Object[]{Constant.CREATOR, "application/pdf", ".pdf"},
-                new Object[]{Constant.CREATOR, "application/vnd.ekstep.ecml-archive", ".zip"},
-                new Object[]{Constant.CREATOR, "application/vnd.ekstep.html-archive", ".zip"},
-                new Object[]{Constant.CREATOR, "application/vnd.ekstep.h5p-archive", ".zip"},
-                new Object[]{Constant.CREATOR, "video/x-youtube", ""},
+                new Object[]{ContentV3Scenario.TEST_UPLOAD_RESOURCE_WITH_PDF, Constant.CREATOR, "application/pdf", ".pdf"},
+                new Object[]{ContentV3Scenario.TEST_UPLOAD_RESOURCE_WITH_ECML, Constant.CREATOR, "application/vnd.ekstep.ecml-archive", ".zip"},
+                new Object[]{ContentV3Scenario.TEST_UPLOAD_RESOURCE_WITH_HTML, Constant.CREATOR, "application/vnd.ekstep.html-archive", ".zip"},
+                new Object[]{ContentV3Scenario.TEST_UPLOAD_RESOURCE_WITH_H5P, Constant.CREATOR, "application/vnd.ekstep.h5p-archive", ".zip"},
+                new Object[]{ContentV3Scenario.TEST_UPLOAD_RESOURCE_WITH_X_YOUTUBE, Constant.CREATOR, "video/x-youtube", ""},
 
         };
     }
@@ -143,13 +146,13 @@ public class UploadContentTest extends BaseCitrusTestRunner {
     @DataProvider(name = "uploadAssetContentWithFileMimeTypes")
     public Object[][] uploadAssetContentWithFileMimeTypss() {
         return new Object[][]{
-                new Object[]{Constant.CREATOR, "image/png", ".png"},
-                new Object[]{Constant.CREATOR, "image/jpg", ".jpg"},
-                new Object[]{Constant.CREATOR, "video/mp4", ".mp4"},
-                new Object[]{Constant.CREATOR, "video/webm", ".webm"},
-                new Object[]{Constant.CREATOR, "audio/mp3", ".mp3"},
-                new Object[]{Constant.CREATOR, "video/mpeg", ".mpeg"},
-                new Object[]{Constant.CREATOR, "video/x-youtube", ""},
+                new Object[]{ContentV3Scenario.TEST_UPLOAD_ASSET_WITH_IMAGE_PNG, Constant.CREATOR, "image/png", ".png"},
+                new Object[]{ContentV3Scenario.TEST_UPLOAD_ASSET_WITH_IMAGE_JPG, Constant.CREATOR, "image/jpg", ".jpg"},
+                new Object[]{ContentV3Scenario.TEST_UPLOAD_ASSET_WITH_VIDEO_MP4, Constant.CREATOR, "video/mp4", ".mp4"},
+                new Object[]{ContentV3Scenario.TEST_UPLOAD_ASSET_WITH_VIDEO_WEBM, Constant.CREATOR, "video/webm", ".webm"},
+                new Object[]{ContentV3Scenario.TEST_UPLOAD_ASSET_WITH_AUDIO_MP3, Constant.CREATOR, "audio/mp3", ".mp3"},
+                new Object[]{ContentV3Scenario.TEST_UPLOAD_ASSET_WITH_VIDEO_MPEG, Constant.CREATOR, "video/mpeg", ".mpeg"},
+                new Object[]{ContentV3Scenario.TEST_UPLOAD_ASSET_WITH_VIDEO_X_YOUTUBE, Constant.CREATOR, "video/x-youtube", ""},
 
 
 
@@ -190,7 +193,7 @@ public class UploadContentTest extends BaseCitrusTestRunner {
     @DataProvider(name = "uploadResourceContentInLiveWithFile")
     public Object[][] uploadResourceContentInLiveWithFile() {
         return new Object[][]{
-                //new Object[]{Constant.CREATOR, "application/pdf", ".pdf"},
+                new Object[]{ContentV3Scenario.TEST_UPLOAD_RESOURCE_LIVE_CONTENT_PDF, Constant.CREATOR, "application/pdf", ".pdf"},
 
         };
     }
@@ -219,12 +222,12 @@ public class UploadContentTest extends BaseCitrusTestRunner {
     @DataProvider(name = "uploadResourceContentInWorkflow")
     public Object[][] uploadResourceContentInWorkflow() {
         return new Object[][]{
-                new Object[]{"testuploadContentInWorkflow",Constant.CREATOR,  WorkflowConstants.CONTENT_IN_LIVE_STATE},
-                new Object[]{"testuploadContentInWorkflow",Constant.CREATOR, WorkflowConstants.CONTENT_IN_REVIEW_STATE},
-                new Object[]{"testuploadContentInWorkflow", Constant.CREATOR, WorkflowConstants.CONTENT_IN_FLAG_STATE},
-                new Object[]{"testuploadContentInWorkflow",Constant.CREATOR, WorkflowConstants.CONTENT_IN_FLAG_DRAFT},
-                new Object[]{"testuploadContentInWorkflow", Constant.CREATOR,  WorkflowConstants.CONTENT_IN_FLAG_REVIEW},
-                new Object[]{"testuploadContentInWorkflow", Constant.CREATOR,  WorkflowConstants.CONTENT_IN_RETIRED_STATE},
+                new Object[]{ContentV3Scenario.TEST_UPLOAD_CONTENT_IN_LIVE,Constant.CREATOR,  WorkflowConstants.CONTENT_IN_LIVE_STATE},
+                new Object[]{ContentV3Scenario.TEST_UPLOAD_CONTENT_IN_REVIEW,Constant.CREATOR, WorkflowConstants.CONTENT_IN_REVIEW_STATE},
+                new Object[]{ContentV3Scenario.TEST_UPLOAD_CONTENT_IN_FLAG, Constant.CREATOR, WorkflowConstants.CONTENT_IN_FLAG_STATE},
+                new Object[]{ContentV3Scenario.TEST_UPLOAD_CONTENT_IN_FLAG_DRAFT,Constant.CREATOR, WorkflowConstants.CONTENT_IN_FLAG_DRAFT},
+                new Object[]{ContentV3Scenario.TEST_UPLOAD_CONTENT_IN_FLAG_REVIEW, Constant.CREATOR,  WorkflowConstants.CONTENT_IN_FLAG_REVIEW},
+                new Object[]{ContentV3Scenario.TEST_UPLOAD_CONTENT_IN_RETIRED, Constant.CREATOR,  WorkflowConstants.CONTENT_IN_RETIRED_STATE},
 
         };
     }
