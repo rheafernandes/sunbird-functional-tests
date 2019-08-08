@@ -38,6 +38,24 @@ public class ContentV3Scenario {
     public static final String TEST_CREATE_ASSET_IMAGE_PNG_CONTENT_WITH_VALID_REQUEST =
             "testCreateAssetImagePngContentWithValidRequest";
 
+    //Invalid Request
+    public static final String TEST_CREATE_RESOURCE_PDF_CONTENT_WITH_INVALID_REQUEST_WITHOUT_NAME =
+            "testCreateResourcePdfContentWithInvalidRequestWithoutName";
+    public static final String TEST_CREATE_RESOURCE_PDF_CONTENT_WITH_INVALID_REQUEST_WITHOUT_CODE =
+            "testCreateResourcePdfContentWithInvalidRequestWithoutCode";
+    public static final String TEST_CREATE_RESOURCE_PDF_CONTENT_WITH_INVALID_REQUEST_WITHOUT_MIMETYPE =
+            "testCreateResourcePdfContentWithInvalidRequestWithoutMimeType";
+    public static final String TEST_CREATE_RESOURCE_PDF_CONTENT_WITH_INVALID_REQUEST_WITHOUT_CONTENT_TYPE =
+            "testCreateResourcePdfContentWithInvalidRequestWithoutContentType";
+    public static final String TEST_CREATE_RESOURCE_PDF_CONTENT_WITH_INVALID_REQUEST_WITH_SYSTEM_PROPS =
+            "testCreateResourcePdfContentWithInvalidRequestWithSystemProps";
+    public static final String TEST_CREATE_RESOURCE_PDF_CONTENT_WITH_INVALID_MIMETYPE =
+            "testCreateResourcePdfContentWithInvalidMimeType";
+    public static final String TEST_CREATE_RESOURCE_PDF_CONTENT_WITH_INVALID_CONTENT_TYPE =
+            "testCreateResourcePdfContentWithInvalidContentType";
+    public static final String TEST_CREATE_RESOURCE_PDF_CONTENT_WITH_DUPLICATE_IDENTIFIER =
+            "testCreateResourcePdfContentWithDuplicateIdentifier";
+
 
     // Scenario's for Content Read API
     public static final String TEST_READ_RESOURCE_CONTENT_WITH_VALID_IDENTIFIER =
