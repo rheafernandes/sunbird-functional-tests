@@ -38,6 +38,24 @@ public class ContentV3Scenario {
     public static final String TEST_CREATE_ASSET_IMAGE_PNG_CONTENT_WITH_VALID_REQUEST =
             "testCreateAssetImagePngContentWithValidRequest";
 
+    //Invalid Request
+    public static final String TEST_CREATE_RESOURCE_PDF_CONTENT_WITH_INVALID_REQUEST_WITHOUT_NAME =
+            "testCreateResourcePdfContentWithInvalidRequestWithoutName";
+    public static final String TEST_CREATE_RESOURCE_PDF_CONTENT_WITH_INVALID_REQUEST_WITHOUT_CODE =
+            "testCreateResourcePdfContentWithInvalidRequestWithoutCode";
+    public static final String TEST_CREATE_RESOURCE_PDF_CONTENT_WITH_INVALID_REQUEST_WITHOUT_MIMETYPE =
+            "testCreateResourcePdfContentWithInvalidRequestWithoutMimeType";
+    public static final String TEST_CREATE_RESOURCE_PDF_CONTENT_WITH_INVALID_REQUEST_WITHOUT_CONTENT_TYPE =
+            "testCreateResourcePdfContentWithInvalidRequestWithoutContentType";
+    public static final String TEST_CREATE_RESOURCE_PDF_CONTENT_WITH_INVALID_REQUEST_WITH_SYSTEM_PROPS =
+            "testCreateResourcePdfContentWithInvalidRequestWithSystemProps";
+    public static final String TEST_CREATE_RESOURCE_PDF_CONTENT_WITH_INVALID_MIMETYPE =
+            "testCreateResourcePdfContentWithInvalidMimeType";
+    public static final String TEST_CREATE_RESOURCE_PDF_CONTENT_WITH_INVALID_CONTENT_TYPE =
+            "testCreateResourcePdfContentWithInvalidContentType";
+    public static final String TEST_CREATE_RESOURCE_PDF_CONTENT_WITH_DUPLICATE_IDENTIFIER =
+            "testCreateResourcePdfContentWithDuplicateIdentifier";
+
 
     // Scenario's for Content Read API
     public static final String TEST_READ_RESOURCE_CONTENT_WITH_VALID_IDENTIFIER =
@@ -73,6 +91,12 @@ public class ContentV3Scenario {
             "testUploadResourceWithValidEcmlMissingAsset";
     public static final String TEST_UPLOAD_RESOURCE_ECML_WITH_TWIN_ANIMATION_AUDIO_SPRITES_IMG_SPRITES =
             "testUploadResourceEcmlWithTwinAnimationAudioSpritesImgSprites";
+    public static final String TEST_UPLOAD_RESOURCE_WITH_VALID_ECML_CONTAINING_JSON_ITEM =
+            "testUploadResourceEcmlWithJsonItem";
+    public static final String TEST_UPLOAD_RESOURCE_WITH_VALID_HTML_WITHOUT_HTML_INDEX =
+            "testUploadResourceWithValidHtmlWithoutIndexHtml";
+    public static final String TEST_UPLOAD_RESOURCE_ZIP_WITH_MISSING_ASSET_ID =
+            "testUploadResourceZipWithMissingAsserId";
 
     // Scenario's for review Content  API
     public static final String TEST_REVIEW_WITH_VALID_IDENTIFIER_WITH_NOT_UPLOAD_FILE =
@@ -81,6 +105,8 @@ public class ContentV3Scenario {
             "testReviewWithValidIdentifier";
     public static final String TEST_REVIEW_WITH_INVALID_IDENTIFIER =
             "testReviewWithInvalidIdentifier";
+    public static final String TEST_REVIEW_WITH_REVIEWED_CONTENT =
+            "testReviewWithReviewedContent";
 
 
     // Scenario's for Content Update API
@@ -247,6 +273,8 @@ public class ContentV3Scenario {
     //Flag scenarios
     public static final String TEST_FLAG_VALID_REQUEST_VALID_ID =
             "testFlagValidRequestValidId";
+    public static final String TEST_FLAG_VALID_REQUEST_INVALID_ID =
+            "testFlagValidRequestInValidId";
     public static final String TEST_FLAG_VALID_REQUEST_WITHOUT_FLAGGEDBY =
             "testFlagValidRequestWithoutFlaggedBy";
     public static final String TEST_FLAG_VALID_REQUEST_WITHOUT_FLAG_ARRAY =

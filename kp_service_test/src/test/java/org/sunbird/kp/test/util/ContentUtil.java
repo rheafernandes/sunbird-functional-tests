@@ -435,7 +435,7 @@ public class ContentUtil {
                     break;
                 }
                 case "application/vnd.ekstep.h5p-archive": {
-                    runner.testContext.setVariable("fileNameValue", "sample.pdf");
+                    runner.testContext.setVariable("fileNameValue", "sample_h5p_content.h5p");
                     runner.testContext.setVariable("fileUrlValue", "");
                     break;
                 }
@@ -495,6 +495,15 @@ public class ContentUtil {
                 }
                 case "audio/mp3": {
                     runner.testContext.setVariable("fileNameValue", "sample.mp3");
+                    break;
+                }
+                case "application/vnd.ekstep.h5p-archive": {
+                    runner.testContext.setVariable("fileNameValue", "sample_h5p_content.h5p");
+                    break;
+                }
+                case "video/x-youtube": {
+                    runner.testContext.setVariable("fileNameValue", "");
+                    runner.testContext.setVariable("fileUrlValue", "https://www.youtube.com/watch?v=FfgT6zx4k3Q");
                     break;
                 }
             }

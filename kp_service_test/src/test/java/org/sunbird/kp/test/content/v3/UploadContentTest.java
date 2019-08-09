@@ -8,6 +8,7 @@ import org.sunbird.kp.test.common.APIUrl;
 import org.sunbird.kp.test.common.BaseCitrusTestRunner;
 import org.sunbird.kp.test.common.Constant;
 import org.sunbird.kp.test.util.ContentUtil;
+import org.sunbird.kp.test.util.WorkflowConstants;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -23,7 +24,7 @@ public class UploadContentTest extends BaseCitrusTestRunner {
 
     private static final String TEMPLATE_DIR = "templates/content/v3/upload";
     private static final String MATCHED_EXTENSION = ".pdf";
-    private static final String IMG_EXTENSION = ".img";
+    private static final String FILE_URL = "https://ekstep-public-dev.s3-ap-south-1.amazonaws.com/content/do_112513878123618304117/artifact/test_1527573671403.pdf";
 
     @Test(dataProvider = "uploadResourceContentInLiveWithFile")
     @CitrusParameters({"userType", "mimeType", "extension"})
@@ -89,7 +90,7 @@ public class UploadContentTest extends BaseCitrusTestRunner {
         getAuthToken(this, userType);
         String contentId = (String) ContentUtil.createResourceContent(this, null, mimeType, null).get("content_id");
         System.out.println("created contentId = " + contentId);
-        setContext(this, contentId, mimeType, extension, null);
+        setContext(this, contentId, mimeType, extension, null, FILE_URL);
         performMultipartTest(
                 this,
                 TEMPLATE_DIR,
@@ -99,7 +100,7 @@ public class UploadContentTest extends BaseCitrusTestRunner {
                 Constant.REQUEST_FORM_DATA,
                 httpStatusCode,
                 valParams,
-                null
+                RESPONSE_JSON
         );
     }
 
@@ -109,8 +110,11 @@ public class UploadContentTest extends BaseCitrusTestRunner {
     public void testUploadResourceContentWithFile(
             String testName, String requestUrl, HttpStatus httpStatusCode, String userType, Map<String, Object> valParams, String mimeType, String extension, String fileName) {
         getAuthToken(this, userType);
-        String contentId = (String) ContentUtil.createResourceContent(this, null, mimeType, null).get("content_id");
-        setContext(this, contentId, mimeType, extension, fileName);
+        Map<String, Object> resourceMap = ContentUtil.createResourceContent(this, null, mimeType, null);
+        String contentId = (String) resourceMap.get("content_id");
+        this.variable("contentIdVal", contentId);
+
+        setContext(this, contentId, mimeType, extension, fileName, "");
         performMultipartTest(
                 this,
                 TEMPLATE_DIR,
@@ -120,7 +124,7 @@ public class UploadContentTest extends BaseCitrusTestRunner {
                 Constant.REQUEST_FORM_DATA,
                 httpStatusCode,
                 valParams,
-                null
+                RESPONSE_JSON
         );
     }
 
@@ -130,6 +134,8 @@ public class UploadContentTest extends BaseCitrusTestRunner {
                 new Object[]{Constant.CREATOR, "application/pdf", ".pdf"},
                 new Object[]{Constant.CREATOR, "application/vnd.ekstep.ecml-archive", ".zip"},
                 new Object[]{Constant.CREATOR, "application/vnd.ekstep.html-archive", ".zip"},
+                new Object[]{Constant.CREATOR, "application/vnd.ekstep.h5p-archive", ".zip"},
+                new Object[]{Constant.CREATOR, "video/x-youtube", ""},
 
         };
     }
@@ -143,6 +149,9 @@ public class UploadContentTest extends BaseCitrusTestRunner {
                 new Object[]{Constant.CREATOR, "video/webm", ".webm"},
                 new Object[]{Constant.CREATOR, "audio/mp3", ".mp3"},
                 new Object[]{Constant.CREATOR, "video/mpeg", ".mpeg"},
+                new Object[]{Constant.CREATOR, "video/x-youtube", ""},
+
+
 
         };
     }
@@ -150,10 +159,7 @@ public class UploadContentTest extends BaseCitrusTestRunner {
     @DataProvider(name = "uploadResourceContentWithFileUrl")
     public Object[][] uploadResourceContentWithFileUrl() {
         return new Object[][]{
-                new Object[]{
-                        ContentV3Scenario.TEST_UPLOAD_RESOURCE_PDF_WITH_FILE_URL, APIUrl.UPLOAD_CONTENT, HttpStatus.OK, Constant.CREATOR,
-                        null, "application/pdf", ".pdf"
-                },
+                new Object[]{ContentV3Scenario.TEST_UPLOAD_RESOURCE_PDF_WITH_FILE_URL, APIUrl.UPLOAD_CONTENT, HttpStatus.OK, Constant.CREATOR, null, "application/pdf", ".pdf"},
 
         };
     }
@@ -162,45 +168,21 @@ public class UploadContentTest extends BaseCitrusTestRunner {
     public Object[][] uploadResourceContentWithFile() {
         return new Object[][]{
                 //specific negetive test scenarios
-                new Object[]{
-                        ContentV3Scenario.TEST_UPLOAD_RESOURCE_PDF_WITH_FILE_MISMATCHED_MIME, APIUrl.UPLOAD_CONTENT, HttpStatus.BAD_REQUEST, Constant.CREATOR,
-                        null, "application/pdf", ".jpg", null
-                },
-                new Object[]{
-                        ContentV3Scenario.TEST_UPLOAD_RESOURCE_PDF_WITH_FILE_INVALID_IDENTIFIER, APIUrl.UPLOAD_CONTENT, HttpStatus.BAD_REQUEST, Constant.CREATOR,
-                        null, null, null, ".pdf"
-                },
-                new Object[]{
-                        ContentV3Scenario.TEST_UPLOAD_RESOURCE_WITH_EMPTY_ZIP, APIUrl.UPLOAD_CONTENT, HttpStatus.BAD_REQUEST, Constant.CREATOR,
-                        null, "application/vnd.ekstep.ecml-archive", null, "empty.zip"
-                },
-                new Object[]{
-                        ContentV3Scenario.TEST_UPLOAD_RESOURCE_ZIP_WITHOUT_INDEX, APIUrl.UPLOAD_CONTENT, HttpStatus.BAD_REQUEST, Constant.CREATOR,
-                        null, "application/vnd.ekstep.ecml-archive", null, "UploadWithoutIndex.zip"
-                },
-                new Object[]{
-                        ContentV3Scenario.TEST_UPLOAD_RESOURCE_ZIP_WITHOUT_ASSET, APIUrl.UPLOAD_CONTENT, HttpStatus.BAD_REQUEST, Constant.CREATOR,
-                        null, "application/vnd.ekstep.ecml-archive", null, "sample_withoutAssets.zip"
-                },
-                new Object[]{
-                        ContentV3Scenario.TEST_UPLOAD_RESOURCE_WITH_VALID_ECML_INVALID_JSON, APIUrl.UPLOAD_CONTENT, HttpStatus.BAD_REQUEST, Constant.CREATOR,
-                        null, "application/vnd.ekstep.ecml-archive", null, "ecmlCorruptedJSON.zip"
-                },
+                new Object[]{ContentV3Scenario.TEST_UPLOAD_RESOURCE_PDF_WITH_FILE_MISMATCHED_MIME, APIUrl.UPLOAD_CONTENT, HttpStatus.BAD_REQUEST, Constant.CREATOR, null, "application/pdf", ".jpg", null},
+                new Object[]{ContentV3Scenario.TEST_UPLOAD_RESOURCE_PDF_WITH_FILE_INVALID_IDENTIFIER, APIUrl.UPLOAD_CONTENT, HttpStatus.BAD_REQUEST, Constant.CREATOR, null, null, null, ".pdf"},
+                new Object[]{ContentV3Scenario.TEST_UPLOAD_RESOURCE_WITH_EMPTY_ZIP, APIUrl.UPLOAD_CONTENT, HttpStatus.BAD_REQUEST, Constant.CREATOR, null, "application/vnd.ekstep.ecml-archive", null, "empty.zip"},
+                new Object[]{ContentV3Scenario.TEST_UPLOAD_RESOURCE_ZIP_WITHOUT_INDEX, APIUrl.UPLOAD_CONTENT, HttpStatus.BAD_REQUEST, Constant.CREATOR, null, "application/vnd.ekstep.ecml-archive", null, "UploadWithoutIndex.zip"},
+                new Object[]{ContentV3Scenario.TEST_UPLOAD_RESOURCE_ZIP_WITH_MISSING_ASSET_ID, APIUrl.UPLOAD_CONTENT, HttpStatus.BAD_REQUEST, Constant.CREATOR, null, "application/vnd.ekstep.ecml-archive", null, "sample_with_missing_assetid.zip"},
+                new Object[]{ContentV3Scenario.TEST_UPLOAD_RESOURCE_WITH_VALID_ECML_INVALID_JSON, APIUrl.UPLOAD_CONTENT, HttpStatus.BAD_REQUEST, Constant.CREATOR, null, "application/vnd.ekstep.ecml-archive", null, "ecmlCorruptedJSON.zip"},
+                new Object[]{ContentV3Scenario.TEST_UPLOAD_RESOURCE_WITH_GREATER_THAN_50MB_ZIP, APIUrl.UPLOAD_CONTENT, HttpStatus.BAD_REQUEST, Constant.CREATOR, null, "application/vnd.ekstep.ecml-archive", null, "contentAbove50MB.zip"},
+                new Object[]{ContentV3Scenario.TEST_UPLOAD_RESOURCE_WITH_VALID_HTML_WITHOUT_HTML_INDEX, APIUrl.UPLOAD_CONTENT, HttpStatus.BAD_REQUEST, Constant.CREATOR, null, "application/vnd.ekstep.html-archive", null, "html_without_index.zip"},
 
-                new Object[]{
-                        ContentV3Scenario.TEST_UPLOAD_RESOURCE_WITH_GREATER_THAN_50MB_ZIP, APIUrl.UPLOAD_CONTENT, HttpStatus.BAD_REQUEST, Constant.CREATOR,
-                        null, "application/vnd.ekstep.ecml-archive", null, "contentAbove50MB.zip"
-                },
                 // specific positive test cases
-                new Object[]{
-                        ContentV3Scenario.TEST_UPLOAD_RESOURCE_WITH_VALID_ECML_VALID_JSON, APIUrl.UPLOAD_CONTENT, HttpStatus.OK, Constant.CREATOR,
-                        null, "application/vnd.ekstep.ecml-archive", null, "ecml_with_json.zip"
-                },
+                new Object[]{ContentV3Scenario.TEST_UPLOAD_RESOURCE_WITH_VALID_ECML_VALID_JSON, APIUrl.UPLOAD_CONTENT, HttpStatus.OK, Constant.CREATOR, null, "application/vnd.ekstep.ecml-archive", null, "ecml_with_json.zip"},
+                new Object[]{ContentV3Scenario.TEST_UPLOAD_RESOURCE_ECML_WITH_TWIN_ANIMATION_AUDIO_SPRITES_IMG_SPRITES, APIUrl.UPLOAD_CONTENT, HttpStatus.OK, Constant.CREATOR, null, "application/vnd.ekstep.ecml-archive", null, "tweenAndaudioSprite.zip"},
+                new Object[]{ContentV3Scenario.TEST_UPLOAD_RESOURCE_WITH_VALID_ECML_CONTAINING_JSON_ITEM, APIUrl.UPLOAD_CONTENT, HttpStatus.OK, Constant.CREATOR, null, "application/vnd.ekstep.ecml-archive", null, "Item_json.zip"},
+                new Object[]{ContentV3Scenario.TEST_UPLOAD_RESOURCE_ZIP_WITHOUT_ASSET, APIUrl.UPLOAD_CONTENT, HttpStatus.OK, Constant.CREATOR, null, "application/vnd.ekstep.ecml-archive", null, "Ecml_without_asset.zip"},
 
-                new Object[]{
-                        ContentV3Scenario.TEST_UPLOAD_RESOURCE_ECML_WITH_TWIN_ANIMATION_AUDIO_SPRITES_IMG_SPRITES, APIUrl.UPLOAD_CONTENT, HttpStatus.OK, Constant.CREATOR,
-                        null, "application/vnd.ekstep.ecml-archive", null, "tweenAndaudioSprite.zip"
-                },
         };
     }
 
@@ -208,15 +190,49 @@ public class UploadContentTest extends BaseCitrusTestRunner {
     @DataProvider(name = "uploadResourceContentInLiveWithFile")
     public Object[][] uploadResourceContentInLiveWithFile() {
         return new Object[][]{
-                new Object[]{Constant.CREATOR, "application/pdf", ".pdf"},
+                //new Object[]{Constant.CREATOR, "application/pdf", ".pdf"},
 
         };
     }
 
+    @Test(dataProvider = "uploadResourceContentInWorkflow")
+    @CitrusParameters({"testName","userType", "workflow", "status"})
+    @CitrusTest
+    public void testUploadResourceContentInWorkflow(String testName, String userType, String workflow, String status) {
+        getAuthToken(this, userType);
+        String contentId = (String) ContentUtil.prepareResourceContent(workflow,this, null, "application/pdf", null).get("content_id");
+        Map<String, Object> resourceMap = (Map<String, Object>) ContentUtil.readContent(this, contentId, "edit", null).get("content");
+        String oldArtifactUrl = "artifactUrl";
+        if(!workflow.equalsIgnoreCase(WorkflowConstants.CONTENT_IN_RETIRED_STATE)){
+            oldArtifactUrl = resourceMap.get("artifactUrl").toString();
+        }
 
-    private void setContext(BaseCitrusTestRunner runner, String contentId, String mimeType, String ext, String fileName) {
+        setContext(this, contentId, "application/pdf", ".pdf", null, FILE_URL);
+        performMultipartTest(this, TEMPLATE_DIR, testName, APIUrl.UPLOAD_CONTENT + contentId, null, Constant.REQUEST_FORM_DATA, HttpStatus.OK, null, null);
+        Map<String, Object> newResourceMap = (Map<String, Object>) ContentUtil.readContent(this, contentId, "edit", null).get("content");
+        String newArtifactUrl = newResourceMap.get("artifactUrl").toString();
+
+        Assert.assertNotEquals(oldArtifactUrl, newArtifactUrl);
+
+
+    }
+    @DataProvider(name = "uploadResourceContentInWorkflow")
+    public Object[][] uploadResourceContentInWorkflow() {
+        return new Object[][]{
+                new Object[]{"testuploadContentInWorkflow",Constant.CREATOR,  WorkflowConstants.CONTENT_IN_LIVE_STATE},
+                new Object[]{"testuploadContentInWorkflow",Constant.CREATOR, WorkflowConstants.CONTENT_IN_REVIEW_STATE},
+                new Object[]{"testuploadContentInWorkflow", Constant.CREATOR, WorkflowConstants.CONTENT_IN_FLAG_STATE},
+                new Object[]{"testuploadContentInWorkflow",Constant.CREATOR, WorkflowConstants.CONTENT_IN_FLAG_DRAFT},
+                new Object[]{"testuploadContentInWorkflow", Constant.CREATOR,  WorkflowConstants.CONTENT_IN_FLAG_REVIEW},
+                new Object[]{"testuploadContentInWorkflow", Constant.CREATOR,  WorkflowConstants.CONTENT_IN_RETIRED_STATE},
+
+        };
+    }
+
+    private void setContext(BaseCitrusTestRunner runner, String contentId, String mimeType, String ext, String fileName, String fileUrl) {
         String extension = ext != null ? ext : MATCHED_EXTENSION;
         String fileNameValue = fileName != null ? fileName : "sample" + extension;
+        //String fileurl = fileUrl != null ? fileUrl : "sample_url" + extension;
         if (StringUtils.isNotBlank(mimeType) && StringUtils.isNotBlank(contentId)) {
             switch (mimeType.toLowerCase()) {
                 case "application/pdf":
@@ -232,7 +248,7 @@ public class UploadContentTest extends BaseCitrusTestRunner {
                 case "video/mpeg":
                 case "audio/mp3":
                     runner.testContext.setVariable("fileNameValue", fileNameValue);
-                    runner.testContext.setVariable("fileUrlValue", "sample_url" + extension);
+                    runner.testContext.setVariable("fileUrlValue", fileUrl);
                     break;
             }
         } else { //handle for mimeType == null (invalid id)

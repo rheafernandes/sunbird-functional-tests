@@ -5,14 +5,10 @@
     "params": {
         "resmsgid": "@ignore@",
         "msgid": null,
-        "err": null,
-        "status": "successful",
-        "errmsg": null
+        "err": "ERR_TAXONOMY_INVALID_CONTENT",
+        "status": "failed",
+        "errmsg": "@ignore@"
     },
-    "responseCode": "OK",
-    "result": {
-        "content_url": "@ignore@",
-        "node_id": "@ignore@",
-        "versionKey": "@ignore@"
-    }
+    "responseCode": "CLIENT_ERROR",
+    "result": {}
 }
