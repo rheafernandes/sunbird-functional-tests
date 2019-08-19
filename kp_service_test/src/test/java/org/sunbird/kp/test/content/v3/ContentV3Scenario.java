@@ -65,6 +65,46 @@ public class ContentV3Scenario {
 
 
     // Scenario's for upload Content  API
+    public static final String TEST_UPLOAD_CONTENT_IN_LIVE =
+            "testuploadContentInLive";
+    public static final String TEST_UPLOAD_CONTENT_IN_REVIEW =
+            "testuploadContentInReview";
+    public static final String TEST_UPLOAD_CONTENT_IN_RETIRED =
+            "testuploadContentInRetired";
+    public static final String TEST_UPLOAD_CONTENT_IN_FLAG =
+            "testuploadContentInFlag";
+    public static final String TEST_UPLOAD_CONTENT_IN_FLAG_DRAFT =
+            "testuploadContentInFlagDraft";
+    public static final String TEST_UPLOAD_CONTENT_IN_FLAG_REVIEW =
+            "testuploadContentInFlagReview";
+
+    public static final String TEST_UPLOAD_RESOURCE_WITH_PDF =
+            "testUploadResourceWithPdf";
+    public static final String TEST_UPLOAD_RESOURCE_WITH_ECML =
+            "testUploadResourceWithEcml";
+    public static final String TEST_UPLOAD_RESOURCE_WITH_HTML =
+            "testUploadResourceWithHtml";
+    public static final String TEST_UPLOAD_RESOURCE_WITH_H5P =
+            "testUploadResourceWithh5p";
+    public static final String TEST_UPLOAD_RESOURCE_WITH_X_YOUTUBE =
+            "testUploadResourceWithxyoutube";
+    public static final String TEST_UPLOAD_ASSET_WITH_IMAGE_PNG =
+            "testUploadAssetWithImagePng";
+    public static final String TEST_UPLOAD_ASSET_WITH_IMAGE_JPG =
+            "testUploadAssetWithImageJpg";
+    public static final String TEST_UPLOAD_ASSET_WITH_VIDEO_MP4 =
+            "testUploadAssetWithVideoMp4";
+    public static final String TEST_UPLOAD_ASSET_WITH_VIDEO_WEBM =
+            "testUploadAssetWithVideoWebm";
+    public static final String TEST_UPLOAD_ASSET_WITH_VIDEO_MPEG =
+            "testUploadAssetWithVideoMpeg";
+    public static final String TEST_UPLOAD_ASSET_WITH_VIDEO_X_YOUTUBE =
+            "testUploadAssetWithVideoXYoutube";
+    public static final String TEST_UPLOAD_ASSET_WITH_AUDIO_MP3 =
+            "testUploadAssetWithAudioMp3";
+    public static final String TEST_UPLOAD_RESOURCE_LIVE_CONTENT_PDF =
+            "testUploadResourceForLiveContentWithPdf";
+
     public static final String TEST_UPLOAD_RESOURCE_PDF_WITH_FILE_URL =
             "testUploadResourcePdfWithFileUrl";
     public static final String TEST_UPLOAD_RESOURCE_PDF_WITH_FILE_MISMATCHED_MIME =
@@ -233,6 +273,12 @@ public class ContentV3Scenario {
             "testPublishResourceHtmlContent";
     public static final String TEST_PUBLISH_RESOURCE_H5P_CONTENT =
             "testPublishResourceH5pContent";
+    public static final String TEST_PUBLISH_RESOURCE_VIDEO_MP4 =
+            "testPublishResourceVideoMp4";
+    public static final String TEST_PUBLISH_RESOURCE_VIDEO_WEBM =
+            "testPublishResourceVideoWebm";
+    public static final String TEST_PUBLISH_RESOURCE_VIDEO_X_YOUTUBE =
+            "testPublishResourceVideoXYoutube";
     public static final String TEST_PUBLISH_COLLECTION_WITH_RESOURCE_CONTENT =
             "testPublishCollectionWithResourceContent";
     public static final String TEST_PUBLISH_TEXTBOOK_WITH_RESOURCE_CONTENT =
