@@ -1,7 +1,7 @@
 {
   "request": {
     "content": {
-      "identifier":"citrus:concat('KP_FT_',citrus:randomNumber(10))",
+      "identifier":"${contentIdVal}",
       "name": "KP Integration Test Content",
       "code": "kp.ft.resource.pdf",
       "mimeType": "application/abc",

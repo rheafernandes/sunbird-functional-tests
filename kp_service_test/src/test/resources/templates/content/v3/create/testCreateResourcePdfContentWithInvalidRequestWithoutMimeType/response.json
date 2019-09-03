@@ -3,12 +3,12 @@
   "ver": "3.0",
   "ts": "@ignore@",
   "params": {
-    "resmsgid": "@ignore@",
-    "msgid": null,
-    "err": "ERR_CONTENT_INVALID_CONTENT_MIMETYPE_TYPE",
-    "status": "failed",
-    "errmsg": "Mime Type cannot be empty"
-  },
-  "responseCode": "CLIENT_ERROR",
-  "result": {}
+"resmsgid": "@ignore@",
+"msgid": null,
+"err": "ERR_CONTENT_INVALID_CONTENT_MIMETYPE_TYPE",
+"status": "failed",
+"errmsg": "Mime Type cannot be empty"
+},
+"responseCode": "CLIENT_ERROR",
+"result": {}
 }
