@@ -1,7 +1,7 @@
 {
   "request": {
     "content": {
-      "identifier":"citrus:concat('KP_FT_',citrus:randomNumber(10))",
+      "identifier":"${contentIdVal}",
       "name": "KP Integration Test Asset",
       "code": "kp.ft.asset.video.mp4",
       "mimeType": "video/mp4",

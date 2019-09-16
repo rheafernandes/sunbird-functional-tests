@@ -2,7 +2,7 @@
   "request": {
     "content": {
       "name": "KP Integration Test Plugin",
-      "code": "citrus:concat('KP_FT_PLUGIN_',citrus:randomNumber(10))",
+      "code": "${contentIdVal}",
       "mimeType": "application/vnd.ekstep.plugin-archive",
       "contentType":"Plugin"
     }
