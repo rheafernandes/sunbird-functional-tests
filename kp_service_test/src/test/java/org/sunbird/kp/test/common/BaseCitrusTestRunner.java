@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 /**
  * Base Runner Class for Integration Test
@@ -297,6 +298,11 @@ public class BaseCitrusTestRunner extends TestNGCitrusTestRunner {
         } catch (Exception e) {
             System.out.println("Exception : "+e);
         }
+    }
+
+    public static int generateRandomDigits(int n) {
+        int m = (int) Math.pow(10, n - 1);
+        return m + new Random().nextInt(9 * m);
     }
 
 }

@@ -23,9 +23,36 @@ public class ContentV3Scenario {
             "testCreateResourceVideoMp4ContentWithValidRequest";
     public static final String TEST_CREATE_RESOURCE_VIDEO_MPEG_CONTENT_WITH_VALID_REQUEST =
             "testCreateResourceVideoMpegContentWithValidRequest";
+    public static final String TEST_CREATE_RESOURCE_WITH_INVALID_OS_NAME =
+            "testCreateResourceWithInvalidOsName";
+    public static final String TEST_CREATE_RESOURCE_WITH_NO_CHANNEL_ID =
+            "testCreateResourceWithNoChannelId";
+    public static final String TEST_CREATE_RESOURCE_WITH_CONCEPTS=
+            "testCreateResourceWithConcepts";
+    public static final String TEST_CREATE_RESOURCE_WITH_QUESTIONS=
+            "testCreateResourceWithQuestions";
+    public static final String TEST_CREATE_RESOURCE_WITH_SCREENSHOTS=
+            "testCreateResourceWithScreenshot";
+    public static final String TEST_CREATE_RESOURCE_WITH_INVALID_CONCEPT_ID=
+            "testCreateResourceWithInvalidConceptId";
+    public static final String TEST_CREATE_RESOURCE_CONTENT_WITH_ECML_BODY=
+            "testCreateResourceWithEcmlBody";
+    public static final String TEST_CREATE_RESOURCE_CONTENT_WITH_INVALID_LICENSE_TYPE=
+            "testCreateResourceWithInvalidLicenseType";
+    public static final String TEST_CREATE_RESOURCE_CONTENT_WITH_VALID_FRAMEWORK_INVALID_SUBJECT=
+            "testCreateResourceWithValidFrameworkInvalidSubject";
+    public static final String TEST_CREATE_RESOURCE_CONTENT_WITH_VALID_FRAMEWORK_INVALID_CATEGORY=
+            "testCreateResourceWithValidFrameworkInvalidCategor";
+    public static final String TEST_CREATE_RESOURCE_CONTENT_WITH_INVALID_FRAMEWORK=
+            "testCreateResourceWithInvalidFramework";
+    public static final String TEST_CREATE_RESOURCE_CONTENT_WITH_INVALID_RESOURCE_TYPE=
+            "testCreateResourceWithInvalidResourceType";
     //Plugin
     public static final String TEST_CREATE_PLUGIN_CONTENT_WITH_VALID_REQUEST =
             "testCreatePluginContentWithValidRequest";
+    public static final String TEST_CREATE_PLUGIN_CONTENT_WITH_NO_CODE_GIVEN =
+            "testCreatePluginContentWithNoCodeGiven";
+
     //Asset
     public static final String TEST_CREATE_ASSET_VIDEO_MP4_CONTENT_WITH_VALID_REQUEST =
             "testCreateAssetVideoMp4ContentWithValidRequest";
@@ -54,6 +81,12 @@ public class ContentV3Scenario {
     public static final String TEST_CREATE_RESOURCE_PDF_CONTENT_WITH_INVALID_CONTENT_TYPE =
             "testCreateResourcePdfContentWithInvalidContentType";
     public static final String TEST_CREATE_RESOURCE_PDF_CONTENT_WITH_DUPLICATE_IDENTIFIER =
+            "testCreateResourcePdfContentWithDuplicateIdentifier";
+
+    //Collection
+    public static final String TEST_COLLECTION_WITH_CHILDREN=
+            "testCreateResourcePdfContentWithDuplicateIdentifier";
+    public static final String TEST_COLLECTION_WITH_NO_CHILDREN=
             "testCreateResourcePdfContentWithDuplicateIdentifier";
 
 
