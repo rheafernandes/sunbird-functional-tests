@@ -15,20 +15,20 @@
       "ownershipType": [
         "createdBy"
       ],
-      "code": "${contentIdVal}",
+      "code": "kp.ft.resource.youtube",
       "channel": "channel-01",
       "language": [
         "English"
       ],
-      "mimeType": "application/vnd.ekstep.plugin-archive",
+      "mimeType": "video/x-youtube",
       "idealScreenSize": "normal",
       "createdOn": "@matchesDatePattern('yyyy-MM-dd')@",
       "appId": "@ignore@",
       "consumerId": "@ignore@",
-      "contentDisposition": "inline",
-      "contentEncoding": "gzip",
+      "contentDisposition": "online",
+      "contentEncoding": "identity",
       "lastUpdatedOn": "@matchesDatePattern('yyyy-MM-dd')@",
-      "contentType": "Plugin",
+      "contentType": "Resource",
       "dialcodeRequired": "No",
       "identifier": "${contentIdVal}",
       "lastStatusChangedOn": "@matchesDatePattern('yyyy-MM-dd')@",
@@ -40,7 +40,7 @@
         "All"
       ],
       "mediaType": "content",
-      "osId": "org.ekstep.launcher",
+      "osId": "org.ekstep.quiz.app",
       "languageCode": "en",
       "version": 1,
       "versionKey": "@isNumber()@",
@@ -48,7 +48,7 @@
       "idealScreenDensity": "hdpi",
       "framework": "NCF",
       "compatibilityLevel": 1.0,
-      "name": "KP Integration Test Plugin",
+      "name": "KP Integration Test Content",
       "status": "Draft"
     }
   }

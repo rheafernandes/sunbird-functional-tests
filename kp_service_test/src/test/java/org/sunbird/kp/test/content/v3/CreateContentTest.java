@@ -7,12 +7,10 @@ import org.sunbird.kp.test.common.APIUrl;
 import org.sunbird.kp.test.common.BaseCitrusTestRunner;
 import org.sunbird.kp.test.common.Constant;
 import org.sunbird.kp.test.util.ContentUtil;
-import org.sunbird.kp.test.util.MetadataValidationUtil;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import javax.ws.rs.core.MediaType;
-import java.util.Map;
 
 /**
  * Integration Test Cases for Content Create API
@@ -119,15 +117,6 @@ public class CreateContentTest extends BaseCitrusTestRunner {
                 },
                 new Object[]{
                         ContentV3Scenario.TEST_CREATE_RESOURCE_WITH_CONCEPTS
-                },
-                new Object[]{
-                        ContentV3Scenario.TEST_CREATE_RESOURCE_WITH_QUESTIONS
-                },
-                new Object[]{
-                        ContentV3Scenario.TEST_CREATE_RESOURCE_WITH_SCREENSHOTS
-                },
-                new Object[]{
-                        ContentV3Scenario.TEST_CREATE_RESOURCE_CONTENT_WITH_ECML_BODY
                 }
 
         };
