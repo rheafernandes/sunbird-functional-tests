@@ -15,6 +15,7 @@ public class Constant {
     public static final String BEARER = "Bearer ";
     public static final String X_CHANNEL_ID = "X-Channel-Id";
     public static final String X_AUTHENTICATED_USER_TOKEN = "x-authenticated-user-token";
+    public static final String X_APP_ID = "X-App-Id";
 
     //Test Client Constants
     public static final String KP_ENDPOINT = "kpRestClient";

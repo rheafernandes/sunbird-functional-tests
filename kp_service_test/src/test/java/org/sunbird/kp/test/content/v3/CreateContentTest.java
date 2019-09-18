@@ -47,8 +47,19 @@ public class CreateContentTest extends BaseCitrusTestRunner {
                 null,
                 RESPONSE_JSON
         );
-        Map<String, Object> readResult = ContentUtil.readContent(this, identifier, null, null);
-        Assert.assertTrue(MetadataValidationUtil.validateMetadataAfterCreate(readResult));
+        //Read The Content And Validate
+        performGetTest(
+                this,
+                TEMPLATE_DIR,
+                testName,
+                APIUrl.READ_CONTENT + identifier,
+                null,
+                HttpStatus.OK,
+                null,
+                VALIDATE_JSON
+        );
+        //Map<String, Object> readResult = ContentUtil.readContent(this, identifier, null, null);
+        //Assert.assertTrue(MetadataValidationUtil.validateMetadataAfterCreate(readResult));
     }
 
     @Test(dataProvider = "createAssetContentWithValidRequest")
@@ -146,7 +157,7 @@ public class CreateContentTest extends BaseCitrusTestRunner {
                 new Object[]{
                         ContentV3Scenario.TEST_CREATE_RESOURCE_PDF_CONTENT_WITH_VALID_REQUEST
                 },
-                new Object[]{
+                /*new Object[]{
                         ContentV3Scenario.TEST_CREATE_RESOURCE_ECML_CONTENT_WITH_VALID_REQUEST
                 },
                 new Object[]{
@@ -178,7 +189,7 @@ public class CreateContentTest extends BaseCitrusTestRunner {
                 },
                 new Object[]{
                         ContentV3Scenario.TEST_CREATE_RESOURCE_CONTENT_WITH_ECML_BODY
-                }
+                }*/
 
         };
     }

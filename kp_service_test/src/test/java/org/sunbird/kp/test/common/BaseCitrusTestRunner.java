@@ -24,6 +24,7 @@ public class BaseCitrusTestRunner extends TestNGCitrusTestRunner {
     public static final String REQUEST_FORM_DATA = "request.params";
     public static final String REQUEST_JSON = "request.json";
     public static final String RESPONSE_JSON = "response.json";
+    public static final String VALIDATE_JSON = "validate.json";
 
     private static final String API_KEY = AppConfig.config.getString("kp_api_key");
     private static final Boolean IS_USER_AUTH_REQUIRED = AppConfig.config.getBoolean("user_auth_enable");
@@ -284,6 +285,8 @@ public class BaseCitrusTestRunner extends TestNGCitrusTestRunner {
 
         if (!headers.containsKey(Constant.X_CHANNEL_ID))
             headers.put(Constant.X_CHANNEL_ID, AppConfig.config.getString("kp_test_default_channel"));
+        if (!headers.containsKey(Constant.X_APP_ID))
+            headers.put(Constant.X_APP_ID, AppConfig.config.getString("kp_test_default_appId"));
 
         headers.put(Constant.AUTHORIZATION, Constant.BEARER + API_KEY);
 
