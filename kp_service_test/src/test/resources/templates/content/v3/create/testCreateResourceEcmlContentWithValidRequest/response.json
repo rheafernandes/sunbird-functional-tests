@@ -11,7 +11,7 @@
   },
   "responseCode": "OK",
   "result": {
-    "node_id": "@ignore@",
-    "versionKey": "@ignore@"
+    "node_id": "@startsWith('KP_FT')@",
+    "versionKey": "@isNumber()@"
   }
 }
