@@ -15,12 +15,12 @@
       "ownershipType": [
         "createdBy"
       ],
-      "code": "kp.ft.resource.pdf",
+      "code": "kp.ft.resource.mp4",
       "channel": "channel-01",
       "language": [
         "English"
       ],
-      "mimeType": "application/pdf",
+      "mimeType": "video/mp4",
       "idealScreenSize": "normal",
       "createdOn": "@matchesDatePattern('yyyy-MM-dd')@",
       "appId": "@ignore@",
@@ -42,7 +42,7 @@
       "mediaType": "content",
       "osId": "org.ekstep.quiz.app",
       "languageCode": "en",
-      "version": 1,
+      "version": "@isNumber()@",
       "versionKey": "@isNumber()@",
       "license": "Creative Commons Attribution (CC BY)",
       "idealScreenDensity": "hdpi",

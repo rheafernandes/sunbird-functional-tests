@@ -15,12 +15,12 @@
       "ownershipType": [
         "createdBy"
       ],
-      "code": "kp.ft.resource.pdf",
+      "code": "kp.ft.asset.video.mpeg",
       "channel": "channel-01",
       "language": [
         "English"
       ],
-      "mimeType": "application/pdf",
+      "mimeType": "video/mpeg",
       "idealScreenSize": "normal",
       "createdOn": "@matchesDatePattern('yyyy-MM-dd')@",
       "appId": "@ignore@",
@@ -28,7 +28,7 @@
       "contentDisposition": "inline",
       "contentEncoding": "identity",
       "lastUpdatedOn": "@matchesDatePattern('yyyy-MM-dd')@",
-      "contentType": "Resource",
+      "contentType": "Asset",
       "dialcodeRequired": "No",
       "identifier": "${contentIdVal}",
       "lastStatusChangedOn": "@matchesDatePattern('yyyy-MM-dd')@",
@@ -39,7 +39,7 @@
       "os": [
         "All"
       ],
-      "mediaType": "content",
+      "mediaType": "video",
       "osId": "org.ekstep.quiz.app",
       "languageCode": "en",
       "version": 1,
