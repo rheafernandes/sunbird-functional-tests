@@ -27,25 +27,25 @@ public class ContentV3Scenario {
             "testCreateResourceWithInvalidOsName";
     public static final String TEST_CREATE_RESOURCE_WITH_NO_CHANNEL_ID =
             "testCreateResourceWithNoChannelId";
-    public static final String TEST_CREATE_RESOURCE_WITH_CONCEPTS=
+    public static final String TEST_CREATE_RESOURCE_WITH_CONCEPTS =
             "testCreateResourceWithConcepts";
-    public static final String TEST_CREATE_RESOURCE_WITH_QUESTIONS=
+    public static final String TEST_CREATE_RESOURCE_WITH_QUESTIONS =
             "testCreateResourceWithQuestions";
-    public static final String TEST_CREATE_RESOURCE_WITH_SCREENSHOTS=
+    public static final String TEST_CREATE_RESOURCE_WITH_SCREENSHOTS =
             "testCreateResourceWithScreenshot";
-    public static final String TEST_CREATE_RESOURCE_WITH_INVALID_CONCEPT_ID=
+    public static final String TEST_CREATE_RESOURCE_WITH_INVALID_CONCEPT_ID =
             "testCreateResourceWithInvalidConceptId";
-    public static final String TEST_CREATE_RESOURCE_CONTENT_WITH_ECML_BODY=
+    public static final String TEST_CREATE_RESOURCE_CONTENT_WITH_ECML_BODY =
             "testCreateResourceWithEcmlBody";
-    public static final String TEST_CREATE_RESOURCE_CONTENT_WITH_INVALID_LICENSE_TYPE=
+    public static final String TEST_CREATE_RESOURCE_CONTENT_WITH_INVALID_LICENSE_TYPE =
             "testCreateResourceWithInvalidLicenseType";
-    public static final String TEST_CREATE_RESOURCE_CONTENT_WITH_VALID_FRAMEWORK_INVALID_SUBJECT=
+    public static final String TEST_CREATE_RESOURCE_CONTENT_WITH_VALID_FRAMEWORK_INVALID_SUBJECT =
             "testCreateResourceWithValidFrameworkInvalidSubject";
-    public static final String TEST_CREATE_RESOURCE_CONTENT_WITH_VALID_FRAMEWORK_INVALID_CATEGORY=
+    public static final String TEST_CREATE_RESOURCE_CONTENT_WITH_VALID_FRAMEWORK_INVALID_CATEGORY =
             "testCreateResourceWithValidFrameworkInvalidCategor";
-    public static final String TEST_CREATE_RESOURCE_CONTENT_WITH_INVALID_FRAMEWORK=
+    public static final String TEST_CREATE_RESOURCE_CONTENT_WITH_INVALID_FRAMEWORK =
             "testCreateResourceWithInvalidFramework";
-    public static final String TEST_CREATE_RESOURCE_CONTENT_WITH_INVALID_RESOURCE_TYPE=
+    public static final String TEST_CREATE_RESOURCE_CONTENT_WITH_INVALID_RESOURCE_TYPE =
             "testCreateResourceWithInvalidResourceType";
     //Plugin
     public static final String TEST_CREATE_PLUGIN_CONTENT_WITH_VALID_REQUEST =
@@ -84,9 +84,9 @@ public class ContentV3Scenario {
             "testCreateResourcePdfContentWithDuplicateIdentifier";
 
     //Collection
-    public static final String TEST_COLLECTION_WITH_CHILDREN=
+    public static final String TEST_COLLECTION_WITH_CHILDREN =
             "testCreateResourcePdfContentWithDuplicateIdentifier";
-    public static final String TEST_COLLECTION_WITH_NO_CHILDREN=
+    public static final String TEST_COLLECTION_WITH_NO_CHILDREN =
             "testCreateResourcePdfContentWithDuplicateIdentifier";
 
 
@@ -147,7 +147,7 @@ public class ContentV3Scenario {
 
     public static final String TEST_UPLOAD_RESOURCE_WITH_VALID_ECML_VALID_JSON =
             "testUploadResourceWithValidEcmlValidJson";
-    public static final String TEST_UPLOAD_RESOURCE_WITH_VALID_ECML_CUSTOM_PLUGIN=
+    public static final String TEST_UPLOAD_RESOURCE_WITH_VALID_ECML_CUSTOM_PLUGIN =
             "testUploadResourceWithValidEcmlCustom_Plugin";
 
     public static final String TEST_UPLOAD_RESOURCE_WITH_GREATER_THAN_50MB_ZIP =
@@ -334,9 +334,9 @@ public class ContentV3Scenario {
             "testPublishingInvalidResourceContent";
     public static final String TEST_PUBLISH_WITH_DIFFERENT_VERSION =
             "testPublishWithDifferentVersionResource";
-    public static final String TEST_PUBLISH_WITH_RESOURCE_RETIRED=
+    public static final String TEST_PUBLISH_WITH_RESOURCE_RETIRED =
             "testPublishWithResourceRetired";
-    public static final String TEST_PUBLISH_COLLECTION_WITH_CONCEPT=
+    public static final String TEST_PUBLISH_COLLECTION_WITH_CONCEPT =
             "testPublishWithResourceRetired";
 
     //Accept Flag Scenarios
@@ -378,4 +378,16 @@ public class ContentV3Scenario {
     public static final String TEST_FLAG_WITH_RETIRE_STATE_WITH_VALID_REQUEST =
             "testFlagValidRequestWithResourceInRetire";
 
+    //Update Hierarchy Scenarios
+    public static final String TEST_UPDATE_HIERARCHY_WITH_1UNIT_1RESOURCE_VALID_REQUEST =
+            "testUpdateHierarchyWith1UnitAnd1Resource";
+    public static final String TEST_UPDATE_HIERARCHY_WITH_1UNIT_VALID_REQUEST = "testUpdateHierarchyWith1UnitOnly";
+    public static final String TEST_UPDATE_HIERARCHY_WITH_INVALID_UNIT_VALID_RESOURCE_REQUEST = "testUpdateHierarchyWithInvalidUnitAndValidResource";
+    public static final String TEST_UPDATE_HIERARCHY_WITH_1UNIT_INVALID_RESOURCE_REQUEST = "testUpdateHierarchyWithValidUnitAndInvalidResource";
+    public static final String TEST_UPDATE_HIERARCHY_WITH_NO_HIERARCHY_IN_REQUEST = "testUpdateHierarchyWithOnlyNodesModified";
+    public static final String TEST_UPDATE_HIERARCHY_WITH_NO_ROOT_NODE_REQUEST = "testUpdateHierarchyWithoutRootNode";
+    public static final String TEST_UPDATE_HIERARCHY_WITH_INVALID_REQUEST = "testUpdateHierarchyWithInvalidRequest";
+    public static final String TEST_UPDATE_HIERARCHY_WITHOUT_UNIT_OR_RESOURCE = "testUpdateHierarchyWithOutUnitOrResource";
+    public static final String TEST_UPDATE_HIERARCHY_WITH_1RESOURCE_ONLY = "testUpdateHierarchyWith1ResourceOnly";
 }
+
