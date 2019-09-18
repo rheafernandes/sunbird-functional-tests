@@ -3,6 +3,8 @@ package org.sunbird.kp.test.content.v3;
 import com.consol.citrus.annotations.CitrusTest;
 import com.consol.citrus.testng.CitrusParameters;
 import org.springframework.http.HttpStatus;
+import org.springframework.test.annotation.Rollback;
+import org.springframework.transaction.annotation.Transactional;
 import org.sunbird.kp.test.common.APIUrl;
 import org.sunbird.kp.test.common.BaseCitrusTestRunner;
 import org.sunbird.kp.test.common.Constant;
@@ -42,7 +44,6 @@ public class UpdateContentTest extends BaseCitrusTestRunner {
                 RESPONSE_JSON
         );
     }
-
 
     @DataProvider(name = "updateResourceContent")
     public Object[][] updateResourceContent() {
@@ -85,9 +86,12 @@ public class UpdateContentTest extends BaseCitrusTestRunner {
                 new Object[]{
                         ContentV3Scenario.TEST_UPDATE_CONTENT_IN_LIVE_WITH_IMAGE, APIUrl.UPDATE_CONTENT, HttpStatus.OK, Constant.CREATOR, null, "application/pdf", false, "contentInLiveImageDraft"
                 },
-//                new Object[]{
-//                        ContentV3Scenario.TEST_UPDATE_CONTENT_IN_RETIRED, APIUrl.UPDATE_CONTENT, HttpStatus.OK, Constant.CREATOR, null, "application/pdf", false, "contentRetired"
-//                },
+                new Object[]{
+                        ContentV3Scenario.TEST_UPDATE_CONTENT_STATUS_FLAGGED, APIUrl.UPDATE_CONTENT, HttpStatus.OK, Constant.CREATOR, null, "application/pdf", false, "contentInFlagged"
+                },
+                new Object[]{
+                        ContentV3Scenario.TEST_UPDATE_CONTENT_STATUS_FLAGREVIEW, APIUrl.UPDATE_CONTENT, HttpStatus.OK, Constant.CREATOR, null, "application/pdf", false, "contentInFlagReview"
+                },
 
                  //Invalid Request Format (400) requests are here
 
@@ -110,13 +114,37 @@ public class UpdateContentTest extends BaseCitrusTestRunner {
                 new Object[]{
                         ContentV3Scenario.TEST_UPDATE_WITH_SYSTEM_PROPERTY, APIUrl.UPDATE_CONTENT, HttpStatus.BAD_REQUEST, Constant.CREATOR, null, "application/pdf", false, "contentInDraft"
                 },
+                new Object[]{
+                        ContentV3Scenario.TEST_UPDATE_CONTENT_IN_RETIRED, APIUrl.UPDATE_CONTENT, HttpStatus.BAD_REQUEST, Constant.CREATOR, null, "application/pdf", false, "contentRetired"
+                },
+                new Object[]{
+                        ContentV3Scenario.TEST_UPDATE_WITH_DIALCODES, APIUrl.UPDATE_CONTENT, HttpStatus.BAD_REQUEST, Constant.CREATOR, null, "application/pdf", false, "contentInDraft"
+                },
+                new Object[]{
+                        ContentV3Scenario.TEST_UPDATE_WITH_RESERVED_DIALCODES, APIUrl.UPDATE_CONTENT, HttpStatus.BAD_REQUEST, Constant.CREATOR, null, "application/pdf", false, "contentInDraft"
+                },
+                new Object[]{
+                        ContentV3Scenario.TEST_UPDATE_WITH_INVALID_FRAMEWORK, APIUrl.UPDATE_CONTENT, HttpStatus.BAD_REQUEST, Constant.CREATOR, null, "application/pdf", false, "contentInDraft"
+                },
+                new Object[]{
+                        ContentV3Scenario.TEST_UPDATE_FOR_PUBLISHED_CONTENT_WITH_IMAGE_ID, APIUrl.UPDATE_CONTENT, HttpStatus.NOT_FOUND, Constant.CREATOR, null, "application/pdf", true, "contentInLive"
+                },
+                new Object[]{
+                        ContentV3Scenario.TEST_UPDATE_WITH_VALID_ECML, APIUrl.UPDATE_CONTENT, HttpStatus.OK, Constant.CREATOR, null, "application/pdf", false, "contentInDraft"
+                },
+                new Object[]{
+                        ContentV3Scenario.TEST_UPDATE_WITH_INVALID_ECML, APIUrl.UPDATE_CONTENT, HttpStatus.BAD_REQUEST, Constant.CREATOR, null, "application/pdf", false, "contentInDraft"
+                },
+                new Object[]{
+                        ContentV3Scenario.TEST_UPDATE_ECML_BODY_FOR_PUBLISHED_CONTENT, APIUrl.UPDATE_CONTENT, HttpStatus.OK, Constant.CREATOR, null, "application/pdf", false, "contentInDraft"
+                },
+                new Object[]{
+                        ContentV3Scenario.TEST_UPDATE_WITH_CORRECT_IDENTIFIER_IN_REQUEST, APIUrl.UPDATE_CONTENT, HttpStatus.BAD_REQUEST, Constant.CREATOR, null, "application/pdf", false, "contentInDraft"
+                },
+                new Object[]{
+                        ContentV3Scenario.TEST_UPDATE_WITH_INCORRECT_IDENTIFIER_IN_REQUEST, APIUrl.UPDATE_CONTENT, HttpStatus.BAD_REQUEST, Constant.CREATOR, null, "application/pdf", false, "contentInDraft"
+                },
 
-                new Object[]{
-                        ContentV3Scenario.TEST_UPDATE_CONTENT_STATUS_FLAGGED, APIUrl.UPDATE_CONTENT, HttpStatus.OK, Constant.CREATOR, null, "application/pdf", false, "contentInFlagged"
-                },
-                new Object[]{
-                        ContentV3Scenario.TEST_UPDATE_CONTENT_STATUS_FLAGREVIEW, APIUrl.UPDATE_CONTENT, HttpStatus.OK, Constant.CREATOR, null, "application/pdf", false, "contentInFlagReview"
-                },
 
                 // Resource Not Found requests (404) are here
 
@@ -134,8 +162,7 @@ public class UpdateContentTest extends BaseCitrusTestRunner {
                 // Resources with Server (500) errors are here
                 new Object[]{
                         ContentV3Scenario.TEST_UPDATE_WITH_INVALID_FORMAT_RESERVED_DIALCODES, APIUrl.UPDATE_CONTENT, HttpStatus.BAD_REQUEST, Constant.CREATOR, null, "application/pdf", false, "contentInDraft"
-                },
-
+                }
         };
     }
 

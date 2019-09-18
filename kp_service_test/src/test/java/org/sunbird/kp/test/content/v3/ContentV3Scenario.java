@@ -240,6 +240,24 @@ public class ContentV3Scenario {
             "testUpdateWithInvalidReservedDialcodes";
     public static final String TEST_UPDATE_WITH_STALE_DATA =
             "testUpdateContentWithStaleData";
+    public static final String TEST_UPDATE_WITH_DIALCODES =
+            "testUpdateWithDialcodes";
+    public static final String TEST_UPDATE_WITH_RESERVED_DIALCODES =
+            "testUpdateWithReservedDialcodes";
+    public static final String TEST_UPDATE_WITH_INVALID_FRAMEWORK =
+            "testUpdateWithInvalidFramework";
+    public static final String TEST_UPDATE_FOR_PUBLISHED_CONTENT_WITH_IMAGE_ID=
+            "testUpdateForPublishedContentWithImageId";
+    public static final String TEST_UPDATE_WITH_VALID_ECML =
+            "testUpdateWithValidEcml";
+    public static final String TEST_UPDATE_WITH_INVALID_ECML =
+            "testUpdateWithInvalidEcml";
+    public static final String TEST_UPDATE_ECML_BODY_FOR_PUBLISHED_CONTENT =
+            "testUpdateEcmlBodyForPublishedContent";
+    public static final String TEST_UPDATE_WITH_CORRECT_IDENTIFIER_IN_REQUEST =
+            "testUpdateWithCorrectIdentifierInRequest";
+    public static final String TEST_UPDATE_WITH_INCORRECT_IDENTIFIER_IN_REQUEST =
+            "testUpdateWithInCorrectIdentifierInRequest";
 
     //Scenario's for Content Retire API
     public static final String TEST_RETIRE_WITH_IMAGE_ID =

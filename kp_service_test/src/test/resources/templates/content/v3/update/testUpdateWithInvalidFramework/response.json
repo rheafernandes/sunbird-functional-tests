@@ -5,8 +5,8 @@
   "params": {
     "resmsgid": "@ignore@",
     "msgid": null,
-    "err": "@ignore@",
     "status": "failed",
+    "err": "@ignore@",
     "errmsg": "@ignore@"
   },
   "responseCode": "CLIENT_ERROR",

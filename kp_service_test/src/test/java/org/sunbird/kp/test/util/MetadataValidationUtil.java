@@ -5,16 +5,26 @@ import java.util.List;
 import java.util.Map;
 
 public class MetadataValidationUtil {
+    /**
+     *
+     * @param metadataMap  (Metadata to be validated -> User provided)
+     * @param resultMap    (Read Api result map)
+     * @return
+     */
+    public static Boolean validateMetadataValue(Map<String, Object> metadataMap, Map<String, Object> resultMap) {
+        return (resultMap.keySet().containsAll(metadataMap.keySet()) &&
+                (resultMap.keySet().stream().filter(key -> null == key).count()) == 0) ? true : false;
+    }
 
+    /**
+     *
+     * @param resultMap
+     * @return
+     */
     public static Boolean validateMetadataAfterCreate(Map<String, Object> resultMap) {
         Map<String, Object> contentMap = (Map<String,Object>) resultMap.get("content");
         return (contentMap.keySet().containsAll(METADATA_ADDED_AFTER_CREATION) &&
                 (contentMap.keySet().stream().filter(key -> key == null).count()) == 0) ? true : false;
-    }
-
-    public static Boolean validateSpecificMetadata(Map<String, Object> metadataMap, Map<String, Object> resultMap) {
-        return (resultMap.keySet().containsAll(metadataMap.keySet()) &&
-                (resultMap.keySet().stream().filter(key -> null == key).count()) == 0) ? true : false;
     }
 
     public final static List<String> METADATA_ADDED_AFTER_CREATION = new ArrayList<String>() {{
