@@ -19,7 +19,6 @@ public class UpdateHierarchyTest extends BaseCitrusTestRunner {
 
     private static final String TEMPLATE_DIR = "templates/content/v3/hierarchy/update";
     private static final String MODE_EDIT = "?mode=edit";
-    private static final String GET_HIERARCHY_RESPONSE_JSON = "hierarchy_response.json";
     private String identifier;
     private static List<String> resourceList = new ArrayList<>();
 
@@ -52,7 +51,7 @@ public class UpdateHierarchyTest extends BaseCitrusTestRunner {
                 null,
                 HttpStatus.OK,
                 null,
-                GET_HIERARCHY_RESPONSE_JSON
+                VALIDATE_JSON
         );
 
     }
