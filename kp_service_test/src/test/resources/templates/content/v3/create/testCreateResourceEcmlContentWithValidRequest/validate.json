@@ -15,18 +15,18 @@
       "ownershipType": [
         "createdBy"
       ],
-      "code": "kp.ft.resource.pdf",
+      "code": "kp.ft.resource.ecml",
       "channel": "channel-01",
       "language": [
         "English"
       ],
-      "mimeType": "application/pdf",
+      "mimeType": "application/vnd.ekstep.ecml-archive",
       "idealScreenSize": "normal",
       "createdOn": "@matchesDatePattern('yyyy-MM-dd')@",
       "appId": "@ignore@",
       "consumerId": "@ignore@",
       "contentDisposition": "inline",
-      "contentEncoding": "identity",
+      "contentEncoding": "gzip",
       "lastUpdatedOn": "@matchesDatePattern('yyyy-MM-dd')@",
       "contentType": "Resource",
       "dialcodeRequired": "No",
@@ -42,7 +42,7 @@
       "mediaType": "content",
       "osId": "org.ekstep.quiz.app",
       "languageCode": "en",
-      "version": 1,
+      "version": ",@isNumber()@",
       "versionKey": "@isNumber()@",
       "license": "Creative Commons Attribution (CC BY)",
       "idealScreenDensity": "hdpi",

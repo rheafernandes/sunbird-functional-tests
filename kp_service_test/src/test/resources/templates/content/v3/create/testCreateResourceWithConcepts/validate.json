@@ -42,11 +42,21 @@
       "mediaType": "content",
       "osId": "org.ekstep.quiz.app",
       "languageCode": "en",
-      "version": 1,
+      "version": "@isNumber()@",
       "versionKey": "@isNumber()@",
       "license": "Creative Commons Attribution (CC BY)",
       "idealScreenDensity": "hdpi",
       "framework": "NCF",
+      "concepts": [
+        {
+          "identifier": "LO53",
+          "name": "Word Context",
+          "objectType": "Concept",
+          "relation": "associatedTo",
+          "description": "Accurate Word For Context",
+          "status": "Live"
+        }
+      ],
       "compatibilityLevel": 1.0,
       "name": "KP Integration Test Content",
       "status": "Draft"
