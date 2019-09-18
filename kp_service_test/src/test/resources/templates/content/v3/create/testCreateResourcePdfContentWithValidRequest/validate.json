@@ -1,0 +1,55 @@
+{
+  "id": "ekstep.content.find",
+  "ver": "3.0",
+  "ts": "@ignore@",
+  "params": {
+    "resmsgid": "@ignore@",
+    "msgid": null,
+    "err": null,
+    "status": "successful",
+    "errmsg": null
+  },
+  "responseCode": "OK",
+  "result": {
+    "content": {
+      "ownershipType": [
+        "createdBy"
+      ],
+      "code": "kp.ft.resource.pdf",
+      "channel": "channel-01",
+      "language": [
+        "English"
+      ],
+      "mimeType": "application/pdf",
+      "idealScreenSize": "normal",
+      "createdOn": "@ignore@",
+      "appId": "@ignore@",
+      "consumerId": "@ignore@",
+      "contentDisposition": "inline",
+      "contentEncoding": "identity",
+      "lastUpdatedOn": "@ignore@",
+      "contentType": "Resource",
+      "dialcodeRequired": "No",
+      "identifier": "${contentIdVal}",
+      "lastStatusChangedOn": "@ignore@",
+      "audience": [
+        "Learner"
+      ],
+      "visibility": "Default",
+      "os": [
+        "All"
+      ],
+      "mediaType": "content",
+      "osId": "org.ekstep.quiz.app",
+      "languageCode": "en",
+      "version": 1,
+      "versionKey": "@isNumber()@",
+      "license": "Creative Commons Attribution (CC BY)",
+      "idealScreenDensity": "hdpi",
+      "framework": "NCF",
+      "compatibilityLevel": 1.0,
+      "name": "KP Integration Test Content",
+      "status": "Draft"
+    }
+  }
+}

@@ -13,6 +13,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import java.util.UUID;
 import java.util.function.Supplier;
 import java.util.stream.IntStream;
 
@@ -103,9 +104,10 @@ public class CollectionUtil {
      */
     public static List<String> getLiveResources(BaseCitrusTestRunner runner, Integer resourceCount, String mimeType, String createReqPayload) {
         List<String> resourceIds = new ArrayList<>();
+        Map<String, Object> headers = new HashMap<String, Object>() {{ put("X-Consumer-Id", UUID.randomUUID().toString()); }};
         IntStream.rangeClosed(1, resourceCount).forEach(val -> {
             String randMimeType = StringUtils.isBlank(mimeType) ? resourceMimeTypes.get((new Random()).nextInt(resourceMimeTypes.size())) : mimeType;
-            resourceIds.add((String) ContentUtil.prepareResourceContent("contentInLive", runner, createReqPayload, randMimeType, null).get("content_id"));
+            resourceIds.add((String) ContentUtil.prepareResourceContent("contentInLive", runner, createReqPayload, randMimeType, headers).get("content_id"));
         });
         return resourceIds;
     }
