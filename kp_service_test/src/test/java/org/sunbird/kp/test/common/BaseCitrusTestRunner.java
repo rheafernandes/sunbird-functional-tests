@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
+import java.util.UUID;
 
 /**
  * Base Runner Class for Integration Test
@@ -289,6 +290,7 @@ public class BaseCitrusTestRunner extends TestNGCitrusTestRunner {
             headers.put(Constant.X_APP_ID, AppConfig.config.getString("kp_test_default_appId"));
 
         headers.put(Constant.AUTHORIZATION, Constant.BEARER + API_KEY);
+        headers.put(Constant.X_CONSUMER_ID, UUID.randomUUID().toString());
 
         if (IS_USER_AUTH_REQUIRED)
             headers.put(Constant.X_AUTHENTICATED_USER_TOKEN, "${accessToken}");
