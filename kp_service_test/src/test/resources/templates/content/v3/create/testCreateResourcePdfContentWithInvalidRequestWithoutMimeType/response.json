@@ -1,7 +1,7 @@
 {
   "id": "ekstep.learning.content.create",
   "ver": "3.0",
-  "ts": "@ignore@",
+  "ts": "@matchesDatePattern('yyyy-MM-dd')@",
   "params": {
 "resmsgid": "@ignore@",
 "msgid": null,

@@ -15,12 +15,12 @@
       "ownershipType": [
         "createdBy"
       ],
-      "code": "kp.ft.resource.pdf",
+      "code": "kp.ft.asset.png",
       "channel": "channel-01",
       "language": [
         "English"
       ],
-      "mimeType": "application/pdf",
+      "mimeType": "image/png",
       "idealScreenSize": "normal",
       "createdOn": "@matchesDatePattern('yyyy-MM-dd')@",
       "appId": "@ignore@",
@@ -28,7 +28,7 @@
       "contentDisposition": "inline",
       "contentEncoding": "identity",
       "lastUpdatedOn": "@matchesDatePattern('yyyy-MM-dd')@",
-      "contentType": "Resource",
+      "contentType": "Asset",
       "dialcodeRequired": "No",
       "identifier": "${contentIdVal}",
       "lastStatusChangedOn": "@matchesDatePattern('yyyy-MM-dd')@",
@@ -39,7 +39,7 @@
       "os": [
         "All"
       ],
-      "mediaType": "content",
+      "mediaType": "image",
       "osId": "org.ekstep.quiz.app",
       "languageCode": "en",
       "version": 1,
@@ -48,7 +48,7 @@
       "idealScreenDensity": "hdpi",
       "framework": "NCF",
       "compatibilityLevel": 1.0,
-      "name": "KP Integration Test Content",
+      "name": "KP Integration Test Asset",
       "status": "Draft"
     }
   }
