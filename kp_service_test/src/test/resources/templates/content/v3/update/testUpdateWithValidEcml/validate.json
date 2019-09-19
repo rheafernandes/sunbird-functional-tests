@@ -1,0 +1,56 @@
+{
+  "id": "ekstep.content.find",
+  "ver": "3.0",
+  "ts": "@ignore@",
+  "params": {
+    "resmsgid": "@ignore@",
+    "msgid": null,
+    "err": null,
+    "status": "successful",
+    "errmsg": null
+  },
+  "responseCode": "OK",
+  "result": {
+    "content": {
+      "ownershipType": [
+        "createdBy"
+      ],
+      "code": "kp.ft.resource.pdf",
+      "channel": "@ignore@",
+      "description": "KP-Updated description pdf",
+      "language": [
+        "English"
+      ],
+      "mimeType": "application/pdf",
+      "idealScreenSize": "normal",
+      "createdOn": "@ignore@",
+      "appId": "@ignore@",
+      "contentDisposition": "inline",
+      "contentEncoding": "identity",
+      "lastUpdatedOn": "@ignore@",
+      "contentType": "Resource",
+      "dialcodeRequired": "No",
+      "identifier": "@ignore@",
+      "lastStatusChangedOn": "@ignore@",
+      "audience": [
+        "Learner"
+      ],
+      "visibility": "Default",
+      "os": [
+        "All"
+      ],
+      "consumerId": "@ignore@",
+      "mediaType": "content",
+      "osId": "org.ekstep.quiz.app",
+      "languageCode": "en",
+      "version": "@isNumber()@",
+      "versionKey":  "@isNumber()@",
+      "license": "Creative Commons Attribution (CC BY)",
+      "idealScreenDensity": "hdpi",
+      "framework": "NCF",
+      "compatibilityLevel":  "@isNumber()@",
+      "name": "KP-Updated-pdf",
+      "status": "Draft"
+    }
+  }
+}

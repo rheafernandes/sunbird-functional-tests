@@ -8,7 +8,6 @@ import org.sunbird.kp.test.common.BaseCitrusTestRunner;
 import org.sunbird.kp.test.common.Constant;
 import org.sunbird.kp.test.util.ContentUtil;
 import org.sunbird.kp.test.util.MetadataValidationUtil;
-import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 

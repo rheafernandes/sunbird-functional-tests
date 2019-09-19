@@ -1,8 +1,8 @@
 {
   "request": {
     "content": {
-      "name": "KP-Updated-pdf",
-      "description": "KP-Updated description pdf",
+      "name": "KP-Updated-ecml",
+      "description": "KP-Updated description ecml",
       "versionKey": "${versionKeyVal}",
       "body": {
         "solutions": [

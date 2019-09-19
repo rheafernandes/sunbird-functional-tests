@@ -1,0 +1,73 @@
+{
+  "id": "ekstep.content.find",
+  "ver": "3.0",
+  "ts": "@ignore@",
+  "params": {
+    "resmsgid": "@ignore@",
+    "msgid": null,
+    "err": null,
+    "status": "successful",
+    "errmsg": null
+  },
+  "responseCode": "OK",
+  "result": {
+    "content": {
+      "ownershipType": [
+        "createdBy"
+      ],
+      "previewUrl": "@ignore@",
+      "code": "kp.ft.resource.ecml",
+      "downloadUrl": "@ignore@",
+      "channel": "@ignore@",
+      "description": "KP Integration Test Content",
+      "language": [
+        "English"
+      ],
+      "streamingUrl": "@ignore@",
+      "variants": {
+        "spine": {
+          "ecarUrl": "@ignore@",
+          "size": "@isNumber()@"
+        }
+      },
+      "mimeType": "application/vnd.ekstep.ecml-archive",
+      "idealScreenSize": "normal",
+      "createdOn": "@ignore@",
+      "appId": "@ignore@",
+      "contentDisposition": "inline",
+      "artifactUrl": "@ignore@",
+      "contentEncoding": "gzip",
+      "lastUpdatedOn": "@ignore@",
+      "SYS_INTERNAL_LAST_UPDATED_ON": "@ignore@",
+      "contentType": "Resource",
+      "dialcodeRequired": "No",
+      "identifier": "@ignore@",
+      "audience": [
+        "Learner"
+      ],
+      "lastStatusChangedOn": "@ignore@",
+      "visibility": "Default",
+      "os": [
+        "All"
+      ],
+      "consumerId": "@ignore@",
+      "mediaType": "content",
+      "osId": "org.ekstep.quiz.app",
+      "lastPublishedBy": "KP_FT_PUBLISHER",
+      "version": "@isNumber()@",
+      "pkgVersion": "@isNumber()@",
+      "versionKey": "@isNumber()@",
+      "prevState": "Draft",
+      "license": "Creative Commons Attribution (CC BY)",
+      "idealScreenDensity": "hdpi",
+      "s3Key": "@ignore@",
+      "framework": "NCF",
+      "size":  "@isNumber()@",
+      "lastPublishedOn": "@ignore@",
+      "compatibilityLevel": "@isNumber()@",
+      "name": "KP Integration Test Content",
+      "status": "Live",
+      "languageCode": "en"
+    }
+  }
+}

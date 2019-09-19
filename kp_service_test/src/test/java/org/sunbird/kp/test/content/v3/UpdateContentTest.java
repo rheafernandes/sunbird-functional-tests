@@ -3,8 +3,6 @@ package org.sunbird.kp.test.content.v3;
 import com.consol.citrus.annotations.CitrusTest;
 import com.consol.citrus.testng.CitrusParameters;
 import org.springframework.http.HttpStatus;
-import org.springframework.test.annotation.Rollback;
-import org.springframework.transaction.annotation.Transactional;
 import org.sunbird.kp.test.common.APIUrl;
 import org.sunbird.kp.test.common.BaseCitrusTestRunner;
 import org.sunbird.kp.test.common.Constant;
@@ -19,149 +17,228 @@ public class UpdateContentTest extends BaseCitrusTestRunner {
 
     private static final String TEMPLATE_DIR = "templates/content/v3/update";
 
-    @Test(dataProvider = "updateResourceContent")
-    @CitrusParameters({"testName", "requestUrl", "httpStatusCode", "userType", "valParams", "mimeType", "needImage", "workflow"})
+    @Test(dataProvider = "updateValidResourceContent")
+    @CitrusParameters({"testName", "mimeType", "workflow"})
     @CitrusTest
-    public void testUpdateResourceContent(
-            String testName, String requestUrl, HttpStatus httpStatusCode, String userType,
-            Map<String, Object> valParams, String mimeType, Boolean needImage, String workflow) {
-        getAuthToken(this, userType);
-        Map<String, Object> map = ContentUtil.prepareResourceContent(workflow, this, null, mimeType, null);        String contentId = (String) map.get("content_id");
+    public void testValidUpdateResourceContent(
+            String testName, String mimeType, String workflow) {
+        getAuthToken(this, Constant.CREATOR);
+        Map<String, Object> map = ContentUtil.prepareResourceContent(workflow, this, null, mimeType, null);
+        String contentId = (String) map.get("content_id");
         String versionKey = (String) map.get("versionKey");
         this.variable("versionKeyVal", versionKey);
         this.variable("contentIdVal", contentId);
-        contentId = needImage? contentId + IMAGE_SUFFIX : contentId;
-        performPatchTest(
-                this,
-                TEMPLATE_DIR,
-                testName,
-                requestUrl + contentId,
-                null,
-                REQUEST_JSON,
-                MediaType.APPLICATION_JSON,
-                httpStatusCode,
-                valParams,
-                RESPONSE_JSON
+        performPatchTest(this, TEMPLATE_DIR, testName, APIUrl.UPDATE_CONTENT + contentId, null,
+                REQUEST_JSON, MediaType.APPLICATION_JSON, HttpStatus.OK, null, RESPONSE_JSON);
+        performGetTest(this, TEMPLATE_DIR, testName, APIUrl.READ_CONTENT + contentId,
+                null, HttpStatus.OK, null, VALIDATE_JSON);
+    }
+
+    @Test(dataProvider = "updateInvalidResourceContent")
+    @CitrusParameters({"testName", "mimeType", "workflow"})
+    @CitrusTest
+    public void testInvalidUpdateResourceContent(
+            String testName, String mimeType, String workflow) {
+        getAuthToken(this, Constant.CREATOR);
+        Map<String, Object> map = ContentUtil.prepareResourceContent(workflow, this, null, mimeType, null);
+        String contentId = (String) map.get("content_id");
+        String versionKey = (String) map.get("versionKey");
+        this.variable("versionKeyVal", versionKey);
+        this.variable("contentIdVal", contentId);
+        performPatchTest(this, TEMPLATE_DIR, testName, APIUrl.UPDATE_CONTENT + contentId, null,
+                REQUEST_JSON, MediaType.APPLICATION_JSON, HttpStatus.BAD_REQUEST, null, RESPONSE_JSON);
+    }
+
+    @Test(dataProvider = "updateNotFoundResourceContent")
+    @CitrusParameters({"testName", "mimeType", "needImage", "workflow"})
+    @CitrusTest
+    public void testNotFoundUpdateResourceContent(
+            String testName, String mimeType, Boolean needImage, String workflow) {
+        getAuthToken(this, Constant.CREATOR);
+        Map<String, Object> map = ContentUtil.prepareResourceContent(workflow, this, null, mimeType, null);
+        String contentId = (String) map.get("content_id");
+        String versionKey = (String) map.get("versionKey");
+        this.variable("versionKeyVal", versionKey);
+        this.variable("contentIdVal", contentId);
+        contentId = needImage ? contentId + IMAGE_SUFFIX : contentId;
+        performPatchTest(this, TEMPLATE_DIR, testName, APIUrl.UPDATE_CONTENT + contentId, null,
+                REQUEST_JSON, MediaType.APPLICATION_JSON, HttpStatus.NOT_FOUND, null, RESPONSE_JSON
         );
     }
 
-    @DataProvider(name = "updateResourceContent")
-    public Object[][] updateResourceContent() {
+    @Test(dataProvider = "updateImageResourceContent")
+    @CitrusParameters({"testName", "mimeType", "workflow"})
+    @CitrusTest
+    public void testImageUpdateResourceContent(
+            String testName, String mimeType, String workflow) {
+        getAuthToken(this, Constant.CREATOR);
+        Map<String, Object> map = ContentUtil.prepareResourceContent(workflow, this, null, mimeType, null);
+        String contentId = (String) map.get("content_id");
+        String versionKey = (String) map.get("versionKey");
+        this.variable("versionKeyVal", versionKey);
+        this.variable("contentIdVal", contentId);
+        performPatchTest(this, TEMPLATE_DIR, testName, APIUrl.UPDATE_CONTENT + contentId, null,
+                REQUEST_JSON, MediaType.APPLICATION_JSON, HttpStatus.OK, null, RESPONSE_JSON);
+        performGetTest(this, TEMPLATE_DIR, testName, APIUrl.READ_CONTENT + contentId,
+                null, HttpStatus.OK, null, "validateLive.json");
+        performGetTest(this, TEMPLATE_DIR, testName, APIUrl.READ_CONTENT + contentId + "?mode=edit",
+                null, HttpStatus.OK, null, "validateImage.json");
+    }
+
+    @Test(dataProvider = "updateEcmlResource")
+    @CitrusParameters({"testName", "mimeType", "workflow"})
+    @CitrusTest
+    public void testEcmlUpdateResourceContent(
+            String testName, String mimeType, String workflow) {
+        getAuthToken(this, Constant.CREATOR);
+        Map<String, Object> map = ContentUtil.prepareResourceContent(workflow, this, null, mimeType, null);
+        String contentId = (String) map.get("content_id");
+        String versionKey = (String) map.get("versionKey");
+        this.variable("versionKeyVal", versionKey);
+        this.variable("contentIdVal", contentId);
+        performPatchTest(this, TEMPLATE_DIR, testName, APIUrl.UPDATE_CONTENT + contentId, null,
+                REQUEST_JSON, MediaType.APPLICATION_JSON, HttpStatus.OK, null, RESPONSE_JSON);
+        performGetTest(this, TEMPLATE_DIR, testName, APIUrl.READ_CONTENT + contentId,
+                null, HttpStatus.OK, null, "validateLive.json");
+        performGetTest(this, TEMPLATE_DIR, testName, APIUrl.READ_CONTENT + contentId + "?mode=edit",
+                null, HttpStatus.OK, null, "validateImage.json");
+        performGetTest(this, TEMPLATE_DIR, testName, APIUrl.READ_CONTENT + contentId + "?mode=edit&fields=body",
+                null, HttpStatus.OK, null, "validateFields.json");
+    }
+
+    @DataProvider(name = "updateValidResourceContent")
+    public Object[][] updateValidResourceContent() {
         return new Object[][]{
                 //Valid Requests (200) are here
+//                new Object[]{
+//                        ContentV3Scenario.TEST_UPDATE_RESOURCE_PDF_CONTENT_WITH_VALID_REQUEST, "application/pdf", "contentInDraft"
+//                },
+//                new Object[]{
+//                        ContentV3Scenario.TEST_UPDATE_RESOURCE_ECML_CONTENT_WITH_VALID_REQUEST, "application/vnd.ekstep.ecml-archive", "contentInDraft"
+//                },
+//                new Object[]{
+//                        ContentV3Scenario.TEST_UPDATE_RESOURCE_HTML_CONTENT_WITH_VALID_REQUEST, "application/vnd.ekstep.html-archive", "contentInDraft"
+//                },
+//                new Object[]{
+//                        ContentV3Scenario.TEST_UPDATE_RESOURCE_H5P_CONTENT_WITH_VALID_REQUEST, "application/vnd.ekstep.h5p-archive", "contentInDraft"
+//                },
+//                new Object[]{
+//                        ContentV3Scenario.TEST_UPDATE_RESOURCE_YOUTUBE_CONTENT_WITH_VALID_REQUEST, "video/x-youtube", "contentInDraft"
+//                },
+//                new Object[]{
+//                        ContentV3Scenario.TEST_UPDATE_CONTENT_WITH_NEW_FRAMEWORK, "application/pdf", "contentInDraft"
+//                },
+//                new Object[]{
+//                        ContentV3Scenario.TEST_UPDATE_CONTENT_STATUS_REVIEW, "application/pdf", "contentInReview"
+//                },
+//                new Object[]{
+//                        ContentV3Scenario.TEST_UPDATE_CONTENT_STATUS_FLAGREVIEW, "application/pdf", "contentInFlagReview"
+//                },
+//                new Object[]{
+//                        ContentV3Scenario.TEST_UPDATE_WITH_VALID_ECML, "application/pdf", "contentInDraft"
+//                },
+        };
+    }
+
+    @DataProvider(name = "updateInvalidResourceContent")
+    public Object[][] updateInvalidResourceContent() {
+        return new Object[][]{
                 new Object[]{
-                        ContentV3Scenario.TEST_UPDATE_RESOURCE_PDF_CONTENT_WITH_VALID_REQUEST, APIUrl.UPDATE_CONTENT, HttpStatus.OK, Constant.CREATOR, null, "application/pdf", false, "contentInDraft"
-                },
-                new Object[]{
-                        ContentV3Scenario.TEST_UPDATE_RESOURCE_ECML_CONTENT_WITH_VALID_REQUEST, APIUrl.UPDATE_CONTENT, HttpStatus.OK, Constant.CREATOR, null, "application/vnd.ekstep.ecml-archive", false, "contentInDraft"
-                },
-                new Object[]{
-                        ContentV3Scenario.TEST_UPDATE_RESOURCE_HTML_CONTENT_WITH_VALID_REQUEST, APIUrl.UPDATE_CONTENT, HttpStatus.OK, Constant.CREATOR, null, "application/vnd.ekstep.html-archive", false, "contentInDraft"
-                },
-                new Object[]{
-                        ContentV3Scenario.TEST_UPDATE_RESOURCE_H5P_CONTENT_WITH_VALID_REQUEST, APIUrl.UPDATE_CONTENT, HttpStatus.OK, Constant.CREATOR, null, "application/vnd.ekstep.h5p-archive", false, "contentInDraft"
-                },
-                new Object[]{
-                        ContentV3Scenario.TEST_UPDATE_RESOURCE_YOUTUBE_CONTENT_WITH_VALID_REQUEST, APIUrl.UPDATE_CONTENT, HttpStatus.OK, Constant.CREATOR, null, "video/x-youtube", false, "contentInDraft"
-                },
-                new Object[]{
-                        ContentV3Scenario.TEST_UPDATE_CONTENT_WITH_NEW_FRAMEWORK, APIUrl.UPDATE_CONTENT, HttpStatus.OK, Constant.CREATOR, null, "application/pdf", false, "contentInDraft"
-                },
-                new Object[]{
-                        ContentV3Scenario.TEST_UPDATE_CONTENT_WITH_NEW_MIMETYPE, APIUrl.UPDATE_CONTENT, HttpStatus.OK, Constant.CREATOR, null, "application/pdf", false, "contentInDraft"
+                        ContentV3Scenario.TEST_UPDATE_CONTENT_WITH_NEW_MIMETYPE, "application/pdf", "contentInDraft"
                 },
 
                 new Object[]{
-                        ContentV3Scenario.TEST_UPDATE_CONTENT_WITH_NEW_MEDIATYPE, APIUrl.UPDATE_CONTENT, HttpStatus.OK, Constant.CREATOR, null, "application/pdf", false, "contentInDraft"
+                        ContentV3Scenario.TEST_UPDATE_CONTENT_WITH_NEW_MEDIATYPE, "application/pdf", "contentInDraft"
                 },
                 new Object[]{
-                        ContentV3Scenario.TEST_UPDATE_CONTENT_WITH_VALID_CONTENT_TYPE, APIUrl.UPDATE_CONTENT, HttpStatus.OK, Constant.CREATOR, null, "application/pdf", false, "contentInDraft"
+                        ContentV3Scenario.TEST_UPDATE_CONTENT_WITH_VALID_CONTENT_TYPE, "application/pdf", "contentInDraft"
                 },
                 new Object[]{
-                        ContentV3Scenario.TEST_UPDATE_CONTENT_STATUS_REVIEW, APIUrl.UPDATE_CONTENT, HttpStatus.OK, Constant.CREATOR, null, "application/pdf", false, "contentInReview"
+                        ContentV3Scenario.TEST_UPDATE_CONTENT_STATUS_FLAGGED, "application/pdf", "contentInFlagged"
                 },
                 new Object[]{
-                        ContentV3Scenario.TEST_UPDATE_CONTENT_IN_LIVE, APIUrl.UPDATE_CONTENT, HttpStatus.OK, Constant.CREATOR, null, "application/pdf", false, "contentInLive"
+                        ContentV3Scenario.TEST_UPDATE_CONTENT_WITH_BLANK_VERSION_KEY, "application/pdf", "contentInDraft"
                 },
                 new Object[]{
-                        ContentV3Scenario.TEST_UPDATE_CONTENT_IN_LIVE_WITH_IMAGE, APIUrl.UPDATE_CONTENT, HttpStatus.OK, Constant.CREATOR, null, "application/pdf", false, "contentInLiveImageDraft"
+                        ContentV3Scenario.TEST_UPDATE_CONTENT_WITH_INVALID_VERSION_KEY, "application/pdf", "contentInDraft"
                 },
                 new Object[]{
-                        ContentV3Scenario.TEST_UPDATE_CONTENT_STATUS_FLAGGED, APIUrl.UPDATE_CONTENT, HttpStatus.OK, Constant.CREATOR, null, "application/pdf", false, "contentInFlagged"
+                        ContentV3Scenario.TEST_UPDATE_CONTENT_WITH_CHANGED_STATUS, "application/pdf", "contentInDraft"
                 },
                 new Object[]{
-                        ContentV3Scenario.TEST_UPDATE_CONTENT_STATUS_FLAGREVIEW, APIUrl.UPDATE_CONTENT, HttpStatus.OK, Constant.CREATOR, null, "application/pdf", false, "contentInFlagReview"
-                },
-
-                 //Invalid Request Format (400) requests are here
-
-                new Object[]{
-                        ContentV3Scenario.TEST_UPDATE_CONTENT_WITH_BLANK_VERSION_KEY, APIUrl.UPDATE_CONTENT, HttpStatus.BAD_REQUEST, Constant.CREATOR, null, "application/pdf", false, "contentInDraft"
-                },
-                new Object[]{
-                        ContentV3Scenario.TEST_UPDATE_CONTENT_WITH_INVALID_VERSION_KEY, APIUrl.UPDATE_CONTENT, HttpStatus.BAD_REQUEST, Constant.CREATOR, null, "application/pdf", false, "contentInDraft"
-                },
-                new Object[]{
-                        ContentV3Scenario.TEST_UPDATE_CONTENT_WITH_CHANGED_STATUS, APIUrl.UPDATE_CONTENT, HttpStatus.BAD_REQUEST, Constant.CREATOR, null, "application/pdf", false, "contentInDraft"
-                },
-                new Object[]{
-                        ContentV3Scenario.TEST_UPDATE_CONTENT_WITH_INVALID_METADATA, APIUrl.UPDATE_CONTENT, HttpStatus.BAD_REQUEST, Constant.CREATOR, null, "application/pdf", false, "contentInDraft"
+                        ContentV3Scenario.TEST_UPDATE_CONTENT_WITH_INVALID_METADATA, "application/pdf", "contentInDraft"
                 },
 
                 new Object[]{
-                        ContentV3Scenario.TEST_UPDATE_CONTENT_WITH_INVALID_CONTENT_TYPE, APIUrl.UPDATE_CONTENT, HttpStatus.BAD_REQUEST, Constant.CREATOR, null, "application/pdf", false, "contentInDraft"
+                        ContentV3Scenario.TEST_UPDATE_CONTENT_WITH_INVALID_CONTENT_TYPE, "application/pdf", "contentInDraft"
                 },
                 new Object[]{
-                        ContentV3Scenario.TEST_UPDATE_WITH_SYSTEM_PROPERTY, APIUrl.UPDATE_CONTENT, HttpStatus.BAD_REQUEST, Constant.CREATOR, null, "application/pdf", false, "contentInDraft"
+                        ContentV3Scenario.TEST_UPDATE_WITH_SYSTEM_PROPERTY, "application/pdf", "contentInDraft"
                 },
                 new Object[]{
-                        ContentV3Scenario.TEST_UPDATE_CONTENT_IN_RETIRED, APIUrl.UPDATE_CONTENT, HttpStatus.BAD_REQUEST, Constant.CREATOR, null, "application/pdf", false, "contentRetired"
+                        ContentV3Scenario.TEST_UPDATE_CONTENT_IN_RETIRED, "application/pdf", "contentRetired"
                 },
                 new Object[]{
-                        ContentV3Scenario.TEST_UPDATE_WITH_DIALCODES, APIUrl.UPDATE_CONTENT, HttpStatus.BAD_REQUEST, Constant.CREATOR, null, "application/pdf", false, "contentInDraft"
+                        ContentV3Scenario.TEST_UPDATE_WITH_DIALCODES, "application/pdf", "contentInDraft"
                 },
                 new Object[]{
-                        ContentV3Scenario.TEST_UPDATE_WITH_RESERVED_DIALCODES, APIUrl.UPDATE_CONTENT, HttpStatus.BAD_REQUEST, Constant.CREATOR, null, "application/pdf", false, "contentInDraft"
+                        ContentV3Scenario.TEST_UPDATE_WITH_RESERVED_DIALCODES, "application/pdf", "contentInDraft"
                 },
                 new Object[]{
-                        ContentV3Scenario.TEST_UPDATE_WITH_INVALID_FRAMEWORK, APIUrl.UPDATE_CONTENT, HttpStatus.BAD_REQUEST, Constant.CREATOR, null, "application/pdf", false, "contentInDraft"
+                        ContentV3Scenario.TEST_UPDATE_WITH_INVALID_FRAMEWORK, "application/pdf", "contentInDraft"
                 },
                 new Object[]{
-                        ContentV3Scenario.TEST_UPDATE_FOR_PUBLISHED_CONTENT_WITH_IMAGE_ID, APIUrl.UPDATE_CONTENT, HttpStatus.NOT_FOUND, Constant.CREATOR, null, "application/pdf", true, "contentInLive"
+                        ContentV3Scenario.TEST_UPDATE_WITH_CORRECT_IDENTIFIER_IN_REQUEST, "application/pdf", "contentInDraft"
                 },
                 new Object[]{
-                        ContentV3Scenario.TEST_UPDATE_WITH_VALID_ECML, APIUrl.UPDATE_CONTENT, HttpStatus.OK, Constant.CREATOR, null, "application/pdf", false, "contentInDraft"
+                        ContentV3Scenario.TEST_UPDATE_WITH_INCORRECT_IDENTIFIER_IN_REQUEST, "application/pdf", "contentInDraft"
                 },
                 new Object[]{
-                        ContentV3Scenario.TEST_UPDATE_WITH_INVALID_ECML, APIUrl.UPDATE_CONTENT, HttpStatus.BAD_REQUEST, Constant.CREATOR, null, "application/pdf", false, "contentInDraft"
+                        ContentV3Scenario.TEST_UPDATE_WITH_INVALID_FORMAT_RESERVED_DIALCODES, "application/pdf", "contentInDraft"
                 },
                 new Object[]{
-                        ContentV3Scenario.TEST_UPDATE_ECML_BODY_FOR_PUBLISHED_CONTENT, APIUrl.UPDATE_CONTENT, HttpStatus.OK, Constant.CREATOR, null, "application/pdf", false, "contentInDraft"
+                        ContentV3Scenario.TEST_UPDATE_WITH_INVALID_ECML, "application/pdf", "contentInDraft"
                 },
-                new Object[]{
-                        ContentV3Scenario.TEST_UPDATE_WITH_CORRECT_IDENTIFIER_IN_REQUEST, APIUrl.UPDATE_CONTENT, HttpStatus.BAD_REQUEST, Constant.CREATOR, null, "application/pdf", false, "contentInDraft"
-                },
-                new Object[]{
-                        ContentV3Scenario.TEST_UPDATE_WITH_INCORRECT_IDENTIFIER_IN_REQUEST, APIUrl.UPDATE_CONTENT, HttpStatus.BAD_REQUEST, Constant.CREATOR, null, "application/pdf", false, "contentInDraft"
-                },
+        };
+    }
 
-
-                // Resource Not Found requests (404) are here
-
+    @DataProvider(name = "updateNotFoundResourceContent")
+    public Object[][] updateNotFoundResourceContent() {
+        return new Object[][]{
                 new Object[]{
-                        ContentV3Scenario.TEST_UPDATE_CONTENT_WITH_NOT_FOUND_REQUEST, APIUrl.UPDATE_CONTENT, HttpStatus.NOT_FOUND, Constant.CREATOR, null, null, false, "contentInDraft"
+                        ContentV3Scenario.TEST_UPDATE_CONTENT_WITH_NOT_FOUND_REQUEST, null, false, "contentInDraft"
                 },
 
                 new Object[]{
-                        ContentV3Scenario.TEST_UPDATE_WITH_IMAGE_ID, APIUrl.UPDATE_CONTENT, HttpStatus.NOT_FOUND, Constant.CREATOR, null, "application/pdf", true, "contentInDraft"
+                        ContentV3Scenario.TEST_UPDATE_WITH_IMAGE_ID, "application/pdf", true, "contentInDraft"
                 },
                 new Object[]{
-                        ContentV3Scenario.TEST_UPDATE_CONTENT_AFTER_DISCARD, APIUrl.UPDATE_CONTENT, HttpStatus.NOT_FOUND, Constant.CREATOR, null, "application/pdf", false, "contentDiscarded"
+                        ContentV3Scenario.TEST_UPDATE_CONTENT_AFTER_DISCARD, "application/pdf", false, "contentDiscarded"
+                },
+                new Object[]{
+                        ContentV3Scenario.TEST_UPDATE_FOR_PUBLISHED_CONTENT_WITH_IMAGE_ID, "application/pdf", true, "contentInLive"
+                },
+        };
+    }
+
+    @DataProvider(name = "updateImageResourceContent")
+    public Object[][] updateImageResourceContent() {
+        return new Object[][]{
+                new Object[]{
+                        ContentV3Scenario.TEST_UPDATE_CONTENT_IN_LIVE, "application/pdf", "contentInLive"
+                },
+                new Object[]{
+                        ContentV3Scenario.TEST_UPDATE_CONTENT_IN_LIVE_WITH_IMAGE, "application/pdf", "contentInLiveImageDraft"
                 },
 
-                // Resources with Server (500) errors are here
+        };
+    }
+
+    @DataProvider(name = "updateEcmlResource")
+    public Object[][] updateEcmlResource(){
+        return new Object[][]{
                 new Object[]{
-                        ContentV3Scenario.TEST_UPDATE_WITH_INVALID_FORMAT_RESERVED_DIALCODES, APIUrl.UPDATE_CONTENT, HttpStatus.BAD_REQUEST, Constant.CREATOR, null, "application/pdf", false, "contentInDraft"
+                        ContentV3Scenario.TEST_UPDATE_ECML_BODY_FOR_PUBLISHED_CONTENT, "application/vnd.ekstep.ecml-archive", "contentInLive"
                 }
         };
     }

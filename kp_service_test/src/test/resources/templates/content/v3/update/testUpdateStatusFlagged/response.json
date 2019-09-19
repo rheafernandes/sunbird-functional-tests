@@ -5,13 +5,10 @@
   "params": {
     "resmsgid": "@ignore@",
     "msgid": null,
-    "err": null,
-    "status": "successful",
-    "errmsg": null
+    "err": "@ignore@",
+    "status": "failed",
+    "errmsg": "@ignore@"
   },
-  "responseCode": "OK",
-  "result": {
-    "node_id": "${contentIdVal}",
-    "versionKey": "@ignore@"
-  }
+  "responseCode": "CLIENT_ERROR",
+  "result": "@ignore@"
 }
