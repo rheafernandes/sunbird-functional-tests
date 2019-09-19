@@ -110,33 +110,33 @@ public class UpdateContentTest extends BaseCitrusTestRunner {
     public Object[][] updateValidResourceContent() {
         return new Object[][]{
                 //Valid Requests (200) are here
-//                new Object[]{
-//                        ContentV3Scenario.TEST_UPDATE_RESOURCE_PDF_CONTENT_WITH_VALID_REQUEST, "application/pdf", "contentInDraft"
-//                },
-//                new Object[]{
-//                        ContentV3Scenario.TEST_UPDATE_RESOURCE_ECML_CONTENT_WITH_VALID_REQUEST, "application/vnd.ekstep.ecml-archive", "contentInDraft"
-//                },
-//                new Object[]{
-//                        ContentV3Scenario.TEST_UPDATE_RESOURCE_HTML_CONTENT_WITH_VALID_REQUEST, "application/vnd.ekstep.html-archive", "contentInDraft"
-//                },
-//                new Object[]{
-//                        ContentV3Scenario.TEST_UPDATE_RESOURCE_H5P_CONTENT_WITH_VALID_REQUEST, "application/vnd.ekstep.h5p-archive", "contentInDraft"
-//                },
-//                new Object[]{
-//                        ContentV3Scenario.TEST_UPDATE_RESOURCE_YOUTUBE_CONTENT_WITH_VALID_REQUEST, "video/x-youtube", "contentInDraft"
-//                },
-//                new Object[]{
-//                        ContentV3Scenario.TEST_UPDATE_CONTENT_WITH_NEW_FRAMEWORK, "application/pdf", "contentInDraft"
-//                },
-//                new Object[]{
-//                        ContentV3Scenario.TEST_UPDATE_CONTENT_STATUS_REVIEW, "application/pdf", "contentInReview"
-//                },
-//                new Object[]{
-//                        ContentV3Scenario.TEST_UPDATE_CONTENT_STATUS_FLAGREVIEW, "application/pdf", "contentInFlagReview"
-//                },
-//                new Object[]{
-//                        ContentV3Scenario.TEST_UPDATE_WITH_VALID_ECML, "application/pdf", "contentInDraft"
-//                },
+                new Object[]{
+                        ContentV3Scenario.TEST_UPDATE_RESOURCE_PDF_CONTENT_WITH_VALID_REQUEST, "application/pdf", "contentInDraft"
+                },
+                new Object[]{
+                        ContentV3Scenario.TEST_UPDATE_RESOURCE_ECML_CONTENT_WITH_VALID_REQUEST, "application/vnd.ekstep.ecml-archive", "contentInDraft"
+                },
+                new Object[]{
+                        ContentV3Scenario.TEST_UPDATE_RESOURCE_HTML_CONTENT_WITH_VALID_REQUEST, "application/vnd.ekstep.html-archive", "contentInDraft"
+                },
+                new Object[]{
+                        ContentV3Scenario.TEST_UPDATE_RESOURCE_H5P_CONTENT_WITH_VALID_REQUEST, "application/vnd.ekstep.h5p-archive", "contentInDraft"
+                },
+                new Object[]{
+                        ContentV3Scenario.TEST_UPDATE_RESOURCE_YOUTUBE_CONTENT_WITH_VALID_REQUEST, "video/x-youtube", "contentInDraft"
+                },
+                new Object[]{
+                        ContentV3Scenario.TEST_UPDATE_CONTENT_WITH_NEW_FRAMEWORK, "application/pdf", "contentInDraft"
+                },
+                new Object[]{
+                        ContentV3Scenario.TEST_UPDATE_CONTENT_STATUS_REVIEW, "application/pdf", "contentInReview"
+                },
+                new Object[]{
+                        ContentV3Scenario.TEST_UPDATE_CONTENT_STATUS_FLAGREVIEW, "application/pdf", "contentInFlagReview"
+                },
+                new Object[]{
+                        ContentV3Scenario.TEST_UPDATE_WITH_VALID_ECML, "application/pdf", "contentInDraft"
+                },
         };
     }
 
