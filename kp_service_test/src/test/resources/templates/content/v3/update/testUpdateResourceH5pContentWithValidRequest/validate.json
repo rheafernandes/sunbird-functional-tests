@@ -1,7 +1,7 @@
 {
   "id": "ekstep.content.find",
   "ver": "3.0",
-  "ts": "@ignore@",
+  "ts": "@matchesDatePattern('yyyy-MM-dd')@",
   "params": {
     "resmsgid": "@ignore@",
     "msgid": null,
@@ -23,18 +23,18 @@
       ],
       "mimeType": "application/vnd.ekstep.h5p-archive",
       "idealScreenSize": "normal",
-      "createdOn": "@ignore@",
+      "createdOn": "@matchesDatePattern('yyyy-MM-dd')@",
       "appId": "@ignore@",
       "contentDisposition": "inline",
       "contentEncoding": "gzip",
       "lastUpdatedOn":"@ignore@",
       "contentType": "Resource",
       "dialcodeRequired": "No",
-      "identifier": "@ignore@",
+      "identifier": "${contentIdVal}",
       "audience": [
         "Learner"
       ],
-      "lastStatusChangedOn": "@ignore@",
+      "lastStatusChangedOn": "@matchesDatePattern('yyyy-MM-dd')@",
       "visibility": "Default",
       "os": [
         "All"

@@ -33,7 +33,7 @@
       "contentEncoding": "identity",
       "contentType": "Resource",
       "lastUpdatedBy": "KP-Tester",
-      "identifier": "@ignore@",
+      "identifier": "${contentIdVal}",
       "audience": [
         "Learner"
       ],
@@ -49,7 +49,7 @@
       ],
       "prevState": "Draft",
       "license": "Creative Commons Attribution (CC BY)",
-      "lastPublishedOn": "@ignore@",
+      "lastPublishedOn": "@matchesDatePattern('yyyy-MM-dd')@",
       "size": "@isNumber()@",
       "name": "KP Integration Test Content",
       "status": "Retired",
@@ -59,18 +59,18 @@
         "newKp-flags"
       ],
       "description": "KP Integration Test Content",
-      "lastFlaggedOn": "@ignore@",
+      "lastFlaggedOn": "@matchesDatePattern('yyyy-MM-dd')@",
       "streamingUrl": "@ignore@",
       "flaggedBy": [
         "KP-Tester"
       ],
       "idealScreenSize": "normal",
-      "createdOn": "@ignore@",
+      "createdOn": "@matchesDatePattern('yyyy-MM-dd')@",
       "contentDisposition": "inline",
-      "lastUpdatedOn": "@ignore@",
+      "lastUpdatedOn": "@matchesDatePattern('yyyy-MM-dd')@",
       "SYS_INTERNAL_LAST_UPDATED_ON": "@ignore@",
       "dialcodeRequired": "No",
-      "lastStatusChangedOn": "@ignore@",
+      "lastStatusChangedOn": "@matchesDatePattern('yyyy-MM-dd')@",
       "flagReasons": [
         "Copyright Violation"
       ],

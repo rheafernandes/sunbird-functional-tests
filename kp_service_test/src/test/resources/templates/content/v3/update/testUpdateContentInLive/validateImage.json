@@ -1,7 +1,7 @@
 {
   "id": "ekstep.content.find",
   "ver": "3.0",
-  "ts": "@ignore@",
+  "ts": "@matchesDatePattern('yyyy-MM-dd')@",
   "params": {
     "resmsgid": "@ignore@",
     "msgid": null,
@@ -32,20 +32,20 @@
       "mimeType": "application/pdf",
       "streamingUrl": "@ignore@",
       "idealScreenSize": "normal",
-      "createdOn": "@ignore@",
+      "createdOn": "@matchesDatePattern('yyyy-MM-dd')@",
       "appId": "@ignore@",
       "contentDisposition": "inline",
       "contentEncoding": "identity",
-      "lastUpdatedOn": "@ignore@",
+      "lastUpdatedOn": "@matchesDatePattern('yyyy-MM-dd')@",
       "artifactUrl": "@ignore@",
       "SYS_INTERNAL_LAST_UPDATED_ON": "@ignore@",
       "contentType": "Resource",
       "dialcodeRequired": "No",
-      "identifier": "@ignore@",
+      "identifier": "${contentIdVal}",
       "audience": [
         "Learner"
       ],
-      "lastStatusChangedOn": "@ignore@",
+      "lastStatusChangedOn": "@matchesDatePattern('yyyy-MM-dd')@",
       "visibility": "Default",
       "os": [
         "All"
@@ -67,7 +67,7 @@
       "s3Key": "@ignore@",
       "framework": "NCF",
       "size":  "@isNumber()@",
-      "lastPublishedOn": "@ignore@",
+      "lastPublishedOn": "@matchesDatePattern('yyyy-MM-dd')@",
       "compatibilityLevel": "@isNumber()@",
       "name": "KP-Updated-pdf",
       "status": "Draft"

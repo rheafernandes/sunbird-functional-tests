@@ -23,19 +23,19 @@
       ],
       "mimeType": "application/vnd.ekstep.content-collection",
       "idealScreenSize": "normal",
-      "createdOn": "@ignore@",
+      "createdOn": "@matchesDatePattern('yyyy-MM-dd')@",
       "children": null,
       "appId": "@ignore@",
       "contentDisposition": "inline",
       "contentEncoding": "gzip",
-      "lastUpdatedOn": "@ignore@",
+      "lastUpdatedOn": "@matchesDatePattern('yyyy-MM-dd')@",
       "contentType": "Textbook",
       "dialcodeRequired": "No",
       "identifier": "${rootId}",
       "audience": [
         "Learner"
       ],
-      "lastStatusChangedOn": "@ignore@",
+      "lastStatusChangedOn": "@matchesDatePattern('yyyy-MM-dd')@",
       "visibility": "Default",
       "os": [
         "All"

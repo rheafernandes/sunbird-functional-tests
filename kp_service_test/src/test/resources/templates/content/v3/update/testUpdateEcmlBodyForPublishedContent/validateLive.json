@@ -1,7 +1,7 @@
 {
   "id": "ekstep.content.find",
   "ver": "3.0",
-  "ts": "@ignore@",
+  "ts": "@matchesDatePattern('yyyy-MM-dd')@",
   "params": {
     "resmsgid": "@ignore@",
     "msgid": null,
@@ -32,12 +32,12 @@
       },
       "mimeType": "application/vnd.ekstep.ecml-archive",
       "idealScreenSize": "normal",
-      "createdOn": "@ignore@",
+      "createdOn": "@matchesDatePattern('yyyy-MM-dd')@",
       "appId": "@ignore@",
       "contentDisposition": "inline",
       "artifactUrl": "@ignore@",
       "contentEncoding": "gzip",
-      "lastUpdatedOn": "@ignore@",
+      "lastUpdatedOn": "@matchesDatePattern('yyyy-MM-dd')@",
       "SYS_INTERNAL_LAST_UPDATED_ON": "@ignore@",
       "contentType": "Resource",
       "dialcodeRequired": "No",
@@ -45,7 +45,7 @@
       "audience": [
         "Learner"
       ],
-      "lastStatusChangedOn": "@ignore@",
+      "lastStatusChangedOn": "@matchesDatePattern('yyyy-MM-dd')@",
       "visibility": "Default",
       "os": [
         "All"
@@ -63,7 +63,7 @@
       "s3Key": "@ignore@",
       "framework": "NCF",
       "size":  "@isNumber()@",
-      "lastPublishedOn": "@ignore@",
+      "lastPublishedOn": "@matchesDatePattern('yyyy-MM-dd')@",
       "compatibilityLevel": "@isNumber()@",
       "name": "KP Integration Test Content",
       "status": "Live",

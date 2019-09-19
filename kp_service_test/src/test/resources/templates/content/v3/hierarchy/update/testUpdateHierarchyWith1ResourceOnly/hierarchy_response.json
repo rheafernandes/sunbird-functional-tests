@@ -23,22 +23,22 @@
       ],
       "mimeType": "application/vnd.ekstep.content-collection",
       "idealScreenSize": "normal",
-      "createdOn": "@ignore@",
+      "createdOn": "@matchesDatePattern('yyyy-MM-dd')@",
       "children": [
         {
           "parent": "${rootId}",
           "identifier": "@ignore@",
-          "lastStatusChangedOn": "@ignore@",
+          "lastStatusChangedOn": "@matchesDatePattern('yyyy-MM-dd')@",
           "code": "2cb4d698-dc19-4f0c-9990-96f49daff753",
           "visibility": "Parent",
           "description": "@ignore@",
           "index": 1,
           "mimeType": "application/vnd.ekstep.content-collection",
-          "createdOn": "@ignore@",
+          "createdOn": "@matchesDatePattern('yyyy-MM-dd')@",
           "versionKey": "@ignore@",
           "depth": 1,
           "name": "@ignore@",
-          "lastUpdatedOn": "@ignore@",
+          "lastUpdatedOn": "@matchesDatePattern('yyyy-MM-dd')@",
           "contentType": "TextBookUnit",
           "status": "Draft"
         }
@@ -46,14 +46,14 @@
       "appId": "@ignore@",
       "contentDisposition": "inline",
       "contentEncoding": "gzip",
-      "lastUpdatedOn": "@ignore@",
+      "lastUpdatedOn": "@matchesDatePattern('yyyy-MM-dd')@",
       "contentType": "Textbook",
       "dialcodeRequired": "No",
       "identifier": "${rootId}",
       "audience": [
         "Learner"
       ],
-      "lastStatusChangedOn": "@ignore@",
+      "lastStatusChangedOn": "@matchesDatePattern('yyyy-MM-dd')@",
       "visibility": "Default",
       "os": [
         "All"
