@@ -389,5 +389,7 @@ public class ContentV3Scenario {
     public static final String TEST_UPDATE_HIERARCHY_WITH_INVALID_REQUEST = "testUpdateHierarchyWithInvalidRequest";
     public static final String TEST_UPDATE_HIERARCHY_WITHOUT_UNIT_OR_RESOURCE = "testUpdateHierarchyWithOutUnitOrResource";
     public static final String TEST_UPDATE_HIERARCHY_WITH_1RESOURCE_ONLY = "testUpdateHierarchyWith1ResourceOnly";
+    public static final String TEST_UPDATE_HIERARCHY_WITH_MULTILEVEL_UNITS = "testUpdateHierarchyWithMultilevelUnitAnd1Resource";
+    public static final String TEST_UPDATE_HIERARCHY_WITH_1UNIT_1COLLECTION = "testUpdateHierarchyWith1Unit1CollectionValidRequest";
 }
 
