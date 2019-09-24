@@ -3,6 +3,9 @@ package org.sunbird.kp.test.util;
 import com.consol.citrus.context.TestContext;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectWriter;
+import com.mashape.unirest.http.HttpResponse;
+import com.mashape.unirest.http.Unirest;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.collections4.MapUtils;
 import org.apache.commons.lang.StringUtils;
@@ -12,12 +15,16 @@ import org.sunbird.kp.test.common.APIUrl;
 import org.sunbird.kp.test.common.AppConfig;
 import org.sunbird.kp.test.common.BaseCitrusTestRunner;
 import org.sunbird.kp.test.common.Constant;
+import org.sunbird.kp.test.common.Response;
 import org.sunbird.kp.test.common.TestActionUtil;
 
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
 import java.util.function.Supplier;
 
@@ -31,6 +38,7 @@ public class ContentUtil {
     private static final String API_KEY = AppConfig.config.getString("kp_api_key");
     private static final Boolean IS_USER_AUTH_REQUIRED = AppConfig.config.getBoolean("user_auth_enable");
     private static ObjectMapper objectMapper = new ObjectMapper();
+    private static ObjectWriter objectWriter = objectMapper.writer().withDefaultPrettyPrinter();
 
     private static final String CONTENT_PAYLOAD_DIR = "templates/payload/content";
 
@@ -989,6 +997,77 @@ public class ContentUtil {
         }
         return result;
     }
+
+    /**
+     * Method creates, populates and modifies the assertions for validate.json.
+     * TODO: MUST be extended for response.json
+     * @param dirIdMap (Mapping of directoryNames and ContentIds)
+     * @param validationFileName (Should be validate.json or response.json)
+     */
+    public static void createDirectoriesForTestCases(Map<String, String> dirIdMap, String validationFileName, String templateDir)  {
+        Set<String> directoryNames = dirIdMap.keySet();
+        String mainDir = System.getProperty("user.dir") + "/src/test/resources/" + templateDir;
+        directoryNames.forEach(dir -> {
+            File file = new File(mainDir +"/"+ dir);
+            file.mkdir();
+            if (file.isDirectory()) {
+                File responseFile = new File(file.getPath() + "/" + "response.json");
+                File requestFile = new File(mainDir + "/" + dir + "/" + "request.json");
+                File validateFile = new File(mainDir + "/" + dir + "/" + "validate.json");
+                try {
+                    responseFile.createNewFile();
+                    requestFile.createNewFile();
+                    validateFile.createNewFile();
+                    populateDataIntoResponseFiles(mainDir, dir, validationFileName, dirIdMap.get(dir));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    System.out.println("No files are created");
+                }
+            }
+        });
+    }
+
+    private static void populateDataIntoResponseFiles(String mainDir, String directoryPath, String fileName, String contentId ) {
+        File file = new File(mainDir + "/" + directoryPath);
+        if (file.isDirectory()) {
+            try {
+                FileWriter fileWriter = new FileWriter(file.getPath() + "/" + fileName);
+                HttpResponse<String> jsonNode = Unirest.get("http://11.2.4.22:8080/learning-service/content/v3/read/" + contentId + "").asString();
+                Response response = objectMapper.readValue(jsonNode.getBody(), Response.class);
+                fileWriter.write(formGeneralAssertions(response));
+                fileWriter.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private static String formGeneralAssertions(Response response) {
+        String oldString = "";
+        try {
+            oldString = objectWriter.writeValueAsString(response);
+            String updatedString = oldString.replaceAll("\\d{4}-\\d{2}-\\d{2}T[a-zA-Z0-9:.+]+", "@matchesDatePattern('yyyy-MM-dd')@" )
+                    .replaceAll("\"resmsgid\"\\W?:\\W?\"[0-9a-zA-Z-]+\"", "\"resmsgid\" : \"@ignore@\"")
+                    .replaceAll("\"previewUrl\"\\W?:\\W\"[a-zA-Z://._0-9-]+\"","\"previewUrl\" : \"@ignore@\"")
+                    .replaceAll("\"downloadUrl\"\\W?:\\W\"[a-zA-Z://._0-9-]+\"","\"downloadUrl\" : \"@ignore@\"")
+                    .replaceAll("\"ecarUrl\"\\W?:\\W\"[a-zA-Z://._0-9-]+\"","\"ecarUrl\" : \"@ignore@\"")
+                    .replaceAll("\"streamingUrl\"\\W?:\\W\"[a-zA-Z://._0-9-]+\"","\"streamingUrl\" :\"@ignore@\"")
+                    .replaceAll("\"artifactUrl\"\\W?:\\W\"[a-zA-Z://._0-9-]+\"","\"artifactUrl\" : \"@ignore@\"")
+                    .replaceAll("\"s3Key\"\\W?:\\W\"[a-zA-Z:/._0-9-]+\"","\"s3Key\" : \"@ignore@\"")
+                    .replaceAll("\"appId\"\\W?:\\W?\"[a-zA-Z.-]+\"","\"appId\" : \"@ignore@\"")
+                    .replaceAll("\"consumerId\"\\W?:\\W?\"[a-zA-Z0-9-]+\"","\"consumerId\" : \"@ignore@\"")
+                    .replaceAll("KP_FT_\\d+","\\${contentIdVal}")
+                    .replaceAll("\\s\\d+\\.\\d+","\"@isNumber()@\"")
+                    .replaceAll("\\s\\d", "\"@isNumber()@\"")
+                    .replaceAll("\"versionKey\"\\W?:\\W\"\\d+\"","\"versionKey\" : \"@ignore@\"");
+            System.out.println(updatedString);
+            return updatedString;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return oldString;
+    }
+
 
     public static Map<String, Supplier<Map<String, Object>>> getContentWorkflowMap(BaseCitrusTestRunner runner, String contentId, String mimeType, Map<String, Object> headers) {
         return new HashMap<String, Supplier<Map<String, Object>>>() {
