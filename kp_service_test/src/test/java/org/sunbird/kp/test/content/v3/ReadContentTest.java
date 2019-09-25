@@ -2,29 +2,18 @@ package org.sunbird.kp.test.content.v3;
 
 import com.consol.citrus.annotations.CitrusTest;
 import com.consol.citrus.testng.CitrusParameters;
-import com.mashape.unirest.http.HttpResponse;
-import com.mashape.unirest.http.JsonNode;
-import com.mashape.unirest.http.Unirest;
-import org.apache.commons.io.FileUtils;
 import org.springframework.http.HttpStatus;
 import org.sunbird.kp.test.common.APIUrl;
 import org.sunbird.kp.test.common.BaseCitrusTestRunner;
 import org.sunbird.kp.test.common.Constant;
-import org.sunbird.kp.test.common.Response;
 import org.sunbird.kp.test.util.ContentUtil;
+import org.sunbird.kp.test.util.TestSetupUtil;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 /**
  * Integration Test Cases for Content Read API
@@ -38,10 +27,10 @@ public class ReadContentTest extends BaseCitrusTestRunner {
 
     //TODO:Comment after files are created and populated
 
-//    @AfterClass
-//    public static void populateAssertionData() {
-//        ContentUtil.createDirectoriesForTestCases(dirIdMap, "response.json", TEMPLATE_DIR);
-//    }
+    @AfterClass
+    public static void populateAssertionData() {
+        TestSetupUtil.createDirectoriesForTestCases(dirIdMap, "response.json", TEMPLATE_DIR);
+    }
 
     @Test(dataProvider = "readResourceContentWithWorkflow")
     @CitrusParameters({"testName", "workflow"})
