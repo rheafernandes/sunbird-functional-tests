@@ -95,7 +95,14 @@ public class ContentV3Scenario {
             "testReadResourceContentWithValidIdentifier";
     public static final String TEST_READ_RESOURCE_CONTENT_WITH_INVALID_IDENTIFIER =
             "testReadResourceContentWithInvalidIdentifier";
-
+    public static final String TEST_READ_RESOURCE_CONTENT_WITH_INVALID_MODE = "testReadContentWithInvalidMode";
+    public static final String TEST_READ_RESOURCE_CONTENT_WITH_EMPTY_MODE = "testReadContentWithEmptyMode";
+    public static final String TEST_READ_RESOURCE_CONTENT_WITH_EMPTY_FIELDS = "testReadContentWithEmptyFields";
+    public static final String TEST_READ_RESOURCE_CONTENT_WITH_EDIT_MODE = "testReadContentWithEditMode";
+    public static final String TEST_READ_RESOURCE_CONTENT_WITH_FIELDS = "testReadResourceContentWithFields";
+    public static final String TEST_READ_RESOURCE_CONTENT_WITH_BODY_FIELDS = "testReadResourceContentWithBodyFields";
+    public static final String TEST_READ_RESOURCE_CONTENT_WITH_INVALID_FIELDS = "testReadResourceContentWithInvalidFields";
+    public static final String TEST_READ_RESOURCE_CONTENT_WITH_FIELDS_AND_MODE = "testReadResourceContentWithFieldsAndMode";
 
     // Scenario's for upload Content  API
     public static final String TEST_UPLOAD_CONTENT_IN_LIVE =
