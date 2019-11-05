@@ -277,7 +277,7 @@ public class ContentV3Scenario {
     public static final String TEST_DISCARD_CONTENT_STATUS_DRAFT =
             "testDiscardStatusDraft";
     public static final String TEST_DISCARD_COLLECTION_STATUS_DRAFT =
-            "testPublishCollectionWithResourceContent";
+            "testDiscardCollectionStatusDraft";
     public static final String TEST_DISCARD_CONTENT_STATUS_REVIEW =
             "testDiscardStatusReview";
     public static final String TEST_DISCARD_CONTENT_STATUS_FLAGGED =

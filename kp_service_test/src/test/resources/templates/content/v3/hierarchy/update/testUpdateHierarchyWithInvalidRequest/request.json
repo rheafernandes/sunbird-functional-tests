@@ -1,21 +1,37 @@
 {
   "request": {
-    "data": {
-      "hierarchy": {
-        "${rootId}": {
-          "contentType": "TextBook",
-          "children": [
-            "2cb4d698-dc19-4f0c-9990-96f49daff753"
-          ],
-          "root": true
-        },
-        "2cb4d698-dc19-4f0c-9990-96f49daff753": {
+  "data": {
+    "nodesModified": {
+      "${rootId}": {
+        "isNew":false,
+        "root":true
+      },
+      "b9a50833-eff6-4ef5-a2a4-2413f2d51f6c": {
+        "isNew": true,
+        "root": false,
+        "metadata": {
+          "mimeType": "application/vnd.ekstep.content-collection",
           "contentType": "TextBookUnit",
-          "children": ["${resourceId}"],
-          "root": false
+          "code": "b9a50833-eff6-4ef5-a2a4-2413f2d51f6c",
+          "name": "Test_CourseUnit_name_8313773787",
+          "description": "Test_CourseUnit_desc_2576463004"
         }
-
+      }
+    },
+    "hierarchy": {
+      "${rootId}": {
+        "children": [
+          "b9a50833-eff6-4ef5-a2a4-2413f2d51f6d"
+        ],
+        "root": true
+      },
+      "b9a50833-eff6-4ef5-a2a4-2413f2d51f6d": {
+        "children": [
+          "${resourceId}"
+        ],
+        "root": false
       }
     }
   }
+}
 }
