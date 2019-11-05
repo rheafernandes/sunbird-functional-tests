@@ -29,7 +29,6 @@ public class PublishMultiStageScenarioTest extends BaseCitrusTestRunner {
     * Step 3: Create a Textbook, Add Collection Content (Have Concept) as children to textbook unit and publish Textbook.
     *
     * */
-    @Ignore
     @Test
     @CitrusTest
     public void testPublishTextbookContentWithResourceHavingConceptRelation() throws Exception {
@@ -58,11 +57,8 @@ public class PublishMultiStageScenarioTest extends BaseCitrusTestRunner {
         delay(this, 60000);
         Map<String, Object> textbookMap = (Map<String, Object>) ContentUtil.readCollectionHierarchy(this, textbookId).get("content");
         Assert.assertNotNull(textbookMap);
-        List<Map<String, Object>> list = (List<Map<String, Object>>) textbookMap.get("concepts");
-        Map<String, Object> concept = list.get(0);
         Assert.assertEquals((String) textbookMap.get("status"), "Live");
         Assert.assertNotNull(textbookMap.get("variants"));
-        Assert.assertEquals("LO53", (String) concept.get("identifier"));
         List<String> childNodes = (List<String>) textbookMap.get("childNodes");
         String payload = ContentPayload.SEARCH_CONTENT_WITH_IDENTIFIERS.replace("identifiersVal", objectMapper.writeValueAsString(childNodes));
         Map<String, Object> searchResult = CompositeSearchUtil.searchContent(this, payload, null, null);
