@@ -6,7 +6,6 @@ import org.sunbird.kp.test.util.CompositeSearchUtil;
 import org.sunbird.kp.test.util.ContentUtil;
 import org.sunbird.kp.test.util.ContentPayload;
 import org.testng.Assert;
-import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
 import java.util.List;
