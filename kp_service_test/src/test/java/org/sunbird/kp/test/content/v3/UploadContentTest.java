@@ -199,7 +199,7 @@ public class UploadContentTest extends BaseCitrusTestRunner {
     }
 
     @Test(dataProvider = "uploadResourceContentInWorkflow")
-    @CitrusParameters({"testName","userType", "workflow", "status"})
+    @CitrusParameters({"testName","userType", "workflow"})
     @CitrusTest
     public void testUploadResourceContentInWorkflow(String testName, String userType, String workflow) {
         getAuthToken(this, userType);
