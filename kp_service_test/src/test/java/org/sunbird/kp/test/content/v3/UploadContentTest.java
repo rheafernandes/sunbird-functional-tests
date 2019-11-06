@@ -201,7 +201,7 @@ public class UploadContentTest extends BaseCitrusTestRunner {
     @Test(dataProvider = "uploadResourceContentInWorkflow")
     @CitrusParameters({"testName","userType", "workflow", "status"})
     @CitrusTest
-    public void testUploadResourceContentInWorkflow(String testName, String userType, String workflow, String status) {
+    public void testUploadResourceContentInWorkflow(String testName, String userType, String workflow) {
         getAuthToken(this, userType);
         String contentId = (String) ContentUtil.prepareResourceContent(workflow,this, null, "application/pdf", null).get("content_id");
         Map<String, Object> resourceMap = (Map<String, Object>) ContentUtil.readContent(this, contentId, "edit", null).get("content");
