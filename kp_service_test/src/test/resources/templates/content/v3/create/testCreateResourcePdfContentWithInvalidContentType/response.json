@@ -1,7 +1,7 @@
 {
   "id": "ekstep.learning.content.create",
   "ver": "3.0",
-  "ts": "@ignore@",
+  "ts": "@matchesDatePattern('yyyy-MM-dd')@",
   "params": {
     "resmsgid": "@ignore@",
     "msgid": null,
@@ -12,7 +12,7 @@
   "responseCode": "CLIENT_ERROR",
   "result": {
     "messages": [
-      "Metadata contentType should be one of: [Resource, Collection, TextBook, LessonPlan, Course, Template, Asset, Plugin, LessonPlanUnit, CourseUnit, TextBookUnit, TeachingMethod, PedagogyFlow, FocusSpot, LearningOutcomeDefinition, PracticeQuestionSet, CuriosityQuestionSet, MarkingSchemeRubric, ExplanationResource, ExperientialResource]"
+      "Metadata contentType should be one of: [Resource, Collection, TextBook, LessonPlan, Course, Template, Asset, Plugin, LessonPlanUnit, CourseUnit, TextBookUnit, TeachingMethod, PedagogyFlow, FocusSpot, LearningOutcomeDefinition, PracticeQuestionSet, CuriosityQuestionSet, MarkingSchemeRubric, ExplanationResource, ExperientialResource, ConceptMap, SelfAssess]"
     ]
   }
 }

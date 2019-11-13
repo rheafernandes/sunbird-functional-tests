@@ -15,17 +15,17 @@
       "ownershipType": [
         "createdBy"
       ],
-      "code": "kp.ft.resource.pdf",
+      "code": "kp.ft.resource.youtube",
       "channel": "channel-01",
       "language": [
         "English"
       ],
-      "mimeType": "application/pdf",
+      "mimeType": "video/x-youtube",
       "idealScreenSize": "normal",
       "createdOn": "@matchesDatePattern('yyyy-MM-dd')@",
       "appId": "@ignore@",
       "consumerId": "@ignore@",
-      "contentDisposition": "inline",
+      "contentDisposition": "online",
       "contentEncoding": "identity",
       "lastUpdatedOn": "@matchesDatePattern('yyyy-MM-dd')@",
       "contentType": "Resource",
