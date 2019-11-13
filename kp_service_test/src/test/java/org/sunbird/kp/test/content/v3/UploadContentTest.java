@@ -246,28 +246,6 @@ public class UploadContentTest extends BaseCitrusTestRunner {
         };
     }
 
-    @Test(dataProvider = "uploadResourceContentInWorkflow")
-    @CitrusParameters({"testName","userType", "workflow"})
-    @CitrusTest
-    public void testUploadResourceContentInWorkflow(String testName, String userType, String workflow) {
-        getAuthToken(this, userType);
-        String contentId = (String) ContentUtil.prepareResourceContent(workflow,this, null, "application/pdf", null).get("content_id");
-        Map<String, Object> resourceMap = (Map<String, Object>) ContentUtil.readContent(this, contentId, "edit", null).get("content");
-        String oldArtifactUrl = "artifactUrl";
-        if(!workflow.equalsIgnoreCase(WorkflowConstants.CONTENT_IN_RETIRED_STATE)){
-            oldArtifactUrl = resourceMap.get("artifactUrl").toString();
-        }
-
-        setContext(this, contentId, "application/pdf", ".pdf", null, FILE_URL);
-        performMultipartTest(this, TEMPLATE_DIR, testName, APIUrl.UPLOAD_CONTENT + contentId, null, Constant.REQUEST_FORM_DATA, HttpStatus.OK, null, null);
-        Map<String, Object> newResourceMap = (Map<String, Object>) ContentUtil.readContent(this, contentId, "edit", null).get("content");
-        String newArtifactUrl = newResourceMap.get("artifactUrl").toString();
-
-        Assert.assertNotEquals(oldArtifactUrl, newArtifactUrl);
-
-
-    }
-
     @DataProvider(name = "uploadResourceContentInWorkflow")
     public Object[][] uploadResourceContentInWorkflow() {
         return new Object[][]{
