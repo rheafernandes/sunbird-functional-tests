@@ -95,6 +95,50 @@ public class ContentV3Scenario {
             "testReadResourceContentWithValidIdentifier";
     public static final String TEST_READ_RESOURCE_CONTENT_WITH_INVALID_IDENTIFIER =
             "testReadResourceContentWithInvalidIdentifier";
+    public static final String TEST_READ_PDF_CONTENT_AFTER_UPLOAD =
+            "testReadPdfContentAfterUpload";
+    public static final String TEST_READ_PDF_CONTENT_AFTER_PUBLISH =
+            "testReadPdfContentAfterPublish";
+    public static final String TEST_READ_PDF_CONTENT_AFTER_UNLISTED_PUBLISH =
+            "testReadPdfContentAfterUnlistedPublish";
+    public static final String TEST_READ_PDF_CONTENT_AFTER_UPDATE =
+            "testReadPdfContentAfterUpdate";
+    public static final String TEST_READ_PDF_CONTENT_AFTER_REVIEW =
+            "testReadPdfContentAfterReview";
+    public static final String TEST_READ_PDF_CONTENT_AFTER_REJECT =
+            "testReadPdfContentAfterReject";
+    public static final String TEST_READ_PDF_CONTENT_AFTER_FLAG =
+            "testReadPdfContentAfterFlag";
+    public static final String TEST_READ_PDF_CONTENT_AFTER_FLAG_REJECT =
+            "testReadPdfContentAfterFlagReject";
+    public static final String TEST_READ_PDF_CONTENT_AFTER_FLAG_ACCEPT =
+            "testReadPdfContentAfterFlagAccept";
+    public static final String TEST_READ_PDF_CONTENT_AFTER_DISCARD =
+            "testReadPdfContentAfterDiscard";
+    public static final String TEST_READ_PDF_CONTENT_AFTER_RETIRE =
+            "testReadPdfContentAfterRetire";
+    public static final String TEST_READ_ECML_CONTENT_IN_DRAFT =
+            "testReadEcmlContentInDraft";
+    public static final String TEST_READ_HTML_CONTENT_IN_DRAFT =
+            "testReadHtmlContentInDraft";
+    public static final String TEST_READ_H5P_CONTENT_IN_DRAFT =
+            "testReadH5pContentInDraft";
+    public static final String TEST_READ_YOUTUBE_CONTENT_IN_DRAFT =
+            "testReadYoutubeContentInDraft";
+    public static final String TEST_READ_VIDEO_MP4_CONTENT_IN_DRAFT =
+            "testReadMp4ContentInDraft";
+    public static final String TEST_READ_VIDEO_MPEG_CONTENT_IN_DRAFT =
+            "testReadMpegContentInDraft";
+    public static final String TEST_READ_IMAGE_JPEG_IN_DRAFT =
+            "testReadJpegContentInDraft";
+    public static final String TEST_READ_IMAGE_PNG_IN_DRAFT =
+            "testReadPngContentInDraft";
+    public static final String TEST_READ_PLUGIN_IN_DRAFT =
+            "testReadPluginContentInDraft";
+
+
+
+
 
 
     // Scenario's for upload Content  API
@@ -407,5 +451,7 @@ public class ContentV3Scenario {
     public static final String TEST_UPDATE_HIERARCHY_WITH_INVALID_REQUEST = "testUpdateHierarchyWithInvalidRequest";
     public static final String TEST_UPDATE_HIERARCHY_WITHOUT_UNIT_OR_RESOURCE = "testUpdateHierarchyWithOutUnitOrResource";
     public static final String TEST_UPDATE_HIERARCHY_WITH_1RESOURCE_ONLY = "testUpdateHierarchyWith1ResourceOnly";
+    public static final String TEST_UPDATE_HIERARCHY_WITH_MULTILEVEL_UNITS = "testUpdateHierarchyWithMultilevelUnitAnd1Resource";
+    public static final String TEST_UPDATE_HIERARCHY_WITH_1UNIT_1COLLECTION = "testUpdateHierarchyWith1Unit1CollectionValidRequest";
 }
 

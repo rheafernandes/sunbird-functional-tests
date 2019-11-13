@@ -3,6 +3,7 @@ package org.sunbird.kp.test.util;
 import com.consol.citrus.context.TestContext;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectWriter;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.collections4.MapUtils;
 import org.apache.commons.lang.StringUtils;
@@ -31,6 +32,7 @@ public class ContentUtil {
     private static final String API_KEY = AppConfig.config.getString("kp_api_key");
     private static final Boolean IS_USER_AUTH_REQUIRED = AppConfig.config.getBoolean("user_auth_enable");
     private static ObjectMapper objectMapper = new ObjectMapper();
+    private static ObjectWriter objectWriter = objectMapper.writer().withDefaultPrettyPrinter();
 
     private static final String CONTENT_PAYLOAD_DIR = "templates/payload/content";
 
