@@ -16,7 +16,7 @@
         "createdBy"
       ],
       "code": "kp.ft.resource.ecml",
-      "channel": "channel-01",
+      "channel": "@ignore@",
       "description": "KP Integration Test Content",
       "language": [
         "English"
@@ -24,14 +24,14 @@
       "mimeType": "application/vnd.ekstep.ecml-archive",
       "idealScreenSize": "normal",
       "createdOn": "@matchesDatePattern('yyyy-MM-dd')@",
-      "appId": "app-01",
+      "appId": "@ignore@",
       "contentDisposition": "inline",
       "artifactUrl": "@ignore@",
       "contentEncoding": "gzip",
       "lastUpdatedOn": "@matchesDatePattern('yyyy-MM-dd')@",
       "dialcodeRequired": "No",
       "contentType": "Resource",
-      "identifier": "@ignore@",
+      "identifier": "${contentIdVal}",
       "audience": [
         "Learner"
       ],
@@ -45,7 +45,7 @@
       "osId": "org.ekstep.quiz.app",
       "languageCode": "en",
       "version": 2,
-      "versionKey": "@ignore@",
+      "versionKey": "@isNumber()@",
       "idealScreenDensity": "hdpi",
       "license": "Creative Commons Attribution (CC BY)",
       "s3Key": "@ignore@",

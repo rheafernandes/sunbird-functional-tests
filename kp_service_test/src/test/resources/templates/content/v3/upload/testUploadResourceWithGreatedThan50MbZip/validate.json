@@ -30,7 +30,7 @@
       "lastUpdatedOn": "@matchesDatePattern('yyyy-MM-dd')@",
       "dialcodeRequired": "No",
       "contentType": "Resource",
-      "identifier": "@ignore@",
+      "identifier": "${contentIdVal}",
       "audience": [
         "Learner"
       ],
@@ -44,7 +44,7 @@
       "osId": "org.ekstep.quiz.app",
       "languageCode": "en",
       "version": 2,
-      "versionKey": "@ignore@",
+      "versionKey": "@isNumber()@",
       "idealScreenDensity": "hdpi",
       "license": "Creative Commons Attribution (CC BY)",
       "framework": "NCF",

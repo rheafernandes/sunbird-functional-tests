@@ -12,7 +12,7 @@
   "responseCode": "OK",
   "result": {
     "content": {
-      "identifier": "@ignore@",
+      "identifier": "${contentIdVal}",
       "name": "KP Integration Test Content",
       "status": "Live",
       "languageCode": []
