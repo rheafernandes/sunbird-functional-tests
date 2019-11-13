@@ -23,53 +23,34 @@
       ],
       "mimeType": "application/vnd.ekstep.content-collection",
       "idealScreenSize": "normal",
-      "createdOn": "@ignore@",
-      "children": [
-        {
-          "parent": "${rootId}",
-          "identifier": "@ignore@",
-          "lastStatusChangedOn": "@ignore@",
-          "code": "2cb4d698-dc19-4f0c-9990-96f49daff753",
-          "visibility": "Parent",
-          "description": "@ignore@",
-          "index": 1,
-          "mimeType": "application/vnd.ekstep.content-collection",
-          "createdOn": "@ignore@",
-          "versionKey": "@ignore@",
-          "depth": 1,
-          "name": "@ignore@",
-          "lastUpdatedOn": "@ignore@",
-          "contentType": "TextBookUnit",
-          "status": "Draft"
-        }
-      ],
+      "createdOn": "@matchesDatePattern('yyyy-MM-dd')@",
+      "children": null,
       "appId": "@ignore@",
       "contentDisposition": "inline",
       "contentEncoding": "gzip",
-      "lastUpdatedOn": "@ignore@",
+      "lastUpdatedOn": "@matchesDatePattern('yyyy-MM-dd')@",
       "contentType": "Textbook",
       "dialcodeRequired": "No",
       "identifier": "${rootId}",
       "audience": [
         "Learner"
       ],
-      "lastStatusChangedOn": "@ignore@",
+      "lastStatusChangedOn": "@matchesDatePattern('yyyy-MM-dd')@",
       "visibility": "Default",
       "os": [
         "All"
       ],
       "consumerId": "@ignore@",
-      "childNodes": "@ignore@",
       "mediaType": "content",
       "osId": "org.ekstep.quiz.app",
       "version": 2,
       "versionKey": "@ignore@",
       "license": "Creative Commons Attribution (CC BY)",
       "idealScreenDensity": "hdpi",
-      "depth": 0,
       "framework": "NCF",
-      "compatibilityLevel": 1.0,
-      "name": "KP Integration Test Collection Content",
+      "depth": 0,
+      "compatibilityLevel": "@isNumber()@",
+      "name": "TextBook Updated",
       "status": "Draft"
     }
   }
