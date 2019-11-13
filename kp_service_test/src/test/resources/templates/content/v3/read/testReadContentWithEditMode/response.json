@@ -1,0 +1,75 @@
+{
+  "id": "ekstep.content.find",
+  "ver": "3.0",
+  "ts": "@matchesDatePattern('yyyy-MM-dd')@",
+  "params": {
+    "resmsgid": "@ignore@",
+    "msgid": null,
+    "err": null,
+    "status": "successful",
+    "errmsg": null
+  },
+  "responseCode": "OK",
+  "result": {
+    "content": {
+      "ownershipType": [
+        "createdBy"
+      ],
+      "previewUrl": "@ignore@",
+      "code": "kp.ft.resource.ecml",
+      "channel": "channel-01",
+      "downloadUrl": "@ignore@",
+      "description": "KP-Updated Description",
+      "language": [
+        "English"
+      ],
+      "mimeType": "application/vnd.ekstep.ecml-archive",
+      "streamingUrl": "@ignore@",
+      "variants": {
+        "spine": {
+          "ecarUrl": "@ignore@",
+          "size": "@isNumber()@"
+        }
+      },
+      "idealScreenSize": "normal",
+      "publishComment": "OK",
+      "createdOn": "@matchesDatePattern('yyyy-MM-dd')@",
+      "contentDisposition": "inline",
+      "artifactUrl": "@ignore@",
+      "appId": "app-01",
+      "contentEncoding": "gzip",
+      "lastUpdatedOn": "@matchesDatePattern('yyyy-MM-dd')@",
+      "SYS_INTERNAL_LAST_UPDATED_ON": "@matchesDatePattern('yyyy-MM-dd')@",
+      "dialcodeRequired": "No",
+      "contentType": "Resource",
+      "lastUpdatedBy": "KP_FT_PUBLISHER",
+      "identifier": "${contentIdVal}",
+      "audience": [
+        "Learner"
+      ],
+      "lastStatusChangedOn": "@matchesDatePattern('yyyy-MM-dd')@",
+      "os": [
+        "All"
+      ],
+      "visibility": "Default",
+      "consumerId": "@ignore@",
+      "mediaType": "content",
+      "osId": "org.ekstep.quiz.app",
+      "lastPublishedBy": "KP_FT_PUBLISHER",
+      "languageCode": "en",
+      "version": "@isNumber()@",
+      "pkgVersion": "@isNumber()@",
+      "versionKey": "@isNumber()@",
+      "license": "Creative Commons Attribution (CC BY)",
+      "idealScreenDensity": "hdpi",
+      "framework": "NCF",
+      "s3Key": "@ignore@",
+      "size": "@isNumber()@",
+      "lastPublishedOn": "@matchesDatePattern('yyyy-MM-dd')@",
+      "compatibilityLevel": "@isNumber()@",
+      "name": "KP-Updated-Name",
+      "publisher": "KP_FT_PUBLISHER",
+      "status": "Draft"
+    }
+  }
+}

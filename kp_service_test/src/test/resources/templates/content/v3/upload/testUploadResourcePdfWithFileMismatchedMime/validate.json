@@ -15,40 +15,41 @@
       "ownershipType": [
         "createdBy"
       ],
-      "code": "${contentIdVal}",
+      "code": "kp.ft.resource.pdf",
       "channel": "channel-01",
+      "description": "KP Integration Test Content",
       "language": [
         "English"
       ],
-      "mimeType": "application/vnd.ekstep.plugin-archive",
+      "mimeType": "application/pdf",
       "idealScreenSize": "normal",
       "createdOn": "@matchesDatePattern('yyyy-MM-dd')@",
-      "appId": "@ignore@",
-      "consumerId": "@ignore@",
+      "appId": "app-01",
       "contentDisposition": "inline",
-      "contentEncoding": "gzip",
+      "contentEncoding": "identity",
       "lastUpdatedOn": "@matchesDatePattern('yyyy-MM-dd')@",
-      "contentType": "Plugin",
       "dialcodeRequired": "No",
+      "contentType": "Resource",
       "identifier": "${contentIdVal}",
-      "lastStatusChangedOn": "@matchesDatePattern('yyyy-MM-dd')@",
       "audience": [
         "Learner"
       ],
-      "visibility": "Default",
+      "lastStatusChangedOn": "@matchesDatePattern('yyyy-MM-dd')@",
       "os": [
         "All"
       ],
+      "visibility": "Default",
+      "consumerId": "@ignore@",
       "mediaType": "content",
-      "osId": "org.ekstep.launcher",
+      "osId": "org.ekstep.quiz.app",
       "languageCode": "en",
-     "version": "@isNumber()@",
-"versionKey": "@isNumber()@",
-      "license": "Creative Commons Attribution (CC BY)",
+      "version": "@isNumber()@",
+      "versionKey": "@isNumber()@",
       "idealScreenDensity": "hdpi",
+      "license": "Creative Commons Attribution (CC BY)",
       "framework": "NCF",
-      "compatibilityLevel": 1.0,
-      "name": "KP Integration Test Plugin",
+      "compatibilityLevel": "@isNumber()@",
+      "name": "KP Integration Test Content",
       "status": "Draft"
     }
   }

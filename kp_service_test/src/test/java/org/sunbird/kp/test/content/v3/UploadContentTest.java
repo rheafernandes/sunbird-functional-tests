@@ -129,6 +129,55 @@ public class UploadContentTest extends BaseCitrusTestRunner {
                 valParams,
                 RESPONSE_JSON
         );
+        //Read The Content And Validate
+            performGetTest(this, TEMPLATE_DIR, testName, APIUrl.READ_CONTENT + contentId, null,
+                    HttpStatus.OK, null, VALIDATE_JSON);
+    }
+
+    @Test(dataProvider = "uploadResourceContentWithFileInvalidId")
+    @CitrusParameters({"testName", "requestUrl", "httpStatusCode", "userType", "valParams", "mimeType", "extension", "fileName"})
+    @CitrusTest
+    public void testUploadResourceContentWithFileInvalidId(
+            String testName, String requestUrl, HttpStatus httpStatusCode, String userType, Map<String, Object> valParams, String mimeType, String extension, String fileName) {
+        getAuthToken(this, userType);
+        Map<String, Object> resourceMap = ContentUtil.createResourceContent(this, null, mimeType, null);
+        String contentId = (String) resourceMap.get("content_id");
+        this.variable("contentIdVal", contentId);
+
+        setContext(this, contentId, mimeType, extension, fileName, "");
+        performMultipartTest(
+                this,
+                TEMPLATE_DIR,
+                testName,
+                requestUrl + "abc",
+                null,
+                Constant.REQUEST_FORM_DATA,
+                httpStatusCode,
+                valParams,
+                RESPONSE_JSON
+        );
+    }
+
+    @Test(dataProvider = "uploadResourceContentInWorkflow")
+    @CitrusParameters({"testName","userType", "workflow"})
+    @CitrusTest
+    public void testUploadResourceContentInWorkflow(String testName, String userType, String workflow) {
+        getAuthToken(this, userType);
+        String contentId = (String) ContentUtil.prepareResourceContent(workflow,this, null, "application/pdf", null).get("content_id");
+        Map<String, Object> resourceMap = (Map<String, Object>) ContentUtil.readContent(this, contentId, "edit", null).get("content");
+        String oldArtifactUrl = "artifactUrl";
+        if(!workflow.equalsIgnoreCase(WorkflowConstants.CONTENT_IN_RETIRED_STATE)){
+            oldArtifactUrl = resourceMap.get("artifactUrl").toString();
+        }
+
+        setContext(this, contentId, "application/pdf", ".pdf", null, FILE_URL);
+        performMultipartTest(this, TEMPLATE_DIR, testName, APIUrl.UPLOAD_CONTENT + contentId, null, Constant.REQUEST_FORM_DATA, HttpStatus.OK, null, null);
+        Map<String, Object> newResourceMap = (Map<String, Object>) ContentUtil.readContent(this, contentId, "edit", null).get("content");
+        String newArtifactUrl = newResourceMap.get("artifactUrl").toString();
+
+        Assert.assertNotEquals(oldArtifactUrl, newArtifactUrl);
+
+
     }
 
     @DataProvider(name = "uploadResourceContentWithFileMimeTypes")
@@ -172,7 +221,6 @@ public class UploadContentTest extends BaseCitrusTestRunner {
         return new Object[][]{
                 //specific negetive test scenarios
                 new Object[]{ContentV3Scenario.TEST_UPLOAD_RESOURCE_PDF_WITH_FILE_MISMATCHED_MIME, APIUrl.UPLOAD_CONTENT, HttpStatus.BAD_REQUEST, Constant.CREATOR, null, "application/pdf", ".jpg", null},
-                new Object[]{ContentV3Scenario.TEST_UPLOAD_RESOURCE_PDF_WITH_FILE_INVALID_IDENTIFIER, APIUrl.UPLOAD_CONTENT, HttpStatus.BAD_REQUEST, Constant.CREATOR, null, null, null, ".pdf"},
                 new Object[]{ContentV3Scenario.TEST_UPLOAD_RESOURCE_WITH_EMPTY_ZIP, APIUrl.UPLOAD_CONTENT, HttpStatus.BAD_REQUEST, Constant.CREATOR, null, "application/vnd.ekstep.ecml-archive", null, "empty.zip"},
                 new Object[]{ContentV3Scenario.TEST_UPLOAD_RESOURCE_ZIP_WITHOUT_INDEX, APIUrl.UPLOAD_CONTENT, HttpStatus.BAD_REQUEST, Constant.CREATOR, null, "application/vnd.ekstep.ecml-archive", null, "UploadWithoutIndex.zip"},
                 new Object[]{ContentV3Scenario.TEST_UPLOAD_RESOURCE_ZIP_WITH_MISSING_ASSET_ID, APIUrl.UPLOAD_CONTENT, HttpStatus.BAD_REQUEST, Constant.CREATOR, null, "application/vnd.ekstep.ecml-archive", null, "sample_with_missing_assetid.zip"},
@@ -219,6 +267,7 @@ public class UploadContentTest extends BaseCitrusTestRunner {
 
 
     }
+
     @DataProvider(name = "uploadResourceContentInWorkflow")
     public Object[][] uploadResourceContentInWorkflow() {
         return new Object[][]{
@@ -259,5 +308,15 @@ public class UploadContentTest extends BaseCitrusTestRunner {
             runner.testContext.setVariable("fileUrlValue", "url_" + extension);
         }
     }
+
+    @DataProvider(name = "uploadResourceContentWithFileInvalidId")
+    public Object[][] uploadResourceContentWithFileInvalidId() {
+        return new Object[][]{
+                //specific negetive test scenarios
+                new Object[]{ContentV3Scenario.TEST_UPLOAD_RESOURCE_PDF_WITH_FILE_INVALID_IDENTIFIER, APIUrl.UPLOAD_CONTENT, HttpStatus.BAD_REQUEST, Constant.CREATOR, null, "application/pdf" , null, "sample.pdf"
+                }
+        };
+    }
+
 
 }
