@@ -44,7 +44,7 @@
       "mediaType": "content",
       "osId": "org.ekstep.quiz.app",
       "languageCode": "en",
-      "version": 2,
+      "version": "@isNumber()@",
       "versionKey": "@isNumber()@",
       "idealScreenDensity": "hdpi",
       "license": "Creative Commons Attribution (CC BY)",
