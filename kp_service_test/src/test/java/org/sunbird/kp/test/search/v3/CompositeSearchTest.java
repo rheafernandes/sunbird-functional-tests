@@ -1,26 +1,18 @@
 package org.sunbird.kp.test.search.v3;
 
 import com.consol.citrus.annotations.CitrusTest;
-import com.consol.citrus.testng.CitrusParameters;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.apache.commons.lang.StringUtils;
-import org.springframework.http.HttpStatus;
-import org.sunbird.kp.test.common.APIUrl;
-import org.sunbird.kp.test.common.AppConfig;
 import org.sunbird.kp.test.common.BaseCitrusTestRunner;
 import org.sunbird.kp.test.common.Constant;
 import org.sunbird.kp.test.util.CompositeSearchUtil;
-import org.sunbird.kp.test.util.ContentPayload;
 import org.sunbird.kp.test.util.ContentUtil;
 import org.sunbird.kp.test.util.SearchPayload;
-import org.sunbird.kp.test.util.SystemApiUtil;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import javax.ws.rs.core.MediaType;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
