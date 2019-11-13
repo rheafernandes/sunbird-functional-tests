@@ -38,7 +38,7 @@ public class CollectionUtil {
      *
      * @param workFlow       (Mandatory)
      * @param runner
-     * @param payloadMap        (Mandatory -> Send new HashMap with (updateHierarchy -> Payload String))
+     * @param payloadMap        (Mandatory -> Send new HashMap with (updateHierarchy -> Payload String), If you want to custom resource, pass createResource)
      * @param collectionType (For valid collection type see ContentUtil)
      * @param assetCount     (Number of assets that are needed to replace in the payload)
      * @param resourceCount  (Number of resources that are needed to replace in the payload

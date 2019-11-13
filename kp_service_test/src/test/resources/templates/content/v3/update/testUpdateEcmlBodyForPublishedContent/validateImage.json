@@ -1,7 +1,7 @@
 {
-  "id": "ekstep.learning.content.hierarchy",
+  "id": "ekstep.content.find",
   "ver": "3.0",
-  "ts": "@ignore@",
+  "ts": "@matchesDatePattern('yyyy-MM-dd')@",
   "params": {
     "resmsgid": "@ignore@",
     "msgid": null,
@@ -15,23 +15,32 @@
       "ownershipType": [
         "createdBy"
       ],
-      "code": "kp.ft.collection.textbook",
-      "channel": "channel-01",
-      "description": "KP Integration Test Collection Content",
+      "code": "kp.ft.resource.ecml",
+      "previewUrl": "@ignore@",
+      "downloadUrl": "@ignore@",
+      "channel": "@ignore@",
+      "description": "KP-Updated description ecml",
       "language": [
         "English"
       ],
-      "mimeType": "application/vnd.ekstep.content-collection",
+      "variants": {
+        "spine": {
+          "ecarUrl": "@ignore@",
+          "size": "@isNumber()@"
+        }
+      },
+      "mimeType": "application/vnd.ekstep.ecml-archive",
+      "streamingUrl": "@ignore@",
       "idealScreenSize": "normal",
       "createdOn": "@matchesDatePattern('yyyy-MM-dd')@",
-      "children": null,
       "appId": "@ignore@",
       "contentDisposition": "inline",
       "contentEncoding": "gzip",
       "lastUpdatedOn": "@matchesDatePattern('yyyy-MM-dd')@",
-      "contentType": "Textbook",
+      "SYS_INTERNAL_LAST_UPDATED_ON": "@ignore@",
+      "contentType": "Resource",
       "dialcodeRequired": "No",
-      "identifier": "${rootId}",
+      "identifier": "@ignore@",
       "audience": [
         "Learner"
       ],
@@ -43,14 +52,20 @@
       "consumerId": "@ignore@",
       "mediaType": "content",
       "osId": "org.ekstep.quiz.app",
-      "version": 2,
-      "versionKey": "@ignore@",
+      "lastPublishedBy": "KP_FT_PUBLISHER",
+      "languageCode": "en",
+      "version": "@isNumber()@",
+      "pkgVersion": "@isNumber()@",
+      "versionKey": "@isNumber()@",
       "license": "Creative Commons Attribution (CC BY)",
       "idealScreenDensity": "hdpi",
+      "prevState": "Draft",
+      "s3Key": "@ignore@",
       "framework": "NCF",
-      "depth": 0,
+      "size": "@isNumber()@",
+      "lastPublishedOn": "@matchesDatePattern('yyyy-MM-dd')@",
       "compatibilityLevel": "@isNumber()@",
-      "name": "TextBook Updated",
+      "name": "KP-Updated-ecml",
       "status": "Draft"
     }
   }
