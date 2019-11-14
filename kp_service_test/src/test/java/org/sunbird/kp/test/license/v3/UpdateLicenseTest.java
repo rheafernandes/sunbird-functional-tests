@@ -3,6 +3,8 @@ package org.sunbird.kp.test.license.v3;
 import com.consol.citrus.annotations.CitrusTest;
 import com.consol.citrus.testng.CitrusParameters;
 import org.sunbird.kp.test.common.BaseCitrusTestRunner;
+import org.sunbird.kp.test.content.v3.ContentV3Scenario;
+import org.sunbird.kp.test.util.LicenseUtil;
 import org.sunbird.kp.test.util.TestSetupUtil;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.DataProvider;

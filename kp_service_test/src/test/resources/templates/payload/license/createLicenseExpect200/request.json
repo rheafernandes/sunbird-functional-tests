@@ -1,0 +1,9 @@
+{
+  "request": {
+    "license": {
+      "name": "kp_test_name_${idVal}",
+      "code": "KP_FT_${idVal}",
+      "url":"www.kp-test.in"
+    }
+  }
+}
