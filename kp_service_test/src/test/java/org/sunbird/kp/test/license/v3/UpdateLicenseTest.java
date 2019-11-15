@@ -28,12 +28,6 @@ public class UpdateLicenseTest extends BaseCitrusTestRunner {
     // This map populates the id's and directories
     private static Map<String, String> dirIdMap = new HashMap<>();
 
-    //Comment this out after populating the data
-//    @AfterClass
-//    public static void populateAssertionData() {
-//        TestSetupUtil.createDirectoriesForTestCases(dirIdMap, "validate.json", TEMPLATE_DIR);
-//    }
-
     @Test(dataProvider = "updateLicenseWithValidRequest")
     @CitrusParameters("testName")
     @CitrusTest

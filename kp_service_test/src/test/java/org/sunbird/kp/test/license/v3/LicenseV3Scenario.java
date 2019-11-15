@@ -12,5 +12,7 @@ public class LicenseV3Scenario {
     public static final String TEST_UPDATE_LICENSE_WITH_DATA_TYPE_MISMATCH = "testUpdateLicenseWithDataTypeMismatch";
     public static final String TEST_UPDATE_LICENSE_WITH_INVALID_IDENTIFIER = "testUpdateLicenseWithInvalidIdentifier";
 
-
+    //Retire License Api Scenarios
+    public static final String TEST_RETIRE_LICENSE_WITH_VALID_REQUEST = "testRetireLicenseWithValidRequest";
+    public static final String TEST_RETIRE_LICENSE_WITH_INVALID_IDENTIFIER = "testRetireLicenseWithInvalidIdentifier";
 }
