@@ -1,0 +1,9 @@
+{
+  "request": {
+    "license": {
+      "name": "KP_FT_NAME",
+      "code": "@+${identifier}",
+      "url": "www.url.com"
+     }
+  }
+}

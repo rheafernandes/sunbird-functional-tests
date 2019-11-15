@@ -1,0 +1,16 @@
+{
+  "id": "org.sunbird.license.create",
+  "ver": "3.0",
+  "ts": null,
+  "params": {
+    "resmsgid": null,
+    "msgid": null,
+    "err": "CONSTRAINT_VALIDATION_FAILED",
+    "status": "failed",
+    "errmsg": "Object already exists with identifier: ${identifier}"
+  },
+  "responseCode": "CLIENT_ERROR",
+  "result": {
+    "messages": null
+  }
+}
