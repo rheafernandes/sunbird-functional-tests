@@ -66,6 +66,9 @@ public class UpdateLicenseTest extends BaseCitrusTestRunner {
                 new Object[]{
                         LicenseV3Scenario.TEST_UPDATE_LICENSE_WITH_INVALID_STATUS
                 },
+                new Object[]{
+                        LicenseV3Scenario.TEST_UPDATE_LICENSE_WITH_INVALID_IDENTIFIER
+                },
         };
     }
 }

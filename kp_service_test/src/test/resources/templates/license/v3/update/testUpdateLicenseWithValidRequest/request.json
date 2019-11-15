@@ -1,0 +1,9 @@
+{
+  "request": {
+    "license": {
+      "name": "updated name",
+      "description": "updated description",
+      "url": "www.url-updated.com"
+    }
+  }
+}
