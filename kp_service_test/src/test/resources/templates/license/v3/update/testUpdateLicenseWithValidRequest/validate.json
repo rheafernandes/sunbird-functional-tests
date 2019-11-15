@@ -1,0 +1,30 @@
+{
+  "id" : "org.sunbird.license.read",
+  "ver" : "3.0",
+  "ts" : null,
+  "params" : {
+    "resmsgid" : null,
+    "msgid" : null,
+    "err" : null,
+    "status" : "successful",
+    "errmsg" : null
+  },
+  "responseCode" : "OK",
+  "result" : {
+    "license" : {
+      "identifier" : "${identifier}",
+      "lastStatusChangedOn" : "@matchesDatePattern('yyyy-MM-dd')@",
+      "code" : "${identifier}",
+      "consumerId" : "@ignore@",
+      "appId" : "@ignore@",
+      "name" : "updated name",
+      "channel" : "channel-01",
+      "lastUpdatedOn" : "@matchesDatePattern('yyyy-MM-dd')@",
+      "description" : "updated description",
+      "createdOn" : "@matchesDatePattern('yyyy-MM-dd')@",
+      "url" : "www.url-updated.com",
+      "status" : "Live",
+      "versionKey" : "@isNumber()@"
+    }
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "id" : "org.sunbird.license.read",
+  "ver" : "3.0",
+  "ts" : null,
+  "params" : {
+    "resmsgid" : null,
+    "msgid" : null,
+    "err" : null,
+    "status" : "successful",
+    "errmsg" : null
+  },
+  "responseCode" : "OK",
+  "result" : {
+    "license" : {
+      "identifier" : "${identifier}",
+      "lastStatusChangedOn" : "@matchesDatePattern('yyyy-MM-dd')@",
+      "code" : "${identifier}",
+      "consumerId" : "@ignore@",
+      "appId" : "@ignore@",
+      "name" : "kp_test_name",
+      "genre" : "Heavy metal",
+      "channel" : "channel-01",
+      "lastUpdatedOn" : "@matchesDatePattern('yyyy-MM-dd')@",
+      "createdOn" : "@matchesDatePattern('yyyy-MM-dd')@",
+      "url" : "www.kp-test.in",
+      "status" : "Live",
+      "versionKey" : "@isNumber()@"
+    }
+  }
+}

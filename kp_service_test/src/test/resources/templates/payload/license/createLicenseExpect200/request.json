@@ -1,7 +1,7 @@
 {
   "request": {
     "license": {
-      "name": "kp_test_name_${idVal}",
+      "name": "kp_test_name",
       "code": "KP_FT_${idVal}",
       "url":"www.kp-test.in"
     }

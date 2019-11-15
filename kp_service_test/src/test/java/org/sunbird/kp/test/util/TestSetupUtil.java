@@ -78,7 +78,9 @@ public class TestSetupUtil {
                     .replaceAll("\"s3Key\"\\W?:\\W\"[a-zA-Z:/._0-9-]+\"","\"s3Key\" : \"@ignore@\"")
                     .replaceAll("\"appId\"\\W?:\\W?\"[a-zA-Z.-]+\"","\"appId\" : \"@ignore@\"")
                     .replaceAll("\"consumerId\"\\W?:\\W?\"[a-zA-Z0-9-]+\"","\"consumerId\" : \"@ignore@\"")
-                    .replaceAll("KP_FT_LICENSE_\\d+","\\${identifier}")
+                    .replaceAll("kp_ft_\\d+","\\${identifier}")
+                    .replaceAll("KP_FT_\\d+","\\${identifier}")
+                    .replaceAll("kp_ft_license_\\d+", "\\${identifier}")
                     .replaceAll("\\s\\d+\\.\\d+","\"@isNumber()@\"")
                     .replaceAll("\\s\\d", "\"@isNumber()@\"")
                     .replaceAll("\"versionKey\"\\W?:\\W\"\\d+\"","\"versionKey\" : \"@isNumber()@\"");

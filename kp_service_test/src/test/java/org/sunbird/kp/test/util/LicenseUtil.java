@@ -64,6 +64,7 @@ public class LicenseUtil {
         if (MapUtils.isNotEmpty(result)) {
             data.put("identifier", result.get("node_id"));
         }
+        runner.variable("identifier", result.get("node_id"));
         return data;
     }
 
