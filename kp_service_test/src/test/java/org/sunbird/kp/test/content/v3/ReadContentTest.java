@@ -27,10 +27,10 @@ public class ReadContentTest extends BaseCitrusTestRunner {
 
     //TODO:Comment after files are created and populated
 
-    @AfterClass
-    public static void populateAssertionData() {
-        TestSetupUtil.createDirectoriesForTestCases(dirIdMap, "response.json", TEMPLATE_DIR);
-    }
+//    @AfterClass
+//    public static void populateAssertionData() {
+//        TestSetupUtil.createDirectoriesForTestCases(dirIdMap, "response.json", TEMPLATE_DIR);
+//    }
 
     @Test(dataProvider = "readResourceContentWithWorkflow")
     @CitrusParameters({"testName", "workflow"})
