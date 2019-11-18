@@ -13,6 +13,7 @@ import org.testng.annotations.Test;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -26,33 +27,38 @@ public class CompositeSearchTest extends BaseCitrusTestRunner {
 
 	@Test
 	@CitrusTest
-	public void testSearchForTextBookHavingConsumeAs() throws JsonProcessingException {
+	public void testSearchForTextBookHavingRelatedBoards() throws JsonProcessingException {
 		String testName = "testSearchForTextBookHavingConsumeAs";
 		this.getTestCase().setName(testName);
 		getAuthToken(this, Constant.CREATOR);
-		// Prepare Data
-		String channel1 = "test.channel-" + generateRandomDigits(5);
-		String channel2 = "consume.channel-" + generateRandomDigits(5);
-		Map<String, Object> header1 = new HashMap<String, Object>() {{
-			put(Constant.X_CHANNEL_ID, channel1);
-		}};
-		Map<String, Object> header2 = new HashMap<String, Object>() {{
-			put(Constant.X_CHANNEL_ID, channel2);
-		}};
-		String textbookId = (String) ContentUtil.createCollectionContent(this, null, "textbook", header1).get("content_id");
+		//TODO: Get Board Using Framework API.
+		String board = "ICSE";
+		String textbookId = (String) ContentUtil.createCollectionContent(this, null, "textbook", null).get("content_id");
 		System.out.println("Textbook Id : " + textbookId);
-		String consumableTextbookId = (String) ContentUtil.createCollectionContent(this, null, "textbook", header2).get("content_id");
-		String payload = "{\"request\":{\"content\":{\"consumeAs\":{\"channel\":\"channelIdVal\"}}}}".replace("channelIdVal", channel1);
-		String updatedId = (String) ContentUtil.systemUpdate(this, testContext, consumableTextbookId, payload, testName, header2).get("content_id");
+		String updateReqPayload = "{\"request\":{\"content\":{\"board\":\"boardVal\"}}}".replace("boardVal", board);
+		String updatedTbId = (String) ContentUtil.systemUpdate(this, testContext, textbookId, updateReqPayload, testName, null).get("content_id");
+		Assert.assertTrue(StringUtils.isNotBlank(textbookId) && StringUtils.isNotBlank(updatedTbId));
+		String consumableTextbookId = (String) ContentUtil.createCollectionContent(this, null, "textbook", null).get("content_id");
+		String payload = "{\"request\":{\"content\":{\"relatedBoards\":{\"board\":\"boardVal\"}}}}".replace("boardVal", board);
+		String updatedId = (String) ContentUtil.systemUpdate(this, testContext, consumableTextbookId, payload, testName, null).get("content_id");
 		Assert.assertTrue(StringUtils.isNotBlank(textbookId) && StringUtils.isNotBlank(updatedId));
 		delay(this, 60000);
 		//search content and validate
-		String searchPayload = SearchPayload.SEARCH_CONTENT_WITH_IDENTIFIER_AND_CHANNEL.replace("contentIdVal", objectMapper.writeValueAsString(new ArrayList<String>() {{
+		String searchPayload = SearchPayload.SEARCH_CONTENT_WITH_IDENTIFIER_AND_BOARD.replace("contentIdVal", objectMapper.writeValueAsString(new ArrayList<String>() {{
 			add(textbookId);
-		}})).replace("channelIdVal", channel1);
+		}})).replace("boardVal", board);
 		System.out.println("searchPayload : " + searchPayload);
 		Map<String, Object> searchResult = CompositeSearchUtil.searchContent(this, payload, testName, null);
-		int count = (int) searchResult.get("count");
-		Assert.assertEquals(count, 2);
+		List<Map<String, Object>> content = (List<Map<String, Object>>) searchResult.get("content");
+		boolean found = false;
+		for (Map<String, Object> record : content) {
+			if (record.containsKey("relatedBoards")) {
+				String boardResult = (String) ((Map<String, Object>) record.get("relatedBoards")).get("board");
+				if (StringUtils.equals(board, boardResult) && StringUtils.equals(consumableTextbookId, (String) record.get("identifier"))) {
+					found = true;
+				}
+			}
+		}
+		Assert.assertTrue(found);
 	}
 }
