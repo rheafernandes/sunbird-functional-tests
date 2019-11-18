@@ -953,6 +953,45 @@ public class ContentUtil {
         return data;
     }
 
+    public static Map<String, Object> systemUpdate(BaseCitrusTestRunner runner, TestContext testContext, String objectId, String payload, String testName, Map<String, Object> headers) {
+        Map<String, Object> data = new HashMap<String, Object>();
+        if (StringUtils.isNotBlank(payload) && StringUtils.isNotBlank(objectId)) {
+            System.out.println("Dynamic Payload...");
+            runner.getTestCase().setName(testName);
+            runner.http(
+                    builder ->
+                            TestActionUtil.getPatchRequestTestAction(
+                                    builder,
+                                    Constant.KP_ENDPOINT,
+                                    APIUrl.SYSTEM_UPDATE + objectId,
+                                    MediaType.APPLICATION_JSON.toString(),
+                                    payload,
+                                    getHeaders(headers)));
+
+        } else {
+            System.out.println("Received Invalid Request for System Update Api!");
+            //TODO: Provide static payload implementation here.
+        }
+
+        runner.http(
+                builder ->
+                        TestActionUtil.getExtractFromResponseTestAction(
+                                testContext,
+                                builder,
+                                Constant.KP_ENDPOINT,
+                                HttpStatus.OK,
+                                "$.result",
+                                "result"));
+        Map<String, Object> result = getResult(testContext);
+
+        if (MapUtils.isNotEmpty(result)) {
+            data.put("content_id", (String) result.get("node_id"));
+            data.put("versionKey", (String) result.get("versionKey"));
+        }
+
+        return data;
+    }
+
     /**
      * This Method provides all necessary header elements
      *
