@@ -39,9 +39,10 @@ public class CompositeSearchTest extends BaseCitrusTestRunner {
 		String updatedTbId = (String) ContentUtil.systemUpdate(this, testContext, textbookId, updateReqPayload, testName, null).get("content_id");
 		Assert.assertTrue(StringUtils.isNotBlank(textbookId) && StringUtils.isNotBlank(updatedTbId));
 		String consumableTextbookId = (String) ContentUtil.createCollectionContent(this, null, "textbook", null).get("content_id");
-		String payload = "{\"request\":{\"content\":{\"relatedBoards\":{\"board\":\"boardVal\"}}}}".replace("boardVal", board);
+		String payload = "{\"request\":{\"content\":{\"relatedBoards\":[{\"board\":\"boardVal\"}]}}}".replace("boardVal", board);
 		String updatedId = (String) ContentUtil.systemUpdate(this, testContext, consumableTextbookId, payload, testName, null).get("content_id");
 		Assert.assertTrue(StringUtils.isNotBlank(textbookId) && StringUtils.isNotBlank(updatedId));
+		ContentUtil.publishContent(this, null, "public", consumableTextbookId, null);
 		delay(this, 60000);
 		//search content and validate
 		String searchPayload = SearchPayload.SEARCH_CONTENT_WITH_IDENTIFIER_AND_BOARD.replace("contentIdVal", objectMapper.writeValueAsString(new ArrayList<String>() {{
