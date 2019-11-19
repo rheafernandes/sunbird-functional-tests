@@ -255,13 +255,13 @@ public class ContentV3Scenario {
     public static final String TEST_UPDATE_CONTENT_WITH_CHANGED_STATUS =
             "testUpdateContentChangeStatus";
     //Get Content should have same MimeType if allow update is false
-    public static final String TEST_UPDATE_CONTENT_WITH_NEW_MIMETYPE =
+    public static final String TEST_UPDATE_CONTENT_WITH_MIMETYPE =
             "testUpdateContentNewMimetype";
-    public static final String TEST_UPDATE_CONTENT_WITH_NEW_MEDIATYPE =
+    public static final String TEST_UPDATE_CONTENT_WITH_MEDIATYPE =
             "testUpdateContentNewMediaType";
     public static final String TEST_UPDATE_CONTENT_WITH_INVALID_CONTENT_TYPE =
             "testUpdateContentInvalidContentType";
-    public static final String TEST_UPDATE_CONTENT_WITH_VALID_CONTENT_TYPE =
+    public static final String TEST_UPDATE_CONTENT_WITH_CONTENT_TYPE =
             "testUpdateContentValidContentType";
     public static final String TEST_UPDATE_CONTENT_STATUS_REVIEW =
             "testUpdateContentInReviewState";
@@ -295,9 +295,9 @@ public class ContentV3Scenario {
             "testUpdateWithInvalidFramework";
     public static final String TEST_UPDATE_FOR_PUBLISHED_CONTENT_WITH_IMAGE_ID=
             "testUpdateForPublishedContentWithImageId";
-    public static final String TEST_UPDATE_WITH_VALID_ECML =
+    public static final String TEST_UPDATE_WITH_VALID_ECML_BODY =
             "testUpdateWithValidEcml";
-    public static final String TEST_UPDATE_WITH_INVALID_ECML =
+    public static final String TEST_UPDATE_WITH_INVALID_ECML_BODY =
             "testUpdateWithInvalidEcml";
     public static final String TEST_UPDATE_ECML_BODY_FOR_PUBLISHED_CONTENT =
             "testUpdateEcmlBodyForPublishedContent";

@@ -135,7 +135,7 @@ public class UpdateContentTest extends BaseCitrusTestRunner {
                         ContentV3Scenario.TEST_UPDATE_CONTENT_STATUS_FLAGREVIEW, "application/pdf", "contentInFlagReview"
                 },
                 new Object[]{
-                        ContentV3Scenario.TEST_UPDATE_WITH_VALID_ECML, "application/pdf", "contentInDraft"
+                        ContentV3Scenario.TEST_UPDATE_WITH_VALID_ECML_BODY, "application/pdf", "contentInDraft"
                 },
         };
     }
@@ -143,19 +143,19 @@ public class UpdateContentTest extends BaseCitrusTestRunner {
     @DataProvider(name = "updateInvalidResourceContent")
     public Object[][] updateInvalidResourceContent() {
         return new Object[][]{
-                new Object[]{
-                        ContentV3Scenario.TEST_UPDATE_CONTENT_WITH_NEW_MIMETYPE, "application/pdf", "contentInDraft"
-                },
-
-                new Object[]{
-                        ContentV3Scenario.TEST_UPDATE_CONTENT_WITH_NEW_MEDIATYPE, "application/pdf", "contentInDraft"
-                },
-                new Object[]{
-                        ContentV3Scenario.TEST_UPDATE_CONTENT_WITH_VALID_CONTENT_TYPE, "application/pdf", "contentInDraft"
-                },
-                new Object[]{
-                        ContentV3Scenario.TEST_UPDATE_CONTENT_STATUS_FLAGGED, "application/pdf", "contentInFlagged"
-                },
+                // TODO: Uncomment in KP-2.0
+//                new Object[]{
+//                        ContentV3Scenario.TEST_UPDATE_CONTENT_WITH_MIMETYPE, "application/pdf", "contentInDraft"
+//                },
+//                new Object[]{
+//                        ContentV3Scenario.TEST_UPDATE_CONTENT_WITH_MEDIATYPE, "application/pdf", "contentInDraft"
+//                },
+//                new Object[]{
+//                        ContentV3Scenario.TEST_UPDATE_CONTENT_WITH_CONTENT_TYPE, "application/pdf", "contentInDraft"
+//                },
+//                new Object[]{
+//                        ContentV3Scenario.TEST_UPDATE_CONTENT_STATUS_FLAGGED, "application/pdf", "contentInFlagged"
+//                },
                 new Object[]{
                         ContentV3Scenario.TEST_UPDATE_CONTENT_WITH_BLANK_VERSION_KEY, "application/pdf", "contentInDraft"
                 },
@@ -175,30 +175,32 @@ public class UpdateContentTest extends BaseCitrusTestRunner {
                 new Object[]{
                         ContentV3Scenario.TEST_UPDATE_WITH_SYSTEM_PROPERTY, "application/pdf", "contentInDraft"
                 },
-                new Object[]{
-                        ContentV3Scenario.TEST_UPDATE_CONTENT_IN_RETIRED, "application/pdf", "contentRetired"
-                },
-                new Object[]{
-                        ContentV3Scenario.TEST_UPDATE_WITH_DIALCODES, "application/pdf", "contentInDraft"
-                },
-                new Object[]{
-                        ContentV3Scenario.TEST_UPDATE_WITH_RESERVED_DIALCODES, "application/pdf", "contentInDraft"
-                },
-                new Object[]{
-                        ContentV3Scenario.TEST_UPDATE_WITH_INVALID_FRAMEWORK, "application/pdf", "contentInDraft"
-                },
-                new Object[]{
-                        ContentV3Scenario.TEST_UPDATE_WITH_CORRECT_IDENTIFIER_IN_REQUEST, "application/pdf", "contentInDraft"
-                },
-                new Object[]{
-                        ContentV3Scenario.TEST_UPDATE_WITH_INCORRECT_IDENTIFIER_IN_REQUEST, "application/pdf", "contentInDraft"
-                },
+                // TODO: Uncomment in KP-2.0
+//                new Object[]{
+//                        ContentV3Scenario.TEST_UPDATE_CONTENT_IN_RETIRED, "application/pdf", "contentRetired"
+//                },
+//                new Object[]{
+//                        ContentV3Scenario.TEST_UPDATE_WITH_DIALCODES, "application/pdf", "contentInDraft"
+//                },
+//                new Object[]{
+//                        ContentV3Scenario.TEST_UPDATE_WITH_RESERVED_DIALCODES, "application/pdf", "contentInDraft"
+//                },
+//                new Object[]{
+//                        ContentV3Scenario.TEST_UPDATE_WITH_INVALID_FRAMEWORK, "application/pdf", "contentInDraft"
+//                },
+//                new Object[]{
+//                        ContentV3Scenario.TEST_UPDATE_WITH_CORRECT_IDENTIFIER_IN_REQUEST, "application/pdf", "contentInDraft"
+//                },
+//                new Object[]{
+//                        ContentV3Scenario.TEST_UPDATE_WITH_INCORRECT_IDENTIFIER_IN_REQUEST, "application/pdf", "contentInDraft"
+//                },
                 new Object[]{
                         ContentV3Scenario.TEST_UPDATE_WITH_INVALID_FORMAT_RESERVED_DIALCODES, "application/pdf", "contentInDraft"
                 },
-                new Object[]{
-                        ContentV3Scenario.TEST_UPDATE_WITH_INVALID_ECML, "application/pdf", "contentInDraft"
-                },
+                // TODO: Uncomment in KP-2.0
+//                new Object[]{
+//                        ContentV3Scenario.TEST_UPDATE_WITH_INVALID_ECML_BODY, "application/pdf", "contentInDraft"
+//                },
         };
     }
 

@@ -26,11 +26,11 @@ public class ReadContentTest extends BaseCitrusTestRunner {
     private static final String TEMPLATE_DIR = "templates/content/v3/read";
     private static Map<String, String> dirIdMap = new HashMap<>();
 
-    //TODO:Comment after files are created and populated
 
     @AfterClass
     public static void populateAssertionData() {
-        TestSetupUtil.createDirectoriesForTestCases(dirIdMap, "response.json", TEMPLATE_DIR);
+//        TODO: This code can be commented out after the directories are created and populated.
+//        TestSetupUtil.createDirectoriesForTestCases(dirIdMap, "response.json", TEMPLATE_DIR);
     }
 
     @Test(dataProvider = "readResourceContentWithWorkflow")
