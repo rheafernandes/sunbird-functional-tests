@@ -24,7 +24,7 @@
       "mimeType": "application/pdf",
       "idealScreenSize": "normal",
       "createdOn": "@matchesDatePattern('yyyy-MM-dd')@",
-      "appId": "app-01",
+      "appId": "@ignore@",
       "contentDisposition": "inline",
       "contentEncoding": "identity",
       "lastUpdatedOn": "@matchesDatePattern('yyyy-MM-dd')@",

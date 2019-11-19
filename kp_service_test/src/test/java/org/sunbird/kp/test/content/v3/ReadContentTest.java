@@ -105,12 +105,15 @@ public class ReadContentTest extends BaseCitrusTestRunner {
     public void testReadResourceContentWithIdentifier(
             String testName, String requestUrl, HttpStatus httpStatusCode, String userType, Map<String, Object> valParams, String mimeType) {
         getAuthToken(this, userType);
-        String contentId = (String) ContentUtil.createResourceContent(this, null, mimeType, null).get("content_id");
+        Map<String, Object> result = ContentUtil.createResourceContent(this, null, mimeType, null);
+        this.variable("contentIdVal", result.getOrDefault("content_id", "KP_TEST_000009999"));
+        this.variable("versionKeyVal", (String) result.getOrDefault("versionKey", "00000000000"));
+        dirIdMap.put(testName, (String) result.getOrDefault("content_id", "KP_TEST_000009999"));
         performGetTest(
                 this,
                 TEMPLATE_DIR,
                 testName,
-                requestUrl + contentId,
+                requestUrl + result.getOrDefault("content_id", "KP_TEST_000009999"),
                 null,
                 httpStatusCode,
                 valParams,
@@ -123,7 +126,11 @@ public class ReadContentTest extends BaseCitrusTestRunner {
     @CitrusTest
     public void testReadResourceContentWithMode(
             String testName, String requestUrl, HttpStatus httpStatusCode, Map<String, Object> valParams, String workFlowStatus, String responseJson, String mode) {
-        String contentId = ContentUtil.prepareResourceContent(workFlowStatus, this, null, "application/vnd.ekstep.ecml-archive", null).get("content_id").toString();
+        Map<String, Object> result = ContentUtil.prepareResourceContent(workFlowStatus, this, null, "application/vnd.ekstep.ecml-archive", null);
+        String contentId = (String) result.getOrDefault("content_id", "KP_TEST_000009999");
+        this.variable("contentIdVal", contentId);
+        this.variable("versionKeyVal", (String) result.getOrDefault("versionKey", "00000000000"));
+        dirIdMap.put(testName, contentId);
             performGetTest(
                 this,
                 TEMPLATE_DIR,
@@ -141,7 +148,11 @@ public class ReadContentTest extends BaseCitrusTestRunner {
     @CitrusTest
     public void testReadResourceContentWithFields(
             String testName, String requestUrl, HttpStatus httpStatusCode, Map<String, Object> valParams, String workFlowStatus, String responseJson, String fields) {
-        String contentId = ContentUtil.prepareResourceContent(workFlowStatus, this, null, "application/vnd.ekstep.ecml-archive", null).get("content_id").toString();
+        Map<String, Object> result = ContentUtil.prepareResourceContent(workFlowStatus, this, null, "application/vnd.ekstep.ecml-archive", null);
+        String contentId = (String) result.getOrDefault("content_id", "KP_TEST_000009999");
+        this.variable("contentIdVal", contentId);
+        this.variable("versionKeyVal", (String) result.getOrDefault("versionKey", "00000000000"));
+        dirIdMap.put(testName, contentId);
         performGetTest(
                 this,
                 TEMPLATE_DIR,
@@ -158,7 +169,11 @@ public class ReadContentTest extends BaseCitrusTestRunner {
     @CitrusTest
     public void testReadResourceContentWithModeAndFields(
             String testName, String requestUrl, HttpStatus httpStatusCode, Map<String, Object> valParams, String workFlowStatus, String responseJson, String mode, String fields) {
-        String contentId = ContentUtil.prepareResourceContent(workFlowStatus, this, null, "application/vnd.ekstep.ecml-archive", null).get("content_id").toString();
+        Map<String, Object> result = ContentUtil.prepareResourceContent(workFlowStatus, this, null, "application/vnd.ekstep.ecml-archive", null);
+        String contentId = (String) result.getOrDefault("content_id", "KP_TEST_000009999");
+        this.variable("contentIdVal", contentId);
+        this.variable("versionKeyVal", (String) result.getOrDefault("versionKey", "00000000000"));
+        dirIdMap.put(testName, contentId);
         performGetTest(
                 this,
                 TEMPLATE_DIR,
