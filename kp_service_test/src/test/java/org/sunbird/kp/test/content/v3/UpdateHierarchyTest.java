@@ -118,7 +118,7 @@ public class UpdateHierarchyTest extends BaseCitrusTestRunner {
                 new HashMap<String,String>() {{put("updateHierarchy", payload);}}, collectionType, 0, resourceCount, "application/pdf");
         String collectionId = (String) collectionMap.get("content_id");
         Map<String, String> unitIds = (Map<String, String>) collectionMap.get("identifiers");
-        String unit1Id = unitIds.get(collectionMap.keySet().stream().findFirst().get());
+        String unit1Id = unitIds.get(unitIds.keySet().stream().findFirst().get());
         identifier = (String) ContentUtil.createCollectionContent(this, null, "textbook", null).get("content_id");
         this.variable("rootId", identifier);
         this.variable("collectionId", collectionId);

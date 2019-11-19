@@ -121,6 +121,28 @@ public class ReadContentTest extends BaseCitrusTestRunner {
         );
     }
 
+    @Test(dataProvider = "readResourceContentWithInvalidIdentifier")
+    @CitrusParameters({"testName", "requestUrl", "httpStatusCode", "userType","valParams","mimeType"})
+    @CitrusTest
+    public void testReadResourceContentWithInvalidIdentifier(
+            String testName, String requestUrl, HttpStatus httpStatusCode, String userType, Map<String, Object> valParams, String mimeType) {
+        getAuthToken(this, userType);
+        Map<String, Object> result = ContentUtil.createResourceContent(this, null, mimeType, null);
+        this.variable("contentIdVal", result.getOrDefault("content_id", "KP_TEST_000009999"));
+        this.variable("versionKeyVal", (String) result.getOrDefault("versionKey", "00000000000"));
+        dirIdMap.put(testName, (String) result.getOrDefault("content_id", "KP_TEST_000009999"));
+        performGetTest(
+                this,
+                TEMPLATE_DIR,
+                testName,
+                requestUrl + "KP_TEST_000009999",
+                null,
+                httpStatusCode,
+                valParams,
+                RESPONSE_JSON
+        );
+    }
+
     @Test(dataProvider = "readResourceContentWithMode")
     @CitrusParameters({"testName", "requestUrl", "httpStatusCode", "valParams", "workFlowStatus", "responseJson", "mode"})
     @CitrusTest
@@ -204,34 +226,44 @@ public class ReadContentTest extends BaseCitrusTestRunner {
         };
     }
 
+    @DataProvider(name = "readResourceContentWithInvalidIdentifier")
+    public Object[][] readResourceContentWithInvalidIdentifier() {
+        return new Object[][]{
+                new Object[]{
+                        ContentV3Scenario.TEST_READ_RESOURCE_CONTENT_WITH_INVALID_IDENTIFIER, APIUrl.READ_CONTENT, HttpStatus.NOT_FOUND, Constant.CREATOR,
+                        null, null
+                }
+        };
+    }
+
     @DataProvider(name = "readResourceContentWithMode")
     public Object[][] readResourceContentWithMode() {
         return new Object[][]{
+//                new Object[]{
+//                        ContentV3Scenario.TEST_READ_RESOURCE_CONTENT_WITH_EDIT_MODE, APIUrl.READ_CONTENT, HttpStatus.OK, null, "contentInLiveImageDraft", RESPONSE_JSON, "edit"
+//                },
                 new Object[]{
-                        ContentV3Scenario.TEST_READ_RESOURCE_CONTENT_WITH_EDIT_MODE, APIUrl.READ_CONTENT, HttpStatus.OK, null, "contentInLiveImageDraft", RESPONSE_JSON, "edit"
+                        ContentV3Scenario.TEST_READ_RESOURCE_CONTENT_WITH_INVALID_MODE, APIUrl.READ_CONTENT, HttpStatus.OK, null, "contentInDraft", RESPONSE_JSON, "abc"
                 },
                 new Object[]{
-                        ContentV3Scenario.TEST_READ_RESOURCE_CONTENT_WITH_INVALID_MODE, APIUrl.READ_CONTENT, HttpStatus.OK, null, "contentInLiveImageDraft", RESPONSE_JSON, "abc"
-                },
-                new Object[]{
-                        ContentV3Scenario.TEST_READ_RESOURCE_CONTENT_WITH_EMPTY_MODE, APIUrl.READ_CONTENT, HttpStatus.OK, null, "contentInLiveImageDraft", RESPONSE_JSON, ""
+                        ContentV3Scenario.TEST_READ_RESOURCE_CONTENT_WITH_EMPTY_MODE, APIUrl.READ_CONTENT, HttpStatus.OK, null, "contentInDraft", RESPONSE_JSON, ""
                 }
         };
     }
     @DataProvider(name = "readResourceContentWithFields")
     public Object[][] readResourceContentWithFields() {
         return new Object[][]{
+//                new Object[]{
+//                        ContentV3Scenario.TEST_READ_RESOURCE_CONTENT_WITH_FIELDS, APIUrl.READ_CONTENT, HttpStatus.OK, null, "contentInLiveImageDraft", RESPONSE_JSON, "name,status"
+//                },
+//                new Object[]{
+//                        ContentV3Scenario.TEST_READ_RESOURCE_CONTENT_WITH_INVALID_FIELDS, APIUrl.READ_CONTENT, HttpStatus.OK, null, "contentInLiveImageDraft", RESPONSE_JSON, "abc"
+//                },
+//                new Object[]{
+//                        ContentV3Scenario.TEST_READ_RESOURCE_CONTENT_WITH_BODY_FIELDS, APIUrl.READ_CONTENT, HttpStatus.OK, null, "contentInLiveImageDraft", RESPONSE_JSON, "body"
+//                },
                 new Object[]{
-                        ContentV3Scenario.TEST_READ_RESOURCE_CONTENT_WITH_FIELDS, APIUrl.READ_CONTENT, HttpStatus.OK, null, "contentInLiveImageDraft", RESPONSE_JSON, "name,status"
-                },
-                new Object[]{
-                        ContentV3Scenario.TEST_READ_RESOURCE_CONTENT_WITH_INVALID_FIELDS, APIUrl.READ_CONTENT, HttpStatus.OK, null, "contentInLiveImageDraft", RESPONSE_JSON, "abc"
-                },
-                new Object[]{
-                        ContentV3Scenario.TEST_READ_RESOURCE_CONTENT_WITH_BODY_FIELDS, APIUrl.READ_CONTENT, HttpStatus.OK, null, "contentInLiveImageDraft", RESPONSE_JSON, "body"
-                },
-                new Object[]{
-                        ContentV3Scenario.TEST_READ_RESOURCE_CONTENT_WITH_EMPTY_FIELDS, APIUrl.READ_CONTENT, HttpStatus.OK, null, "contentInLiveImageDraft", RESPONSE_JSON, ""
+                        ContentV3Scenario.TEST_READ_RESOURCE_CONTENT_WITH_EMPTY_FIELDS, APIUrl.READ_CONTENT, HttpStatus.OK, null, "contentInDraft", RESPONSE_JSON, ""
                 }
         };
     }
