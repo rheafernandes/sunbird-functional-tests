@@ -214,10 +214,6 @@ public class ReadContentTest extends BaseCitrusTestRunner {
                 new Object[]{
                         ContentV3Scenario.TEST_READ_RESOURCE_CONTENT_WITH_VALID_IDENTIFIER, APIUrl.READ_CONTENT, HttpStatus.OK, Constant.CREATOR,
                         new HashMap(){{put("identifier",null);put("versionKey",null);put("mimeType","video/x-youtube");put("status","Draft");}}, "video/x-youtube"
-                },
-                new Object[]{
-                        ContentV3Scenario.TEST_READ_RESOURCE_CONTENT_WITH_INVALID_IDENTIFIER, APIUrl.READ_CONTENT, HttpStatus.NOT_FOUND, Constant.CREATOR,
-                        null, null
                 }
         };
     }
@@ -271,9 +267,9 @@ public class ReadContentTest extends BaseCitrusTestRunner {
                 new Object[]{
                         ContentV3Scenario.TEST_READ_PDF_CONTENT_AFTER_REVIEW, "contentInReview"
                 },
-                new Object[]{
-                        ContentV3Scenario.TEST_READ_PDF_CONTENT_AFTER_DISCARD, "contentDiscarded"
-                },
+//                new Object[]{
+//                        ContentV3Scenario.TEST_READ_PDF_CONTENT_AFTER_DISCARD, "contentDiscarded"
+//                },
                 new Object[]{
                         ContentV3Scenario.TEST_READ_PDF_CONTENT_AFTER_FLAG, "contentInFlagged"
                 },
