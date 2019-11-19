@@ -135,7 +135,7 @@ public class UpdateContentTest extends BaseCitrusTestRunner {
                         ContentV3Scenario.TEST_UPDATE_CONTENT_STATUS_FLAGREVIEW, "application/pdf", "contentInFlagReview"
                 },
                 new Object[]{
-                        ContentV3Scenario.TEST_UPDATE_WITH_VALID_ECML, "application/pdf", "contentInDraft"
+                        ContentV3Scenario.TEST_UPDATE_WITH_VALID_ECML_BODY, "application/pdf", "contentInDraft"
                 },
         };
     }
@@ -145,13 +145,13 @@ public class UpdateContentTest extends BaseCitrusTestRunner {
         return new Object[][]{
                 // TODO: Uncomment in KP-2.0
 //                new Object[]{
-//                        ContentV3Scenario.TEST_UPDATE_CONTENT_WITH_NEW_MIMETYPE, "application/pdf", "contentInDraft"
+//                        ContentV3Scenario.TEST_UPDATE_CONTENT_WITH_MIMETYPE, "application/pdf", "contentInDraft"
 //                },
 //                new Object[]{
-//                        ContentV3Scenario.TEST_UPDATE_CONTENT_WITH_NEW_MEDIATYPE, "application/pdf", "contentInDraft"
+//                        ContentV3Scenario.TEST_UPDATE_CONTENT_WITH_MEDIATYPE, "application/pdf", "contentInDraft"
 //                },
 //                new Object[]{
-//                        ContentV3Scenario.TEST_UPDATE_CONTENT_WITH_VALID_CONTENT_TYPE, "application/pdf", "contentInDraft"
+//                        ContentV3Scenario.TEST_UPDATE_CONTENT_WITH_CONTENT_TYPE, "application/pdf", "contentInDraft"
 //                },
 //                new Object[]{
 //                        ContentV3Scenario.TEST_UPDATE_CONTENT_STATUS_FLAGGED, "application/pdf", "contentInFlagged"
@@ -199,7 +199,7 @@ public class UpdateContentTest extends BaseCitrusTestRunner {
                 },
                 // TODO: Uncomment in KP-2.0
 //                new Object[]{
-//                        ContentV3Scenario.TEST_UPDATE_WITH_INVALID_ECML, "application/pdf", "contentInDraft"
+//                        ContentV3Scenario.TEST_UPDATE_WITH_INVALID_ECML_BODY, "application/pdf", "contentInDraft"
 //                },
         };
     }
