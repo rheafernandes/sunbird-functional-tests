@@ -18,12 +18,12 @@ public class WorkflowConstants {
             "\t\"contentDraftUpdated\" : [\"Update\"],\n" +
             "\t\"contentInReview\" : [\"Upload\", \"Review\"],\n" +
             "\t\"contentInLive\": [\"Upload\", \"Publish\"],\n" +
-            "\t\"contentInLiveImageDraft\" : [\"Upload\", \"Publish\", \"Update\"],\n" +
-            "\t\"contentInLiveImageReview\" : [\"Upload\", \"Publish\", \"Update\", \"Review\"],\n" +
+            "\t\"contentInLiveImageDraft\" : [\"Upload\", \"Publish\", \"Get\", \"Update\"],\n" +
+            "\t\"contentInLiveImageReview\" : [\"Upload\", \"Publish\", \"Get\", \"Update\", \"Review\"],\n" +
             "\t\"contentInUnlisted\" : [\"Upload\", \"Unlisted\"],\n" +
-            "\t\"contentInFlagged\" : [\"Upload\", \"Publish\", \"Flag\"],\n" +
-            "\t\"contentInFlagDraft\" :  [\"Upload\", \"Publish\", \"Flag\", \"AcceptFlag\"],\n" +
-            "\t\"contentInFlagReview\" :  [\"Upload\", \"Publish\", \"Flag\", \"AcceptFlag\", \"Review\"],\n" +
+            "\t\"contentInFlagged\" : [\"Upload\", \"Publish\", \"Get\", \"Flag\"],\n" +
+            "\t\"contentInFlagDraft\" :  [\"Upload\", \"Publish\", \"Get\", \"Flag\", \"AcceptFlag\"],\n" +
+            "\t\"contentInFlagReview\" :  [\"Upload\", \"Publish\", \"Get\", \"Flag\", \"AcceptFlag\", \"Review\"],\n" +
             "\t\"contentRetired\" : [\"Retire\"],\n" +
             "\t\"contentDiscarded\" : [\"Discard\"]\n" +
             "}";
