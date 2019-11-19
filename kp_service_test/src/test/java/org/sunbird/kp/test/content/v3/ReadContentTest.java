@@ -121,24 +121,20 @@ public class ReadContentTest extends BaseCitrusTestRunner {
         );
     }
 
-    @Test(dataProvider = "readResourceContentWithInvalidIdentifier")
-    @CitrusParameters({"testName", "requestUrl", "httpStatusCode", "userType","valParams","mimeType"})
+    @Test
     @CitrusTest
-    public void testReadResourceContentWithInvalidIdentifier(
-            String testName, String requestUrl, HttpStatus httpStatusCode, String userType, Map<String, Object> valParams, String mimeType) {
-        getAuthToken(this, userType);
-        Map<String, Object> result = ContentUtil.createResourceContent(this, null, mimeType, null);
-        this.variable("contentIdVal", result.getOrDefault("content_id", "KP_TEST_000009999"));
-        this.variable("versionKeyVal", (String) result.getOrDefault("versionKey", "00000000000"));
-        dirIdMap.put(testName, (String) result.getOrDefault("content_id", "KP_TEST_000009999"));
+    public void testReadResourceContentWithInvalidIdentifier() {
+        String testName = ContentV3Scenario.TEST_READ_RESOURCE_CONTENT_WITH_INVALID_IDENTIFIER;
+        getAuthToken(this, Constant.CREATOR);
+        Map<String, Object> result = ContentUtil.createResourceContent(this, null, "application/pdf", null);
         performGetTest(
                 this,
                 TEMPLATE_DIR,
                 testName,
-                requestUrl + "KP_TEST_000009999",
+                APIUrl.READ_CONTENT + "KP_TEST_000009999",
                 null,
-                httpStatusCode,
-                valParams,
+                HttpStatus.NOT_FOUND,
+                null,
                 RESPONSE_JSON
         );
     }
@@ -226,16 +222,6 @@ public class ReadContentTest extends BaseCitrusTestRunner {
         };
     }
 
-    @DataProvider(name = "readResourceContentWithInvalidIdentifier")
-    public Object[][] readResourceContentWithInvalidIdentifier() {
-        return new Object[][]{
-                new Object[]{
-                        ContentV3Scenario.TEST_READ_RESOURCE_CONTENT_WITH_INVALID_IDENTIFIER, APIUrl.READ_CONTENT, HttpStatus.NOT_FOUND, Constant.CREATOR,
-                        null, null
-                }
-        };
-    }
-
     @DataProvider(name = "readResourceContentWithMode")
     public Object[][] readResourceContentWithMode() {
         return new Object[][]{
@@ -285,9 +271,9 @@ public class ReadContentTest extends BaseCitrusTestRunner {
                 new Object[]{
                         ContentV3Scenario.TEST_READ_PDF_CONTENT_AFTER_REVIEW, "contentInReview"
                 },
-//                new Object[]{
-//                        ContentV3Scenario.TEST_READ_PDF_CONTENT_AFTER_DISCARD, "contentDiscarded"
-//                },
+                new Object[]{
+                        ContentV3Scenario.TEST_READ_PDF_CONTENT_AFTER_DISCARD, "contentDiscarded"
+                },
                 new Object[]{
                         ContentV3Scenario.TEST_READ_PDF_CONTENT_AFTER_FLAG, "contentInFlagged"
                 },
