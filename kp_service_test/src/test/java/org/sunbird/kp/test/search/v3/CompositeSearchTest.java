@@ -12,7 +12,6 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -49,14 +48,17 @@ public class CompositeSearchTest extends BaseCitrusTestRunner {
 			add(textbookId);
 		}})).replace("boardVal", board);
 		System.out.println("searchPayload : " + searchPayload);
-		Map<String, Object> searchResult = CompositeSearchUtil.searchContent(this, payload, testName, null);
+		Map<String, Object> searchResult = CompositeSearchUtil.searchContent(this, searchPayload, testName, null);
+		System.out.println("count : "+searchResult.get("count"));
 		List<Map<String, Object>> content = (List<Map<String, Object>>) searchResult.get("content");
 		boolean found = false;
 		for (Map<String, Object> record : content) {
 			if (record.containsKey("relatedBoards")) {
-				String boardResult = (String) ((Map<String, Object>) record.get("relatedBoards")).get("board");
-				if (StringUtils.equals(board, boardResult) && StringUtils.equals(consumableTextbookId, (String) record.get("identifier"))) {
-					found = true;
+				List<Map<String, Object>> relatedBoards = (List<Map<String, Object>>)record.get("relatedBoards");
+				for(Map<String, Object> boardMap:relatedBoards){
+					if (StringUtils.equals(board, (String) boardMap.get("board")) && StringUtils.equals(consumableTextbookId, (String) record.get("identifier"))) {
+						found = true;
+					}
 				}
 			}
 		}
