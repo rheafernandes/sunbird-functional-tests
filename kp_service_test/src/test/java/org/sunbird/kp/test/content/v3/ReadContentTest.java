@@ -121,6 +121,24 @@ public class ReadContentTest extends BaseCitrusTestRunner {
         );
     }
 
+    @Test
+    @CitrusTest
+    public void testReadResourceContentWithInvalidIdentifier() {
+        String testName = ContentV3Scenario.TEST_READ_RESOURCE_CONTENT_WITH_INVALID_IDENTIFIER;
+        getAuthToken(this, Constant.CREATOR);
+        Map<String, Object> result = ContentUtil.createResourceContent(this, null, "application/pdf", null);
+        performGetTest(
+                this,
+                TEMPLATE_DIR,
+                testName,
+                APIUrl.READ_CONTENT + "KP_TEST_000009999",
+                null,
+                HttpStatus.NOT_FOUND,
+                null,
+                RESPONSE_JSON
+        );
+    }
+
     @Test(dataProvider = "readResourceContentWithMode")
     @CitrusParameters({"testName", "requestUrl", "httpStatusCode", "valParams", "workFlowStatus", "responseJson", "mode"})
     @CitrusTest
@@ -196,10 +214,6 @@ public class ReadContentTest extends BaseCitrusTestRunner {
                 new Object[]{
                         ContentV3Scenario.TEST_READ_RESOURCE_CONTENT_WITH_VALID_IDENTIFIER, APIUrl.READ_CONTENT, HttpStatus.OK, Constant.CREATOR,
                         new HashMap(){{put("identifier",null);put("versionKey",null);put("mimeType","video/x-youtube");put("status","Draft");}}, "video/x-youtube"
-                },
-                new Object[]{
-                        ContentV3Scenario.TEST_READ_RESOURCE_CONTENT_WITH_INVALID_IDENTIFIER, APIUrl.READ_CONTENT, HttpStatus.NOT_FOUND, Constant.CREATOR,
-                        null, null
                 }
         };
     }
@@ -211,10 +225,10 @@ public class ReadContentTest extends BaseCitrusTestRunner {
                         ContentV3Scenario.TEST_READ_RESOURCE_CONTENT_WITH_EDIT_MODE, APIUrl.READ_CONTENT, HttpStatus.OK, null, "contentInLiveImageDraft", RESPONSE_JSON, "edit"
                 },
                 new Object[]{
-                        ContentV3Scenario.TEST_READ_RESOURCE_CONTENT_WITH_INVALID_MODE, APIUrl.READ_CONTENT, HttpStatus.OK, null, "contentInLiveImageDraft", RESPONSE_JSON, "abc"
+                        ContentV3Scenario.TEST_READ_RESOURCE_CONTENT_WITH_INVALID_MODE, APIUrl.READ_CONTENT, HttpStatus.OK, null, "contentInDraft", RESPONSE_JSON, "abc"
                 },
                 new Object[]{
-                        ContentV3Scenario.TEST_READ_RESOURCE_CONTENT_WITH_EMPTY_MODE, APIUrl.READ_CONTENT, HttpStatus.OK, null, "contentInLiveImageDraft", RESPONSE_JSON, ""
+                        ContentV3Scenario.TEST_READ_RESOURCE_CONTENT_WITH_EMPTY_MODE, APIUrl.READ_CONTENT, HttpStatus.OK, null, "contentInDraft", RESPONSE_JSON, ""
                 }
         };
     }
@@ -231,7 +245,7 @@ public class ReadContentTest extends BaseCitrusTestRunner {
                         ContentV3Scenario.TEST_READ_RESOURCE_CONTENT_WITH_BODY_FIELDS, APIUrl.READ_CONTENT, HttpStatus.OK, null, "contentInLiveImageDraft", RESPONSE_JSON, "body"
                 },
                 new Object[]{
-                        ContentV3Scenario.TEST_READ_RESOURCE_CONTENT_WITH_EMPTY_FIELDS, APIUrl.READ_CONTENT, HttpStatus.OK, null, "contentInLiveImageDraft", RESPONSE_JSON, ""
+                        ContentV3Scenario.TEST_READ_RESOURCE_CONTENT_WITH_EMPTY_FIELDS, APIUrl.READ_CONTENT, HttpStatus.OK, null, "contentInDraft", RESPONSE_JSON, ""
                 }
         };
     }
