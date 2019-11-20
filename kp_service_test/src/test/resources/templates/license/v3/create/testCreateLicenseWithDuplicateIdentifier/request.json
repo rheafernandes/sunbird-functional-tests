@@ -1,8 +1,7 @@
 {
   "request": {
     "license": {
-      "name": "kp-test",
-      "code": "${identifier}",
+      "name": "${identifier}",
       "url": "www.url.com"
     }
   }

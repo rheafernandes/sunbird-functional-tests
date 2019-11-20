@@ -11,6 +11,6 @@
     },
     "responseCode": "OK",
     "result": {
-        "node_id": "${identifier}",
+        "node_id": "${identifier}"
     }
 }

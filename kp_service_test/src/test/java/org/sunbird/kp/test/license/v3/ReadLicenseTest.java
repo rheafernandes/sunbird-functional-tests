@@ -28,7 +28,7 @@ public class ReadLicenseTest extends BaseCitrusTestRunner {
     @CitrusParameters({"testName", "fields_present", "fields_value"})
     @CitrusTest
     public void testReadLicenseWithValidRequest(String testName, Boolean fields_present, String fields_value) {
-        identifier = "kp_ft_license_" + generateRandomDigits(9);
+        identifier = "KP_FT_" + generateRandomDigits(9);
         identifier = (String) LicenseUtil.createLicense(this, null, null).get("identifier");
         this.variable("identifier", identifier);
         getAuthToken(this, Constant.CREATOR);

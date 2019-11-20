@@ -14,9 +14,8 @@
     "license" : {
       "identifier" : "${identifier}",
       "lastStatusChangedOn" : "@matchesDatePattern('yyyy-MM-dd')@",
-      "code" : "${identifier}",
       "consumerId" : "@ignore@",
-      "name" : "kp_test_name",
+      "name" : "@startsWith('KP_FT_')@",
       "lastUpdatedOn" : "@matchesDatePattern('yyyy-MM-dd')@",
       "createdOn" : "@matchesDatePattern('yyyy-MM-dd')@",
       "url" : "www.kp-test.in",
