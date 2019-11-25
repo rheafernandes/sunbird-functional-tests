@@ -1,16 +1,16 @@
 {
     "id": "org.sunbird.license.update",
     "ver": "3.0",
-    "ts": null,
+    "ts": "@matchesDatePattern('yyyy-MM-dd')@",
     "params": {
-        "resmsgid": null,
+        "resmsgid": "@ignore@",
         "msgid": null,
-        "err": "ERROR_RESTRICTED_PROP",
-        "status": "failed",
-        "errmsg": "Properties in list [status, identifier, code] are not allowed in request"
+        "err": null,
+        "status": "successful",
+        "errmsg": null
     },
-    "responseCode": "CLIENT_ERROR",
+    "responseCode": "OK",
     "result": {
-        "messages": null
+        "node_id": "${identifier}"
     }
 }

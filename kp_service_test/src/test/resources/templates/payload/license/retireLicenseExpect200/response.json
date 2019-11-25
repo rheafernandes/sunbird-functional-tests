@@ -1,9 +1,9 @@
 {
     "id": "org.sunbird.license.retire",
     "ver": "3.0",
-    "ts": null,
+    "ts": "@matchesDatePattern('yyyy-MM-dd')@",
     "params": {
-        "resmsgid": null,
+        "resmsgid": "@ignore@",
         "msgid": null,
         "err": null,
         "status": "successful",

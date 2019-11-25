@@ -81,6 +81,9 @@ public class UpdateLicenseTest extends BaseCitrusTestRunner {
                 new Object[]{
                         LicenseV3Scenario.TEST_UPDATE_LICENSE_WITH_METADATA_NAME_CASE_MISMATCH
                 },
+                new Object[]{
+                        LicenseV3Scenario.TEST_UPDATE_LICENSE_WITH_CODE
+                },
         };
     }
 
@@ -89,9 +92,6 @@ public class UpdateLicenseTest extends BaseCitrusTestRunner {
         return new Object[][]{
                 new Object[]{
                         LicenseV3Scenario.TEST_UPDATE_LICENSE_WITH_STATUS
-                },
-                new Object[]{
-                        LicenseV3Scenario.TEST_UPDATE_LICENSE_WITH_CODE
                 },
                 new Object[]{
                         LicenseV3Scenario.TEST_UPDATE_LICENSE_WITH_DATA_TYPE_MISMATCH

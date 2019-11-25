@@ -1,10 +1,9 @@
 {
     "id": "org.sunbird.license.retire",
     "ver": "3.0",
-    "ts": null,
+    "ts": "@matchesDatePattern('yyyy-MM-dd')@",
     "params": {
-        "resmsgid": null,
-        "msgid": null,
+        "resmsgid": "@ignore@","msgid": null,
         "err": "NOT_FOUND",
         "status": "failed",
         "errmsg": "Error! Node(s) doesn't Exists. | [Invalid Node Id.]: invalid123"

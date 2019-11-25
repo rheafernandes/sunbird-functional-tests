@@ -1,10 +1,10 @@
 {
   "id" : "org.sunbird.license.read",
   "ver" : "3.0",
-  "ts" : null,
+  "ts": "@matchesDatePattern('yyyy-MM-dd')@",
   "params" : {
-    "resmsgid" : null,
-    "msgid" : null,
+    "resmsgid" : "@ignore@",
+"msgid" : null,
     "err" : null,
     "status" : "successful",
     "errmsg" : null
@@ -14,7 +14,6 @@
     "license" : {
       "identifier" : "${identifier}",
       "lastStatusChangedOn" : "@matchesDatePattern('yyyy-MM-dd')@",
-      "code" : "${identifier}",
       "consumerId" : "@ignore@",
       "channel" : "channel-01",
       "description" : "some description",
@@ -23,7 +22,7 @@
       "versionKey" : "@isNumber()@",
       "Name" : "updated name",
       "appId" : "@ignore@",
-      "name" : "kp_test_name",
+      "name" : "KP_FT_${idVal}",
       "lastUpdatedOn" : "@matchesDatePattern('yyyy-MM-dd')@",
       "status" : "Live"
     }
