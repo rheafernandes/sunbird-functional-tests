@@ -32,21 +32,23 @@ public class CompositeSearchTest extends BaseCitrusTestRunner {
 		getAuthToken(this, Constant.CREATOR);
 		//TODO: Get Board Using Framework API.
 		String board = "ICSE";
+		String anotherBoard = "testboard"+generateRandomDigits(5);
 		String textbookId = (String) ContentUtil.createCollectionContent(this, null, "textbook", null).get("content_id");
 		System.out.println("Textbook Id : " + textbookId);
 		String updateReqPayload = "{\"request\":{\"content\":{\"board\":\"boardVal\"}}}".replace("boardVal", board);
 		String updatedTbId = (String) ContentUtil.systemUpdate(this, testContext, textbookId, updateReqPayload, testName, null).get("content_id");
 		Assert.assertTrue(StringUtils.isNotBlank(textbookId) && StringUtils.isNotBlank(updatedTbId));
 		String consumableTextbookId = (String) ContentUtil.createCollectionContent(this, null, "textbook", null).get("content_id");
-		String payload = "{\"request\":{\"content\":{\"relatedBoards\":[{\"board\":\"boardVal\"}]}}}".replace("boardVal", board);
+		String payload = "{\"request\":{\"content\":{\"relatedBoards\":boardVal}}}".replace("boardVal", objectMapper.writeValueAsString(new ArrayList<String>(){{
+			add(board);
+			add(anotherBoard);
+		}}));
 		String updatedId = (String) ContentUtil.systemUpdate(this, testContext, consumableTextbookId, payload, testName, null).get("content_id");
 		Assert.assertTrue(StringUtils.isNotBlank(textbookId) && StringUtils.isNotBlank(updatedId));
 		ContentUtil.publishContent(this, null, "public", consumableTextbookId, null);
 		delay(this, 60000);
 		//search content and validate
-		String searchPayload = SearchPayload.SEARCH_CONTENT_WITH_IDENTIFIER_AND_BOARD.replace("contentIdVal", objectMapper.writeValueAsString(new ArrayList<String>() {{
-			add(textbookId);
-		}})).replace("boardVal", board);
+		String searchPayload = SearchPayload.SEARCH_CONTENT_WITH_BOARD.replace("boardVal", board);
 		System.out.println("searchPayload : " + searchPayload);
 		Map<String, Object> searchResult = CompositeSearchUtil.searchContent(this, searchPayload, testName, null);
 		System.out.println("count : "+searchResult.get("count"));
@@ -54,9 +56,9 @@ public class CompositeSearchTest extends BaseCitrusTestRunner {
 		boolean found = false;
 		for (Map<String, Object> record : content) {
 			if (record.containsKey("relatedBoards")) {
-				List<Map<String, Object>> relatedBoards = (List<Map<String, Object>>)record.get("relatedBoards");
-				for(Map<String, Object> boardMap:relatedBoards){
-					if (StringUtils.equals(board, (String) boardMap.get("board")) && StringUtils.equals(consumableTextbookId, (String) record.get("identifier"))) {
+				List<String> relatedBoards = (List<String>)record.get("relatedBoards");
+				for(String relBoard:relatedBoards){
+					if (StringUtils.equals(relBoard, anotherBoard) && StringUtils.equals(consumableTextbookId, (String) record.get("identifier"))) {
 						found = true;
 					}
 				}
