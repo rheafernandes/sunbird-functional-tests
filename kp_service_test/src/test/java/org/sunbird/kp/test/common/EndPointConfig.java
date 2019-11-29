@@ -41,4 +41,12 @@ public class EndPointConfig {
                 .build();
     }
 
+    @Bean
+    public HttpClient kpContentServiceClient() {
+        return CitrusEndpoints.http()
+                .client()
+                .requestUrl(AppConfig.config.getString("kp_content_service_base_uri"))
+                .build();
+    }
+
 }
