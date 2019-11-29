@@ -20,6 +20,7 @@ public class Constant {
 
     //Test Client Constants
     public static final String KP_ENDPOINT = "kpRestClient";
+    public static final String KP_CONTENT_SERVICE_ENDPOINT = "kpContentServiceClient";
     public static final String KP_SEARCH_SERVICE_ENDPOINT = "kpSearchServiceClient";
     public static final String KP_DIAL_SERVICE_ENDPOINT = "kpDIALServiceClient";
     public static final String KEYCLOAK_ENDPOINT = "keycloakTestClient";
