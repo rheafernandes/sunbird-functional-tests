@@ -12,6 +12,7 @@
   "responseCode": "OK",
   "result": {
     "node_id": "@startsWith('KP_FT_')@",
+    "identifier": "@startsWith('KP_FT_')@",
     "versionKey": "@isNumber()@"
   }
 }

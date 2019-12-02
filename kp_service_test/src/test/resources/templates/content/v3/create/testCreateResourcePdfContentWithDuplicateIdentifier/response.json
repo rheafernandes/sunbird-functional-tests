@@ -10,5 +10,7 @@
     "errmsg": "Object already exists with identifier: ${identifierVal}"
   },
   "responseCode": "CLIENT_ERROR",
-  "result": {}
+  "result": {
+    "messages":null
+  }
 }

@@ -5,10 +5,13 @@
   "params": {
     "resmsgid": "@ignore@",
     "msgid": null,
-    "err": "@ignore@",
+    "err": "ERR_PLUGIN_CODE_REQUIRED",
     "status": "failed",
-    "errmsg": "@ignore@"
+    "errmsg": "Unique code is mandatory for plugins"
   },
   "responseCode": "CLIENT_ERROR",
-  "result": {}
+  "result": {
+    "messages":null
+  }
 }
+

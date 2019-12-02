@@ -3,12 +3,14 @@
   "ver": "3.0",
   "ts": "@matchesDatePattern('yyyy-MM-dd')@",
   "params": {
-"resmsgid": "@ignore@",
-"msgid": null,
-"err": "ERR_CONTENT_INVALID_CONTENT_MIMETYPE_TYPE",
-"status": "failed",
-"errmsg": "Mime Type cannot be empty"
-},
-"responseCode": "CLIENT_ERROR",
-"result": {}
+    "resmsgid": "@ignore@",
+    "msgid": null,
+    "err": "CLIENT_ERROR",
+    "status": "failed",
+    "errmsg": "Validation Errors"
+  },
+  "responseCode": "CLIENT_ERROR",
+  "result":{
+    "messages":["Required Metadata mimeType not set"]
+  }
 }
