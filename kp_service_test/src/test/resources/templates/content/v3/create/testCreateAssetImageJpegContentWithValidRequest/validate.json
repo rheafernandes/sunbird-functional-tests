@@ -44,7 +44,7 @@
       "languageCode": ["en"],
       "version": "@isNumber()@",
       "versionKey": "@isNumber()@",
-      "license": "Creative Commons Attribution (CC BY)",
+      "license": "CC BY 4.0",
       "idealScreenDensity": "hdpi",
       "framework": "NCF",
       "compatibilityLevel": "@isNumber()@",

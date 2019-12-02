@@ -23,7 +23,6 @@
       "mimeType": "application/pdf",
       "idealScreenSize": "normal",
       "createdOn": "@matchesDatePattern('yyyy-MM-dd')@",
-      "collections": [],
       "appId": "@ignore@",
       "contentDisposition": "inline",
       "contentEncoding": "identity",
@@ -60,7 +59,6 @@
       ],
       "compatibilityLevel": "@isNumber()@",
       "name": "KP Integration Test Content",
-      "usedByContent": [],
       "status": "Draft"
     }
   }
