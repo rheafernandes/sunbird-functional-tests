@@ -40,10 +40,10 @@
         "All"
       ],
       "mediaType": "content",
-      "osId": "org.ekstep.launcher",
+      "osId": "org.ekstep.quiz.app",
       "languageCode": ["en"],
-     "version": "@isNumber()@",
-"versionKey": "@isNumber()@",
+      "version": "@isNumber()@",
+      "versionKey": "@isNumber()@",
       "license": "CC BY 4.0",
       "idealScreenDensity": "hdpi",
       "framework": "NCF",

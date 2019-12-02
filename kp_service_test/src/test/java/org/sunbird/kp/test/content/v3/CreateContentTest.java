@@ -130,7 +130,6 @@ public class CreateContentTest extends BaseCitrusTestRunner {
                 new Object[]{
                         ContentV3Scenario.TEST_CREATE_RESOURCE_WITH_CONCEPTS
                 }
-
         };
     }
 
