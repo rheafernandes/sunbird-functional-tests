@@ -10,5 +10,5 @@
     "errmsg": "IL_UNIQUE_ID is a reserved system property"
   },
   "responseCode": "CLIENT_ERROR",
-  "result": {}
+  "result": {"messages":null}
 }

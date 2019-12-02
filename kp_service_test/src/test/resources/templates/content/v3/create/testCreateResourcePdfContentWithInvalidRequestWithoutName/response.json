@@ -5,7 +5,7 @@
   "params": {
     "resmsgid": "@ignore@",
     "msgid": null,
-    "err": "ERR_GRAPH_ADD_NODE_VALIDATION_FAILED",
+    "err": "CLIENT_ERROR",
     "status": "failed",
     "errmsg": "Validation Errors"
   },

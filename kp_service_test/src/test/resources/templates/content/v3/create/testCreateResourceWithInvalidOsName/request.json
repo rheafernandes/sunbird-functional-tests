@@ -6,7 +6,7 @@
       "code": "kp.ft.resource.pdf",
       "mimeType": "application/pdf",
       "contentType":"Resource",
-      "os": "Other"
+      "os": ["Other"]
     }
   }
 }

@@ -1,18 +1,16 @@
 {
-  "id": "ekstep.learning.content.create",
-  "ver": "3.0",
-  "ts": "@matchesDatePattern('yyyy-MM-dd')@",
-  "params": {
-    "resmsgid": "@ignore@",
-    "msgid": null,
-    "err": "ERR_GRAPH_UPDATE_NODE_VALIDATION_FAILED",
-    "status": "failed",
-    "errmsg": "Failed to update relations and tags"
-  },
-  "responseCode": "CLIENT_ERROR",
-  "result": {
-    "messages": [
-      "Node 'LO5322' not Found"
-    ]
-  }
+    "id": "ekstep.learning.content.create",
+    "ver": "3.0",
+    "ts": "@matchesDatePattern('yyyy-MM-dd')@",
+    "params": {
+        "resmsgid": "@ignore@",
+        "msgid": null,
+        "err": "ERR_INVALID_NODE",
+        "status": "failed",
+        "errmsg": "Node Not Found With Identifier [LO5322]"
+    },
+    "responseCode": "RESOURCE_NOT_FOUND",
+    "result": {
+        "messages": null
+    }
 }
