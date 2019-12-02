@@ -13,6 +13,7 @@
   "result": {
     "messages": [
       "Metadata category should be one of: [core, learning, literacy, math, science, time, wordnet, game, mcq, mtf, ftb, library]",
-      "Metadata category should be a/an Array value",
+      "Metadata category should be a/an Array value"
+      ]
   }
 }
