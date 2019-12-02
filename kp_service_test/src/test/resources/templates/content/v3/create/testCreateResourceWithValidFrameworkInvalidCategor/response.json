@@ -12,6 +12,7 @@
   "responseCode": "CLIENT_ERROR",
   "result": {
     "messages": [
-      "Metadata category should be a list of values from: [core, learning, literacy, math, science, time, wordnet, game, mcq, mtf, ftb, library]"]
+      "Metadata category should be one of: [core, learning, literacy, math, science, time, wordnet, game, mcq, mtf, ftb, library]",
+      "Metadata category should be a/an Array value",
   }
 }
