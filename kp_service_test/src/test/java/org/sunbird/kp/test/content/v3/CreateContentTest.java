@@ -89,6 +89,17 @@ public class CreateContentTest extends BaseCitrusTestRunner {
         }
     }
 
+    @Test(dataProvider = "createResourceContentWithNotFound")
+    @CitrusParameters({"testName"})
+    @CitrusTest
+    public void testCreateResourceContentWithNotFound(String testName){
+        identifier = "KP_FT_" + generateRandomDigits(9);
+        this.variable("contentIdVal", identifier);
+        getAuthToken(this, Constant.CREATOR);
+        performPostTest(this, TEMPLATE_DIR, testName, APIUrl.CREATE_CONTENT, null, REQUEST_JSON,
+                MediaType.APPLICATION_JSON, HttpStatus.NOT_FOUND, null, RESPONSE_JSON);
+    }
+
     @DataProvider(name = "createResourceContentWithValidRequest")
     public Object[][] createResourceContentWithValidRequest() {
         return new Object[][]{
@@ -119,7 +130,6 @@ public class CreateContentTest extends BaseCitrusTestRunner {
                 new Object[]{
                         ContentV3Scenario.TEST_CREATE_RESOURCE_WITH_CONCEPTS
                 }
-
         };
     }
 
@@ -185,9 +195,6 @@ public class CreateContentTest extends BaseCitrusTestRunner {
                         ContentV3Scenario.TEST_CREATE_RESOURCE_WITH_INVALID_OS_NAME
                 },
                 new Object[]{
-                        ContentV3Scenario.TEST_CREATE_RESOURCE_WITH_INVALID_CONCEPT_ID
-                },
-                new Object[]{
                         ContentV3Scenario.TEST_CREATE_RESOURCE_CONTENT_WITH_INVALID_LICENSE_TYPE
                 },
                 new Object[]{
@@ -201,6 +208,15 @@ public class CreateContentTest extends BaseCitrusTestRunner {
                 },
                 new Object[]{
                         ContentV3Scenario.TEST_CREATE_RESOURCE_CONTENT_WITH_VALID_FRAMEWORK_INVALID_CATEGORY
+                }
+        };
+    }
+
+    @DataProvider(name = "createResourceContentWithNotFound")
+    public Object[] createResourceContentWithNotFound() {
+        return new Object[][]{
+                new Object[]{
+                        ContentV3Scenario.TEST_CREATE_RESOURCE_WITH_INVALID_CONCEPT_ID
                 }
         };
     }

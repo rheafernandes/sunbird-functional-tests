@@ -41,13 +41,13 @@
       ],
       "mediaType": "content",
       "osId": "org.ekstep.quiz.app",
-      "languageCode": "en",
+      "languageCode": ["en"],
       "version": "@isNumber()@",
       "versionKey": "@isNumber()@",
-      "license": "Creative Commons Attribution (CC BY)",
+      "license": "CC BY 4.0",
       "idealScreenDensity": "hdpi",
       "framework": "NCF",
-      "compatibilityLevel": 1.0,
+      "compatibilityLevel": "@isNumber()@",
       "name": "KP Integration Test Content",
       "status": "Draft"
     }
