@@ -315,7 +315,8 @@ public class BaseCitrusTestRunner extends TestNGCitrusTestRunner {
     }
 
     private static String getEndPoint(String reqUrl) {
-        return CS_API_LIST.contains(reqUrl) ? Constant.KP_CONTENT_SERVICE_ENDPOINT : Constant.KP_ENDPOINT;
+        String newReqUrl = reqUrl.replaceAll("KP_FT_\\d+\\??[a-zA-Z&=,]*", "");
+        return CS_API_LIST.contains(newReqUrl) ? Constant.KP_CONTENT_SERVICE_ENDPOINT : Constant.KP_ENDPOINT;
     }
 
 }
