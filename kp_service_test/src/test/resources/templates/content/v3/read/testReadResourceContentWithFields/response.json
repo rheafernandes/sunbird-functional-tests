@@ -12,10 +12,8 @@
   "responseCode": "OK",
   "result": {
     "content": {
-      "identifier": "${contentIdVal}",
       "name": "KP Integration Test Content",
-      "status": "Live",
-      "languageCode": []
+      "status": "Live"
     }
   }
 }

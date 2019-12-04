@@ -12,8 +12,6 @@
   "responseCode": "OK",
   "result": {
     "content": {
-      "identifier": "${contentIdVal}",
-      "languageCode": [],
       "status": "Draft"
     }
   }

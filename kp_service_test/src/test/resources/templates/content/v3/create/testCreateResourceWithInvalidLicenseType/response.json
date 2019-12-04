@@ -7,7 +7,7 @@
         "msgid": null,
         "err": "ERR_INVALID_EDGE_PROPERTY",
         "status": "failed",
-        "errmsg": "license value should be one of [CC BY-NC-SA 4.0, CC BY-NC 4.0, CC BY-SA 4.0, Standard Youtube License, CC BY 4.0]"
+        "errmsg": "@ignore@"
     },
     "responseCode": "CLIENT_ERROR",
     "result": {

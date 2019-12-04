@@ -6,7 +6,7 @@
       "code": "citrus:Code",
       "mimeType": "application/pdf",
       "framework":"NCFInvalid",
-      "subject": "German"
+      "subject": ["German"]
     }
   }
 }
