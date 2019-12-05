@@ -61,7 +61,7 @@
       ],
       "versionKey": "@isNumber()@",
       "prevState": "Draft",
-      "license": "Creative Commons Attribution (CC BY)",
+      "license": "CC BY 4.0",
       "idealScreenDensity": "hdpi",
       "s3Key": "@ignore@",
       "framework": "NCF",
