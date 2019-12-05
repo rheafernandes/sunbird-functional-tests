@@ -24,7 +24,6 @@
       "mimeType": "application/vnd.ekstep.ecml-archive",
       "idealScreenSize": "normal",
       "createdOn": "@matchesDatePattern('yyyy-MM-dd')@",
-      "appId": "@ignore@",
       "contentDisposition": "inline",
       "artifactUrl": "@ignore@",
       "contentEncoding": "gzip",

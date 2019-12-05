@@ -24,7 +24,6 @@
       "mimeType": "application/vnd.ekstep.html-archive",
       "idealScreenSize": "normal",
       "createdOn": "@matchesDatePattern('yyyy-MM-dd')@",
-      "appId": "@ignore@",
       "contentDisposition": "inline",
       "contentEncoding": "gzip",
       "lastUpdatedOn": "@matchesDatePattern('yyyy-MM-dd')@",
