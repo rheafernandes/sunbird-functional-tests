@@ -131,7 +131,7 @@ public class ReadContentTest extends BaseCitrusTestRunner {
                 this,
                 TEMPLATE_DIR,
                 testName,
-                APIUrl.READ_CONTENT + "KP_TEST_000009999",
+                APIUrl.READ_CONTENT + "KP_FT_000009999",
                 null,
                 HttpStatus.NOT_FOUND,
                 null,
