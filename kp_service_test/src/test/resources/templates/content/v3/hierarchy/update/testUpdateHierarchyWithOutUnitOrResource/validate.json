@@ -45,7 +45,7 @@
       "osId": "org.ekstep.quiz.app",
       "version": 2,
       "versionKey": "@ignore@",
-      "license": "Creative Commons Attribution (CC BY)",
+      "license": "CC BY 4.0",
       "idealScreenDensity": "hdpi",
       "framework": "NCF",
       "depth": 0,
