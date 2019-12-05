@@ -5,10 +5,12 @@
   "params" : {
     "resmsgid" : "@ignore@",
     "msgid" : null,
-    "err" : "ERR_CONTENT_NOT_FOUND",
+    "err" : "NOT_FOUND",
     "status" : "failed",
-    "errmsg" : "Content not found with id: KP_TEST_000009999"
+    "errmsg" : "Error! Node(s) doesn't Exists. | [Invalid Node Id.]: KP_FT_000009999"
   },
   "responseCode" : "RESOURCE_NOT_FOUND",
-  "result" : { }
+  "result" : {
+    "messages": null
+  }
 }

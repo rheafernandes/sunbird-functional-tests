@@ -12,9 +12,7 @@
   "responseCode": "OK",
   "result": {
     "content": {
-      "body": "@ignore@",
-      "identifier": "@ignore@",
-      "languageCode": []
-    }
+      "body": "@ignore@"
+      }
   }
 }

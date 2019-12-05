@@ -12,6 +12,7 @@
   "responseCode" : "OK",
   "result" : {
     "content" : {
+      "appId": "@ignore@",
       "ownershipType" : [ "createdBy" ],
       "previewUrl" : "@ignore@",
       "code" : "kp.ft.resource.pdf",
@@ -59,7 +60,9 @@
       "compatibilityLevel" :"@isNumber()@",
       "name" : "KP Integration Test Content",
       "status" : "Unlisted",
-      "languageCode" : "en"
+      "languageCode": [
+        "en"
+      ]
     }
   }
 }
