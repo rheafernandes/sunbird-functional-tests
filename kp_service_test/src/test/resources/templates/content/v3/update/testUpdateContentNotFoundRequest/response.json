@@ -6,7 +6,7 @@
     "resmsgid": "@ignore@",
     "msgid": null,
     "status": "failed",
-    "err": "ERR_GRAPH_SEARCH_UNKNOWN_ERROR",
+    "err": "NOT_FOUND",
     "errmsg": "@ignore@"
   },
   "responseCode": "RESOURCE_NOT_FOUND",
