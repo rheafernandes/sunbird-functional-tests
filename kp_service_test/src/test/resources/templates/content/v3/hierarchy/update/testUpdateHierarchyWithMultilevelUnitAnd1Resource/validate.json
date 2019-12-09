@@ -96,7 +96,7 @@
                   "mediaType": "content",
                   "osId": "org.ekstep.quiz.app",
                   "lastPublishedBy": "KP_FT_PUBLISHER",
-                  "version": 1,
+                  "version": "@isNumber()@",
                   "pkgVersion": "@isNumber()@",
                   "pragma": [
                     "external"
@@ -131,7 +131,7 @@
       "contentDisposition": "inline",
       "contentEncoding": "gzip",
       "lastUpdatedOn": "@ignore@",
-      "contentType": "Textbook",
+      "contentType": "TextBook",
       "dialcodeRequired": "No",
       "identifier": "${rootId}",
       "audience": [

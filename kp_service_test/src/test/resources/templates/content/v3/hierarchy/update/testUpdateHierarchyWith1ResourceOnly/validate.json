@@ -47,7 +47,7 @@
       "contentDisposition": "inline",
       "contentEncoding": "gzip",
       "lastUpdatedOn": "@matchesDatePattern('yyyy-MM-dd')@",
-      "contentType": "Textbook",
+      "contentType": "TextBook",
       "dialcodeRequired": "No",
       "identifier": "${rootId}",
       "audience": [
@@ -68,7 +68,7 @@
       "idealScreenDensity": "hdpi",
       "depth": 0,
       "framework": "NCF",
-      "compatibilityLevel": 1.0,
+      "compatibilityLevel": "@isNumber()@",
       "name": "KP Integration Test Collection Content",
       "status": "Draft"
     }

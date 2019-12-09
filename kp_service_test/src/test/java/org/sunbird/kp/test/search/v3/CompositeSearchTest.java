@@ -33,12 +33,12 @@ public class CompositeSearchTest extends BaseCitrusTestRunner {
 		//TODO: Get Board Using Framework API.
 		String board = "ICSE";
 		String anotherBoard = "testboard"+generateRandomDigits(5);
-		String textbookId = (String) ContentUtil.createCollectionContent(this, null, "textbook", null).get("content_id");
+		String textbookId = (String) ContentUtil.createCollectionContent(this, null, "textBook", null).get("content_id");
 		System.out.println("Textbook Id : " + textbookId);
 		String updateReqPayload = "{\"request\":{\"content\":{\"board\":\"boardVal\"}}}".replace("boardVal", board);
 		String updatedTbId = (String) ContentUtil.systemUpdate(this, testContext, textbookId, updateReqPayload, testName, null).get("content_id");
 		Assert.assertTrue(StringUtils.isNotBlank(textbookId) && StringUtils.isNotBlank(updatedTbId));
-		String consumableTextbookId = (String) ContentUtil.createCollectionContent(this, null, "textbook", null).get("content_id");
+		String consumableTextbookId = (String) ContentUtil.createCollectionContent(this, null, "textBook", null).get("content_id");
 		String payload = "{\"request\":{\"content\":{\"relatedBoards\":boardVal}}}".replace("boardVal", objectMapper.writeValueAsString(new ArrayList<String>(){{
 			add(board);
 			add(anotherBoard);

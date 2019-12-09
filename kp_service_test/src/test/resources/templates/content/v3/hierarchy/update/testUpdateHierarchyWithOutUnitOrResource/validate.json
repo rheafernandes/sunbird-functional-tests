@@ -29,7 +29,7 @@
       "contentDisposition": "inline",
       "contentEncoding": "gzip",
       "lastUpdatedOn": "@ignore@",
-      "contentType": "Textbook",
+      "contentType": "TextBook",
       "dialcodeRequired": "No",
       "identifier": "${rootId}",
       "audience": [
