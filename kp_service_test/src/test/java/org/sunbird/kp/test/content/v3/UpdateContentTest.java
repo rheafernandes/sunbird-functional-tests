@@ -162,9 +162,9 @@ public class UpdateContentTest extends BaseCitrusTestRunner {
                 new Object[]{
                         ContentV3Scenario.TEST_UPDATE_CONTENT_WITH_INVALID_VERSION_KEY, "application/pdf", "contentInDraft"
                 },
-                new Object[]{
+                /*new Object[]{
                         ContentV3Scenario.TEST_UPDATE_CONTENT_WITH_CHANGED_STATUS, "application/pdf", "contentInDraft"
-                },
+                },*/
                 new Object[]{
                         ContentV3Scenario.TEST_UPDATE_CONTENT_WITH_INVALID_METADATA, "application/pdf", "contentInDraft"
                 },
@@ -172,9 +172,9 @@ public class UpdateContentTest extends BaseCitrusTestRunner {
                 new Object[]{
                         ContentV3Scenario.TEST_UPDATE_CONTENT_WITH_INVALID_CONTENT_TYPE, "application/pdf", "contentInDraft"
                 },
-                new Object[]{
+                /*new Object[]{
                         ContentV3Scenario.TEST_UPDATE_WITH_SYSTEM_PROPERTY, "application/pdf", "contentInDraft"
-                },
+                },*/
                 // TODO: Uncomment in KP-2.0
 //                new Object[]{
 //                        ContentV3Scenario.TEST_UPDATE_CONTENT_IN_RETIRED, "application/pdf", "contentRetired"

@@ -12,7 +12,7 @@
   "responseCode": "CLIENT_ERROR",
   "result": {
     "messages": [
-      "Please select a valid framework. This framework doesn't have category: subject"
+      "subject range data is empty from the given framework."
     ]
   }
 }
