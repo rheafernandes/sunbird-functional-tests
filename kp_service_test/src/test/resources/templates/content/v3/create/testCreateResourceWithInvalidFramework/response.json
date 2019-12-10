@@ -7,7 +7,7 @@
     "msgid": null,
     "err": "CLIENT_ERROR",
     "status": "failed",
-    "errmsg": "Validation Errors"
+    "errmsg": "Validation Errors."
   },
   "responseCode": "CLIENT_ERROR",
   "result": {
