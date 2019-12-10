@@ -12,6 +12,7 @@
   "responseCode": "OK",
   "result": {
     "content": {
+      "identifier":"${contentIdVal}",
       "status": "Draft"
     }
   }
