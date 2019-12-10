@@ -5,7 +5,7 @@
   "params": {
     "resmsgid": "@ignore@",
     "msgid": null,
-    "err": "ERR_GRAPH_SEARCH_UNKNOWN_ERROR",
+    "err": "NOT_FOUND",
     "status": "failed",
     "errmsg": "@ignore@"
   },
