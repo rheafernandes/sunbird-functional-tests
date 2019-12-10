@@ -11,7 +11,8 @@
   },
   "responseCode": "OK",
   "result": {
+    "identifier":"${contentIdVal}",
     "node_id": "${contentIdVal}",
-    "versionKey": "@ignore@"
+    "versionKey": "@isNumber()@"
   }
 }

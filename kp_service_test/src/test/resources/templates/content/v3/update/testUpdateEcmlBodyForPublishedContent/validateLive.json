@@ -67,7 +67,7 @@
       "compatibilityLevel": "@isNumber()@",
       "name": "KP Integration Test Content",
       "status": "Live",
-      "languageCode": "en"
+      "languageCode": ["en"]
     }
   }
 }
