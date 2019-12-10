@@ -47,9 +47,9 @@ public class PublishMultiStageScenarioTest extends BaseCitrusTestRunner {
         ContentUtil.updateContentHierarchy(this, collectionId, "collection", resourceId, null, null);
         ContentUtil.publishContent(this, null, "public", collectionId, null);
 
-        String textbookId = (String) ContentUtil.createCollectionContent(this, null, "textbook", null).get("content_id");
+        String textbookId = (String) ContentUtil.createCollectionContent(this, null, "textBook", null).get("content_id");
         System.out.println("Textbook Id : " + textbookId);
-        ContentUtil.updateContentHierarchy(this, textbookId, "textbook", collectionId, null, null);
+        ContentUtil.updateContentHierarchy(this, textbookId, "textBook", collectionId, null, null);
         ContentUtil.publishContent(this, null, "public", textbookId, null);
 
         this.getTestCase().setName("testPublishTextbookContentWithResourceHavingConceptRelation");
@@ -90,9 +90,9 @@ public class PublishMultiStageScenarioTest extends BaseCitrusTestRunner {
         Assert.assertNotNull(uploadResult.get("content_url"));
         ContentUtil.publishContent(this, null, "public", resourceId, null);
 
-        String textbookId = (String) ContentUtil.createCollectionContent(this, null, "textbook", null).get("content_id");
+        String textbookId = (String) ContentUtil.createCollectionContent(this, null, "textBook", null).get("content_id");
         System.out.println("Textbook Id : " + textbookId);
-        ContentUtil.updateContentHierarchy(this, textbookId, "textbook", resourceId, null, null);
+        ContentUtil.updateContentHierarchy(this, textbookId, "textBook", resourceId, null, null);
         ContentUtil.publishContent(this, null, "public", textbookId, null);
 
         delay(this, 40000);
@@ -129,9 +129,9 @@ public class PublishMultiStageScenarioTest extends BaseCitrusTestRunner {
         Assert.assertNotNull(uploadResult.get("content_url"));
         ContentUtil.publishContent(this, null, "public", resourceId, null);
 
-        String textbookId = (String) ContentUtil.createCollectionContent(this, null, "textbook", null).get("content_id");
+        String textbookId = (String) ContentUtil.createCollectionContent(this, null, "textBook", null).get("content_id");
         System.out.println("Textbook Id : " + textbookId);
-        ContentUtil.updateContentHierarchy(this, textbookId, "textbook", resourceId, null, null);
+        ContentUtil.updateContentHierarchy(this, textbookId, "textBook", resourceId, null, null);
         ContentUtil.publishContent(this, null, "public", textbookId, null);
 
         delay(this, 40000);
