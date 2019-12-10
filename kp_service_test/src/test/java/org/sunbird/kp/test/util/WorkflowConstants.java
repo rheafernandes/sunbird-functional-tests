@@ -23,7 +23,7 @@ public class WorkflowConstants {
             "\t\"contentInUnlisted\" : [\"Upload\", \"Unlisted\"],\n" +
             "\t\"contentInFlagged\" : [\"Upload\", \"Publish\", \"Get\", \"Flag\"],\n" +
             "\t\"contentInFlagDraft\" :  [\"Upload\", \"Publish\", \"Get\", \"Flag\", \"AcceptFlag\"],\n" +
-            "\t\"contentInFlagReview\" :  [\"Upload\", \"Publish\", \"Get\", \"Flag\", \"AcceptFlag\", \"Review\"],\n" +
+            "\t\"contentInFlagReview\" :  [\"Upload\", \"Publish\", \"Get\", \"Flag\", \"AcceptFlag\", \"Review\", \"Get\"],\n" +
             "\t\"contentRetired\" : [\"Retire\"],\n" +
             "\t\"contentDiscarded\" : [\"Discard\"]\n" +
             "}";
