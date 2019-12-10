@@ -57,6 +57,7 @@ public class CreateContentTest extends BaseCitrusTestRunner {
     @CitrusParameters("testName")
     @CitrusTest
     public void createResourceContentWithInvalidRequest(String testName) {
+        this.getTestCase().setName(testName);
         identifier = "KP_FT_" + generateRandomDigits(9);
         this.variable("contentIdVal", identifier);
         getAuthToken(this, Constant.CREATOR);
@@ -182,9 +183,10 @@ public class CreateContentTest extends BaseCitrusTestRunner {
                 new Object[]{
                         ContentV3Scenario.TEST_CREATE_RESOURCE_PDF_CONTENT_WITH_INVALID_REQUEST_WITHOUT_CONTENT_TYPE
                 },
-                new Object[]{
+                //TODO: Uncomment in R-2.7.0
+                /*new Object[]{
                         ContentV3Scenario.TEST_CREATE_RESOURCE_PDF_CONTENT_WITH_INVALID_REQUEST_WITH_SYSTEM_PROPS
-                },
+                },*/
                 new Object[]{
                         ContentV3Scenario.TEST_CREATE_RESOURCE_PDF_CONTENT_WITH_INVALID_MIMETYPE
                 },
