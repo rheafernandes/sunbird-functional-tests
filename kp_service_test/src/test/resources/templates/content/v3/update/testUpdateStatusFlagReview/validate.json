@@ -51,14 +51,14 @@
       "license": "CC BY 4.0",
       "lastPublishedOn": "@matchesDatePattern('yyyy-MM-dd')@",
       "size": "@isNumber()@",
-      "name": "KP Integration Test Content",
+      "name": "KP-Updated-pdf",
       "status": "Retired",
       "code": "kp.ft.resource.pdf",
       "flags": [
         "kp-flags",
         "newKp-flags"
       ],
-      "description": "KP Integration Test Content",
+      "description": "KP-Updated description pdf",
       "lastFlaggedOn": "@matchesDatePattern('yyyy-MM-dd')@",
       "streamingUrl": "@ignore@",
       "flaggedBy": [
