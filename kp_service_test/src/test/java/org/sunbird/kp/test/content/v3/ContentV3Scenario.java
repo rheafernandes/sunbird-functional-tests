@@ -405,6 +405,8 @@ public class ContentV3Scenario {
             "testPublishWithResourceRetired";
     public static final String TEST_PUBLISH_COLLECTION_WITH_CONCEPT =
             "testPublishWithResourceRetired";
+    public static final String TEST_PUBLISH_FOR_INDEXING_IN_HIERACHY =
+            "testPublishForIndexingInHierarchy";
 
     //Accept Flag Scenarios
     public static final String TEST_ACCEPT_FLAG_VALID_ID_AND_VALID_STATUS =
