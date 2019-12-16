@@ -143,6 +143,8 @@ public class ContentV3Scenario {
             "testReadPngContentInDraft";
     public static final String TEST_READ_PLUGIN_IN_DRAFT =
             "testReadPluginContentInDraft";
+    public static final String TEST_READ_CONTENT_WITH_SUBJECT_AND_MEDIUM =
+            "testReadContentWithSubjectAndMedium";
 
     // Scenario's for upload Content  API
     public static final String TEST_UPLOAD_CONTENT_IN_LIVE =
