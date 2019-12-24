@@ -64,38 +64,4 @@ public class ContentPayload {
             "        }\n" +
             "    }\n" +
             "}";
-
-    public static final String CREATE_RESOURCE_CONTENT_WITH_RESOURCES_METADATA = "{\n" +
-            "  \"request\": {\n" +
-            "    \"content\": {\n" +
-            "      \"identifier\": \"KP_FT_"+System.currentTimeMillis()+"\",\n" +
-            "      \"name\": \"KP Integration Test Content\",\n" +
-            "      \"code\": \"kp.ft.resource.pdf\",\n" +
-            "      \"mimeType\": \"application/pdf\",\n" +
-            "      \"contentType\": \"Resource\",\n" +
-            "      \"resources\": [\n" +
-            "          \"Speaker\"\n" +
-            "      ]\n" +
-            "    }\n" +
-            "  }\n" +
-            "}";
-
-    public static final String CREATE_RESOURCE_CONTENT_WITH_CONTENTCREDITS_METADATA = "{\n" +
-            "  \"request\": {\n" +
-            "    \"content\": {\n" +
-            "      \"identifier\": \"KP_FT_"+System.currentTimeMillis()+"\",\n" +
-            "      \"name\": \"KP Integration Test Content\",\n" +
-            "      \"code\": \"kp.ft.resource.pdf\",\n" +
-            "      \"mimeType\": \"application/pdf\",\n" +
-            "      \"contentType\": \"Resource\",\n" +
-            "      \"contentCredits\": [\n" +
-            "        {\n" +
-            "          \"id\": \"12345\"\n" +
-            "          \"name\": \"user1\"\n" +
-            "          \"type\": \"user\"\n" +
-            "        }\n" +
-            "      ]\n" +
-            "    }\n" +
-            "  }\n" +
-            "}";
 }

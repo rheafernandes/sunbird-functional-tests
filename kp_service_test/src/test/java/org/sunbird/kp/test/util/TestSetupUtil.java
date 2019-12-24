@@ -33,12 +33,12 @@ public class TestSetupUtil {
                 File requestFile = new File(file.getPath() + "/" + "request.json");
                 File validateFile = new File(file.getPath() + "/" + "validate.json");
                 try {
-//                    if (!responseFile.exists())
-//                        responseFile.createNewFile();
-//                    if (!requestFile.exists())
-//                        requestFile.createNewFile();
-//                    if (!validateFile.exists())
-//                        validateFile.createNewFile();
+                    if (!responseFile.exists())
+                        responseFile.createNewFile();
+                    if (!requestFile.exists())
+                        requestFile.createNewFile();
+                    if (!validateFile.exists())
+                        validateFile.createNewFile();
                     populateDataIntoValidateFiles(mainDir, dir, validationFileName, dirIdMap.get(dir));
                 } catch (Exception e) {
                     e.printStackTrace();

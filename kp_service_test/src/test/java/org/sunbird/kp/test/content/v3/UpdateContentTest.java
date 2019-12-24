@@ -6,26 +6,16 @@ import org.springframework.http.HttpStatus;
 import org.sunbird.kp.test.common.APIUrl;
 import org.sunbird.kp.test.common.BaseCitrusTestRunner;
 import org.sunbird.kp.test.common.Constant;
-import org.sunbird.kp.test.util.ContentPayload;
 import org.sunbird.kp.test.util.ContentUtil;
-import org.sunbird.kp.test.util.TestSetupUtil;
-import org.testng.annotations.AfterClass;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import javax.ws.rs.core.MediaType;
-import java.util.HashMap;
 import java.util.Map;
 
 public class UpdateContentTest extends BaseCitrusTestRunner {
 
     private static final String TEMPLATE_DIR = "templates/content/v3/update";
-    private static Map<String, String> dirIdMap = new HashMap<>();
-    @AfterClass
-    public static void populateAssertionData() {
-        TestSetupUtil.createDirectoriesForTestCases(dirIdMap, "response.json", TEMPLATE_DIR);
-        TestSetupUtil.createDirectoriesForTestCases(dirIdMap, "validate.json", TEMPLATE_DIR);
-    }
 
     @Test(dataProvider = "updateValidResourceContent")
     @CitrusParameters({"testName", "mimeType", "workflow"})
@@ -116,21 +106,65 @@ public class UpdateContentTest extends BaseCitrusTestRunner {
                 null, HttpStatus.OK, null, "validateFields.json");
     }
 
-    @Test(dataProvider = "updateContentWithPayload")
-    @CitrusParameters({"testName", "mimeType", "workflow", "payload"})
+    @Test
     @CitrusTest
-    public void testValidUpdateResourceContentWithPayload(
-            String testName, String mimeType, String workflow, String payload) {
-        getAuthToken(this, Constant.CREATOR);
-        Map<String, Object> map = ContentUtil.prepareResourceContent(workflow, this, payload, mimeType, null);
+    public void testUpdateContentWithResourceHavingMetadataResources() throws Exception {
+        String CREATE_RESOURCE_CONTENT_WITH_RESOURCES = "{\n" +
+                "  \"request\": {\n" +
+                "    \"content\": {\n" +
+                "      \"identifier\": \"KP_FT_"+System.currentTimeMillis()+"\",\n" +
+                "      \"name\": \"KP Integration Test Content\",\n" +
+                "      \"code\": \"kp.ft.resource.pdf\",\n" +
+                "      \"mimeType\": \"application/pdf\",\n" +
+                "      \"contentType\": \"Resource\",\n" +
+                "      \"resources\": [\n" +
+                "          \"Speaker\"\n" +
+                "      ]\n" +
+                "    }\n" +
+                "  }\n" +
+                "}";
+        getAuthToken(this, null);
+        Map<String, Object> map = ContentUtil.createResourceContent(this, CREATE_RESOURCE_CONTENT_WITH_RESOURCES, null, null);
         String contentId = (String) map.get("content_id");
         String versionKey = (String) map.get("versionKey");
         this.variable("versionKeyVal", versionKey);
         this.variable("contentIdVal", contentId);
-        dirIdMap.put(testName, contentId);
-        performPatchTest(this, TEMPLATE_DIR, testName, APIUrl.UPDATE_CONTENT + contentId, null,
+        performPatchTest(this, TEMPLATE_DIR, ContentV3Scenario.TEST_UPDATE_CONTENT_WITH_RESOURCES, APIUrl.UPDATE_CONTENT + contentId, null,
                 REQUEST_JSON, MediaType.APPLICATION_JSON, HttpStatus.OK, null, RESPONSE_JSON);
-        performGetTest(this, TEMPLATE_DIR, testName, APIUrl.READ_CONTENT + contentId,
+        performGetTest(this, TEMPLATE_DIR, ContentV3Scenario.TEST_UPDATE_CONTENT_WITH_RESOURCES, APIUrl.READ_CONTENT + contentId,
+                null, HttpStatus.OK, null, VALIDATE_JSON);
+    }
+
+    @Test
+    @CitrusTest
+    public void testUpdateContentWithResourceHavingMetadataContentcredits() throws Exception {
+        String CREATE_RESOURCE_CONTENT_WITH_CONTENTCREDITS = "{\n" +
+                "  \"request\": {\n" +
+                "    \"content\": {\n" +
+                "      \"identifier\": \"KP_FT_"+System.currentTimeMillis()+"\",\n" +
+                "      \"name\": \"KP Integration Test Content\",\n" +
+                "      \"code\": \"kp.ft.resource.pdf\",\n" +
+                "      \"mimeType\": \"application/pdf\",\n" +
+                "      \"contentType\": \"Resource\",\n" +
+                "      \"contentCredits\": [\n" +
+                "        {\n" +
+                "          \"id\": \"12345\",\n" +
+                "          \"name\": \"user1\",\n" +
+                "          \"type\": \"user\"\n" +
+                "        }\n" +
+                "      ]\n" +
+                "    }\n" +
+                "  }\n" +
+                "}";
+        getAuthToken(this, null);
+        Map<String, Object> map = ContentUtil.createResourceContent(this, CREATE_RESOURCE_CONTENT_WITH_CONTENTCREDITS, null, null);
+        String contentId = (String) map.get("content_id");
+        String versionKey = (String) map.get("versionKey");
+        this.variable("versionKeyVal", versionKey);
+        this.variable("contentIdVal", contentId);
+        performPatchTest(this, TEMPLATE_DIR, ContentV3Scenario.TEST_UPDATE_CONTENT_WITH_CONTENTCREDITS, APIUrl.UPDATE_CONTENT + contentId, null,
+                REQUEST_JSON, MediaType.APPLICATION_JSON, HttpStatus.OK, null, RESPONSE_JSON);
+        performGetTest(this, TEMPLATE_DIR, ContentV3Scenario.TEST_UPDATE_CONTENT_WITH_CONTENTCREDITS, APIUrl.READ_CONTENT + contentId,
                 null, HttpStatus.OK, null, VALIDATE_JSON);
     }
 
@@ -273,15 +307,4 @@ public class UpdateContentTest extends BaseCitrusTestRunner {
         };
     }
 
-    @DataProvider(name = "updateContentWithPayload")
-    public Object[][] updateContentWithPayload(){
-        return new Object[][]{
-                new Object[]{
-                        ContentV3Scenario.TEST_UPDATE_CONTENT_WITH_RESOURCES, null, "contentInDraft", ContentPayload.CREATE_RESOURCE_CONTENT_WITH_RESOURCES_METADATA
-                },
-                new Object[]{
-                        ContentV3Scenario.TEST_UPDATE_CONTENT_WITH_CONTENTCREDITS, null, "contentInDraft", ContentPayload.CREATE_RESOURCE_CONTENT_WITH_CONTENTCREDITS_METADATA
-                }
-        };
-    }
 }
