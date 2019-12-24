@@ -40,7 +40,8 @@
       ],
       "consumerId": "@ignore@",
       "resources": [
-        "Speaker"
+        "Speaker",
+        "Microphone"
       ],
       "mediaType": "content",
       "osId": "org.ekstep.quiz.app",

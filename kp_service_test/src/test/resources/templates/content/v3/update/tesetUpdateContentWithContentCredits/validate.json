@@ -39,9 +39,7 @@
         "All"
       ],
       "consumerId": "@ignore@",
-      "resources": [
-        "Speaker"
-      ],
+      "contentCredits": "[{\"id\":\"12345\",\"name\":\"user1\",\"type\":\"user\"}]",
       "mediaType": "content",
       "osId": "org.ekstep.quiz.app",
       "version": "@isNumber()@",

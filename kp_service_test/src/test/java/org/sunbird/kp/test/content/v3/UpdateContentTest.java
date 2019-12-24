@@ -108,21 +108,8 @@ public class UpdateContentTest extends BaseCitrusTestRunner {
 
     @Test
     @CitrusTest
-    public void testUpdateContentWithResourceHavingMetadataResources() throws Exception {
-        String CREATE_RESOURCE_CONTENT_WITH_RESOURCES = "{\n" +
-                "  \"request\": {\n" +
-                "    \"content\": {\n" +
-                "      \"identifier\": \"KP_FT_"+System.currentTimeMillis()+"\",\n" +
-                "      \"name\": \"KP Integration Test Content\",\n" +
-                "      \"code\": \"kp.ft.resource.pdf\",\n" +
-                "      \"mimeType\": \"application/pdf\",\n" +
-                "      \"contentType\": \"Resource\",\n" +
-                "      \"resources\": [\n" +
-                "          \"Speaker\"\n" +
-                "      ]\n" +
-                "    }\n" +
-                "  }\n" +
-                "}";
+    public void testUpdateContentHavingMetadataResources() throws Exception {
+        String CREATE_RESOURCE_CONTENT_WITH_RESOURCES = "{\n" + "\"request\": {\n" + "\"content\": {\n" + "\"identifier\": \"KP_FT_"+System.currentTimeMillis()+"\",\n" + "\"name\": \"KP Integration Test Content\",\n" + "\"code\": \"kp.ft.resource.pdf\",\n" + "\"mimeType\": \"application/pdf\",\n" + "\"contentType\": \"Resource\",\n" + "\"resources\": [\n" + "\"Speaker\",\n" + "\"Microphone\"\n" + "]\n" + "}\n" + "}\n" +"}";
         getAuthToken(this, null);
         Map<String, Object> map = ContentUtil.createResourceContent(this, CREATE_RESOURCE_CONTENT_WITH_RESOURCES, null, null);
         String contentId = (String) map.get("content_id");
@@ -137,25 +124,8 @@ public class UpdateContentTest extends BaseCitrusTestRunner {
 
     @Test
     @CitrusTest
-    public void testUpdateContentWithResourceHavingMetadataContentcredits() throws Exception {
-        String CREATE_RESOURCE_CONTENT_WITH_CONTENTCREDITS = "{\n" +
-                "  \"request\": {\n" +
-                "    \"content\": {\n" +
-                "      \"identifier\": \"KP_FT_"+System.currentTimeMillis()+"\",\n" +
-                "      \"name\": \"KP Integration Test Content\",\n" +
-                "      \"code\": \"kp.ft.resource.pdf\",\n" +
-                "      \"mimeType\": \"application/pdf\",\n" +
-                "      \"contentType\": \"Resource\",\n" +
-                "      \"contentCredits\": [\n" +
-                "        {\n" +
-                "          \"id\": \"12345\",\n" +
-                "          \"name\": \"user1\",\n" +
-                "          \"type\": \"user\"\n" +
-                "        }\n" +
-                "      ]\n" +
-                "    }\n" +
-                "  }\n" +
-                "}";
+    public void testUpdateContentHavingMetadataContentCredits() throws Exception {
+        String CREATE_RESOURCE_CONTENT_WITH_CONTENTCREDITS = "{\n" + "\"request\": {\n" + "\"content\": {\n" + "\"identifier\": \"KP_FT_"+System.currentTimeMillis()+"\",\n" + "\"name\": \"KP Integration Test Content\",\n" + "\"code\": \"kp.ft.resource.pdf\",\n" + "\"mimeType\": \"application/pdf\",\n" + "\"contentType\": \"Resource\",\n" + "\"contentCredits\": [\n" + "{\n" + "\"id\": \"12345\",\n" + "\"name\": \"user1\",\n" + "\"type\": \"user\"\n" + "}\n" + "]\n" + "}\n" + "}\n" +"}";
         getAuthToken(this, null);
         Map<String, Object> map = ContentUtil.createResourceContent(this, CREATE_RESOURCE_CONTENT_WITH_CONTENTCREDITS, null, null);
         String contentId = (String) map.get("content_id");
