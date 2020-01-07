@@ -1,9 +1,8 @@
 {
   "request": {
     "license": {
-      "name": 1234,
-      "code": "${identifier}",
-      "url": "www.url.com"
+      "name": "${identifier}",
+      "url": 1234
     }
   }
 }

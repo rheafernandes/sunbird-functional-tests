@@ -11,8 +11,6 @@
   },
   "responseCode": "CLIENT_ERROR",
   "result": {
-    "messages": [
-      "[1,162][] The object must have a property whose name is \"name\"."
-    ]
+    "messages": "@ignore@"
   }
 }

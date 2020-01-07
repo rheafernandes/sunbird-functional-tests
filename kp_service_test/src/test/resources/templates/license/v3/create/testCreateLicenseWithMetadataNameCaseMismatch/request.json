@@ -1,8 +1,7 @@
 {
   "request": {
     "license": {
-      "Name": "KP_FT_NAME",
-      "code": "${identifier}",
+      "Name": "${identifier}",
       "url": "www.url.com"
     }
   }

@@ -44,5 +44,7 @@ public class APIUrl {
     public static final String RETIRE_LICENSE = "/license/v3/retire/";
 
 
+    //System Update API
+    public static final String SYSTEM_UPDATE = "/system/v3/content/update/";
 
 }

@@ -5,9 +5,9 @@
   "params": {
     "resmsgid": null,
     "msgid": null,
-    "err": "ERR_CODE_SET_AS_IDENTIFIER",
+    "err": "ERR_NAME_SET_AS_IDENTIFIER",
     "status": "failed",
-    "errmsg": "code will be set as identifier"
+    "errmsg": "name will be set as identifier"
   },
   "responseCode": "CLIENT_ERROR",
   "result": {

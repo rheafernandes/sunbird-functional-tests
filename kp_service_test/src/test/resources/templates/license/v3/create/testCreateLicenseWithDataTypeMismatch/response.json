@@ -11,8 +11,6 @@
   },
   "responseCode": "CLIENT_ERROR",
   "result": {
-    "messages": [
-      "[1,12][/name] The value must be of string type, but actual type is integer."
-    ]
+    "messages": "@ignore@"
   }
 }

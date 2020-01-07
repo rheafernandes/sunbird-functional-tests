@@ -5,18 +5,12 @@ import com.consol.citrus.testng.CitrusParameters;
 import org.springframework.http.HttpStatus;
 import org.sunbird.kp.test.common.APIUrl;
 import org.sunbird.kp.test.common.Constant;
-import org.sunbird.kp.test.content.v3.ContentV3Scenario;
-import org.sunbird.kp.test.util.ContentUtil;
 import org.sunbird.kp.test.util.LicenseUtil;
-import org.sunbird.kp.test.util.TestSetupUtil;
-import org.testng.annotations.AfterClass;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import org.sunbird.kp.test.common.BaseCitrusTestRunner;
 
 import javax.ws.rs.core.MediaType;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Integration Test Cases for License Create API
@@ -49,7 +43,7 @@ public class CreateLicenseTest extends BaseCitrusTestRunner {
     @Test(dataProvider = "createLicenseWithInvalidRequest")
     @CitrusParameters("testName")
     @CitrusTest
-    public void createResourceContentWithInvalidRequest(String testName) {
+    public void createLicenseWithInvalidRequest(String testName) {
         identifier = "kp_ft_license_" + generateRandomDigits(9);
         this.variable("identifier", identifier);
         getAuthToken(this, Constant.CREATOR);
@@ -57,10 +51,10 @@ public class CreateLicenseTest extends BaseCitrusTestRunner {
                 MediaType.APPLICATION_JSON, HttpStatus.BAD_REQUEST, null, RESPONSE_JSON);
     }
 
-    @Test(dataProvider = "createLicenseWithSluggifiedCode")
+    @Test(dataProvider = "createLicenseWithSluggifiedName")
     @CitrusParameters("testName")
     @CitrusTest
-    public void createResourceContentWithSluggifiedCode(String testName) {
+    public void createLicenseWithSluggifiedName(String testName) {
         identifier = "kp_ft_license_" + generateRandomDigits(9);
         this.variable("identifier", identifier);
         getAuthToken(this, Constant.CREATOR);
@@ -74,7 +68,7 @@ public class CreateLicenseTest extends BaseCitrusTestRunner {
     @Test(dataProvider = "createLicenseWithDuplicateIdentifier")
     @CitrusParameters("testName")
     @CitrusTest
-    public void createResourceContentWithDuplicateIdentifier(String testName) {
+    public void createLicenseWithDuplicateIdentifier(String testName) {
         identifier = (String) LicenseUtil.createLicense(this, null, null).get("identifier");
         this.variable("identifier", identifier);
         getAuthToken(this, Constant.CREATOR);
@@ -101,9 +95,6 @@ public class CreateLicenseTest extends BaseCitrusTestRunner {
                         LicenseV3Scenario.TEST_CREATE_LICENSE_WITHOUT_NAME
                 },
                 new Object[]{
-                        LicenseV3Scenario.TEST_CREATE_LICENSE_WITHOUT_CODE
-                },
-                new Object[]{
                         LicenseV3Scenario.TEST_CREATE_LICENSE_WITHOUT_URL
                 },
                 new Object[]{
@@ -121,11 +112,11 @@ public class CreateLicenseTest extends BaseCitrusTestRunner {
         };
     }
 
-    @DataProvider(name = "createLicenseWithSluggifiedCode")
-    public Object[][] createLicenseWithSluggifiedCode() {
+    @DataProvider(name = "createLicenseWithSluggifiedName")
+    public Object[][] createLicenseWithSluggifiedName() {
         return new Object[][]{
                 new Object[]{
-                        LicenseV3Scenario.TEST_CREATE_LICENSE_WITH_SLUGGIFIED_CODE
+                        LicenseV3Scenario.TEST_CREATE_LICENSE_WITH_SLUGGIFIED_NAME
                 }
         };
     }

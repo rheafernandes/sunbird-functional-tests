@@ -1,7 +1,7 @@
 {
   "request": {
     "license": {
-      "name": "KP_FT_NAME",
+      "name": "@+${identifier}",
       "url": "www.url.com"
     }
   }
