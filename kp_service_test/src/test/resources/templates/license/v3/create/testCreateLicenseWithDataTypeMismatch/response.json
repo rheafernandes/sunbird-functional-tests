@@ -1,0 +1,18 @@
+{
+  "id": "org.sunbird.license.create",
+  "ver": "3.0",
+  "ts": null,
+  "params": {
+    "resmsgid": null,
+    "msgid": null,
+    "err": "CLIENT_ERROR",
+    "status": "failed",
+    "errmsg": "Validation errors."
+  },
+  "responseCode": "CLIENT_ERROR",
+  "result": {
+    "messages": [
+      "[1,12][/name] The value must be of string type, but actual type is integer."
+    ]
+  }
+}

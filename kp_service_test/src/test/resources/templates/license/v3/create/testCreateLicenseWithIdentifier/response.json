@@ -1,0 +1,16 @@
+{
+  "id": "org.sunbird.license.create",
+  "ver": "3.0",
+  "ts": null,
+  "params": {
+    "resmsgid": null,
+    "msgid": null,
+    "err": "ERR_CODE_SET_AS_IDENTIFIER",
+    "status": "failed",
+    "errmsg": "code will be set as identifier"
+  },
+  "responseCode": "CLIENT_ERROR",
+  "result": {
+    "messages": null
+  }
+}

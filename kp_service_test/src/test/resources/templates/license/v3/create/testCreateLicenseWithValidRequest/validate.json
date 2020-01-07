@@ -1,0 +1,29 @@
+{
+  "id" : "org.sunbird.content.read",
+  "ver" : "3.0",
+  "ts" : null,
+  "params" : {
+    "resmsgid" : null,
+    "msgid" : null,
+    "err" : null,
+    "status" : "successful",
+    "errmsg" : null
+  },
+  "responseCode" : "OK",
+  "result" : {
+    "content" : {
+      "identifier" : "${identifier}",
+      "lastStatusChangedOn" : "@matchesDatePattern('yyyy-MM-dd')@",
+      "code" : "${identifier}",
+      "consumerId" : "@ignore@",
+      "appId" : "app-01",
+      "name" : "KP_FT_NAME",
+      "channel" : "channel-01",
+      "lastUpdatedOn" : "@matchesDatePattern('yyyy-MM-dd')@",
+      "createdOn" : "@matchesDatePattern('yyyy-MM-dd')@",
+      "url" : "www.url.com",
+      "status" : "Live",
+      "versionKey" : "@isNumber()@"
+    }
+  }
+}

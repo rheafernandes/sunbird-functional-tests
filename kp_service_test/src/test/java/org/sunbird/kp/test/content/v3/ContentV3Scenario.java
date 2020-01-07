@@ -95,6 +95,14 @@ public class ContentV3Scenario {
             "testReadResourceContentWithValidIdentifier";
     public static final String TEST_READ_RESOURCE_CONTENT_WITH_INVALID_IDENTIFIER =
             "testReadResourceContentWithInvalidIdentifier";
+    public static final String TEST_READ_RESOURCE_CONTENT_WITH_INVALID_MODE = "testReadContentWithInvalidMode";
+    public static final String TEST_READ_RESOURCE_CONTENT_WITH_EMPTY_MODE = "testReadContentWithEmptyMode";
+    public static final String TEST_READ_RESOURCE_CONTENT_WITH_EMPTY_FIELDS = "testReadContentWithEmptyFields";
+    public static final String TEST_READ_RESOURCE_CONTENT_WITH_EDIT_MODE = "testReadContentWithEditMode";
+    public static final String TEST_READ_RESOURCE_CONTENT_WITH_FIELDS = "testReadResourceContentWithFields";
+    public static final String TEST_READ_RESOURCE_CONTENT_WITH_BODY_FIELDS = "testReadResourceContentWithBodyFields";
+    public static final String TEST_READ_RESOURCE_CONTENT_WITH_INVALID_FIELDS = "testReadResourceContentWithInvalidFields";
+    public static final String TEST_READ_RESOURCE_CONTENT_WITH_FIELDS_AND_MODE = "testReadResourceContentWithFieldsAndMode";
     public static final String TEST_READ_PDF_CONTENT_AFTER_UPLOAD =
             "testReadPdfContentAfterUpload";
     public static final String TEST_READ_PDF_CONTENT_AFTER_PUBLISH =
@@ -135,11 +143,6 @@ public class ContentV3Scenario {
             "testReadPngContentInDraft";
     public static final String TEST_READ_PLUGIN_IN_DRAFT =
             "testReadPluginContentInDraft";
-
-
-
-
-
 
     // Scenario's for upload Content  API
     public static final String TEST_UPLOAD_CONTENT_IN_LIVE =
@@ -284,6 +287,24 @@ public class ContentV3Scenario {
             "testUpdateWithInvalidReservedDialcodes";
     public static final String TEST_UPDATE_WITH_STALE_DATA =
             "testUpdateContentWithStaleData";
+    public static final String TEST_UPDATE_WITH_DIALCODES =
+            "testUpdateWithDialcodes";
+    public static final String TEST_UPDATE_WITH_RESERVED_DIALCODES =
+            "testUpdateWithReservedDialcodes";
+    public static final String TEST_UPDATE_WITH_INVALID_FRAMEWORK =
+            "testUpdateWithInvalidFramework";
+    public static final String TEST_UPDATE_FOR_PUBLISHED_CONTENT_WITH_IMAGE_ID=
+            "testUpdateForPublishedContentWithImageId";
+    public static final String TEST_UPDATE_WITH_VALID_ECML =
+            "testUpdateWithValidEcml";
+    public static final String TEST_UPDATE_WITH_INVALID_ECML =
+            "testUpdateWithInvalidEcml";
+    public static final String TEST_UPDATE_ECML_BODY_FOR_PUBLISHED_CONTENT =
+            "testUpdateEcmlBodyForPublishedContent";
+    public static final String TEST_UPDATE_WITH_CORRECT_IDENTIFIER_IN_REQUEST =
+            "testUpdateWithCorrectIdentifierInRequest";
+    public static final String TEST_UPDATE_WITH_INCORRECT_IDENTIFIER_IN_REQUEST =
+            "testUpdateWithInCorrectIdentifierInRequest";
 
     //Scenario's for Content Retire API
     public static final String TEST_RETIRE_WITH_IMAGE_ID =
