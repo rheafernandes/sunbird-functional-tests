@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.UUID;
@@ -31,6 +32,8 @@ public class BaseCitrusTestRunner extends TestNGCitrusTestRunner {
     private static final Boolean IS_USER_AUTH_REQUIRED = AppConfig.config.getBoolean("user_auth_enable");
 
     protected static ObjectMapper objectMapper = new ObjectMapper();
+
+    private static List<String> CS_API_LIST = AppConfig.config.getStringList("cs_api_list");
 
     public BaseCitrusTestRunner() {
     }
@@ -60,7 +63,7 @@ public class BaseCitrusTestRunner extends TestNGCitrusTestRunner {
                 builder ->
                         TestActionUtil.processGetRequest(
                                 builder,
-                                Constant.KP_ENDPOINT,
+                                getEndPoint(requestUrl),
                                 testName,
                                 requestUrl,
                                 getHeaders(headers)
@@ -68,7 +71,7 @@ public class BaseCitrusTestRunner extends TestNGCitrusTestRunner {
         runner.http(
                 builder ->
                         TestActionUtil.getResponse(
-                                builder, Constant.KP_ENDPOINT, templateDir, testName, responseCode, responseJson, validationParams));
+                                builder, getEndPoint(requestUrl), templateDir, testName, responseCode, responseJson, validationParams));
     }
 
     /**
@@ -100,7 +103,7 @@ public class BaseCitrusTestRunner extends TestNGCitrusTestRunner {
                 builder ->
                         TestActionUtil.processPostRequest(
                                 builder,
-                                Constant.KP_ENDPOINT,
+                                getEndPoint(requestUrl),
                                 templateDir,
                                 testName,
                                 requestUrl,
@@ -111,7 +114,7 @@ public class BaseCitrusTestRunner extends TestNGCitrusTestRunner {
             runner.http(
                     builder ->
                             TestActionUtil.getResponse(
-                                    builder, Constant.KP_ENDPOINT, templateDir, testName, responseCode, responseJson, validationParams));
+                                    builder, getEndPoint(requestUrl), templateDir, testName, responseCode, responseJson, validationParams));
 
 
     }
@@ -140,12 +143,13 @@ public class BaseCitrusTestRunner extends TestNGCitrusTestRunner {
             HttpStatus responseCode,
             Map<String, Object> validationParams,
             String responseJson) {
+
         getTestCase().setName(testName);
         runner.http(
                 builder ->
                         TestActionUtil.processPatchRequest(
                                 builder,
-                                Constant.KP_ENDPOINT,
+                                getEndPoint(requestUrl),
                                 templateDir,
                                 testName,
                                 requestUrl,
@@ -156,7 +160,7 @@ public class BaseCitrusTestRunner extends TestNGCitrusTestRunner {
         runner.http(
                 builder ->
                         TestActionUtil.getResponse(
-                                builder, Constant.KP_ENDPOINT, templateDir, testName, responseCode, responseJson, validationParams));
+                                builder, getEndPoint(requestUrl), templateDir, testName, responseCode, responseJson, validationParams));
     }
 
     /**
@@ -188,7 +192,7 @@ public class BaseCitrusTestRunner extends TestNGCitrusTestRunner {
                 builder ->
                         TestActionUtil.processDeleteRequest(
                                 builder,
-                                Constant.KP_ENDPOINT,
+                                getEndPoint(requestUrl),
                                 templateDir,
                                 testName,
                                 requestUrl,
@@ -199,7 +203,7 @@ public class BaseCitrusTestRunner extends TestNGCitrusTestRunner {
         runner.http(
                 builder ->
                         TestActionUtil.getResponse(
-                                builder, Constant.KP_ENDPOINT, templateDir, testName, responseCode, responseJson, validationParams));
+                                builder, getEndPoint(requestUrl), templateDir, testName, responseCode, responseJson, validationParams));
     }
 
     /**
@@ -229,7 +233,7 @@ public class BaseCitrusTestRunner extends TestNGCitrusTestRunner {
                         TestActionUtil.processMultipartRequest(
                                 testContext,
                                 builder,
-                                Constant.KP_ENDPOINT,
+                                getEndPoint(requestUrl),
                                 templateDir,
                                 testName,
                                 requestUrl,
@@ -240,7 +244,7 @@ public class BaseCitrusTestRunner extends TestNGCitrusTestRunner {
         runner.http(
                 builder ->
                         TestActionUtil.getResponse(
-                                builder, Constant.KP_ENDPOINT, templateDir, testName, responseCode, responseJson, validationParams));
+                                builder, getEndPoint(requestUrl), templateDir, testName, responseCode, responseJson, validationParams));
     }
 
     /**
@@ -308,6 +312,12 @@ public class BaseCitrusTestRunner extends TestNGCitrusTestRunner {
     protected static int generateRandomDigits(int n) {
         int m = (int) Math.pow(10, n - 1);
         return m + new Random().nextInt(9 * m);
+    }
+
+    public  String getEndPoint(String reqUrl) {
+        String newReqUrl = reqUrl.replaceAll("KP[a-zA-Z_]+\\d+\\??[a-zA-Z&=,]*", "")
+                .replaceAll("do_\\d+\\??[a-zA-Z&=,]*", "");
+        return CS_API_LIST.contains(newReqUrl) ? Constant.KP_CONTENT_SERVICE_ENDPOINT : Constant.KP_ENDPOINT;
     }
 
 }

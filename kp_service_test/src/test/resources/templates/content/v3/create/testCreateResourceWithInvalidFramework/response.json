@@ -1,18 +1,18 @@
 {
-  "id": "ekstep.learning.content.create",
+  "id": "api.content.create",
   "ver": "3.0",
   "ts": "@matchesDatePattern('yyyy-MM-dd')@",
   "params": {
     "resmsgid": "@ignore@",
     "msgid": null,
-    "err": "ERR_GRAPH_ADD_NODE_VALIDATION_FAILED",
+    "err": "CLIENT_ERROR",
     "status": "failed",
-    "errmsg": "Validation Errors"
+    "errmsg": "Validation Errors."
   },
   "responseCode": "CLIENT_ERROR",
   "result": {
     "messages": [
-      "Please select a valid framework. This framework doesn't have category: subject"
+      "subject range data is empty from the given framework."
     ]
   }
 }

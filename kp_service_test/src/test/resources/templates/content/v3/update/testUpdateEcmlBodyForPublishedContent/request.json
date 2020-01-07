@@ -4,11 +4,7 @@
       "name": "KP-Updated-ecml",
       "description": "KP-Updated description ecml",
       "versionKey": "${versionKeyVal}",
-      "body": {
-        "solutions": [
-          "<p>When the bird.</p>"
-        ]
-      }
+      "body": "{\"solutions\":[\"<p>When the bird.</p>\"]}"
     }
   }
 }

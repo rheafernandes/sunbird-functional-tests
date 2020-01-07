@@ -1,5 +1,5 @@
 {
-  "id": "ekstep.content.find",
+  "id": "api.content.read",
   "ver": "3.0",
   "ts": "@matchesDatePattern('yyyy-MM-dd')@",
   "params": {
@@ -61,7 +61,7 @@
       ],
       "versionKey": "@isNumber()@",
       "prevState": "Draft",
-      "license": "Creative Commons Attribution (CC BY)",
+      "license": "CC BY 4.0",
       "idealScreenDensity": "hdpi",
       "s3Key": "@ignore@",
       "framework": "NCF",
@@ -70,7 +70,7 @@
       "compatibilityLevel": "@isNumber()@",
       "name": "KP Integration Test Content",
       "status": "Live",
-      "languageCode": "en"
+      "languageCode": ["en"]
     }
   }
 }

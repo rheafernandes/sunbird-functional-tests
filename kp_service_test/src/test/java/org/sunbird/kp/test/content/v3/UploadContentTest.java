@@ -149,7 +149,7 @@ public class UploadContentTest extends BaseCitrusTestRunner {
                 this,
                 TEMPLATE_DIR,
                 testName,
-                requestUrl + "abc",
+                requestUrl + "invalidId100",
                 null,
                 Constant.REQUEST_FORM_DATA,
                 httpStatusCode,

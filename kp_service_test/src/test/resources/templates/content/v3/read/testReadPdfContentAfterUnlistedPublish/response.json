@@ -1,5 +1,5 @@
 {
-  "id" : "ekstep.content.find",
+  "id" : "api.content.read",
   "ver" : "3.0",
   "ts" : "@matchesDatePattern('yyyy-MM-dd')@",
   "params" : {
@@ -12,6 +12,7 @@
   "responseCode" : "OK",
   "result" : {
     "content" : {
+      "appId": "@ignore@",
       "ownershipType" : [ "createdBy" ],
       "previewUrl" : "@ignore@",
       "code" : "kp.ft.resource.pdf",
@@ -29,7 +30,6 @@
       "mimeType" : "application/pdf",
       "idealScreenSize" : "normal",
       "createdOn" : "@matchesDatePattern('yyyy-MM-dd')@",
-      "appId" : "@ignore@",
       "contentDisposition" : "inline",
       "artifactUrl" : "@ignore@",
       "contentEncoding" : "identity",
@@ -51,7 +51,7 @@
       "pragma" : [ "external" ],
       "versionKey" : "@ignore@",
       "prevState" : "Draft",
-      "license" : "Creative Commons Attribution (CC BY)",
+      "license" : "CC BY 4.0",
       "idealScreenDensity" : "hdpi",
       "s3Key" : "@ignore@",
       "framework" : "NCF",
@@ -60,7 +60,9 @@
       "compatibilityLevel" :"@isNumber()@",
       "name" : "KP Integration Test Content",
       "status" : "Unlisted",
-      "languageCode" : "en"
+      "languageCode": [
+        "en"
+      ]
     }
   }
 }

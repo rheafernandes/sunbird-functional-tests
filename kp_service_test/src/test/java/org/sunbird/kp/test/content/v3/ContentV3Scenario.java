@@ -143,6 +143,8 @@ public class ContentV3Scenario {
             "testReadPngContentInDraft";
     public static final String TEST_READ_PLUGIN_IN_DRAFT =
             "testReadPluginContentInDraft";
+    public static final String TEST_READ_CONTENT_WITH_SUBJECT_AND_MEDIUM =
+            "testReadContentWithSubjectAndMedium";
 
     // Scenario's for upload Content  API
     public static final String TEST_UPLOAD_CONTENT_IN_LIVE =
@@ -255,13 +257,13 @@ public class ContentV3Scenario {
     public static final String TEST_UPDATE_CONTENT_WITH_CHANGED_STATUS =
             "testUpdateContentChangeStatus";
     //Get Content should have same MimeType if allow update is false
-    public static final String TEST_UPDATE_CONTENT_WITH_NEW_MIMETYPE =
+    public static final String TEST_UPDATE_CONTENT_WITH_MIMETYPE =
             "testUpdateContentNewMimetype";
-    public static final String TEST_UPDATE_CONTENT_WITH_NEW_MEDIATYPE =
+    public static final String TEST_UPDATE_CONTENT_WITH_MEDIATYPE =
             "testUpdateContentNewMediaType";
     public static final String TEST_UPDATE_CONTENT_WITH_INVALID_CONTENT_TYPE =
             "testUpdateContentInvalidContentType";
-    public static final String TEST_UPDATE_CONTENT_WITH_VALID_CONTENT_TYPE =
+    public static final String TEST_UPDATE_CONTENT_WITH_CONTENT_TYPE =
             "testUpdateContentValidContentType";
     public static final String TEST_UPDATE_CONTENT_STATUS_REVIEW =
             "testUpdateContentInReviewState";
@@ -295,9 +297,9 @@ public class ContentV3Scenario {
             "testUpdateWithInvalidFramework";
     public static final String TEST_UPDATE_FOR_PUBLISHED_CONTENT_WITH_IMAGE_ID=
             "testUpdateForPublishedContentWithImageId";
-    public static final String TEST_UPDATE_WITH_VALID_ECML =
+    public static final String TEST_UPDATE_WITH_VALID_ECML_BODY =
             "testUpdateWithValidEcml";
-    public static final String TEST_UPDATE_WITH_INVALID_ECML =
+    public static final String TEST_UPDATE_WITH_INVALID_ECML_BODY =
             "testUpdateWithInvalidEcml";
     public static final String TEST_UPDATE_ECML_BODY_FOR_PUBLISHED_CONTENT =
             "testUpdateEcmlBodyForPublishedContent";
@@ -305,6 +307,8 @@ public class ContentV3Scenario {
             "testUpdateWithCorrectIdentifierInRequest";
     public static final String TEST_UPDATE_WITH_INCORRECT_IDENTIFIER_IN_REQUEST =
             "testUpdateWithInCorrectIdentifierInRequest";
+    public static final String TEST_UPDATE_CONTENT_WITH_RESOURCES = "tesetUpdateContentWithResources";
+    public static final String TEST_UPDATE_CONTENT_WITH_CONTENTCREDITS = "tesetUpdateContentWithContentCredits";
 
     //Scenario's for Content Retire API
     public static final String TEST_RETIRE_WITH_IMAGE_ID =
@@ -403,6 +407,8 @@ public class ContentV3Scenario {
             "testPublishWithResourceRetired";
     public static final String TEST_PUBLISH_COLLECTION_WITH_CONCEPT =
             "testPublishWithResourceRetired";
+    public static final String TEST_PUBLISH_FOR_INDEXING_IN_HIERACHY =
+            "testPublishForIndexingInHierarchy";
 
     //Accept Flag Scenarios
     public static final String TEST_ACCEPT_FLAG_VALID_ID_AND_VALID_STATUS =
@@ -456,5 +462,6 @@ public class ContentV3Scenario {
     public static final String TEST_UPDATE_HIERARCHY_WITH_1RESOURCE_ONLY = "testUpdateHierarchyWith1ResourceOnly";
     public static final String TEST_UPDATE_HIERARCHY_WITH_MULTILEVEL_UNITS = "testUpdateHierarchyWithMultilevelUnitAnd1Resource";
     public static final String TEST_UPDATE_HIERARCHY_WITH_1UNIT_1COLLECTION = "testUpdateHierarchyWith1Unit1CollectionValidRequest";
+
 }
 

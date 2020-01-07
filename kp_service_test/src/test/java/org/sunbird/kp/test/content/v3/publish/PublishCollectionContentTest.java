@@ -2,6 +2,8 @@ package org.sunbird.kp.test.content.v3.publish;
 
 import com.consol.citrus.annotations.CitrusTest;
 import com.consol.citrus.testng.CitrusParameters;
+import org.springframework.http.HttpStatus;
+import org.sunbird.kp.test.common.APIUrl;
 import org.sunbird.kp.test.common.BaseCitrusTestRunner;
 import org.sunbird.kp.test.content.v3.ContentV3Scenario;
 import org.sunbird.kp.test.util.CollectionUtil;
@@ -22,6 +24,40 @@ import java.util.Map;
 public class PublishCollectionContentTest extends BaseCitrusTestRunner {
 
     private static final String TEMPLATE_DIR = "templates/content/v3/publish";
+
+    @Test
+    @CitrusTest
+    public void testPublishForIndexingInHierarchy() {
+        String testName = ContentV3Scenario.TEST_PUBLISH_FOR_INDEXING_IN_HIERACHY;
+        getAuthToken(this, null);
+        this.getTestCase().setName(testName);
+        Map<String, Object> collectionMap = CollectionUtil.prepareTestCollection("collectionUnitsInDraft", this,
+                new HashMap<String,String>() {{put("updateHierarchy", CollectionUtilPayload.UPDATE_HIERARCHY_WITH_1_UNIT_2SUB3RESOURCES);}}, "textBook", 0, 3, "application/pdf");
+        String textbookId = (String) collectionMap.get("content_id");
+        ContentUtil.publishContent(this, null, "public", textbookId, null);
+        delay(this, 10000);
+        performGetTest(
+                this,
+                TEMPLATE_DIR,
+                testName,
+                APIUrl.READ_CONTENT_HIERARCHY + textbookId + "?mode=edit",
+                null,
+                HttpStatus.OK,
+                null,
+                "validateDraft.json"
+        );
+        performGetTest(
+                this,
+                TEMPLATE_DIR,
+                testName,
+                APIUrl.READ_CONTENT_HIERARCHY + textbookId,
+                null,
+                HttpStatus.OK,
+                null,
+                "validateLive.json"
+        );
+    }
+
 
     @Test(dataProvider = "publishValidCollectionPdfResources")
     @CitrusParameters({"testName", "collectionType", "resourceCount", "payload"})
@@ -182,13 +218,13 @@ public class PublishCollectionContentTest extends BaseCitrusTestRunner {
                         ContentV3Scenario.TEST_PUBLISH_COLLECTION_WITH_RESOURCE_CONTENT, "collection", 1, CollectionUtilPayload.UPDATE_HIERARCHY_1_UNIT_1_RESOURCE
                 },
                 new Object[]{
-                        ContentV3Scenario.TEST_PUBLISH_COLLECTION_WITH_RESOURCE_CONTENT, "textbook", 1, CollectionUtilPayload.UPDATE_HIERARCHY_1_UNIT_1_RESOURCE
+                        ContentV3Scenario.TEST_PUBLISH_COLLECTION_WITH_RESOURCE_CONTENT, "textBook", 1, CollectionUtilPayload.UPDATE_HIERARCHY_1_UNIT_1_RESOURCE
                 },
                 new Object[]{
                         ContentV3Scenario.TEST_PUBLISH_COLLECTION_WITH_RESOURCE_CONTENT, "course", 1, CollectionUtilPayload.UPDATE_HIERARCHY_1_UNIT_1_RESOURCE
                 },
                 new Object[]{
-                        ContentV3Scenario.TEST_PUBLISH_COLLECTION_WITH_RESOURCE_CONTENT, "lessonplan", 1, CollectionUtilPayload.UPDATE_HIERARCHY_1_UNIT_1_RESOURCE
+                        ContentV3Scenario.TEST_PUBLISH_COLLECTION_WITH_RESOURCE_CONTENT, "lessonPlan", 1, CollectionUtilPayload.UPDATE_HIERARCHY_1_UNIT_1_RESOURCE
                 }
         };
     }
@@ -200,13 +236,13 @@ public class PublishCollectionContentTest extends BaseCitrusTestRunner {
                         ContentV3Scenario.TEST_PUBLISH_COLLECTION_WITH_RESOURCE_CONTENT, "collection", 1, CollectionUtilPayload.UPDATE_HIERARCHY_1_UNIT_1_RESOURCE
                 },
                 new Object[]{
-                        ContentV3Scenario.TEST_PUBLISH_COLLECTION_WITH_RESOURCE_CONTENT, "textbook", 1, CollectionUtilPayload.UPDATE_HIERARCHY_1_UNIT_1_RESOURCE
+                        ContentV3Scenario.TEST_PUBLISH_COLLECTION_WITH_RESOURCE_CONTENT, "textBook", 1, CollectionUtilPayload.UPDATE_HIERARCHY_1_UNIT_1_RESOURCE
                 },
                 new Object[]{
                         ContentV3Scenario.TEST_PUBLISH_COLLECTION_WITH_RESOURCE_CONTENT, "course", 1, CollectionUtilPayload.UPDATE_HIERARCHY_1_UNIT_1_RESOURCE
                 },
                 new Object[]{
-                        ContentV3Scenario.TEST_PUBLISH_COLLECTION_WITH_RESOURCE_CONTENT, "lessonplan", 1, CollectionUtilPayload.UPDATE_HIERARCHY_1_UNIT_1_RESOURCE
+                        ContentV3Scenario.TEST_PUBLISH_COLLECTION_WITH_RESOURCE_CONTENT, "lessonPlan", 1, CollectionUtilPayload.UPDATE_HIERARCHY_1_UNIT_1_RESOURCE
                 }
         };
     }
@@ -218,13 +254,13 @@ public class PublishCollectionContentTest extends BaseCitrusTestRunner {
                         ContentV3Scenario.TEST_PUBLISH_COLLECTION_WITH_RESOURCE_CONTENT, "collection", 1, CollectionUtilPayload.UPDATE_HIERARCHY_1_UNIT_1_RESOURCE
                 },
                 new Object[]{
-                        ContentV3Scenario.TEST_PUBLISH_COLLECTION_WITH_RESOURCE_CONTENT, "textbook", 1, CollectionUtilPayload.UPDATE_HIERARCHY_1_UNIT_1_RESOURCE
+                        ContentV3Scenario.TEST_PUBLISH_COLLECTION_WITH_RESOURCE_CONTENT, "textBook", 1, CollectionUtilPayload.UPDATE_HIERARCHY_1_UNIT_1_RESOURCE
                 },
                 new Object[]{
                         ContentV3Scenario.TEST_PUBLISH_COLLECTION_WITH_RESOURCE_CONTENT, "course", 1, CollectionUtilPayload.UPDATE_HIERARCHY_1_UNIT_1_RESOURCE
                 },
                 new Object[]{
-                        ContentV3Scenario.TEST_PUBLISH_COLLECTION_WITH_RESOURCE_CONTENT, "lessonplan", 1, CollectionUtilPayload.UPDATE_HIERARCHY_1_UNIT_1_RESOURCE
+                        ContentV3Scenario.TEST_PUBLISH_COLLECTION_WITH_RESOURCE_CONTENT, "lessonPlan", 1, CollectionUtilPayload.UPDATE_HIERARCHY_1_UNIT_1_RESOURCE
                 }
         };
     }
@@ -236,13 +272,13 @@ public class PublishCollectionContentTest extends BaseCitrusTestRunner {
                         ContentV3Scenario.TEST_PUBLISH_COLLECTION_WITH_RESOURCE_CONTENT, "collection", 1, CollectionUtilPayload.UPDATE_HIERARCHY_1_UNIT_1_RESOURCE
                 },
                 new Object[]{
-                        ContentV3Scenario.TEST_PUBLISH_COLLECTION_WITH_RESOURCE_CONTENT, "textbook", 1, CollectionUtilPayload.UPDATE_HIERARCHY_1_UNIT_1_RESOURCE
+                        ContentV3Scenario.TEST_PUBLISH_COLLECTION_WITH_RESOURCE_CONTENT, "textBook", 1, CollectionUtilPayload.UPDATE_HIERARCHY_1_UNIT_1_RESOURCE
                 },
                 new Object[]{
                         ContentV3Scenario.TEST_PUBLISH_COLLECTION_WITH_RESOURCE_CONTENT, "course", 1, CollectionUtilPayload.UPDATE_HIERARCHY_1_UNIT_1_RESOURCE
                 },
                 new Object[]{
-                        ContentV3Scenario.TEST_PUBLISH_COLLECTION_WITH_RESOURCE_CONTENT, "lessonplan", 1, CollectionUtilPayload.UPDATE_HIERARCHY_1_UNIT_1_RESOURCE
+                        ContentV3Scenario.TEST_PUBLISH_COLLECTION_WITH_RESOURCE_CONTENT, "lessonPlan", 1, CollectionUtilPayload.UPDATE_HIERARCHY_1_UNIT_1_RESOURCE
                 }
         };
     }
@@ -254,13 +290,13 @@ public class PublishCollectionContentTest extends BaseCitrusTestRunner {
                         ContentV3Scenario.TEST_PUBLISH_COLLECTION_WITH_RESOURCE_CONTENT, "collection", 1, CollectionUtilPayload.UPDATE_HIERARCHY_1_UNIT_1_RESOURCE
                 },
                 new Object[]{
-                        ContentV3Scenario.TEST_PUBLISH_COLLECTION_WITH_RESOURCE_CONTENT, "textbook", 1, CollectionUtilPayload.UPDATE_HIERARCHY_1_UNIT_1_RESOURCE
+                        ContentV3Scenario.TEST_PUBLISH_COLLECTION_WITH_RESOURCE_CONTENT, "textBook", 1, CollectionUtilPayload.UPDATE_HIERARCHY_1_UNIT_1_RESOURCE
                 },
                 new Object[]{
                         ContentV3Scenario.TEST_PUBLISH_COLLECTION_WITH_RESOURCE_CONTENT, "course", 1, CollectionUtilPayload.UPDATE_HIERARCHY_1_UNIT_1_RESOURCE
                 },
                 new Object[]{
-                        ContentV3Scenario.TEST_PUBLISH_COLLECTION_WITH_RESOURCE_CONTENT, "lessonplan", 1, CollectionUtilPayload.UPDATE_HIERARCHY_1_UNIT_1_RESOURCE
+                        ContentV3Scenario.TEST_PUBLISH_COLLECTION_WITH_RESOURCE_CONTENT, "lessonPlan", 1, CollectionUtilPayload.UPDATE_HIERARCHY_1_UNIT_1_RESOURCE
                 }
         };
     }
@@ -269,7 +305,7 @@ public class PublishCollectionContentTest extends BaseCitrusTestRunner {
     public Object[][] publishWithDifferentVersionResource() {
         return new Object[][]{
                 new Object[]{
-                        ContentV3Scenario.TEST_PUBLISH_WITH_DIFFERENT_VERSION, "textbook", 1, CollectionUtilPayload.UPDATE_HIERARCHY_1_UNIT_1_RESOURCE
+                        ContentV3Scenario.TEST_PUBLISH_WITH_DIFFERENT_VERSION, "textBook", 1, CollectionUtilPayload.UPDATE_HIERARCHY_1_UNIT_1_RESOURCE
                 },
 
         };
@@ -279,7 +315,7 @@ public class PublishCollectionContentTest extends BaseCitrusTestRunner {
     public Object[][] publishWithRetiredResource() {
         return new Object[][]{
                 new Object[]{
-                        ContentV3Scenario.TEST_PUBLISH_WITH_RESOURCE_RETIRED, "textbook", 1, CollectionUtilPayload.UPDATE_HIERARCHY_1_UNIT_1_RESOURCE
+                        ContentV3Scenario.TEST_PUBLISH_WITH_RESOURCE_RETIRED, "textBook", 1, CollectionUtilPayload.UPDATE_HIERARCHY_1_UNIT_1_RESOURCE
                 },
 
         };

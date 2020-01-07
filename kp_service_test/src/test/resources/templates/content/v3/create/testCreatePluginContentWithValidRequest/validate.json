@@ -1,5 +1,5 @@
 {
-  "id": "ekstep.content.find",
+  "id": "api.content.read",
   "ver": "3.0",
   "ts": "@matchesDatePattern('yyyy-MM-dd')@",
   "params": {
@@ -40,14 +40,14 @@
         "All"
       ],
       "mediaType": "content",
-      "osId": "org.ekstep.launcher",
-      "languageCode": "en",
-     "version": "@isNumber()@",
-"versionKey": "@isNumber()@",
-      "license": "Creative Commons Attribution (CC BY)",
+      "osId": "org.ekstep.quiz.app",
+      "languageCode": ["en"],
+      "version": "@isNumber()@",
+      "versionKey": "@isNumber()@",
+      "license": "CC BY 4.0",
       "idealScreenDensity": "hdpi",
       "framework": "NCF",
-      "compatibilityLevel": 1.0,
+      "compatibilityLevel": "@isNumber()@",
       "name": "KP Integration Test Plugin",
       "status": "Draft"
     }

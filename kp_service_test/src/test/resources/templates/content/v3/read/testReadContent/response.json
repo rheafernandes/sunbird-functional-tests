@@ -1,5 +1,5 @@
 {
-  "id": "ekstep.content.find",
+  "id": "api.content.read",
   "ver": "3.0",
   "ts": "@matchesDatePattern('yyyy-MM-dd')@",
   "params": {
@@ -34,7 +34,6 @@
       "idealScreenSize": "normal",
       "publishComment": "OK",
       "createdOn": "@matchesDatePattern('yyyy-MM-dd')@",
-      "appId": "app-01",
       "contentDisposition": "inline",
       "artifactUrl": "@ignore@",
       "contentEncoding": "gzip",
@@ -60,7 +59,7 @@
       "pkgVersion": "@isNumber()@",
       "versionKey": "@ignore@",
       "idealScreenDensity": "hdpi",
-      "license": "Creative Commons Attribution (CC BY)",
+      "license": "CC BY 4.0",
       "s3Key": "@ignore@",
       "framework": "NCF",
       "size": "@isNumber()@",

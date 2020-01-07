@@ -48,7 +48,7 @@
       "contentDisposition": "inline",
       "contentEncoding": "gzip",
       "lastUpdatedOn": "@matchesDatePattern('yyyy-MM-dd')@",
-      "contentType": "Textbook",
+      "contentType": "TextBook",
       "dialcodeRequired": "No",
       "identifier": "${rootId}",
       "audience": [
@@ -64,11 +64,11 @@
       "osId": "org.ekstep.quiz.app",
       "version": 2,
       "versionKey": "@ignore@",
-      "license": "Creative Commons Attribution (CC BY)",
+      "license": "CC BY 4.0",
       "idealScreenDensity": "hdpi",
       "depth": 0,
       "framework": "NCF",
-      "compatibilityLevel": 1.0,
+      "compatibilityLevel": "@isNumber()@",
       "name": "KP Integration Test Collection Content",
       "status": "Draft"
     }

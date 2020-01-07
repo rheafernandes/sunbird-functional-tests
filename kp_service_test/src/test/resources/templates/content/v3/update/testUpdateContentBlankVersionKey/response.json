@@ -1,13 +1,13 @@
 {
-  "id": "ekstep.learning.content.update",
+  "id": "api.content.update",
   "ver": "3.0",
   "ts": "@ignore@",
   "params": {
     "resmsgid": "@ignore@",
     "msgid": null,
     "status": "failed",
-    "err": "BLANK_VERSION",
-    "errmsg": "@ignore@"
+    "err": "ERR_INVALID_REQUEST",
+    "errmsg": "Please Provide Version Key!"
   },
   "responseCode": "CLIENT_ERROR",
   "result": "@ignore@"

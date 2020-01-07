@@ -1,5 +1,5 @@
 {
-  "id" : "ekstep.content.find",
+  "id" : "api.content.read",
   "ver" : "3.0",
   "ts" : "@matchesDatePattern('yyyy-MM-dd')@",
   "params" : {
@@ -12,6 +12,7 @@
   "responseCode" : "OK",
   "result" : {
     "content" : {
+      "appId": "@ignore@",
       "ownershipType" : [ "createdBy" ],
       "previewUrl" : "@ignore@",
       "downloadUrl" : "@ignore@",
@@ -24,7 +25,6 @@
         }
       },
       "mimeType" : "application/pdf",
-      "appId" : "@ignore@",
       "artifactUrl" : "@ignore@",
       "contentEncoding" : "identity",
       "contentType" : "Resource",
@@ -36,11 +36,11 @@
       "mediaType" : "content",
       "osId" : "org.ekstep.quiz.app",
       "lastPublishedBy" : "KP_FT_PUBLISHER",
-      "languageCode" : "en",
+      "languageCode": ["en"],
       "version" :"@isNumber()@",
       "pragma" : [ "external" ],
       "prevState" : "Draft",
-      "license" : "Creative Commons Attribution (CC BY)",
+      "license" : "CC BY 4.0",
       "lastPublishedOn" : "@matchesDatePattern('yyyy-MM-dd')@",
       "size" :"@isNumber()@",
       "name" : "KP Integration Test Content",

@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.sunbird.kp.test.common.APIUrl;
 import org.sunbird.kp.test.common.BaseCitrusTestRunner;
 import org.sunbird.kp.test.common.Constant;
+import org.sunbird.kp.test.util.ContentPayload;
 import org.sunbird.kp.test.util.ContentUtil;
 import org.sunbird.kp.test.util.WorkflowConstants;
 import org.sunbird.kp.test.util.TestSetupUtil;
@@ -26,11 +27,11 @@ public class ReadContentTest extends BaseCitrusTestRunner {
     private static final String TEMPLATE_DIR = "templates/content/v3/read";
     private static Map<String, String> dirIdMap = new HashMap<>();
 
-    //TODO:Comment after files are created and populated
 
     @AfterClass
     public static void populateAssertionData() {
-        TestSetupUtil.createDirectoriesForTestCases(dirIdMap, "response.json", TEMPLATE_DIR);
+//        TODO: This code can be commented out after the directories are created and populated.
+//        TestSetupUtil.createDirectoriesForTestCases(dirIdMap, "response.json", TEMPLATE_DIR);
     }
 
     @Test(dataProvider = "readResourceContentWithWorkflow")
@@ -105,15 +106,36 @@ public class ReadContentTest extends BaseCitrusTestRunner {
     public void testReadResourceContentWithIdentifier(
             String testName, String requestUrl, HttpStatus httpStatusCode, String userType, Map<String, Object> valParams, String mimeType) {
         getAuthToken(this, userType);
-        String contentId = (String) ContentUtil.createResourceContent(this, null, mimeType, null).get("content_id");
+        Map<String, Object> result = ContentUtil.createResourceContent(this, null, mimeType, null);
+        this.variable("contentIdVal", result.getOrDefault("content_id", "KP_TEST_000009999"));
+        this.variable("versionKeyVal", (String) result.getOrDefault("versionKey", "00000000000"));
+        dirIdMap.put(testName, (String) result.getOrDefault("content_id", "KP_TEST_000009999"));
         performGetTest(
                 this,
                 TEMPLATE_DIR,
                 testName,
-                requestUrl + contentId,
+                requestUrl + result.getOrDefault("content_id", "KP_TEST_000009999"),
                 null,
                 httpStatusCode,
                 valParams,
+                RESPONSE_JSON
+        );
+    }
+
+    @Test
+    @CitrusTest
+    public void testReadResourceContentWithInvalidIdentifier() {
+        String testName = ContentV3Scenario.TEST_READ_RESOURCE_CONTENT_WITH_INVALID_IDENTIFIER;
+        getAuthToken(this, Constant.CREATOR);
+        Map<String, Object> result = ContentUtil.createResourceContent(this, null, "application/pdf", null);
+        performGetTest(
+                this,
+                TEMPLATE_DIR,
+                testName,
+                APIUrl.READ_CONTENT + "KP_FT_000009999",
+                null,
+                HttpStatus.NOT_FOUND,
+                null,
                 RESPONSE_JSON
         );
     }
@@ -123,7 +145,11 @@ public class ReadContentTest extends BaseCitrusTestRunner {
     @CitrusTest
     public void testReadResourceContentWithMode(
             String testName, String requestUrl, HttpStatus httpStatusCode, Map<String, Object> valParams, String workFlowStatus, String responseJson, String mode) {
-        String contentId = ContentUtil.prepareResourceContent(workFlowStatus, this, null, "application/vnd.ekstep.ecml-archive", null).get("content_id").toString();
+        Map<String, Object> result = ContentUtil.prepareResourceContent(workFlowStatus, this, null, "application/vnd.ekstep.ecml-archive", null);
+        String contentId = (String) result.getOrDefault("content_id", "KP_TEST_000009999");
+        this.variable("contentIdVal", contentId);
+        this.variable("versionKeyVal", (String) result.getOrDefault("versionKey", "00000000000"));
+        dirIdMap.put(testName, contentId);
             performGetTest(
                 this,
                 TEMPLATE_DIR,
@@ -141,7 +167,11 @@ public class ReadContentTest extends BaseCitrusTestRunner {
     @CitrusTest
     public void testReadResourceContentWithFields(
             String testName, String requestUrl, HttpStatus httpStatusCode, Map<String, Object> valParams, String workFlowStatus, String responseJson, String fields) {
-        String contentId = ContentUtil.prepareResourceContent(workFlowStatus, this, null, "application/vnd.ekstep.ecml-archive", null).get("content_id").toString();
+        Map<String, Object> result = ContentUtil.prepareResourceContent(workFlowStatus, this, null, "application/vnd.ekstep.ecml-archive", null);
+        String contentId = (String) result.getOrDefault("content_id", "KP_TEST_000009999");
+        this.variable("contentIdVal", contentId);
+        this.variable("versionKeyVal", (String) result.getOrDefault("versionKey", "00000000000"));
+        dirIdMap.put(testName, contentId);
         performGetTest(
                 this,
                 TEMPLATE_DIR,
@@ -158,7 +188,11 @@ public class ReadContentTest extends BaseCitrusTestRunner {
     @CitrusTest
     public void testReadResourceContentWithModeAndFields(
             String testName, String requestUrl, HttpStatus httpStatusCode, Map<String, Object> valParams, String workFlowStatus, String responseJson, String mode, String fields) {
-        String contentId = ContentUtil.prepareResourceContent(workFlowStatus, this, null, "application/vnd.ekstep.ecml-archive", null).get("content_id").toString();
+        Map<String, Object> result = ContentUtil.prepareResourceContent(workFlowStatus, this, null, "application/vnd.ekstep.ecml-archive", null);
+        String contentId = (String) result.getOrDefault("content_id", "KP_TEST_000009999");
+        this.variable("contentIdVal", contentId);
+        this.variable("versionKeyVal", (String) result.getOrDefault("versionKey", "00000000000"));
+        dirIdMap.put(testName, contentId);
         performGetTest(
                 this,
                 TEMPLATE_DIR,
@@ -168,6 +202,28 @@ public class ReadContentTest extends BaseCitrusTestRunner {
                 httpStatusCode,
                 valParams,
                 responseJson
+        );
+    }
+
+    @Test
+    @CitrusTest
+    public void testReadResourceContentWithMediumAndSubject() {
+        String testName = ContentV3Scenario.TEST_READ_CONTENT_WITH_SUBJECT_AND_MEDIUM;
+        this.getTestCase().setName(testName);
+        getAuthToken(this, Constant.CREATOR);
+        Map<String, Object> result = ContentUtil.createResourceContent(this, ContentPayload.CREATE_RESOURCE_CONTENT_WITH_SUBJECT_MEDIUM, "application/pdf", null);
+        String contentId = (String) result.getOrDefault("content_id", "KP_TEST_000009999");
+        this.variable("contentIdVal", contentId);
+        this.variable("versionKeyVal", (String) result.getOrDefault("versionKey", "00000000000"));
+        performGetTest(
+                this,
+                TEMPLATE_DIR,
+                testName,
+                APIUrl.READ_CONTENT + contentId,
+                null,
+                HttpStatus.OK,
+                null,
+                RESPONSE_JSON
         );
     }
 
@@ -181,10 +237,6 @@ public class ReadContentTest extends BaseCitrusTestRunner {
                 new Object[]{
                         ContentV3Scenario.TEST_READ_RESOURCE_CONTENT_WITH_VALID_IDENTIFIER, APIUrl.READ_CONTENT, HttpStatus.OK, Constant.CREATOR,
                         new HashMap(){{put("identifier",null);put("versionKey",null);put("mimeType","video/x-youtube");put("status","Draft");}}, "video/x-youtube"
-                },
-                new Object[]{
-                        ContentV3Scenario.TEST_READ_RESOURCE_CONTENT_WITH_INVALID_IDENTIFIER, APIUrl.READ_CONTENT, HttpStatus.NOT_FOUND, Constant.CREATOR,
-                        null, null
                 }
         };
     }
@@ -196,10 +248,10 @@ public class ReadContentTest extends BaseCitrusTestRunner {
                         ContentV3Scenario.TEST_READ_RESOURCE_CONTENT_WITH_EDIT_MODE, APIUrl.READ_CONTENT, HttpStatus.OK, null, "contentInLiveImageDraft", RESPONSE_JSON, "edit"
                 },
                 new Object[]{
-                        ContentV3Scenario.TEST_READ_RESOURCE_CONTENT_WITH_INVALID_MODE, APIUrl.READ_CONTENT, HttpStatus.OK, null, "contentInLiveImageDraft", RESPONSE_JSON, "abc"
+                        ContentV3Scenario.TEST_READ_RESOURCE_CONTENT_WITH_INVALID_MODE, APIUrl.READ_CONTENT, HttpStatus.OK, null, "contentInDraft", RESPONSE_JSON, "abc"
                 },
                 new Object[]{
-                        ContentV3Scenario.TEST_READ_RESOURCE_CONTENT_WITH_EMPTY_MODE, APIUrl.READ_CONTENT, HttpStatus.OK, null, "contentInLiveImageDraft", RESPONSE_JSON, ""
+                        ContentV3Scenario.TEST_READ_RESOURCE_CONTENT_WITH_EMPTY_MODE, APIUrl.READ_CONTENT, HttpStatus.OK, null, "contentInDraft", RESPONSE_JSON, ""
                 }
         };
     }
@@ -216,7 +268,7 @@ public class ReadContentTest extends BaseCitrusTestRunner {
                         ContentV3Scenario.TEST_READ_RESOURCE_CONTENT_WITH_BODY_FIELDS, APIUrl.READ_CONTENT, HttpStatus.OK, null, "contentInLiveImageDraft", RESPONSE_JSON, "body"
                 },
                 new Object[]{
-                        ContentV3Scenario.TEST_READ_RESOURCE_CONTENT_WITH_EMPTY_FIELDS, APIUrl.READ_CONTENT, HttpStatus.OK, null, "contentInLiveImageDraft", RESPONSE_JSON, ""
+                        ContentV3Scenario.TEST_READ_RESOURCE_CONTENT_WITH_EMPTY_FIELDS, APIUrl.READ_CONTENT, HttpStatus.OK, null, "contentInDraft", RESPONSE_JSON, ""
                 }
         };
     }

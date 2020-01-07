@@ -106,6 +106,38 @@ public class UpdateContentTest extends BaseCitrusTestRunner {
                 null, HttpStatus.OK, null, "validateFields.json");
     }
 
+    @Test
+    @CitrusTest
+    public void testUpdateContentHavingMetadataResources() throws Exception {
+        String CREATE_RESOURCE_CONTENT_WITH_RESOURCES = "{\n" + "\"request\": {\n" + "\"content\": {\n" + "\"identifier\": \"KP_FT_"+System.currentTimeMillis()+"\",\n" + "\"name\": \"KP Integration Test Content\",\n" + "\"code\": \"kp.ft.resource.pdf\",\n" + "\"mimeType\": \"application/pdf\",\n" + "\"contentType\": \"Resource\",\n" + "\"resources\": [\n" + "\"Speaker\",\n" + "\"Microphone\"\n" + "]\n" + "}\n" + "}\n" +"}";
+        getAuthToken(this, null);
+        Map<String, Object> map = ContentUtil.createResourceContent(this, CREATE_RESOURCE_CONTENT_WITH_RESOURCES, null, null);
+        String contentId = (String) map.get("content_id");
+        String versionKey = (String) map.get("versionKey");
+        this.variable("versionKeyVal", versionKey);
+        this.variable("contentIdVal", contentId);
+        performPatchTest(this, TEMPLATE_DIR, ContentV3Scenario.TEST_UPDATE_CONTENT_WITH_RESOURCES, APIUrl.UPDATE_CONTENT + contentId, null,
+                REQUEST_JSON, MediaType.APPLICATION_JSON, HttpStatus.OK, null, RESPONSE_JSON);
+        performGetTest(this, TEMPLATE_DIR, ContentV3Scenario.TEST_UPDATE_CONTENT_WITH_RESOURCES, APIUrl.READ_CONTENT + contentId,
+                null, HttpStatus.OK, null, VALIDATE_JSON);
+    }
+
+    @Test
+    @CitrusTest
+    public void testUpdateContentHavingMetadataContentCredits() throws Exception {
+        String CREATE_RESOURCE_CONTENT_WITH_CONTENTCREDITS = "{\n" + "\"request\": {\n" + "\"content\": {\n" + "\"identifier\": \"KP_FT_"+System.currentTimeMillis()+"\",\n" + "\"name\": \"KP Integration Test Content\",\n" + "\"code\": \"kp.ft.resource.pdf\",\n" + "\"mimeType\": \"application/pdf\",\n" + "\"contentType\": \"Resource\",\n" + "\"contentCredits\": [\n" + "{\n" + "\"id\": \"12345\",\n" + "\"name\": \"user1\",\n" + "\"type\": \"user\"\n" + "}\n" + "]\n" + "}\n" + "}\n" +"}";
+        getAuthToken(this, null);
+        Map<String, Object> map = ContentUtil.createResourceContent(this, CREATE_RESOURCE_CONTENT_WITH_CONTENTCREDITS, null, null);
+        String contentId = (String) map.get("content_id");
+        String versionKey = (String) map.get("versionKey");
+        this.variable("versionKeyVal", versionKey);
+        this.variable("contentIdVal", contentId);
+        performPatchTest(this, TEMPLATE_DIR, ContentV3Scenario.TEST_UPDATE_CONTENT_WITH_CONTENTCREDITS, APIUrl.UPDATE_CONTENT + contentId, null,
+                REQUEST_JSON, MediaType.APPLICATION_JSON, HttpStatus.OK, null, RESPONSE_JSON);
+        performGetTest(this, TEMPLATE_DIR, ContentV3Scenario.TEST_UPDATE_CONTENT_WITH_CONTENTCREDITS, APIUrl.READ_CONTENT + contentId,
+                null, HttpStatus.OK, null, VALIDATE_JSON);
+    }
+
     @DataProvider(name = "updateValidResourceContent")
     public Object[][] updateValidResourceContent() {
         return new Object[][]{
@@ -135,7 +167,7 @@ public class UpdateContentTest extends BaseCitrusTestRunner {
                         ContentV3Scenario.TEST_UPDATE_CONTENT_STATUS_FLAGREVIEW, "application/pdf", "contentInFlagReview"
                 },
                 new Object[]{
-                        ContentV3Scenario.TEST_UPDATE_WITH_VALID_ECML, "application/pdf", "contentInDraft"
+                        ContentV3Scenario.TEST_UPDATE_WITH_VALID_ECML_BODY, "application/pdf", "contentInDraft"
                 },
         };
     }
@@ -143,28 +175,28 @@ public class UpdateContentTest extends BaseCitrusTestRunner {
     @DataProvider(name = "updateInvalidResourceContent")
     public Object[][] updateInvalidResourceContent() {
         return new Object[][]{
-                new Object[]{
-                        ContentV3Scenario.TEST_UPDATE_CONTENT_WITH_NEW_MIMETYPE, "application/pdf", "contentInDraft"
-                },
-
-                new Object[]{
-                        ContentV3Scenario.TEST_UPDATE_CONTENT_WITH_NEW_MEDIATYPE, "application/pdf", "contentInDraft"
-                },
-                new Object[]{
-                        ContentV3Scenario.TEST_UPDATE_CONTENT_WITH_VALID_CONTENT_TYPE, "application/pdf", "contentInDraft"
-                },
-                new Object[]{
-                        ContentV3Scenario.TEST_UPDATE_CONTENT_STATUS_FLAGGED, "application/pdf", "contentInFlagged"
-                },
+                // TODO: Uncomment in KP-2.0
+//                new Object[]{
+//                        ContentV3Scenario.TEST_UPDATE_CONTENT_WITH_MIMETYPE, "application/pdf", "contentInDraft"
+//                },
+//                new Object[]{
+//                        ContentV3Scenario.TEST_UPDATE_CONTENT_WITH_MEDIATYPE, "application/pdf", "contentInDraft"
+//                },
+//                new Object[]{
+//                        ContentV3Scenario.TEST_UPDATE_CONTENT_WITH_CONTENT_TYPE, "application/pdf", "contentInDraft"
+//                },
+//                new Object[]{
+//                        ContentV3Scenario.TEST_UPDATE_CONTENT_STATUS_FLAGGED, "application/pdf", "contentInFlagged"
+//                },
                 new Object[]{
                         ContentV3Scenario.TEST_UPDATE_CONTENT_WITH_BLANK_VERSION_KEY, "application/pdf", "contentInDraft"
                 },
                 new Object[]{
                         ContentV3Scenario.TEST_UPDATE_CONTENT_WITH_INVALID_VERSION_KEY, "application/pdf", "contentInDraft"
                 },
-                new Object[]{
+                /*new Object[]{
                         ContentV3Scenario.TEST_UPDATE_CONTENT_WITH_CHANGED_STATUS, "application/pdf", "contentInDraft"
-                },
+                },*/
                 new Object[]{
                         ContentV3Scenario.TEST_UPDATE_CONTENT_WITH_INVALID_METADATA, "application/pdf", "contentInDraft"
                 },
@@ -172,33 +204,35 @@ public class UpdateContentTest extends BaseCitrusTestRunner {
                 new Object[]{
                         ContentV3Scenario.TEST_UPDATE_CONTENT_WITH_INVALID_CONTENT_TYPE, "application/pdf", "contentInDraft"
                 },
-                new Object[]{
+                /*new Object[]{
                         ContentV3Scenario.TEST_UPDATE_WITH_SYSTEM_PROPERTY, "application/pdf", "contentInDraft"
-                },
-                new Object[]{
-                        ContentV3Scenario.TEST_UPDATE_CONTENT_IN_RETIRED, "application/pdf", "contentRetired"
-                },
-                new Object[]{
-                        ContentV3Scenario.TEST_UPDATE_WITH_DIALCODES, "application/pdf", "contentInDraft"
-                },
-                new Object[]{
-                        ContentV3Scenario.TEST_UPDATE_WITH_RESERVED_DIALCODES, "application/pdf", "contentInDraft"
-                },
-                new Object[]{
-                        ContentV3Scenario.TEST_UPDATE_WITH_INVALID_FRAMEWORK, "application/pdf", "contentInDraft"
-                },
-                new Object[]{
-                        ContentV3Scenario.TEST_UPDATE_WITH_CORRECT_IDENTIFIER_IN_REQUEST, "application/pdf", "contentInDraft"
-                },
-                new Object[]{
-                        ContentV3Scenario.TEST_UPDATE_WITH_INCORRECT_IDENTIFIER_IN_REQUEST, "application/pdf", "contentInDraft"
-                },
+                },*/
+                // TODO: Uncomment in KP-2.0
+//                new Object[]{
+//                        ContentV3Scenario.TEST_UPDATE_CONTENT_IN_RETIRED, "application/pdf", "contentRetired"
+//                },
+//                new Object[]{
+//                        ContentV3Scenario.TEST_UPDATE_WITH_DIALCODES, "application/pdf", "contentInDraft"
+//                },
+//                new Object[]{
+//                        ContentV3Scenario.TEST_UPDATE_WITH_RESERVED_DIALCODES, "application/pdf", "contentInDraft"
+//                },
+//                new Object[]{
+//                        ContentV3Scenario.TEST_UPDATE_WITH_INVALID_FRAMEWORK, "application/pdf", "contentInDraft"
+//                },
+//                new Object[]{
+//                        ContentV3Scenario.TEST_UPDATE_WITH_CORRECT_IDENTIFIER_IN_REQUEST, "application/pdf", "contentInDraft"
+//                },
+//                new Object[]{
+//                        ContentV3Scenario.TEST_UPDATE_WITH_INCORRECT_IDENTIFIER_IN_REQUEST, "application/pdf", "contentInDraft"
+//                },
                 new Object[]{
                         ContentV3Scenario.TEST_UPDATE_WITH_INVALID_FORMAT_RESERVED_DIALCODES, "application/pdf", "contentInDraft"
                 },
-                new Object[]{
-                        ContentV3Scenario.TEST_UPDATE_WITH_INVALID_ECML, "application/pdf", "contentInDraft"
-                },
+                // TODO: Uncomment in KP-2.0
+//                new Object[]{
+//                        ContentV3Scenario.TEST_UPDATE_WITH_INVALID_ECML_BODY, "application/pdf", "contentInDraft"
+//                },
         };
     }
 
@@ -208,16 +242,16 @@ public class UpdateContentTest extends BaseCitrusTestRunner {
                 new Object[]{
                         ContentV3Scenario.TEST_UPDATE_CONTENT_WITH_NOT_FOUND_REQUEST, null, false, "contentInDraft"
                 },
-
-                new Object[]{
-                        ContentV3Scenario.TEST_UPDATE_WITH_IMAGE_ID, "application/pdf", true, "contentInDraft"
-                },
+//
+//                new Object[]{
+//                        ContentV3Scenario.TEST_UPDATE_WITH_IMAGE_ID, "application/pdf", true, "contentInDraft"
+//                },
                 new Object[]{
                         ContentV3Scenario.TEST_UPDATE_CONTENT_AFTER_DISCARD, "application/pdf", false, "contentDiscarded"
                 },
-                new Object[]{
-                        ContentV3Scenario.TEST_UPDATE_FOR_PUBLISHED_CONTENT_WITH_IMAGE_ID, "application/pdf", true, "contentInLive"
-                },
+//                new Object[]{
+//                        ContentV3Scenario.TEST_UPDATE_FOR_PUBLISHED_CONTENT_WITH_IMAGE_ID, "application/pdf", true, "contentInLive"
+//                },
         };
     }
 

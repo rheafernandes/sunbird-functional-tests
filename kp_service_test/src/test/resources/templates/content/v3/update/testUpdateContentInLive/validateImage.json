@@ -1,5 +1,5 @@
 {
-  "id": "ekstep.content.find",
+  "id": "api.content.read",
   "ver": "3.0",
   "ts": "@matchesDatePattern('yyyy-MM-dd')@",
   "params": {
@@ -54,14 +54,14 @@
       "mediaType": "content",
       "osId": "org.ekstep.quiz.app",
       "lastPublishedBy": "KP_FT_PUBLISHER",
-      "languageCode": "en",
+      "languageCode": ["en"],
       "version":  "@isNumber()@",
       "pkgVersion":  "@isNumber()@",
       "pragma": [
         "external"
       ],
       "versionKey":  "@isNumber()@",
-      "license": "Creative Commons Attribution (CC BY)",
+      "license": "CC BY 4.0",
       "idealScreenDensity": "hdpi",
       "prevState": "Draft",
       "s3Key": "@ignore@",

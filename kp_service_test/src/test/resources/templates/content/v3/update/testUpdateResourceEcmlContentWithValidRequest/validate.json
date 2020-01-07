@@ -1,5 +1,5 @@
 {
-  "id": "ekstep.content.find",
+  "id": "api.content.read",
   "ver": "3.0",
   "ts": "@matchesDatePattern('yyyy-MM-dd')@",
   "params": {
@@ -42,10 +42,10 @@
       "consumerId": "@ignore@",
       "mediaType": "content",
       "osId": "org.ekstep.quiz.app",
-      "languageCode": "en",
+      "languageCode": ["en"],
       "version": "@isNumber()@",
       "versionKey": "@isNumber()@",
-      "license": "Creative Commons Attribution (CC BY)",
+      "license": "CC BY 4.0",
       "idealScreenDensity": "hdpi",
       "framework": "NCF",
       "compatibilityLevel": "@isNumber()@",

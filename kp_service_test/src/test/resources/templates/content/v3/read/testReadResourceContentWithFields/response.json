@@ -1,5 +1,5 @@
 {
-  "id": "ekstep.content.find",
+  "id": "api.content.read",
   "ver": "3.0",
   "ts": "@matchesDatePattern('yyyy-MM-dd')@",
   "params": {
@@ -12,10 +12,9 @@
   "responseCode": "OK",
   "result": {
     "content": {
-      "identifier": "${contentIdVal}",
       "name": "KP Integration Test Content",
       "status": "Live",
-      "languageCode": []
+      "identifier":"${contentIdVal}"
     }
   }
 }

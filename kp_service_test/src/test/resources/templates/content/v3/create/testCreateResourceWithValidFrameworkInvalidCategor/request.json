@@ -6,7 +6,7 @@
       "code": "citrus:Code",
       "mimeType": "application/pdf",
       "framework":"NCF",
-      "category": "New Cat"
+      "board": "InvalidSubject"
     }
   }
 }

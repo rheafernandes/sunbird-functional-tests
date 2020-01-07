@@ -1,11 +1,11 @@
 {
-  "id": "ekstep.learning.content.update",
+  "id": "api.content.update",
   "ver": "3.0",
   "ts": "@ignore@",
   "params": {
     "resmsgid": "@ignore@",
     "msgid": null,
-    "err": "ERR_GRAPH_SEARCH_UNKNOWN_ERROR",
+    "err": "NOT_FOUND",
     "status": "failed",
     "errmsg": "@ignore@"
   },

@@ -31,6 +31,7 @@ public class ContentUtil {
 
     private static final String API_KEY = AppConfig.config.getString("kp_api_key");
     private static final Boolean IS_USER_AUTH_REQUIRED = AppConfig.config.getBoolean("user_auth_enable");
+    private static List<String> CS_API_LIST = AppConfig.config.getStringList("cs_api_list");
     private static ObjectMapper objectMapper = new ObjectMapper();
     private static ObjectWriter objectWriter = objectMapper.writer().withDefaultPrettyPrinter();
 
@@ -321,7 +322,7 @@ public class ContentUtil {
                     builder ->
                             TestActionUtil.getPatchRequestTestAction(
                                     builder,
-                                    Constant.KP_ENDPOINT,
+                                    getEndPoint(APIUrl.UPDATE_CONTENT_HIERARCHY),
                                     APIUrl.UPDATE_CONTENT_HIERARCHY,
                                     Constant.CONTENT_TYPE_APPLICATION_JSON,
                                     payload,
@@ -331,7 +332,7 @@ public class ContentUtil {
                     builder ->
                             TestActionUtil.processPatchRequest(
                                     builder,
-                                    Constant.KP_ENDPOINT,
+                                    getEndPoint(APIUrl.UPDATE_CONTENT_HIERARCHY),
                                     CONTENT_PAYLOAD_DIR,
                                     testName,
                                     APIUrl.UPDATE_CONTENT_HIERARCHY,
@@ -345,7 +346,7 @@ public class ContentUtil {
                         TestActionUtil.getExtractFromResponseTestAction(
                                 testContext,
                                 builder,
-                                Constant.KP_ENDPOINT,
+                                getEndPoint(APIUrl.UPDATE_CONTENT_HIERARCHY),
                                 HttpStatus.OK,
                                 "$.result",
                                 "result"));
@@ -371,7 +372,7 @@ public class ContentUtil {
                     builder ->
                             TestActionUtil.processGetRequest(
                                     builder,
-                                    Constant.KP_ENDPOINT,
+                                    getEndPoint(APIUrl.READ_CONTENT),
                                     testName,
                                     reqUrl,
                                     getHeaders(null)
@@ -381,7 +382,7 @@ public class ContentUtil {
                             TestActionUtil.getExtractFromResponseTestAction(
                                     runner.testContext,
                                     builder,
-                                    Constant.KP_ENDPOINT,
+                                    getEndPoint(APIUrl.READ_CONTENT),
                                     HttpStatus.OK,
                                     "$.result",
                                     "result"));
@@ -398,7 +399,7 @@ public class ContentUtil {
                     builder ->
                             TestActionUtil.processGetRequest(
                                     builder,
-                                    Constant.KP_ENDPOINT,
+                                    getEndPoint(APIUrl.READ_CONTENT_HIERARCHY),
                                     runner.getTestCase().getName(),
                                     APIUrl.READ_CONTENT_HIERARCHY + contentId,
                                     getHeaders(null)
@@ -408,7 +409,7 @@ public class ContentUtil {
                             TestActionUtil.getExtractFromResponseTestAction(
                                     runner.testContext,
                                     builder,
-                                    Constant.KP_ENDPOINT,
+                                    getEndPoint(APIUrl.READ_CONTENT_HIERARCHY),
                                     HttpStatus.OK,
                                     "$.result",
                                     "result"));
@@ -524,7 +525,7 @@ public class ContentUtil {
                     builder ->
                             TestActionUtil.getPostRequestTestAction(
                                     builder,
-                                    Constant.KP_ENDPOINT,
+                                    getEndPoint(APIUrl.CREATE_CONTENT),
                                     APIUrl.CREATE_CONTENT,
                                     MediaType.APPLICATION_JSON.toString(),
                                     payload,
@@ -537,7 +538,7 @@ public class ContentUtil {
                     builder ->
                             TestActionUtil.processPostRequest(
                                     builder,
-                                    Constant.KP_ENDPOINT,
+                                    getEndPoint(APIUrl.CREATE_CONTENT),
                                     CONTENT_PAYLOAD_DIR,
                                     testName,
                                     APIUrl.CREATE_CONTENT,
@@ -551,7 +552,7 @@ public class ContentUtil {
                         TestActionUtil.getExtractFromResponseTestAction(
                                 testContext,
                                 builder,
-                                Constant.KP_ENDPOINT,
+                                getEndPoint(APIUrl.CREATE_CONTENT),
                                 HttpStatus.OK,
                                 "$.result",
                                 "result"));
@@ -575,7 +576,7 @@ public class ContentUtil {
                             TestActionUtil.processMultipartRequest(
                                     testContext,
                                     builder,
-                                    Constant.KP_ENDPOINT,
+                                    getEndPoint(APIUrl.UPLOAD_CONTENT),
                                     CONTENT_PAYLOAD_DIR,
                                     testName,
                                     APIUrl.UPLOAD_CONTENT + contentId,
@@ -590,7 +591,7 @@ public class ContentUtil {
                         TestActionUtil.getExtractFromResponseTestAction(
                                 testContext,
                                 builder,
-                                Constant.KP_ENDPOINT,
+                                getEndPoint(APIUrl.UPLOAD_CONTENT),
                                 HttpStatus.OK,
                                 "$.result",
                                 "result"));
@@ -605,14 +606,15 @@ public class ContentUtil {
     }
 
     public static Map<String, Object> publishContent(BaseCitrusTestRunner runner, String payload, String publishType, String contentId, Map<String, Object> headers) {
-        final String url = StringUtils.equalsIgnoreCase("unlisted", publishType.toLowerCase()) ? (APIUrl.UNLISTED_PUBLISH_CONTENT + contentId) : (APIUrl.PUBLIC_PUBLISH_CONTENT + contentId);
+        final String apiUrl = StringUtils.equalsIgnoreCase("unlisted", publishType.toLowerCase()) ? (APIUrl.UNLISTED_PUBLISH_CONTENT) : (APIUrl.PUBLIC_PUBLISH_CONTENT);
+        final String url = apiUrl + contentId;
         final TestContext testContext = runner.testContext;
         if (StringUtils.isNotBlank(payload)) {
             runner.http(
                     builder ->
                             TestActionUtil.getPostRequestTestAction(
                                     builder,
-                                    Constant.KP_ENDPOINT,
+                                    getEndPoint(apiUrl),
                                     url,
                                     MediaType.APPLICATION_JSON.toString(),
                                     payload,
@@ -623,7 +625,7 @@ public class ContentUtil {
                     builder ->
                             TestActionUtil.processPostRequest(
                                     builder,
-                                    Constant.KP_ENDPOINT,
+                                    getEndPoint(apiUrl),
                                     CONTENT_PAYLOAD_DIR,
                                     PUBLISH_CONTENT_EXPECT_200,
                                     url,
@@ -638,7 +640,7 @@ public class ContentUtil {
                         TestActionUtil.getExtractFromResponseTestAction(
                                 testContext,
                                 builder,
-                                Constant.KP_ENDPOINT,
+                                getEndPoint(apiUrl),
                                 HttpStatus.OK,
                                 "$.result",
                                 "result"));
@@ -670,7 +672,7 @@ public class ContentUtil {
                     builder ->
                             TestActionUtil.getPostRequestTestAction(
                                     builder,
-                                    Constant.KP_ENDPOINT,
+                                    getEndPoint(APIUrl.REVIEW_CONTENT),
                                     url,
                                     MediaType.APPLICATION_JSON.toString(),
                                     payload,
@@ -681,7 +683,7 @@ public class ContentUtil {
                     builder ->
                             TestActionUtil.processPostRequest(
                                     builder,
-                                    Constant.KP_ENDPOINT,
+                                    getEndPoint(APIUrl.REVIEW_CONTENT),
                                     CONTENT_PAYLOAD_DIR,
                                     updatedTestName,
                                     url,
@@ -695,7 +697,7 @@ public class ContentUtil {
                         TestActionUtil.getExtractFromResponseTestAction(
                                 testContext,
                                 builder,
-                                Constant.KP_ENDPOINT,
+                                getEndPoint(APIUrl.REVIEW_CONTENT),
                                 HttpStatus.OK,
                                 "$.result",
                                 "result"));
@@ -729,7 +731,7 @@ public class ContentUtil {
                     builder ->
                             TestActionUtil.getPatchRequestTestAction(
                                     builder,
-                                    Constant.KP_ENDPOINT,
+                                    getEndPoint(APIUrl.UPDATE_CONTENT),
                                     url,
                                     MediaType.APPLICATION_JSON.toString(),
                                     payload,
@@ -740,7 +742,7 @@ public class ContentUtil {
                     builder ->
                             TestActionUtil.processPatchRequest(
                                     builder,
-                                    Constant.KP_ENDPOINT,
+                                    getEndPoint(APIUrl.UPDATE_CONTENT),
                                     CONTENT_PAYLOAD_DIR,
                                     updatedTestName,
                                     url,
@@ -754,7 +756,7 @@ public class ContentUtil {
                         TestActionUtil.getExtractFromResponseTestAction(
                                 testContext,
                                 builder,
-                                Constant.KP_ENDPOINT,
+                                getEndPoint(APIUrl.UPDATE_CONTENT),
                                 HttpStatus.OK,
                                 "$.result",
                                 "result"));
@@ -773,7 +775,7 @@ public class ContentUtil {
                 builder ->
                         TestActionUtil.processDeleteRequest(
                                 builder,
-                                Constant.KP_ENDPOINT,
+                                getEndPoint(APIUrl.DISCARD_CONTENT),
                                 CONTENT_PAYLOAD_DIR,
                                 DISCARD_CONTENT_EXPECT_200,
                                 url,
@@ -785,7 +787,7 @@ public class ContentUtil {
         runner.http(
                 builder ->
                         TestActionUtil.getResponse(builder,
-                                Constant.KP_ENDPOINT,
+                                getEndPoint(APIUrl.DISCARD_CONTENT),
                                 CONTENT_PAYLOAD_DIR,
                                 DISCARD_CONTENT_EXPECT_200,
                                 HttpStatus.OK,
@@ -805,7 +807,7 @@ public class ContentUtil {
                     builder ->
                             TestActionUtil.getPostRequestTestAction(
                                     builder,
-                                    Constant.KP_ENDPOINT,
+                                    getEndPoint(APIUrl.FLAG_CONTENT),
                                     url,
                                     MediaType.APPLICATION_JSON.toString(),
                                     payload,
@@ -816,7 +818,7 @@ public class ContentUtil {
                     builder ->
                             TestActionUtil.processPostRequest(
                                     builder,
-                                    Constant.KP_ENDPOINT,
+                                    getEndPoint(APIUrl.FLAG_CONTENT),
                                     CONTENT_PAYLOAD_DIR,
                                     updatedTestName,
                                     url,
@@ -830,7 +832,7 @@ public class ContentUtil {
                         TestActionUtil.getExtractFromResponseTestAction(
                                 testContext,
                                 builder,
-                                Constant.KP_ENDPOINT,
+                                getEndPoint(APIUrl.FLAG_CONTENT),
                                 HttpStatus.OK,
                                 "$.result",
                                 "result"));
@@ -852,7 +854,7 @@ public class ContentUtil {
                     builder ->
                             TestActionUtil.getPostRequestTestAction(
                                     builder,
-                                    Constant.KP_ENDPOINT,
+                                    getEndPoint(APIUrl.ACCEPT_FLAG_CONTENT),
                                     url,
                                     MediaType.APPLICATION_JSON.toString(),
                                     payload,
@@ -863,7 +865,7 @@ public class ContentUtil {
                     builder ->
                             TestActionUtil.processPostRequest(
                                     builder,
-                                    Constant.KP_ENDPOINT,
+                                    getEndPoint(APIUrl.ACCEPT_FLAG_CONTENT),
                                     CONTENT_PAYLOAD_DIR,
                                     updatedTestName,
                                     url,
@@ -876,7 +878,7 @@ public class ContentUtil {
                 builder ->
                         TestActionUtil.getResponse(
                                 builder,
-                                Constant.KP_ENDPOINT,
+                                getEndPoint(APIUrl.ACCEPT_FLAG_CONTENT),
                                 testName,
                                 HttpStatus.OK));
         Map<String, Object> data = new HashMap<String, Object>();
@@ -891,7 +893,7 @@ public class ContentUtil {
                     builder ->
                             TestActionUtil.getPostRequestTestAction(
                                     builder,
-                                    Constant.KP_ENDPOINT,
+                                    getEndPoint(APIUrl.REJECT_FLAG_CONTENT),
                                     url,
                                     MediaType.APPLICATION_JSON.toString(),
                                     payload,
@@ -901,7 +903,7 @@ public class ContentUtil {
                     builder ->
                             TestActionUtil.processPostRequest(
                                     builder,
-                                    Constant.KP_ENDPOINT,
+                                    getEndPoint(APIUrl.REJECT_FLAG_CONTENT),
                                     CONTENT_PAYLOAD_DIR,
                                     REJECT_FLAG_CONTENT_EXPECT_200,
                                     url,
@@ -914,7 +916,7 @@ public class ContentUtil {
                 builder ->
                         TestActionUtil.getResponse(
                                 builder,
-                                Constant.KP_ENDPOINT,
+                                getEndPoint(APIUrl.REJECT_FLAG_CONTENT),
                                 REJECT_FLAG_CONTENT_EXPECT_200,
                                 HttpStatus.OK));
         Map<String, Object> data = new HashMap<String, Object>();
@@ -930,7 +932,7 @@ public class ContentUtil {
                 builder ->
                         TestActionUtil.processDeleteRequest(
                                 builder,
-                                Constant.KP_ENDPOINT,
+                                getEndPoint(APIUrl.RETIRE_CONTENT),
                                 CONTENT_PAYLOAD_DIR,
                                 RETIRE_CONTENT_EXPECT_200,
                                 url,
@@ -942,7 +944,7 @@ public class ContentUtil {
         runner.http(
                 builder ->
                         TestActionUtil.getResponse(builder,
-                                Constant.KP_ENDPOINT,
+                                getEndPoint(APIUrl.RETIRE_CONTENT),
                                 CONTENT_PAYLOAD_DIR,
                                 RETIRE_CONTENT_EXPECT_200,
                                 HttpStatus.OK,
@@ -962,7 +964,7 @@ public class ContentUtil {
                     builder ->
                             TestActionUtil.getPatchRequestTestAction(
                                     builder,
-                                    Constant.KP_ENDPOINT,
+                                    getEndPoint(APIUrl.SYSTEM_UPDATE),
                                     APIUrl.SYSTEM_UPDATE + objectId,
                                     MediaType.APPLICATION_JSON.toString(),
                                     payload,
@@ -978,7 +980,7 @@ public class ContentUtil {
                         TestActionUtil.getExtractFromResponseTestAction(
                                 testContext,
                                 builder,
-                                Constant.KP_ENDPOINT,
+                                getEndPoint(APIUrl.SYSTEM_UPDATE),
                                 HttpStatus.OK,
                                 "$.result",
                                 "result"));
@@ -1076,6 +1078,10 @@ public class ContentUtil {
                 put("Get", () -> ContentUtil.readCollectionHierarchy(runner, contentId));
             }
         };
+    }
+
+    private static String getEndPoint(String reqUrl) {
+        return CS_API_LIST.contains(reqUrl) ? Constant.KP_CONTENT_SERVICE_ENDPOINT : Constant.KP_ENDPOINT;
     }
 }
 
