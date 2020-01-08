@@ -1,9 +1,9 @@
 {
-  "id": "org.sunbird.license.read",
+  "id": "api.license.read",
   "ver": "3.0",
-  "ts": null,
+  "ts": "@matchesDatePattern('yyyy-MM-dd')@",
   "params": {
-    "resmsgid": null,
+    "resmsgid": "@ignore@",
     "msgid": null,
     "err": "NOT_FOUND",
     "status": "failed",

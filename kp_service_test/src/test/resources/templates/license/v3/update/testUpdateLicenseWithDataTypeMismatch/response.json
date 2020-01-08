@@ -1,5 +1,5 @@
 {
-    "id": "org.sunbird.license.update",
+    "id": "api.license.update",
     "ver": "3.0",
     "ts": "@matchesDatePattern('yyyy-MM-dd')@",
     "params": {
@@ -7,7 +7,7 @@
         "msgid": null,
         "err": "CLIENT_ERROR",
         "status": "failed",
-        "errmsg": "Validation errors."
+        "errmsg": "Validation Errors"
     },
     "responseCode": "CLIENT_ERROR",
     "result": {

@@ -1,7 +1,7 @@
 {
   "id" : "org.sunbird.content.read",
   "ver" : "3.0",
-  "ts" : null,
+   "ts": "@matchesDatePattern('yyyy-MM-dd')@",
   "params" : {
     "resmsgid" : null,
     "msgid" : null,

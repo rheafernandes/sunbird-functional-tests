@@ -1,5 +1,5 @@
 {
-    "id": "org.sunbird.license.retire",
+    "id": "api.license.retire",
     "ver": "3.0",
     "ts": "@matchesDatePattern('yyyy-MM-dd')@",
     "params": {
