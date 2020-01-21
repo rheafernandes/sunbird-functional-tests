@@ -1,0 +1,13 @@
+{
+  "id" : "api.license.read",
+  "ver" : "3.0",
+  "ts": "@matchesDatePattern('yyyy-MM-dd')@","params" : {
+    "resmsgid" : "@ignore@",
+"msgid" : null,
+    "err" : "RESOURCE_NOT_FOUND",
+    "status" : "failed",
+    "errmsg" : "License not found with identifier: ${identifier}"
+  },
+  "responseCode" : "RESOURCE_NOT_FOUND",
+  "result" : { }
+}

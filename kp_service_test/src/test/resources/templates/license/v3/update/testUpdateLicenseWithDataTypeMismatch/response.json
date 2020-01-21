@@ -1,0 +1,18 @@
+{
+    "id": "api.license.update",
+    "ver": "3.0",
+    "ts": "@matchesDatePattern('yyyy-MM-dd')@",
+    "params": {
+        "resmsgid": "@ignore@",
+        "msgid": null,
+        "err": "CLIENT_ERROR",
+        "status": "failed",
+        "errmsg": "Validation Errors"
+    },
+    "responseCode": "CLIENT_ERROR",
+    "result": {
+        "messages": [
+            "[1,279][/url] The value must be of string type, but actual type is integer."
+        ]
+    }
+}
