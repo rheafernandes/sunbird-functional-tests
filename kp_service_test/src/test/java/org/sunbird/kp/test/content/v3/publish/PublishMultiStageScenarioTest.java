@@ -1,6 +1,7 @@
 package org.sunbird.kp.test.content.v3.publish;
 
 import com.consol.citrus.annotations.CitrusTest;
+import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.collections4.MapUtils;
 import org.sunbird.kp.test.common.BaseCitrusTestRunner;
 import org.sunbird.kp.test.util.CompositeSearchUtil;
@@ -176,11 +177,13 @@ public class PublishMultiStageScenarioTest extends BaseCitrusTestRunner {
         Assert.assertNotNull(uploadResult.get("content_url"));
         ContentUtil.publishContent(this, null, "public", resourceId, null);
         Map<String, Object> contentMap = ContentUtil.readContent(this, resourceId, null, null);
-        Assert.assertTrue(MapUtils.isNotEmpty((Map<String, Object>) contentMap.get("concepts")));
-        Map<String, Object> result = ContentUtil.readContent(this, resourceId, null, null);
-        Assert.assertTrue(MapUtils.isNotEmpty((Map<String, Object>) result.get("concepts")));
-        Assert.assertTrue(result.containsKey("identifier"));
-        Assert.assertTrue(result.containsKey("objectType"));
+        Map<String, Object> res = (Map<String, Object>) contentMap.get("content");
+        Assert.assertTrue(CollectionUtils.isNotEmpty((List<Map<String, Object>>) res.get("concepts")));
+        Map<String, Object> contentMap2 = ContentUtil.readContent(this, resourceId, null, null);
+        Map<String, Object> res2 = (Map<String, Object>) contentMap2.get("content");
+        Assert.assertTrue(CollectionUtils.isNotEmpty((List<Map<String, Object>>) res2.get("concepts")));
+        Assert.assertTrue(res2.containsKey("identifier"));
+        Assert.assertTrue(res2.containsKey("objectType"));
     }
 
 }
