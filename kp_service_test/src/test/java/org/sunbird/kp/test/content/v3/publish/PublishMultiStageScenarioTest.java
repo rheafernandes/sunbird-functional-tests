@@ -1,6 +1,7 @@
 package org.sunbird.kp.test.content.v3.publish;
 
 import com.consol.citrus.annotations.CitrusTest;
+import org.apache.commons.collections4.MapUtils;
 import org.sunbird.kp.test.common.BaseCitrusTestRunner;
 import org.sunbird.kp.test.util.CompositeSearchUtil;
 import org.sunbird.kp.test.util.ContentUtil;
@@ -154,6 +155,32 @@ public class PublishMultiStageScenarioTest extends BaseCitrusTestRunner {
         Assert.assertEquals((String) textbookUpdatedMap.get("status"), "Live");
         List<String> updatedChildNodes = (List<String>) textbookUpdatedMap.get("childNodes");
         Assert.assertFalse(updatedChildNodes.contains(resourceId));
+    }
+
+    /*
+     * Scenario : Publish a Content (Resource) Having Some Relation And Read The Content Twice.
+     * Expectation: Relation Should be present in Read API Response
+     *
+     * Step 1: Create a Live Resource Content with Concept
+     * Step 2: Read the content two times and validate
+     *
+     * */
+    @Test
+    @CitrusTest
+    public void testPublishResourceContentHavingConceptRelation() throws Exception {
+        String resourceMimeType = "application/pdf";
+        getAuthToken(this, null);
+        String resourceId = (String) ContentUtil.createResourceContent(this, ContentPayload.CREATE_RESOURCE_CONTENT_WITH_CONCEPT, null, null).get("content_id");
+        System.out.println("Resource Content Id:" + resourceId);
+        Map<String, Object> uploadResult = ContentUtil.uploadResourceContent(this, resourceId, resourceMimeType, null);
+        Assert.assertNotNull(uploadResult.get("content_url"));
+        ContentUtil.publishContent(this, null, "public", resourceId, null);
+        Map<String, Object> contentMap = ContentUtil.readContent(this, resourceId, null, null);
+        Assert.assertTrue(MapUtils.isNotEmpty((Map<String, Object>) contentMap.get("concepts")));
+        Map<String, Object> result = ContentUtil.readContent(this, resourceId, null, null);
+        Assert.assertTrue(MapUtils.isNotEmpty((Map<String, Object>) result.get("concepts")));
+        Assert.assertTrue(result.containsKey("identifier"));
+        Assert.assertTrue(result.containsKey("objectType"));
     }
 
 }
