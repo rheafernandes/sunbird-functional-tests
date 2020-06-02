@@ -89,7 +89,7 @@ public class AcceptFlagTest extends BaseCitrusTestRunner {
                 // accept flag for invalid scenarios
                 new Object[]{ContentV3Scenario.TEST_ACCEPT_FLAG_VALID_ID_AND_INVALID_STATUS, Constant.CREATOR, "application/pdf", HttpStatus.BAD_REQUEST, null},
                 new Object[]{ContentV3Scenario.TEST_REACCEPT_FLAG_VALID_ID_AND_VALID_STATUS, Constant.CREATOR, "application/pdf", HttpStatus.BAD_REQUEST, null},
-                new Object[]{ContentV3Scenario.TEST_ACCEPT_FLAG_INVALID_ID, Constant.CREATOR, "application/pdf", HttpStatus.BAD_REQUEST, null},
+                new Object[]{ContentV3Scenario.TEST_ACCEPT_FLAG_INVALID_ID, Constant.CREATOR, "application/pdf", HttpStatus.NOT_FOUND, null},
 
         };
     }
