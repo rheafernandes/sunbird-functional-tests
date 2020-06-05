@@ -20,11 +20,12 @@
       "createdOn" : "@matchesDatePattern('yyyy-MM-dd')@",
       "url" : "www.kp-test.in",
       "versionKey" : "@isNumber()@",
-      "Name" : "updated name",
       "appId" : "@ignore@",
       "name" : "KP_FT_${idVal}",
       "lastUpdatedOn" : "@matchesDatePattern('yyyy-MM-dd')@",
-      "status" : "Live"
+      "status" : "Live",
+      "objectType":"License",
+      "languageCode":[]
     }
   }
 }
