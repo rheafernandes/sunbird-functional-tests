@@ -40,7 +40,7 @@
         "All"
       ],
       "mediaType": "content",
-      "osId": "org.ekstep.launcher",
+      "osId": "@ignore@",
       "languageCode": ["en"],
       "version": "@isNumber()@",
       "versionKey": "@isNumber()@",
