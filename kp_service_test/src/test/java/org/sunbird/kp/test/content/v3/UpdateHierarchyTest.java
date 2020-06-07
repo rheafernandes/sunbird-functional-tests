@@ -149,6 +149,30 @@ public class UpdateHierarchyTest extends BaseCitrusTestRunner {
 
     }
 
+
+    @Test(dataProvider = "updateHierarchyWithServerError")
+    @CitrusParameters("testName")
+    @CitrusTest
+    public void updateHierarchyWithServerError(String testName) {
+        resourceList = CollectionUtil.getLiveResources(this, 1, "application/pdf", null);
+        identifier = (String) ContentUtil.createCollectionContent(this, null, "textBook", null).get("content_id");
+        this.variable("rootId", identifier);
+        this.variable("resourceId", resourceList.get(0));
+        getAuthToken(this, Constant.CREATOR);
+        performPatchTest(
+                this,
+                TEMPLATE_DIR,
+                testName,
+                APIUrl.UPDATE_CONTENT_HIERARCHY,
+                null,
+                REQUEST_JSON,
+                MediaType.APPLICATION_JSON,
+                HttpStatus.INTERNAL_SERVER_ERROR,
+                null,
+                RESPONSE_JSON
+        );
+    }
+
     @DataProvider
     public static Object[][] updateHierarchyWithBadRequest() {
         return new Object[][]{
@@ -172,13 +196,7 @@ public class UpdateHierarchyTest extends BaseCitrusTestRunner {
                         ContentV3Scenario.TEST_UPDATE_HIERARCHY_WITH_1UNIT_VALID_REQUEST
                 },
                 new Object[]{
-                        ContentV3Scenario.TEST_UPDATE_HIERARCHY_WITHOUT_UNIT_OR_RESOURCE
-                },
-                new Object[]{
                         ContentV3Scenario.TEST_UPDATE_HIERARCHY_WITH_1RESOURCE_ONLY
-                },
-                new Object[]{
-                        ContentV3Scenario.TEST_UPDATE_HIERARCHY_WITH_NO_HIERARCHY_IN_REQUEST
                 },
                 new Object[]{
                         ContentV3Scenario.TEST_UPDATE_HIERARCHY_WITH_MULTILEVEL_UNITS
@@ -203,6 +221,18 @@ public class UpdateHierarchyTest extends BaseCitrusTestRunner {
         return new Object[][]{
                 new Object[]{
                         ContentV3Scenario.TEST_UPDATE_HIERARCHY_WITH_1UNIT_1COLLECTION, "collection", 1, CollectionUtilPayload.UPDATE_HIERARCHY_1_UNIT_1_RESOURCE
+                }
+        };
+    }
+
+    @DataProvider
+    public static Object[][] updateHierarchyWithServerError() {
+        return new Object[][]{
+                new Object[]{
+                        ContentV3Scenario.TEST_UPDATE_HIERARCHY_WITHOUT_UNIT_OR_RESOURCE
+                },
+                new Object[]{
+                        ContentV3Scenario.TEST_UPDATE_HIERARCHY_WITH_NO_HIERARCHY_IN_REQUEST
                 }
         };
     }
