@@ -1,14 +1,17 @@
 {
-  "id": "api.content.hierarchy.update",
+  "id": "content.hierarchy.update",
   "ver": "3.0",
   "ts": "@ignore@",
   "params": {
     "resmsgid": "@ignore@",
     "msgid": null,
-    "err": "ERR_SYSTEM_EXCEPTION",
-    "status": "failed",
-    "errmsg": "Something went wrong in server while processing the request"
+    "err": null,
+    "status": "successful",
+    "errmsg": null
   },
-  "responseCode": "SERVER_ERROR",
-  "result": {}
+  "responseCode": "OK",
+  "result": {
+    "content_id": "@ignore@",
+    "identifiers": "@ignore@"
+  }
 }
