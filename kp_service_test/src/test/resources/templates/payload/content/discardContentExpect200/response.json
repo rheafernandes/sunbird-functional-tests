@@ -12,6 +12,7 @@
   "responseCode": "OK",
   "result": {
     "message": "Draft version of the content with id : ${contentIdVal} is discarded",
-    "node_id": "${contentIdVal}"
+    "node_id": "${contentIdVal}",
+    "identifier": "${contentIdVal}"
   }
 }
