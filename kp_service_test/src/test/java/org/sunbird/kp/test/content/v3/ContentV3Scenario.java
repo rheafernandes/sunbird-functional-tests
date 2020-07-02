@@ -181,7 +181,7 @@ public class ContentV3Scenario {
     public static final String TEST_UPLOAD_ASSET_WITH_VIDEO_MPEG =
             "testUploadAssetWithVideoMpeg";
     public static final String TEST_UPLOAD_ASSET_WITH_VIDEO_X_YOUTUBE =
-            "testUploadAssetWithVideoXYoutube";
+            "testUploadAssetWithVideoYoutube";
     public static final String TEST_UPLOAD_ASSET_WITH_AUDIO_MP3 =
             "testUploadAssetWithAudioMp3";
     public static final String TEST_UPLOAD_RESOURCE_LIVE_CONTENT_PDF =

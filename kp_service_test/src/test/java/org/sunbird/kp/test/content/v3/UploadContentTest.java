@@ -202,10 +202,6 @@ public class UploadContentTest extends BaseCitrusTestRunner {
                 new Object[]{ContentV3Scenario.TEST_UPLOAD_ASSET_WITH_VIDEO_WEBM, Constant.CREATOR, "video/webm", ".webm"},
                 new Object[]{ContentV3Scenario.TEST_UPLOAD_ASSET_WITH_AUDIO_MP3, Constant.CREATOR, "audio/mp3", ".mp3"},
                 new Object[]{ContentV3Scenario.TEST_UPLOAD_ASSET_WITH_VIDEO_MPEG, Constant.CREATOR, "video/mpeg", ".mpeg"},
-                new Object[]{ContentV3Scenario.TEST_UPLOAD_ASSET_WITH_VIDEO_X_YOUTUBE, Constant.CREATOR, "video/x-youtube", ""},
-
-
-
         };
     }
 
@@ -213,7 +209,7 @@ public class UploadContentTest extends BaseCitrusTestRunner {
     public Object[][] uploadResourceContentWithFileUrl() {
         return new Object[][]{
                 new Object[]{ContentV3Scenario.TEST_UPLOAD_RESOURCE_PDF_WITH_FILE_URL, APIUrl.UPLOAD_CONTENT, HttpStatus.OK, Constant.CREATOR, null, "application/pdf", ".pdf"},
-
+                new Object[]{ContentV3Scenario.TEST_UPLOAD_ASSET_WITH_VIDEO_X_YOUTUBE,APIUrl.UPLOAD_CONTENT, HttpStatus.OK, Constant.CREATOR, null,  "video/x-youtube", ""},
         };
     }
 
